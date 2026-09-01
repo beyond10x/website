@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import EcosystemProjectCard from '../components/EcosystemProjectCard';
+import EcosystemFamilyOrientation from '../components/EcosystemFamilyOrientation';
 import type {EcosystemRegistry} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 
@@ -144,7 +145,7 @@ export default function Home(): ReactNode {
                 <span>BEYOND10X</span>
               </p>
               <Heading as="h1">
-                From a principle<br />
+                From a principle{' '}<br />
                 <em>to an action in the world.</em>
               </Heading>
               <p className={styles.lede}>
@@ -164,6 +165,12 @@ export default function Home(): ReactNode {
             <ReadingStack />
           </div>
         </header>
+
+        <div className={styles.gateway}>
+          <div className="container">
+            <EcosystemFamilyOrientation surfaces={registry.surfaces} />
+          </div>
+        </div>
 
         <section className={styles.journeys} aria-labelledby="journeys-title">
           <div className="container">

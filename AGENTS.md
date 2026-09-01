@@ -20,6 +20,11 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
   source code, load repository sidebars, or accept active MDX. Preserve the canonical collection
   index and extracted passive tree for each exact source revision so Atlas can verify locked content
   independently.
+- For a coordinated preview whose locked source commits have not been pushed, set
+  `B10X_SOURCE_WORKSPACE` to the absolute parent of the sibling repositories. This changes only the
+  lock and Git-object fetch origins: `npm run sources:lock` requires clean checked-out `main` heads,
+  while extraction still uses the exact locked commits and never reads dirty worktree bytes. Leave
+  it unset for production and ordinary remote-backed builds.
 - `beyond10x.github.io` is a generated deployment mirror. Do not author content there.
 - `getting-started` is predecessor history, not an authority or a source dependency. It remains an
   explicit compatibility-only façade; do not add it to the 19-source lock.

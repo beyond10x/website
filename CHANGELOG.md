@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 — 2026-09-01
+
+- Introduce a compact four-family entry experience for Foundations, Build, Services, and Products.
+- Add shared family, journey, project, API, dependency, change, and release discovery surfaces.
+- Derive navigation and rich project profiles from exact repository manifests and locked Git revisions.
+- Adopt the shared Docs System design language, responsive components, diagrams, and accessible light/dark tokens.
+- Bind Atlas-generated bootstrap data to its producer revision, Website revision, source lock, and typed file digests.
+- Add content, source-safety, accessibility, route, crawl, and artifact provenance gates for the unified public site.
+
 ## 0.1.0 — 2026-09-01
 
 - Establish the unified organization-root website, journey and ecosystem discovery surfaces.

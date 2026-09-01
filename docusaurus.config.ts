@@ -101,6 +101,18 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/social-card.svg',
+    mermaid: {
+      theme: {light: 'neutral', dark: 'dark'},
+      options: {
+        fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
+      },
+    },
+    docs: {
+      sidebar: {
+        autoCollapseCategories: true,
+        hideable: true,
+      },
+    },
     metadata: [
       {
         name: 'keywords',
@@ -120,9 +132,9 @@ const config: Config = {
         src: 'img/mark.svg',
       },
       items: [
-        {to: '/vision/', label: 'Vision', position: 'left'},
-        {to: '/journeys/', label: 'Journeys', position: 'left'},
-        {to: '/ecosystem/', label: 'Ecosystem', position: 'left'},
+        {to: '/', label: 'Start', position: 'left'},
+        {to: '/ecosystem/', label: 'Explore', position: 'left'},
+        {to: '/docs/', label: 'Docs', position: 'left'},
         {to: '/changes/', label: 'Changes', position: 'left'},
         {to: '/search/', label: 'Search', position: 'left'},
         {

@@ -1,0 +1,53 @@
+{
+  "schema": "b10x-ecosystem-families/v1",
+  "families": [
+    {
+      "id": "Foundation",
+      "label": "Foundations",
+      "slug": "/foundations/",
+      "expectedMembers": 4,
+      "purpose": "Understand the evidence, principles, protocols, and executable specifications that explain what an agent system should do and what it can prove.",
+      "startRepository": "agentic-principles",
+      "next": {
+        "family": "Build",
+        "label": "Turn those rules into an executable agent system."
+      }
+    },
+    {
+      "id": "Build",
+      "label": "Agent tooling & build",
+      "slug": "/build/",
+      "expectedMembers": 7,
+      "purpose": "Build and test agent loops with shared libraries, plugins, isolated execution, documentation tools, and clean workspaces.",
+      "startRepository": "harness",
+      "next": {
+        "family": "Services",
+        "label": "Connect the agent loop to governed service boundaries."
+      }
+    },
+    {
+      "id": "Services",
+      "label": "Services",
+      "slug": "/services/",
+      "expectedMembers": 7,
+      "purpose": "Integrate authenticated, auditable capabilities for commands, identity, events, secrets, workflows, and external systems.",
+      "startRepository": "agent-platform",
+      "next": {
+        "family": "Products",
+        "label": "See those capabilities assembled into a public experience."
+      }
+    },
+    {
+      "id": "Products",
+      "label": "Products",
+      "slug": "/products/",
+      "expectedMembers": 1,
+      "purpose": "Preview Devcenter while it remains in active development. Start with its credential-free review mode to inspect the emerging product direction and readiness—not as a production adoption promise.",
+      "startRepository": "devcenter",
+      "next": {
+        "family": "Foundation",
+        "label": "Trace product behavior back to its evidence and contracts."
+      }
+    }
+  ]
+}

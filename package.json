@@ -1,6 +1,6 @@
 {
   "name": "@beyond10x/website",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -27,11 +27,11 @@
     "gate:fixture": "B10X_BOOTSTRAP_FIXTURE=1 node scripts/run-gate.mjs"
   },
   "dependencies": {
+    "@beyond10x/docs-system": "git+https://github.com/beyond10x/docs-system.git#ddaa43fa1443d110b52b46dbcb1154f68c47763c",
     "@docusaurus/core": "3.10.2",
     "@docusaurus/faster": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
     "@docusaurus/theme-mermaid": "3.10.2",
-    "@beyond10x/docs-system": "git+https://github.com/beyond10x/docs-system.git#a547b6930e9777277699c0b1037567d67b4c1149",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",

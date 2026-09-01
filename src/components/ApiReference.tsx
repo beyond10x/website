@@ -28,7 +28,7 @@ export default function ApiReference({format, sourceUrl, sourceRepository}: Prop
 
   if (error) return <p role="alert">Could not render this contract: {error}. <a href={sourceUrl}>Download the source</a>.</p>;
   if (!document) return <p aria-live="polite">Loading the pinned contract…</p>;
-  if (format === 'openapi') return <OpenApiReference document={document as OpenApiDocument} sourceUrl={sourceUrl} />;
+  if (format === 'openapi') return <OpenApiReference document={document as OpenApiDocument} sourceUrl={sourceUrl} headingLevel={3} />;
   return (
     <section>
       <p><a href={sourceUrl}>Download JSON Schema</a> · <a href={sourceRepository}>View its owning source</a></p>

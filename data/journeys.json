@@ -1,0 +1,45 @@
+{
+  "schema": "b10x-adoption-journeys/v1",
+  "journeys": [
+    {
+      "id": "understand",
+      "label": "Understand",
+      "title": "Understand before automating",
+      "description": "Ground an agentic-system decision in public evidence, principles, and reproducible observations before turning it into automation.",
+      "verification": "You can name the evidence or reproduced observation that supports the decision, including the limits it does not resolve.",
+      "next": "plan-work"
+    },
+    {
+      "id": "plan-work",
+      "label": "Plan work",
+      "title": "Move from guidance to governed work",
+      "description": "Install focused guidance and express engineering intent, evidence gates, reviews, and execution state as a governed artifact.",
+      "verification": "You leave with installed guidance or a typed plan and can identify the gate that permits the next execution step.",
+      "next": "specify"
+    },
+    {
+      "id": "specify",
+      "label": "Specify",
+      "title": "Make system intent executable",
+      "description": "Turn system intent into validated specifications, deterministic intermediate artifacts, generated contracts, and conformance evidence.",
+      "verification": "The specification validates and produces a deterministic artifact or conformance result that another tool can inspect.",
+      "next": "build-agents"
+    },
+    {
+      "id": "build-agents",
+      "label": "Build agents",
+      "title": "Build an observable agent loop",
+      "description": "Run and compare provider-neutral model and tool loops with explicit approvals, budgets, effects, isolation, and retained session evidence.",
+      "verification": "A run completes with its session evidence retained and its effects, approvals, and budget decisions visible for inspection.",
+      "next": "operate-services"
+    },
+    {
+      "id": "operate-services",
+      "label": "Operate services",
+      "title": "Carry governed contracts into operation",
+      "description": "Adopt authenticated, auditable service boundaries without collapsing distinct command, identity, event, secret, workflow, or connector responsibilities.",
+      "verification": "A bounded command or workflow completes and its authenticated state change or resulting evidence can be inspected.",
+      "next": "understand"
+    }
+  ]
+}

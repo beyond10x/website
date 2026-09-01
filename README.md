@@ -34,6 +34,22 @@ every same-origin manifest, redirect, alias, and rendered HTML link. The empty-l
 fixture is accepted only with `B10X_BOOTSTRAP_FIXTURE=1` (or `npm run gate:fixture`) while bringing
 up a new catalog; it is never valid production provenance.
 
+When the source lock intentionally names local commits that have not been pushed yet, preview those
+exact Git objects from sibling checkouts:
+
+```console
+B10X_SOURCE_WORKSPACE=/absolute/path/to/beyond10x npm run sources:lock
+B10X_SOURCE_WORKSPACE=/absolute/path/to/beyond10x npm run gate
+B10X_SOURCE_WORKSPACE=/absolute/path/to/beyond10x npm start
+```
+
+`B10X_SOURCE_WORKSPACE` is an explicit local-preview input and must name the directory whose direct
+children are the 19 repositories. The lock command requires every checkout to have a clean `main`
+checked out, then pins that exact local HEAD. Collection fetches those locked commits from each
+checkout's Git object database into the same bounded bare cache; source worktree bytes are never
+used as publication input. With the variable unset, including in production, lock resolution and
+collection remain remote-only.
+
 Provenance file and route inventories use explicit UTF-8 byte-lexical order. Verifiers in other
 languages must use the same ordering contract; locale-sensitive comparison is not permitted.
 

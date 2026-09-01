@@ -6,6 +6,9 @@ import {compareUtf8} from './order-contract.mjs';
 import {sourceKey, sourceMap} from './source-routing.mjs';
 import {bootstrapEnabled, validateSourceLock} from './source-lock-contract.mjs';
 import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
+import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from './api-catalog.mjs';
+import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars} from './sidebar-contract.mjs';
+import {normalizePassiveMarkdown} from './passive-markdown.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const generated = path.join(root, '.generated');
@@ -38,12 +41,14 @@ let registry;
 let manifests = [];
 let indexes = [];
 let collectionRoot;
+let apiCatalog = buildApiCatalog([]);
 
 if (lock.sources.length > 0) {
   const {collectSources} = await import('./collect-sources.mjs');
   const collected = await collectSources({root, outputRoot: generated});
   ({registry, manifests, indexes, collectionRoot} = collected);
-  await materializeCollection({manifests, indexes, collectionRoot});
+  assertDocumentationFamilyDistribution(manifests);
+  apiCatalog = await materializeCollection({manifests, indexes, collectionRoot});
 } else {
   registry = fixtureRegistry(roster.repositories, legacyRegistry);
 }
@@ -74,6 +79,8 @@ await Promise.all([
   writeFile(path.join(data, 'dependencies.json'), `${JSON.stringify(dependencyGraph, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'dependencies.json'), `${JSON.stringify(dependencyGraph, null, 2)}\n`),
   writeFile(path.join(data, 'manifests.json'), `${JSON.stringify(manifests, null, 2)}\n`),
+  writeFile(path.join(data, 'api-catalog.json'), `${JSON.stringify(apiCatalog, null, 2)}\n`),
+  writeFile(path.join(generatedStatic, 'api-catalog.json'), `${JSON.stringify(apiCatalog, null, 2)}\n`),
   writeFile(
     path.join(generated, 'sidebars.cjs'),
     renderSidebars(registry, manifests),
@@ -115,24 +122,71 @@ for (const repository of ['aep', 'ess']) {
 }
 
 await writeFile(
-  path.join(docs, 'index.md'),
-  `---\ntitle: Technical documentation\nslug: /\n---\n\n# Technical documentation\n\nEach page is owned by its source repository and published here at an immutable revision.\n`,
+  path.join(docs, 'index.mdx'),
+  [
+    '---',
+    'title: Technical documentation',
+    'slug: /',
+    'description: Explore public beyond10x documentation by ecosystem family.',
+    '---',
+    '',
+    "import {EcosystemFamilyGateway} from '@beyond10x/docs-system/components';",
+    "import EcosystemFamilyOrientation from '@site/src/components/EcosystemFamilyOrientation';",
+    "import registry from '@site/.generated/data/ecosystem.json';",
+    '',
+    '# Technical documentation',
+    '',
+    'Choose the public family that owns your question. Every destination below is declared by its source repository and published at the revision in the Website source lock.',
+    '',
+    '<EcosystemFamilyOrientation surfaces={registry.surfaces} title="Start with one ecosystem family" description="Each family has a distinct purpose, a recommended first path, and a clear hand-off to the next boundary." />',
+    '',
+    `<EcosystemFamilyGateway surfaces={registry.surfaces.filter((surface) => surface.kind !== 'front-door')} familyOrder={${JSON.stringify(documentationFamilyOrder)}} title="Browse by family" description="Move from foundations through agent tooling and service boundaries to public products." />`,
+    '',
+  ].join('\n'),
 );
+if (!bootstrap) {
+  const familyDocs = path.join(docs, 'families');
+  await mkdir(familyDocs, {recursive: true});
+  for (const family of documentationFamiliesForLanding()) {
+    await writeFile(path.join(familyDocs, `${family.file}.mdx`), [
+      '---',
+      `title: ${family.label}`,
+      `slug: ${family.slug}`,
+      `description: ${JSON.stringify(family.description)}`,
+      'hide_title: true',
+      '---',
+      '',
+      "import EcosystemFamilyLanding from '@site/src/components/EcosystemFamilyLanding';",
+      '',
+      `<EcosystemFamilyLanding family="${family.id}" />`,
+      '',
+    ].join('\n'));
+  }
+}
 await writeFile(
-  path.join(api, 'index.md'),
-  `---\ntitle: Public APIs\nslug: /\n---\n\n# Public APIs\n\nRead-only OpenAPI and JSON Schema references appear here when owning repositories declare them.\n`,
+  path.join(api, 'index.mdx'),
+  renderApiCatalogLanding(),
 );
+
+function documentationFamiliesForLanding() {
+  return documentationFamilies.map((family) => ({
+    ...family,
+    file: family.slug.replace(/^\/+|\/+$/g, ''),
+  }));
+}
 await writeFile(
   path.join(components, 'index.md'),
   `---\ntitle: Public components and data\nslug: /\n---\n\n# Public components and data\n\nRepository-owned catalogs and component projections appear here at locked source revisions.\n`,
 );
 
+const profiledRepositories = new Set();
 for (const surface of surfaces) {
   const repository = surface.repository.id;
   const source = lockByRepository.get(repository);
   const revision = source?.commit ?? 'lock-pending';
   const sourceUrl = `${surface.repository.url}${revision === 'lock-pending' ? '' : `/tree/${revision}`}`;
   const relationships = (surface.relationships ?? [])
+    .filter(isPresentedRelationship)
     .map((relation) => {
       const targetRepository = relation.target.split('/')[0];
       if (!roster.repositories.includes(targetRepository)) return undefined;
@@ -159,10 +213,13 @@ for (const surface of surfaces) {
       `${projectDocument({surface, repository, revision, sourceUrl, relationships, sections})}\n`,
     );
   }
-  await writeFile(
-    path.join(ecosystem, `${repository}.md`),
-    `${profileDocument({surface, repository, relationships})}\n`,
-  );
+  if (!profiledRepositories.has(repository)) {
+    await writeFile(
+      path.join(ecosystem, `${repository}.mdx`),
+      `${profileDocument({surface, repository, revision})}\n`,
+    );
+    profiledRepositories.add(repository);
+  }
 }
 
 async function materializeCollection({manifests: sourceManifests, indexes: sourceIndexes, collectionRoot: collectedRoot}) {
@@ -184,6 +241,7 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
     (file) => `/source-assets/${file.outputPath}`,
   );
   const destinations = new Set();
+  const apiSpecifications = [];
 
   for (const index of sourceIndexes) {
     const manifest = manifestByRepository.get(index.repository.id);
@@ -230,12 +288,13 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
       } else if (file.kind === 'data') {
         await materializeData({file, sourceFile, manifest, commit: lockSource.commit});
       } else if (file.kind === 'openapi' || file.kind === 'json-schema') {
-        await materializeSpecification({file, sourceFile, manifest, commit: lockSource.commit});
+        apiSpecifications.push(await materializeSpecification({file, sourceFile, manifest, commit: lockSource.commit}));
       }
     }
   }
   await synthesizeDirectoryLandings({documents, routeBySource, destinations, manifestByRepository});
   await synthesizeApiLandings(sourceIndexes, manifestByRepository);
+  return buildApiCatalog(apiSpecifications);
 }
 
 function documentRoute(file, surfaceByKey) {
@@ -274,7 +333,7 @@ function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeB
     'pagination_prev: null',
     '---',
     '',
-    `> Source-owned documentation · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision \`${commit}\``,
+    `> Source-owned documentation · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`,
     '',
     rewritten.trim(),
     '',
@@ -295,7 +354,7 @@ function renderBlog({raw, file, route, commit, repositoryUrl, routeBySource, blo
     ...(Array.isArray(frontmatter.tags) ? [`tags: ${JSON.stringify(frontmatter.tags)}`] : []),
     '---',
     '',
-    `> Source-owned field note · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision \`${commit}\``,
+    `> Source-owned field note · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`,
     '',
     rewritten.trim(),
     '',
@@ -337,6 +396,7 @@ async function materializeSpecification({file, sourceFile, manifest, commit}) {
       '',
     ].join('\n'),
   );
+  return describeApiSpecification({document: parsed, file, manifest, commit});
 }
 
 async function materializeData({file, sourceFile, manifest, commit}) {
@@ -416,47 +476,6 @@ function rewriteLinks(body, context) {
     const resolved = resolveLink(destination, context, {image: /\ssrc=["']$/i.test(prefix)});
     return `${prefix}${resolved}${quote}`;
   });
-}
-
-function normalizePassiveMarkdown(source) {
-  const output = [];
-  let fence;
-  let htmlComment = false;
-  for (const original of source.split(/\r?\n/)) {
-    const fenceMatch = /^\s*(`{3,}|~{3,})/.exec(original);
-    if (fenceMatch) {
-      const marker = fenceMatch[1][0];
-      if (!fence) fence = marker;
-      else if (fence === marker) fence = undefined;
-      output.push(original);
-      continue;
-    }
-    if (fence) {
-      output.push(original);
-      continue;
-    }
-    let line = original;
-    if (htmlComment) {
-      const end = line.indexOf('-->');
-      if (end < 0) continue;
-      line = line.slice(end + 3);
-      htmlComment = false;
-    }
-    while (line.includes('<!--')) {
-      const start = line.indexOf('<!--');
-      const end = line.indexOf('-->', start + 4);
-      if (end < 0) {
-        line = line.slice(0, start);
-        htmlComment = true;
-        break;
-      }
-      line = `${line.slice(0, start)}${line.slice(end + 3)}`;
-    }
-    const heading = /^(#{1,6})\s+(.+?)\s+\{#([A-Za-z][A-Za-z0-9_.:-]*)\}\s*$/.exec(line);
-    if (heading) output.push(`<a id=${JSON.stringify(heading[3])}></a>`, `${heading[1]} ${heading[2]}`);
-    else if (line || !htmlComment) output.push(line);
-  }
-  return output.join('\n');
 }
 
 function resolveLink(destination, context, {image}) {
@@ -570,7 +589,7 @@ function projectDocument({surface, repository, revision, sourceUrl, relationship
     '---', `title: ${JSON.stringify(surface.name)}`, `description: ${JSON.stringify(surface.summary)}`,
     `slug: /${repository}/`, 'pagination_next: null', 'pagination_prev: null', '---', '',
     `# ${surface.name}`, '', surface.summary, '',
-    `> Source-owned documentation · [${repository}](${sourceUrl}) · revision \`${revision}\``, '',
+    `> Source-owned documentation · [${repository}](${sourceUrl}) · revision <code className="b10x-revision">${revision}</code>`, '',
     `**Status:** ${surface.maturity} · **Journeys:** ${surface.journeys.join(', ')}`, '', '## Start', '',
     `[${surface.adoption?.label ?? 'Open the source'}](${surface.adoption?.url ?? surface.repository.url})`, '',
     surface.adoption?.outcome ?? '', '',
@@ -579,15 +598,13 @@ function projectDocument({surface, repository, revision, sourceUrl, relationship
   ].join('\n');
 }
 
-function profileDocument({surface, repository, relationships}) {
+function profileDocument({surface, repository, revision}) {
   return [
     '---', `title: ${JSON.stringify(surface.name)}`, `description: ${JSON.stringify(surface.summary)}`,
     `slug: /${repository}/`, 'pagination_next: null', 'pagination_prev: null', '---', '',
-    `# ${surface.name}`, '', surface.summary, '',
-    `[Read the unified documentation](/docs/${repository}/) · [Source](${surface.repository.url})`, '',
-    `**Status:** ${surface.maturity} · **Journeys:** ${surface.journeys.join(', ')}`, '',
-    ...(relationships.length ? ['## Relationships', '', ...relationships, ''] : []),
-    '## Capabilities', '', ...(surface.capabilities ?? []).map((capability) => `- ${capability}`),
+    "import ProjectProfile from '@site/src/components/ProjectProfile';", '',
+    `# ${surface.name}`, '',
+    `<ProjectProfile repository=${JSON.stringify(repository)} revision=${JSON.stringify(revision)} />`,
   ].join('\n');
 }
 
@@ -632,6 +649,7 @@ function buildDependencyGraph(registrySurfaces) {
   const seen = new Set();
   for (const surface of registrySurfaces) {
     for (const relationship of surface.relationships ?? []) {
+      if (!isPresentedRelationship(relationship)) continue;
       const target = relationship.target.split('/')[0];
       const key = `${surface.repository.id}\0${target}\0${relationship.kind}`;
       if (!known.has(target) || seen.has(key)) continue;
@@ -643,35 +661,9 @@ function buildDependencyGraph(registrySurfaces) {
   return {schema: 'b10x-public-dependency-graph/v1', nodes, edges};
 }
 
-function renderSidebars(ecosystemRegistry, sourceManifests) {
-  const navigation = new Map(
-    sourceManifests.flatMap((manifest) => manifest.surfaces.map((surface) => [
-      manifest.repository.id,
-      surface.source?.navigation ?? {},
-    ])),
-  );
-  const repositories = [...new Set(ecosystemRegistry.surfaces.map((surface) => surface.repository.id))]
-    .map((repository) => {
-      const surface = ecosystemRegistry.surfaces.find((candidate) => candidate.repository.id === repository);
-      const declared = navigation.get(repository) ?? {};
-      return {
-        repository,
-        label: declared.label ?? surface.name,
-        group: declared.group ?? 'Projects',
-        order: Number.isFinite(declared.order) ? declared.order : 100,
-      };
-    })
-    .sort((left, right) => compareUtf8(left.group, right.group) || left.order - right.order || compareUtf8(left.label, right.label) || compareUtf8(left.repository, right.repository));
-  const items = [
-    {type: 'doc', id: 'index', label: 'Technical documentation'},
-    ...repositories.map((item) => ({
-      type: 'category',
-      label: item.label,
-      collapsed: true,
-      items: [{type: 'autogenerated', dirName: item.repository}],
-    })),
-  ];
-  return `module.exports = ${JSON.stringify({docs: items}, null, 2)};\n`;
+function isPresentedRelationship(relationship) {
+  return relationship.kind !== 'documentation-source'
+    && !(relationship.kind === 'supports' && relationship.target === 'website/docs');
 }
 
 function displayNameForRelease(repository) {

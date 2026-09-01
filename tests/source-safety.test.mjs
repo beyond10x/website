@@ -1,13 +1,18 @@
 import assert from 'node:assert/strict';
+import {execFile as execFileCallback} from 'node:child_process';
 import {createServer} from 'node:net';
-import {mkdtemp, readFile, rm, symlink, writeFile} from 'node:fs/promises';
+import {mkdir, mkdtemp, readFile, rm, symlink, writeFile} from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import {promisify} from 'node:util';
 import test from 'node:test';
 import {assertPassiveMdx} from '@beyond10x/docs-system/collector';
-import {artifactFacts} from '../scripts/artifact-contract.mjs';
-import {declaredAnchors, safeTreePath, staticPrefix} from '../scripts/git-source.mjs';
+import {artifactFacts, sha256} from '../scripts/artifact-contract.mjs';
+import {validateBootstrapSnapshots} from '../scripts/bootstrap-contract.mjs';
+import {declaredAnchors, extractDeclaredSource, resolveWorkspaceCommit, safeTreePath, sourceWorkspaceFromEnvironment, staticPrefix} from '../scripts/git-source.mjs';
 import {sourceKey, sourceMap} from '../scripts/source-routing.mjs';
+
+const execFile = promisify(execFileCallback);
 
 test('static source anchors bound wildcard extraction without changing glob semantics', () => {
   assert.equal(staticPrefix('README.md'), 'README.md');
@@ -26,6 +31,65 @@ test('repository paths cannot escape or switch separator conventions', () => {
   assert.throws(() => safeTreePath('../private.md'), /escapes/);
   assert.throws(() => safeTreePath('/absolute.md'), /unsafe/);
   assert.throws(() => safeTreePath('website\\docs\\index.md'), /unsafe/);
+});
+
+test('local preview collection extracts the locked Git object and ignores dirty checkout bytes', async (context) => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'b10x-local-source-'));
+  context.after(() => rm(directory, {recursive: true, force: true}));
+  const workspace = path.join(directory, 'workspace');
+  const repositoryRoot = path.join(workspace, 'aep');
+  await mkdir(repositoryRoot, {recursive: true});
+  await testGit(repositoryRoot, ['init']);
+  await testGit(repositoryRoot, ['config', 'user.name', 'Website Test']);
+  await testGit(repositoryRoot, ['config', 'user.email', 'website-test@example.invalid']);
+  await testGit(repositoryRoot, ['branch', '-M', 'main']);
+  await testGit(repositoryRoot, ['remote', 'add', 'origin', 'https://github.com/beyond10x/aep.git']);
+  await writeFile(path.join(repositoryRoot, 'b10x.docs.yaml'), [
+    'schema: b10x-docs/v3',
+    'repository:',
+    '  id: aep',
+    '  displayName: AEP',
+    '  url: https://github.com/beyond10x/aep',
+    'surfaces:',
+    '  - id: docs',
+    '    name: AEP',
+    '    kind: foundation',
+    '    source:',
+    '      root: .',
+    '      documents:',
+    '        include:',
+    '          - README.md',
+    '',
+  ].join('\n'));
+  await writeFile(path.join(repositoryRoot, 'README.md'), 'committed public documentation\n');
+  await testGit(repositoryRoot, ['add', 'b10x.docs.yaml', 'README.md']);
+  await testGit(repositoryRoot, ['commit', '-m', 'fixture']);
+  const {stdout} = await testGit(repositoryRoot, ['rev-parse', 'HEAD']);
+  const commit = stdout.trim();
+  assert.equal(await resolveWorkspaceCommit(workspace, 'aep'), commit);
+  await writeFile(path.join(repositoryRoot, 'README.md'), 'dirty private preview bytes\n');
+  await assert.rejects(resolveWorkspaceCommit(workspace, 'aep'), /must be clean/);
+
+  const extracted = await extractDeclaredSource({
+    repository: 'aep',
+    url: 'https://github.com/beyond10x/aep',
+    commit,
+    manifestPath: 'b10x.docs.yaml',
+    cacheRoot: path.join(directory, 'cache'),
+    sourceWorkspace: workspace,
+  });
+  assert.equal(await readFile(path.join(extracted.treeRoot, 'README.md'), 'utf8'), 'committed public documentation\n');
+  assert.equal(await readFile(path.join(repositoryRoot, 'README.md'), 'utf8'), 'dirty private preview bytes\n');
+  await assert.rejects(extractDeclaredSource({
+    repository: 'aep',
+    url: 'https://github.com/beyond10x/aep',
+    commit: 'f'.repeat(40),
+    manifestPath: 'b10x.docs.yaml',
+    cacheRoot: path.join(directory, 'missing-cache'),
+    sourceWorkspace: workspace,
+  }), /is not available as an exact Git object/);
+  assert.equal(sourceWorkspaceFromEnvironment({B10X_SOURCE_WORKSPACE: workspace}), workspace);
+  assert.throws(() => sourceWorkspaceFromEnvironment({B10X_SOURCE_WORKSPACE: 'relative/workspace'}), /must be an absolute directory/);
 });
 
 test('public MDX is passive data with an explicit component allowlist', () => {
@@ -87,6 +151,41 @@ test('artifact provenance rejects Git control files', async (context) => {
   await assert.rejects(artifactFacts(directory), /forbidden Git metadata/);
 });
 
+test('bootstrap snapshots accept the Website surface and bind the exact source lock', async (context) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), 'b10x-bootstrap-contract-'));
+  context.after(() => rm(root, {recursive: true, force: true}));
+  const directory = path.join(root, 'data', 'bootstrap');
+  await mkdir(directory, {recursive: true});
+
+  const sourceLock = Buffer.from(`${JSON.stringify({schema: 'b10x-sources/v1', sources: []}, null, 2)}\n`);
+  const snapshots = {
+    'changes.json': Buffer.from(`${JSON.stringify({schema: 'b10x-change-ledger/v1', changes: []}, null, 2)}\n`),
+    'ecosystem.json': Buffer.from(`${JSON.stringify({
+      schema: 'b10x-docs-registry/v2',
+      surfaces: [{
+        id: 'docs',
+        name: 'Website',
+        summary: 'Unified ecosystem entry point.',
+        repository: {id: 'website', url: 'https://github.com/beyond10x/website'},
+      }],
+    }, null, 2)}\n`),
+    'release-facts.json': Buffer.from(`${JSON.stringify({schema: 'b10x-release-facts/v1', releases: []}, null, 2)}\n`),
+  };
+  await writeFile(path.join(root, 'sources.lock.json'), sourceLock);
+  for (const [name, bytes] of Object.entries(snapshots)) await writeFile(path.join(directory, name), bytes);
+  await writeFile(path.join(directory, 'metadata.json'), `${JSON.stringify({
+    schema: 'b10x-bootstrap-snapshot/v1',
+    sourceRevision: 'a'.repeat(40),
+    websiteRevision: 'b'.repeat(40),
+    sourceLockSha256: sha256(sourceLock),
+    files: Object.fromEntries(Object.entries(snapshots).map(([name, bytes]) => [name, sha256(bytes)])),
+  }, null, 2)}\n`);
+
+  await assert.doesNotReject(validateBootstrapSnapshots(root, []));
+  await writeFile(path.join(root, 'sources.lock.json'), `${JSON.stringify({schema: 'b10x-sources/v1', sources: [{repository: 'changed'}]}, null, 2)}\n`);
+  await assert.rejects(validateBootstrapSnapshots(root, []), /source-lock digest/);
+});
+
 test('reusable façade workflow executes its own immutable revision and treats the deployed Website as data', async () => {
   const workflow = await readFile(path.join(path.resolve(import.meta.dirname, '..'), '.github', 'workflows', 'redirect-facade.yml'), 'utf8');
   assert.match(workflow, /repository: \$\{\{ job\.workflow_repository \}\}/);
@@ -111,3 +210,7 @@ test('reusable root workflow executes immutable controls and blocks human reruns
   assert.match(workflow, /--data \.website-data/);
   assert.doesNotMatch(workflow, /working-directory: \.website-data/);
 });
+
+function testGit(repositoryRoot, args) {
+  return execFile('git', ['-C', repositoryRoot, ...args], {encoding: 'utf8'});
+}

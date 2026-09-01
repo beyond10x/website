@@ -5,8 +5,17 @@ import {sha256} from './artifact-contract.mjs';
 export async function validateBootstrapSnapshots(root, rosterRepositories) {
   const directory = path.join(root, 'data', 'bootstrap');
   const metadata = JSON.parse(await readFile(path.join(directory, 'metadata.json'), 'utf8'));
-  if (metadata.schema !== 'b10x-bootstrap-snapshot/v1' || !/^[0-9a-f]{40}$/.test(metadata.sourceRevision)) {
+  const revision = /^(?!0{40}$)[0-9a-f]{40}$/;
+  const digest = /^(?!0{64}$)[0-9a-f]{64}$/;
+  if (metadata.schema !== 'b10x-bootstrap-snapshot/v1'
+    || !revision.test(metadata.sourceRevision)
+    || !revision.test(metadata.websiteRevision)
+    || !digest.test(metadata.sourceLockSha256)) {
     throw new Error('bootstrap snapshot metadata is invalid');
+  }
+  const sourceLockBytes = await readFile(path.join(root, 'sources.lock.json'));
+  if (metadata.sourceLockSha256 !== sha256(sourceLockBytes)) {
+    throw new Error('bootstrap snapshot source-lock digest does not match sources.lock.json');
   }
   const names = ['changes.json', 'ecosystem.json', 'release-facts.json'];
   const documents = {};
@@ -21,7 +30,9 @@ export async function validateBootstrapSnapshots(root, rosterRepositories) {
   const surfaceKeys = new Set();
   for (const surface of ecosystem.surfaces) {
     const repository = surface.repository?.id;
-    if (!known.has(repository) && repository !== 'getting-started') throw new Error(`bootstrap ecosystem contains unknown repository ${repository}`);
+    if (!known.has(repository) && repository !== 'website' && repository !== 'getting-started') {
+      throw new Error(`bootstrap ecosystem contains unknown repository ${repository}`);
+    }
     const key = `${repository}/${surface.id}`;
     if (surfaceKeys.has(key) || !surface.name || !surface.summary || !surface.repository?.url) throw new Error(`bootstrap ecosystem contains invalid or duplicate surface ${key}`);
     surfaceKeys.add(key);

@@ -1,0 +1,28 @@
+.section {
+  margin: 0;
+}
+
+.card {
+  min-width: 0;
+}
+
+.card > header a {
+  display: inline;
+  min-height: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.purpose {
+  margin: 0;
+  padding: var(--b10x-space-3);
+  border-bottom: 1px solid var(--b10x-color-line);
+}
+
+.card small code {
+  display: block;
+  margin-top: .2rem;
+  overflow-wrap: anywhere;
+  color: var(--b10x-color-muted);
+  background: transparent;
+}

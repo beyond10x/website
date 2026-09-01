@@ -2,9 +2,9 @@ import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {collectManifestSources, verifyCollectionLock} from '@beyond10x/docs-system/collector';
 import {buildRegistry, readManifest, readSourceLock} from '@beyond10x/docs-system/manifest';
-import {extractDeclaredSource, readRoster, repositoryUrl, sha256} from './git-source.mjs';
+import {extractDeclaredSource, readRoster, repositoryUrl, sha256, sourceWorkspaceFromEnvironment} from './git-source.mjs';
 
-export async function collectSources({root, outputRoot}) {
+export async function collectSources({root, outputRoot, sourceWorkspace = sourceWorkspaceFromEnvironment()}) {
   const roster = await readRoster(path.join(root, 'sources.yaml'));
   const lockFile = path.join(root, 'sources.lock.json');
   const lock = await readSourceLock(lockFile);
@@ -23,7 +23,7 @@ export async function collectSources({root, outputRoot}) {
     if (source.url !== repositoryUrl(source.repository) || source.manifestPath !== roster.manifestPath) {
       throw new Error(`${source.repository} source-lock identity does not match sources.yaml`);
     }
-    const extracted = await extractDeclaredSource({...source, cacheRoot});
+    const extracted = await extractDeclaredSource({...source, cacheRoot, sourceWorkspace});
     const manifestBytes = await readFile(extracted.manifestFile);
     const actualManifestSha = sha256(manifestBytes);
     if (actualManifestSha !== source.manifestSha256 || extracted.manifestSha256 !== source.manifestSha256) {

@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {execFile as execFileCallback} from 'node:child_process';
-import {mkdir, readFile, rm, writeFile} from 'node:fs/promises';
+import {mkdir, readFile, realpath, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {promisify} from 'node:util';
 import {parse} from 'yaml';
@@ -46,18 +46,44 @@ export async function resolveCommit(url, ref = 'refs/heads/main') {
   return commit;
 }
 
-export async function extractDeclaredSource({repository, url, commit, manifestPath, cacheRoot}) {
+export async function resolveWorkspaceCommit(sourceWorkspace, repository) {
+  const repositoryRoot = await localRepositoryRoot(sourceWorkspace, repository);
+  let branch;
+  let commit;
+  let status;
+  try {
+    ({stdout: branch} = await runGit(['-C', repositoryRoot, 'symbolic-ref', '--quiet', 'HEAD']));
+    ({stdout: commit} = await runGit(['-C', repositoryRoot, 'rev-parse', '--verify', 'HEAD^{commit}']));
+    ({stdout: status} = await runGit(['-C', repositoryRoot, 'status', '--porcelain=v1', '--untracked-files=all']));
+  } catch {
+    throw new Error(`${repository} below B10X_SOURCE_WORKSPACE is not a readable Git checkout`);
+  }
+  if (branch.trim() !== 'refs/heads/main') {
+    throw new Error(`${repository} local source-lock input must have main checked out`);
+  }
+  if (status.length > 0) {
+    throw new Error(`${repository} local source-lock input must be clean before its main HEAD can be locked`);
+  }
+  const resolved = commit.trim();
+  if (!commitPattern.test(resolved)) throw new Error(`${repository} local main resolved to invalid commit ${resolved}`);
+  return resolved;
+}
+
+export async function extractDeclaredSource({repository, url, commit, manifestPath, cacheRoot, sourceWorkspace}) {
   validateRepositoryUrl(url, repository);
   if (!commitPattern.test(commit)) throw new Error(`${repository} has invalid commit ${commit}`);
   const bare = path.join(cacheRoot, 'objects', `${repository}.git`);
   const treeRoot = path.join(cacheRoot, 'trees', `${repository}-${commit}`);
+  const fetchSource = sourceWorkspace
+    ? await localGitSource(sourceWorkspace, repository, commit)
+    : `${url}.git`;
   await mkdir(path.dirname(bare), {recursive: true});
   try {
     await runGit([`--git-dir=${bare}`, 'rev-parse', '--is-bare-repository']);
   } catch {
     await runGit(['init', '--bare', bare]);
   }
-  await runGit([`--git-dir=${bare}`, 'fetch', '--no-tags', '--depth=1', `${url}.git`, commit]);
+  await runGit([`--git-dir=${bare}`, 'fetch', '--no-tags', '--depth=1', fetchSource, commit]);
   await runGit([`--git-dir=${bare}`, 'cat-file', '-e', `${commit}^{commit}`]);
 
   const entries = await listTree(bare, commit);
@@ -92,6 +118,15 @@ export async function extractDeclaredSource({repository, url, commit, manifestPa
     manifestFile: path.join(treeRoot, ...manifestPath.split('/')),
     manifestSha256: sha256(manifestBytes),
   };
+}
+
+export function sourceWorkspaceFromEnvironment(environment = process.env) {
+  const value = environment.B10X_SOURCE_WORKSPACE;
+  if (value === undefined || value === '') return undefined;
+  if (typeof value !== 'string' || value.includes('\0') || !path.isAbsolute(value)) {
+    throw new Error('B10X_SOURCE_WORKSPACE must be an absolute directory containing direct repository children');
+  }
+  return path.resolve(value);
 }
 
 export function declaredAnchors(manifest) {
@@ -135,6 +170,31 @@ function validateRepositoryUrl(url, repository) {
   if (!/^https:\/\/github\.com\/beyond10x\/[a-z0-9][a-z0-9-]*$/.test(url) || (expected && url !== expected)) {
     throw new Error(`source URL is outside the public beyond10x allowlist: ${url}`);
   }
+}
+
+async function localGitSource(workspaceRoot, repository, commit) {
+  const repositoryRoot = await localRepositoryRoot(workspaceRoot, repository);
+  try {
+    await runGit(['-C', repositoryRoot, 'cat-file', '-e', `${commit}^{commit}`]);
+  } catch {
+    throw new Error(`${repository}@${commit} is not available as an exact Git object below B10X_SOURCE_WORKSPACE`);
+  }
+  return repositoryRoot;
+}
+
+async function localRepositoryRoot(workspaceRoot, repository) {
+  if (!path.isAbsolute(workspaceRoot)) throw new Error('the local source workspace must be absolute');
+  if (!repositoryPattern.test(repository)) throw new Error(`invalid beyond10x repository ${repository}`);
+  let resolvedWorkspace;
+  let repositoryRoot;
+  try {
+    resolvedWorkspace = await realpath(workspaceRoot);
+    repositoryRoot = await realpath(path.join(resolvedWorkspace, repository));
+  } catch {
+    throw new Error(`${repository} is not an available direct child of B10X_SOURCE_WORKSPACE`);
+  }
+  if (path.dirname(repositoryRoot) !== resolvedWorkspace) throw new Error(`${repository} escapes the local source workspace`);
+  return repositoryRoot;
 }
 
 function joinSource(root, relative) {

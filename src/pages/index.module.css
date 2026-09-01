@@ -12,6 +12,19 @@
     #0b1118;
 }
 
+.gateway {
+  display: grid;
+  gap: clamp(3rem, 6vw, 5rem);
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  border-bottom: 1px solid var(--b10x-color-line);
+  background: var(--ifm-background-color);
+}
+
+.gateway > div {
+  display: grid;
+  gap: clamp(3rem, 6vw, 5rem);
+}
+
 .heroGrid {
   position: absolute;
   inset: 0;
