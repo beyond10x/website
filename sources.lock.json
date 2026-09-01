@@ -60,7 +60,7 @@
     {
       "repository": "docs-system",
       "url": "https://github.com/beyond10x/docs-system",
-      "commit": "ddaa43fa1443d110b52b46dbcb1154f68c47763c",
+      "commit": "a72cb048fe2dbab8e262b48d8811e747c07eecf6",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "27df8673c10150b33ecae697126e2a7d64051d74fa555dc9b5dffd20b0a0f1a9",
       "contentSha256": "7db68e54f1b399da34f63884ae849ae5d161741d6966e1634257cd7dd15ecc49"
