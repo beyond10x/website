@@ -4,10 +4,19 @@
   padding-bottom: calc(var(--b10x-space-5) * 2);
 }
 
+.page > :global(.b10x-page-header) {
+  margin-bottom: 0;
+}
+
 .start,
 .members {
   display: grid;
   gap: var(--b10x-space-4);
+}
+
+.start > :global(.b10x-section-header),
+.members > :global(.b10x-section-header) {
+  margin-top: 0;
 }
 
 .startGrid {
