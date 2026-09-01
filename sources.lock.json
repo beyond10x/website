@@ -20,10 +20,10 @@
     {
       "repository": "agent-platform",
       "url": "https://github.com/beyond10x/agent-platform",
-      "commit": "ddd08bec7ef88297cec29ac6a8db3d760f694ef3",
+      "commit": "c162ff43913f5e7d449e23a06c17ec31ac6cace8",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "97b0dc3edbebb726315d58c415cb480003f7a492e20891e3cd1fb6173b5af172",
-      "contentSha256": "363640c44433cc43d597392b6d3dfa7346349084a4a57acad0e3d6d9eab0888f"
+      "contentSha256": "68883b867bb2b0374e83932c5a1bb229f35db557b8ccb3acbdcdd1de17485665"
     },
     {
       "repository": "agentic-principles",
@@ -44,7 +44,7 @@
     {
       "repository": "connectors",
       "url": "https://github.com/beyond10x/connectors",
-      "commit": "05e1df2d3e3296473e3fe46fd5c16af8904c06a6",
+      "commit": "776376035519056722bb2ce11fe78cf48c3e8773",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "ced4338144ce76381429fb60c4068d40e33f750d23889c58f0d77fdac34736d4",
       "contentSha256": "c7d5a95aa2ba140004d8d73661b5e8d2f2b6b617c83985835de47f2fc3e6f58f"
@@ -52,10 +52,10 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "f25b59301384fde135fc6334336bc8d618cc0bce",
+      "commit": "24a186cfd2bbc1f70ebc79369870a5eb7b690730",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "04d767fab8fc5756c2d068df873a3fbd65143932c3bfff999e2750a5fd66d9f3",
-      "contentSha256": "88c7d2d010f9577649f5d2347cbe754129a2f2d38c4678c0be529c9f53416158"
+      "contentSha256": "4c5093ea0da8b6dd5da49bca48743eeb8554ec487741660bf3e54251a1b7cd86"
     },
     {
       "repository": "docs-system",
@@ -148,10 +148,10 @@
     {
       "repository": "worktree",
       "url": "https://github.com/beyond10x/worktree",
-      "commit": "4bd8d785b05806da82b1acaa9883a95249da18c9",
+      "commit": "c99bdee990258a3c03d13e7eff06b3a47fd91b3e",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "8fe6ddd3b940413f2cb45a0ac375a789ccb7aa859440239835f2e8daa0ee8520",
-      "contentSha256": "7e5e53e587808c364b9068b5601bb839685fedaeaae4f5d491e62570d525b605"
+      "contentSha256": "540424bda1748db33a1c76572620b923f73955269cf3f2bc793fc1f74fc02e5c"
     }
   ]
 }
