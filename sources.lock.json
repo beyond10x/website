@@ -44,7 +44,7 @@
     {
       "repository": "connectors",
       "url": "https://github.com/beyond10x/connectors",
-      "commit": "84fa25eaaf6d3a816bd25ea83c6cdacb806eb842",
+      "commit": "05e1df2d3e3296473e3fe46fd5c16af8904c06a6",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "ced4338144ce76381429fb60c4068d40e33f750d23889c58f0d77fdac34736d4",
       "contentSha256": "c7d5a95aa2ba140004d8d73661b5e8d2f2b6b617c83985835de47f2fc3e6f58f"
@@ -52,10 +52,10 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "94365bd9d7edf5c7e523b1431a9e3f530e084a4e",
+      "commit": "f25b59301384fde135fc6334336bc8d618cc0bce",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "04d767fab8fc5756c2d068df873a3fbd65143932c3bfff999e2750a5fd66d9f3",
-      "contentSha256": "4a7c72e0b4e896638e265927f3fb5fe92686e11bae5c6942fedc00160102085a"
+      "contentSha256": "88c7d2d010f9577649f5d2347cbe754129a2f2d38c4678c0be529c9f53416158"
     },
     {
       "repository": "docs-system",
