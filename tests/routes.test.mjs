@@ -7,6 +7,7 @@ import {parse} from 'yaml';
 import {renderRedirectHtml} from '@beyond10x/docs-system/redirects';
 import {routesFromFiles} from '../scripts/provenance-routes.mjs';
 import {facadeRepositories, synthesizeFacadeRoutes} from '../scripts/facade-contract.mjs';
+import {effectiveRedirectMap} from '../scripts/redirect-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 
@@ -72,15 +73,21 @@ test('source roster is complete, sorted, and lock is either the explicit bootstr
 
 test('provenance route inventory is deterministic and excludes the fallback document', () => {
   const routes = routesFromFiles([
+    {path: 'VISION.html'},
+    {path: 'myindex.html'},
     {path: 'vision/index.html'},
     {path: '404.html'},
     {path: 'index.html'},
     {path: 'docs/aep/index.html'},
   ]);
-  assert.deepEqual(routes, ['/', '/docs/aep/', '/vision/']);
+  assert.deepEqual(routes, ['/', '/VISION.html', '/docs/aep/', '/myindex.html', '/vision/']);
+  assert.throws(() => routesFromFiles([{path: '../escape.html'}]), /not canonical/);
+  assert.throws(() => routesFromFiles([{path: 'docs\\escape.html'}]), /not a portable relative path/);
+  assert.throws(() => routesFromFiles([{path: 'docs/next\u0085line.html'}]), /not a portable relative path/);
+  assert.throws(() => routesFromFiles([{path: 'docs/%2e%2e/escape.html'}]), /not a portable relative path/);
 });
 
-test('the retired getting-started repository remains an explicit compatibility-only façade', () => {
+test('the superseded getting-started source remains an explicit compatibility-only façade', () => {
   const repositories = facadeRepositories({repositories: ['aep', 'website'], compatibilityRepositories: ['getting-started']});
   assert.deepEqual(repositories, ['aep', 'getting-started', 'website']);
   const redirects = synthesizeFacadeRoutes(
@@ -102,4 +109,30 @@ test('active repositories receive profile and documentation façade entry points
     {from: '/docs/', to: '/docs/harness/', type: 'html'},
     {from: '/ecosystem/', to: '/ecosystem/harness/', type: 'html'},
   ]);
+});
+
+test('effective redirects are an exact safe projection of declared compatibility routes', () => {
+  const projected = effectiveRedirectMap({
+    schema: 'b10x-redirects/v1',
+    origin: 'https://beyond10x.github.io',
+    redirects: [
+      {from: '/old/', to: '/missing/leaf/', type: 'html'},
+      {from: '/feed.xml', source: 'releases/rss.xml', type: 'alias', mediaType: 'application/rss+xml'},
+    ],
+  }, {
+    routes: ['/', '/missing/'],
+    files: [{path: 'releases/rss.xml'}],
+  });
+  assert.deepEqual(projected.redirects, [
+    {from: '/old/', to: '/missing/', type: 'html'},
+    {from: '/feed.xml', source: 'releases/rss.xml', type: 'alias', mediaType: 'application/rss+xml'},
+  ]);
+  assert.throws(() => effectiveRedirectMap({
+    schema: 'b10x-redirects/v1', origin: 'https://beyond10x.github.io',
+    redirects: [{from: '/../escape', to: '/', type: 'html'}],
+  }, {routes: ['/'], files: []}), /traversal/);
+  assert.throws(() => effectiveRedirectMap({
+    schema: 'b10x-redirects/v1', origin: 'https://beyond10x.github.io',
+    redirects: [{from: '/.Git/config', to: '/', type: 'html'}],
+  }, {routes: ['/'], files: []}), /forbidden Git metadata/);
 });

@@ -4,6 +4,7 @@ import {mkdir, readFile, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {promisify} from 'node:util';
 import {parse} from 'yaml';
+import {compareUtf8} from './order-contract.mjs';
 
 const execFile = promisify(execFileCallback);
 const commitPattern = /^[0-9a-f]{40}$/;
@@ -22,7 +23,7 @@ export async function readRoster(file) {
     throw new Error(`${file} contains an invalid repository id`);
   }
   if (new Set(repositories).size !== repositories.length) throw new Error(`${file} contains duplicate repositories`);
-  if ([...repositories].sort().join('\n') !== repositories.join('\n')) throw new Error(`${file} repositories must be sorted`);
+  if ([...repositories].sort(compareUtf8).join('\n') !== repositories.join('\n')) throw new Error(`${file} repositories must be sorted`);
   return {
     repositories,
     manifestPath: safeTreePath(document.manifestPath ?? 'b10x.docs.yaml'),
@@ -104,7 +105,7 @@ export function declaredAnchors(manifest) {
       anchors.add(joinSource(root, safeTreePath(specification.path)));
     }
   }
-  return [...anchors].sort();
+  return [...anchors].sort(compareUtf8);
 }
 
 export function staticPrefix(pattern) {

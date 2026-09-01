@@ -7,4 +7,5 @@
 - Add deterministic changes, releases, API, component, search, route-compatibility, and provenance output.
 - Provide the caller-scoped reusable Pages redirect-façade workflow.
 - Verify source-lock, route, legacy-route, and artifact digests through root and façade deployment metadata.
-- Add commit-exact artifact crawling, source-derived navigation, static API/data summaries, and explicit retired Getting Started compatibility.
+- Add commit-exact artifact crawling, source-derived navigation, static API/data summaries, and explicit compatibility for the superseded Getting Started source.
+- Bind root and project Pages to immutable reusable runtimes, bot-only caller commits, portable UTF-8 artifact contracts, deterministic redirect projections, and independently verifiable source collection indexes.

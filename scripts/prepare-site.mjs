@@ -2,6 +2,7 @@ import {copyFile, mkdir, readFile, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {parse} from 'yaml';
 import {writeJsonFeed, writeRss} from '@beyond10x/docs-system/feeds';
+import {compareUtf8} from './order-contract.mjs';
 import {sourceKey, sourceMap} from './source-routing.mjs';
 import {bootstrapEnabled, validateSourceLock} from './source-lock-contract.mjs';
 import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
@@ -386,7 +387,7 @@ function specificationSummary(document, kind) {
       ...(operations.length > 40 ? [`- …and ${operations.length - 40} more in the interactive reference and canonical document.`] : []),
     ];
   }
-  const properties = Object.keys(document.properties ?? {}).sort();
+  const properties = Object.keys(document.properties ?? {}).sort(compareUtf8);
   return [
     `**Schema:** ${plainText(document.title ?? document.$id ?? 'Untitled schema')} · **Type:** ${plainText(document.type ?? 'unspecified')} · **Top-level properties:** ${properties.length}`,
     '',
@@ -398,7 +399,7 @@ function dataSummary(document) {
   if (Array.isArray(document)) {
     return [`This catalog contains **${document.length} items**.`, '', ...document.slice(0, 25).map((item, index) => `- ${plainText(item?.name ?? item?.id ?? item?.key ?? `Item ${index + 1}`)}`)];
   }
-  const keys = document && typeof document === 'object' ? Object.keys(document).sort() : [];
+  const keys = document && typeof document === 'object' ? Object.keys(document).sort(compareUtf8) : [];
   return [`This data document exposes **${keys.length} top-level fields**.`, '', ...keys.slice(0, 50).map((key) => `- \`${plainText(key)}\``)];
 }
 
@@ -514,7 +515,7 @@ async function synthesizeDirectoryLandings({documents, routeBySource, destinatio
       children.get(directory).add(route);
     }
   }
-  for (const [route, routeChildren] of [...children.entries()].sort(([left], [right]) => left.localeCompare(right))) {
+  for (const [route, routeChildren] of [...children.entries()].sort(([left], [right]) => compareUtf8(left, right))) {
     if (realRoutes.has(route)) continue;
     const [, , repository, ...remainder] = route.split('/');
     const destination = docDestination(route, 'index.md');
@@ -522,7 +523,7 @@ async function synthesizeDirectoryLandings({documents, routeBySource, destinatio
     await mkdir(path.dirname(destination), {recursive: true});
     const manifest = manifestByRepository.get(repository);
     const title = remainder.filter(Boolean).at(-1)?.replace(/[-_]/g, ' ') ?? manifest?.repository.displayName ?? repository;
-    const links = [...routeChildren].sort().map((child) => `- [${child.replace(route, '').replace(/\/$/, '').replace(/[-_/]/g, ' ')}](${child})`);
+    const links = [...routeChildren].sort(compareUtf8).map((child) => `- [${child.replace(route, '').replace(/\/$/, '').replace(/[-_/]/g, ' ')}](${child})`);
     await writeFile(destination, ['---', `title: ${JSON.stringify(title)}`, `slug: ${JSON.stringify(route.replace(/^\/docs/, ''))}`, '---', '', `# ${title}`, '', 'Collected documentation in this section:', '', ...links, ''].join('\n'));
     realRoutes.add(route);
   }
@@ -605,7 +606,7 @@ async function synthesizeApiLandings(sourceIndexes, manifestByRepository) {
     if (!byRepository.has(file.repository)) byRepository.set(file.repository, []);
     byRepository.get(file.repository).push({route: file.route, label: file.specificationId});
   }
-  for (const [repository, specifications] of [...byRepository].sort(([left], [right]) => left.localeCompare(right))) {
+  for (const [repository, specifications] of [...byRepository].sort(([left], [right]) => compareUtf8(left, right))) {
     const displayName = manifestByRepository.get(repository)?.repository.displayName ?? repository;
     const destination = path.join(api, repository, 'index.md');
     await mkdir(path.dirname(destination), {recursive: true});
@@ -613,7 +614,7 @@ async function synthesizeApiLandings(sourceIndexes, manifestByRepository) {
       '---', `title: ${JSON.stringify(`${displayName} APIs`)}`, `slug: ${JSON.stringify(`/${repository}/`)}`, '---', '',
       `# ${displayName} APIs`, '',
       'Repository-owned machine contracts, rendered from the exact source revision in the Website source lock.', '',
-      ...specifications.sort((left, right) => left.route.localeCompare(right.route)).map((specification) => `- [${specification.label}](${specification.route})`), '',
+      ...specifications.sort((left, right) => compareUtf8(left.route, right.route)).map((specification) => `- [${specification.label}](${specification.route})`), '',
     ].join('\n'));
   }
 }
@@ -625,7 +626,7 @@ function assertUniqueDestination(destinations, destination) {
 
 function buildDependencyGraph(registrySurfaces) {
   const nodes = [...new Map(registrySurfaces.map((surface) => [surface.repository.id, {id: surface.repository.id, label: surface.name}])).values()]
-    .sort((left, right) => left.id.localeCompare(right.id));
+    .sort((left, right) => compareUtf8(left.id, right.id));
   const known = new Set(nodes.map((node) => node.id));
   const edges = [];
   const seen = new Set();
@@ -638,7 +639,7 @@ function buildDependencyGraph(registrySurfaces) {
       edges.push({from: surface.repository.id, to: target, label: relationship.kind});
     }
   }
-  edges.sort((left, right) => left.from.localeCompare(right.from) || left.to.localeCompare(right.to) || left.label.localeCompare(right.label));
+  edges.sort((left, right) => compareUtf8(left.from, right.from) || compareUtf8(left.to, right.to) || compareUtf8(left.label, right.label));
   return {schema: 'b10x-public-dependency-graph/v1', nodes, edges};
 }
 
@@ -660,7 +661,7 @@ function renderSidebars(ecosystemRegistry, sourceManifests) {
         order: Number.isFinite(declared.order) ? declared.order : 100,
       };
     })
-    .sort((left, right) => left.group.localeCompare(right.group) || left.order - right.order || left.label.localeCompare(right.label) || left.repository.localeCompare(right.repository));
+    .sort((left, right) => compareUtf8(left.group, right.group) || left.order - right.order || compareUtf8(left.label, right.label) || compareUtf8(left.repository, right.repository));
   const items = [
     {type: 'doc', id: 'index', label: 'Technical documentation'},
     ...repositories.map((item) => ({

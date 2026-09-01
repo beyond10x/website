@@ -1,6 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {parse} from 'yaml';
+import {compareUtf8} from './order-contract.mjs';
 
 const hex40 = /^[0-9a-f]{40}$/;
 const hex64 = /^[0-9a-f]{64}$/;
@@ -15,7 +16,7 @@ export async function validateSourceLock(root, {allowBootstrap = false} = {}) {
     throw new Error('sources.lock.json is not a b10x-sources/v1 lock');
   }
   const expected = roster.repositories;
-  if (expected.length !== 19 || new Set(expected).size !== 19 || expected.join('\n') !== [...expected].sort().join('\n')) {
+  if (expected.length !== 19 || new Set(expected).size !== 19 || expected.join('\n') !== [...expected].sort(compareUtf8).join('\n')) {
     throw new Error('sources.yaml must contain exactly 19 unique sorted source repositories');
   }
   if (JSON.stringify(roster.compatibilityRepositories) !== JSON.stringify(['getting-started']) || expected.includes('getting-started')) {

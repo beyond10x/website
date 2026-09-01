@@ -1,5 +1,7 @@
+import {compareUtf8} from './order-contract.mjs';
+
 export function facadeRepositories(roster) {
-  return [...new Set([...roster.repositories, ...(roster.compatibilityRepositories ?? [])])].sort();
+  return [...new Set([...roster.repositories, ...(roster.compatibilityRepositories ?? [])])].sort(compareUtf8);
 }
 
 export function synthesizeFacadeRoutes(repository, input, rootRoutes) {
@@ -18,5 +20,5 @@ export function synthesizeFacadeRoutes(repository, input, rootRoutes) {
   for (const redirect of routes.filter((candidate) => candidate.type === 'html')) {
     if (!rootRoutes.has(redirect.to)) throw new Error(`${repository} façade target ${redirect.to} is absent from root provenance`);
   }
-  return routes.sort((left, right) => left.from.localeCompare(right.from));
+  return routes.sort((left, right) => compareUtf8(left.from, right.from));
 }

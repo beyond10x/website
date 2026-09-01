@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {createServer} from 'node:net';
-import {mkdtemp, rm, symlink, writeFile} from 'node:fs/promises';
+import {mkdtemp, readFile, rm, symlink, writeFile} from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -66,4 +66,48 @@ test('artifact provenance rejects symbolic links and non-regular entries', async
     server.listen(socket, resolve);
   });
   await assert.rejects(artifactFacts(directory), /artifact contains non-regular entry .*artifact\.sock/);
+});
+
+test('artifact files and routes use explicit UTF-8 byte order', async (context) => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'b10x-artifact-order-'));
+  context.after(() => rm(directory, {recursive: true, force: true}));
+  await writeFile(path.join(directory, 'a.html'), 'lowercase');
+  await writeFile(path.join(directory, 'VISION.html'), 'uppercase');
+
+  const facts = await artifactFacts(directory);
+  assert.deepEqual(facts.files.map((file) => file.path), ['VISION.html', 'a.html']);
+  assert.deepEqual(facts.routes, ['/VISION.html', '/a.html']);
+});
+
+test('artifact provenance rejects Git control files', async (context) => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'b10x-artifact-git-control-'));
+  context.after(() => rm(directory, {recursive: true, force: true}));
+  await writeFile(path.join(directory, 'index.html'), '<!doctype html>');
+  await writeFile(path.join(directory, '.gitignore'), '*');
+  await assert.rejects(artifactFacts(directory), /forbidden Git metadata/);
+});
+
+test('reusable façade workflow executes its own immutable revision and treats the deployed Website as data', async () => {
+  const workflow = await readFile(path.join(path.resolve(import.meta.dirname, '..'), '.github', 'workflows', 'redirect-facade.yml'), 'utf8');
+  assert.match(workflow, /repository: \$\{\{ job\.workflow_repository \}\}/);
+  assert.match(workflow, /ref: \$\{\{ job\.workflow_sha \}\}/);
+  assert.match(workflow, /path: \.runtime/);
+  assert.match(workflow, /path: \.control-data/);
+  assert.match(workflow, /path: \.website-data/);
+  assert.match(workflow, /--data \.\.\/\.website-data/);
+  assert.match(workflow, /github\.triggering_actor == 'b10x-bot\[bot\]'/);
+  assert.match(workflow, /github\.sha == inputs\.control_sha/);
+  assert.match(workflow, /refs\/heads\/main/);
+  assert.doesNotMatch(workflow, /working-directory: \.website-data/);
+});
+
+test('reusable root workflow executes immutable controls and blocks human reruns', async () => {
+  const workflow = await readFile(path.join(path.resolve(import.meta.dirname, '..'), '.github', 'workflows', 'deploy-root.yml'), 'utf8');
+  assert.match(workflow, /repository: \$\{\{ job\.workflow_repository \}\}/);
+  assert.match(workflow, /ref: \$\{\{ job\.workflow_sha \}\}/);
+  assert.match(workflow, /github\.triggering_actor == 'b10x-bot\[bot\]'/);
+  assert.match(workflow, /github\.sha == inputs\.control_sha/);
+  assert.match(workflow, /node \.runtime\/scripts\/verify-build\.mjs/);
+  assert.match(workflow, /--data \.website-data/);
+  assert.doesNotMatch(workflow, /working-directory: \.website-data/);
 });

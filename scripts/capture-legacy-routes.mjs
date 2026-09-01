@@ -1,5 +1,6 @@
 import {writeFile} from 'node:fs/promises';
 import path from 'node:path';
+import {compareUtf8} from './order-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const repositories = [
@@ -46,7 +47,7 @@ redirects.push(
   {from: '/getting-started/release-facts.json', source: 'release-facts.json', type: 'alias', mediaType: 'application/json'},
 );
 
-redirects.sort((left, right) => left.from.localeCompare(right.from) || left.type.localeCompare(right.type));
+redirects.sort((left, right) => compareUtf8(left.from, right.from) || compareUtf8(left.type, right.type));
 const seen = new Set();
 for (const redirect of redirects) {
   if (seen.has(redirect.from)) throw new Error(`duplicate legacy route ${redirect.from}`);

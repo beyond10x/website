@@ -11,11 +11,12 @@ on:
         description: Calling beyond10x repository name.
         required: true
         type: string
+      control_sha:
+        description: Exact bot-authored caller commit on main.
+        required: true
+        type: string
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+permissions: {}
 
 concurrency:
   group: pages-${{ inputs.repository }}
@@ -23,7 +24,11 @@ concurrency:
 
 jobs:
   publish:
-    if: ${{ github.actor == 'b10x-bot[bot]' && github.repository == format('beyond10x/{0}', inputs.repository) }}
+    if: ${{ github.actor == 'b10x-bot[bot]' && github.triggering_actor == 'b10x-bot[bot]' && github.repository == format('beyond10x/{0}', inputs.repository) && github.ref == 'refs/heads/main' && github.sha == inputs.control_sha }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -33,35 +38,111 @@ jobs:
       - name: Validate immutable inputs
         env:
           WEBSITE_SHA: ${{ inputs.website_sha }}
+          CONTROL_SHA: ${{ inputs.control_sha }}
           SOURCE_REPOSITORY: ${{ inputs.repository }}
+          RUNTIME_REPOSITORY: ${{ job.workflow_repository }}
+          RUNTIME_SHA: ${{ job.workflow_sha }}
         run: |
           case "$WEBSITE_SHA" in
             *[!0-9a-f]*|'') exit 1 ;;
           esac
           test "${#WEBSITE_SHA}" -eq 40
+          case "$CONTROL_SHA" in
+            *[!0-9a-f]*|'') exit 1 ;;
+          esac
+          test "${#CONTROL_SHA}" -eq 40
+          case "$RUNTIME_SHA" in
+            *[!0-9a-f]*|'') exit 1 ;;
+          esac
+          test "${#RUNTIME_SHA}" -eq 40
+          test "$CONTROL_SHA" = "$GITHUB_SHA"
+          test "$RUNTIME_REPOSITORY" = beyond10x/website
           test "$GITHUB_REPOSITORY" = "beyond10x/$SOURCE_REPOSITORY"
-      - name: Check out the exact website source
+      - name: Check out the immutable façade runtime
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: ${{ job.workflow_repository }}
+          ref: ${{ job.workflow_sha }}
+          path: .runtime
+          persist-credentials: false
+      - name: Check out caller controls as immutable data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ inputs.control_sha }}
+          path: .control-data
+          persist-credentials: false
+      - name: Check out the deployed Website revision as data
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: beyond10x/website
           ref: ${{ inputs.website_sha }}
-          path: .website
+          path: .website-data
+          fetch-depth: 0
           persist-credentials: false
+      - name: Verify caller, runtime, and Website authority
+        env:
+          BOT_EMAIL: 316511680+b10x-bot[bot]@users.noreply.github.com
+          BOT_LOGIN: b10x-bot[bot]
+          CONTROL_SHA: ${{ inputs.control_sha }}
+          GITHUB_TOKEN: ${{ github.token }}
+          RUNTIME_SHA: ${{ job.workflow_sha }}
+          WEBSITE_SHA: ${{ inputs.website_sha }}
+        run: |
+          set -euo pipefail
+          test "$(git -C .runtime rev-parse HEAD)" = "$RUNTIME_SHA"
+          test "$(git -C .control-data rev-parse HEAD)" = "$CONTROL_SHA"
+          test "$(git -C .website-data rev-parse HEAD)" = "$WEBSITE_SHA"
+          test "$(git ls-remote --refs "https://github.com/${GITHUB_REPOSITORY}.git" refs/heads/main | awk 'NF == 2 { print $1 }')" = "$CONTROL_SHA"
+
+          assert_git_bot() {
+            local repository=$1 revision=$2
+            mapfile -t identity < <(git -C "$repository" show -s --format='%an%n%ae%n%cn%n%ce' "$revision")
+            test "${#identity[@]}" -eq 4
+            test "${identity[0]}" = "$BOT_LOGIN" && test "${identity[1]}" = "$BOT_EMAIL"
+            test "${identity[2]}" = "$BOT_LOGIN" && test "${identity[3]}" = "$BOT_EMAIL"
+          }
+          assert_git_bot .runtime "$RUNTIME_SHA"
+          assert_git_bot .control-data "$CONTROL_SHA"
+          assert_git_bot .website-data "$WEBSITE_SHA"
+
+          mkdir -p "$RUNNER_TEMP/b10x-facade-boundary"
+          api_commit() {
+            local repository=$1 revision=$2 destination=$3
+            curl --fail-with-body --silent --show-error --location --retry 3 \
+              --header 'Accept: application/vnd.github+json' \
+              --header "Authorization: Bearer $GITHUB_TOKEN" \
+              --header 'X-GitHub-Api-Version: 2022-11-28' \
+              "$GITHUB_API_URL/repos/$repository/commits/$revision" > "$destination"
+          }
+          api_commit beyond10x/website "$RUNTIME_SHA" "$RUNNER_TEMP/b10x-facade-boundary/runtime.json"
+          api_commit "$GITHUB_REPOSITORY" "$CONTROL_SHA" "$RUNNER_TEMP/b10x-facade-boundary/control.json"
+          api_commit beyond10x/website "$WEBSITE_SHA" "$RUNNER_TEMP/b10x-facade-boundary/website.json"
+          for document in "$RUNNER_TEMP"/b10x-facade-boundary/*.json; do
+            jq -e --arg login "$BOT_LOGIN" \
+              '.author.login == $login and .committer.login == $login' "$document" >/dev/null
+          done
+
+          git -C .website-data fetch --quiet --no-tags origin \
+            '+refs/heads/main:refs/remotes/origin/main'
+          git -C .website-data merge-base --is-ancestor "$RUNTIME_SHA" refs/remotes/origin/main
+          git -C .website-data merge-base --is-ancestor "$WEBSITE_SHA" refs/remotes/origin/main
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: .website/package-lock.json
+          cache-dependency-path: .runtime/package-lock.json
       - name: Install the pinned façade generator
-        working-directory: .website
+        working-directory: .runtime
         run: npm ci --ignore-scripts
       - name: Build compatibility routes after root convergence
-        working-directory: .website
+        working-directory: .runtime
         run: >-
           node scripts/build-redirect-facade.mjs
           --repository '${{ inputs.repository }}'
           --website-sha '${{ inputs.website_sha }}'
+          --data ../.website-data
           --out ../_site
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b

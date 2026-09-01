@@ -16,6 +16,9 @@ The source contract is deliberately split:
   plus `/._b10x/deployment.json` in the artifact and on the public URL.
 
 Collection uses bare Git object databases and never creates worktrees or runs source code.
+Each build also records the canonical Docs System collection index for every locked source beside
+the extracted passive tree. Atlas uses those indexes to verify every selected byte and the locked
+`contentSha256` independently before publication.
 
 ## Develop
 
@@ -31,6 +34,9 @@ every same-origin manifest, redirect, alias, and rendered HTML link. The empty-l
 fixture is accepted only with `B10X_BOOTSTRAP_FIXTURE=1` (or `npm run gate:fixture`) while bringing
 up a new catalog; it is never valid production provenance.
 
+Provenance file and route inventories use explicit UTF-8 byte-lexical order. Verifiers in other
+languages must use the same ordering contract; locale-sensitive comparison is not permitted.
+
 Refresh `sources.lock.json` only through the deterministic lock command after repository-owned
 manifest changes have merged. Atlas and release operators can run `npm run sources:freshness` to
 compare the committed lock with the current 19 remote `main` heads; moving-tip freshness is kept
@@ -39,7 +45,9 @@ is published by Atlas-owned bot automation, not from developer credentials in th
 
 Active and retired repository Pages sites are redirect façades. They call
 `.github/workflows/redirect-facade.yml` at an immutable Website commit, verify downloaded aliases
-against the deployed root provenance, and publish their own façade provenance. `getting-started`
-remains explicitly admitted only for this permanent compatibility role.
+against the deployed root provenance, and publish their own façade provenance. The reusable
+workflow executes the generator and dependency lock from its own immutable `job.workflow_sha`;
+the newly deployed Website revision is checked out separately and parsed only as data.
+`getting-started` remains explicitly admitted only for this permanent compatibility role.
 
 Apache-2.0.

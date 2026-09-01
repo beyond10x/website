@@ -17,7 +17,9 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
 - Technical claims and documentation stay owned by their individual public repositories. Import
   only paths declared by their `b10x-docs/v3` manifests at commits in `sources.lock.json`.
 - Collect sources through bounded bare Git object stores. Never create source worktrees, execute
-  source code, load repository sidebars, or accept active MDX.
+  source code, load repository sidebars, or accept active MDX. Preserve the canonical collection
+  index and extracted passive tree for each exact source revision so Atlas can verify locked content
+  independently.
 - `beyond10x.github.io` is a generated deployment mirror. Do not author content there.
 - `getting-started` is predecessor history, not an authority or a source dependency. It remains an
   explicit compatibility-only façade; do not add it to the 19-source lock.
@@ -34,5 +36,8 @@ must be deterministic. Production provenance requires a nonzero full Website com
 19 source commits. The artifact crawler must cover manifest URLs, effective redirect targets, alias
 sources, and rendered same-origin links. Use `npm run sources:freshness` as an explicit promotion
 check against moving remote heads; never make rebuilding an immutable Website commit depend on
-those heads remaining unchanged. Publication credentials and bot-authenticated GitHub operations
-remain in private Atlas tooling; never commit credential machinery or tokens here.
+those heads remaining unchanged. File and route inventories are ordered by UTF-8 bytes, never by a
+process locale. Reusable Pages workflows execute only their own immutable runtime revision; the
+deployed Website revision is data, not executable tooling. Publication credentials and
+bot-authenticated GitHub operations remain in private Atlas tooling; never commit credential
+machinery or tokens here.

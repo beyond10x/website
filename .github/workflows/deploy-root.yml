@@ -1,0 +1,187 @@
+name: deploy organization Pages
+
+on:
+  workflow_call:
+    inputs:
+      published_sha:
+        description: Exact bot-authored commit at the deployment repository's published head.
+        required: true
+        type: string
+      control_sha:
+        description: Exact bot-authored deployment-repository main commit running the caller.
+        required: true
+        type: string
+
+permissions: {}
+
+jobs:
+  deploy:
+    if: >-
+      github.actor == 'b10x-bot[bot]'
+      && github.triggering_actor == 'b10x-bot[bot]'
+      && github.repository == 'beyond10x/beyond10x.github.io'
+      && github.ref == 'refs/heads/main'
+      && github.sha == inputs.control_sha
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    env:
+      BOT_EMAIL: 316511680+b10x-bot[bot]@users.noreply.github.com
+      BOT_LOGIN: b10x-bot[bot]
+      CONTROL_SHA: ${{ inputs.control_sha }}
+      PUBLISHED_SHA: ${{ inputs.published_sha }}
+    steps:
+      - name: Validate immutable authority inputs
+        env:
+          RUNTIME_REPOSITORY: ${{ job.workflow_repository }}
+          RUNTIME_SHA: ${{ job.workflow_sha }}
+        run: |
+          set -euo pipefail
+          for revision in "$CONTROL_SHA" "$PUBLISHED_SHA" "$RUNTIME_SHA"; do
+            case "$revision" in
+              *[!0-9a-f]*|'') exit 1 ;;
+            esac
+            test "${#revision}" -eq 40
+            test "$revision" != 0000000000000000000000000000000000000000
+          done
+          test "$CONTROL_SHA" = "$GITHUB_SHA"
+          test "$RUNTIME_REPOSITORY" = beyond10x/website
+
+      - name: Check out the immutable deployment runtime
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: ${{ job.workflow_repository }}
+          ref: ${{ job.workflow_sha }}
+          path: .runtime
+          persist-credentials: false
+
+      - name: Check out deployment controls as data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: beyond10x/beyond10x.github.io
+          ref: ${{ inputs.control_sha }}
+          path: .control-data
+          persist-credentials: false
+
+      - name: Check out the exact generated artifact
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: beyond10x/beyond10x.github.io
+          ref: ${{ inputs.published_sha }}
+          path: _site
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Resolve the exact Website data revision
+        id: website
+        run: |
+          set -euo pipefail
+          revision="$(jq -er '.websiteCommit | select(test("^[0-9a-f]{40}$")) | select(test("^0+$") | not)' _site/PROVENANCE.json)"
+          printf 'sha=%s\n' "$revision" >> "$GITHUB_OUTPUT"
+
+      - name: Check out Website inputs as immutable data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: beyond10x/website
+          ref: ${{ steps.website.outputs.sha }}
+          path: .website-data
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .runtime/package-lock.json
+
+      - name: Install the pinned verifier runtime
+        working-directory: .runtime
+        run: npm ci --ignore-scripts
+
+      - name: Verify Git and GitHub publication boundaries
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RUNTIME_SHA: ${{ job.workflow_sha }}
+          WEBSITE_SHA: ${{ steps.website.outputs.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git -C .runtime rev-parse HEAD)" = "$RUNTIME_SHA"
+          test "$(git -C .control-data rev-parse HEAD)" = "$CONTROL_SHA"
+          test "$(git -C _site rev-parse HEAD)" = "$PUBLISHED_SHA"
+          test "$(git -C .website-data rev-parse HEAD)" = "$WEBSITE_SHA"
+
+          remote_head() {
+            local repository=$1 branch=$2
+            git ls-remote --refs "https://github.com/beyond10x/${repository}.git" "refs/heads/${branch}" \
+              | awk 'NF == 2 && $2 == "refs/heads/'"$branch"'" { print $1 }'
+          }
+          test "$(remote_head beyond10x.github.io main)" = "$CONTROL_SHA"
+          test "$(remote_head beyond10x.github.io published)" = "$PUBLISHED_SHA"
+
+          assert_git_bot() {
+            local repository=$1 revision=$2 label=$3
+            mapfile -t identity < <(git -C "$repository" show -s --format='%an%n%ae%n%cn%n%ce' "$revision")
+            test "${#identity[@]}" -eq 4
+            test "${identity[0]}" = "$BOT_LOGIN" && test "${identity[1]}" = "$BOT_EMAIL"
+            test "${identity[2]}" = "$BOT_LOGIN" && test "${identity[3]}" = "$BOT_EMAIL"
+            printf 'verified Git identity for %s\n' "$label"
+          }
+          assert_git_bot .runtime "$RUNTIME_SHA" runtime
+          assert_git_bot .control-data "$CONTROL_SHA" controls
+          assert_git_bot _site "$PUBLISHED_SHA" publication
+          assert_git_bot .website-data "$WEBSITE_SHA" Website
+
+          mkdir -p "$RUNNER_TEMP/b10x-root-boundary"
+          api_commit() {
+            local repository=$1 revision=$2 destination=$3
+            curl --fail-with-body --silent --show-error --location --retry 3 \
+              --header 'Accept: application/vnd.github+json' \
+              --header "Authorization: Bearer $GITHUB_TOKEN" \
+              --header 'X-GitHub-Api-Version: 2022-11-28' \
+              "$GITHUB_API_URL/repos/beyond10x/$repository/commits/$revision" > "$destination"
+          }
+          api_commit website "$RUNTIME_SHA" "$RUNNER_TEMP/b10x-root-boundary/runtime.json"
+          api_commit beyond10x.github.io "$CONTROL_SHA" "$RUNNER_TEMP/b10x-root-boundary/control.json"
+          api_commit beyond10x.github.io "$PUBLISHED_SHA" "$RUNNER_TEMP/b10x-root-boundary/publication.json"
+          api_commit website "$WEBSITE_SHA" "$RUNNER_TEMP/b10x-root-boundary/website.json"
+          for document in "$RUNNER_TEMP"/b10x-root-boundary/*.json; do
+            jq -e --arg login "$BOT_LOGIN" \
+              '.author.login == $login and .committer.login == $login' "$document" >/dev/null
+          done
+
+          git -C .website-data fetch --quiet --no-tags origin \
+            '+refs/heads/main:refs/remotes/origin/main'
+          git -C .website-data merge-base --is-ancestor "$RUNTIME_SHA" refs/remotes/origin/main
+          git -C .website-data merge-base --is-ancestor "$WEBSITE_SHA" refs/remotes/origin/main
+
+      - name: Remove checkout metadata and independently verify artifact bytes
+        env:
+          WEBSITE_SHA: ${{ steps.website.outputs.sha }}
+        run: |
+          set -euo pipefail
+          rm -rf -- _site/.git
+          node .runtime/scripts/verify-build.mjs \
+            --artifact _site \
+            --data .website-data \
+            --website-sha "$WEBSITE_SHA"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+        with:
+          enablement: true
+
+      - name: Upload static artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
+        with:
+          path: _site
+
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e

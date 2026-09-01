@@ -4,17 +4,20 @@ import {writeRedirectMap} from '@beyond10x/docs-system/redirects';
 import {artifactFacts, canonicalJson, deploymentFromProvenance, sha256} from './artifact-contract.mjs';
 import {validateSourceLock} from './source-lock-contract.mjs';
 import {facadeRepositories, synthesizeFacadeRoutes} from './facade-contract.mjs';
+import {compareUtf8} from './order-contract.mjs';
+import {effectiveRedirectMap} from './redirect-contract.mjs';
 
 const options = parseArgs(process.argv.slice(2));
-const root = path.resolve(import.meta.dirname, '..');
+const runtimeRoot = path.resolve(import.meta.dirname, '..');
+const dataRoot = path.resolve(options.data ?? runtimeRoot);
 const repository = options.repository;
 if (!/^[a-z0-9][a-z0-9-]*$/.test(repository)) throw new Error(`invalid repository ${repository}`);
 if (!/^[0-9a-f]{40}$/.test(options.websiteSha) || /^0+$/.test(options.websiteSha)) throw new Error('website-sha must be a non-zero full commit');
-const {roster} = await validateSourceLock(root, {allowBootstrap: true});
+const {roster} = await validateSourceLock(dataRoot, {allowBootstrap: true});
 if (!facadeRepositories(roster).includes(repository)) throw new Error(`${repository} is not in the active or compatibility-only façade roster`);
 
 const output = path.resolve(options.out);
-const globalMapBytes = await readFile(path.join(root, 'legacy-routes.json'));
+const globalMapBytes = await readFile(path.join(dataRoot, 'legacy-routes.json'));
 const globalMap = JSON.parse(globalMapBytes);
 const initialRoot = await fetchRootProvenance(globalMap.origin, options.websiteSha);
 if (initialRoot.document.legacyRoutesSha256 !== sha256(globalMapBytes)) {
@@ -23,13 +26,17 @@ if (initialRoot.document.legacyRoutesSha256 !== sha256(globalMapBytes)) {
 const rootFiles = new Map(initialRoot.document.files.map((file) => [file.path, file]));
 const effectiveBytes = await fetchVerifiedFile(globalMap.origin, '.well-known/b10x-redirects.json', rootFiles);
 const effectiveMap = JSON.parse(effectiveBytes);
+const expectedEffectiveMap = effectiveRedirectMap(globalMap, {routes: initialRoot.document.routes, files: initialRoot.document.files});
+if (!effectiveBytes.equals(Buffer.from(canonicalJson(expectedEffectiveMap)))) {
+  throw new Error('root effective redirect map is not the deterministic projection of the Website redirect contract');
+}
 if (effectiveMap.schema !== 'b10x-redirects/v1' || effectiveMap.origin !== globalMap.origin) throw new Error('root effective redirect map is invalid');
 const prefix = `/${repository}`;
 const declared = effectiveMap.redirects
   .filter((redirect) => redirect.from === prefix || redirect.from.startsWith(`${prefix}/`))
   .map((redirect) => ({...redirect, from: redirect.from.slice(prefix.length) || '/'}));
 const redirects = synthesizeFacadeRoutes(repository, declared, new Set(initialRoot.document.routes));
-const aliasRoot = path.join(root, '.cache', 'redirect-aliases', repository);
+const aliasRoot = path.join(runtimeRoot, '.cache', 'redirect-aliases', repository);
 await Promise.all([rm(output, {recursive: true, force: true}), rm(aliasRoot, {recursive: true, force: true})]);
 await Promise.all([mkdir(output, {recursive: true}), mkdir(aliasRoot, {recursive: true})]);
 const aliases = [];
@@ -75,7 +82,7 @@ const facadeProvenance = {
     artifactSha256: initialRoot.document.artifactSha256,
     routesSha256: initialRoot.document.routesSha256,
   },
-  aliases: aliases.sort((left, right) => left.from.localeCompare(right.from)),
+  aliases: aliases.sort((left, right) => compareUtf8(left.from, right.from)),
   routes: facts.routes,
   files: facts.files,
 };
@@ -119,10 +126,10 @@ function parseArgs(args) {
   for (let index = 0; index < args.length; index += 2) {
     const name = args[index];
     const value = args[index + 1];
-    if (!name?.startsWith('--') || !value) throw new Error('usage: build-redirect-facade --repository <id> --website-sha <sha> --out <directory>');
+    if (!name?.startsWith('--') || !value) throw new Error('usage: build-redirect-facade --repository <id> --website-sha <sha> --out <directory> [--data <directory>]');
     result[name.slice(2).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())] = value;
   }
-  if (!result.repository || !result.websiteSha || !result.out) throw new Error('usage: build-redirect-facade --repository <id> --website-sha <sha> --out <directory>');
+  if (!result.repository || !result.websiteSha || !result.out) throw new Error('usage: build-redirect-facade --repository <id> --website-sha <sha> --out <directory> [--data <directory>]');
   return result;
 }
 

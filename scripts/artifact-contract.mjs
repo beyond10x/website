@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {lstat, readdir, readFile} from 'node:fs/promises';
 import path from 'node:path';
+import {assertPortableRelativePath, compareUtf8} from './order-contract.mjs';
 import {routesFromFiles} from './provenance-routes.mjs';
 
 export const metadataPaths = new Set([
@@ -17,11 +18,12 @@ export async function artifactFacts(build) {
   const files = [];
   for (const file of await walk(build)) {
     const relative = path.relative(build, file).split(path.sep).join('/');
+    assertPortableRelativePath(relative, 'artifact path');
     if (metadataPaths.has(relative)) continue;
     const bytes = await readFile(file);
     files.push({path: relative, sha256: sha256(bytes), size: bytes.byteLength});
   }
-  files.sort((left, right) => left.path.localeCompare(right.path));
+  files.sort((left, right) => compareUtf8(left.path, right.path));
   const routes = routesFromFiles(files);
   const artifactSha256 = sha256(Buffer.from(files.map((file) => `${file.sha256}  ${file.path}\n`).join('')));
   const routesSha256 = sha256(Buffer.from(`${routes.join('\n')}\n`));
