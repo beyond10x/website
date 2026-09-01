@@ -1,0 +1,1511 @@
+{
+  "schema": "b10x-docs-registry/v2",
+  "surfaces": [
+    {
+      "id": "docs",
+      "name": "AEP Service",
+      "summary": "The authenticated command and query authority for centrally managed engineering entities and evidence.",
+      "kind": "service-docs",
+      "canonicalUrl": "https://beyond10x.github.io/aep-service/",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "specify",
+        "operate-services"
+      ],
+      "capabilities": [
+        "aep-service",
+        "openapi",
+        "transactional-authority"
+      ],
+      "sections": [
+        {
+          "label": "Quickstart",
+          "url": "https://beyond10x.github.io/aep-service/docs/quickstart",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Architecture",
+          "url": "https://beyond10x.github.io/aep-service/docs/architecture",
+          "kind": "docs"
+        },
+        {
+          "label": "API reference",
+          "url": "https://beyond10x.github.io/aep-service/api",
+          "kind": "api"
+        },
+        {
+          "label": "OpenAPI",
+          "url": "https://beyond10x.github.io/aep-service/openapi.json",
+          "kind": "api"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/aep-service",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "aep/docs",
+          "kind": "implements"
+        },
+        {
+          "target": "entity-runtime/docs",
+          "kind": "uses"
+        }
+      ],
+      "adoption": {
+        "label": "Run the developer preview",
+        "url": "https://beyond10x.github.io/aep-service/docs/quickstart",
+        "mode": "source-build",
+        "estimatedMinutes": 15,
+        "prerequisites": [
+          "Rust toolchain",
+          "PostgreSQL"
+        ],
+        "outcome": "Submit an authenticated command and inspect its governed state and evidence."
+      },
+      "accent": "#b99cff",
+      "mark": "website/static/img/mark.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "aep-service/docs",
+      "repository": {
+        "id": "aep-service",
+        "url": "https://github.com/beyond10x/aep-service"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "AEP",
+      "summary": "Typed, portable, machine-executable specifications for performing and proving autonomous engineering work.",
+      "kind": "documentation",
+      "canonicalUrl": "https://beyond10x.github.io/aep/",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "plan-work",
+        "specify",
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "aep",
+        "engineering-workflows",
+        "evidence-gates",
+        "contract-generation"
+      ],
+      "sections": [
+        {
+          "label": "Getting started",
+          "url": "https://beyond10x.github.io/aep/docs/getting-started",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Concepts",
+          "url": "https://beyond10x.github.io/aep/docs/concepts/overview",
+          "kind": "docs"
+        },
+        {
+          "label": "CLI",
+          "url": "https://beyond10x.github.io/aep/docs/reference/cli",
+          "kind": "reference"
+        },
+        {
+          "label": "Status",
+          "url": "https://beyond10x.github.io/aep/docs/status/where-this-stands",
+          "kind": "status"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/aep",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "aep-service/docs",
+          "kind": "specifies"
+        }
+      ],
+      "feeds": [
+        {
+          "label": "Release notes RSS",
+          "url": "https://beyond10x.github.io/aep/releases/rss.xml",
+          "kind": "feed"
+        }
+      ],
+      "adoption": {
+        "label": "Create governed work",
+        "url": "https://beyond10x.github.io/aep/docs/getting-started",
+        "mode": "source-build",
+        "estimatedMinutes": 12,
+        "prerequisites": [
+          "Rust toolchain"
+        ],
+        "outcome": "Create and validate a typed planning artifact through the AEP command."
+      },
+      "accent": "#a5d6ff",
+      "mark": "website/static/img/mark.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "aep/docs",
+      "repository": {
+        "id": "aep",
+        "url": "https://github.com/beyond10x/aep"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Agent Platform",
+      "summary": "Public source, local service documentation, and generated API contracts for managing agents, revisions, capabilities, tasks, runs, and triggers.",
+      "kind": "service-docs",
+      "canonicalUrl": "https://github.com/beyond10x/agent-platform#readme",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "agent-management",
+        "capability-projection",
+        "task-admission"
+      ],
+      "sections": [
+        {
+          "label": "Run the service",
+          "url": "https://github.com/beyond10x/agent-platform#run-the-development-service",
+          "kind": "quickstart"
+        },
+        {
+          "label": "HTTP surface",
+          "url": "https://github.com/beyond10x/agent-platform#http-surface",
+          "kind": "api"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/agent-platform",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "harness/docs",
+          "kind": "uses",
+          "label": "Runs agent model and tool loops through Harness"
+        },
+        {
+          "target": "connectors/docs",
+          "kind": "uses",
+          "label": "Projects governed Connector operations"
+        },
+        {
+          "target": "identity/docs",
+          "kind": "uses",
+          "label": "Resolves tenant and principal authority"
+        }
+      ],
+      "adoption": {
+        "label": "Run the development service",
+        "url": "https://github.com/beyond10x/agent-platform#run-the-development-service",
+        "mode": "source-build",
+        "estimatedMinutes": 10,
+        "prerequisites": [
+          "Rust toolchain"
+        ],
+        "outcome": "Run the local authenticated service and inspect its embedded docs and OpenAPI contract."
+      },
+      "accent": "#b7e36b",
+      "shell": {
+        "integration": "portable",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "agent-platform/docs",
+      "repository": {
+        "id": "agent-platform",
+        "url": "https://github.com/beyond10x/agent-platform"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Agentic Principles",
+      "summary": "Evidence-backed principles for safe and efficient agentic work automation.",
+      "kind": "research",
+      "canonicalUrl": "https://beyond10x.github.io/agentic-principles/",
+      "maturity": "experimental",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "researcher",
+        "developer"
+      ],
+      "journeys": [
+        "understand",
+        "plan-work",
+        "build-agents"
+      ],
+      "capabilities": [
+        "evidence-registry",
+        "principle-catalog",
+        "field-notes"
+      ],
+      "sections": [
+        {
+          "label": "Principles",
+          "url": "https://beyond10x.github.io/agentic-principles/principles",
+          "kind": "reference"
+        },
+        {
+          "label": "Research guide",
+          "url": "https://beyond10x.github.io/agentic-principles/research",
+          "kind": "docs"
+        },
+        {
+          "label": "Field notes",
+          "url": "https://beyond10x.github.io/agentic-principles/blog",
+          "kind": "feed"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/agentic-principles",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "aep/docs",
+          "kind": "informs"
+        },
+        {
+          "target": "harness/docs",
+          "kind": "informs"
+        },
+        {
+          "target": "metaharness/docs",
+          "kind": "informs"
+        }
+      ],
+      "feeds": [
+        {
+          "label": "Field notes RSS",
+          "url": "https://beyond10x.github.io/agentic-principles/blog/rss.xml",
+          "kind": "feed"
+        }
+      ],
+      "adoption": {
+        "label": "Read the principle catalog",
+        "url": "https://beyond10x.github.io/agentic-principles/principles",
+        "mode": "browser",
+        "estimatedMinutes": 8,
+        "outcome": "Identify an evidence-backed principle and inspect the evidence behind it."
+      },
+      "accent": "#43cdbf",
+      "mark": "website/static/img/mark.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "agentic-principles/docs",
+      "repository": {
+        "id": "agentic-principles",
+        "url": "https://github.com/beyond10x/agentic-principles"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Agent Plugins",
+      "summary": "Navigate and create portable plugins, or install focused AEP planning, ADP delivery, and ESS schema guidance from the curated beyond10x marketplace.",
+      "kind": "documentation",
+      "canonicalUrl": "https://beyond10x.github.io/agentplugins/",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "journeys": [
+        "plan-work",
+        "build-agents",
+        "specify"
+      ],
+      "capabilities": [
+        "plugin-routing",
+        "plugin-authoring",
+        "governed-planning",
+        "development-waves",
+        "schema-validation"
+      ],
+      "sections": [
+        {
+          "label": "Choose a plugin",
+          "url": "https://beyond10x.github.io/agentplugins/docs/choose-a-plugin",
+          "kind": "guide"
+        },
+        {
+          "label": "Install",
+          "url": "https://beyond10x.github.io/agentplugins/docs/install",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Plugin reference",
+          "url": "https://beyond10x.github.io/agentplugins/docs/plugins/beyond10x",
+          "kind": "reference"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/agentplugins",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "aep-service/docs",
+          "kind": "supports",
+          "label": "Adds governed planning guidance"
+        },
+        {
+          "target": "ess/docs",
+          "kind": "supports",
+          "label": "Adds schema and projection guidance"
+        }
+      ],
+      "adoption": {
+        "label": "Install a focused plugin",
+        "url": "https://beyond10x.github.io/agentplugins/docs/install",
+        "mode": "install",
+        "estimatedMinutes": 5,
+        "prerequisites": [
+          "A supported agent harness"
+        ],
+        "outcome": "Install one scoped guidance plugin without copying its instructions."
+      },
+      "accent": "#d3a6ff",
+      "mark": "website/static/img/mark.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "agentplugins/docs",
+      "repository": {
+        "id": "agentplugins",
+        "url": "https://github.com/beyond10x/agentplugins"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Connectors",
+      "summary": "Public contracts, guides, catalog, and service architecture for governed external operations, credentials, grants, invocation, and events.",
+      "kind": "documentation",
+      "canonicalUrl": "https://github.com/beyond10x/connectors#readme",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "connector-catalog",
+        "governed-invocation",
+        "credential-custody",
+        "event-delivery"
+      ],
+      "sections": [
+        {
+          "label": "Architecture",
+          "url": "https://github.com/beyond10x/connectors/blob/main/docs/design/02-architecture.md",
+          "kind": "docs"
+        },
+        {
+          "label": "Connect Slack",
+          "url": "https://github.com/beyond10x/connectors/blob/main/docs/guides/connect-slack.md",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Connect GitLab",
+          "url": "https://github.com/beyond10x/connectors/blob/main/docs/guides/connect-gitlab.md",
+          "kind": "guide"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/connectors",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "identity/docs",
+          "kind": "uses",
+          "label": "Resolves tenant and principal authority"
+        },
+        {
+          "target": "agent-platform/docs",
+          "kind": "supports",
+          "label": "Supplies governed operations to agents"
+        },
+        {
+          "target": "eventlog/docs",
+          "kind": "uses",
+          "label": "Stores durable Connector-owned state as events"
+        }
+      ],
+      "adoption": {
+        "label": "Connect Slack locally",
+        "url": "https://github.com/beyond10x/connectors/blob/main/docs/guides/connect-slack.md",
+        "mode": "source-build",
+        "estimatedMinutes": 20,
+        "prerequisites": [
+          "Rust toolchain",
+          "Slack application credentials"
+        ],
+        "outcome": "Configure a local Connector deployment and establish a governed Slack connection."
+      },
+      "accent": "#52d6c7",
+      "shell": {
+        "integration": "portable",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "connectors/docs",
+      "repository": {
+        "id": "connectors",
+        "url": "https://github.com/beyond10x/connectors"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Docs System",
+      "summary": "Shared documentation contracts, design tokens, React primitives, renderers, and deterministic discovery tooling.",
+      "kind": "reference",
+      "canonicalUrl": "https://github.com/beyond10x/docs-system#readme",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "developer"
+      ],
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "documentation-contracts",
+        "shared-components",
+        "ecosystem-change-feeds"
+      ],
+      "sections": [
+        {
+          "label": "Integration guide",
+          "url": "https://github.com/beyond10x/docs-system#readme",
+          "kind": "guide"
+        },
+        {
+          "label": "Releases",
+          "url": "https://github.com/beyond10x/docs-system/releases",
+          "kind": "feed"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/docs-system",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "getting-started/docs",
+          "kind": "supports",
+          "label": "Generates the public discovery snapshot"
+        }
+      ],
+      "adoption": {
+        "label": "Pin the shared docs package",
+        "url": "https://github.com/beyond10x/docs-system#surface-manifests",
+        "mode": "install",
+        "estimatedMinutes": 5,
+        "prerequisites": [
+          "Node.js"
+        ],
+        "outcome": "Validate one repository manifest and reuse the shared documentation shell."
+      },
+      "accent": "#59d89d",
+      "shell": {
+        "integration": "portable",
+        "revision": "local"
+      },
+      "key": "docs-system/docs",
+      "repository": {
+        "id": "docs-system",
+        "url": "https://github.com/beyond10x/docs-system"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Entity Runtime",
+      "summary": "Declare entity state, operations, rules, and events as data and let a deterministic kernel decide transitions.",
+      "kind": "documentation",
+      "canonicalUrl": "https://beyond10x.github.io/entity-runtime/",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "journeys": [
+        "specify",
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "entity-modeling",
+        "deterministic-decisions",
+        "generated-interfaces"
+      ],
+      "sections": [
+        {
+          "label": "Quickstart",
+          "url": "https://beyond10x.github.io/entity-runtime/docs/guide/getting-started",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Definition language",
+          "url": "https://beyond10x.github.io/entity-runtime/docs/guide/definitions",
+          "kind": "reference"
+        },
+        {
+          "label": "Guarantees",
+          "url": "https://beyond10x.github.io/entity-runtime/docs/guarantees",
+          "kind": "status"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/entity-runtime",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "aep-service/docs",
+          "kind": "uses",
+          "label": "Provides deterministic entity storage semantics"
+        }
+      ],
+      "adoption": {
+        "label": "Model and execute a refund",
+        "url": "https://beyond10x.github.io/entity-runtime/docs/guide/getting-started",
+        "mode": "source-build",
+        "estimatedMinutes": 10,
+        "prerequisites": [
+          "Rust toolchain"
+        ],
+        "outcome": "Validate an entity definition and observe a deterministic transition decision."
+      },
+      "accent": "#f0b35c",
+      "mark": "website/static/img/mark.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "entity-runtime/docs",
+      "repository": {
+        "id": "entity-runtime",
+        "url": "https://github.com/beyond10x/entity-runtime"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "ESS",
+      "summary": "Executable system specifications, deterministic intermediate representations, generated contracts, and conformance.",
+      "kind": "documentation",
+      "canonicalUrl": "https://beyond10x.github.io/ess/",
+      "maturity": "experimental",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "specify",
+        "operate-services"
+      ],
+      "capabilities": [
+        "system-specification",
+        "contract-generation",
+        "conformance"
+      ],
+      "sections": [
+        {
+          "label": "Getting started",
+          "url": "https://beyond10x.github.io/ess/docs/getting-started",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Concepts",
+          "url": "https://beyond10x.github.io/ess/docs/concepts/overview",
+          "kind": "docs"
+        },
+        {
+          "label": "CLI",
+          "url": "https://beyond10x.github.io/ess/docs/reference/cli",
+          "kind": "reference"
+        },
+        {
+          "label": "Status",
+          "url": "https://beyond10x.github.io/ess/docs/status/where-this-stands",
+          "kind": "status"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/ess",
+          "kind": "source"
+        }
+      ],
+      "feeds": [
+        {
+          "label": "Release notes RSS",
+          "url": "https://beyond10x.github.io/ess/releases/rss.xml",
+          "kind": "feed"
+        }
+      ],
+      "adoption": {
+        "label": "Compile a system specification",
+        "url": "https://beyond10x.github.io/ess/docs/getting-started",
+        "mode": "source-build",
+        "estimatedMinutes": 12,
+        "prerequisites": [
+          "Rust toolchain"
+        ],
+        "outcome": "Validate system intent and generate deterministic contract artifacts."
+      },
+      "accent": "#ff9070",
+      "mark": "website/static/img/mark.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "ess/docs",
+      "repository": {
+        "id": "ess",
+        "url": "https://github.com/beyond10x/ess"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Eventlog",
+      "summary": "Public Rust libraries for tenant-safe event streams, aggregates, snapshots, projections, schema evolution, redaction, SQLite, and PostgreSQL.",
+      "kind": "documentation",
+      "canonicalUrl": "https://github.com/beyond10x/eventlog#readme",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer"
+      ],
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "event-sourcing",
+        "projections",
+        "snapshots",
+        "schema-evolution"
+      ],
+      "sections": [
+        {
+          "label": "Build and test",
+          "url": "https://github.com/beyond10x/eventlog#build-test-run",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Crate layout",
+          "url": "https://github.com/beyond10x/eventlog#layout",
+          "kind": "reference"
+        },
+        {
+          "label": "Changelog",
+          "url": "https://github.com/beyond10x/eventlog/blob/main/CHANGELOG.md",
+          "kind": "status"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/eventlog",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "connectors/docs",
+          "kind": "supports",
+          "label": "Provides durable event-backed owner state"
+        },
+        {
+          "target": "identity/docs",
+          "kind": "supports",
+          "label": "Provides durable event-backed owner state"
+        },
+        {
+          "target": "workflow/docs",
+          "kind": "supports",
+          "label": "Provides durable workflow state and evidence"
+        }
+      ],
+      "adoption": {
+        "label": "Run the conformance suite",
+        "url": "https://github.com/beyond10x/eventlog#build-test-run",
+        "mode": "source-build",
+        "estimatedMinutes": 8,
+        "prerequisites": [
+          "Rust toolchain"
+        ],
+        "outcome": "Build the eventlog crates and run the same conformance contract against the in-memory backend."
+      },
+      "accent": "#f0b35d",
+      "shell": {
+        "integration": "portable",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "eventlog/docs",
+      "repository": {
+        "id": "eventlog",
+        "url": "https://github.com/beyond10x/eventlog"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "beyond10x — Start here",
+      "summary": "Choose a journey through the public beyond10x research, specifications, runtimes, harnesses, and services.",
+      "kind": "front-door",
+      "canonicalUrl": "https://beyond10x.github.io/getting-started/",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator",
+        "researcher"
+      ],
+      "journeys": [
+        "understand",
+        "plan-work",
+        "specify",
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "ecosystem-discovery",
+        "guided-journeys",
+        "public-boundaries"
+      ],
+      "sections": [
+        {
+          "label": "Start here",
+          "url": "https://beyond10x.github.io/getting-started/",
+          "kind": "docs"
+        },
+        {
+          "label": "Ecosystem",
+          "url": "https://beyond10x.github.io/getting-started/ecosystem",
+          "kind": "reference"
+        },
+        {
+          "label": "Ecosystem changes",
+          "url": "https://beyond10x.github.io/getting-started/changes",
+          "kind": "feed"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/getting-started",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "agentic-principles/docs",
+          "kind": "uses",
+          "label": "Begin with evidence"
+        },
+        {
+          "target": "entity-runtime/docs",
+          "kind": "uses",
+          "label": "Model decisions as data"
+        },
+        {
+          "target": "aep/docs",
+          "kind": "uses",
+          "label": "Govern engineering work"
+        },
+        {
+          "target": "ess/docs",
+          "kind": "uses",
+          "label": "Specify the system"
+        },
+        {
+          "target": "metaharness/docs",
+          "kind": "uses",
+          "label": "Compare harnesses"
+        },
+        {
+          "target": "harness/docs",
+          "kind": "uses",
+          "label": "Run an agent loop"
+        },
+        {
+          "target": "substrate/docs",
+          "kind": "uses",
+          "label": "Confine execution"
+        },
+        {
+          "target": "aep-service/docs",
+          "kind": "uses",
+          "label": "Operate protocol state"
+        },
+        {
+          "target": "agentplugins/docs",
+          "kind": "uses",
+          "label": "Add governed agent guidance"
+        },
+        {
+          "target": "worktree/docs",
+          "kind": "uses",
+          "label": "Keep agent checkouts recoverable"
+        },
+        {
+          "target": "docs-system/docs",
+          "kind": "uses",
+          "label": "Share the public documentation contract"
+        },
+        {
+          "target": "identity/docs",
+          "kind": "uses",
+          "label": "Establish tenant and principal authority"
+        },
+        {
+          "target": "eventlog/docs",
+          "kind": "uses",
+          "label": "Build durable owner state from events"
+        },
+        {
+          "target": "connectors/docs",
+          "kind": "uses",
+          "label": "Reach external systems under grants"
+        },
+        {
+          "target": "agent-platform/docs",
+          "kind": "uses",
+          "label": "Manage and run product-neutral agents"
+        },
+        {
+          "target": "workflow/docs",
+          "kind": "uses",
+          "label": "Define and inspect durable workflows"
+        },
+        {
+          "target": "research/docs",
+          "kind": "uses",
+          "label": "See what agent work can be automated"
+        }
+      ],
+      "adoption": {
+        "label": "Choose a journey",
+        "url": "https://beyond10x.github.io/getting-started/",
+        "mode": "browser",
+        "estimatedMinutes": 2,
+        "outcome": "Leave with one verified next step for the outcome you want."
+      },
+      "accent": "#59d89d",
+      "mark": "website/static/img/mark.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "getting-started/docs",
+      "repository": {
+        "id": "getting-started",
+        "url": "https://github.com/beyond10x/getting-started"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Harness",
+      "summary": "A provider-neutral agent loop with explicit tools, effects, approvals, budgets, and durable session evidence.",
+      "kind": "documentation",
+      "canonicalUrl": "https://beyond10x.github.io/harness/",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "agent-loop",
+        "tool-approvals",
+        "workflows",
+        "session-evidence"
+      ],
+      "sections": [
+        {
+          "label": "Getting started",
+          "url": "https://beyond10x.github.io/harness/docs/getting-started",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Agent loop",
+          "url": "https://beyond10x.github.io/harness/docs/concepts/agent-loop",
+          "kind": "docs"
+        },
+        {
+          "label": "CLI",
+          "url": "https://beyond10x.github.io/harness/docs/reference/cli",
+          "kind": "reference"
+        },
+        {
+          "label": "Status",
+          "url": "https://beyond10x.github.io/harness/docs/status",
+          "kind": "status"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/harness",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "substrate/docs",
+          "kind": "executes-in"
+        }
+      ],
+      "adoption": {
+        "label": "Run the read-only quickstart",
+        "url": "https://beyond10x.github.io/harness/docs/getting-started",
+        "mode": "source-build",
+        "estimatedMinutes": 12,
+        "prerequisites": [
+          "Rust toolchain",
+          "Provider credentials"
+        ],
+        "outcome": "Run a provider-neutral agent loop and retain its session evidence."
+      },
+      "accent": "#b9f46a",
+      "mark": "website/static/img/mark.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "harness/docs",
+      "repository": {
+        "id": "harness",
+        "url": "https://github.com/beyond10x/harness"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Identity",
+      "summary": "Public service and library documentation for login, tenant-scoped principals, sessions, audience-bound authority, directories, and collaboration profiles.",
+      "kind": "service-docs",
+      "canonicalUrl": "https://github.com/beyond10x/identity#readme",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "oidc-login",
+        "tenant-identity",
+        "audience-authority",
+        "organization-directory"
+      ],
+      "sections": [
+        {
+          "label": "Run locally",
+          "url": "https://github.com/beyond10x/identity#running-it-locally",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Routes",
+          "url": "https://github.com/beyond10x/identity#routes",
+          "kind": "api"
+        },
+        {
+          "label": "Architecture rules",
+          "url": "https://github.com/beyond10x/identity#the-rules-that-shape-the-code",
+          "kind": "docs"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/identity",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "connectors/docs",
+          "kind": "supports",
+          "label": "Issues exact-audience Connector authority"
+        },
+        {
+          "target": "agent-platform/docs",
+          "kind": "supports",
+          "label": "Supplies tenant and principal truth"
+        },
+        {
+          "target": "eventlog/docs",
+          "kind": "uses",
+          "label": "Stores durable Identity-owned state as events"
+        }
+      ],
+      "adoption": {
+        "label": "Run Identity locally",
+        "url": "https://github.com/beyond10x/identity#running-it-locally",
+        "mode": "source-build",
+        "estimatedMinutes": 15,
+        "prerequisites": [
+          "Rust toolchain",
+          "OIDC client"
+        ],
+        "outcome": "Start the local service and complete the standard authorization-code flow."
+      },
+      "accent": "#81a9ff",
+      "shell": {
+        "integration": "portable",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "identity/docs",
+      "repository": {
+        "id": "identity",
+        "url": "https://github.com/beyond10x/identity"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Metaharness",
+      "summary": "Drive and compare multiple agent harnesses through one observable, steerable, hermetic interface.",
+      "kind": "documentation",
+      "canonicalUrl": "https://beyond10x.github.io/metaharness/",
+      "maturity": "experimental",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "developer",
+        "researcher"
+      ],
+      "journeys": [
+        "understand",
+        "build-agents"
+      ],
+      "capabilities": [
+        "harness-comparison",
+        "hermetic-runs",
+        "steering-protocol"
+      ],
+      "sections": [
+        {
+          "label": "Quickstart",
+          "url": "https://beyond10x.github.io/metaharness/docs/quickstart",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Protocol",
+          "url": "https://beyond10x.github.io/metaharness/docs/protocol/events",
+          "kind": "reference"
+        },
+        {
+          "label": "Status",
+          "url": "https://beyond10x.github.io/metaharness/docs/status",
+          "kind": "status"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/metaharness",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "harness/docs",
+          "kind": "drives"
+        }
+      ],
+      "adoption": {
+        "label": "Observe a harness run",
+        "url": "https://beyond10x.github.io/metaharness/docs/quickstart",
+        "mode": "source-build",
+        "estimatedMinutes": 15,
+        "prerequisites": [
+          "Rust toolchain",
+          "A supported harness"
+        ],
+        "outcome": "Drive a harness through one interface and inspect its normalized event stream."
+      },
+      "accent": "#4dc4e6",
+      "mark": "website/static/img/logo.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "metaharness/docs",
+      "repository": {
+        "id": "metaharness",
+        "url": "https://github.com/beyond10x/metaharness"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Agent interaction research",
+      "summary": "A reproducible empirical study of which human turns in agent sessions carry judgment and which can become deterministic or delegated workflows.",
+      "kind": "research",
+      "canonicalUrl": "https://github.com/beyond10x/research#readme",
+      "maturity": "experimental",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "researcher",
+        "developer"
+      ],
+      "journeys": [
+        "understand",
+        "build-agents"
+      ],
+      "capabilities": [
+        "interaction-analysis",
+        "workflow-mining",
+        "agent-evaluation"
+      ],
+      "sections": [
+        {
+          "label": "Run the study",
+          "url": "https://github.com/beyond10x/research#run-it",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Pipeline stages",
+          "url": "https://github.com/beyond10x/research#stages",
+          "kind": "reference"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/research",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "agentic-principles/docs",
+          "kind": "informs",
+          "label": "Grounds principles in observed agent sessions"
+        },
+        {
+          "target": "aep/docs",
+          "kind": "informs",
+          "label": "Identifies work that benefits from governed workflows"
+        },
+        {
+          "target": "agentplugins/docs",
+          "kind": "informs",
+          "label": "Identifies repeatable guidance and tool paths"
+        }
+      ],
+      "adoption": {
+        "label": "Reproduce the deterministic stages",
+        "url": "https://github.com/beyond10x/research#run-it",
+        "mode": "source-build",
+        "estimatedMinutes": 10,
+        "prerequisites": [
+          "Python 3.13",
+          "uv",
+          "Task"
+        ],
+        "outcome": "Extract a frozen local corpus and reproduce the measurement and workflow-mining stages without model calls."
+      },
+      "accent": "#d3a6ff",
+      "shell": {
+        "integration": "portable",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "research/docs",
+      "repository": {
+        "id": "research",
+        "url": "https://github.com/beyond10x/research"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Substrate",
+      "summary": "Confined execution with explicit capabilities, durable operations, and observed outcomes.",
+      "kind": "documentation",
+      "canonicalUrl": "https://beyond10x.github.io/substrate/",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "confined-execution",
+        "operation-ledger",
+        "execution-contract"
+      ],
+      "sections": [
+        {
+          "label": "Getting started",
+          "url": "https://beyond10x.github.io/substrate/docs/getting-started",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Boundary",
+          "url": "https://beyond10x.github.io/substrate/docs/concepts/boundary",
+          "kind": "docs"
+        },
+        {
+          "label": "Contract",
+          "url": "https://beyond10x.github.io/substrate/docs/reference/contract",
+          "kind": "reference"
+        },
+        {
+          "label": "Status",
+          "url": "https://beyond10x.github.io/substrate/docs/status",
+          "kind": "status"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/substrate",
+          "kind": "source"
+        }
+      ],
+      "adoption": {
+        "label": "Run a confined command",
+        "url": "https://beyond10x.github.io/substrate/docs/getting-started",
+        "mode": "source-build",
+        "estimatedMinutes": 15,
+        "prerequisites": [
+          "Linux",
+          "Rust toolchain"
+        ],
+        "outcome": "Execute a bounded process and inspect the recorded operation outcome."
+      },
+      "accent": "#72b7ff",
+      "mark": "website/static/img/mark.svg",
+      "shell": {
+        "integration": "docusaurus",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "substrate/docs",
+      "repository": {
+        "id": "substrate",
+        "url": "https://github.com/beyond10x/substrate"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Workflow",
+      "summary": "Public service and library boundary for workflow definitions, immutable revisions, triggers, durable runs, leases, cancellation, and evidence.",
+      "kind": "service-docs",
+      "canonicalUrl": "https://github.com/beyond10x/workflow#readme",
+      "maturity": "experimental",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "workflow-definitions",
+        "durable-runs",
+        "triggers",
+        "execution-evidence"
+      ],
+      "sections": [
+        {
+          "label": "Overview",
+          "url": "https://github.com/beyond10x/workflow#readme",
+          "kind": "docs"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/workflow",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "aep/docs",
+          "kind": "uses",
+          "label": "Governs engineering planning and execution artifacts"
+        },
+        {
+          "target": "agent-platform/docs",
+          "kind": "uses",
+          "label": "Runs product-neutral agent tasks"
+        },
+        {
+          "target": "connectors/docs",
+          "kind": "uses",
+          "label": "Executes governed external operations"
+        },
+        {
+          "target": "identity/docs",
+          "kind": "uses",
+          "label": "Resolves current attributable authority"
+        },
+        {
+          "target": "eventlog/docs",
+          "kind": "uses",
+          "label": "Persists workflow state and evidence"
+        }
+      ],
+      "adoption": {
+        "label": "Build the domain crate",
+        "url": "https://github.com/beyond10x/workflow#readme",
+        "mode": "source-build",
+        "estimatedMinutes": 5,
+        "prerequisites": [
+          "Rust toolchain"
+        ],
+        "outcome": "Build and test the current workflow domain boundary and inspect its governed delivery plan."
+      },
+      "accent": "#ff9070",
+      "shell": {
+        "integration": "portable",
+        "revision": "73aefe1ca268cc853ed38fb23478454496462a03"
+      },
+      "key": "workflow/docs",
+      "repository": {
+        "id": "workflow",
+        "url": "https://github.com/beyond10x/workflow"
+      }
+    },
+    {
+      "id": "docs",
+      "name": "Worktree",
+      "summary": "A reusable Rust library and CLI for isolated Git work, recovery-aware cleanup, durable leases, and generated agent guidance.",
+      "kind": "documentation",
+      "canonicalUrl": "https://github.com/beyond10x/worktree#readme",
+      "maturity": "development",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "capabilities": [
+        "managed-worktrees",
+        "recovery-proof",
+        "agent-guidance"
+      ],
+      "sections": [
+        {
+          "label": "Install",
+          "url": "https://github.com/beyond10x/worktree#install",
+          "kind": "quickstart"
+        },
+        {
+          "label": "Use",
+          "url": "https://github.com/beyond10x/worktree#use",
+          "kind": "guide"
+        },
+        {
+          "label": "Source",
+          "url": "https://github.com/beyond10x/worktree",
+          "kind": "source"
+        }
+      ],
+      "relationships": [
+        {
+          "target": "agentplugins/docs",
+          "kind": "supports",
+          "label": "Generates workspace-hygiene guidance"
+        }
+      ],
+      "adoption": {
+        "label": "Activate managed worktrees",
+        "url": "https://github.com/beyond10x/worktree#use",
+        "mode": "source-build",
+        "estimatedMinutes": 8,
+        "prerequisites": [
+          "Rust toolchain",
+          "Git"
+        ],
+        "outcome": "Create one isolated checkout with a durable cleanup and recovery record."
+      },
+      "accent": "#6aa8ff",
+      "shell": {
+        "integration": "portable",
+        "revision": "local"
+      },
+      "key": "worktree/docs",
+      "repository": {
+        "id": "worktree",
+        "url": "https://github.com/beyond10x/worktree"
+      }
+    }
+  ]
+}

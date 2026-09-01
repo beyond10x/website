@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#101923"/>
+      <stop offset="1" stop-color="#080d12"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0v48" fill="none" stroke="#fff" stroke-opacity=".035"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#field)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <text x="80" y="92" fill="#59d89d" font-family="monospace" font-size="21" font-weight="700" letter-spacing="4">BEYOND10X / ONE ECOSYSTEM</text>
+  <text x="80" y="225" fill="#f2f5f7" font-family="Arial, sans-serif" font-size="66" font-weight="700">From evidence-backed principles</text>
+  <text x="80" y="310" fill="#f2f5f7" font-family="Arial, sans-serif" font-size="70" font-weight="700">to governed action.</text>
+  <text x="83" y="390" fill="#9eabb7" font-family="Arial, sans-serif" font-size="25">Principles · Entity Runtime · AEP + ESS · Connectors</text>
+  <rect x="735" y="455" width="375" height="58" rx="9" fill="#ff9070"/>
+  <rect x="775" y="380" width="335" height="58" rx="9" fill="#59d89d"/>
+  <rect x="815" y="305" width="295" height="58" rx="9" fill="#6aa8ff"/>
+  <rect x="855" y="230" width="255" height="58" rx="9" fill="#f0b35c"/>
+  <text x="755" y="491" fill="#180b08" font-family="monospace" font-size="17" font-weight="700">01  AGENTIC PRINCIPLES</text>
+  <text x="795" y="416" fill="#07120e" font-family="monospace" font-size="17" font-weight="700">02  ENTITY RUNTIME</text>
+  <text x="835" y="341" fill="#07101d" font-family="monospace" font-size="17" font-weight="700">03  AEP + ESS</text>
+  <text x="875" y="266" fill="#191006" font-family="monospace" font-size="17" font-weight="700">04  CONNECTORS</text>
+  <text x="83" y="548" fill="#667583" font-family="monospace" font-size="20">beyond10x.github.io</text>
+</svg>

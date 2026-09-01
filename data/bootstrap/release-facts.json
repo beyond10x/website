@@ -1,0 +1,605 @@
+{
+  "schema": "b10x-release-facts/v1",
+  "releases": [
+    {
+      "repository": "docs-system",
+      "version": "0.2.0",
+      "publishedAt": "2026-09-01T11:22:04Z",
+      "url": "https://github.com/beyond10x/docs-system/releases/tag/0.2.0"
+    },
+    {
+      "repository": "aep-service",
+      "version": "0.1.4",
+      "publishedAt": "2026-09-01T10:58:46Z",
+      "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.4"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.5.0",
+      "publishedAt": "2026-09-01T10:47:50Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.5.0"
+    },
+    {
+      "repository": "aep-service",
+      "version": "0.1.3",
+      "publishedAt": "2026-09-01T10:23:01Z",
+      "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.3"
+    },
+    {
+      "repository": "ess",
+      "version": "0.2.1",
+      "publishedAt": "2026-09-01T10:15:58Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.2.1"
+    },
+    {
+      "repository": "aep",
+      "version": "0.40.3",
+      "publishedAt": "2026-09-01T10:09:59Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.40.3"
+    },
+    {
+      "repository": "metaharness",
+      "version": "0.4.1",
+      "publishedAt": "2026-09-01T10:02:54Z",
+      "url": "https://github.com/beyond10x/metaharness/releases/tag/0.4.1"
+    },
+    {
+      "repository": "harness",
+      "version": "0.10.1",
+      "publishedAt": "2026-09-01T10:00:53Z",
+      "url": "https://github.com/beyond10x/harness/releases/tag/0.10.1"
+    },
+    {
+      "repository": "aep",
+      "version": "0.40.2",
+      "publishedAt": "2026-09-01T09:44:01Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.40.2"
+    },
+    {
+      "repository": "agentplugins",
+      "version": "0.3.1",
+      "publishedAt": "2026-09-01T09:27:15Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.1"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.17.5",
+      "publishedAt": "2026-09-01T09:19:12Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.17.5"
+    },
+    {
+      "repository": "agentplugins",
+      "version": "0.3.0",
+      "publishedAt": "2026-09-01T09:16:40Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.0"
+    },
+    {
+      "repository": "worktree",
+      "version": "0.1.0",
+      "publishedAt": "2026-09-01T09:12:28Z",
+      "url": "https://github.com/beyond10x/worktree/releases/tag/0.1.0"
+    },
+    {
+      "repository": "ess",
+      "version": "0.2.0",
+      "publishedAt": "2026-09-01T09:08:49Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.2.0"
+    },
+    {
+      "repository": "agentplugins",
+      "version": "0.2.0",
+      "publishedAt": "2026-09-01T08:49:46Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.2.0"
+    },
+    {
+      "repository": "agentplugins",
+      "version": "0.1.1",
+      "publishedAt": "2026-09-01T08:49:45Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.1.1"
+    },
+    {
+      "repository": "agentplugins",
+      "version": "0.1.0",
+      "publishedAt": "2026-09-01T08:49:44Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.1.0"
+    },
+    {
+      "repository": "aep-service",
+      "version": "0.1.2",
+      "publishedAt": "2026-09-01T07:21:05Z",
+      "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.2"
+    },
+    {
+      "repository": "aep",
+      "version": "0.40.1",
+      "publishedAt": "2026-09-01T07:11:54Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.40.1"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.17.4",
+      "publishedAt": "2026-09-01T06:56:09Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.17.4"
+    },
+    {
+      "repository": "aep",
+      "version": "0.40.0",
+      "publishedAt": "2026-09-01T06:47:23Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.40.0"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.3.3",
+      "publishedAt": "2026-09-01T04:57:11Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.3.3"
+    },
+    {
+      "repository": "identity",
+      "version": "0.4.0",
+      "publishedAt": "2026-09-01T03:50:24Z",
+      "url": "https://github.com/beyond10x/identity/releases/tag/0.4.0"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.3.2",
+      "publishedAt": "2026-09-01T03:47:23Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.3.2"
+    },
+    {
+      "repository": "ess",
+      "version": "0.1.1",
+      "publishedAt": "2026-09-01T02:57:49Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.1.1"
+    },
+    {
+      "repository": "identity",
+      "version": "0.3.2",
+      "publishedAt": "2026-09-01T02:37:11Z",
+      "url": "https://github.com/beyond10x/identity/releases/tag/0.3.2"
+    },
+    {
+      "repository": "ess",
+      "version": "0.1.0",
+      "publishedAt": "2026-09-01T02:32:47Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.1.0"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.4.2",
+      "publishedAt": "2026-09-01T02:26:54Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.4.2"
+    },
+    {
+      "repository": "docs-system",
+      "version": "0.1.3",
+      "publishedAt": "2026-09-01T02:18:41Z",
+      "url": "https://github.com/beyond10x/docs-system/releases/tag/0.1.3"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.3.1",
+      "publishedAt": "2026-09-01T02:04:08Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.3.1"
+    },
+    {
+      "repository": "docs-system",
+      "version": "0.1.2",
+      "publishedAt": "2026-09-01T01:59:58Z",
+      "url": "https://github.com/beyond10x/docs-system/releases/tag/0.1.2"
+    },
+    {
+      "repository": "docs-system",
+      "version": "0.1.1",
+      "publishedAt": "2026-09-01T01:53:54Z",
+      "url": "https://github.com/beyond10x/docs-system/releases/tag/0.1.1"
+    },
+    {
+      "repository": "docs-system",
+      "version": "0.1.0",
+      "publishedAt": "2026-09-01T01:51:43Z",
+      "url": "https://github.com/beyond10x/docs-system/releases/tag/0.1.0"
+    },
+    {
+      "repository": "identity",
+      "version": "0.3.0",
+      "publishedAt": "2026-09-01T00:21:27Z",
+      "url": "https://github.com/beyond10x/identity/releases/tag/0.3.0"
+    },
+    {
+      "repository": "identity",
+      "version": "0.2.1",
+      "publishedAt": "2026-09-01T00:09:06Z",
+      "url": "https://github.com/beyond10x/identity/releases/tag/0.2.1"
+    },
+    {
+      "repository": "identity",
+      "version": "0.2.0",
+      "publishedAt": "2026-09-01T00:03:22Z",
+      "url": "https://github.com/beyond10x/identity/releases/tag/0.2.0"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.4.0",
+      "publishedAt": "2026-08-31T23:20:27Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.4.0"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.3.1",
+      "publishedAt": "2026-08-31T22:32:40Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.3.1"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.3.0",
+      "publishedAt": "2026-08-31T21:54:42Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.3.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.39.2",
+      "publishedAt": "2026-08-31T21:11:57Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.39.2"
+    },
+    {
+      "repository": "aep-service",
+      "version": "0.1.1",
+      "publishedAt": "2026-08-31T20:36:22Z",
+      "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.1"
+    },
+    {
+      "repository": "agent-platform",
+      "version": "0.2.0",
+      "publishedAt": "2026-08-31T19:55:30Z",
+      "url": "https://github.com/beyond10x/agent-platform/releases/tag/0.2.0"
+    },
+    {
+      "repository": "agent-platform",
+      "version": "0.1.0",
+      "publishedAt": "2026-08-31T19:28:14Z",
+      "url": "https://github.com/beyond10x/agent-platform/releases/tag/0.1.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.39.0",
+      "publishedAt": "2026-08-31T19:25:37Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.39.0"
+    },
+    {
+      "repository": "aep-service",
+      "version": "0.1.0",
+      "publishedAt": "2026-08-31T16:35:35Z",
+      "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.38.1",
+      "publishedAt": "2026-08-31T15:23:41Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.38.1"
+    },
+    {
+      "repository": "aep",
+      "version": "0.38.0",
+      "publishedAt": "2026-08-31T14:32:34Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.38.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.37.1",
+      "publishedAt": "2026-08-31T14:19:11Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.37.1"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.2.4",
+      "publishedAt": "2026-08-31T13:56:04Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.2.4"
+    },
+    {
+      "repository": "aep",
+      "version": "0.37.0",
+      "publishedAt": "2026-08-31T12:38:00Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.37.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.36.4",
+      "publishedAt": "2026-08-31T12:01:45Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.36.4"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.17.3",
+      "publishedAt": "2026-08-31T10:44:06Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.17.3"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.17.2",
+      "publishedAt": "2026-08-31T10:38:16Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.17.2"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.17.1",
+      "publishedAt": "2026-08-31T09:05:03Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.17.1"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.17.0",
+      "publishedAt": "2026-08-31T08:55:26Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.17.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.35.0",
+      "publishedAt": "2026-08-31T03:01:52Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.35.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.16.0",
+      "publishedAt": "2026-08-31T02:28:44Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.16.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.15.0",
+      "publishedAt": "2026-08-30T23:22:13Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.15.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.14.0",
+      "publishedAt": "2026-08-30T22:23:09Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.14.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.34.0",
+      "publishedAt": "2026-08-30T22:08:36Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.34.0"
+    },
+    {
+      "repository": "harness",
+      "version": "0.4.0",
+      "publishedAt": "2026-08-30T12:23:23Z",
+      "url": "https://github.com/beyond10x/harness/releases/tag/0.4.0"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.2.3",
+      "publishedAt": "2026-08-30T09:39:33Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.2.3"
+    },
+    {
+      "repository": "aep",
+      "version": "0.33.0",
+      "publishedAt": "2026-08-29T22:43:30Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.33.0"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.2.1",
+      "publishedAt": "2026-08-29T19:44:38Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.2.1"
+    },
+    {
+      "repository": "aep",
+      "version": "0.32.1",
+      "publishedAt": "2026-08-28T21:16:04Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.32.1"
+    },
+    {
+      "repository": "aep",
+      "version": "0.31.0",
+      "publishedAt": "2026-08-28T19:10:02Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.31.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.30.0",
+      "publishedAt": "2026-08-28T17:48:46Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.30.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.13.0",
+      "publishedAt": "2026-08-28T17:20:30Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.13.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.12.2",
+      "publishedAt": "2026-08-28T17:10:02Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.12.2"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.12.1",
+      "publishedAt": "2026-08-28T16:21:11Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.12.1"
+    },
+    {
+      "repository": "aep",
+      "version": "0.29.0",
+      "publishedAt": "2026-08-28T16:16:08Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.29.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.28.0",
+      "publishedAt": "2026-08-28T15:33:17Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.28.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.11.0",
+      "publishedAt": "2026-08-28T15:32:24Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.11.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.10.0",
+      "publishedAt": "2026-08-28T15:14:07Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.10.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.27.3",
+      "publishedAt": "2026-08-26T11:50:59Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.27.3"
+    },
+    {
+      "repository": "aep",
+      "version": "0.27.1",
+      "publishedAt": "2026-08-26T11:40:19Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.27.1"
+    },
+    {
+      "repository": "aep",
+      "version": "0.27.2",
+      "publishedAt": "2026-08-26T11:35:31Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.27.2"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.9.1",
+      "publishedAt": "2026-08-26T11:28:38Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.9.1"
+    },
+    {
+      "repository": "aep",
+      "version": "0.27.0",
+      "publishedAt": "2026-08-26T11:18:00Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.27.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.9.0",
+      "publishedAt": "2026-08-26T11:11:48Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.9.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.26.0",
+      "publishedAt": "2026-08-26T08:50:42Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.26.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.8.0",
+      "publishedAt": "2026-08-26T08:42:30Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.8.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.25.0",
+      "publishedAt": "2026-08-26T07:23:57Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.25.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.7.0",
+      "publishedAt": "2026-08-26T07:17:36Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.7.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.6.0",
+      "publishedAt": "2026-08-26T07:17:34Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.6.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.24.0",
+      "publishedAt": "2026-08-26T00:56:34Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.24.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.5.3",
+      "publishedAt": "2026-08-26T00:54:49Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.5.3"
+    },
+    {
+      "repository": "aep",
+      "version": "0.23.2",
+      "publishedAt": "2026-08-25T23:32:43Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.23.2"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.5.2",
+      "publishedAt": "2026-08-25T22:59:22Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.5.2"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.5.1",
+      "publishedAt": "2026-08-25T21:46:27Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.5.1"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.5.0",
+      "publishedAt": "2026-08-25T21:30:18Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.5.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.4.0",
+      "publishedAt": "2026-08-25T21:02:32Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.4.0"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.2.1",
+      "publishedAt": "2026-08-25T13:08:32Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.2.1"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.3.0",
+      "publishedAt": "2026-08-25T12:44:10Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.3.0"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.2.0",
+      "publishedAt": "2026-08-25T09:39:10Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.2.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.2.1",
+      "publishedAt": "2026-08-25T09:17:10Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.2.1"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.2.0",
+      "publishedAt": "2026-08-25T09:13:11Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.2.0"
+    },
+    {
+      "repository": "agentic-principles",
+      "version": "v0.1.1",
+      "publishedAt": "2026-08-25T08:37:31Z",
+      "url": "https://github.com/beyond10x/agentic-principles/releases/tag/v0.1.1"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.1.0",
+      "publishedAt": "2026-08-25T08:11:52Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.1.0"
+    },
+    {
+      "repository": "agentic-principles",
+      "version": "v0.1.0",
+      "publishedAt": "2026-08-25T08:02:37Z",
+      "url": "https://github.com/beyond10x/agentic-principles/releases/tag/v0.1.0"
+    }
+  ]
+}

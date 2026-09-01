@@ -1,0 +1,76 @@
+name: publish documentation redirect facade
+
+on:
+  workflow_call:
+    inputs:
+      website_sha:
+        description: Exact website commit already deployed at the organization root.
+        required: true
+        type: string
+      repository:
+        description: Calling beyond10x repository name.
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ inputs.repository }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: ${{ github.actor == 'b10x-bot[bot]' && github.repository == format('beyond10x/{0}', inputs.repository) }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Validate immutable inputs
+        env:
+          WEBSITE_SHA: ${{ inputs.website_sha }}
+          SOURCE_REPOSITORY: ${{ inputs.repository }}
+        run: |
+          case "$WEBSITE_SHA" in
+            *[!0-9a-f]*|'') exit 1 ;;
+          esac
+          test "${#WEBSITE_SHA}" -eq 40
+          test "$GITHUB_REPOSITORY" = "beyond10x/$SOURCE_REPOSITORY"
+      - name: Check out the exact website source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: beyond10x/website
+          ref: ${{ inputs.website_sha }}
+          path: .website
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: .website/package-lock.json
+      - name: Install the pinned façade generator
+        working-directory: .website
+        run: npm ci --ignore-scripts
+      - name: Build compatibility routes after root convergence
+        working-directory: .website
+        run: >-
+          node scripts/build-redirect-facade.mjs
+          --repository '${{ inputs.repository }}'
+          --website-sha '${{ inputs.website_sha }}'
+          --out ../_site
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+        with:
+          enablement: true
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
+        with:
+          path: _site
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e

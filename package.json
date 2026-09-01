@@ -1,0 +1,65 @@
+{
+  "name": "@beyond10x/website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "npm run prepare:site && docusaurus start",
+    "prepare:site": "node scripts/prepare-site.mjs",
+    "sources:collect": "node scripts/collect-sources.mjs",
+    "sources:lock": "node scripts/update-source-lock.mjs",
+    "sources:freshness": "node scripts/update-source-lock.mjs --check",
+    "sources:lock:check": "npm run sources:freshness",
+    "routes:capture": "node scripts/capture-legacy-routes.mjs",
+    "redirect:build": "node scripts/build-redirect-facade.mjs",
+    "build:site": "docusaurus build",
+    "index:search": "pagefind --site build --output-subdir pagefind",
+    "redirects:effective": "node scripts/write-effective-redirects.mjs",
+    "crawl": "node scripts/crawl-build.mjs",
+    "build": "npm run prepare:site && npm run build:site && npm run index:search && node scripts/write-provenance.mjs",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "typecheck": "tsc",
+    "test": "node --test tests/*.test.mjs",
+    "sources:verify": "node scripts/verify-source-lock.mjs",
+    "bootstrap:verify": "node scripts/verify-bootstrap.mjs",
+    "gate": "node scripts/run-gate.mjs",
+    "gate:fixture": "B10X_BOOTSTRAP_FIXTURE=1 node scripts/run-gate.mjs"
+  },
+  "dependencies": {
+    "@docusaurus/core": "3.10.2",
+    "@docusaurus/faster": "3.10.2",
+    "@docusaurus/preset-classic": "3.10.2",
+    "@docusaurus/theme-mermaid": "3.10.2",
+    "@beyond10x/docs-system": "git+https://github.com/beyond10x/docs-system.git#a547b6930e9777277699c0b1037567d67b4c1149",
+    "@mdx-js/react": "^3.0.0",
+    "clsx": "^2.0.0",
+    "prism-react-renderer": "^2.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "yaml": "2.9.0"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "3.10.2",
+    "@docusaurus/tsconfig": "3.10.2",
+    "@docusaurus/types": "3.10.2",
+    "@types/react": "^19.0.0",
+    "pagefind": "1.5.2",
+    "typescript": "~6.0.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=24.0"
+  }
+}

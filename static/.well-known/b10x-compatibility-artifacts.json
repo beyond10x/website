@@ -1,0 +1,18 @@
+{
+  "schema": "b10x-compatibility-artifacts/v1",
+  "artifacts": [
+    {
+      "path": "static/artifacts/ess/lab/billing_web_realized.wasm",
+      "legacyUrl": "https://beyond10x.github.io/ess/lab/billing_web_realized.wasm",
+      "sourceRepository": "https://github.com/beyond10x/ess",
+      "sourceRevision": "c2f7ead1c12faa653be104cfaf2d5bf86cb74499",
+      "sourceWorkflowRun": "https://github.com/beyond10x/ess/actions/runs/33504837851",
+      "capturedAt": "2026-09-01T11:56:43Z",
+      "mediaType": "application/wasm",
+      "size": 195770,
+      "sha256": "0d400d1c27e6afb29835bee88abb614a21a07351afabb0e9eab38084a3e74468",
+      "license": "Apache-2.0",
+      "purpose": "Frozen compatibility bytes for the retired ESS project-Pages lab endpoint; not an active Website runtime."
+    }
+  ]
+}

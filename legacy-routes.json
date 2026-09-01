@@ -1,0 +1,1150 @@
+{
+  "schema": "b10x-redirects/v1",
+  "origin": "https://beyond10x.github.io",
+  "redirects": [
+    {
+      "from": "/aep-service/",
+      "to": "/ecosystem/aep-service/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/api",
+      "to": "/api/aep-service/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/architecture",
+      "to": "/docs/aep-service/architecture/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/commands-and-queries",
+      "to": "/docs/aep-service/commands-and-queries/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/concepts",
+      "to": "/docs/aep-service/concepts/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/configuration",
+      "to": "/docs/aep-service/configuration/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/http-contract",
+      "to": "/docs/aep-service/http-contract/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/intro",
+      "to": "/docs/aep-service/intro/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/operations",
+      "to": "/docs/aep-service/operations/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/quickstart",
+      "to": "/docs/aep-service/quickstart/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/release-status",
+      "to": "/docs/aep-service/release-status/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/reliability",
+      "to": "/docs/aep-service/reliability/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/docs/security",
+      "to": "/docs/aep-service/security/",
+      "type": "html"
+    },
+    {
+      "from": "/aep-service/openapi.json",
+      "source": "api/aep-service/http-api/openapi.json",
+      "type": "alias",
+      "mediaType": "application/json"
+    },
+    {
+      "from": "/aep/",
+      "to": "/ecosystem/aep/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs",
+      "to": "/docs/aep/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/concepts/aep",
+      "to": "/docs/aep/concepts/aep/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/concepts/design-principles",
+      "to": "/docs/aep/concepts/design-principles/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/concepts/evidence",
+      "to": "/docs/aep/concepts/evidence/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/concepts/lifecycles",
+      "to": "/docs/aep/concepts/lifecycles/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/concepts/overview",
+      "to": "/docs/aep/concepts/overview/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/examples/governed-task",
+      "to": "/docs/aep/examples/governed-task/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/getting-started",
+      "to": "/docs/aep/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/guides/check-a-transcript",
+      "to": "/docs/aep/guides/check-a-transcript/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/guides/govern-a-task",
+      "to": "/docs/aep/guides/govern-a-task/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/guides/integrate-a-harness",
+      "to": "/docs/aep/guides/integrate-a-harness/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/guides/write-a-principle",
+      "to": "/docs/aep/guides/write-a-principle/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/reference/cli",
+      "to": "/docs/aep/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/reference/documents",
+      "to": "/docs/aep/reference/documents/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/reference/glossary",
+      "to": "/docs/aep/reference/glossary/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/reference/harnesses",
+      "to": "/docs/aep/reference/harnesses/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/reference/vocabulary",
+      "to": "/docs/aep/reference/vocabulary/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/status/limitations",
+      "to": "/docs/aep/status/limitations/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/status/roadmap",
+      "to": "/docs/aep/status/roadmap/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/docs/status/where-this-stands",
+      "to": "/docs/aep/status/where-this-stands/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/a-claim-that-left-the-boundary",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/a-repository-that-already-exists",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/a-rung-may-cost-evidence",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/a-rung-may-open-on-a-date",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/a-second-transcript-shape",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/archive",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/atom.xml",
+      "source": "releases/aep/atom.xml",
+      "type": "alias",
+      "mediaType": "application/xml"
+    },
+    {
+      "from": "/aep/releases/conformance-and-the-domain-profiles",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/domain-model-and-document-layer",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/evidence-names-what-it-is-about",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/ground-truth-and-docs",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/horizons-and-the-first-governed-run",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/identity-and-the-interaction-contract",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/obligation",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/page/2",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/page/3",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/project-discovery",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/rss.xml",
+      "source": "releases/aep/rss.xml",
+      "type": "alias",
+      "mediaType": "application/xml"
+    },
+    {
+      "from": "/aep/releases/tags",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/adoption",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/aep",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/aep/page/2",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/aep/page/3",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/ci",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/conformance",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/docs",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/driver",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/evidence",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/planning",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/portability",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/release",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/release/page/2",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/release/page/3",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/tags/trace",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-docs-catch-up",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-engines-mechanisms",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-execution-core",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-first-verified-tag",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-ladder-is-data",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-pin-says-what-it-links",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-plan-and-the-transcript",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-plan-has-a-history",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-reference-driver",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/the-typed-blocker",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/aep/releases/where-a-run-may-write",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/",
+      "to": "/ecosystem/agentic-principles/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog",
+      "to": "/updates/field-notes/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog/2026/08/25/what-the-operator-actually-contributes",
+      "to": "/updates/field-notes/2026/08/25/what-the-operator-actually-contributes/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog/archive",
+      "to": "/updates/field-notes/archive/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog/atom.xml",
+      "source": "updates/field-notes/atom.xml",
+      "type": "alias",
+      "mediaType": "application/xml"
+    },
+    {
+      "from": "/agentic-principles/blog/authors",
+      "to": "/updates/field-notes/authors/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog/authors/b-10-x-author-01",
+      "to": "/updates/field-notes/authors/b-10-x-author-01/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog/feed.json",
+      "source": "updates/field-notes/feed.json",
+      "type": "alias",
+      "mediaType": "application/json"
+    },
+    {
+      "from": "/agentic-principles/blog/rss.xml",
+      "source": "updates/field-notes/rss.xml",
+      "type": "alias",
+      "mediaType": "application/xml"
+    },
+    {
+      "from": "/agentic-principles/blog/tags",
+      "to": "/updates/field-notes/tags/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog/tags/automation",
+      "to": "/updates/field-notes/tags/automation/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog/tags/human-in-the-loop",
+      "to": "/updates/field-notes/tags/human-in-the-loop/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog/tags/measurement",
+      "to": "/updates/field-notes/tags/measurement/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/blog/tags/transcripts",
+      "to": "/updates/field-notes/tags/transcripts/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/principles",
+      "to": "/docs/agentic-principles/principles/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research",
+      "to": "/docs/agentic-principles/research/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research/research/2026-08-25T001613+0200_seed",
+      "to": "/docs/agentic-principles/research/research/2026-08-25T001613+0200_seed/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research/research/2026-08-25T001928+0200_seed",
+      "to": "/docs/agentic-principles/research/research/2026-08-25T001928+0200_seed/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research/research/2026-08-25T004318+0200_engineering-protocols-workflow-fit",
+      "to": "/docs/agentic-principles/research/research/2026-08-25T004318+0200_engineering-protocols-workflow-fit/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research/research/2026-08-25T005715+0200_fix-the-source-not-the-adopter",
+      "to": "/docs/agentic-principles/research/research/2026-08-25T005715+0200_fix-the-source-not-the-adopter/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure",
+      "to": "/docs/agentic-principles/research/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research/research/evidence/scoped-progress-partial-failure",
+      "to": "/docs/agentic-principles/research/research/evidence/scoped-progress-partial-failure/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research/research/evidence/scoped-progress-partial-failure/analysis",
+      "to": "/docs/agentic-principles/research/research/evidence/scoped-progress-partial-failure/analysis/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research/research/evidence/scoped-progress-partial-failure/sources",
+      "to": "/docs/agentic-principles/research/research/evidence/scoped-progress-partial-failure/sources/",
+      "type": "html"
+    },
+    {
+      "from": "/agentic-principles/research/VISION",
+      "to": "/docs/agentic-principles/research/VISION/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/",
+      "to": "/ecosystem/agentplugins/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/docs",
+      "to": "/docs/agentplugins/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/docs/choose-a-plugin",
+      "to": "/docs/agentplugins/choose-a-plugin/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/docs/install",
+      "to": "/docs/agentplugins/install/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/docs/plugins/adp",
+      "to": "/docs/agentplugins/plugins/adp/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/docs/plugins/aep-planning",
+      "to": "/docs/agentplugins/plugins/aep-planning/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/docs/plugins/beyond10x",
+      "to": "/docs/agentplugins/plugins/beyond10x/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/docs/plugins/ess-schema",
+      "to": "/docs/agentplugins/plugins/ess-schema/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/docs/plugins/workspace-hygiene",
+      "to": "/docs/agentplugins/plugins/workspace-hygiene/",
+      "type": "html"
+    },
+    {
+      "from": "/agentplugins/docs/trust-and-scope",
+      "to": "/docs/agentplugins/trust-and-scope/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/",
+      "to": "/ecosystem/entity-runtime/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs",
+      "to": "/docs/entity-runtime/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/agentic-systems",
+      "to": "/docs/entity-runtime/agentic-systems/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guarantees",
+      "to": "/docs/entity-runtime/guarantees/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/agent-integration",
+      "to": "/docs/entity-runtime/guide/agent-integration/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/cli",
+      "to": "/docs/entity-runtime/guide/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/definitions",
+      "to": "/docs/entity-runtime/guide/definitions/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/file-store-migration",
+      "to": "/docs/entity-runtime/guide/file-store-migration/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/generated-cli",
+      "to": "/docs/entity-runtime/guide/generated-cli/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/generated-docs",
+      "to": "/docs/entity-runtime/guide/generated-docs/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/getting-started",
+      "to": "/docs/entity-runtime/guide/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/graphs",
+      "to": "/docs/entity-runtime/guide/graphs/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/library",
+      "to": "/docs/entity-runtime/guide/library/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/mcp",
+      "to": "/docs/entity-runtime/guide/mcp/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/modeling",
+      "to": "/docs/entity-runtime/guide/modeling/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/refusals",
+      "to": "/docs/entity-runtime/guide/refusals/",
+      "type": "html"
+    },
+    {
+      "from": "/entity-runtime/docs/guide/storage",
+      "to": "/docs/entity-runtime/guide/storage/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/",
+      "to": "/ecosystem/ess/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs",
+      "to": "/docs/ess/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/concepts/ess",
+      "to": "/docs/ess/concepts/ess/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/concepts/overview",
+      "to": "/docs/ess/concepts/overview/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/examples/specification-to-contracts",
+      "to": "/docs/ess/examples/specification-to-contracts/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/getting-started",
+      "to": "/docs/ess/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/guides/check-infrastructure",
+      "to": "/docs/ess/guides/check-infrastructure/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/guides/generate-artifacts",
+      "to": "/docs/ess/guides/generate-artifacts/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/guides/synthesize",
+      "to": "/docs/ess/guides/synthesize/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/guides/track-change",
+      "to": "/docs/ess/guides/track-change/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/guides/verify-conformance",
+      "to": "/docs/ess/guides/verify-conformance/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/guides/write-a-specification",
+      "to": "/docs/ess/guides/write-a-specification/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/reference/cli",
+      "to": "/docs/ess/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/status/limitations",
+      "to": "/docs/ess/status/limitations/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/status/roadmap",
+      "to": "/docs/ess/status/roadmap/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/docs/status/where-this-stands",
+      "to": "/docs/ess/status/where-this-stands/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/lab",
+      "to": "/docs/ess/lab/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/lab/billing_web_realized.wasm",
+      "source": "artifacts/ess/lab/billing_web_realized.wasm",
+      "type": "alias",
+      "mediaType": "application/wasm"
+    },
+    {
+      "from": "/ess/releases",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/a-cluster-described-and-answered",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/archive",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/atom.xml",
+      "source": "releases/ess/atom.xml",
+      "type": "alias",
+      "mediaType": "application/xml"
+    },
+    {
+      "from": "/ess/releases/ess-the-compiler",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/ess-the-join-and-the-model",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/ess-the-projections",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/hardening-the-register-emptied",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/one-spec-two-apps",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/reconciliation",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/rss.xml",
+      "source": "releases/ess/rss.xml",
+      "type": "alias",
+      "mediaType": "application/xml"
+    },
+    {
+      "from": "/ess/releases/semantic-diff",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/structural-synthesis",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/tags",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/tags/conformance",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/tags/ess",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/tags/infrastructure",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/tags/release",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/ess/releases/the-specification-as-oracle",
+      "to": "/releases/",
+      "type": "html"
+    },
+    {
+      "from": "/getting-started/",
+      "to": "/",
+      "type": "html"
+    },
+    {
+      "from": "/getting-started/changes",
+      "to": "/changes/",
+      "type": "html"
+    },
+    {
+      "from": "/getting-started/changes.json",
+      "source": "changes.json",
+      "type": "alias",
+      "mediaType": "application/json"
+    },
+    {
+      "from": "/getting-started/changes/feed.json",
+      "source": "changes/feed.json",
+      "type": "alias",
+      "mediaType": "application/json"
+    },
+    {
+      "from": "/getting-started/changes/rss.xml",
+      "source": "changes/rss.xml",
+      "type": "alias",
+      "mediaType": "application/xml"
+    },
+    {
+      "from": "/getting-started/ecosystem",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/getting-started/ecosystem.json",
+      "source": "ecosystem.json",
+      "type": "alias",
+      "mediaType": "application/json"
+    },
+    {
+      "from": "/getting-started/release-facts.json",
+      "source": "release-facts.json",
+      "type": "alias",
+      "mediaType": "application/json"
+    },
+    {
+      "from": "/getting-started/updates",
+      "to": "/changes/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/",
+      "to": "/ecosystem/harness/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs",
+      "to": "/docs/harness/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/concepts/agent-loop",
+      "to": "/docs/harness/concepts/agent-loop/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/concepts/security-boundary",
+      "to": "/docs/harness/concepts/security-boundary/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/concepts/tools-and-approvals",
+      "to": "/docs/harness/concepts/tools-and-approvals/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/getting-started",
+      "to": "/docs/harness/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/guides/confinement",
+      "to": "/docs/harness/guides/confinement/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/guides/profiles",
+      "to": "/docs/harness/guides/profiles/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/guides/sessions-and-events",
+      "to": "/docs/harness/guides/sessions-and-events/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/guides/structured-runs",
+      "to": "/docs/harness/guides/structured-runs/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/guides/workflows",
+      "to": "/docs/harness/guides/workflows/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/reference/cli",
+      "to": "/docs/harness/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/reference/configuration",
+      "to": "/docs/harness/reference/configuration/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/reference/toolchains",
+      "to": "/docs/harness/reference/toolchains/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/reference/wires",
+      "to": "/docs/harness/reference/wires/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/reference/workflows",
+      "to": "/docs/harness/reference/workflows/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/status",
+      "to": "/docs/harness/status/",
+      "type": "html"
+    },
+    {
+      "from": "/harness/docs/tutorials/confined-change",
+      "to": "/docs/harness/tutorials/confined-change/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/",
+      "to": "/ecosystem/metaharness/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs",
+      "to": "/docs/metaharness/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/control-seam",
+      "to": "/docs/metaharness/control-seam/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/frames",
+      "to": "/docs/metaharness/frames/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/harnesses/b10x",
+      "to": "/docs/metaharness/harnesses/b10x/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/harnesses/claude",
+      "to": "/docs/metaharness/harnesses/claude/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/harnesses/codex",
+      "to": "/docs/metaharness/harnesses/codex/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/hermetic",
+      "to": "/docs/metaharness/hermetic/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/protocol/commands",
+      "to": "/docs/metaharness/protocol/commands/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/protocol/events",
+      "to": "/docs/metaharness/protocol/events/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/quickstart",
+      "to": "/docs/metaharness/quickstart/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/reference/cli",
+      "to": "/docs/metaharness/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/reference/library",
+      "to": "/docs/metaharness/reference/library/",
+      "type": "html"
+    },
+    {
+      "from": "/metaharness/docs/status",
+      "to": "/docs/metaharness/status/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/",
+      "to": "/ecosystem/substrate/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs",
+      "to": "/docs/substrate/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/concepts/boundary",
+      "to": "/docs/substrate/concepts/boundary/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/concepts/confinement",
+      "to": "/docs/substrate/concepts/confinement/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/concepts/operations",
+      "to": "/docs/substrate/concepts/operations/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/getting-started",
+      "to": "/docs/substrate/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/guides/deployment",
+      "to": "/docs/substrate/guides/deployment/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/guides/mcp-adapter",
+      "to": "/docs/substrate/guides/mcp-adapter/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/guides/run-a-command",
+      "to": "/docs/substrate/guides/run-a-command/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/guides/rust-sdk",
+      "to": "/docs/substrate/guides/rust-sdk/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/guides/storage-and-metrics",
+      "to": "/docs/substrate/guides/storage-and-metrics/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/reference/contract",
+      "to": "/docs/substrate/reference/contract/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/security",
+      "to": "/docs/substrate/security/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/status",
+      "to": "/docs/substrate/status/",
+      "type": "html"
+    },
+    {
+      "from": "/substrate/docs/use-cases",
+      "to": "/docs/substrate/use-cases/",
+      "type": "html"
+    }
+  ]
+}

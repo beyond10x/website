@@ -1,0 +1,25 @@
+schema: b10x-website-sources/v1
+organization: beyond10x
+manifestPath: b10x.docs.yaml
+compatibilityRepositories:
+  - getting-started
+repositories:
+  - aep
+  - aep-service
+  - agent-platform
+  - agentic-principles
+  - agentplugins
+  - connectors
+  - devcenter
+  - docs-system
+  - entity-runtime
+  - ess
+  - eventlog
+  - harness
+  - identity
+  - metaharness
+  - research
+  - secrets
+  - substrate
+  - workflow
+  - worktree

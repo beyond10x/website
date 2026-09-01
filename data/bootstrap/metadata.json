@@ -1,0 +1,11 @@
+{
+  "schema": "b10x-bootstrap-snapshot/v1",
+  "sourceRepository": "https://github.com/beyond10x/getting-started",
+  "sourceRevision": "763711ad8aca12fbdb737c8452439c8824700db6",
+  "capturedAt": "2026-09-01T12:30:00Z",
+  "files": {
+    "changes.json": "f0276ba0ae389936dec15b9af2561c5b0840f4045d4ce3fb81fc97dd030e6d75",
+    "ecosystem.json": "f4c399f5dc1f30c18baf3e4bbafcd3d90203cf49395795367883be6a78cdc1eb",
+    "release-facts.json": "5f8483b42fdfcd5a9675b5cad982946f2b9e0d532dd7fb7a481b27de8ec4bf59"
+  }
+}
