@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/0.4.2",
+      "id": "devcenter/0.4.2",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-01T21:02:30Z",
+      "title": "Devcenter 0.4.2",
+      "summary": "Devcenter released version 0.4.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.2",
+        "version": "0.4.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "docs-system/passive-data-sources-0.3.1",
       "id": "docs-system/passive-data-sources-0.3.1",
       "repository": "docs-system",

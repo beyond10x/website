@@ -2,6 +2,12 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "devcenter",
+      "version": "0.4.2",
+      "publishedAt": "2026-09-01T21:02:30Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.2"
+    },
+    {
       "repository": "docs-system",
       "version": "0.4.0",
       "publishedAt": "2026-09-01T17:57:20Z",
