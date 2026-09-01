@@ -1,6 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {artifactFacts} from './artifact-contract.mjs';
+import {ROOT_OWNED_REDIRECTS} from './root-redirect-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const build = path.join(root, 'build');
@@ -11,7 +12,16 @@ const routeSet = new Set(routes);
 const failures = [];
 
 const redirects = JSON.parse(await readFile(path.join(build, '.well-known', 'b10x-redirects.json'), 'utf8'));
-const facadePaths = new Set(redirects.redirects.map((redirect) => normalizePath(redirect.from)));
+const rootOwnedPaths = new Set(ROOT_OWNED_REDIRECTS.map((redirect) => normalizePath(redirect.from)));
+const facadePaths = new Set(
+  redirects.redirects
+    .map((redirect) => normalizePath(redirect.from))
+    .filter((redirect) => !rootOwnedPaths.has(redirect)),
+);
+for (const redirect of ROOT_OWNED_REDIRECTS) {
+  const route = routeForPublicPath(redirect.from);
+  if (!routeSet.has(route)) failures.push(`root-owned redirect ${redirect.from} is missing from the root artifact`);
+}
 for (const redirect of redirects.redirects) {
   if (redirect.type === 'html') requirePublicPath(redirect.to, `redirect ${redirect.from}`);
   else if (!fileSet.has(redirect.source)) failures.push(`alias ${redirect.from} references missing /${redirect.source}`);
@@ -73,6 +83,11 @@ function requirePublicPath(value, context) {
 function normalizePath(value) {
   const pathname = `/${value.replace(/^\/+|\/+$/g, '')}`;
   return pathname === '/' ? '/' : pathname;
+}
+
+function routeForPublicPath(value) {
+  const pathname = value.replace(/^\/+|\/+$/g, '');
+  return pathname ? `/${pathname}/` : '/';
 }
 
 function routeForFile(file) {

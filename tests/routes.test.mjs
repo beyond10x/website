@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {readFile} from 'node:fs/promises';
+import {mkdtemp, readFile, rm} from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import {parse} from 'yaml';
@@ -8,6 +9,7 @@ import {renderRedirectHtml} from '@beyond10x/docs-system/redirects';
 import {routesFromFiles} from '../scripts/provenance-routes.mjs';
 import {facadeRepositories, synthesizeFacadeRoutes} from '../scripts/facade-contract.mjs';
 import {effectiveRedirectMap} from '../scripts/redirect-contract.mjs';
+import {ROOT_OWNED_REDIRECTS, writeRootOwnedRedirects} from '../scripts/root-redirect-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 
@@ -15,10 +17,14 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   const map = JSON.parse(await readFile(path.join(root, 'legacy-routes.json'), 'utf8'));
   const html = map.redirects.filter((route) => route.type === 'html');
   const aliases = map.redirects.filter((route) => route.type === 'alias');
-  assert.equal(html.length, 212);
+  assert.equal(html.length, 214);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));
+  assert.deepEqual(
+    html.filter((route) => ROOT_OWNED_REDIRECTS.some((expected) => expected.from === route.from)),
+    ROOT_OWNED_REDIRECTS,
+  );
   assert.ok(aliases.some((route) => route.from === '/aep-service/openapi.json' && route.source === 'api/aep-service/http-api/openapi.json' && route.mediaType === 'application/json'));
   assert.ok(
     aliases
@@ -30,6 +36,19 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
       .filter((route) => route.from.endsWith('.json'))
       .every((route) => route.mediaType === 'application/json'),
   );
+});
+
+test('root-owned compatibility routes are materialized in the root artifact', async (context) => {
+  const output = await mkdtemp(path.join(os.tmpdir(), 'b10x-root-redirects-'));
+  context.after(() => rm(output, {recursive: true, force: true}));
+  const declared = JSON.parse(await readFile(path.join(root, 'legacy-routes.json'), 'utf8'));
+  await writeRootOwnedRedirects(output, declared);
+  for (const redirect of ROOT_OWNED_REDIRECTS) {
+    const file = path.join(output, redirect.from.replace(/^\/+|\/+$/g, ''), 'index.html');
+    const html = await readFile(file, 'utf8');
+    assert.match(html, new RegExp(`<link rel="canonical" href="${new URL(redirect.to, declared.origin).href}"`));
+    assert.match(html, /window\.location\.replace/);
+  }
 });
 
 test('HTML compatibility pages preserve search and fragment and expose a canonical fallback', () => {

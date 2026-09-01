@@ -15,6 +15,7 @@ const commands = [
   ['node', ['scripts/code-contract.mjs', 'source']],
   ['npm', ['run', 'typecheck']],
   ['npm', ['run', 'build:site']],
+  ['npm', ['run', 'redirects:root']],
   ['node', ['scripts/code-contract.mjs', 'build']],
   ['npm', ['run', 'index:search']],
   ['node', ['scripts/write-effective-redirects.mjs']],

@@ -674,6 +674,11 @@
       "type": "html"
     },
     {
+      "from": "/engineering-protocols/",
+      "to": "/ecosystem/aep/",
+      "type": "html"
+    },
+    {
       "from": "/ess/",
       "to": "/ecosystem/ess/",
       "type": "html"
@@ -1144,6 +1149,11 @@
     {
       "from": "/substrate/docs/use-cases",
       "to": "/docs/substrate/use-cases/",
+      "type": "html"
+    },
+    {
+      "from": "/website/",
+      "to": "/",
       "type": "html"
     }
   ]

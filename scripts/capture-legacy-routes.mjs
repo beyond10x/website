@@ -1,6 +1,7 @@
 import {writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {compareUtf8} from './order-contract.mjs';
+import {ROOT_OWNED_REDIRECTS} from './root-redirect-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const repositories = [
@@ -45,6 +46,7 @@ redirects.push(
   {from: '/getting-started/changes/rss.xml', source: 'changes/rss.xml', type: 'alias', mediaType: 'application/rss+xml'},
   {from: '/getting-started/ecosystem.json', source: 'ecosystem.json', type: 'alias', mediaType: 'application/json'},
   {from: '/getting-started/release-facts.json', source: 'release-facts.json', type: 'alias', mediaType: 'application/json'},
+  ...ROOT_OWNED_REDIRECTS,
 );
 
 redirects.sort((left, right) => compareUtf8(left.from, right.from) || compareUtf8(left.type, right.type));
@@ -54,7 +56,7 @@ for (const redirect of redirects) {
   seen.add(redirect.from);
 }
 const htmlCount = redirects.filter((redirect) => redirect.type === 'html').length;
-if (htmlCount !== 212) throw new Error(`expected 212 legacy HTML routes, captured ${htmlCount}`);
+if (htmlCount !== 214) throw new Error(`expected 214 legacy HTML routes, captured ${htmlCount}`);
 await writeFile(
   path.join(root, 'legacy-routes.json'),
   `${JSON.stringify({schema: 'b10x-redirects/v1', origin: 'https://beyond10x.github.io', redirects}, null, 2)}\n`,
