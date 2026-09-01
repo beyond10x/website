@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useState, type ReactNode} from 'react';
-import Heading from '@theme/Heading';
 import Layout from '@theme/Layout';
+import {CardGrid, ContentCard, PageHeader, SearchField, SectionHeader} from '@beyond10x/docs-system/components';
 import type {EcosystemRegistry} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import styles from './ecosystem.module.css';
@@ -48,34 +48,37 @@ export default function Search(): ReactNode {
   return (
     <Layout title="Search" description="Search the public beyond10x documentation ecosystem.">
       <main className="container">
-        <header className={styles.hero}>
-          <p className="b10x-eyebrow">SEARCH</p>
-          <Heading as="h1">Find the boundary or capability you need.</Heading>
-          <div className={styles.search}>
-            <label htmlFor="site-search">Search every project and technical page</label>
-            <input id="site-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} autoFocus />
+        <div className={styles.hero}>
+          <PageHeader eyebrow="Search" title="Find the boundary or capability you need." description="Search repository-owned guides, references, capabilities, and project profiles from one index." />
+          <div className={styles.discoveryControls}>
+            <SearchField label="Search every project and technical page" value={query} onChange={(event) => setQuery(event.target.value)} autoFocus />
           </div>
-        </header>
+        </div>
         {fullTextResults.length > 0 && (
           <section className={styles.updates} aria-label={`${fullTextResults.length} documentation results`}>
-            <Heading as="h2">Documentation</Heading>
-            {fullTextResults.map((result) => (
-              <article key={result.url}>
-                <Heading as="h3"><a href={result.url}>{result.meta.title ?? result.url}</a></Heading>
-                <p dangerouslySetInnerHTML={{__html: safeExcerpt(result.excerpt)}} />
-              </article>
-            ))}
+            <SectionHeader title="Documentation" description={`${fullTextResults.length} full-text ${fullTextResults.length === 1 ? 'result' : 'results'} from the locked public source set.`} />
+            <CardGrid>{fullTextResults.map((result) => <ContentCard
+              key={result.url}
+              title={result.meta.title ?? result.url}
+              titleUrl={result.url}
+              description={<p dangerouslySetInnerHTML={{__html: safeExcerpt(result.excerpt)}} />}
+              actionUrl={result.url}
+              actionLabel="Open documentation"
+            />)}</CardGrid>
           </section>
         )}
         <section className={styles.updates} aria-label={`${projectResults.length} project results`}>
-          <Heading as="h2">Projects</Heading>
-          {projectResults.map((surface) => (
-            <article key={surface.key}>
-              <Heading as="h3"><a href={`/docs/${surface.repository.id}/`}>{surface.name}</a></Heading>
-              <p>{surface.summary}</p>
-              <small>{surface.capabilities.join(' · ')}</small>
-            </article>
-          ))}
+          <SectionHeader title="Projects" description={`${projectResults.length} matching public ${projectResults.length === 1 ? 'surface' : 'surfaces'}.`} />
+          <CardGrid>{projectResults.map((surface) => <ContentCard
+            key={surface.key}
+            title={surface.name}
+            titleUrl={`/ecosystem/${surface.repository.id}/`}
+            description={surface.summary}
+            meta={surface.capabilities.join(' · ')}
+            actionUrl={`/ecosystem/${surface.repository.id}/`}
+            actionLabel="View project profile"
+            accent={surface.accent}
+          />)}</CardGrid>
         </section>
       </main>
     </Layout>

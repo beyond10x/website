@@ -1,7 +1,6 @@
 import type {ReactNode} from 'react';
 import Link from '@docusaurus/Link';
-import Heading from '@theme/Heading';
-import {AdoptionCard, StatusBadge} from '@beyond10x/docs-system/components';
+import {AdoptionCard, CardGrid, ContentCard, FactGrid, PageHeader, SectionHeader, StatusBadge} from '@beyond10x/docs-system/components';
 import {surfaceNavigation} from '@beyond10x/docs-system/navigation';
 import type {RegistrySurface} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
@@ -31,41 +30,46 @@ export default function EcosystemFamilyLanding({family: familyId}: {family: stri
   if (!next) throw new Error(`${family.label} points to unknown next family ${family.next.family}`);
 
   return <div className={styles.page}>
-    <header className={styles.hero}>
-      <p className="b10x-eyebrow">ECOSYSTEM FAMILY · {String(families.indexOf(family) + 1).padStart(2, '0')}</p>
-      <Heading as="h1">{family.label}</Heading>
-      <p>{family.purpose}</p>
-      <span>{members.length} {members.length === 1 ? 'public project' : 'public projects'}</span>
-    </header>
+    <PageHeader
+      eyebrow={`Ecosystem family · ${String(families.indexOf(family) + 1).padStart(2, '0')}`}
+      title={family.label}
+      description={family.purpose}
+    ><span>{members.length} {members.length === 1 ? 'public project' : 'public projects'}</span></PageHeader>
 
     <section className={styles.start} aria-labelledby={`${family.id}-start`}>
-      <header>
-        <p className="b10x-eyebrow">Recommended start · {start.name}</p>
-        <Heading as="h2" id={`${family.id}-start`}>Begin with one inspectable outcome.</Heading>
-        <p>The action and prerequisites below are owned by {start.repository.displayName ?? start.name} at the Website's locked source revision.</p>
-      </header>
+      <SectionHeader
+        eyebrow={`Recommended start · ${start.name}`}
+        title="Begin with one inspectable outcome."
+        id={`${family.id}-start`}
+        description={`The action and prerequisites below are owned by ${start.repository.displayName ?? start.name} at the Website's locked source revision.`}
+      />
       <div className={styles.startGrid}>
         <AdoptionCard surface={start} journey={primaryJourneyOf(start)} />
-        <aside className={styles.availability} aria-label={`${start.name} current availability`}>
-          <p className="b10x-eyebrow">Current availability</p>
-          <StatusBadge maturity={start.maturity} />
-          <dl>
-            <div><dt>Maturity</dt><dd>{label(start.maturity)}</dd></div>
-            <div><dt>Publication</dt><dd>{label(start.availability)}</dd></div>
-            <div><dt>Audience</dt><dd>{(start.audiences ?? []).map(label).join(', ') || 'Not declared'}</dd></div>
-          </dl>
-          <Link to={`/ecosystem/${start.repository.id}/`}>Inspect the full project profile <span aria-hidden="true">→</span></Link>
-        </aside>
+        <ContentCard
+          title="Current availability"
+          meta={<StatusBadge maturity={start.maturity} />}
+          actionUrl={`/ecosystem/${start.repository.id}/`}
+          actionLabel="Inspect the full project profile"
+        ><FactGrid items={[
+          {label: 'Maturity', value: label(start.maturity)},
+          {label: 'Publication', value: label(start.availability)},
+          {label: 'Audience', value: (start.audiences ?? []).map(label).join(', ') || 'Not declared'},
+        ]} /></ContentCard>
       </div>
     </section>
 
     <section className={styles.members} aria-labelledby={`${family.id}-members`}>
-      <header><p className="b10x-eyebrow">Family members</p><Heading as="h2" id={`${family.id}-members`}>Choose the boundary that owns your next question.</Heading></header>
-      <ul>{members.map((surface) => <li key={surface.repository.id}>
-        <Heading as="h3"><Link to={`/ecosystem/${surface.repository.id}/`}>{surface.name}</Link></Heading>
-        <p>{surface.summary}</p>
-        <small>{label(primaryJourneyOf(surface) ?? 'journey-not-declared')} · {label(surface.maturity)}</small>
-      </li>)}</ul>
+      <SectionHeader eyebrow="Family members" title="Choose the boundary that owns your next question." id={`${family.id}-members`} />
+      <CardGrid columns={2}>{members.map((surface) => <ContentCard
+        key={surface.repository.id}
+        title={surface.name}
+        titleUrl={`/ecosystem/${surface.repository.id}/`}
+        description={surface.summary}
+        meta={`${label(primaryJourneyOf(surface) ?? 'journey-not-declared')} · ${label(surface.maturity)}`}
+        actionUrl={`/ecosystem/${surface.repository.id}/`}
+        actionLabel="View project profile"
+        accent={surface.accent}
+      />)}</CardGrid>
     </section>
 
     <nav className={styles.next} aria-label="Next ecosystem family">

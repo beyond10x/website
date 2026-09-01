@@ -2,7 +2,7 @@ import type {ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
-import EcosystemProjectCard from '../components/EcosystemProjectCard';
+import {CodeExample, ProjectCard} from '@beyond10x/docs-system/components';
 import EcosystemFamilyOrientation from '../components/EcosystemFamilyOrientation';
 import type {EcosystemRegistry} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
@@ -216,7 +216,12 @@ export default function Home(): ReactNode {
             </div>
             <div className={styles.executionGrid}>
               {executionSurfaces.map((surface) => (
-                <EcosystemProjectCard key={surface.key} surface={surface} />
+                <ProjectCard
+                  key={surface.key}
+                  surface={surface}
+                  headingLevel={3}
+                  titleUrl={`/ecosystem/${surface.repository.id}/`}
+                />
               ))}
             </div>
           </div>
@@ -342,14 +347,14 @@ export default function Home(): ReactNode {
                 <span>order.yaml</span>
                 <span className={styles.dotSet} aria-hidden="true"><i /><i /><i /></span>
               </div>
-              <pre><code>{`submit:
+              <CodeExample language="yaml">{`submit:
   transitions:
     - { from: draft, to: submitted }
   preconditions:
     - name: positive_total
       assert: { gt: [$fields.total_cents, 0] }
   emits:
-    - type: OrderSubmitted`}</code></pre>
+    - type: OrderSubmitted`}</CodeExample>
               <div className={styles.decisionOut}>
                 <span>DECISION / ACCEPTED</span>
                 <div><b>draft</b><i>→</i><strong>submitted</strong></div>
@@ -420,7 +425,7 @@ export default function Home(): ReactNode {
                 <span>aep explain</span>
                 <Status tone="proposal">EVIDENCE GATE</Status>
               </div>
-              <pre><code>{`$ aep explain \\
+              <CodeExample language="shell-session">{`$ aep explain \\
   --task task.yaml \\
   --action production.write
 
@@ -428,7 +433,7 @@ production.write denied
   operation: change production state
   reason:    production-write-requires-approval
   missing:   approval for production.write
-  state:     receive`}</code></pre>
+  state:     receive`}</CodeExample>
               <div className={styles.panelFoot}>
                 <span>THE REFUSAL HAS AN ADDRESS</span>
                 <p>A principle, a missing fact, and the state in which the rule was evaluated.</p>

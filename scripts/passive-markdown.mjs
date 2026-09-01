@@ -1,3 +1,5 @@
+import {normalizeMarkdownFenceLanguage} from '@beyond10x/docs-system/code';
+
 const managedMarker = /^\s*<!--\s*(b10x-docs(?:[-:][a-z0-9-]+)*):(start|end)\s*-->\s*$/i;
 
 export function normalizePassiveMarkdown(source) {
@@ -10,7 +12,7 @@ export function normalizePassiveMarkdown(source) {
       const marker = fenceMatch[1][0];
       if (!fence) fence = marker;
       else if (fence === marker) fence = undefined;
-      output.push(original);
+      output.push(fence ? normalizeFence(original) : original);
       continue;
     }
     if (fence) {
@@ -39,6 +41,20 @@ export function normalizePassiveMarkdown(source) {
     else if (line || !htmlComment) output.push(line);
   }
   return output.join('\n');
+}
+
+/**
+ * Canonicalize only the language token on an opening fence. The fence marker,
+ * indentation, metadata, and every byte of the example body remain unchanged.
+ */
+export function normalizeFence(line) {
+  const match = /^(\s*)(`{3,}|~{3,})(\s*)([^\s{]+)(.*)$/.exec(line);
+  if (!match) return line;
+  const [, indentation, marker, spacing, language, metadata] = match;
+  // Keep the ambiguous legacy label visible so the source contract can reject
+  // it with an actionable bash/shell-session/text diagnostic.
+  if (language.toLowerCase() === 'console') return line;
+  return `${indentation}${marker}${spacing}${normalizeMarkdownFenceLanguage(language)}${metadata}`;
 }
 
 export function stripManagedRanges(source) {

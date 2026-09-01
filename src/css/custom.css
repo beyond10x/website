@@ -161,57 +161,13 @@ body {
   margin: 2rem 0 3rem;
 }
 
-.b10x-api-catalog__summary {
-  color: var(--b10x-color-muted);
-  font-family: var(--b10x-font-mono);
-  font-size: 0.82rem;
-}
-
-.b10x-api-catalog__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
-  gap: 1rem;
-}
-
-.b10x-api-catalog__grid > article {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: 1.25rem;
-  border: 1px solid var(--b10x-color-line);
-  border-top: 3px solid var(--b10x-color-success);
-  border-radius: var(--b10x-radius);
-  background: color-mix(in srgb, var(--ifm-background-surface-color) 82%, transparent);
-}
-
-.b10x-api-catalog__grid header,
-.b10x-api-catalog__grid footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem 1rem;
-}
-
-.b10x-api-catalog__grid header {
-  color: var(--b10x-color-muted);
-  font: 700 0.68rem var(--b10x-font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.b10x-api-catalog__grid header code {
+.b10x-api-catalog .b10x-content-card > header code {
   border: 0;
   color: var(--b10x-color-success);
   background: transparent;
 }
 
-.b10x-api-catalog__grid h2 {
-  margin: 1rem 0 0.35rem;
-  font-size: 1.35rem;
-}
-
-.b10x-api-catalog__grid ul {
+.b10x-api-catalog .b10x-content-card ul {
   display: grid;
   gap: 0.55rem;
   margin: 0.5rem 0 1rem;
@@ -219,7 +175,7 @@ body {
   list-style: none;
 }
 
-.b10x-api-catalog__grid li a {
+.b10x-api-catalog .b10x-content-card li a {
   display: grid;
   gap: 0.2rem;
   padding: 0.75rem;
@@ -230,19 +186,13 @@ body {
   background: var(--b10x-color-surface);
 }
 
-.b10x-api-catalog__grid li a:hover {
+.b10x-api-catalog .b10x-content-card li a:hover {
   border-color: var(--b10x-color-link);
 }
 
-.b10x-api-catalog__grid li span {
+.b10x-api-catalog .b10x-content-card li span {
   color: var(--b10x-color-muted);
   font: 0.72rem var(--b10x-font-mono);
-}
-
-.b10x-api-catalog__grid footer {
-  margin-top: auto;
-  font-size: 0.82rem;
-  font-weight: 700;
 }
 
 @media (prefers-reduced-motion: reduce) {

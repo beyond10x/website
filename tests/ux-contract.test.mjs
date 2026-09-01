@@ -157,14 +157,32 @@ test('shared status/filter tokens remain unshadowed and footer copy meets WCAG A
   assert.ok(contrast('#b3c0ca', '#303846') >= 4.5);
 });
 
+test('discovery and profile views compose the shared presentation primitives', async () => {
+  const files = await Promise.all([
+    'src/pages/ecosystem.tsx',
+    'src/pages/changes.tsx',
+    'src/pages/search.tsx',
+    'src/pages/releases.tsx',
+    'src/components/EcosystemFamilyLanding.tsx',
+    'src/components/JourneyView.tsx',
+    'src/components/ProjectProfile.tsx',
+  ].map((file) => readFile(path.join(root, file), 'utf8')));
+  const source = files.join('\n');
+  for (const component of ['PageHeader', 'SectionHeader', 'CardGrid', 'ContentCard', 'SearchField', 'FilterChipGroup', 'FactGrid', 'Callout']) {
+    assert.match(source, new RegExp(`<${component}\\b`), `${component} must be exercised by the Website`);
+  }
+  assert.doesNotMatch(source, /<input[^>]*type="search"/);
+  assert.doesNotMatch(source, /data-active=/);
+});
+
 test('interactive API and ecosystem projections preserve one page landmark and heading hierarchy', async () => {
   const api = await readFile(path.join(root, 'src/components/ApiReference.tsx'), 'utf8');
-  const ecosystem = await readFile(path.join(root, 'src/components/EcosystemProjectCard.tsx'), 'utf8');
+  const ecosystem = await readFile(path.join(root, 'src/pages/ecosystem.tsx'), 'utf8');
   assert.doesNotMatch(api, /<main[\s>]/);
   assert.doesNotMatch(api, /<h1[\s>]/);
   assert.match(api, /<OpenApiReference[^>]*headingLevel=\{3\}/);
-  assert.match(ecosystem, /<h2><a href=/);
-  assert.doesNotMatch(ecosystem, /<h3>/);
+  assert.match(ecosystem, /<ProjectCard[\s\S]*?headingLevel=\{2\}/);
+  assert.doesNotMatch(ecosystem, /EcosystemProjectCard/);
 });
 
 test('project profiles derive adoption, references, revisions, releases, and both relationship directions', async () => {
@@ -208,7 +226,7 @@ test('all five adoption routes use one manifest-driven journey view with explici
 test('architecture requests full-size keyboard panning and a complete textual projection', async () => {
   const architecture = await readFile(path.join(root, 'src/pages/architecture.tsx'), 'utf8');
   assert.match(architecture, /<DependencyGraph[^>]*minWidth="112rem"/);
-  assert.match(architecture, /swipe horizontally on touch/);
+  assert.doesNotMatch(architecture, /swipe horizontally on touch/);
   assert.match(architecture, /open its complete text alternative/);
 });
 
@@ -228,7 +246,8 @@ test('family orientation leads home while exhaustive discovery stays in docs and
   assert.match(preparation, /<EcosystemFamilyGateway surfaces=/);
   assert.match(preparation, /<EcosystemFamilyLanding family=/);
   assert.match(ecosystem, /deriveEcosystemNavigation\(registry, \{familyOrder\}\)/);
-  assert.match(ecosystem, /Filter by ecosystem family/);
+  assert.match(ecosystem, /label="Ecosystem family"/);
+  assert.match(ecosystem, /<FilterChipGroup/);
   assert.match(ecosystem, /surfaceNavigation\(surface\)\?\.group === family/);
   assert.match(ecosystem, /setJourney\([^\n]+: 'all'\)/);
   assert.match(ecosystem, /setFamily\([^\n]+: 'all'\)/);

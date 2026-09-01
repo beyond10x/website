@@ -3,20 +3,7 @@
 }
 
 .hero {
-  display: grid;
-  gap: var(--b10x-space-3);
-  max-width: 58rem;
   margin-bottom: clamp(3rem, 7vw, 6rem);
-}
-
-.hero h1,
-.hero p {
-  margin: 0;
-}
-
-.hero > p:last-of-type {
-  color: var(--b10x-color-muted);
-  font-size: 1.15rem;
 }
 
 .counts {
@@ -47,12 +34,6 @@
   color: var(--b10x-color-muted);
 }
 
-.primaryGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-  gap: var(--b10x-space-3);
-}
-
 .primaryItem {
   display: grid;
   align-content: start;
@@ -70,43 +51,7 @@
 }
 
 .verification {
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  border: 1px solid var(--b10x-color-line);
-  border-left: 4px solid var(--b10x-color-success);
-  border-radius: var(--b10x-radius);
-  background: var(--b10x-color-surface);
-}
-
-.verification h2,
-.verification p:last-child {
-  margin-bottom: 0;
-}
-
-.related {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-  gap: var(--b10x-space-3);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.related li {
-  padding: var(--b10x-space-3);
-  border: 1px solid var(--b10x-color-line);
-  border-radius: var(--b10x-radius);
-  background: var(--b10x-color-surface);
-}
-
-.related a {
-  font-weight: 750;
-}
-
-.related p,
-.related small {
-  display: block;
-  margin: .4rem 0 0;
-  color: var(--b10x-color-muted);
+  margin-block: clamp(3rem, 7vw, 6rem);
 }
 
 .next {

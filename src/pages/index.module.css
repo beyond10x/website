@@ -814,6 +814,15 @@
   background: #3b4956;
 }
 
+.codePanel :global(.b10x-code),
+.codePanel :global(.theme-code-block) {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 .codePanel pre {
   margin: 0;
   overflow-x: auto;

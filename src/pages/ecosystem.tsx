@@ -1,10 +1,9 @@
 import {useEffect, useMemo, useState, type ReactNode} from 'react';
 import {useLocation} from '@docusaurus/router';
-import Heading from '@theme/Heading';
 import Layout from '@theme/Layout';
+import {CardGrid, FilterChipGroup, PageHeader, ProjectCard, SearchField} from '@beyond10x/docs-system/components';
 import {deriveEcosystemNavigation, surfaceNavigation} from '@beyond10x/docs-system/navigation';
 import type {EcosystemRegistry, Journey} from '@beyond10x/docs-system/types';
-import EcosystemProjectCard from '../components/EcosystemProjectCard';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import familyTaxonomy from '../../data/ecosystem-families.json';
 import styles from './ecosystem.module.css';
@@ -43,5 +42,45 @@ export default function Ecosystem(): ReactNode {
     });
   }, [family, journey, query]);
 
-  return <Layout title="Public ecosystem" description="Find the public beyond10x project, guide, API, or research surface for the question you have."><main className="container"><header className={styles.hero}><p className="b10x-eyebrow">PUBLIC ECOSYSTEM</p><Heading as="h1">Find the public surface that owns your next question.</Heading><p>Search capabilities and documentation sections, choose an ecosystem family, or filter by the outcome you need. This index is generated from manifests owned by the projects themselves; planned and private systems are not presented as public destinations.</p><div className={styles.search}><label htmlFor="ecosystem-search">Find a project, capability, or section</label><input id="ecosystem-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="confinement, OpenAPI, evidence, agent loop…" /></div><div className={styles.filterGroups}><span>Family</span><div className={styles.journeys} aria-label="Filter by ecosystem family"><button type="button" data-active={family === 'all'} aria-pressed={family === 'all'} onClick={() => setFamily('all')}>All families</button>{families.map((item) => <button key={item} type="button" data-active={family === item} aria-pressed={family === item} onClick={() => setFamily(item)}>{item}</button>)}</div><span>Outcome</span><div className={styles.journeys} aria-label="Filter by journey">{journeys.map((item) => <button key={item.id} type="button" data-active={journey === item.id} aria-pressed={journey === item.id} onClick={() => setJourney(item.id)}>{item.label}</button>)}</div></div></header>{visible.length ? <section className={styles.grid} aria-label={`${visible.length} matching public surfaces`}>{visible.map((surface) => <EcosystemProjectCard key={surface.key} surface={surface} />)}</section> : <p className={styles.empty}>No public surface matches those family, journey, and search filters.</p>}</main></Layout>;
+  return <Layout title="Public ecosystem" description="Find the public beyond10x project, guide, API, or research surface for the question you have.">
+    <main className={`container ${styles.page}`}>
+      <div className={styles.hero}>
+        <PageHeader
+          eyebrow="Public ecosystem"
+          title="Find the public surface that owns your next question."
+          description="Search capabilities and documentation sections, choose an ecosystem family, or filter by the outcome you need. This index is generated from manifests owned by the projects themselves; planned and private systems are not presented as public destinations."
+        />
+        <div className={styles.discoveryControls}>
+          <SearchField
+            label="Find a project, capability, or section"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="confinement, OpenAPI, evidence, agent loop…"
+          />
+          <FilterChipGroup
+            label="Ecosystem family"
+            selected={[family]}
+            options={[{value: 'all', label: 'All families'}, ...families.map((item) => ({value: item, label: item}))]}
+            onToggle={(value) => setFamily(value)}
+          />
+          <FilterChipGroup
+            label="Adoption outcome"
+            selected={[journey]}
+            options={journeys.map((item) => ({value: item.id, label: item.label}))}
+            onToggle={(value) => setJourney(value as Journey | 'all')}
+          />
+        </div>
+      </div>
+      {visible.length ? <section aria-label={`${visible.length} matching public surfaces`}>
+        <CardGrid>
+          {visible.map((surface) => <ProjectCard
+            key={surface.key}
+            surface={surface}
+            headingLevel={2}
+            titleUrl={`/ecosystem/${surface.repository.id}/`}
+          />)}
+        </CardGrid>
+      </section> : <p className={styles.empty}>No public surface matches those family, journey, and search filters.</p>}
+    </main>
+  </Layout>;
 }

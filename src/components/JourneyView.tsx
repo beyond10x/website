@@ -1,7 +1,6 @@
 import type {ReactNode} from 'react';
 import Link from '@docusaurus/Link';
-import Heading from '@theme/Heading';
-import {AdoptionCard} from '@beyond10x/docs-system/components';
+import {AdoptionCard, Callout, CardGrid, ContentCard, PageHeader, SectionHeader} from '@beyond10x/docs-system/components';
 import {surfaceNavigation} from '@beyond10x/docs-system/navigation';
 import type {Journey, RegistrySurface} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
@@ -31,30 +30,37 @@ export default function JourneyView({journey}: {journey: Journey}): ReactNode {
   if (!next) throw new Error(`${journey} points to unknown next journey ${definition.next}`);
 
   return <div className={`container ${styles.page}`}>
-    <header className={styles.hero}>
-      <p className="b10x-eyebrow">ADOPTION JOURNEY · {definition.label}</p>
-      <Heading as="h1">{definition.title}</Heading>
-      <p>{definition.description}</p>
-      <div className={styles.counts}><span>{primary.length} primary {primary.length === 1 ? 'destination' : 'destinations'}</span><span>{related.length} related {related.length === 1 ? 'surface' : 'surfaces'}</span></div>
-    </header>
+    <div className={styles.hero}><PageHeader
+      eyebrow={`Adoption journey · ${definition.label}`}
+      title={definition.title}
+      description={definition.description}
+    ><div className={styles.counts}><span>{primary.length} primary {primary.length === 1 ? 'destination' : 'destinations'}</span><span>{related.length} related {related.length === 1 ? 'surface' : 'surfaces'}</span></div></PageHeader></div>
 
     <section className={styles.section} aria-labelledby={`${journey}-primary`}>
-      <header><p className="b10x-eyebrow">Start here</p><Heading as="h2" id={`${journey}-primary`}>Choose a surface that owns this outcome.</Heading><p>Primary destinations explicitly declare this as their <code>primaryJourney</code>. Their outcome, prerequisites, and estimated time come from the repository-owned adoption contract.</p></header>
-      <div className={styles.primaryGrid}>{primary.map((surface) => <div className={styles.primaryItem} key={surface.key}>
+      <SectionHeader eyebrow="Start here" title="Choose a surface that owns this outcome." id={`${journey}-primary`} description={<>Primary destinations explicitly declare this as their <code>primaryJourney</code>. Their outcome, prerequisites, and estimated time come from the repository-owned adoption contract.</>} />
+      <CardGrid>{primary.map((surface) => <div className={styles.primaryItem} key={surface.key}>
         <AdoptionCard surface={surface} journey={journey} />
         <p className={styles.cardMeta}><span><strong>Audience:</strong> {(surface.audiences ?? []).map(label).join(', ') || 'not declared'}</span><Link to={`/ecosystem/${surface.repository.id}/`}>Project profile</Link></p>
-      </div>)}</div>
+      </div>)}</CardGrid>
     </section>
 
     <section className={styles.verification} aria-labelledby={`${journey}-verification`}>
-      <p className="b10x-eyebrow">Verification expectation</p>
-      <Heading as="h2" id={`${journey}-verification`}>Know what “done” should make inspectable.</Heading>
-      <p>{definition.verification}</p>
+      <SectionHeader eyebrow="Verification expectation" title="Know what “done” should make inspectable." id={`${journey}-verification`} />
+      <Callout tone="success" title="Inspectable outcome"><p>{definition.verification}</p></Callout>
     </section>
 
     {related.length ? <section className={styles.section} aria-labelledby={`${journey}-related`}>
-      <header><p className="b10x-eyebrow">Related, not primary</p><Heading as="h2" id={`${journey}-related`}>Bring these surfaces in when the work crosses their boundary.</Heading><p>These repositories mention this journey, but own a different primary outcome. They are context and follow-on options, not required steps.</p></header>
-      <ul className={styles.related}>{related.map((surface) => <li key={surface.key}><Link to={`/ecosystem/${surface.repository.id}/`}>{surface.name}</Link><p>{surface.summary}</p><small>Primary: {primaryJourneyOf(surface) ? label(primaryJourneyOf(surface) ?? '') : 'not declared'}</small></li>)}</ul>
+      <SectionHeader eyebrow="Related, not primary" title="Bring these surfaces in when the work crosses their boundary." id={`${journey}-related`} description="These repositories mention this journey, but own a different primary outcome. They are context and follow-on options, not required steps." />
+      <CardGrid>{related.map((surface) => <ContentCard
+        key={surface.key}
+        title={surface.name}
+        titleUrl={`/ecosystem/${surface.repository.id}/`}
+        description={surface.summary}
+        meta={`Primary: ${primaryJourneyOf(surface) ? label(primaryJourneyOf(surface) ?? '') : 'not declared'}`}
+        actionUrl={`/ecosystem/${surface.repository.id}/`}
+        actionLabel="View project profile"
+        accent={surface.accent}
+      />)}</CardGrid>
     </section> : null}
 
     <nav className={styles.next} aria-label="Next adoption journey"><p><span className="b10x-eyebrow">Next journey</span><strong>{next.title}</strong></p><Link to={`/journeys/${next.id}/`}>{next.label} <span aria-hidden="true">→</span></Link></nav>

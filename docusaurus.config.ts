@@ -2,6 +2,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import docsSystemPlugin, {ecosystemFooterGroup} from '@beyond10x/docs-system/docusaurus';
+import {PRISM_ADDITIONAL_LANGUAGES} from '@beyond10x/docs-system/code';
 
 const config: Config = {
   title: 'beyond10x',
@@ -197,7 +198,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['yaml', 'json', 'bash'],
+      additionalLanguages: [...PRISM_ADDITIONAL_LANGUAGES],
     },
   } satisfies Preset.ThemeConfig,
 };

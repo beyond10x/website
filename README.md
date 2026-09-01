@@ -22,7 +22,7 @@ the extracted passive tree. Atlas uses those indexes to verify every selected by
 
 ## Develop
 
-```console
+```bash
 npm ci --ignore-scripts
 npm run gate
 npm start
@@ -37,7 +37,7 @@ up a new catalog; it is never valid production provenance.
 When the source lock intentionally names local commits that have not been pushed yet, preview those
 exact Git objects from sibling checkouts:
 
-```console
+```bash
 B10X_SOURCE_WORKSPACE=/absolute/path/to/beyond10x npm run sources:lock
 B10X_SOURCE_WORKSPACE=/absolute/path/to/beyond10x npm run gate
 B10X_SOURCE_WORKSPACE=/absolute/path/to/beyond10x npm start
@@ -52,6 +52,18 @@ collection remain remote-only.
 
 Provenance file and route inventories use explicit UTF-8 byte-lexical order. Verifiers in other
 languages must use the same ordering contract; locale-sensitive comparison is not permitted.
+
+## Presentation contract
+
+Docs System is the shared component and design-token library; Website owns composition and the
+organization shell. Discovery and profile views should use its headers, fact grids, callouts,
+search/filter controls, card grids, project cards, and code/diagram renderers before adding a
+site-specific equivalent. Narrative visuals on the home page remain Website-owned.
+
+Every fenced block must name its semantics: `bash` for copyable input, `shell-session` for prompts
+and output, and `text` for plain output or diagrams. The shared Prism list loads the remaining
+language grammars. `npm run gate` rejects unlabeled or ambiguous `console` fences, raw React
+`<pre>` elements, and rendered code that bypasses Prism.
 
 Refresh `sources.lock.json` only through the deterministic lock command after repository-owned
 manifest changes have merged. Atlas and release operators can run `npm run sources:freshness` to

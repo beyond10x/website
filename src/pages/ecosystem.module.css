@@ -1,18 +1,6 @@
-.hero { padding: 6rem 0 3rem; }
-.hero p { max-width: 50rem; color: var(--b10x-color-muted); font-size: 1.15rem; }
-.search { display: grid; gap: .5rem; max-width: 48rem; margin: 2rem 0; }
-.search label { font: 700 .72rem var(--b10x-font-mono); letter-spacing: .1em; text-transform: uppercase; }
-.search input { padding: .9rem 1rem; border: 1px solid var(--b10x-color-line); border-radius: .4rem; background: var(--ifm-background-surface-color); color: var(--ifm-font-color-base); font: inherit; }
-.journeys { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 2.5rem; }
-.journeys button { padding: .5rem .75rem; border: 1px solid var(--b10x-color-line); border-radius: 999px; background: transparent; color: inherit; cursor: pointer; }
-.journeys button[data-active='true'] { border-color: var(--b10x-color-link); color: var(--b10x-color-link); }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1rem; padding-bottom: 6rem; }
+.page { padding-bottom: 6rem; }
+.hero { padding: clamp(3rem, 7vw, 6rem) 0 3rem; }
+.discoveryControls { display: grid; gap: var(--b10x-space-4); max-width: 64rem; }
 .empty { padding: 3rem 0 6rem; color: var(--b10x-color-muted); }
-.updates { display: grid; gap: 1rem; padding: 2rem 0 6rem; }
-.updates article { padding: 1.25rem; border: 1px solid var(--b10x-color-line); border-radius: .5rem; }
-.feedLinks { display: flex; gap: .75rem; margin: 1.5rem 0; }
-.feedLinks a { border: 1px solid var(--b10x-color-line); border-radius: 999px; padding: .45rem .8rem; font: 700 .72rem var(--b10x-font-mono); text-transform: uppercase; }
-.filterGroups { display: grid; gap: .25rem; }
-.filterGroups > span { margin-top: .5rem; color: var(--b10x-color-muted); font: 700 .68rem var(--b10x-font-mono); letter-spacing: .08em; text-transform: uppercase; }
-.filterGroups .journeys { margin-bottom: .25rem; }
+.updates { padding-bottom: 3rem; }
 .timeline { display: grid; gap: 1rem; max-width: 58rem; padding: 1rem 0 6rem; }

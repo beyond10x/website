@@ -1,7 +1,6 @@
 import {useMemo, useState, type ReactNode} from 'react';
-import Heading from '@theme/Heading';
 import Layout from '@theme/Layout';
-import {ChangeTimelineEntry} from '@beyond10x/docs-system/components';
+import {Callout, ChangeTimelineEntry, FilterChipGroup, PageHeader, SearchField} from '@beyond10x/docs-system/components';
 import type {
   ChangeImpact,
   ChangeLedger,
@@ -58,53 +57,40 @@ export default function Changes(): ReactNode {
       title="Ecosystem changes"
       description="Important releases, capabilities, migrations, and adopter actions across beyond10x.">
       <main className="container">
-        <header className={styles.hero}>
-          <p className="b10x-eyebrow">ECOSYSTEM CHANGES</p>
-          <Heading as="h1">One impact trail across the repositories.</Heading>
-          <p>
-            Maintainers publish changes that alter an adopter journey, migration, or relationship;
-            the owning repository remains the authority and links to its evidence. The complete,
-            mechanical stream remains available under <a href="/releases/">releases</a>.
-          </p>
-          <div className={styles.feedLinks}>
-            <a href="/changes/impact.rss.xml">RSS</a>
-            <a href="/changes/impact.feed.json">JSON Feed</a>
-          </div>
-          <div className={styles.search}>
-            <label htmlFor="change-search">Find a repository, version, or capability</label>
-            <input
-              id="change-search"
-              type="search"
+        <div className={styles.hero}>
+          <PageHeader
+            eyebrow="Ecosystem changes"
+            title="One impact trail across the repositories."
+            description={<>Maintainers publish changes that alter an adopter journey, migration, or relationship; the owning repository remains the authority and links to its evidence. The complete, mechanical stream remains available under <a href="/releases/">releases</a>.</>}
+            actions={<><a href="/changes/impact.rss.xml">RSS</a><a href="/changes/impact.feed.json">JSON Feed</a></>}
+          />
+          <div className={styles.discoveryControls}>
+            <SearchField
+              label="Find a repository, version, or capability"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="AEP, worktree, migration, 0.2.0…"
             />
+            <FilterChipGroup
+              label="Adoption journey"
+              selected={[journey]}
+              options={journeys.map((item) => ({value: item.id, label: item.label}))}
+              onToggle={(value) => setJourney(value as Journey | 'all')}
+            />
+            <FilterChipGroup
+              label="Impact"
+              selected={[impact]}
+              options={impacts.map((item) => ({value: item.id, label: item.label}))}
+              onToggle={(value) => setImpact(value as ChangeImpact | 'all')}
+            />
           </div>
-          <div className={styles.filterGroups}>
-            <div className={styles.journeys} aria-label="Filter changes by journey">
-              {journeys.map((item) => (
-                <button key={item.id} type="button" data-active={journey === item.id}
-                  aria-pressed={journey === item.id} onClick={() => setJourney(item.id)}>
-                  {item.label}
-                </button>
-              ))}
-            </div>
-            <div className={styles.journeys} aria-label="Filter changes by impact">
-              {impacts.map((item) => (
-                <button key={item.id} type="button" data-active={impact === item.id}
-                  aria-pressed={impact === item.id} onClick={() => setImpact(item.id)}>
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </header>
+        </div>
         <section className={styles.timeline} aria-label={`${visible.length} ecosystem changes`}>
           {visible.map((change) => (
             <ChangeTimelineEntry key={change.key} change={change} surfaces={surfaces} />
           ))}
         </section>
-        {!visible.length && <p className={styles.empty}>No ecosystem change matches those filters.</p>}
+        {!visible.length && <Callout title="No matching changes">Try a broader search or reset one of the filters.</Callout>}
       </main>
     </Layout>
   );

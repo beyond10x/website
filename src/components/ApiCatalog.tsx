@@ -1,4 +1,5 @@
 import type {ReactNode} from 'react';
+import {Callout, CardGrid, ContentCard, FactGrid} from '@beyond10x/docs-system/components';
 
 interface ApiSpecification {
   id: string;
@@ -31,23 +32,28 @@ export default function ApiCatalog({catalog}: {catalog: ApiCatalogDocument}): Re
     0,
   );
   if (!catalog.repositories.length) {
-    return <aside className="b10x-boundary">
-      <p className="b10x-eyebrow">NO DECLARED CONTRACTS</p>
+    return <Callout title="No declared contracts">
       <p>API references appear here as soon as a locked public repository declares an OpenAPI document or JSON Schema.</p>
-    </aside>;
+    </Callout>;
   }
   return <section className="b10x-api-catalog" aria-label="Public API catalog">
-    <p className="b10x-api-catalog__summary">
-      <strong>{catalog.repositories.length}</strong> owning repositories · <strong>{contractCount}</strong> machine contracts
-    </p>
-    <div className="b10x-api-catalog__grid">
-      {catalog.repositories.map((repository) => <article key={repository.id}>
-        <header>
-          <span>{repository.specifications.length} {repository.specifications.length === 1 ? 'contract' : 'contracts'}</span>
-          <code>{formatKinds(repository.specifications)}</code>
-        </header>
-        <h2><a href={repository.route}>{repository.displayName}</a></h2>
-        <p>Rendered from the repository-owned machine contracts at a locked revision.</p>
+    <FactGrid items={[
+      {label: 'Owning repositories', value: catalog.repositories.length},
+      {label: 'Machine contracts', value: contractCount},
+    ]} />
+    <CardGrid>
+      {catalog.repositories.map((repository) => <ContentCard
+        key={repository.id}
+        title={repository.displayName}
+        titleUrl={repository.route}
+        eyebrow={`${repository.specifications.length} ${repository.specifications.length === 1 ? 'contract' : 'contracts'}`}
+        meta={<code>{formatKinds(repository.specifications)}</code>}
+        description="Rendered from the repository-owned machine contracts at a locked revision."
+        footer={<a href={repository.sourceUrl}>View locked source</a>}
+        actionUrl={repository.route}
+        actionLabel="Browse collection"
+        headingLevel={2}
+      >
         <ul>
           {repository.specifications.map((specification) => <li key={specification.route}>
             <a href={specification.route}>
@@ -56,12 +62,8 @@ export default function ApiCatalog({catalog}: {catalog: ApiCatalogDocument}): Re
             </a>
           </li>)}
         </ul>
-        <footer>
-          <a href={repository.route}>Browse collection</a>
-          <a href={repository.sourceUrl}>View locked source</a>
-        </footer>
-      </article>)}
-    </div>
+      </ContentCard>)}
+    </CardGrid>
   </section>;
 }
 

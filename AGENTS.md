@@ -29,9 +29,20 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
 - `getting-started` is predecessor history, not an authority or a source dependency. It remains an
   explicit compatibility-only façade; do not add it to the 19-source lock.
 
+## Presentation
+
+- Compose discovery, profile, search, feed, API, and reference views from the shared Docs System
+  components and semantic tokens. Keep Website-only components for organization narrative or an
+  interaction that has no reusable cross-site meaning.
+- Do not render raw `<pre>` elements. Use shared code components for React examples and label every
+  Markdown fence: `bash` is copyable input, `shell-session` is a prompt/transcript, and `text` is
+  intentionally plain output. Add real language grammars through the shared Prism contract.
+- Shared-component usage and both source/build code-rendering contracts are gate requirements, not
+  visual-review conventions.
+
 ## Gate
 
-```console
+```bash
 npm ci --ignore-scripts
 npm run gate
 ```

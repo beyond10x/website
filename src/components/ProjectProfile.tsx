@@ -1,7 +1,6 @@
 import type {ReactNode} from 'react';
 import Link from '@docusaurus/Link';
-import Heading from '@theme/Heading';
-import {AdoptionCard, StatusBadge} from '@beyond10x/docs-system/components';
+import {AdoptionCard, CardGrid, ContentCard, FactGrid, SectionHeader, StatusBadge} from '@beyond10x/docs-system/components';
 import type {Journey, RegistrySurface, ReleaseFact, ReleaseFactsDocument, SurfaceLink, SurfaceRelationship} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import releaseFactsDocument from '../../.generated/data/release-facts.json';
@@ -33,50 +32,47 @@ export default function ProjectProfile({repository, revision}: {repository: stri
     <section className={styles.intro} aria-label={`${primary.name} public status`}>
       <div className={styles.status}><StatusBadge maturity={primary.maturity} /><span>{primary.kind}</span><span>{primary.availability}</span></div>
       <p>{primary.summary}</p>
-      <dl className={styles.facts}>
-        <div><dt>Locked revision</dt><dd>{revision === 'lock-pending' ? 'Bootstrap fixture' : <Link to={`${primary.repository.url}/tree/${revision}`} aria-label={`View locked revision ${revision} on GitHub`} title={revision}><code>{revision.slice(0, 12)}</code></Link>}</dd></div>
-        <div><dt>Latest release</dt><dd>{latestRelease ? <><Link to={latestRelease.url}>{latestRelease.version}</Link><small><time dateTime={latestRelease.publishedAt}>{formatDate(latestRelease.publishedAt)}</time></small></> : 'Not recorded in the current release snapshot'}</dd></div>
-        <div><dt>Primary journey</dt><dd>{primaryJourneyOf(primary) ? <Link to={`/journeys/${primaryJourneyOf(primary)}/`}>{label(primaryJourneyOf(primary) ?? '')}</Link> : 'Not declared'}</dd></div>
-        <div><dt>Audience</dt><dd>{(primary.audiences ?? []).map(label).join(', ') || 'Not declared'}</dd></div>
-      </dl>
+      <FactGrid items={[
+        {label: 'Locked revision', value: revision === 'lock-pending' ? 'Bootstrap fixture' : <Link to={`${primary.repository.url}/tree/${revision}`} aria-label={`View locked revision ${revision} on GitHub`} title={revision}><code>{revision.slice(0, 12)}</code></Link>},
+        {label: 'Latest release', value: latestRelease ? <Link to={latestRelease.url}>{latestRelease.version}</Link> : 'Not recorded', detail: latestRelease ? <time dateTime={latestRelease.publishedAt}>{formatDate(latestRelease.publishedAt)}</time> : 'No release exists in the current snapshot'},
+        {label: 'Primary journey', value: primaryJourneyOf(primary) ? <Link to={`/journeys/${primaryJourneyOf(primary)}/`}>{label(primaryJourneyOf(primary) ?? '')}</Link> : 'Not declared'},
+        {label: 'Audience', value: (primary.audiences ?? []).map(label).join(', ') || 'Not declared'},
+      ]} />
     </section>
 
     <section className={styles.section} aria-labelledby="profile-start">
-      <p className="b10x-eyebrow">Recommended start</p>
-      <Heading as="h2" id="profile-start">Begin with the repository-owned adoption path.</Heading>
-      <div className={styles.adoptionGrid}>{owned.map((surface) => <div className={styles.adoptionItem} key={surface.key}>
+      <SectionHeader eyebrow="Recommended start" title="Begin with the repository-owned adoption path." id="profile-start" />
+      <CardGrid>{owned.map((surface) => <div className={styles.adoptionItem} key={surface.key}>
         <AdoptionCard surface={surface} journey={primaryJourneyOf(surface)} />
         <p className={styles.audience}><span className={styles.label}>Audience </span>{(surface.audiences ?? []).map(label).join(', ') || 'not declared'}</p>
-      </div>)}</div>
+      </div>)}</CardGrid>
     </section>
 
     <section className={styles.section} aria-labelledby="profile-references">
-      <p className="b10x-eyebrow">Public surface</p>
-      <Heading as="h2" id="profile-references">Continue into declared documentation and machine interfaces.</Heading>
-      <div className={styles.referenceGrid}>
+      <SectionHeader eyebrow="Public surface" title="Continue into declared documentation and machine interfaces." id="profile-references" />
+      <CardGrid columns={3}>
         <ReferenceGroup title="Sections" items={references.sections} empty="No additional sections are declared." />
         <ReferenceGroup title="APIs and schemas" items={references.specifications} empty="No machine specification is declared." />
         <ReferenceGroup title="Feeds" items={references.feeds} empty="No repository feed is declared." />
-      </div>
+      </CardGrid>
     </section>
 
     <section className={styles.section} aria-labelledby="profile-relationships">
-      <p className="b10x-eyebrow">Declared relationships</p>
-      <Heading as="h2" id="profile-relationships">See what this project points to—and what points here.</Heading>
-      <div className={styles.relationshipGrid}>
+      <SectionHeader eyebrow="Declared relationships" title="See what this project points to—and what points here." id="profile-relationships" />
+      <CardGrid columns={2}>
         <RelationshipGroup title="Outgoing" relationships={outgoing} direction="outgoing" />
         <RelationshipGroup title="Incoming" relationships={incoming} direction="incoming" />
-      </div>
+      </CardGrid>
     </section>
   </>;
 }
 
 function ReferenceGroup({title, items, empty}: {title: string; items: Array<{key: string; label: string; url: string; detail?: string; external?: boolean}>; empty: string}): ReactNode {
-  return <section><Heading as="h3">{title}</Heading>{items.length ? <ul>{items.map((item) => <li key={item.key}>{item.external ? <a href={item.url}>{item.label}</a> : <Link to={localTarget(item.url)}>{item.label}</Link>}{item.detail ? <small>{item.detail}</small> : null}</li>)}</ul> : <p className={styles.empty}>{empty}</p>}</section>;
+  return <ContentCard title={title}>{items.length ? <ul>{items.map((item) => <li key={item.key}>{item.external ? <a href={item.url}>{item.label}</a> : <Link to={localTarget(item.url)}>{item.label}</Link>}{item.detail ? <small>{item.detail}</small> : null}</li>)}</ul> : <p className={styles.empty}>{empty}</p>}</ContentCard>;
 }
 
 function RelationshipGroup({title, relationships, direction}: {title: string; relationships: RelationshipView[]; direction: 'incoming' | 'outgoing'}): ReactNode {
-  return <section><Heading as="h3">{title}</Heading>{relationships.length ? <ul>{relationships.map((relationship, index) => {
+  return <ContentCard title={title}>{relationships.length ? <ul>{relationships.map((relationship, index) => {
     const peer = direction === 'outgoing' ? relationship.targetSurface : relationship.source;
     const peerName = peer?.name ?? relationship.targetKey;
     const peerRepository = peer?.repository.id;
@@ -84,7 +80,7 @@ function RelationshipGroup({title, relationships, direction}: {title: string; re
       {direction === 'outgoing' ? <><strong>{label(relationship.kind)}</strong> {peerRepository ? <Link to={`/ecosystem/${peerRepository}/`}>{peerName}</Link> : peerName}</> : <>{peerRepository ? <Link to={`/ecosystem/${peerRepository}/`}>{peerName}</Link> : peerName} <strong>{label(relationship.kind)}</strong> this project</>}
       {relationship.label ? <small>{relationship.label}</small> : null}
     </li>;
-  })}</ul> : <p className={styles.empty}>No {direction} public relationships are declared.</p>}</section>;
+  })}</ul> : <p className={styles.empty}>No {direction} public relationships are declared.</p>}</ContentCard>;
 }
 
 function collectReferences(owned: RegistrySurface[]) {

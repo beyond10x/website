@@ -20,22 +20,6 @@
   text-transform: uppercase;
 }
 
-.facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
-  gap: var(--b10x-space-3);
-  margin: 0;
-}
-
-.facts > div {
-  min-width: 0;
-  padding: var(--b10x-space-3);
-  border: 1px solid var(--b10x-color-line);
-  border-radius: var(--b10x-radius);
-  background: var(--b10x-color-surface);
-}
-
-.facts dt,
 .label {
   color: var(--b10x-color-muted);
   font: 700 .68rem var(--b10x-font-mono);
@@ -43,27 +27,8 @@
   text-transform: uppercase;
 }
 
-.facts dd {
-  margin: .35rem 0 0;
-  overflow-wrap: anywhere;
-}
-
-.facts dd small {
-  display: block;
-  margin-top: .25rem;
-  color: var(--b10x-color-muted);
-}
-
 .section {
   margin-block: clamp(2.5rem, 6vw, 5rem);
-}
-
-.adoptionGrid,
-.referenceGrid,
-.relationshipGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-  gap: var(--b10x-space-3);
 }
 
 .adoptionItem {
@@ -77,29 +42,14 @@
   font-size: .9rem;
 }
 
-.referenceGrid > section,
-.relationshipGrid > section {
-  padding: var(--b10x-space-4);
-  border: 1px solid var(--b10x-color-line);
-  border-radius: var(--b10x-radius);
-  background: var(--b10x-color-surface);
-}
-
-.referenceGrid h3,
-.relationshipGrid h3 {
-  margin-top: 0;
-}
-
-.referenceGrid ul,
-.relationshipGrid ul {
+.section ul {
   display: grid;
   gap: .55rem;
   margin-bottom: 0;
   padding-left: 1.2rem;
 }
 
-.referenceGrid small,
-.relationshipGrid small {
+.section li small {
   display: block;
   margin-top: .15rem;
   color: var(--b10x-color-muted);
