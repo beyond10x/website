@@ -50,6 +50,10 @@ checkout's Git object database into the same bounded bare cache; source worktree
 used as publication input. With the variable unset, including in production, lock resolution and
 collection remain remote-only.
 
+Before pushing Website, push every commit named by the lock and run `npm run gate` once with
+`B10X_SOURCE_WORKSPACE` unset. This makes remote publication availability part of the handoff
+instead of relying on commits that exist only in a local object database.
+
 Provenance file and route inventories use explicit UTF-8 byte-lexical order. Verifiers in other
 languages must use the same ordering contract; locale-sensitive comparison is not permitted.
 
