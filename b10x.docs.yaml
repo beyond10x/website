@@ -138,9 +138,7 @@ surfaces:
     documents:
       include:
       - vision.mdx
-      - journeys/*.mdx
     navigation:
-      group: Organization
       label: Start
       order: 0
       sidebar: flat
