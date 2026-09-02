@@ -2,6 +2,122 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.3.3",
+      "id": "agentplugins/0.3.3",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-02T02:57:02Z",
+      "title": "Agent Plugins 0.3.3",
+      "summary": "Agent Plugins released version 0.3.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.3",
+        "version": "0.3.3"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.5.5",
+      "id": "devcenter/0.5.5",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T02:56:28Z",
+      "title": "Devcenter 0.5.5",
+      "summary": "Devcenter released version 0.5.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.5",
+        "version": "0.5.5"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.3.1",
+      "id": "worktree/0.3.1",
+      "repository": "worktree",
+      "publishedAt": "2026-09-02T02:50:37Z",
+      "title": "Worktree 0.3.1",
+      "summary": "Worktree released version 0.3.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.1",
+        "version": "0.3.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agent-platform/0.5.3",
+      "id": "agent-platform/0.5.3",
+      "repository": "agent-platform",
+      "publishedAt": "2026-09-02T02:49:24Z",
+      "title": "Agent Platform 0.5.3",
+      "summary": "Agent Platform released version 0.5.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agent-platform/releases/tag/0.5.3",
+        "version": "0.5.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agent-platform/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep-service/0.1.5",
+      "id": "aep-service/0.1.5",
+      "repository": "aep-service",
+      "publishedAt": "2026-09-02T01:54:38Z",
+      "title": "AEP Service 0.1.5",
+      "summary": "AEP Service released version 0.1.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.5",
+        "version": "0.1.5"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep-service/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.5.3",
       "id": "devcenter/0.5.3",
       "repository": "devcenter",

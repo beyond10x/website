@@ -3,6 +3,36 @@
   "releases": [
     {
       "repository": "agentplugins",
+      "version": "0.3.3",
+      "publishedAt": "2026-09-02T02:57:02Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.3"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.5.5",
+      "publishedAt": "2026-09-02T02:56:28Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.5"
+    },
+    {
+      "repository": "worktree",
+      "version": "0.3.1",
+      "publishedAt": "2026-09-02T02:50:37Z",
+      "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.1"
+    },
+    {
+      "repository": "agent-platform",
+      "version": "0.5.3",
+      "publishedAt": "2026-09-02T02:49:24Z",
+      "url": "https://github.com/beyond10x/agent-platform/releases/tag/0.5.3"
+    },
+    {
+      "repository": "aep-service",
+      "version": "0.1.5",
+      "publishedAt": "2026-09-02T01:54:38Z",
+      "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.5"
+    },
+    {
+      "repository": "agentplugins",
       "version": "0.3.2",
       "publishedAt": "2026-09-02T01:47:15Z",
       "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.2"

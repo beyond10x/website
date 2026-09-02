@@ -12,7 +12,7 @@
           "Rust toolchain",
           "PostgreSQL"
         ],
-        "url": "https://beyond10x.github.io/docs/aep-service/quickstart"
+        "url": "https://beyond10x.github.io/docs/aep-service/quickstart/"
       },
       "audiences": [
         "evaluator",
@@ -53,12 +53,12 @@
         {
           "kind": "quickstart",
           "label": "Quickstart",
-          "url": "https://beyond10x.github.io/docs/aep-service/quickstart"
+          "url": "https://beyond10x.github.io/docs/aep-service/quickstart/"
         },
         {
           "kind": "docs",
           "label": "Architecture",
-          "url": "https://beyond10x.github.io/docs/aep-service/architecture"
+          "url": "https://beyond10x.github.io/docs/aep-service/architecture/"
         },
         {
           "kind": "api",
@@ -125,7 +125,7 @@
         "prerequisites": [
           "Rust toolchain"
         ],
-        "url": "https://beyond10x.github.io/docs/aep/getting-started"
+        "url": "https://beyond10x.github.io/docs/aep/getting-started/"
       },
       "audiences": [
         "adopter",
@@ -178,22 +178,22 @@
         {
           "kind": "quickstart",
           "label": "Getting started",
-          "url": "https://beyond10x.github.io/docs/aep/getting-started"
+          "url": "https://beyond10x.github.io/docs/aep/getting-started/"
         },
         {
           "kind": "docs",
           "label": "Concepts",
-          "url": "https://beyond10x.github.io/docs/aep/concepts/overview"
+          "url": "https://beyond10x.github.io/docs/aep/concepts/overview/"
         },
         {
           "kind": "reference",
           "label": "CLI",
-          "url": "https://beyond10x.github.io/docs/aep/reference/cli"
+          "url": "https://beyond10x.github.io/docs/aep/reference/cli/"
         },
         {
           "kind": "status",
           "label": "Status",
-          "url": "https://beyond10x.github.io/docs/aep/status/where-this-stands"
+          "url": "https://beyond10x.github.io/docs/aep/status/where-this-stands/"
         },
         {
           "kind": "source",
@@ -399,7 +399,7 @@
         {
           "kind": "docs",
           "label": "Research guide",
-          "url": "https://beyond10x.github.io/docs/agentic-principles/research"
+          "url": "https://beyond10x.github.io/docs/agentic-principles/research/"
         },
         {
           "kind": "feed",
@@ -465,7 +465,7 @@
         "prerequisites": [
           "A supported agent harness"
         ],
-        "url": "https://beyond10x.github.io/docs/agentplugins/install"
+        "url": "https://beyond10x.github.io/docs/agentplugins/install/"
       },
       "audiences": [
         "adopter",
@@ -509,17 +509,17 @@
         {
           "kind": "guide",
           "label": "Choose a plugin",
-          "url": "https://beyond10x.github.io/docs/agentplugins/choose-a-plugin"
+          "url": "https://beyond10x.github.io/docs/agentplugins/choose-a-plugin/"
         },
         {
           "kind": "quickstart",
           "label": "Install",
-          "url": "https://beyond10x.github.io/docs/agentplugins/install"
+          "url": "https://beyond10x.github.io/docs/agentplugins/install/"
         },
         {
           "kind": "reference",
           "label": "Plugin reference",
-          "url": "https://beyond10x.github.io/docs/agentplugins/plugins/beyond10x"
+          "url": "https://beyond10x.github.io/docs/agentplugins/plugins/beyond10x/"
         },
         {
           "kind": "source",
@@ -901,7 +901,7 @@
         "prerequisites": [
           "Rust toolchain"
         ],
-        "url": "https://beyond10x.github.io/docs/entity-runtime/guide/getting-started"
+        "url": "https://beyond10x.github.io/docs/entity-runtime/guide/getting-started/"
       },
       "audiences": [
         "adopter",
@@ -932,17 +932,17 @@
         {
           "kind": "quickstart",
           "label": "Quickstart",
-          "url": "https://beyond10x.github.io/docs/entity-runtime/guide/getting-started"
+          "url": "https://beyond10x.github.io/docs/entity-runtime/guide/getting-started/"
         },
         {
           "kind": "reference",
           "label": "Definition language",
-          "url": "https://beyond10x.github.io/docs/entity-runtime/guide/definitions"
+          "url": "https://beyond10x.github.io/docs/entity-runtime/guide/definitions/"
         },
         {
           "kind": "status",
           "label": "Guarantees",
-          "url": "https://beyond10x.github.io/docs/entity-runtime/guarantees"
+          "url": "https://beyond10x.github.io/docs/entity-runtime/guarantees/"
         },
         {
           "kind": "source",
@@ -996,7 +996,7 @@
         "prerequisites": [
           "Rust toolchain"
         ],
-        "url": "https://beyond10x.github.io/docs/ess/getting-started"
+        "url": "https://beyond10x.github.io/docs/ess/getting-started/"
       },
       "audiences": [
         "adopter",
@@ -1036,22 +1036,22 @@
         {
           "kind": "quickstart",
           "label": "Getting started",
-          "url": "https://beyond10x.github.io/docs/ess/getting-started"
+          "url": "https://beyond10x.github.io/docs/ess/getting-started/"
         },
         {
           "kind": "docs",
           "label": "Concepts",
-          "url": "https://beyond10x.github.io/docs/ess/concepts/overview"
+          "url": "https://beyond10x.github.io/docs/ess/concepts/overview/"
         },
         {
           "kind": "reference",
           "label": "CLI",
-          "url": "https://beyond10x.github.io/docs/ess/reference/cli"
+          "url": "https://beyond10x.github.io/docs/ess/reference/cli/"
         },
         {
           "kind": "status",
           "label": "Status",
-          "url": "https://beyond10x.github.io/docs/ess/status/where-this-stands"
+          "url": "https://beyond10x.github.io/docs/ess/status/where-this-stands/"
         },
         {
           "kind": "source",
@@ -1206,7 +1206,7 @@
           "Rust toolchain",
           "Provider credentials"
         ],
-        "url": "https://beyond10x.github.io/docs/harness/getting-started"
+        "url": "https://beyond10x.github.io/docs/harness/getting-started/"
       },
       "audiences": [
         "adopter",
@@ -1243,22 +1243,22 @@
         {
           "kind": "quickstart",
           "label": "Getting started",
-          "url": "https://beyond10x.github.io/docs/harness/getting-started"
+          "url": "https://beyond10x.github.io/docs/harness/getting-started/"
         },
         {
           "kind": "docs",
           "label": "Agent loop",
-          "url": "https://beyond10x.github.io/docs/harness/concepts/agent-loop"
+          "url": "https://beyond10x.github.io/docs/harness/concepts/agent-loop/"
         },
         {
           "kind": "reference",
           "label": "CLI",
-          "url": "https://beyond10x.github.io/docs/harness/reference/cli"
+          "url": "https://beyond10x.github.io/docs/harness/reference/cli/"
         },
         {
           "kind": "status",
           "label": "Status",
-          "url": "https://beyond10x.github.io/docs/harness/status"
+          "url": "https://beyond10x.github.io/docs/harness/status/"
         },
         {
           "kind": "source",
@@ -1500,7 +1500,7 @@
           "Rust toolchain",
           "A supported harness"
         ],
-        "url": "https://beyond10x.github.io/docs/metaharness/quickstart"
+        "url": "https://beyond10x.github.io/docs/metaharness/quickstart/"
       },
       "audiences": [
         "evaluator",
@@ -1536,17 +1536,17 @@
         {
           "kind": "quickstart",
           "label": "Quickstart",
-          "url": "https://beyond10x.github.io/docs/metaharness/quickstart"
+          "url": "https://beyond10x.github.io/docs/metaharness/quickstart/"
         },
         {
           "kind": "reference",
           "label": "Protocol",
-          "url": "https://beyond10x.github.io/docs/metaharness/protocol/events"
+          "url": "https://beyond10x.github.io/docs/metaharness/protocol/events/"
         },
         {
           "kind": "status",
           "label": "Status",
-          "url": "https://beyond10x.github.io/docs/metaharness/status"
+          "url": "https://beyond10x.github.io/docs/metaharness/status/"
         },
         {
           "kind": "source",
@@ -1788,7 +1788,7 @@
           "Linux",
           "Rust toolchain"
         ],
-        "url": "https://beyond10x.github.io/docs/substrate/getting-started"
+        "url": "https://beyond10x.github.io/docs/substrate/getting-started/"
       },
       "audiences": [
         "adopter",
@@ -1819,22 +1819,22 @@
         {
           "kind": "quickstart",
           "label": "Getting started",
-          "url": "https://beyond10x.github.io/docs/substrate/getting-started"
+          "url": "https://beyond10x.github.io/docs/substrate/getting-started/"
         },
         {
           "kind": "docs",
           "label": "Boundary",
-          "url": "https://beyond10x.github.io/docs/substrate/concepts/boundary"
+          "url": "https://beyond10x.github.io/docs/substrate/concepts/boundary/"
         },
         {
           "kind": "reference",
           "label": "Contract",
-          "url": "https://beyond10x.github.io/docs/substrate/reference/contract"
+          "url": "https://beyond10x.github.io/docs/substrate/reference/contract/"
         },
         {
           "kind": "status",
           "label": "Status",
-          "url": "https://beyond10x.github.io/docs/substrate/status"
+          "url": "https://beyond10x.github.io/docs/substrate/status/"
         },
         {
           "kind": "source",
