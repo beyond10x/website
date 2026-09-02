@@ -2,6 +2,31 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "aep/0.41.0",
+      "id": "aep/0.41.0",
+      "repository": "aep",
+      "publishedAt": "2026-09-02T14:13:58Z",
+      "title": "AEP 0.41.0",
+      "summary": "AEP released version 0.41.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.41.0",
+        "version": "0.41.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "agentplugins/0.3.7",
       "id": "agentplugins/0.3.7",
       "repository": "agentplugins",
