@@ -23,4 +23,5 @@ repositories:
   - secrets
   - substrate
   - workflow
+  - workspace
   - worktree

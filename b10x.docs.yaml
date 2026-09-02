@@ -111,6 +111,8 @@ surfaces:
   - kind: introduces
     target: workflow/docs
   - kind: introduces
+    target: workspace/docs
+  - kind: introduces
     target: worktree/docs
   routeBase: /
   sections:

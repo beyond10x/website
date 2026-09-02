@@ -29,8 +29,8 @@
       "id": "Services",
       "label": "Services",
       "slug": "/services/",
-      "expectedMembers": 7,
-      "purpose": "Integrate authenticated, auditable capabilities for commands, identity, events, secrets, workflows, and external systems.",
+      "expectedMembers": 8,
+      "purpose": "Integrate authenticated, auditable capabilities for commands, identity, events, secrets, governed workspaces, workflows, and external systems.",
       "startRepository": "agent-platform",
       "next": {
         "family": "Products",
