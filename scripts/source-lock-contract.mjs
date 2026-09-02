@@ -16,16 +16,16 @@ export async function validateSourceLock(root, {allowBootstrap = false} = {}) {
     throw new Error('sources.lock.json is not a b10x-sources/v1 lock');
   }
   const expected = roster.repositories;
-  if (expected.length !== 19 || new Set(expected).size !== 19 || expected.join('\n') !== [...expected].sort(compareUtf8).join('\n')) {
-    throw new Error('sources.yaml must contain exactly 19 unique sorted source repositories');
+  if (expected.length !== 20 || new Set(expected).size !== 20 || expected.join('\n') !== [...expected].sort(compareUtf8).join('\n')) {
+    throw new Error('sources.yaml must contain exactly 20 unique sorted source repositories');
   }
   if (JSON.stringify(roster.compatibilityRepositories) !== JSON.stringify(['getting-started']) || expected.includes('getting-started')) {
     throw new Error('sources.yaml must declare getting-started exactly once as compatibility-only, outside the source roster');
   }
   if (allowBootstrap && lock.sources.length === 0) return {roster, lock, bootstrap: true};
   const actual = lock.sources.map((source) => source.repository);
-  if (actual.length !== 19 || actual.join('\n') !== expected.join('\n')) {
-    throw new Error('production sources.lock.json must contain the exact sorted 19-repository roster');
+  if (actual.length !== 20 || actual.join('\n') !== expected.join('\n')) {
+    throw new Error('production sources.lock.json must contain the exact sorted 20-repository roster');
   }
   for (const source of lock.sources) {
     if (source.url !== `https://github.com/beyond10x/${source.repository}`) throw new Error(`${source.repository} has an invalid source URL`);

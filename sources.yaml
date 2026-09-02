@@ -17,6 +17,7 @@ repositories:
   - eventlog
   - harness
   - identity
+  - mcp
   - metaharness
   - research
   - secrets

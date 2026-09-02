@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add MCP as the twentieth exact-commit public documentation source and bind its generated project surface into the unified site.
+
 ## 0.2.0 — 2026-09-01
 
 - Introduce a compact four-family entry experience for Foundations, Build, Services, and Products.

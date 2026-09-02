@@ -99,6 +99,8 @@ surfaces:
   - kind: introduces
     target: identity/docs
   - kind: introduces
+    target: mcp/docs
+  - kind: introduces
     target: metaharness/docs
   - kind: introduces
     target: research/docs

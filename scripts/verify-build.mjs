@@ -56,7 +56,7 @@ const legacyRoutesBytes = await readFile(path.join(dataRoot, 'legacy-routes.json
 if (provenance.legacyRoutesSha256 !== sha256(legacyRoutesBytes)) throw new Error('provenance legacy-route digest does not match legacy-routes.json bytes');
 const expectedCommits = Object.fromEntries(lock.sources.map((source) => [source.repository, source.commit]));
 if (canonicalJson(provenance.sourceCommits) !== canonicalJson(expectedCommits)) throw new Error('provenance source commits do not exactly match the source lock');
-if (!bootstrap && Object.keys(provenance.sourceCommits).length !== 19) throw new Error('production provenance must contain exactly 19 source commits');
+if (!bootstrap && Object.keys(provenance.sourceCommits).length !== 20) throw new Error('production provenance must contain exactly 20 source commits');
 
 const facts = await artifactFacts(build);
 for (const property of ['artifactSha256', 'routesSha256']) {

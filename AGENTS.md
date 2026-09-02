@@ -30,7 +30,7 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
   preview evidence, not publication availability.
 - `beyond10x.github.io` is a generated deployment mirror. Do not author content there.
 - `getting-started` is predecessor history, not an authority or a source dependency. It remains an
-  explicit compatibility-only façade; do not add it to the 19-source lock.
+  explicit compatibility-only façade; do not add it to the 20-source lock.
 
 ## Presentation
 
@@ -52,7 +52,7 @@ npm run gate
 
 Broken links and anchors fail the build. Lock, registry, route map, feeds, and provenance output
 must be deterministic. Production provenance requires a nonzero full Website commit and the exact
-19 source commits. The artifact crawler must cover manifest URLs, effective redirect targets, alias
+20 source commits. The artifact crawler must cover manifest URLs, effective redirect targets, alias
 sources, and rendered same-origin links. Use `npm run sources:freshness` as an explicit promotion
 check against moving remote heads; never make rebuilding an immutable Website commit depend on
 those heads remaining unchanged. File and route inventories are ordered by UTF-8 bytes, never by a
