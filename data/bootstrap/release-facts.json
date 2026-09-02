@@ -2,6 +2,12 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "harness",
+      "version": "0.11.0",
+      "publishedAt": "2026-09-02T07:54:53Z",
+      "url": "https://github.com/beyond10x/harness/releases/tag/0.11.0"
+    },
+    {
       "repository": "devcenter",
       "version": "0.5.6",
       "publishedAt": "2026-09-02T03:35:40Z",
