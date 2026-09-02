@@ -81,6 +81,8 @@ surfaces:
   - kind: introduces
     target: agentic-principles/docs
   - kind: introduces
+    target: agentide/docs
+  - kind: introduces
     target: agentplugins/docs
   - kind: introduces
     target: connectors/docs
