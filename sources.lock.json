@@ -12,15 +12,15 @@
     {
       "repository": "aep-service",
       "url": "https://github.com/beyond10x/aep-service",
-      "commit": "cda05bc63b3ce54661caacdf9019919dc8a2b023",
+      "commit": "0b93619566920ea1e05d1762b7e5174b73a4a78a",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "d976c4575bf879ef4bb2f66a3124b339466addd66036fb7b08770b065960afe5",
-      "contentSha256": "ef3529740dd2a15c52add5eaadf232d920c8e5f60e797e5db6b36fd6d7ae1c94"
+      "contentSha256": "c7db6f637bbbe1b94d1c8eb999c179a5d1f250943e752415cf23608130c64c04"
     },
     {
       "repository": "agent-platform",
       "url": "https://github.com/beyond10x/agent-platform",
-      "commit": "e5ca49ea59711321f4564d2d35f7fa4fbaae8454",
+      "commit": "c13022d71002eea8df93b088be2265fbfabdd468",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "97b0dc3edbebb726315d58c415cb480003f7a492e20891e3cd1fb6173b5af172",
       "contentSha256": "68883b867bb2b0374e83932c5a1bb229f35db557b8ccb3acbdcdd1de17485665"
@@ -52,10 +52,10 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "7f33021cd739a2a7640c54137295b44c5d660a2b",
+      "commit": "a5fb3b7d7fad4a341bbc6306210047ed4a11482c",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "04d767fab8fc5756c2d068df873a3fbd65143932c3bfff999e2750a5fd66d9f3",
-      "contentSha256": "876978b3899a0655b6b14b8ae36e2a4a3f1839b3b34c07aafb0e0cb8468401a6"
+      "contentSha256": "3db71bbfea8dc4c77935be642b5f8063e2fe8c5e0eb1d8cd41add75847942b49"
     },
     {
       "repository": "docs-system",
