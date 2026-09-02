@@ -2,6 +2,12 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "connectors",
+      "version": "v0.4.1",
+      "publishedAt": "2026-09-02T03:14:46Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.1"
+    },
+    {
       "repository": "agentplugins",
       "version": "0.3.3",
       "publishedAt": "2026-09-02T02:57:02Z",
