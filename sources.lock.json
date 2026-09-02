@@ -36,23 +36,23 @@
     {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
-      "commit": "8b1dae0fdb8cac74d5200d05942472e78ea19522",
+      "commit": "236db219b94bc3deaa446b0846b19fbf18642790",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "a7ae60f1c85862acfd004eb8dc1f4daede04de0786ac8467f364f4978bda343d",
-      "contentSha256": "e4aed07275c3cd638229cffab65b3005e39ee4b1adb78465bff91be936537a75"
+      "contentSha256": "3f1ad3eb4ad3e78d40c1f0000d6f8671c02dd92bb5053cde9935a8f93ff18677"
     },
     {
       "repository": "connectors",
       "url": "https://github.com/beyond10x/connectors",
-      "commit": "c5af9a5f4fa4d88246c724a669846596a40c25c1",
+      "commit": "1bf84ea4d28995857176577226405943c50ae256",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "8646f76d304c779fc888a491460d0ed1019d0c8deddb87e53008c6e61cc1186b",
-      "contentSha256": "0cab713badccc01d915dc5762886d2bc9b8b4e3fec1eb019e8fdcaba13d0723c"
+      "contentSha256": "7f2f96f55aeab93b7ae83fff7c2ec2554b4422aa2d753bb4123540134f0ac476"
     },
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "34d73f61f774bc34a01b5a53872d4d64c8b70a63",
+      "commit": "ee7a9562fa0b31ad57b2911dbf3cfba76aebcbd1",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "04d767fab8fc5756c2d068df873a3fbd65143932c3bfff999e2750a5fd66d9f3",
       "contentSha256": "840d4b7122b4ceda6234109ea720f61e3c304d9f7a9faeecb18327331c36ebfc"
@@ -156,10 +156,10 @@
     {
       "repository": "worktree",
       "url": "https://github.com/beyond10x/worktree",
-      "commit": "7119980d0c110a2d344aa8f96b3df435206dab5b",
+      "commit": "0e73774f21b17f1ac34af719782767ccc854805b",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "8fe6ddd3b940413f2cb45a0ac375a789ccb7aa859440239835f2e8daa0ee8520",
-      "contentSha256": "be2f99018d9badf738c9d1c4188174ca797bb07ad46196444c6da1379223aaff"
+      "contentSha256": "4dfc26b1cae6dae855a116ef910d1eeef1c1be0b65793bcb53af9beb22e4af4b"
     }
   ]
 }
