@@ -4,10 +4,10 @@
     {
       "repository": "aep",
       "url": "https://github.com/beyond10x/aep",
-      "commit": "1c4e614829cfa9a35e9b809c44855bd3c8aefd9d",
+      "commit": "26da2ff5ce291a114658f26763c4f5c4d9f104e9",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "cea06eaf9fc9e8d5ea315a82cfca8c7f52fdc0a5c90f1b2ab7eab8cbea43d62b",
-      "contentSha256": "5b8af77eca150ce2476712ec70c1f8e18160850e818713e02da7c68e3a4e8512"
+      "contentSha256": "c04cae06a699b43d00dcb9e14f681618e52fb165e02232ba86ef159f2911e1fb"
     },
     {
       "repository": "aep-service",
@@ -44,7 +44,7 @@
     {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
-      "commit": "03a39cb401360fc45d7559f6e64407b4a08af6dc",
+      "commit": "e2ebdb51f93a633584f2f0397218fb9d0f06d8b0",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "a7ae60f1c85862acfd004eb8dc1f4daede04de0786ac8467f364f4978bda343d",
       "contentSha256": "5e6a5b94a6aa26da15946e91825e05be80200f231850d6367f258b454b492d2b"
@@ -52,7 +52,7 @@
     {
       "repository": "connectors",
       "url": "https://github.com/beyond10x/connectors",
-      "commit": "6a681a6e84bcd6bb37cd2359d3f9710aaa704f1b",
+      "commit": "6410df32d0f24c44b87ee26891e3259431740fa7",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "8646f76d304c779fc888a491460d0ed1019d0c8deddb87e53008c6e61cc1186b",
       "contentSha256": "351d9342cbd13164ea32c9b51e9a2c074adf9ef6d9618a9609338b4b5a5e4da2"
@@ -60,7 +60,7 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "a23df39d0af7eb1db3c33f3ec0cd0e47254fb575",
+      "commit": "ba2091c58b5c6dfe68279dcbb581c1324f61181c",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "357301aa9962e7a83d606c0d783cfebebaf5d7b93d7104a3cf1596cb6eaae3b4",
       "contentSha256": "e7cd8fba41a792c9d1170dc1a5b2dcbb079a8f63f004f4fe9036247f35d359b9"
