@@ -36,10 +36,10 @@
     {
       "repository": "agentide",
       "url": "https://github.com/beyond10x/agentide",
-      "commit": "be01e1a9ce630943e0d5eddca40b2072df3ae96c",
+      "commit": "45d9030b86c84bc1ab3d0c695a04c15a1549babc",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "385754c1e2a4113c2dab6e4a198c35eba1d6f6a199149ef8e35da7bd1b534acd",
-      "contentSha256": "9f794dfb8e1f34654ad7fe4099b8529daebd9806cdd39528f59b0512a247b9fd"
+      "contentSha256": "3f0f7131659e2e2d1cb999f61618869ba19db46aca7afb75339fc5f0ad1c3e21"
     },
     {
       "repository": "agentplugins",

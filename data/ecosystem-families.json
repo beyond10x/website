@@ -17,7 +17,7 @@
       "id": "Build",
       "label": "Agent tooling & build",
       "slug": "/build/",
-      "expectedMembers": 8,
+      "expectedMembers": 9,
       "purpose": "Build and test agent loops with shared libraries, plugins, isolated execution, documentation tools, and clean workspaces.",
       "startRepository": "harness",
       "next": {
