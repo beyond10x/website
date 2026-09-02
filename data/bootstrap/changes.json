@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "worktree/0.3.0",
+      "id": "worktree/0.3.0",
+      "repository": "worktree",
+      "publishedAt": "2026-09-02T01:39:35Z",
+      "title": "Worktree 0.3.0",
+      "summary": "Worktree released version 0.3.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.0",
+        "version": "0.3.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.5.2",
       "id": "devcenter/0.5.2",
       "repository": "devcenter",
