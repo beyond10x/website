@@ -2,30 +2,6 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
-      "key": "agentplugins/0.3.3",
-      "id": "agentplugins/0.3.3",
-      "repository": "agentplugins",
-      "publishedAt": "2026-09-02T02:57:02Z",
-      "title": "Agent Plugins 0.3.3",
-      "summary": "Agent Plugins released version 0.3.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.3",
-        "version": "0.3.3"
-      },
-      "journeys": [
-        "build-agents",
-        "plan-work",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "agentplugins/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "devcenter/0.5.5",
       "id": "devcenter/0.5.5",
       "repository": "devcenter",
@@ -44,29 +20,6 @@
       ],
       "affectedSurfaces": [
         "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "worktree/0.3.1",
-      "id": "worktree/0.3.1",
-      "repository": "worktree",
-      "publishedAt": "2026-09-02T02:50:37Z",
-      "title": "Worktree 0.3.1",
-      "summary": "Worktree released version 0.3.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.1",
-        "version": "0.3.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "worktree/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -93,6 +46,67 @@
       ],
       "automatic": true,
       "channel": "releases"
+    },
+    {
+      "key": "agentplugins/workspace-hygiene-0.3.3",
+      "id": "agentplugins/workspace-hygiene-0.3.3",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-02T02:25:27Z",
+      "title": "Workspace Hygiene guides guarded stale-relocation recovery",
+      "summary": "Agent Plugins 0.3.3 refreshes Workspace Hygiene so agents can recover a finished external legacy tree stranded by stale pre-0.3 relocation intent without bypassing exact source, destination, HEAD, proof, or confirmation gates.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.3",
+        "version": "0.3.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs",
+        "worktree/docs"
+      ],
+      "relations": [
+        {
+          "target": "change:worktree/external-retirement-recovery-0.3.1",
+          "kind": "depends-on",
+          "label": "Uses guarded Worktree stale-relocation recovery"
+        }
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "worktree/external-retirement-recovery-0.3.1",
+      "id": "worktree/external-retirement-recovery-0.3.1",
+      "repository": "worktree",
+      "publishedAt": "2026-09-02T02:22:14Z",
+      "title": "Worktree safely recovers stale external relocation state",
+      "summary": "Worktree 0.3.1 lets exact-id reconciliation retire a finished external legacy tree stranded by a stale pre-0.3 relocation intent, while preserving source, destination, HEAD, proof, and confirmation gates.",
+      "kind": "release",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.1",
+        "version": "0.3.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "relations": [
+        {
+          "target": "change:agentplugins/workspace-hygiene-0.3.3",
+          "kind": "enables",
+          "label": "Updates the generated worktree recovery guide"
+        }
+      ],
+      "automatic": false,
+      "channel": "impact"
     },
     {
       "key": "aep-service/0.1.5",
