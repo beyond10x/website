@@ -2,6 +2,53 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "aep/second-adopter-0.42.0",
+      "id": "aep/second-adopter-0.42.0",
+      "repository": "aep",
+      "publishedAt": "2026-09-02T18:18:01Z",
+      "title": "aep doctor, classified ambiguities in the templates, and the install path that exists",
+      "summary": "AEP 0.42.0 answers the second adopter's report — aep doctor says in six ok/warn/fail lines whether a checkout is ready to be planned in, the epic, story and specification templates seed an Ambiguities section classifying each gap as inferable or requires-stakeholder-input, and the README and site name beyond10x/agentplugins as where the plugins come from.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.42.0",
+        "version": "0.42.0"
+      },
+      "journeys": [
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "agentplugins/second-adopter-0.4.0",
+      "id": "agentplugins/second-adopter-0.4.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-02T17:59:11Z",
+      "title": "Planning gains a critic panel, a golden path and a domain-first rule",
+      "summary": "Agent Plugins 0.4.0 answers the second adopter's report — a copy-paste install block, a recorded golden-path page from feature idea to critiqued plan, a decomposer that files a decision-blocker for every undecided domain relation, four read-only plan critics with a bounded revision loop, and a domain-first guardrail backed by the minimal ess/1 document.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.4.0",
+        "version": "0.4.0"
+      },
+      "journeys": [
+        "plan-work",
+        "build-agents",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
       "key": "workspace/0.1.5",
       "id": "workspace/0.1.5",
       "repository": "workspace",
