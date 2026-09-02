@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/0.6.1",
+      "id": "devcenter/0.6.1",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T14:28:12Z",
+      "title": "Devcenter 0.6.1",
+      "summary": "Devcenter released version 0.6.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.6.1",
+        "version": "0.6.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "aep/0.41.0",
       "id": "aep/0.41.0",
       "repository": "aep",
