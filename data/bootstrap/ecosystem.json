@@ -801,6 +801,21 @@
       "relationships": [
         {
           "kind": "uses",
+          "label": "Devcenter consumes Agent Platform client and core crates at an exact revision.",
+          "target": "agent-platform/docs"
+        },
+        {
+          "kind": "uses",
+          "label": "Devcenter consumes the hosted Connectors client and protocol at an exact revision.",
+          "target": "connectors/docs"
+        },
+        {
+          "kind": "uses",
+          "label": "The Devcenter Connectors composition persists service events through Eventlog Postgres at an exact revision.",
+          "target": "eventlog/docs"
+        },
+        {
+          "kind": "uses",
           "label": "identity source packages consumed by devcenter",
           "target": "identity/docs"
         },

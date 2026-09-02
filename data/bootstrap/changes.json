@@ -2,6 +2,30 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.3.7",
+      "id": "agentplugins/0.3.7",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-02T14:00:12Z",
+      "title": "Agent Plugins 0.3.7",
+      "summary": "Agent Plugins released version 0.3.7.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.7",
+        "version": "0.3.7"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.5.10",
       "id": "devcenter/0.5.10",
       "repository": "devcenter",

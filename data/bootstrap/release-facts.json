@@ -2,6 +2,12 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "agentplugins",
+      "version": "0.3.7",
+      "publishedAt": "2026-09-02T14:00:12Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.7"
+    },
+    {
       "repository": "devcenter",
       "version": "0.5.10",
       "publishedAt": "2026-09-02T13:08:55Z",
