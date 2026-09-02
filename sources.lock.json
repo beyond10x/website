@@ -52,10 +52,10 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "4a0fcdb387840887caef08eae39f1a570e7eac90",
+      "commit": "841cb3a939742a24175196bb407b29efc8204952",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "12396254a2ff266168854cec6379c8fa45d30a50a7e3c499532906e13bf79cdd",
-      "contentSha256": "5f25cafe6dce0b6a8ad912b58cdcfbd5d7545fe32f3473bad975edf2142111e8"
+      "contentSha256": "714f13093d94d7ddfe5c00c5ed98ab1cf1be0380c52a1dd1a9c9266cfe1040ed"
     },
     {
       "repository": "docs-system",
@@ -92,7 +92,7 @@
     {
       "repository": "harness",
       "url": "https://github.com/beyond10x/harness",
-      "commit": "f641b1fb815ef658bc1bb7b8c15cc6aad4f4241e",
+      "commit": "60b2e0537b1e1a0af66ea55bdeac72941b2bdf58",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "03b2b6737cbedc03a73aacc82af114df1cff017f80322666ad412080b57ec246",
       "contentSha256": "7614de6f669fc03427cd40e2ec55433f1f2d828b8c3bb89c15263e0408a2d053"
