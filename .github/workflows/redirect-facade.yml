@@ -95,16 +95,20 @@ jobs:
           test "$(git -C .website-data rev-parse HEAD)" = "$WEBSITE_SHA"
           test "$(git ls-remote --refs "https://github.com/${GITHUB_REPOSITORY}.git" refs/heads/main | awk 'NF == 2 { print $1 }')" = "$CONTROL_SHA"
 
-          assert_git_bot() {
+          assert_git_bot_or_verified_merge() {
             local repository=$1 revision=$2
             mapfile -t identity < <(git -C "$repository" show -s --format='%an%n%ae%n%cn%n%ce' "$revision")
             test "${#identity[@]}" -eq 4
             test "${identity[0]}" = "$BOT_LOGIN" && test "${identity[1]}" = "$BOT_EMAIL"
-            test "${identity[2]}" = "$BOT_LOGIN" && test "${identity[3]}" = "$BOT_EMAIL"
+            if test "${identity[2]}" = "$BOT_LOGIN" && test "${identity[3]}" = "$BOT_EMAIL"; then
+              return
+            fi
+            test "${identity[2]}" = GitHub && test "${identity[3]}" = 'noreply@github.com'
+            test "$(git -C "$repository" show -s --format='%P' "$revision" | wc -w)" -eq 2
           }
-          assert_git_bot .runtime "$RUNTIME_SHA"
-          assert_git_bot .control-data "$CONTROL_SHA"
-          assert_git_bot .website-data "$WEBSITE_SHA"
+          assert_git_bot_or_verified_merge .runtime "$RUNTIME_SHA"
+          assert_git_bot_or_verified_merge .control-data "$CONTROL_SHA"
+          assert_git_bot_or_verified_merge .website-data "$WEBSITE_SHA"
 
           mkdir -p "$RUNNER_TEMP/b10x-facade-boundary"
           api_commit() {
@@ -120,7 +124,13 @@ jobs:
           api_commit beyond10x/website "$WEBSITE_SHA" "$RUNNER_TEMP/b10x-facade-boundary/website.json"
           for document in "$RUNNER_TEMP"/b10x-facade-boundary/*.json; do
             jq -e --arg login "$BOT_LOGIN" \
-              '.author.login == $login and .committer.login == $login' "$document" >/dev/null
+              '.author.login == $login and (
+                .committer.login == $login or (
+                  .committer.login == "web-flow" and
+                  (.parents | length) == 2 and
+                  .commit.verification.verified == true
+                )
+              )' "$document" >/dev/null
           done
 
           git -C .website-data fetch --quiet --no-tags origin \

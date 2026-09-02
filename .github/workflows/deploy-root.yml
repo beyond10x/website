@@ -125,18 +125,23 @@ jobs:
           test "$(remote_head beyond10x.github.io main)" = "$CONTROL_SHA"
           test "$(remote_head beyond10x.github.io published)" = "$PUBLISHED_SHA"
 
-          assert_git_bot() {
+          assert_git_bot_or_verified_merge() {
             local repository=$1 revision=$2 label=$3
             mapfile -t identity < <(git -C "$repository" show -s --format='%an%n%ae%n%cn%n%ce' "$revision")
             test "${#identity[@]}" -eq 4
             test "${identity[0]}" = "$BOT_LOGIN" && test "${identity[1]}" = "$BOT_EMAIL"
-            test "${identity[2]}" = "$BOT_LOGIN" && test "${identity[3]}" = "$BOT_EMAIL"
+            if test "${identity[2]}" = "$BOT_LOGIN" && test "${identity[3]}" = "$BOT_EMAIL"; then
+              printf 'verified Git identity for %s\n' "$label"
+              return
+            fi
+            test "${identity[2]}" = GitHub && test "${identity[3]}" = 'noreply@github.com'
+            test "$(git -C "$repository" show -s --format='%P' "$revision" | wc -w)" -eq 2
             printf 'verified Git identity for %s\n' "$label"
           }
-          assert_git_bot .runtime "$RUNTIME_SHA" runtime
-          assert_git_bot .control-data "$CONTROL_SHA" controls
-          assert_git_bot _site "$PUBLISHED_SHA" publication
-          assert_git_bot .website-data "$WEBSITE_SHA" Website
+          assert_git_bot_or_verified_merge .runtime "$RUNTIME_SHA" runtime
+          assert_git_bot_or_verified_merge .control-data "$CONTROL_SHA" controls
+          assert_git_bot_or_verified_merge _site "$PUBLISHED_SHA" publication
+          assert_git_bot_or_verified_merge .website-data "$WEBSITE_SHA" Website
 
           mkdir -p "$RUNNER_TEMP/b10x-root-boundary"
           api_commit() {
@@ -153,7 +158,13 @@ jobs:
           api_commit website "$WEBSITE_SHA" "$RUNNER_TEMP/b10x-root-boundary/website.json"
           for document in "$RUNNER_TEMP"/b10x-root-boundary/*.json; do
             jq -e --arg login "$BOT_LOGIN" \
-              '.author.login == $login and .committer.login == $login' "$document" >/dev/null
+              '.author.login == $login and (
+                .committer.login == $login or (
+                  .committer.login == "web-flow" and
+                  (.parents | length) == 2 and
+                  .commit.verification.verified == true
+                )
+              )' "$document" >/dev/null
           done
 
           git -C .website-data fetch --quiet --no-tags origin \

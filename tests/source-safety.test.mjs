@@ -197,6 +197,9 @@ test('reusable façade workflow executes its own immutable revision and treats t
   assert.match(workflow, /github\.triggering_actor == 'b10x-bot\[bot\]'/);
   assert.match(workflow, /github\.sha == inputs\.control_sha/);
   assert.match(workflow, /refs\/heads\/main/);
+  assert.match(workflow, /\.committer\.login == "web-flow"/);
+  assert.match(workflow, /\(\.parents \| length\) == 2/);
+  assert.match(workflow, /\.commit\.verification\.verified == true/);
   assert.doesNotMatch(workflow, /working-directory: \.website-data/);
 });
 
@@ -208,6 +211,9 @@ test('reusable root workflow executes immutable controls and blocks human reruns
   assert.match(workflow, /github\.sha == inputs\.control_sha/);
   assert.match(workflow, /node \.runtime\/scripts\/verify-build\.mjs/);
   assert.match(workflow, /--data \.website-data/);
+  assert.match(workflow, /\.committer\.login == "web-flow"/);
+  assert.match(workflow, /\(\.parents \| length\) == 2/);
+  assert.match(workflow, /\.commit\.verification\.verified == true/);
   assert.doesNotMatch(workflow, /working-directory: \.website-data/);
 });
 
