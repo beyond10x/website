@@ -60,7 +60,7 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "0a4dbbc83b33796fb0d1e77d160acf24e96c938b",
+      "commit": "24993467b0ee7e129fcf68c026ee2f4ee3aa515f",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "357301aa9962e7a83d606c0d783cfebebaf5d7b93d7104a3cf1596cb6eaae3b4",
       "contentSha256": "aa82fc8e84c4e0491c37a29c80a1d635c53a754090f91f996271ddf7b81399ec"
@@ -164,7 +164,7 @@
     {
       "repository": "workspace",
       "url": "https://github.com/beyond10x/workspace",
-      "commit": "6c1382db5270af29c4be30ebce8af15e751737e8",
+      "commit": "97a58400552673325f0564eae629ba32c855f7e7",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "b4ae19b445adf90ea510d24d346069be4b771a9b1d9b171f80dac79894f34ab1",
       "contentSha256": "fb2da19c9bfddafe1b8b5dc64c7b540b6f909f28a2df50f240292abc6631366f"
