@@ -20,7 +20,7 @@
     {
       "repository": "agent-platform",
       "url": "https://github.com/beyond10x/agent-platform",
-      "commit": "48134a18d44c906fb1a8ddcea9d5d67b8832bc8b",
+      "commit": "e5ca49ea59711321f4564d2d35f7fa4fbaae8454",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "97b0dc3edbebb726315d58c415cb480003f7a492e20891e3cd1fb6173b5af172",
       "contentSha256": "68883b867bb2b0374e83932c5a1bb229f35db557b8ccb3acbdcdd1de17485665"
@@ -36,10 +36,10 @@
     {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
-      "commit": "249db0945092d0ca51ef3ba6d953d154b86a6814",
+      "commit": "57ce83d072d4bf76eeb4c66731debf69e93c3e5c",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "1bfa6f73b1fc7603b4354cba3baf98c9124170cd0a80e70d2f5672b8edbcb3c3",
-      "contentSha256": "f9f2d812eb3bc2b120e5451cb765c85c847a7973d4a9cb75fb1fecc38168b26a"
+      "contentSha256": "e4aed07275c3cd638229cffab65b3005e39ee4b1adb78465bff91be936537a75"
     },
     {
       "repository": "connectors",
@@ -108,9 +108,9 @@
     {
       "repository": "mcp",
       "url": "https://github.com/beyond10x/mcp",
-      "commit": "d817ff39c0550da71fe38097606205d683bb620e",
+      "commit": "776a2a177b4c7168fc259d42deb64f4f20b1fae7",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "d7ba1817b7a7ea06460f565c13249ab524f7caa266f5425a71e166fd6bff5af0",
+      "manifestSha256": "2fa89f4dc7fece9aafbbf970a9bb794a8c69999d04c5574062b80387ea17691b",
       "contentSha256": "636bd12cf508860997c9cdaabe5b7ad9f5903b52d0fd2097ebd288060610a4e2"
     },
     {
