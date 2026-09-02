@@ -1,13 +1,13 @@
 {
   "schema": "b10x-bootstrap-snapshot/v1",
   "sourceRepository": "https://github.com/beyond10x/atlas",
-  "sourceRevision": "539003ba87ac96ea04659b6a67c0ae86aff24cd6",
-  "websiteRevision": "38a5ac8e6c21eba2ed3d38e10229844b4b3020d5",
-  "sourceLockSha256": "a8ba4dc6d8131143b76dba7cbf6bbd4e494143544cb76701d0ecc7c4c1035ddb",
-  "capturedAt": "2026-09-02T03:27:56+02:00",
+  "sourceRevision": "5761b15228f5708bd25b9649437d692ccc03b40b",
+  "websiteRevision": "7540e7aeae7908a0191b7ac119f91392c98bff7e",
+  "sourceLockSha256": "0a5d6ea1f0e534eb073c02b0ecbd55c0f8c1120357d1c0ef9c3007b5d46f021a",
+  "capturedAt": "2026-09-02T03:45:55+02:00",
   "files": {
-    "changes.json": "5a9f78a7a8f365ed32489c3ab3b125cdb585ebcccea42b43e168afcd9f64df0b",
-    "ecosystem.json": "e1dc9ae271701be519a995f5b7824ed978a4a1134221c78fc620d8d2a1c295d5",
-    "release-facts.json": "30386f6cc2566e24a514e9b0515961d287aaeed433b1a53856ab8b4117cbf8e1"
+    "changes.json": "9099d058c8aeb3f0a373eac8d2f77357c3478b4d5b90b1d558d54f2019890d49",
+    "ecosystem.json": "3b99f1def7053426a23d5967415d38a1e2503317f8e7a23c7a5e2c8a0d60634b",
+    "release-facts.json": "0788ff4efbdbb0eb3b767092a97b3ad90cfa41217188036378953146e968ce2d"
   }
 }
