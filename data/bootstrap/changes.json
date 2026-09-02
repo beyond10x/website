@@ -2,6 +2,75 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/0.6.3",
+      "id": "devcenter/0.6.3",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T16:26:16Z",
+      "title": "Devcenter 0.6.3",
+      "summary": "Devcenter released version 0.6.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.6.3",
+        "version": "0.6.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.1.4",
+      "id": "workspace/0.1.4",
+      "repository": "workspace",
+      "publishedAt": "2026-09-02T16:25:55Z",
+      "title": "Workspace 0.1.4",
+      "summary": "Workspace released version 0.1.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.1.4",
+        "version": "0.1.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.6.2",
+      "id": "devcenter/0.6.2",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T15:59:13Z",
+      "title": "Devcenter 0.6.2",
+      "summary": "Devcenter released version 0.6.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.6.2",
+        "version": "0.6.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.6.1",
       "id": "devcenter/0.6.1",
       "repository": "devcenter",
