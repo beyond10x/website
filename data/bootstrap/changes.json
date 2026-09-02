@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/0.5.6",
+      "id": "devcenter/0.5.6",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T03:35:40Z",
+      "title": "Devcenter 0.5.6",
+      "summary": "Devcenter released version 0.5.6.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.6",
+        "version": "0.5.6"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "connectors/v0.4.1",
       "id": "connectors/v0.4.1",
       "repository": "connectors",
