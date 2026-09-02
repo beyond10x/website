@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "workspace/0.1.5",
+      "id": "workspace/0.1.5",
+      "repository": "workspace",
+      "publishedAt": "2026-09-02T17:28:48Z",
+      "title": "Workspace 0.1.5",
+      "summary": "Workspace released version 0.1.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.1.5",
+        "version": "0.1.5"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.6.3",
       "id": "devcenter/0.6.3",
       "repository": "devcenter",
