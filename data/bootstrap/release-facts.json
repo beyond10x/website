@@ -2,6 +2,12 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "agentide",
+      "version": "0.1.1",
+      "publishedAt": "2026-09-02T19:37:32Z",
+      "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.1"
+    },
+    {
       "repository": "aep",
       "version": "0.42.0",
       "publishedAt": "2026-09-02T18:18:01Z",

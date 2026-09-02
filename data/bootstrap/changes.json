@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentide/0.1.1",
+      "id": "agentide/0.1.1",
+      "repository": "agentide",
+      "publishedAt": "2026-09-02T19:37:32Z",
+      "title": "AgentIDE 0.1.1",
+      "summary": "AgentIDE released version 0.1.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.1",
+        "version": "0.1.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agentide/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "aep/second-adopter-0.42.0",
       "id": "aep/second-adopter-0.42.0",
       "repository": "aep",
