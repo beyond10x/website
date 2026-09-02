@@ -34,6 +34,14 @@
       "contentSha256": "e540f165b2479af1318e2067e1e02b32549e0646e9c0a62cdb5b571927836238"
     },
     {
+      "repository": "agentide",
+      "url": "https://github.com/beyond10x/agentide",
+      "commit": "be01e1a9ce630943e0d5eddca40b2072df3ae96c",
+      "manifestPath": "b10x.docs.yaml",
+      "manifestSha256": "385754c1e2a4113c2dab6e4a198c35eba1d6f6a199149ef8e35da7bd1b534acd",
+      "contentSha256": "9f794dfb8e1f34654ad7fe4099b8529daebd9806cdd39528f59b0512a247b9fd"
+    },
+    {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
       "commit": "03a39cb401360fc45d7559f6e64407b4a08af6dc",

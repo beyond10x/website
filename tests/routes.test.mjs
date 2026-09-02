@@ -81,7 +81,7 @@ test('source roster is complete, sorted, and lock is either the explicit bootstr
   const roster = await readFile(path.join(root, 'sources.yaml'), 'utf8');
   const rosterDocument = parse(roster);
   const repositories = rosterDocument.repositories;
-  assert.equal(repositories.length, 21);
+  assert.equal(repositories.length, 22);
   assert.deepEqual(repositories, [...repositories].sort());
   assert.deepEqual(rosterDocument.compatibilityRepositories, ['getting-started']);
   assert.ok(!repositories.includes('getting-started'));

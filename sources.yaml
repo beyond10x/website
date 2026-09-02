@@ -8,6 +8,7 @@ repositories:
   - aep-service
   - agent-platform
   - agentic-principles
+  - agentide
   - agentplugins
   - connectors
   - devcenter
