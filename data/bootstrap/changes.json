@@ -2,6 +2,52 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/0.5.2",
+      "id": "devcenter/0.5.2",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T01:13:51Z",
+      "title": "Devcenter 0.5.2",
+      "summary": "Devcenter released version 0.5.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.2",
+        "version": "0.5.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.2.0",
+      "id": "worktree/0.2.0",
+      "repository": "worktree",
+      "publishedAt": "2026-09-02T00:12:34Z",
+      "title": "Worktree 0.2.0",
+      "summary": "Worktree released version 0.2.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.2.0",
+        "version": "0.2.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.4.7",
       "id": "devcenter/0.4.7",
       "repository": "devcenter",
