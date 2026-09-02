@@ -71,76 +71,91 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.6.1",
-      "id": "devcenter/0.6.1",
+      "key": "devcenter/identity-routes-0.6.1",
+      "id": "devcenter/identity-routes-0.6.1",
       "repository": "devcenter",
       "publishedAt": "2026-09-02T14:28:12Z",
-      "title": "Devcenter 0.6.1",
-      "summary": "Devcenter released version 0.6.1.",
-      "kind": "release",
-      "impact": "notable",
+      "title": "Devcenter activates scoped Identity administration",
+      "summary": "Devcenter 0.6.1 exposes Identity's exact CLI discovery and scoped access-token routes, pins the SIP-disabled Connector embedding seam, and authenticates private frontend dependencies without leaking credentials into image layers.",
+      "kind": "capability",
+      "impact": "significant",
       "source": {
         "url": "https://github.com/beyond10x/devcenter/releases/tag/0.6.1",
         "version": "0.6.1"
       },
       "journeys": [
-        "build-agents",
-        "operate-services"
+        "operate-services",
+        "build-agents"
       ],
       "affectedSurfaces": [
-        "devcenter/docs"
+        "devcenter/docs",
+        "identity/docs",
+        "connectors/docs"
       ],
-      "automatic": true,
-      "channel": "releases"
+      "automatic": false,
+      "channel": "impact"
     },
     {
-      "key": "aep/0.41.0",
-      "id": "aep/0.41.0",
+      "key": "aep/external-work-refs-0.41.0",
+      "id": "aep/external-work-refs-0.41.0",
       "repository": "aep",
       "publishedAt": "2026-09-02T14:13:58Z",
-      "title": "AEP 0.41.0",
-      "summary": "AEP released version 0.41.0.",
-      "kind": "release",
-      "impact": "notable",
+      "title": "AEP links planning artifacts to external work",
+      "summary": "AEP 0.41.0 gives planning artifacts typed external references, provider-level URL patterns, reference filtering, and a read-only reverse-ticket audit so repository plans can be joined to trackers without parsing prose or granting write authority.",
+      "kind": "capability",
+      "impact": "significant",
       "source": {
         "url": "https://github.com/beyond10x/aep/releases/tag/0.41.0",
         "version": "0.41.0"
       },
       "journeys": [
-        "build-agents",
-        "operate-services",
         "plan-work",
         "specify"
       ],
       "affectedSurfaces": [
-        "aep/docs"
+        "aep/docs",
+        "agentplugins/docs"
       ],
-      "automatic": true,
-      "channel": "releases"
+      "relations": [
+        {
+          "target": "change:agentplugins/aep-refs-0.3.7",
+          "kind": "integrates-with",
+          "label": "Portable planning skills preserve the typed references"
+        }
+      ],
+      "automatic": false,
+      "channel": "impact"
     },
     {
-      "key": "agentplugins/0.3.7",
-      "id": "agentplugins/0.3.7",
+      "key": "agentplugins/aep-refs-0.3.7",
+      "id": "agentplugins/aep-refs-0.3.7",
       "repository": "agentplugins",
       "publishedAt": "2026-09-02T14:00:12Z",
-      "title": "Agent Plugins 0.3.7",
-      "summary": "Agent Plugins released version 0.3.7.",
-      "kind": "release",
-      "impact": "notable",
+      "title": "Planning skills preserve external work references",
+      "summary": "Agent Plugins 0.3.7 teaches planning and story migration to record AEP 0.41.0 refs as typed frontmatter, documents the safe already-exists refusal on repeated migration, and corrects the guidance's published version claims.",
+      "kind": "capability",
+      "impact": "significant",
       "source": {
         "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.7",
         "version": "0.3.7"
       },
       "journeys": [
-        "build-agents",
         "plan-work",
-        "specify"
+        "build-agents"
       ],
       "affectedSurfaces": [
-        "agentplugins/docs"
+        "agentplugins/docs",
+        "aep/docs"
       ],
-      "automatic": true,
-      "channel": "releases"
+      "relations": [
+        {
+          "target": "change:aep/external-work-refs-0.41.0",
+          "kind": "depends-on",
+          "label": "Uses the typed AEP external-reference model"
+        }
+      ],
+      "automatic": false,
+      "channel": "impact"
     },
     {
       "key": "devcenter/0.5.10",
