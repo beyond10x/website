@@ -20,7 +20,7 @@
     {
       "repository": "agent-platform",
       "url": "https://github.com/beyond10x/agent-platform",
-      "commit": "c162ff43913f5e7d449e23a06c17ec31ac6cace8",
+      "commit": "48134a18d44c906fb1a8ddcea9d5d67b8832bc8b",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "97b0dc3edbebb726315d58c415cb480003f7a492e20891e3cd1fb6173b5af172",
       "contentSha256": "68883b867bb2b0374e83932c5a1bb229f35db557b8ccb3acbdcdd1de17485665"
@@ -44,10 +44,10 @@
     {
       "repository": "connectors",
       "url": "https://github.com/beyond10x/connectors",
-      "commit": "776376035519056722bb2ce11fe78cf48c3e8773",
+      "commit": "df721f8697161e56ed02e97d4b0485e8fcb87bbd",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "ced4338144ce76381429fb60c4068d40e33f750d23889c58f0d77fdac34736d4",
-      "contentSha256": "c7d5a95aa2ba140004d8d73661b5e8d2f2b6b617c83985835de47f2fc3e6f58f"
+      "contentSha256": "7b9c5f1028adcd98efd9ae4577481ebf1c3a6c3b6c324edd7879975b0a5c1098"
     },
     {
       "repository": "devcenter",
@@ -76,10 +76,10 @@
     {
       "repository": "ess",
       "url": "https://github.com/beyond10x/ess",
-      "commit": "add93d86f5cd1d97fffe37dd5d18d66302c89828",
+      "commit": "d47067c6d6561b8f151a7a41fc2bf7456fa0629f",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "6e81ae42ac284064497ff2e5643cccc3c063d751edbfc75cb5c7d7d4fc3bcaa6",
-      "contentSha256": "4ac837e88671274fb87c162f819260f94a2acb2ecd827a87b9e56b2aa9e28ac3"
+      "contentSha256": "93e476abbe7d3fb997da02d7c69cb2fe27808b17a46acb9a7bcba4e26b18f604"
     },
     {
       "repository": "eventlog",
