@@ -6,7 +6,7 @@ technical documentation selected by each public repository.
 
 The source contract is deliberately split:
 
-- `sources.yaml` lists the exact 19 active sources and the separate compatibility-only predecessor
+- `sources.yaml` lists the exact 20 active sources and the separate compatibility-only predecessor
   repositories; compatibility entries never enter the source lock.
 - `sources.lock.json` pins an exact commit and content digest for every source.
 - each repository's `b10x.docs.yaml` declares the public, passive content it permits the site to
@@ -44,7 +44,7 @@ B10X_SOURCE_WORKSPACE=/absolute/path/to/beyond10x npm start
 ```
 
 `B10X_SOURCE_WORKSPACE` is an explicit local-preview input and must name the directory whose direct
-children are the 19 repositories. The lock command requires every checkout to have a clean `main`
+children are the 20 repositories. The lock command requires every checkout to have a clean `main`
 checked out, then pins that exact local HEAD. Collection fetches those locked commits from each
 checkout's Git object database into the same bounded bare cache; source worktree bytes are never
 used as publication input. With the variable unset, including in production, lock resolution and
@@ -71,7 +71,7 @@ language grammars. `npm run gate` rejects unlabeled or ambiguous `console` fence
 
 Refresh `sources.lock.json` only through the deterministic lock command after repository-owned
 manifest changes have merged. Atlas and release operators can run `npm run sources:freshness` to
-compare the committed lock with the current 19 remote `main` heads; moving-tip freshness is kept
+compare the committed lock with the current 20 remote `main` heads; moving-tip freshness is kept
 separate from rebuilding an immutable Website commit. The generated `beyond10x.github.io` artifact
 is published by Atlas-owned bot automation, not from developer credentials in this repository.
 
