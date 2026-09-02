@@ -44,7 +44,7 @@
     {
       "repository": "connectors",
       "url": "https://github.com/beyond10x/connectors",
-      "commit": "1bf84ea4d28995857176577226405943c50ae256",
+      "commit": "ce390149bc1918b3dea0402e346166730caa8671",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "8646f76d304c779fc888a491460d0ed1019d0c8deddb87e53008c6e61cc1186b",
       "contentSha256": "7f2f96f55aeab93b7ae83fff7c2ec2554b4422aa2d753bb4123540134f0ac476"
