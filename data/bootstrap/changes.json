@@ -2,6 +2,75 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/0.4.0",
+      "id": "ess/0.4.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-02T21:00:22Z",
+      "title": "ESS 0.4.0",
+      "summary": "ESS released version 0.4.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.4.0",
+        "version": "0.4.0"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.7.1",
+      "id": "devcenter/0.7.1",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T20:56:58Z",
+      "title": "Devcenter 0.7.1",
+      "summary": "Devcenter released version 0.7.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.7.1",
+        "version": "0.7.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "connectors/v0.4.5",
+      "id": "connectors/v0.4.5",
+      "repository": "connectors",
+      "publishedAt": "2026-09-02T20:25:55Z",
+      "title": "Connectors v0.4.5",
+      "summary": "Connectors released version v0.4.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.5",
+        "version": "v0.4.5"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.7.0",
       "id": "devcenter/0.7.0",
       "repository": "devcenter",

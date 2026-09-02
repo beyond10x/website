@@ -2,6 +2,24 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "ess",
+      "version": "0.4.0",
+      "publishedAt": "2026-09-02T21:00:22Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.4.0"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.7.1",
+      "publishedAt": "2026-09-02T20:56:58Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.7.1"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.4.5",
+      "publishedAt": "2026-09-02T20:25:55Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.5"
+    },
+    {
       "repository": "devcenter",
       "version": "0.7.0",
       "publishedAt": "2026-09-02T20:14:52Z",
