@@ -2,6 +2,262 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/0.5.10",
+      "id": "devcenter/0.5.10",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T13:08:55Z",
+      "title": "Devcenter 0.5.10",
+      "summary": "Devcenter released version 0.5.10.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.10",
+        "version": "0.5.10"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentide/0.1.0",
+      "id": "agentide/0.1.0",
+      "repository": "agentide",
+      "publishedAt": "2026-09-02T12:54:08Z",
+      "title": "AgentIDE 0.1.0",
+      "summary": "AgentIDE released version 0.1.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.0",
+        "version": "0.1.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agentide/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "connectors/v0.4.4",
+      "id": "connectors/v0.4.4",
+      "repository": "connectors",
+      "publishedAt": "2026-09-02T12:46:25Z",
+      "title": "Connectors v0.4.4",
+      "summary": "Connectors released version v0.4.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.4",
+        "version": "v0.4.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.3.6",
+      "id": "agentplugins/0.3.6",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-02T12:34:01Z",
+      "title": "Agent Plugins 0.3.6",
+      "summary": "Agent Plugins released version 0.3.6.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.6",
+        "version": "0.3.6"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.5.9",
+      "id": "devcenter/0.5.9",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T12:12:00Z",
+      "title": "Devcenter 0.5.9",
+      "summary": "Devcenter released version 0.5.9.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.9",
+        "version": "0.5.9"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.3.5",
+      "id": "agentplugins/0.3.5",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-02T11:54:44Z",
+      "title": "Agent Plugins 0.3.5",
+      "summary": "Agent Plugins released version 0.3.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.5",
+        "version": "0.3.5"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.3.2",
+      "id": "worktree/0.3.2",
+      "repository": "worktree",
+      "publishedAt": "2026-09-02T11:54:05Z",
+      "title": "Worktree 0.3.2",
+      "summary": "Worktree released version 0.3.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.2",
+        "version": "0.3.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "connectors/v0.4.3",
+      "id": "connectors/v0.4.3",
+      "repository": "connectors",
+      "publishedAt": "2026-09-02T11:40:18Z",
+      "title": "Connectors v0.4.3",
+      "summary": "Connectors released version v0.4.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.3",
+        "version": "v0.4.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "connectors/v0.4.2",
+      "id": "connectors/v0.4.2",
+      "repository": "connectors",
+      "publishedAt": "2026-09-02T11:08:57Z",
+      "title": "Connectors v0.4.2",
+      "summary": "Connectors released version v0.4.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.2",
+        "version": "v0.4.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.3.4",
+      "id": "agentplugins/0.3.4",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-02T11:03:59Z",
+      "title": "Agent Plugins 0.3.4",
+      "summary": "Agent Plugins released version 0.3.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.4",
+        "version": "0.3.4"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.5.8",
+      "id": "devcenter/0.5.8",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-02T10:16:48Z",
+      "title": "Devcenter 0.5.8",
+      "summary": "Devcenter released version 0.5.8.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.8",
+        "version": "0.5.8"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.5.7",
       "id": "devcenter/0.5.7",
       "repository": "devcenter",

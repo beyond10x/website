@@ -3,6 +3,72 @@
   "releases": [
     {
       "repository": "devcenter",
+      "version": "0.5.10",
+      "publishedAt": "2026-09-02T13:08:55Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.10"
+    },
+    {
+      "repository": "agentide",
+      "version": "0.1.0",
+      "publishedAt": "2026-09-02T12:54:08Z",
+      "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.0"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.4.4",
+      "publishedAt": "2026-09-02T12:46:25Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.4"
+    },
+    {
+      "repository": "agentplugins",
+      "version": "0.3.6",
+      "publishedAt": "2026-09-02T12:34:01Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.6"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.5.9",
+      "publishedAt": "2026-09-02T12:12:00Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.9"
+    },
+    {
+      "repository": "agentplugins",
+      "version": "0.3.5",
+      "publishedAt": "2026-09-02T11:54:44Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.5"
+    },
+    {
+      "repository": "worktree",
+      "version": "0.3.2",
+      "publishedAt": "2026-09-02T11:54:05Z",
+      "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.2"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.4.3",
+      "publishedAt": "2026-09-02T11:40:18Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.3"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.4.2",
+      "publishedAt": "2026-09-02T11:08:57Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.2"
+    },
+    {
+      "repository": "agentplugins",
+      "version": "0.3.4",
+      "publishedAt": "2026-09-02T11:03:59Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.3.4"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.5.8",
+      "publishedAt": "2026-09-02T10:16:48Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.8"
+    },
+    {
+      "repository": "devcenter",
       "version": "0.5.7",
       "publishedAt": "2026-09-02T09:12:00Z",
       "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.7"
