@@ -28,7 +28,7 @@
     "gate:fixture": "B10X_BOOTSTRAP_FIXTURE=1 node scripts/run-gate.mjs"
   },
   "dependencies": {
-    "@beyond10x/docs-system": "git+https://github.com/beyond10x/docs-system.git#a1eab8b5c4ddb847517b0d55445a6cebd3d8ec12",
+    "@beyond10x/docs-system": "git+https://github.com/beyond10x/docs-system.git#379b50ee109a8a06ab19d2614eb78d3ce56a2adf",
     "@docusaurus/core": "3.10.2",
     "@docusaurus/faster": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
