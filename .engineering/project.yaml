@@ -1,0 +1,12 @@
+version: aep.project/1
+
+# Written by `protocol reverse init`. It points; it does not duplicate — a rule restated
+# here would be a second copy with no way to say which one is in force. Principles and
+# profiles of this project's own go under `principles/` and `profiles/` beside this file.
+protocol: adp/1
+profile: development.standard
+protocols: git+https://github.com/beyond10x/aep#fb2a507880fec55a50a65d3f8ad8cf514ed06bf2
+
+summary: >-
+  The unified beyond10x public website: organization narrative, adopter journeys, collected
+  project documentation, and deterministic publication.
