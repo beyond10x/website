@@ -243,6 +243,10 @@ test('the browser navigation audit allows a bounded slow-runner navigation budge
   const timeout = audit.match(/const navigationPathTimeoutMs = ([\d_]+);/);
   assert.ok(timeout, 'path navigation must declare an explicit timeout');
   assert.ok(Number(timeout[1].replaceAll('_', '')) >= 15_000, 'path navigation must tolerate a loaded CI runner');
+  assert.match(audit, /await waitForHydration\(cdp, url\)/, 'pointer checks must begin only after Docusaurus hydration');
+  assert.match(audit, /document\.documentElement\.dataset\.hasHydrated/, 'hydration must use Docusaurus runtime evidence');
+  assert.match(audit, /scrollIntoView\(\{block: 'center', behavior: 'instant'\}\)/, 'pointer targets must stop moving before mouse press and release');
+  assert.match(audit, /observed\.origin === siteOrigin && observed\.pathname === expected/, 'path checks must remain on the audit server origin');
   assert.match(audit, /observed \$\{JSON\.stringify\(observed\)\}/, 'path failures must report the observed browser location');
 });
 

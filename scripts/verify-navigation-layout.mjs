@@ -21,6 +21,7 @@ await new Promise((resolve, reject) => {
 const address = server.address();
 if (!address || typeof address === 'string') throw new Error('could not bind navigation audit server');
 const site = `http://127.0.0.1:${address.port}`;
+const siteOrigin = new URL(site).origin;
 const chrome = spawn(chromeBinary, [
   '--headless=new',
   '--no-sandbox',
@@ -287,7 +288,29 @@ async function navigate(cdp, url) {
   const result = await cdp.command('Page.navigate', {url});
   if (result.errorText) throw new Error(`navigation to ${url} failed: ${result.errorText}`);
   await Promise.race([loaded, rejectAfter(10000, `timed out loading ${url}`)]);
+  await waitForHydration(cdp, url);
   await settle(cdp);
+}
+
+async function waitForHydration(cdp, url) {
+  const deadline = performance.now() + navigationPathTimeoutMs;
+  let observed = {hydrated: null, readyState: '<unavailable>', href: '<unavailable>'};
+  while (performance.now() < deadline) {
+    try {
+      observed = await evaluate(cdp, `({
+        hydrated: document.documentElement.dataset.hasHydrated ?? null,
+        readyState: document.readyState,
+        href: window.location.href,
+      })`);
+      if (observed.hydrated === 'true') return;
+    } catch {
+      // A page navigation can briefly replace the execution context.
+    }
+    await delay(navigationPathPollMs);
+  }
+  throw new Error(
+    `page did not hydrate after navigating to ${url} within ${navigationPathTimeoutMs}ms; observed ${JSON.stringify(observed)}`,
+  );
 }
 
 async function settle(cdp) {
@@ -439,7 +462,7 @@ async function verifyLocalAnchorPresentation(cdp, siteUrl) {
   await navigate(cdp, `${siteUrl}/docs/aep/`);
   await evaluate(
     cdp,
-    `document.querySelector('main a[href="/ecosystem/agentplugins/"]')?.scrollIntoView({block: 'center'})`,
+    `document.querySelector('main a[href="/ecosystem/agentplugins/"]')?.scrollIntoView({block: 'center', behavior: 'instant'})`,
   );
   await settle(cdp);
   await clickVisibleElement(
@@ -530,15 +553,16 @@ function assertVisibleLabels(labels, width, context) {
 
 async function waitForPath(cdp, expected, width) {
   const deadline = performance.now() + navigationPathTimeoutMs;
-  let observed = {pathname: '<unavailable>', href: '<unavailable>', readyState: '<unavailable>'};
+  let observed = {origin: '<unavailable>', pathname: '<unavailable>', href: '<unavailable>', readyState: '<unavailable>'};
   while (performance.now() < deadline) {
     try {
       observed = await evaluate(cdp, `({
+        origin: window.location.origin,
         pathname: window.location.pathname,
         href: window.location.href,
         readyState: document.readyState,
       })`);
-      if (observed.pathname === expected) return;
+      if (observed.origin === siteOrigin && observed.pathname === expected) return;
     } catch {
       // A full-page navigation can briefly replace the execution context.
     }
