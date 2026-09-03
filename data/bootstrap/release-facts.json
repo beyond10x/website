@@ -2,6 +2,30 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "devcenter",
+      "version": "0.8.3",
+      "publishedAt": "2026-09-03T06:02:26Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.3"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.8.2",
+      "publishedAt": "2026-09-03T05:38:28Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.2"
+    },
+    {
+      "repository": "workspace",
+      "version": "0.2.6",
+      "publishedAt": "2026-09-03T04:53:39Z",
+      "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.6"
+    },
+    {
+      "repository": "workspace",
+      "version": "0.2.5",
+      "publishedAt": "2026-09-03T04:33:50Z",
+      "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.5"
+    },
+    {
       "repository": "agentplugins",
       "version": "0.6.0",
       "publishedAt": "2026-09-03T03:40:56Z",

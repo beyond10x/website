@@ -2,6 +2,98 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/0.8.3",
+      "id": "devcenter/0.8.3",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-03T06:02:26Z",
+      "title": "Devcenter 0.8.3",
+      "summary": "Devcenter released version 0.8.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.3",
+        "version": "0.8.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.8.2",
+      "id": "devcenter/0.8.2",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-03T05:38:28Z",
+      "title": "Devcenter 0.8.2",
+      "summary": "Devcenter released version 0.8.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.2",
+        "version": "0.8.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.6",
+      "id": "workspace/0.2.6",
+      "repository": "workspace",
+      "publishedAt": "2026-09-03T04:53:39Z",
+      "title": "Workspace 0.2.6",
+      "summary": "Workspace released version 0.2.6.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.6",
+        "version": "0.2.6"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.5",
+      "id": "workspace/0.2.5",
+      "repository": "workspace",
+      "publishedAt": "2026-09-03T04:33:50Z",
+      "title": "Workspace 0.2.5",
+      "summary": "Workspace released version 0.2.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.5",
+        "version": "0.2.5"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "agentplugins/0.6.0",
       "id": "agentplugins/0.6.0",
       "repository": "agentplugins",
