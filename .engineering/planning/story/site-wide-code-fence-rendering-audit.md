@@ -32,12 +32,14 @@ scope:
 - confidence: cited
   path: sources.lock.json
 - confidence: cited
+  path: src/theme/Mermaid/index.tsx
+- confidence: cited
   path: tests/code-contract.test.mjs
 - confidence: cited
   path: tests/fixtures/code-fence-corpus.md
 - confidence: cited
   path: tests/preview-workflow.test.mjs
-revision: 5
+revision: 6
 ---
 ## Problem
 

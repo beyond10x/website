@@ -2,13 +2,22 @@ import {createHash} from 'node:crypto';
 import {mkdir, readFile, readdir, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {PRISM_LANGUAGES, normalizeMarkdownFenceLanguage} from '@beyond10x/docs-system/code';
+import {
+  PRISM_LANGUAGES,
+  describeMarkdownFenceLanguage,
+  normalizeMarkdownFenceLanguage,
+} from '@beyond10x/docs-system/code';
+import {fromMarkdown} from 'mdast-util-from-markdown';
+import {gfmFromMarkdown} from 'mdast-util-gfm';
+import {mdxFromMarkdown} from 'mdast-util-mdx';
+import {gfm} from 'micromark-extension-gfm';
+import {mdxjs} from 'micromark-extension-mdxjs';
 import {parse as parseHtml} from 'parse5';
 import {parse as parseYaml} from 'yaml';
 import {compareUtf8} from './order-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
-const acceptedLanguages = new Set([...PRISM_LANGUAGES, 'mermaid']);
+const acceptedLanguages = new Set(PRISM_LANGUAGES);
 export const CODE_FENCE_INVENTORY_SCHEMA = 'b10x-code-fence-inventory/v1';
 const sourceInventoryPath = path.join(root, '.generated', 'data', 'code-fence-inventory.json');
 const renderedInventoryPath = path.join(root, 'build', '._b10x', 'code-fence-inventory.json');
@@ -17,17 +26,26 @@ export function inventoryMarkdownFences(source, context = {}) {
   const origin = typeof context === 'string' ? {sourcePath: context} : context;
   const diagnostics = [];
   const fences = [];
-  let openFence;
-  for (const [index, line] of source.split(/\r?\n/).entries()) {
-    const candidate = /^( {0,3})(`{3,}|~{3,})(.*)$/.exec(line);
-    if (!candidate) continue;
-    const marker = candidate[2];
-    if (openFence) {
-      if (marker[0] === openFence.marker && marker.length >= openFence.length && !candidate[3].trim()) openFence = undefined;
-      continue;
-    }
-    const info = candidate[3].trim();
-    const declaredLanguage = info.match(/^[^\s{]+/)?.[0] ?? '';
+  let tree;
+  try {
+    const markdownOptions = /\.mdx$/i.test(origin.sourcePath ?? '')
+      ? {extensions: [gfm(), mdxjs()], mdastExtensions: [gfmFromMarkdown(), mdxFromMarkdown()]}
+      : {extensions: [gfm()], mdastExtensions: [gfmFromMarkdown()]};
+    tree = fromMarkdown(source, markdownOptions);
+  } catch (error) {
+    const location = origin.repository ? `${origin.repository}/${origin.sourcePath}` : origin.sourcePath ?? '<markdown>';
+    diagnostics.push(`${location}: Markdown cannot be parsed: ${error instanceof Error ? error.message : String(error)}`);
+    return {fences, diagnostics};
+  }
+  visitMarkdown(tree, (node) => {
+    if (node.type !== 'code') return;
+    const start = node.position?.start?.offset;
+    const end = node.position?.end?.offset;
+    if (start === undefined || end === undefined) return;
+    const opening = /^(`{3,}|~{3,})/.exec(source.slice(start));
+    if (!opening) return;
+    const marker = opening[1];
+    const declaredLanguage = node.lang ?? '';
     const normalizedLanguage = normalizeMarkdownFenceLanguage(declaredLanguage);
     const record = {
       repository: origin.repository ?? null,
@@ -35,23 +53,25 @@ export function inventoryMarkdownFences(source, context = {}) {
       sourceRevision: origin.sourceRevision ?? null,
       sourceKind: origin.sourceKind ?? 'markdown',
       publicRoute: origin.publicRoute ?? null,
-      line: index + 1,
+      line: node.position.start.line,
       declaredLanguage,
       normalizedLanguage,
       semanticClass: semanticClass(normalizedLanguage),
       expectedRendering: normalizedLanguage === 'mermaid' ? 'diagram' : normalizedLanguage === 'text' ? 'plain' : 'prism',
+      bodySha256: codeBodySha256(node.value ?? ''),
     };
     fences.push(record);
     if (!declaredLanguage) {
       diagnostics.push(`${fenceLocation(record)}: fenced code block has no language; use text for plain output`);
     } else if (declaredLanguage.toLowerCase() === 'console') {
       diagnostics.push(`${fenceLocation(record)}: console is ambiguous; use bash, shell-session, or text`);
-    } else if (!acceptedLanguages.has(normalizedLanguage)) {
+    } else if (normalizedLanguage !== 'mermaid' && !acceptedLanguages.has(normalizedLanguage)) {
       diagnostics.push(`${fenceLocation(record)}: unsupported fenced-code language ${JSON.stringify(declaredLanguage)}`);
     }
-    openFence = {marker: marker[0], length: marker.length, record};
-  }
-  if (openFence) diagnostics.push(`${fenceLocation(openFence.record)}: fenced code block is not closed`);
+    const rawFence = source.slice(start, end);
+    const closePattern = new RegExp(`${marker[0]}{${marker.length},}[\\t ]*$`);
+    if (!closePattern.test(rawFence)) diagnostics.push(`${fenceLocation(record)}: fenced code block is not closed`);
+  });
   return {fences, diagnostics};
 }
 
@@ -84,6 +104,7 @@ export function reconcileRenderedInventory(sourceInventory, renderedByRoute) {
       renderings: documentRenderings(rendered).map((block, index) => ({
         position: index + 1,
         ...block,
+        classification: null,
         sourceFence: null,
       })),
     }));
@@ -104,42 +125,42 @@ export function reconcileRenderedInventory(sourceInventory, renderedByRoute) {
     }
     let cursor = 0;
     for (const fence of fences) {
-      const expectedKind = fence.expectedRendering === 'diagram' ? 'diagram' : 'prism';
+      const expectedKind = fence.expectedRendering === 'diagram' ? 'mermaid-payload' : 'prism';
       const matchIndex = rendered.renderings.findIndex((block, index) => (
-        index >= cursor && block.kind === expectedKind && block.language === fence.normalizedLanguage
+        index >= cursor
+        && block.kind === expectedKind
+        && block.language === fence.normalizedLanguage
+        && block.bodySha256 === fence.bodySha256
       ));
       if (matchIndex < 0) {
-        if (expectedKind === 'diagram') {
-          fence.rendered = deferredMermaidRendering();
-          continue;
-        }
         const actual = rendered.renderings[cursor];
         diagnostics.push(actual
-          ? `${fenceLocation(fence)}: expected rendered ${expectedKind} language ${JSON.stringify(fence.normalizedLanguage)}, found ${actual.kind} language ${JSON.stringify(actual.language)}`
-          : `${fenceLocation(fence)}: rendered route has no matching ${fence.normalizedLanguage} code block`);
+          ? `${fenceLocation(fence)}: expected rendered ${expectedKind} language ${JSON.stringify(fence.normalizedLanguage)} with source body ${shortDigest(fence.bodySha256)}, found ${actual.kind} language ${JSON.stringify(actual.language)} with body ${shortDigest(actual.bodySha256)}`
+          : `${fenceLocation(fence)}: rendered route has no matching ${fence.normalizedLanguage} code block with source body ${shortDigest(fence.bodySha256)}`);
         fence.rendered = missingRendering(fence);
         continue;
       }
       const block = rendered.renderings[matchIndex];
       cursor = matchIndex + 1;
-      block.sourceFence = {
-        repository: fence.repository,
-        sourcePath: fence.sourcePath,
-        line: fence.line,
-      };
-      fence.rendered = {
-        kind: block.kind,
-        found: true,
-        language: block.language,
-        meaningfulTokens: block.meaningfulTokens,
-        matchesExpected: true,
-        position: block.position,
-      };
+      block.classification = 'source-fence';
+      block.sourceFence = sourceFenceReference(fence);
+      fence.rendered = block.kind === 'mermaid-payload'
+        ? verifiedMermaidRendering(block)
+        : {
+            kind: block.kind,
+            found: true,
+            language: block.language,
+            bodySha256: block.bodySha256,
+            meaningfulTokens: block.meaningfulTokens,
+            matchesExpected: true,
+            position: block.position,
+          };
       if (fence.normalizedLanguage === 'text' && block.meaningfulTokens) {
         diagnostics.push(`${fenceLocation(fence)}: text fallback unexpectedly contains syntax tokens`);
       }
     }
   }
+  diagnostics.push(...classifyAdditionalRenderings(renderedDocuments, renderedFences));
   const byLanguage = new Map();
   for (const fence of renderedFences) {
     if (fence.normalizedLanguage === 'text' || fence.normalizedLanguage === 'mermaid') continue;
@@ -164,7 +185,15 @@ export function reconcileRenderedInventory(sourceInventory, renderedByRoute) {
         renderedRouteCount: renderedDocuments.length,
         renderedBlockCount: renderedDocuments.reduce((count, document) => count + document.renderings.length, 0),
         unattributedRenderedCount: renderedDocuments.reduce(
-          (count, document) => count + document.renderings.filter((block) => !block.sourceFence).length,
+          (count, document) => count + document.renderings.filter((block) => !block.classification).length,
+          0,
+        ),
+        componentRenderedCount: renderedDocuments.reduce(
+          (count, document) => count + document.renderings.filter((block) => block.classification === 'component').length,
+          0,
+        ),
+        fieldNoteProjectionCount: renderedDocuments.reduce(
+          (count, document) => count + document.renderings.filter((block) => block.classification === 'field-note-projection').length,
           0,
         ),
         clientDeferredCount: renderedFences.filter((fence) => fence.rendered?.verification === 'client-runtime').length,
@@ -193,10 +222,10 @@ async function inspectSourceTree() {
 
     const generated = await readFile(descriptor.generatedFile, 'utf8');
     const generatedFences = inventoryMarkdownFences(generated, descriptor).fences;
-    const expected = inspected.fences.map((fence) => fence.normalizedLanguage);
-    const actual = generatedFences.map((fence) => fence.normalizedLanguage);
+    const expected = inspected.fences.map(fenceIdentity);
+    const actual = generatedFences.map(fenceIdentity);
     if (expected.join('\0') !== actual.join('\0')) {
-      diagnostics.push(`${sourceLocation(descriptor)}: passive rendering changed the fence sequence; expected ${JSON.stringify(expected)}, found ${JSON.stringify(actual)}`);
+      diagnostics.push(`${sourceLocation(descriptor)}: passive rendering changed the fence language or body sequence; expected ${JSON.stringify(expected)}, found ${JSON.stringify(actual)}`);
     }
   }
   for (const file of await filesBelow(path.join(root, 'src', 'pages'), /\.mdx?$/)) {
@@ -306,51 +335,71 @@ async function collectedMarkdownSources() {
   };
 }
 
-function inspectRenderedDocument(html, file, route) {
+export function inspectRenderedDocument(html, file, route) {
   const document = parseHtml(html);
   const diagnostics = [];
   const blocks = [];
   const renderings = [];
   const location = route ? `${file} [${route}]` : file;
-  const visit = (element) => {
+  const visit = (element, projectionOf = null) => {
     if (!element?.tagName) {
-      for (const child of element?.childNodes ?? []) visit(child);
+      for (const child of element?.childNodes ?? []) visit(child, projectionOf);
       return;
     }
+    const currentProjection = element.tagName === 'article'
+      ? fieldNoteProjectionRoute(element) ?? projectionOf
+      : projectionOf;
+    const addRendering = (rendering) => renderings.push({...rendering, projectionOf: currentProjection});
     const names = classNames(element);
+    const mermaidSource = attribute(element, 'data-b10x-mermaid-source');
+    if (mermaidSource !== undefined) {
+      addRendering({
+        kind: 'mermaid-payload',
+        language: 'mermaid',
+        bodySha256: codeBodySha256(mermaidSource),
+        meaningfulTokens: false,
+      });
+      return;
+    }
     if (names.has('docusaurus-mermaid-container')) {
-      renderings.push({kind: 'diagram', language: 'mermaid', meaningfulTokens: false});
+      addRendering({kind: 'diagram', language: 'mermaid', meaningfulTokens: false});
       return;
     }
     if (element.tagName !== 'pre') {
-      for (const child of element.childNodes ?? []) visit(child);
+      for (const child of element.childNodes ?? []) visit(child, currentProjection);
       return;
     }
     const pre = element;
     const preClasses = classNames(pre);
     if (preClasses.has('mermaid')) {
-      renderings.push({kind: 'diagram', language: 'mermaid', meaningfulTokens: false});
+      addRendering({kind: 'diagram', language: 'mermaid', meaningfulTokens: false});
       return;
     }
     if (!preClasses.has('prism-code')) {
       diagnostics.push(`${location}: rendered <pre> bypasses the shared Prism renderer`);
-      renderings.push({kind: 'raw-pre', language: null, meaningfulTokens: false});
+      addRendering({kind: 'raw-pre', language: null, meaningfulTokens: false});
       return;
     }
     const language = languageClass(pre);
     if (!language) {
       diagnostics.push(`${location}: Prism block has no language class`);
-      renderings.push({kind: 'prism', language: null, meaningfulTokens: false});
+      addRendering({kind: 'prism', language: null, meaningfulTokens: false});
+      return;
+    }
+    const bodySha256 = codeBodySha256(renderedCodeValue(pre));
+    if (language === 'mermaid') {
+      diagnostics.push(`${location}: Mermaid rendered as Prism code instead of a diagram`);
+      addRendering({kind: 'prism', language, bodySha256, meaningfulTokens: hasMeaningfulTokens(pre)});
       return;
     }
     if (!acceptedLanguages.has(language)) {
       diagnostics.push(`${location}: rendered Prism block uses unsupported language ${JSON.stringify(language)}`);
-      renderings.push({kind: 'prism', language, meaningfulTokens: hasMeaningfulTokens(pre)});
+      addRendering({kind: 'prism', language, bodySha256, meaningfulTokens: hasMeaningfulTokens(pre)});
       return;
     }
-    const block = {language, meaningfulTokens: hasMeaningfulTokens(pre)};
+    const block = {language, bodySha256, meaningfulTokens: hasMeaningfulTokens(pre)};
     blocks.push(block);
-    renderings.push({kind: 'prism', ...block});
+    addRendering({kind: 'prism', ...block});
   };
   visit(document);
   return {
@@ -370,21 +419,114 @@ function documentRenderings(rendered) {
   ];
 }
 
+function visitMarkdown(node, visitor) {
+  visitor(node);
+  for (const child of node.children ?? []) visitMarkdown(child, visitor);
+}
+
+function codeBodySha256(value) {
+  return createHash('sha256').update(String(value).replace(/\r\n?/g, '\n')).digest('hex');
+}
+
+function fenceIdentity(fence) {
+  return `${fence.normalizedLanguage}\0${fence.bodySha256}`;
+}
+
+function shortDigest(value) {
+  return typeof value === 'string' ? value.slice(0, 12) : '<none>';
+}
+
+function sourceFenceReference(fence) {
+  return {
+    repository: fence.repository,
+    sourcePath: fence.sourcePath,
+    sourceRevision: fence.sourceRevision,
+    publicRoute: fence.publicRoute,
+    line: fence.line,
+  };
+}
+
+function verifiedMermaidRendering(block) {
+  return {
+    kind: 'diagram',
+    found: false,
+    payloadFound: true,
+    language: 'mermaid',
+    bodySha256: block.bodySha256,
+    meaningfulTokens: false,
+    matchesExpected: true,
+    position: block.position,
+    verification: 'client-runtime',
+  };
+}
+
+function classifyAdditionalRenderings(renderedDocuments, sourceFences) {
+  const diagnostics = [];
+  const fieldNoteFencesByRoute = new Map();
+  for (const fence of sourceFences.filter((candidate) => candidate.sourceKind === 'field-note')) {
+    const candidates = fieldNoteFencesByRoute.get(fence.publicRoute) ?? [];
+    candidates.push(fence);
+    fieldNoteFencesByRoute.set(fence.publicRoute, candidates);
+  }
+  for (const document of renderedDocuments) {
+    const projectionCursors = new Map();
+    for (const block of document.renderings) {
+      if (block.classification) continue;
+      const candidates = block.projectionOf ? fieldNoteFencesByRoute.get(block.projectionOf) ?? [] : [];
+      const cursor = projectionCursors.get(block.projectionOf) ?? 0;
+      const matchIndex = candidates.findIndex((candidate, index) => index >= cursor && fenceIdentity(candidate) === `${block.language}\0${block.bodySha256}`);
+      if (matchIndex >= 0) {
+        const sourceFence = candidates[matchIndex];
+        projectionCursors.set(block.projectionOf, matchIndex + 1);
+        block.classification = 'field-note-projection';
+        block.sourceFence = sourceFenceReference(sourceFence);
+      } else if (block.projectionOf) {
+        block.classification = 'field-note-projection';
+        diagnostics.push(`${document.outputPath ?? document.publicRoute}: projected code block for ${block.projectionOf} has no matching source fence`);
+      } else {
+        block.classification = 'component';
+      }
+    }
+  }
+  return diagnostics;
+}
+
+function renderedCodeValue(pre) {
+  const code = findElements(pre, (candidate) => candidate.tagName === 'code')[0];
+  if (!code) return '';
+  const tokenLines = findElements(code, (candidate) => classNames(candidate).has('token-line'));
+  if (tokenLines.length > 0) return tokenLines.map(elementText).join('\n');
+  return elementTextWithBreaks(code);
+}
+
+function elementText(element) {
+  if (element?.nodeName === '#text') return element.value ?? '';
+  return (element?.childNodes ?? []).map(elementText).join('');
+}
+
+function elementTextWithBreaks(element) {
+  if (element?.nodeName === '#text') return element.value ?? '';
+  if (element?.tagName === 'br') return '\n';
+  return (element?.childNodes ?? []).map(elementTextWithBreaks).join('');
+}
+
+function fieldNoteProjectionRoute(article) {
+  for (const link of findElements(article, (candidate) => candidate.tagName === 'a')) {
+    const href = attribute(link, 'href');
+    if (/^\/updates\/field-notes\/(?!tags\/)[^/]+\/[^/]+\/$/.test(href ?? '')) return href;
+  }
+  return null;
+}
+
 function semanticClass(language) {
-  if (language === 'bash') return 'command';
-  if (language === 'shell-session') return 'terminal-transcript';
-  if (language === 'text') return 'plain-output';
   if (language === 'mermaid') return 'diagram';
-  if (language === 'diff') return 'diff';
-  if (['json', 'json5', 'yaml', 'toml', 'ini', 'properties', 'docker'].includes(language)) return 'configuration';
-  if (['markup', 'markdown'].includes(language)) return 'markup';
-  return 'source-code';
+  return describeMarkdownFenceLanguage(language).kind;
 }
 
 function summarizeFences(fences) {
   const languages = countBy(fences, (fence) => fence.normalizedLanguage);
   const semanticClasses = countBy(fences, (fence) => fence.semanticClass);
-  const rendered = fences.filter((fence) => fence.rendered?.found);
+  const rendered = fences.filter((fence) => fence.rendered?.matchesExpected);
   return {
     fenceCount: fences.length,
     fencedSourceCount: new Set(fences.map((fence) => sourceKey(fence.repository ?? '', fence.sourcePath))).size,
@@ -454,19 +596,9 @@ function missingRendering(fence) {
     kind: fence.expectedRendering,
     found: false,
     language: fence.normalizedLanguage,
+    bodySha256: fence.bodySha256,
     meaningfulTokens: false,
     matchesExpected: false,
-  };
-}
-
-function deferredMermaidRendering() {
-  return {
-    kind: 'diagram',
-    found: false,
-    language: 'mermaid',
-    meaningfulTokens: false,
-    matchesExpected: true,
-    verification: 'client-runtime',
   };
 }
 

@@ -3,10 +3,11 @@
 ## Unreleased
 
 - Inventory every fenced example from the exact locked documentation sources through its rendered
-  route, retain source-aware diagnostics, and publish the deterministic source/render report with
-  the site artifact.
+  route and exact body, retain source-aware diagnostics and field-note projection attribution, and
+  publish the deterministic source/render report with the site artifact.
 - Give code examples consistent language labels, semantic accents, theme contrast, focus and touch
-  controls, and narrow-screen scrolling through the pinned shared Docs System renderer.
+  controls, narrow-screen scrolling, and verified client-rendered Mermaid diagrams through the
+  pinned shared Docs System renderer.
 
 ## 0.3.2 — 2026-09-03
 

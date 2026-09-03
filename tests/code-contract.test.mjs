@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
@@ -7,6 +8,7 @@ import {
   inspectComponentSource,
   inspectMarkdownFences,
   inspectRenderedCode,
+  inspectRenderedDocument,
   inventoryMarkdownFences,
   reconcileRenderedInventory,
 } from '../scripts/code-contract.mjs';
@@ -58,11 +60,11 @@ test('inventory deterministically retains source, route, language, and semantic 
     })),
     [
       {declaredLanguage: 'sh', normalizedLanguage: 'bash', semanticClass: 'command', expectedRendering: 'prism'},
-      {declaredLanguage: 'shell-session', normalizedLanguage: 'shell-session', semanticClass: 'terminal-transcript', expectedRendering: 'prism'},
-      {declaredLanguage: 'text', normalizedLanguage: 'text', semanticClass: 'plain-output', expectedRendering: 'plain'},
-      {declaredLanguage: 'yaml', normalizedLanguage: 'yaml', semanticClass: 'configuration', expectedRendering: 'prism'},
-      {declaredLanguage: 'rust', normalizedLanguage: 'rust', semanticClass: 'source-code', expectedRendering: 'prism'},
-      {declaredLanguage: 'diff', normalizedLanguage: 'diff', semanticClass: 'diff', expectedRendering: 'prism'},
+      {declaredLanguage: 'shell-session', normalizedLanguage: 'shell-session', semanticClass: 'transcript', expectedRendering: 'prism'},
+      {declaredLanguage: 'text', normalizedLanguage: 'text', semanticClass: 'output', expectedRendering: 'plain'},
+      {declaredLanguage: 'yaml', normalizedLanguage: 'yaml', semanticClass: 'source', expectedRendering: 'prism'},
+      {declaredLanguage: 'rust', normalizedLanguage: 'rust', semanticClass: 'source', expectedRendering: 'prism'},
+      {declaredLanguage: 'diff', normalizedLanguage: 'diff', semanticClass: 'source', expectedRendering: 'prism'},
       {declaredLanguage: 'mermaid', normalizedLanguage: 'mermaid', semanticClass: 'diagram', expectedRendering: 'diagram'},
     ],
   );
@@ -73,7 +75,33 @@ test('inventory deterministically retains source, route, language, and semantic 
     normalizedLanguage: 'bash',
     semanticClass: 'command',
     expectedRendering: 'prism',
+    bodySha256: bodyHash('npm run build'),
   });
+});
+
+test('inventory includes fenced blocks nested in blockquotes and lists', () => {
+  const source = [
+    '> ```powershell',
+    '> Get-ChildItem',
+    '> ```',
+    '',
+    '- verify',
+    '',
+    '  ~~~yaml',
+    '  enabled: true',
+    '  ~~~',
+  ].join('\n');
+  const result = inventoryMarkdownFences(source, 'nested.md');
+  assert.deepEqual(result.diagnostics, []);
+  assert.deepEqual(result.fences.map(({line, normalizedLanguage, semanticClass, bodySha256}) => ({
+    line,
+    normalizedLanguage,
+    semanticClass,
+    bodySha256,
+  })), [
+    {line: 1, normalizedLanguage: 'powershell', semanticClass: 'command', bodySha256: bodyHash('Get-ChildItem')},
+    {line: 7, normalizedLanguage: 'yaml', semanticClass: 'source', bodySha256: bodyHash('enabled: true')},
+  ]);
 });
 
 test('source diagnostics identify the repository, source line, and public route', () => {
@@ -94,16 +122,31 @@ test('render and component contracts prevent plain preformatted-code escape hatc
   assert.match(inspectRenderedCode('<pre><code>value</code></pre>')[0], /bypasses the shared Prism renderer/);
   assert.match(inspectRenderedCode('<pre class="prism-code"><code>value</code></pre>')[0], /has no language class/);
   assert.match(inspectRenderedCode('<pre class="prism-code language-made-up"><code>value</code></pre>')[0], /unsupported language/);
+  assert.match(inspectRenderedCode('<pre class="prism-code language-mermaid"><code>flowchart LR</code></pre>')[0], /instead of a diagram/);
+  assert.deepEqual(inspectRenderedCode('<span hidden data-b10x-mermaid-source="flowchart LR"></span>'), []);
   assert.match(inspectComponentSource('return <pre><code>{value}</code></pre>;', 'page.tsx')[0], /raw <pre>/);
   assert.deepEqual(inspectComponentSource('return <CodeExample language="yaml">{value}</CodeExample>;'), []);
+});
+
+test('render inspection reconstructs exact Prism bodies across tokens and blank lines', () => {
+  const html = [
+    '<pre class="prism-code language-yaml"><code>',
+    '<div class="token-line"><span class="token key">enabled</span><span class="token punctuation">:</span><span class="token plain"> true</span><br></div>',
+    '<div class="token-line"><span class="token plain"></span><br></div>',
+    '<div class="token-line"><span class="token key">label</span><span class="token punctuation">:</span><span class="token plain"> &quot;A &amp; B&quot;</span><br></div>',
+    '</code></pre>',
+  ].join('');
+  const inspected = inspectRenderedDocument(html, 'fixture.html', '/fixture/');
+  assert.deepEqual(inspected.diagnostics, []);
+  assert.equal(inspected.renderings[0].bodySha256, bodyHash('enabled: true\n\nlabel: "A & B"'));
 });
 
 test('rendered inventory reconciles Prism, plain-text, and Mermaid blocks in document order', () => {
   const route = '/docs/fixture/example/';
   const sourceInventory = inventoryDocument(route, [
-    fence('yaml', 'configuration', 'prism', 4),
-    fence('text', 'plain-output', 'plain', 10),
-    fence('mermaid', 'diagram', 'diagram', 16),
+    fence('yaml', 'source', 'prism', 4, 'enabled: true'),
+    fence('text', 'output', 'plain', 10, 'build complete'),
+    fence('mermaid', 'diagram', 'diagram', 16, 'flowchart LR\n  source --> site'),
   ]);
   const renderedByRoute = new Map([[route, {
     blocks: [
@@ -112,9 +155,9 @@ test('rendered inventory reconciles Prism, plain-text, and Mermaid blocks in doc
     ],
     diagramCount: 1,
     renderings: [
-      {kind: 'prism', language: 'yaml', meaningfulTokens: true},
-      {kind: 'prism', language: 'text', meaningfulTokens: false},
-      {kind: 'diagram', language: 'mermaid', meaningfulTokens: false},
+      rendering('prism', 'yaml', true, 'enabled: true'),
+      rendering('prism', 'text', false, 'build complete'),
+      rendering('mermaid-payload', 'mermaid', false, 'flowchart LR\n  source --> site'),
     ],
   }]]);
   const result = reconcileRenderedInventory(sourceInventory, renderedByRoute);
@@ -124,60 +167,115 @@ test('rendered inventory reconciles Prism, plain-text, and Mermaid blocks in doc
   assert.ok(result.inventory.fences.every((entry) => entry.rendered.matchesExpected));
 });
 
-test('static HTML records Docusaurus client-only Mermaid blocks as deferred', () => {
+test('static HTML verifies the exact payload for client-rendered Mermaid blocks', () => {
   const route = '/docs/fixture/example/';
-  const sourceInventory = inventoryDocument(route, [fence('mermaid', 'diagram', 'diagram', 4)]);
-  const result = reconcileRenderedInventory(sourceInventory, new Map([[route, {renderings: []}]]));
+  const sourceInventory = inventoryDocument(route, [fence('mermaid', 'diagram', 'diagram', 4, 'flowchart LR\n  a --> b')]);
+  const result = reconcileRenderedInventory(sourceInventory, new Map([[route, {
+    renderings: [rendering('mermaid-payload', 'mermaid', false, 'flowchart LR\n  a --> b')],
+  }]]));
   assert.deepEqual(result.diagnostics, []);
   assert.deepEqual(result.inventory.fences[0].rendered, {
     kind: 'diagram',
     found: false,
+    payloadFound: true,
     language: 'mermaid',
+    bodySha256: bodyHash('flowchart LR\n  a --> b'),
     meaningfulTokens: false,
     matchesExpected: true,
+    position: 1,
     verification: 'client-runtime',
   });
   assert.equal(result.inventory.summary.clientDeferredCount, 1);
 });
 
+test('Mermaid cannot silently disappear or fall back to a Prism block', () => {
+  const route = '/docs/fixture/example/';
+  const sourceInventory = inventoryDocument(route, [fence('mermaid', 'diagram', 'diagram', 4, 'flowchart LR\n  a --> b')]);
+  const missing = reconcileRenderedInventory(sourceInventory, new Map([[route, {renderings: []}]]));
+  assert.match(missing.diagnostics[0], /no matching mermaid code block/);
+  assert.equal(missing.inventory.fences[0].rendered.matchesExpected, false);
+  const prism = reconcileRenderedInventory(sourceInventory, new Map([[route, {
+    renderings: [rendering('prism', 'mermaid', false, 'flowchart LR\n  a --> b')],
+  }]]));
+  assert.match(prism.diagnostics[0], /expected rendered mermaid-payload/);
+  assert.equal(prism.inventory.summary.clientDeferredCount, 0);
+});
+
 test('rendered inventory accounts for component blocks without treating them as Markdown fences', () => {
   const route = '/docs/fixture/example/';
-  const sourceInventory = inventoryDocument(route, [fence('yaml', 'configuration', 'prism', 4)]);
+  const sourceInventory = inventoryDocument(route, [fence('yaml', 'source', 'prism', 4, 'enabled: true')]);
   const result = reconcileRenderedInventory(sourceInventory, new Map([
     [route, {renderings: [
-      {kind: 'prism', language: 'text', meaningfulTokens: false},
-      {kind: 'prism', language: 'yaml', meaningfulTokens: false},
+      rendering('prism', 'text', false, 'component output'),
+      rendering('prism', 'yaml', false, 'enabled: true'),
     ]}],
-    ['/untracked/', {renderings: [{kind: 'prism', language: 'bash', meaningfulTokens: true}]}],
+    ['/untracked/', {renderings: [rendering('prism', 'bash', true, 'npm test')]}],
   ]));
   assert.equal(result.diagnostics.length, 1);
   assert.match(result.diagnostics[0], /every rendered yaml block collapsed to plain tokens/);
   assert.equal(result.inventory.summary.renderedBlockCount, 3);
-  assert.equal(result.inventory.summary.unattributedRenderedCount, 2);
+  assert.equal(result.inventory.summary.unattributedRenderedCount, 0);
+  assert.equal(result.inventory.summary.componentRenderedCount, 2);
+  assert.equal(result.inventory.renderedDocuments[0].renderings[0].classification, 'component');
   assert.equal(result.inventory.renderedDocuments[0].renderings[0].sourceFence, null);
   assert.deepEqual(result.inventory.renderedDocuments[0].renderings[1].sourceFence, {
     repository: 'fixture-repository',
     sourcePath: 'docs/example.md',
+    sourceRevision: '0123456789abcdef',
+    publicRoute: route,
     line: 4,
   });
+  assert.equal(result.inventory.renderedDocuments[0].renderings[1].classification, 'source-fence');
   assert.equal(result.inventory.renderedDocuments[1].renderings[0].sourceFence, null);
+});
+
+test('field-note index copies retain source attribution by language and body', () => {
+  const noteRoute = '/updates/field-notes/example/';
+  const noteFence = {
+    ...fence('bash', 'command', 'prism', 8, 'npm test'),
+    sourceKind: 'field-note',
+  };
+  const sourceInventory = inventoryDocument(noteRoute, [noteFence]);
+  const result = reconcileRenderedInventory(sourceInventory, new Map([
+    [noteRoute, {renderings: [rendering('prism', 'bash', true, 'npm test')]}],
+    ['/updates/field-notes/', {renderings: [{
+      ...rendering('prism', 'bash', true, 'npm test'),
+      projectionOf: noteRoute,
+    }]}],
+  ]));
+  assert.deepEqual(result.diagnostics, []);
+  assert.equal(result.inventory.summary.fieldNoteProjectionCount, 1);
+  const projection = result.inventory.renderedDocuments
+    .find((document) => document.publicRoute === '/updates/field-notes/').renderings[0];
+  assert.equal(projection.classification, 'field-note-projection');
+  assert.equal(projection.sourceFence.sourcePath, 'docs/example.md');
+});
+
+test('rendered reconciliation requires source-body identity', () => {
+  const route = '/docs/fixture/example/';
+  const sourceInventory = inventoryDocument(route, [fence('yaml', 'source', 'prism', 4, 'enabled: true')]);
+  const result = reconcileRenderedInventory(sourceInventory, new Map([[route, {
+    renderings: [rendering('prism', 'yaml', true, 'enabled: false')],
+  }]]));
+  assert.match(result.diagnostics[0], /with source body/);
+  assert.equal(result.inventory.fences[0].rendered.matchesExpected, false);
 });
 
 test('rendered inventory rejects reordered Markdown fences with source-aware diagnostics', () => {
   const route = '/docs/fixture/example/';
   const sourceInventory = inventoryDocument(route, [
-    fence('yaml', 'configuration', 'prism', 4),
-    fence('text', 'plain-output', 'plain', 10),
+    fence('yaml', 'source', 'prism', 4, 'enabled: true'),
+    fence('text', 'output', 'plain', 10, 'build complete'),
   ]);
   const result = reconcileRenderedInventory(sourceInventory, new Map([[route, {renderings: [
-    {kind: 'prism', language: 'text', meaningfulTokens: false},
-    {kind: 'prism', language: 'yaml', meaningfulTokens: true},
+    rendering('prism', 'text', false, 'build complete'),
+    rendering('prism', 'yaml', true, 'enabled: true'),
   ]}]]));
   assert.equal(result.diagnostics.length, 1);
   assert.match(result.diagnostics[0], /fixture-repository\/docs\/example\.md:10 \[\/docs\/fixture\/example\/\]: rendered route has no matching text code block/);
 });
 
-function fence(language, semanticClass, expectedRendering, line) {
+function fence(language, semanticClass, expectedRendering, line, body = `${language} example`) {
   return {
     repository: 'fixture-repository',
     sourcePath: 'docs/example.md',
@@ -189,8 +287,17 @@ function fence(language, semanticClass, expectedRendering, line) {
     normalizedLanguage: language,
     semanticClass,
     expectedRendering,
+    bodySha256: bodyHash(body),
     rendered: null,
   };
+}
+
+function rendering(kind, language, meaningfulTokens, body) {
+  return {kind, language, meaningfulTokens, bodySha256: bodyHash(body)};
+}
+
+function bodyHash(value) {
+  return createHash('sha256').update(value).digest('hex');
 }
 
 function inventoryDocument(route, fences) {
