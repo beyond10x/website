@@ -33,9 +33,9 @@ export default function ProjectProfile({repository, revision}: {repository: stri
       <div className={styles.status}><StatusBadge maturity={primary.maturity} /><span>{primary.kind}</span><span>{primary.availability}</span></div>
       <p>{primary.summary}</p>
       <FactGrid items={[
-        {label: 'Locked revision', value: revision === 'lock-pending' ? 'Bootstrap fixture' : <Link to={`${primary.repository.url}/tree/${revision}`} aria-label={`View locked revision ${revision} on GitHub`} title={revision}><code>{revision.slice(0, 12)}</code></Link>},
+        {label: 'Locked revision', value: /^[0-9a-f]{40}$/.test(revision) ? <Link to={`${primary.repository.url}/tree/${revision}`} aria-label={`View locked revision ${revision} on GitHub`} title={revision}><code>{revision.slice(0, 12)}</code></Link> : 'Local preview'},
         {label: 'Latest release', value: latestRelease ? <Link to={latestRelease.url}>{latestRelease.version}</Link> : 'Not recorded', detail: latestRelease ? <time dateTime={latestRelease.publishedAt}>{formatDate(latestRelease.publishedAt)}</time> : 'No release exists in the current snapshot'},
-        {label: 'Primary journey', value: primaryJourneyOf(primary) ? <Link to={`/journeys/${primaryJourneyOf(primary)}/`}>{label(primaryJourneyOf(primary) ?? '')}</Link> : 'Not declared'},
+        {label: 'Primary outcome', value: primaryJourneyOf(primary) ? <Link to={experienceRouteForJourney(primaryJourneyOf(primary) ?? '')}>{label(primaryJourneyOf(primary) ?? '')}</Link> : 'Not declared'},
         {label: 'Audience', value: (primary.audiences ?? []).map(label).join(', ') || 'Not declared'},
       ]} />
     </section>
@@ -69,6 +69,13 @@ export default function ProjectProfile({repository, revision}: {repository: stri
 
 function ReferenceGroup({title, items, empty}: {title: string; items: Array<{key: string; label: string; url: string; detail?: string; external?: boolean}>; empty: string}): ReactNode {
   return <ContentCard title={title}>{items.length ? <ul>{items.map((item) => <li key={item.key}>{item.external ? <a href={item.url}>{item.label}</a> : <Link to={localTarget(item.url)}>{item.label}</Link>}{item.detail ? <small>{item.detail}</small> : null}</li>)}</ul> : <p className={styles.empty}>{empty}</p>}</ContentCard>;
+}
+
+function experienceRouteForJourney(journey: string): string {
+  if (journey === 'understand') return '/learn/safe-agentic-coding/';
+  if (journey === 'plan-work' || journey === 'specify') return '/start/spec-driven-development/';
+  if (journey === 'build-agents') return '/build/agent-systems/';
+  return '/operate/';
 }
 
 function RelationshipGroup({title, relationships, direction}: {title: string; relationships: RelationshipView[]; direction: 'incoming' | 'outgoing'}): ReactNode {

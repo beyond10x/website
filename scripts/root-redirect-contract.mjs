@@ -4,6 +4,12 @@ import {outputPathForRoute, renderRedirectHtml, writeRedirectMap} from '@beyond1
 
 export const ROOT_OWNED_REDIRECTS = Object.freeze([
   Object.freeze({from: '/engineering-protocols/', to: '/ecosystem/aep/', type: 'html'}),
+  Object.freeze({from: '/journeys/', to: '/start/', type: 'html'}),
+  Object.freeze({from: '/journeys/build-agents/', to: '/build/agent-systems/', type: 'html'}),
+  Object.freeze({from: '/journeys/operate-services/', to: '/operate/', type: 'html'}),
+  Object.freeze({from: '/journeys/plan-work/', to: '/start/spec-driven-development/', type: 'html'}),
+  Object.freeze({from: '/journeys/specify/', to: '/start/spec-driven-development/', type: 'html'}),
+  Object.freeze({from: '/journeys/understand/', to: '/learn/safe-agentic-coding/', type: 'html'}),
   Object.freeze({from: '/website/', to: '/', type: 'html'}),
 ]);
 

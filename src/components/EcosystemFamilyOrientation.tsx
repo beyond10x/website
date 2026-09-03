@@ -10,7 +10,6 @@ interface FamilyDefinition {
   id: string;
   label: string;
   slug: string;
-  expectedMembers: number;
   purpose: string;
   startRepository: string;
   next: {family: string; label: string};
@@ -36,11 +35,11 @@ export default function EcosystemFamilyOrientation({
   const titleId = `ecosystem-family-orientation-${useId().replaceAll(':', '')}`;
   const cards = taxonomy.families.map((family, index) => {
     const candidates = surfaces.filter((surface) => surface.repository.id === family.startRepository);
-    const start = candidates.find((surface) => surface.adoption) ?? candidates[0];
+    const start = candidates.find((surface) => declaredAdoption(surface)) ?? candidates[0];
     if (!start) throw new Error(`recommended family start ${family.startRepository} is absent from the public registry`);
     const next = familyById.get(family.next.family);
     if (!next) throw new Error(`${family.id} points to unknown next family ${family.next.family}`);
-    const action = start.adoption ?? {label: `Read ${start.name}`, url: start.canonicalUrl};
+    const action = declaredAdoption(start) ?? {label: `Read ${start.name}`, url: start.canonicalUrl};
     const memberCount = new Set(surfaces
       .filter((surface) => surfaceNavigation(surface)?.group === family.id)
       .map((surface) => surface.repository.id)).size;
@@ -88,6 +87,10 @@ export default function EcosystemFamilyOrientation({
       </div>
     </section>
   );
+}
+
+function declaredAdoption(surface: RegistrySurface) {
+  return 'adoption' in surface ? surface.adoption : undefined;
 }
 
 function familyExplorePath(id: string): string {

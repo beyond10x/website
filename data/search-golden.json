@@ -1,0 +1,25 @@
+{
+  "schema": "b10x-search-golden/v1",
+  "queries": [
+    {
+      "query": "spec driven development claude",
+      "expectedFirst": "/start/spec-driven-development/"
+    },
+    {
+      "query": "safe autonomous coding",
+      "expectedFirst": "/learn/safe-agentic-coding/"
+    },
+    {
+      "query": "agent plugins install claude",
+      "expectedFirst": "/docs/agentplugins/install/"
+    },
+    {
+      "query": "harness approvals",
+      "expectedFirst": "/docs/harness/concepts/tools-and-approvals/"
+    },
+    {
+      "query": "deploy devcenter kubernetes",
+      "expectedFirst": "/operate/"
+    }
+  ]
+}

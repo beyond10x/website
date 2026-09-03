@@ -1007,6 +1007,36 @@
       "type": "html"
     },
     {
+      "from": "/journeys/",
+      "to": "/start/",
+      "type": "html"
+    },
+    {
+      "from": "/journeys/build-agents/",
+      "to": "/build/agent-systems/",
+      "type": "html"
+    },
+    {
+      "from": "/journeys/operate-services/",
+      "to": "/operate/",
+      "type": "html"
+    },
+    {
+      "from": "/journeys/plan-work/",
+      "to": "/start/spec-driven-development/",
+      "type": "html"
+    },
+    {
+      "from": "/journeys/specify/",
+      "to": "/start/spec-driven-development/",
+      "type": "html"
+    },
+    {
+      "from": "/journeys/understand/",
+      "to": "/learn/safe-agentic-coding/",
+      "type": "html"
+    },
+    {
       "from": "/metaharness/",
       "to": "/ecosystem/metaharness/",
       "type": "html"

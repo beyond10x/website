@@ -10,10 +10,22 @@ const options = parseArgs(process.argv.slice(2));
 const dataRoot = options.data ? path.resolve(options.data) : root;
 const build = options.artifact ? path.resolve(options.artifact) : path.join(root, 'build');
 const allowBootstrap = bootstrapEnabled();
-const {lock, bootstrap} = await validateSourceLock(dataRoot, {allowBootstrap});
+const {roster, lock, bootstrap} = await validateSourceLock(dataRoot, {allowBootstrap});
 const required = [
   'index.html',
   'vision/index.html',
+  'start/index.html',
+  'learn/index.html',
+  'build/index.html',
+  'products/index.html',
+  'start/spec-driven-development/index.html',
+  'learn/safe-agentic-coding/index.html',
+  'learn/from-principle-to-action/index.html',
+  'build/agent-systems/index.html',
+  'products/evaluate/index.html',
+  'operate/index.html',
+  'contribute/index.html',
+  'updates/index.html',
   'journeys/index.html',
   'ecosystem/index.html',
   'changes/index.html',
@@ -23,6 +35,7 @@ const required = [
   '.well-known/b10x-docs.json',
   '.well-known/b10x-redirects.json',
   '._b10x/deployment.json',
+  '._b10x/quality.json',
   '.well-known/b10x-compatibility-artifacts.json',
   'artifacts/ess/lab/billing_web_realized.wasm',
   'pagefind/pagefind.js',
@@ -56,7 +69,9 @@ const legacyRoutesBytes = await readFile(path.join(dataRoot, 'legacy-routes.json
 if (provenance.legacyRoutesSha256 !== sha256(legacyRoutesBytes)) throw new Error('provenance legacy-route digest does not match legacy-routes.json bytes');
 const expectedCommits = Object.fromEntries(lock.sources.map((source) => [source.repository, source.commit]));
 if (canonicalJson(provenance.sourceCommits) !== canonicalJson(expectedCommits)) throw new Error('provenance source commits do not exactly match the source lock');
-if (!bootstrap && Object.keys(provenance.sourceCommits).length !== 22) throw new Error('production provenance must contain exactly 22 source commits');
+if (!bootstrap && Object.keys(provenance.sourceCommits).length !== roster.repositories.length) {
+  throw new Error(`production provenance must contain exactly ${roster.repositories.length} source commits from sources.yaml`);
+}
 
 const facts = await artifactFacts(build);
 for (const property of ['artifactSha256', 'routesSha256']) {
@@ -88,6 +103,11 @@ if (frozen.path !== 'static/artifacts/ess/lab/billing_web_realized.wasm' || froz
 const frozenBytes = await readFile(path.join(build, frozen.path.replace(/^static\//, '')));
 if (frozenBytes.byteLength !== frozen.size || sha256(frozenBytes) !== frozen.sha256) {
   throw new Error('frozen ESS compatibility artifact bytes disagree with their ledger');
+}
+
+const quality = JSON.parse(await readFile(path.join(build, '._b10x', 'quality.json'), 'utf8'));
+if (quality.schema !== 'b10x-website-quality/v1' || quality.status !== 'passed' || quality.diagnostics.length !== 0) {
+  throw new Error('website quality report is absent, failed, or contains diagnostics');
 }
 
 process.stdout.write(`verified ${facts.routes.length} routes, ${facts.files.length} files, and ${bootstrap ? 'bootstrap' : 'production'} deployment agreement\n`);

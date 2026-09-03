@@ -9,7 +9,7 @@ import test from 'node:test';
 import {assertPassiveMdx} from '@beyond10x/docs-system/collector';
 import {artifactFacts, sha256} from '../scripts/artifact-contract.mjs';
 import {validateBootstrapSnapshots} from '../scripts/bootstrap-contract.mjs';
-import {declaredAnchors, extractDeclaredSource, resolveWorkspaceCommit, safeTreePath, sourceWorkspaceFromEnvironment, staticPrefix} from '../scripts/git-source.mjs';
+import {declaredAnchors, extractDeclaredSource, isCollectableManifestSchema, resolveWorkspaceCommit, safeTreePath, sourceWorkspaceFromEnvironment, staticPrefix} from '../scripts/git-source.mjs';
 import {sourceKey, sourceMap} from '../scripts/source-routing.mjs';
 
 const execFile = promisify(execFileCallback);
@@ -31,6 +31,12 @@ test('repository paths cannot escape or switch separator conventions', () => {
   assert.throws(() => safeTreePath('../private.md'), /escapes/);
   assert.throws(() => safeTreePath('/absolute.md'), /unsafe/);
   assert.throws(() => safeTreePath('website\\docs\\index.md'), /unsafe/);
+});
+
+test('source locking accepts explicit v3 compatibility and v4 experience manifests', () => {
+  assert.equal(isCollectableManifestSchema('b10x-docs/v3'), true);
+  assert.equal(isCollectableManifestSchema('b10x-docs/v4'), true);
+  assert.equal(isCollectableManifestSchema('b10x-docs/v2'), false);
 });
 
 test('local preview collection extracts the locked Git object and ignores dirty checkout bytes', async (context) => {

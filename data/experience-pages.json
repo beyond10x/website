@@ -1,0 +1,359 @@
+{
+  "schema": "b10x-website-experience-pages/v1",
+  "pages": [
+    {
+      "experienceId": "try-spec-driven-development",
+      "adoptionPathId": "claude-code",
+      "sections": [
+        {
+          "kind": "learn",
+          "title": "See the safety boundary before giving an agent work",
+          "steps": [
+            {
+              "id": "understand-the-loop",
+              "title": "Understand the governed loop",
+              "description": "Learn where model reasoning ends and specifications, permissions, reviews, and evidence begin.",
+              "url": "/learn/safe-agentic-coding/",
+              "completion": "You can name which decisions belong to the model and which must remain explicit and inspectable."
+            },
+            {
+              "id": "check-plugin-scope",
+              "title": "Review plugin trust and scope",
+              "description": "Inspect what an Agent Plugin can instruct Claude to do before installing it.",
+              "url": "/docs/agentplugins/trust-and-scope/",
+              "completion": "You know which instructions will enter the session and which authority they do not grant."
+            }
+          ]
+        },
+        {
+          "kind": "do",
+          "title": "Build the source-owned plan and specification",
+          "steps": [
+            {
+              "id": "install-agent-plugins",
+              "title": "Install the focused plugins",
+              "description": "Follow the Agent Plugins installation contract for Claude Code.",
+              "url": "/docs/agentplugins/install/",
+              "completion": "Claude can discover the selected beyond10x plugin instructions."
+            },
+            {
+              "id": "run-golden-path",
+              "title": "Build the governed first plan",
+              "description": "Use the repository-owned golden path to adopt, model, decompose, scope, run critics, and preserve the unresolved decision instead of guessing it.",
+              "url": "/docs/agentplugins/golden-path/",
+              "completion": "The ESS model and planning store validate, scopes retain their citations, critic verdicts are recorded, and the open decision blocker remains inspectable."
+            },
+            {
+              "id": "generate-docs-from-spec",
+              "title": "Project the specification into documentation",
+              "description": "Use ESS to generate deterministic human-readable documentation from the validated system specification.",
+              "url": "/docs/ess/guides/generate-artifacts/",
+              "completion": "Re-running generation from unchanged inputs produces unchanged documentation bytes."
+            }
+          ]
+        },
+        {
+          "kind": "verify",
+          "title": "Inspect the proof, then decide whether to implement",
+          "steps": [
+            {
+              "id": "inspect-evidence",
+              "title": "Inspect the evidence trail",
+              "description": "Check that claims about the work point to concrete outputs rather than a fluent transcript.",
+              "url": "/docs/aep/guides/check-a-transcript/",
+              "completion": "You can distinguish a claimed result from evidence that another person or tool can verify."
+            },
+            {
+              "id": "graduate-to-harness",
+              "title": "Choose whether to attempt implementation",
+              "description": "Treat the golden path's implementation wave and reference driver as optional experimental follow-ons: the published driven run does not reach completion today.",
+              "url": "/docs/agentplugins/golden-path/",
+              "completion": "You have made an explicit go or no-go decision; completing this planning path does not depend on launching or finishing a driven implementation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "experienceId": "understand-safe-agentic-coding",
+      "adoptionPathId": "concept-first",
+      "sections": [
+        {
+          "kind": "learn",
+          "title": "Start with the concepts",
+          "steps": [
+            {
+              "id": "safe-loop",
+              "title": "Learn the safe coding loop",
+              "description": "See why a useful autonomous coding loop separates intent, execution, review, evidence, and authority.",
+              "url": "/learn/safe-agentic-coding/",
+              "completion": "You can identify the five boundaries in an agentic coding task."
+            },
+            {
+              "id": "principles-to-action",
+              "title": "Follow the deeper architecture narrative",
+              "description": "Read how evidence-backed principles connect to deterministic mechanisms and governed reach.",
+              "url": "/learn/from-principle-to-action/",
+              "completion": "You understand the conceptual stack without treating it as one mandatory dependency chain."
+            }
+          ]
+        },
+        {
+          "kind": "do",
+          "title": "Inspect the boundaries in their owning documentation",
+          "steps": [
+            {
+              "id": "inspect-aep",
+              "title": "See how work becomes governed",
+              "description": "Use AEP's overview to inspect typed work, gates, and evidence.",
+              "url": "/docs/aep/concepts/overview/",
+              "completion": "You can identify the work decision that AEP makes explicit."
+            },
+            {
+              "id": "inspect-ess",
+              "title": "See how system intent becomes executable",
+              "description": "Use ESS's overview to distinguish specifications from generated documentation and contracts.",
+              "url": "/docs/ess/concepts/overview/",
+              "completion": "You can describe specification-to-document generation without claiming that prose is ESS input."
+            },
+            {
+              "id": "inspect-harness",
+              "title": "See how an agent loop stays observable",
+              "description": "Inspect the Harness model for tools, approvals, effects, budgets, and retained sessions.",
+              "url": "/docs/harness/concepts/agent-loop/",
+              "completion": "You can name the evidence a native agent run should retain."
+            }
+          ]
+        },
+        {
+          "kind": "verify",
+          "title": "Check your mental model",
+          "steps": [
+            {
+              "id": "choose-entry-point",
+              "title": "Choose an entry point by outcome",
+              "description": "Decide whether your next action is to try a governed change, build an agent system, or evaluate a product.",
+              "url": "/start/",
+              "completion": "You can choose one path without browsing the entire repository catalog."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "experienceId": "build-agent-systems",
+      "adoptionPathId": "observable-agent-loop",
+      "sections": [
+        {
+          "kind": "learn",
+          "title": "Choose the layer that owns your problem",
+          "steps": [
+            {
+              "id": "choose-plugin",
+              "title": "Use Agent Plugins for focused host guidance",
+              "description": "Choose a narrow plugin when Claude Code already supplies the execution loop.",
+              "url": "/docs/agentplugins/choose-a-plugin/",
+              "completion": "You can choose a plugin without granting it new runtime authority."
+            },
+            {
+              "id": "understand-harness",
+              "title": "Use Harness for a native agent loop",
+              "description": "Adopt Harness when provider-neutral execution, approvals, budgets, and sessions are requirements.",
+              "url": "/docs/harness/concepts/agent-loop/",
+              "completion": "You know when a plugin is enough and when you need a native loop."
+            },
+            {
+              "id": "inspect-approvals",
+              "title": "Inspect tools and approvals",
+              "description": "See how Harness separates available tools from the decisions that permit consequential effects.",
+              "url": "/docs/harness/concepts/tools-and-approvals/",
+              "completion": "You can identify where an approval decision is recorded and enforced."
+            }
+          ]
+        },
+        {
+          "kind": "do",
+          "title": "Run and bound the loop",
+          "steps": [
+            {
+              "id": "run-harness",
+              "title": "Run the Harness getting started path",
+              "description": "Complete the repository-owned first run and retain its session evidence.",
+              "url": "/docs/harness/getting-started/",
+              "completion": "A run completes with its decisions and effects available for inspection."
+            },
+            {
+              "id": "confine-effects",
+              "title": "Add a confinement boundary",
+              "description": "Use Substrate when commands or tools require an explicit execution boundary.",
+              "url": "/docs/substrate/concepts/confinement/",
+              "completion": "The execution boundary and allowed operations are explicit."
+            }
+          ]
+        },
+        {
+          "kind": "verify",
+          "title": "Observe the system from outside",
+          "steps": [
+            {
+              "id": "compare-runs",
+              "title": "Evaluate with Metaharness",
+              "description": "Drive or compare harnesses from outside their native loop when independent observation matters.",
+              "url": "/docs/metaharness/quickstart/",
+              "completion": "You can compare retained outcomes without relying only on the harness's own account."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "experienceId": "evaluate-beyond10x-products",
+      "adoptionPathId": "frontend-review",
+      "sections": [
+        {
+          "kind": "learn",
+          "title": "Start with the product boundary",
+          "steps": [
+            {
+              "id": "devcenter-profile",
+              "title": "Read the Devcenter profile",
+              "description": "Separate the product proposition from its current public artifacts and deployment access.",
+              "url": "/ecosystem/devcenter/",
+              "completion": "You can state what is publicly inspectable and what remains gated."
+            }
+          ]
+        },
+        {
+          "kind": "do",
+          "title": "Use the credential-free public review path",
+          "steps": [
+            {
+              "id": "devcenter-docs",
+              "title": "Run the frontend review without private artifacts",
+              "description": "Follow the source-owned frontend review workflow; the separate full-service build requires approved private dependencies.",
+              "url": "/docs/devcenter/",
+              "completion": "The credential-free review runs locally, and your notes preserve the less-than-32-day evaluation license boundary."
+            }
+          ]
+        },
+        {
+          "kind": "verify",
+          "title": "Verify access before planning adoption",
+          "steps": [
+            {
+              "id": "confirm-availability",
+              "title": "Confirm the current availability statement",
+              "description": "Treat private images and internal-only services as blockers to public deployment until the owning project says otherwise.",
+              "url": "/docs/devcenter/",
+              "completion": "Your evaluation notes distinguish review access from deployability."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "experienceId": "deploy-operate-products",
+      "adoptionPathId": "public-source-service",
+      "sections": [
+        {
+          "kind": "learn",
+          "title": "Choose an operable boundary",
+          "steps": [
+            {
+              "id": "inspect-service-map",
+              "title": "Inspect declared service relationships",
+              "description": "Use the public architecture map to identify the service that owns the boundary you need.",
+              "url": "/architecture/",
+              "completion": "You can name the owning service without assuming the reading order is a deployment stack."
+            }
+          ]
+        },
+        {
+          "kind": "do",
+          "title": "Follow the owning operations guide",
+          "steps": [
+            {
+              "id": "operate-aep-service",
+              "title": "Operate AEP Service",
+              "description": "Use the source-owned service documentation for configuration, security, reliability, and operations.",
+              "url": "/docs/aep-service/operations/",
+              "completion": "The deployment follows an explicitly published service contract."
+            },
+            {
+              "id": "operate-connectors",
+              "title": "Operate governed connector boundaries",
+              "description": "Use Connectors documentation when external actions require catalog, credentials, grants, invocation, and events.",
+              "url": "/docs/connectors/",
+              "completion": "External effects have an attributable, bounded operations path."
+            }
+          ]
+        },
+        {
+          "kind": "verify",
+          "title": "Keep access and support claims explicit",
+          "steps": [
+            {
+              "id": "check-project-status",
+              "title": "Check the owning project's current status",
+              "description": "Verify maturity, required artifacts, and access before copying any deployment command.",
+              "url": "/ecosystem/",
+              "completion": "No deployment plan depends on an artifact that the public cannot obtain."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "experienceId": "contribute-maintain",
+      "adoptionPathId": "source-owned-documentation",
+      "sections": [
+        {
+          "kind": "learn",
+          "title": "Understand documentation ownership",
+          "steps": [
+            {
+              "id": "docs-system-contract",
+              "title": "Read the Docs System contract",
+              "description": "Learn which metadata, collection, validation, and shared presentation concerns belong to Docs System.",
+              "url": "/docs/docs-system/",
+              "completion": "You can separate source truth, shared contracts, Website presentation, and Atlas delivery."
+            }
+          ]
+        },
+        {
+          "kind": "do",
+          "title": "Change the owning repository",
+          "steps": [
+            {
+              "id": "find-owner",
+              "title": "Find the repository that owns the claim",
+              "description": "Use project profiles and source links to edit technical content at its authority rather than in an imported snapshot.",
+              "url": "/ecosystem/",
+              "completion": "The proposed change is located in the repository that owns the technical claim."
+            },
+            {
+              "id": "preview-canonical-site",
+              "title": "Preview through the canonical Website shell",
+              "description": "Validate collected routes, passive Markdown, assets, search metadata, and redirects with the exact source revision.",
+              "url": "/docs/website/",
+              "completion": "The source page renders correctly at its canonical root-site URL."
+            }
+          ]
+        },
+        {
+          "kind": "verify",
+          "title": "Verify the public transaction",
+          "steps": [
+            {
+              "id": "inspect-change-stream",
+              "title": "Inspect changes and releases",
+              "description": "Confirm that the public change stream and source revision agree after publication.",
+              "url": "/updates/",
+              "completion": "The root site, source revision, feeds, and compatibility routes describe one release."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

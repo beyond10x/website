@@ -1,0 +1,291 @@
+{
+  "schema": "b10x-experiences/v1",
+  "artifacts": [
+    {
+      "id": "website-source",
+      "kind": "source",
+      "availability": "available",
+      "access": "public",
+      "url": "https://github.com/beyond10x/website"
+    },
+    {
+      "id": "agentplugins-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/agentplugins/"
+    },
+    {
+      "id": "agentplugins-release-source",
+      "kind": "source",
+      "availability": "available",
+      "access": "public",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.5.1",
+      "version": "0.5.1",
+      "note": "Pinned source release for the focused Claude Code plugins used by the practitioner path."
+    },
+    {
+      "id": "agentic-principles-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/agentic-principles/"
+    },
+    {
+      "id": "aep-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/aep/"
+    },
+    {
+      "id": "aep-cli-binary",
+      "kind": "binary",
+      "availability": "available",
+      "access": "public",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.44.0",
+      "version": "0.44.0",
+      "note": "Choose one archive for your target: x86_64 or aarch64 Linux GNU, or x86_64 or aarch64 macOS. The release also publishes SHA256SUMS. No Windows archive is published."
+    },
+    {
+      "id": "ess-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/ess/"
+    },
+    {
+      "id": "ess-cli-binary",
+      "kind": "binary",
+      "availability": "available",
+      "access": "public",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.5.1",
+      "version": "0.5.1",
+      "note": "Choose one archive for your target: x86_64 or aarch64 Linux GNU, or x86_64 or aarch64 macOS. The release also publishes SHA256SUMS. No Windows archive is published."
+    },
+    {
+      "id": "harness-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/harness/"
+    },
+    {
+      "id": "substrate-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/substrate/"
+    },
+    {
+      "id": "metaharness-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/metaharness/"
+    },
+    {
+      "id": "devcenter-docs",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/devcenter/"
+    },
+    {
+      "id": "devcenter-source",
+      "kind": "source",
+      "availability": "available",
+      "access": "public",
+      "url": "https://github.com/beyond10x/devcenter",
+      "note": "Public source for evaluation under PolyForm Free Trial 1.0.0: less than 32 consecutive calendar days for one application."
+    },
+    {
+      "id": "devcenter-private-build-dependencies",
+      "kind": "package",
+      "availability": "available",
+      "access": "approval-required",
+      "note": "A full service source build requires approved access to private sibling Rust dependencies."
+    },
+    {
+      "id": "devcenter-chart",
+      "kind": "helm-chart",
+      "availability": "available",
+      "access": "public",
+      "url": "https://github.com/beyond10x/devcenter/pkgs/container/charts%2Fdevcenter",
+      "note": "The public OCI chart can be inspected and rendered, but it is insufficient for deployment without private images and deployment-specific values."
+    },
+    {
+      "id": "devcenter-production-container",
+      "kind": "container",
+      "availability": "unpublished",
+      "access": "private",
+      "note": "The production image is not publicly distributed and is not required for the public frontend-review path."
+    },
+    {
+      "id": "aep-service-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/aep-service/"
+    },
+    {
+      "id": "aep-service-source",
+      "kind": "source",
+      "availability": "available",
+      "access": "public",
+      "url": "https://github.com/beyond10x/aep-service"
+    },
+    {
+      "id": "connectors-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/connectors/"
+    },
+    {
+      "id": "docs-system-documentation",
+      "kind": "documentation",
+      "availability": "available",
+      "access": "public",
+      "url": "https://beyond10x.github.io/docs/docs-system/"
+    }
+  ],
+  "experiences": [
+    {
+      "id": "try-spec-driven-development",
+      "label": "Try it",
+      "summary": "Use focused Agent Plugins and ESS to turn one feature idea into a validated system model, deterministic docs, and a scoped, critic-reviewed plan with visible blockers.",
+      "audiences": ["developer", "adopter"],
+      "adoptionPaths": [
+        {
+          "id": "claude-code",
+          "label": "Plan one governed change with Claude",
+          "support": "experimental",
+          "access": "public",
+          "artifactIds": ["agentplugins-documentation", "agentplugins-release-source", "ess-documentation", "ess-cli-binary", "aep-documentation", "aep-cli-binary"],
+          "url": "https://beyond10x.github.io/start/spec-driven-development/",
+          "estimatedMinutes": 30,
+          "prerequisites": ["A Git repository", "Claude Code", "The pinned AEP and ESS command-line binaries on PATH for a supported Linux or macOS target"],
+          "outcome": "Finish with a validated ESS model and generated docs, a scoped and critic-reviewed plan, and explicit blocker and evidence records; driven implementation remains optional and experimental."
+        }
+      ]
+    },
+    {
+      "id": "understand-safe-agentic-coding",
+      "label": "Learn",
+      "summary": "Build a practical mental model for agentic coding without starting from tools, repositories, or infrastructure.",
+      "audiences": ["developer", "evaluator", "researcher"],
+      "adoptionPaths": [
+        {
+          "id": "concept-first",
+          "label": "Understand safe autonomous coding",
+          "support": "supported",
+          "access": "public",
+          "artifactIds": ["agentic-principles-documentation", "aep-documentation", "ess-documentation", "harness-documentation"],
+          "url": "https://beyond10x.github.io/learn/safe-agentic-coding/",
+          "estimatedMinutes": 15,
+          "outcome": "Explain the boundaries between evidence, governed work, executable intent, agent execution, and external effects."
+        }
+      ]
+    },
+    {
+      "id": "build-agent-systems",
+      "label": "Build",
+      "summary": "Move from focused Claude guidance to provider-neutral loops, controlled execution, and outside-in evaluation.",
+      "audiences": ["developer"],
+      "adoptionPaths": [
+        {
+          "id": "observable-agent-loop",
+          "label": "Build observable agent systems",
+          "support": "experimental",
+          "access": "public",
+          "artifactIds": ["harness-documentation", "substrate-documentation", "metaharness-documentation"],
+          "url": "https://beyond10x.github.io/build/agent-systems/",
+          "estimatedMinutes": 20,
+          "outcome": "Choose the smallest agent-system layer that owns the execution or evaluation need."
+        }
+      ]
+    },
+    {
+      "id": "evaluate-beyond10x-products",
+      "label": "Evaluate",
+      "summary": "Review what a product can demonstrate publicly without turning source visibility into a deployment promise.",
+      "audiences": ["evaluator"],
+      "adoptionPaths": [
+        {
+          "id": "frontend-review",
+          "label": "Review Devcenter without credentials",
+          "support": "preview",
+          "access": "public",
+          "artifactIds": ["devcenter-docs", "devcenter-source"],
+          "url": "https://beyond10x.github.io/products/evaluate/",
+          "estimatedMinutes": 10,
+          "prerequisites": ["Node.js and pnpm to run the credential-free frontend review locally"],
+          "outcome": "Run or inspect the credential-free frontend review and understand its license and production-access boundaries.",
+          "note": "The public source is licensed for a trial of less than 32 consecutive calendar days for one application. It does not grant production use or image access."
+        },
+        {
+          "id": "approved-source-build",
+          "label": "Build the full Devcenter service from source",
+          "support": "preview",
+          "access": "approval-required",
+          "artifactIds": ["devcenter-docs", "devcenter-source", "devcenter-private-build-dependencies"],
+          "url": "https://beyond10x.github.io/docs/devcenter/",
+          "estimatedMinutes": 30,
+          "prerequisites": ["Docker", "Approved GitHub access to the private sibling dependencies"],
+          "outcome": "Build and run the full service container locally after obtaining access to every private build dependency.",
+          "note": "This is an approved evaluation path, not a public binary distribution or a production-use grant."
+        }
+      ]
+    },
+    {
+      "id": "deploy-operate-products",
+      "label": "Operate",
+      "summary": "Find service operations material without pushing cluster and chart detail into the practitioner onboarding path.",
+      "audiences": ["operator"],
+      "adoptionPaths": [
+        {
+          "id": "public-source-service",
+          "label": "Deploy and operate an available service",
+          "support": "experimental",
+          "access": "public",
+          "artifactIds": ["aep-service-documentation", "aep-service-source", "connectors-documentation"],
+          "url": "https://beyond10x.github.io/operate/",
+          "estimatedMinutes": 15,
+          "outcome": "Reach the owning service's deployment and operations contract with its access limitations intact."
+        },
+        {
+          "id": "company-cluster-devcenter",
+          "label": "Deploy Devcenter to a company cluster",
+          "support": "paused",
+          "access": "approval-required",
+          "artifactIds": ["devcenter-chart", "devcenter-production-container"],
+          "url": "https://beyond10x.github.io/docs/devcenter/",
+          "estimatedMinutes": 20,
+          "prerequisites": ["A company Kubernetes cluster", "Approved access to the production Devcenter image"],
+          "outcome": "Confirm the private production-image boundary before committing to a company-cluster deployment.",
+          "note": "The public chart is insufficient on its own, and the required production image is unpublished and private. This path is paused; review the operator documentation, then wait for an explicit distribution, license, and access contract."
+        }
+      ]
+    },
+    {
+      "id": "contribute-maintain",
+      "label": "Contribute",
+      "summary": "Work from repository authority, exact source revisions, and the canonical Website projection.",
+      "audiences": ["developer", "operator"],
+      "adoptionPaths": [
+        {
+          "id": "source-owned-documentation",
+          "label": "Contribute to or maintain the documentation system",
+          "support": "supported",
+          "access": "public",
+          "artifactIds": ["website-source", "docs-system-documentation"],
+          "url": "https://beyond10x.github.io/contribute/",
+          "estimatedMinutes": 15,
+          "prerequisites": ["Git", "Node.js", "Access to the repository that owns the claim"],
+          "outcome": "Change source-owned documentation and verify its canonical projection without creating another public documentation site."
+        }
+      ]
+    }
+  ]
+}

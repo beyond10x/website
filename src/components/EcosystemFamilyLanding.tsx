@@ -83,12 +83,16 @@ function uniqueRepositories(input: RegistrySurface[]): RegistrySurface[] {
   const byRepository = new Map<string, RegistrySurface>();
   for (const surface of input) {
     const current = byRepository.get(surface.repository.id);
-    if (!current || (!current.adoption && surface.adoption) || (current.id !== 'docs' && surface.id === 'docs')) {
+    if (!current || (!declaredAdoption(current) && declaredAdoption(surface)) || (current.id !== 'docs' && surface.id === 'docs')) {
       byRepository.set(surface.repository.id, surface);
     }
   }
   return [...byRepository.values()].sort((left, right) => (surfaceNavigation(left)?.order ?? 100) - (surfaceNavigation(right)?.order ?? 100)
     || left.name.localeCompare(right.name, 'en'));
+}
+
+function declaredAdoption(surface: RegistrySurface) {
+  return 'adoption' in surface ? surface.adoption : undefined;
 }
 
 function primaryJourneyOf(surface: RegistrySurface) {

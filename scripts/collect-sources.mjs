@@ -1,8 +1,9 @@
 import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {collectManifestSources, verifyCollectionLock} from '@beyond10x/docs-system/collector';
-import {buildRegistry, readManifest, readSourceLock} from '@beyond10x/docs-system/manifest';
-import {extractDeclaredSource, readRoster, repositoryUrl, sha256, sourceWorkspaceFromEnvironment} from './git-source.mjs';
+import {validateManifestExperienceReferences} from '@beyond10x/docs-system/experiences';
+import {buildRegistry, readExperienceCatalog, readManifest, readSourceLock} from '@beyond10x/docs-system/manifest';
+import {extractDeclaredSource, isCollectableManifestSchema, readRoster, repositoryUrl, sha256, sourceWorkspaceFromEnvironment} from './git-source.mjs';
 
 export async function collectSources({root, outputRoot, sourceWorkspace = sourceWorkspaceFromEnvironment()}) {
   const roster = await readRoster(path.join(root, 'sources.yaml'));
@@ -18,6 +19,7 @@ export async function collectSources({root, outputRoot, sourceWorkspace = source
   await Promise.all([mkdir(collectionRoot, {recursive: true}), mkdir(indexRoot, {recursive: true})]);
   const manifests = [];
   const indexes = [];
+  const experienceCatalog = await readExperienceCatalog(path.join(root, 'data', 'experiences.json'));
 
   for (const source of lock.sources) {
     if (source.url !== repositoryUrl(source.repository) || source.manifestPath !== roster.manifestPath) {
@@ -30,7 +32,8 @@ export async function collectSources({root, outputRoot, sourceWorkspace = source
       throw new Error(`${source.repository} manifest digest drift: locked ${source.manifestSha256}, fetched ${actualManifestSha}`);
     }
     const manifest = await readManifest(extracted.manifestFile);
-    if (manifest.schema !== 'b10x-docs/v3') throw new Error(`${source.repository} source manifest is not v3`);
+    if (!isCollectableManifestSchema(manifest.schema)) throw new Error(`${source.repository} source manifest is not v3 or v4`);
+    if (manifest.schema === 'b10x-docs/v4') validateManifestExperienceReferences(manifest, experienceCatalog);
     const index = await collectManifestSources(manifest, extracted.treeRoot, {outputRoot: collectionRoot});
     verifyCollectionLock(lock, index, {commit: source.commit, manifestSha256: actualManifestSha});
     await writeFile(
@@ -42,8 +45,8 @@ export async function collectSources({root, outputRoot, sourceWorkspace = source
   }
 
   const websiteManifest = await readManifest(path.join(root, 'b10x.docs.yaml'));
-  if (websiteManifest.schema !== 'b10x-docs/v3' || websiteManifest.repository.id !== 'website') {
-    throw new Error('the Website root manifest must be b10x-docs/v3 with repository id website');
+  if (websiteManifest.schema !== 'b10x-docs/v4' || websiteManifest.repository.id !== 'website') {
+    throw new Error('the Website root manifest must be b10x-docs/v4 with repository id website');
   }
   const registryManifests = [websiteManifest, ...manifests];
   return {lock, manifests: registryManifests, indexes, registry: buildRegistry(registryManifests), collectionRoot};

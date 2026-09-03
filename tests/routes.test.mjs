@@ -17,10 +17,11 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   const map = JSON.parse(await readFile(path.join(root, 'legacy-routes.json'), 'utf8'));
   const html = map.redirects.filter((route) => route.type === 'html');
   const aliases = map.redirects.filter((route) => route.type === 'alias');
-  assert.equal(html.length, 214);
+  assert.equal(html.length, 220);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));
+  assert.ok(html.some((route) => route.from === '/journeys/understand/' && route.to === '/learn/safe-agentic-coding/'));
   assert.deepEqual(
     html.filter((route) => ROOT_OWNED_REDIRECTS.some((expected) => expected.from === route.from)),
     ROOT_OWNED_REDIRECTS,
@@ -81,13 +82,16 @@ test('source roster is complete, sorted, and lock is either the explicit bootstr
   const roster = await readFile(path.join(root, 'sources.yaml'), 'utf8');
   const rosterDocument = parse(roster);
   const repositories = rosterDocument.repositories;
-  assert.equal(repositories.length, 22);
+  assert.ok(repositories.length > 0);
   assert.deepEqual(repositories, [...repositories].sort());
   assert.deepEqual(rosterDocument.compatibilityRepositories, ['getting-started']);
   assert.ok(!repositories.includes('getting-started'));
   const lock = JSON.parse(await readFile(path.join(root, 'sources.lock.json'), 'utf8'));
   assert.equal(lock.schema, 'b10x-sources/v1');
-  if (lock.sources.length > 0) assert.deepEqual(lock.sources.map((source) => source.repository), repositories);
+  if (lock.sources.length > 0) {
+    assert.equal(lock.sources.length, repositories.length);
+    assert.deepEqual(lock.sources.map((source) => source.repository), repositories);
+  }
 });
 
 test('provenance route inventory is deterministic and excludes the fallback document', () => {

@@ -6,7 +6,7 @@ import {PRISM_ADDITIONAL_LANGUAGES} from '@beyond10x/docs-system/code';
 
 const config: Config = {
   title: 'beyond10x',
-  tagline: 'Evidence-backed principles, deterministic systems, and governed agents',
+  tagline: 'Safe autonomous coding, from explicit intent to inspectable evidence',
   favicon: 'img/favicon.svg',
 
   future: {
@@ -118,7 +118,7 @@ const config: Config = {
       {
         name: 'keywords',
         content:
-          'beyond10x, agentic principles, entity runtime, AEP, agentic engineering protocol, ESS, executable system specification, governed connectors, autonomous engineering, deterministic systems',
+          'beyond10x, safe agentic coding, autonomous coding, spec-driven development, Claude Code, Agent Plugins, Harness, AEP, ESS, executable system specification',
       },
     ],
     colorMode: {
@@ -127,16 +127,17 @@ const config: Config = {
     },
     navbar: {
       title: 'beyond10x',
-      hideOnScroll: true,
+      hideOnScroll: false,
       logo: {
         alt: 'beyond10x layered mark',
         src: 'img/mark.svg',
       },
       items: [
-        {to: '/', label: 'Start', position: 'left'},
-        {to: '/ecosystem/', label: 'Explore', position: 'left'},
+        {to: '/start/', label: 'Try', position: 'left'},
+        {to: '/learn/', label: 'Learn', position: 'left'},
+        {to: '/build/', label: 'Build', position: 'left'},
+        {to: '/products/', label: 'Products', position: 'left'},
         {to: '/docs/', label: 'Docs', position: 'left'},
-        {to: '/changes/', label: 'Changes', position: 'left'},
         {to: '/search/', label: 'Search', position: 'left'},
         {
           href: 'https://github.com/beyond10x',
@@ -148,50 +149,32 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [
-        ecosystemFooterGroup(),
         {
-          title: 'Start at the bottom',
+          title: 'Get started',
           items: [
-            {
-              label: 'Agentic Principles',
-              href: '/docs/agentic-principles/',
-            },
-            {label: 'Entity Runtime', href: '/docs/entity-runtime/'},
-            {
-              label: 'AEP',
-              href: '/docs/aep/',
-            },
-            {label: 'ESS', href: '/docs/ess/'},
-            {label: 'Harness', href: '/docs/harness/'},
-            {label: 'AEP Service', href: '/docs/aep-service/'},
+            {label: 'Try a governed change', href: '/start/spec-driven-development/'},
+            {label: 'Learn safe agentic coding', href: '/learn/safe-agentic-coding/'},
+            {label: 'Build agent systems', href: '/build/agent-systems/'},
           ],
         },
         {
-          title: 'Source',
+          title: 'Products and operations',
           items: [
-            {label: 'This repository', href: 'https://github.com/beyond10x/website'},
-            {
-              label: 'Agentic Principles',
-              href: 'https://github.com/beyond10x/agentic-principles',
-            },
-            {label: 'Entity Runtime', href: 'https://github.com/beyond10x/entity-runtime'},
-            {
-              label: 'AEP',
-              href: 'https://github.com/beyond10x/aep',
-            },
-            {label: 'ESS', href: 'https://github.com/beyond10x/ess'},
-            {label: 'AEP Service', href: 'https://github.com/beyond10x/aep-service'},
+            {label: 'Evaluate products', href: '/products/evaluate/'},
+            {label: 'Operate services', href: '/operate/'},
+            {label: 'Public project map', href: '/ecosystem/'},
           ],
         },
         {
-          title: 'Map',
+          title: 'Reference',
           items: [
-            {label: 'Public ecosystem', to: '/ecosystem/'},
-            {label: 'Adoption journeys', to: '/journeys/'},
+            {label: 'Technical documentation', to: '/docs/'},
+            {label: 'Changes and field notes', to: '/updates/'},
             {label: 'Release stream', to: '/releases/'},
             {label: 'Architecture', to: '/architecture/'},
           ],
         },
+        ecosystemFooterGroup(),
       ],
       copyright: '© 2026 beyond10x · Make the decision explicit.',
     },

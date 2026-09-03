@@ -1,0 +1,351 @@
+.page {
+  max-width: 76rem;
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.hero {
+  padding: clamp(3rem, 7vw, 6rem) 0 3rem;
+}
+
+.searchAttributes {
+  display: none;
+}
+
+.pathContracts {
+  margin: 0 0 5rem;
+}
+
+.pathGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.pathCard {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  background: var(--ifm-background-surface-color);
+}
+
+.pathCardBlocked {
+  border-color: var(--b10x-warning-border, #b7791f);
+}
+
+.pathHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pathHeader h3 {
+  margin: 0.3rem 0 0;
+}
+
+.pathRole,
+.pathState,
+.pathFacts span,
+.pathEstimate,
+.pathArtifacts li span {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+}
+
+.pathRole {
+  color: var(--ifm-color-primary);
+  text-transform: uppercase;
+}
+
+.pathState {
+  flex: 0 0 auto;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+}
+
+.pathStateAvailable {
+  color: var(--ifm-color-success-darkest);
+  background: var(--ifm-color-success-contrast-background);
+}
+
+.pathStateRestricted {
+  color: var(--ifm-color-info-darkest);
+  background: var(--ifm-color-info-contrast-background);
+}
+
+.pathStateBlocked {
+  color: var(--ifm-color-warning-darkest);
+  background: var(--ifm-color-warning-contrast-background);
+}
+
+.pathFacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+}
+
+.pathFacts span {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.pathOutcome {
+  max-width: 56rem;
+  color: var(--ifm-color-emphasis-800);
+  font-size: 1.05rem;
+}
+
+.pathEstimate {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.pathPrerequisites,
+.pathArtifacts {
+  margin-top: 1.5rem;
+}
+
+.pathPrerequisites h4,
+.pathArtifacts h4 {
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.pathPrerequisites ul,
+.pathArtifacts ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.pathArtifacts ul {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pathArtifacts li {
+  border-left: 2px solid var(--ifm-color-emphasis-300);
+  padding-left: 0.85rem;
+}
+
+.pathArtifacts li div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.7rem;
+  align-items: baseline;
+}
+
+.pathArtifacts li a,
+.pathArtifacts li strong {
+  font-weight: 750;
+}
+
+.pathArtifacts li span {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.pathArtifacts li p {
+  margin: 0.25rem 0 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.85rem;
+}
+
+.pathBlocker {
+  margin-top: 1.5rem;
+  border-left: 3px solid var(--ifm-color-warning-dark);
+  padding: 0.25rem 0 0.25rem 1rem;
+}
+
+.pathBlocker p {
+  margin: 0.4rem 0;
+}
+
+.pathBlocker a,
+.pathLink {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 700;
+}
+
+.pathNote {
+  margin: 1.5rem 0 0;
+  border-left: 3px solid var(--ifm-color-warning-dark);
+  padding-left: 1rem;
+}
+
+.progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1rem 0 5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+}
+
+.progress a {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  min-height: 4.25rem;
+  padding: 1rem 1.25rem;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  background: var(--ifm-background-surface-color);
+}
+
+.progress a + a {
+  border-left: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.progress span,
+.stepNumber,
+.completion span,
+.loop li > span {
+  color: var(--ifm-color-primary);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section {
+  padding: 1rem 0 5rem;
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.steps {
+  display: grid;
+  gap: 1rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps > li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--ifm-background-surface-color);
+}
+
+.stepNumber {
+  padding-top: 0.35rem;
+}
+
+.steps h3 {
+  margin: 0 0 0.7rem;
+}
+
+.steps h3 a {
+  color: var(--ifm-heading-color);
+}
+
+.steps article > p {
+  max-width: 52rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.completion {
+  margin: 1.25rem 0;
+  border-left: 3px solid var(--ifm-color-primary);
+  padding: 0.1rem 0 0.1rem 1rem;
+}
+
+.completion p {
+  margin: 0.25rem 0 0;
+}
+
+.stepAction {
+  font-weight: 700;
+}
+
+.loop {
+  margin: 0 0 5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--ifm-background-surface-color);
+}
+
+.loop ol {
+  display: grid;
+  gap: 1px;
+  margin: 2rem 0 0;
+  padding: 0;
+  background: var(--ifm-color-emphasis-300);
+  list-style: none;
+}
+
+.loop li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--ifm-background-color);
+}
+
+.loop strong {
+  color: var(--ifm-heading-color);
+}
+
+.loop p {
+  margin: 0.25rem 0 0;
+}
+
+.next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  padding-top: 2rem;
+}
+
+.next p {
+  margin: 0;
+}
+
+.next a {
+  font-weight: 700;
+}
+
+.next > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+@media (max-width: 720px) {
+  .pathHeader {
+    flex-direction: column;
+  }
+
+  .progress {
+    grid-template-columns: 1fr;
+  }
+
+  .progress a + a {
+    border-top: 1px solid var(--ifm-color-emphasis-300);
+    border-left: 0;
+  }
+
+  .steps > li {
+    grid-template-columns: 1fr;
+  }
+
+  .next {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

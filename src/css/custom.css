@@ -61,13 +61,19 @@ body {
   letter-spacing: -0.005em;
 }
 
+.b10x-search-attributes {
+  display: none;
+}
+
 ::selection {
   color: #08100d;
   background: var(--b10x-green);
 }
 
 .navbar {
-  position: relative;
+  position: sticky;
+  z-index: var(--ifm-z-index-fixed);
+  top: 0;
   isolation: isolate;
   border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
   background-color: transparent;
@@ -105,7 +111,7 @@ body {
   background-color: var(--ifm-background-surface-color);
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 996px) {
   .navbar__toggle {
     display: inherit;
     align-items: center;

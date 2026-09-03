@@ -1,13 +1,15 @@
 import {readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {collectManifestSources} from '@beyond10x/docs-system/collector';
-import {readManifest} from '@beyond10x/docs-system/manifest';
-import {extractDeclaredSource, readRoster, repositoryUrl, resolveCommit, resolveWorkspaceCommit, sha256, sourceWorkspaceFromEnvironment} from './git-source.mjs';
+import {validateManifestExperienceReferences} from '@beyond10x/docs-system/experiences';
+import {readExperienceCatalog, readManifest} from '@beyond10x/docs-system/manifest';
+import {extractDeclaredSource, isCollectableManifestSchema, readRoster, repositoryUrl, resolveCommit, resolveWorkspaceCommit, sha256, sourceWorkspaceFromEnvironment} from './git-source.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const roster = await readRoster(path.join(root, 'sources.yaml'));
 const cacheRoot = path.join(root, '.cache', 'sources');
 const sourceWorkspace = sourceWorkspaceFromEnvironment();
+const experienceCatalog = await readExperienceCatalog(path.join(root, 'data', 'experiences.json'));
 const sources = [];
 
 for (const repository of roster.repositories) {
@@ -18,7 +20,8 @@ for (const repository of roster.repositories) {
   const extracted = await extractDeclaredSource({repository, url, commit, manifestPath: roster.manifestPath, cacheRoot, sourceWorkspace});
   const manifestBytes = await readFile(extracted.manifestFile);
   const manifest = await readManifest(extracted.manifestFile);
-  if (manifest.schema !== 'b10x-docs/v3') throw new Error(`${repository} must migrate to b10x-docs/v3 before it enters the website lock`);
+  if (!isCollectableManifestSchema(manifest.schema)) throw new Error(`${repository} must use b10x-docs/v3 or b10x-docs/v4 before it enters the website lock`);
+  if (manifest.schema === 'b10x-docs/v4') validateManifestExperienceReferences(manifest, experienceCatalog);
   const index = await collectManifestSources(manifest, extracted.treeRoot);
   sources.push({
     repository,

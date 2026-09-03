@@ -56,7 +56,7 @@ for (const redirect of redirects) {
   seen.add(redirect.from);
 }
 const htmlCount = redirects.filter((redirect) => redirect.type === 'html').length;
-if (htmlCount !== 214) throw new Error(`expected 214 legacy HTML routes, captured ${htmlCount}`);
+if (htmlCount !== 220) throw new Error(`expected 220 legacy HTML routes, captured ${htmlCount}`);
 await writeFile(
   path.join(root, 'legacy-routes.json'),
   `${JSON.stringify({schema: 'b10x-redirects/v1', origin: 'https://beyond10x.github.io', redirects}, null, 2)}\n`,

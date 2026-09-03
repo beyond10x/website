@@ -4,10 +4,10 @@
     {
       "repository": "aep",
       "url": "https://github.com/beyond10x/aep",
-      "commit": "535ae04990bb4e6b9624d79067f064e2f45e41ef",
+      "commit": "12c6843c63a779fe50e44994ca9711cda843bc75",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "cea06eaf9fc9e8d5ea315a82cfca8c7f52fdc0a5c90f1b2ab7eab8cbea43d62b",
-      "contentSha256": "d5606671e0856e2ea5f212f150a16d4c9c01880d78c2743ca4c9e2ab7691d2f1"
+      "manifestSha256": "8bd6e05c5b8d9c469412b7b606e9cc838daf612973ff2d3d1864664e91feb6bc",
+      "contentSha256": "23679a3ce64f0b2bee4a95590421e6b9100b8f3740ccd71458480fbb0247f2ed"
     },
     {
       "repository": "aep-service",
@@ -20,39 +20,47 @@
     {
       "repository": "agent-platform",
       "url": "https://github.com/beyond10x/agent-platform",
-      "commit": "ba71f2c9e24b03f63b4bc8f55df1e61bbb9234f9",
+      "commit": "35b65398d7a7dd57f1fcbac25127a602b4009940",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "97b0dc3edbebb726315d58c415cb480003f7a492e20891e3cd1fb6173b5af172",
-      "contentSha256": "68883b867bb2b0374e83932c5a1bb229f35db557b8ccb3acbdcdd1de17485665"
+      "contentSha256": "240e716d154d7609e79eda167d641358d0dd95733101422969a4955461dcf1c7"
     },
     {
       "repository": "agentic-principles",
       "url": "https://github.com/beyond10x/agentic-principles",
-      "commit": "4efe84611be1e6fc6213cecb843bdcf4026d52b4",
+      "commit": "a52445727484c42fc14da4409802f0437bf5fadd",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "8392fab2ab6d45b04d5263e2b7a33fea7f1fa6c743d32ecc440360ca1507077e",
-      "contentSha256": "e540f165b2479af1318e2067e1e02b32549e0646e9c0a62cdb5b571927836238"
+      "manifestSha256": "8b6ba19a6156702112daf148458583e5527fb48f8dbd6cf51cc7059cc9f18e23",
+      "contentSha256": "3220dd21aa5d3ac974d49c35c17513226d50602137b4e83f06f81755f5796e2a"
     },
     {
       "repository": "agentide",
       "url": "https://github.com/beyond10x/agentide",
-      "commit": "49bb223c929003afe1ae6de40ce51577cd188c8d",
+      "commit": "f87b2de20603709becf45654ae87c1cc5a98e008",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "0c17a1ac3bb008baa70dca1f8817ae0ea13771cf835fa877be76255445072c06",
-      "contentSha256": "72e45d14f11755e1a8a15536db2c347b4a77da614b87da92d021be7b7bf191be"
+      "contentSha256": "a892fae630ad067140360181d63cb407ada3aac8af3e3d612daa6758f743c89e"
     },
     {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
-      "commit": "e73ea13e695be98d85de03b0efb32328f200a251",
+      "commit": "96a796d03f9a453929000c69941c821be4fe1864",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "a7ae60f1c85862acfd004eb8dc1f4daede04de0786ac8467f364f4978bda343d",
-      "contentSha256": "b60947875a3780b176be2531d0a48dbe98ef33eeb01e125e88130c225f088044"
+      "manifestSha256": "403cf50a9d443a8cd62a7acd22638eaa0a2493398153da57524c2f66fd320435",
+      "contentSha256": "65538857b59c3f0e4ff5e3bd65dc164841e25ee251be94057d7072caaabb2163"
+    },
+    {
+      "repository": "bench",
+      "url": "https://github.com/beyond10x/bench",
+      "commit": "fe0d4991ecdde471af528ee3e148bf86a482d0f8",
+      "manifestPath": "b10x.docs.yaml",
+      "manifestSha256": "1237f535b5bb3856fff8a91faf4d9201ed6ae16a40000f9bd99853c22dad5b37",
+      "contentSha256": "05f1944be4453e6b879705d4c1dea08a6bebca612c4dcb5f2ca2bfe1a397f88d"
     },
     {
       "repository": "connectors",
       "url": "https://github.com/beyond10x/connectors",
-      "commit": "ea61141676414121e8f0146af91be9d59de8afb0",
+      "commit": "9badb8a46b5fd60a82cac4c909dbb584929172e4",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "8646f76d304c779fc888a491460d0ed1019d0c8deddb87e53008c6e61cc1186b",
       "contentSha256": "351d9342cbd13164ea32c9b51e9a2c074adf9ef6d9618a9609338b4b5a5e4da2"
@@ -60,18 +68,18 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "8d28a383feec87e9649ff26f7e5b9844bff249dd",
+      "commit": "8c34ef18040a4168ebf85a5e7469389868d49fb2",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "357301aa9962e7a83d606c0d783cfebebaf5d7b93d7104a3cf1596cb6eaae3b4",
-      "contentSha256": "fe4d194aeb00620796842b4d547c91bbd7a8941c463ced6fa2500ba302c49e53"
+      "manifestSha256": "92ac761c0627c843b3bdeda6ce94ba9186612541e089d19ee4a82392411b8227",
+      "contentSha256": "28bf1ddf2d9df0591eb657abb2a6ecfead6c79c41b0f0b1378585efcd3809473"
     },
     {
       "repository": "docs-system",
       "url": "https://github.com/beyond10x/docs-system",
-      "commit": "e128ba05e62d4f88c231e942b3452c3f2d14d9db",
+      "commit": "b4b268305799583bed00b1859e5eed58ad37c8e2",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "27df8673c10150b33ecae697126e2a7d64051d74fa555dc9b5dffd20b0a0f1a9",
-      "contentSha256": "b08301adc12aa18c3d29fb7b78c2fe98046b8b14b8d2b7036addfb200a2e5880"
+      "contentSha256": "0e3f75e1fc94ef2f8c393753fc041855064db05bea34e4d8093ce3b479aacb74"
     },
     {
       "repository": "entity-runtime",
@@ -84,23 +92,23 @@
     {
       "repository": "ess",
       "url": "https://github.com/beyond10x/ess",
-      "commit": "c010b98c2c644d9fbc775e129ab94748f1618ece",
+      "commit": "a75e9423a0711be17b181894ac5d1e3b3e6a992c",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "dede2188956bcee1eadf24ffbd086ca6aee173180485fb02ac4a2ba9d3c160af",
-      "contentSha256": "93e476abbe7d3fb997da02d7c69cb2fe27808b17a46acb9a7bcba4e26b18f604"
+      "manifestSha256": "af67e8dbbd482583c9c72afc2cf7800f134dcda7ac6cd129381e21aaace0df49",
+      "contentSha256": "5f50fffc13db108a9ce4854809741fba7111c28cec12b70ab96e6f7f181a31e1"
     },
     {
       "repository": "eventlog",
       "url": "https://github.com/beyond10x/eventlog",
-      "commit": "134a74821279bd8c3baeb8606b21ca76622887b9",
+      "commit": "3d439b52671e81102833218ba976751bae98e076",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "18707ac9d1a8f8d157a914808592d29bda80542c5964694ec6567aeb781c38a1",
-      "contentSha256": "3d714a23e4261a3db499f56380f5267463727c50273b96a31d3473ce33b81ff3"
+      "contentSha256": "c3fbc8a93eb850e5964e94bbc9d9dddb57ce15a2e2a58aed1ec6b904d0205958"
     },
     {
       "repository": "harness",
       "url": "https://github.com/beyond10x/harness",
-      "commit": "7cab36dd9d5b3642983096a4d05138b82a98f7c0",
+      "commit": "ad3411fc4e318ba618685742b791d6aa78c4c93a",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "03b2b6737cbedc03a73aacc82af114df1cff017f80322666ad412080b57ec246",
       "contentSha256": "7614de6f669fc03427cd40e2ec55433f1f2d828b8c3bb89c15263e0408a2d053"
@@ -108,10 +116,10 @@
     {
       "repository": "identity",
       "url": "https://github.com/beyond10x/identity",
-      "commit": "8ec419ff4ab275889d23f017d8690698db9b24d5",
+      "commit": "b53d6d778f4ad292c50e7b5659946c8fc1593d94",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "d92b298261270dd8c6ef23d977063ffb56d82b7803c11df9ad05ea38e596d2ad",
-      "contentSha256": "ae4deb795c826d703233ecde5b992c2ed638d129d6009f4eadfa18ed0dd75a76"
+      "contentSha256": "76df92d8f9faa95ee7e8dec1d7ec1c35bd1f17f1898b824f7fac29ac64e5e89c"
     },
     {
       "repository": "mcp",
@@ -124,7 +132,7 @@
     {
       "repository": "metaharness",
       "url": "https://github.com/beyond10x/metaharness",
-      "commit": "3c1fbb9de3ac81ea2eef4d88018d68b39e44c748",
+      "commit": "602106114cad60d0684cfff085073d2b9d6d4077",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "4b5d466f6a1c90d951f3e25a04b35cc845b17c2ab69c64e45ff3dd49b30e573b",
       "contentSha256": "3c6503d589947228e42cdcf76eb3e7f9b1140c4b6c1596de8b3f54dc190010ea"
@@ -148,7 +156,7 @@
     {
       "repository": "substrate",
       "url": "https://github.com/beyond10x/substrate",
-      "commit": "27b9c0041c4481fa7110c7c927944ab4b2e60746",
+      "commit": "84d8c7896d25542bbd61ad56df806b18ef5178f2",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "d5817ee13dd2ab37d94d6b197285fbe178c83e84b6ee495c92423abda0bae589",
       "contentSha256": "7e69a6df5e209eea601291a79fd9760e8cf638a44f3d344e73f8f62becd23cc3"
@@ -164,10 +172,10 @@
     {
       "repository": "workspace",
       "url": "https://github.com/beyond10x/workspace",
-      "commit": "6adefeeca29bd82af7be7ec81c4445666559373f",
+      "commit": "341ef6b3aa65817f9e2a48b7e6da9caaf7dd04e3",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "b4ae19b445adf90ea510d24d346069be4b771a9b1d9b171f80dac79894f34ab1",
-      "contentSha256": "fb2da19c9bfddafe1b8b5dc64c7b540b6f909f28a2df50f240292abc6631366f"
+      "contentSha256": "5ec63bcc975e7d42b7156c85f92575a30ce5ae6cd963527ca5862158305307c0"
     },
     {
       "repository": "worktree",

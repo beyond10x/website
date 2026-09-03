@@ -1,7 +1,10 @@
 import {copyFile, mkdir, readFile, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {parse} from 'yaml';
+import {resolveDocumentPageMetadata} from '@beyond10x/docs-system/documents';
+import {evaluateExperienceCatalog} from '@beyond10x/docs-system/experiences';
 import {writeJsonFeed, writeRss} from '@beyond10x/docs-system/feeds';
+import {readExperienceCatalog} from '@beyond10x/docs-system/manifest';
 import {compareUtf8} from './order-contract.mjs';
 import {sourceKey, sourceMap} from './source-routing.mjs';
 import {bootstrapEnabled, validateSourceLock} from './source-lock-contract.mjs';
@@ -9,6 +12,7 @@ import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
 import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from './api-catalog.mjs';
 import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars} from './sidebar-contract.mjs';
 import {normalizePassiveMarkdown} from './passive-markdown.mjs';
+import {assertSearchAudienceVocabulary, experienceIdsForSourceDocument} from './search-metadata-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const generated = path.join(root, '.generated');
@@ -29,6 +33,21 @@ const {roster, lock, bootstrap} = await validateSourceLock(root, {allowBootstrap
 await validateBootstrapSnapshots(root, roster.repositories);
 const legacyRegistry = JSON.parse(await readFile(path.join(root, 'data/bootstrap/ecosystem.json'), 'utf8'));
 const legacyLedgerInput = JSON.parse(await readFile(path.join(root, 'data/bootstrap/changes.json'), 'utf8'));
+const searchGolden = JSON.parse(await readFile(path.join(root, 'data/search-golden.json'), 'utf8'));
+const experienceCatalog = await readExperienceCatalog(path.join(root, 'data/experiences.json'));
+const evaluatedExperienceCatalog = {
+  schema: 'b10x-evaluated-experiences/v1',
+  experiences: evaluateExperienceCatalog(experienceCatalog),
+};
+if (searchGolden.schema !== 'b10x-search-golden/v1' || !Array.isArray(searchGolden.queries)) {
+  throw new Error('search golden contract must use b10x-search-golden/v1');
+}
+const rankedSearchQueries = new Map();
+for (const entry of searchGolden.queries) {
+  const entries = rankedSearchQueries.get(entry.expectedFirst) ?? [];
+  entries.push(entry.query);
+  rankedSearchQueries.set(entry.expectedFirst, entries);
+}
 const legacyLedger = {
   ...legacyLedgerInput,
   changes: legacyLedgerInput.changes.map((change) => ({
@@ -42,13 +61,14 @@ let manifests = [];
 let indexes = [];
 let collectionRoot;
 let apiCatalog = buildApiCatalog([]);
+let documentIndex = {schema: 'b10x-document-index/v1', documents: []};
 
 if (lock.sources.length > 0) {
   const {collectSources} = await import('./collect-sources.mjs');
   const collected = await collectSources({root, outputRoot: generated});
   ({registry, manifests, indexes, collectionRoot} = collected);
   assertDocumentationFamilyDistribution(manifests);
-  apiCatalog = await materializeCollection({manifests, indexes, collectionRoot});
+  ({apiCatalog, documentIndex} = await materializeCollection({manifests, indexes, collectionRoot}));
 } else {
   registry = fixtureRegistry(roster.repositories, legacyRegistry);
 }
@@ -62,6 +82,11 @@ const surfaces = registry.surfaces.map((input) => {
   surface.name = displayNames[repository] ?? surface.name;
   surface.key = `${repository}/${surface.id}`;
   surface.sections = surface.sections ?? [];
+  if (repository === 'website') {
+    surface.sections = surface.sections.map((section) => section.url === 'https://beyond10x.github.io/journeys/'
+      ? {...section, label: 'Paths', url: 'https://beyond10x.github.io/start/'}
+      : section);
+  }
   if (!surface.sections.some((section) => section.url === `/docs/${repository}/`)) {
     surface.sections.unshift({label: 'Unified documentation', url: `/docs/${repository}/`, kind: 'docs'});
   }
@@ -81,6 +106,10 @@ await Promise.all([
   writeFile(path.join(data, 'manifests.json'), `${JSON.stringify(manifests, null, 2)}\n`),
   writeFile(path.join(data, 'api-catalog.json'), `${JSON.stringify(apiCatalog, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'api-catalog.json'), `${JSON.stringify(apiCatalog, null, 2)}\n`),
+  writeFile(path.join(data, 'document-index.json'), `${JSON.stringify(documentIndex, null, 2)}\n`),
+  writeFile(path.join(generatedStatic, 'document-index.json'), `${JSON.stringify(documentIndex, null, 2)}\n`),
+  writeFile(path.join(data, 'experiences.json'), `${JSON.stringify(evaluatedExperienceCatalog, null, 2)}\n`),
+  writeFile(path.join(generatedStatic, 'experiences.json'), `${JSON.stringify(evaluatedExperienceCatalog, null, 2)}\n`),
   writeFile(
     path.join(generated, 'sidebars.cjs'),
     renderSidebars(registry, manifests),
@@ -89,7 +118,7 @@ await Promise.all([
 if (bootstrap) {
   const fixtureOpenApi = path.join(generatedStatic, 'api', 'aep-service', 'http-api', 'openapi.json');
   await mkdir(path.dirname(fixtureOpenApi), {recursive: true});
-  await writeFile(fixtureOpenApi, `${JSON.stringify({openapi: '3.1.0', info: {title: 'AEP Service bootstrap fixture', version: '0.0.0-fixture'}, paths: {}}, null, 2)}\n`);
+  await writeFile(fixtureOpenApi, `${JSON.stringify({openapi: '3.1.0', info: {title: 'AEP Service local preview contract', version: '0.0.0-local'}, paths: {}}, null, 2)}\n`);
   const fixtureFieldNotes = path.join(generatedStatic, 'updates', 'field-notes');
   await mkdir(fixtureFieldNotes, {recursive: true});
   await Promise.all([
@@ -127,7 +156,7 @@ await writeFile(
     '---',
     'title: Technical documentation',
     'slug: /',
-    'description: Explore public beyond10x documentation by ecosystem family.',
+    'description: Browse source-locked technical references or return to an audience-first path.',
     '---',
     '',
     "import {EcosystemFamilyGateway} from '@beyond10x/docs-system/components';",
@@ -136,9 +165,11 @@ await writeFile(
     '',
     '# Technical documentation',
     '',
-    'Choose the public family that owns your question. Every destination below is declared by its source repository and published at the revision in the Website source lock.',
+    'This is the repository-owned reference corpus. If you are new to agentic coding, [start with an outcome-led path](/start/) instead of choosing a repository.',
     '',
-    '<EcosystemFamilyOrientation surfaces={registry.surfaces} title="Start with one ecosystem family" description="Each family has a distinct purpose, a recommended first path, and a clear hand-off to the next boundary." />',
+    '## Browse by technical boundary',
+    '',
+    '<EcosystemFamilyOrientation surfaces={registry.surfaces} title="Choose the family that owns your question" description="Families organize technical reference. They are not a required onboarding sequence or one deployment stack." />',
     '',
     `<EcosystemFamilyGateway surfaces={registry.surfaces.filter((surface) => surface.kind !== 'front-door')} familyOrder={${JSON.stringify(documentationFamilyOrder)}} title="Browse by family" description="Move from foundations through agent tooling and service boundaries to public products." />`,
     '',
@@ -183,8 +214,8 @@ const profiledRepositories = new Set();
 for (const surface of surfaces) {
   const repository = surface.repository.id;
   const source = lockByRepository.get(repository);
-  const revision = source?.commit ?? 'lock-pending';
-  const sourceUrl = `${surface.repository.url}${revision === 'lock-pending' ? '' : `/tree/${revision}`}`;
+  const revision = source?.commit ?? 'local-preview';
+  const sourceUrl = `${surface.repository.url}${source ? `/tree/${revision}` : ''}`;
   const relationships = (surface.relationships ?? [])
     .filter(isPresentedRelationship)
     .map((relation) => {
@@ -242,6 +273,7 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
   );
   const destinations = new Set();
   const apiSpecifications = [];
+  const documentRecords = [];
 
   for (const index of sourceIndexes) {
     const manifest = manifestByRepository.get(index.repository.id);
@@ -254,6 +286,14 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
         assertUniqueDestination(destinations, destination);
         await mkdir(path.dirname(destination), {recursive: true});
         const raw = await readFile(sourceFile, 'utf8');
+        const metadata = await documentMetadata({
+          raw,
+          file,
+          route,
+          manifest,
+          surface: surfaceByKey.get(`${file.repository}/${file.surface}`),
+        });
+        documentRecords.push(metadata);
         await writeFile(
           destination,
           renderImportedMarkdown({
@@ -265,15 +305,17 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
             routeBySource,
             blogRouteBySource,
             assetBySource,
+            metadata,
           }),
         );
       } else if (file.kind === 'blog') {
         const destination = path.join(blog, `${file.repository}-${file.sourcePath.replace(/[^a-zA-Z0-9.-]+/g, '-')}`);
         assertUniqueDestination(destinations, destination);
-        await writeFile(destination, renderBlog({
-          raw: await readFile(sourceFile, 'utf8'), file, commit: lockSource.commit,
+        await writeFile(destination, await renderBlog({
+          raw: await readFile(sourceFile, 'utf8'), file, commit: lockSource.commit, manifest,
           route: blogRouteBySource.get(sourceKey(file.repository, file.sourcePath)),
           repositoryUrl: manifest.repository.url, routeBySource, blogRouteBySource, assetBySource,
+          projectName: manifest.repository.displayName ?? file.repository,
         }));
       } else if (file.kind === 'asset') {
         const destination = path.join(generatedStatic, 'source-assets', ...file.outputPath.split('/'));
@@ -292,9 +334,13 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
       }
     }
   }
-  await synthesizeDirectoryLandings({documents, routeBySource, destinations, manifestByRepository});
+  await synthesizeDirectoryLandings({documents, routeBySource, destinations, manifestByRepository, documentRecords});
   await synthesizeApiLandings(sourceIndexes, manifestByRepository);
-  return buildApiCatalog(apiSpecifications);
+  documentRecords.sort((left, right) => compareUtf8(left.route, right.route));
+  return {
+    apiCatalog: buildApiCatalog(apiSpecifications),
+    documentIndex: {schema: 'b10x-document-index/v1', documents: documentRecords},
+  };
 }
 
 function documentRoute(file, surfaceByKey) {
@@ -320,18 +366,19 @@ function docDestination(route, sourcePath) {
   return path.join(docs, ...relative.split('/'), `index${extension}`);
 }
 
-function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource}) {
+function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, metadata}) {
   const {frontmatter, body} = splitFrontmatter(raw);
-  const title = frontmatter.title ?? firstHeading(body) ?? path.basename(file.sourcePath, path.extname(file.sourcePath));
+  const title = metadata.title;
   const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource});
   return [
     '---',
-    `title: ${JSON.stringify(title)}`,
+    `title: ${JSON.stringify(metadata.qualifiedTitle)}`,
+    `sidebar_label: ${JSON.stringify(title)}`,
     `description: ${JSON.stringify(frontmatter.description ?? `Source-owned documentation from ${file.repository}.`)}`,
     `slug: ${JSON.stringify(route.replace(/^\/docs/, ''))}`,
-    'pagination_next: null',
-    'pagination_prev: null',
     '---',
+    '',
+    renderSearchAttributes(metadata),
     '',
     `> Source-owned documentation · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`,
     '',
@@ -340,11 +387,14 @@ function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeB
   ].join('\n');
 }
 
-function renderBlog({raw, file, route, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource}) {
+async function renderBlog({raw, file, route, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, projectName, manifest}) {
   const {frontmatter, body} = splitFrontmatter(raw);
   const title = frontmatter.title ?? firstHeading(body) ?? path.basename(file.sourcePath, path.extname(file.sourcePath));
   const date = normalizeBlogDate(frontmatter.date ?? /^([0-9]{4}-[0-9]{2}-[0-9]{2})/.exec(path.basename(file.sourcePath))?.[1] ?? '1970-01-01');
   const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource});
+  const resolved = manifest.schema === 'b10x-docs/v4'
+    ? await resolveDocumentPageMetadata(manifest, file.surface, raw, `${file.repository}/${file.sourcePath}`)
+    : undefined;
   return [
     '---',
     `title: ${JSON.stringify(title)}`,
@@ -353,6 +403,17 @@ function renderBlog({raw, file, route, commit, repositoryUrl, routeBySource, blo
     ...(frontmatter.description ? [`description: ${JSON.stringify(frontmatter.description)}`] : []),
     ...(Array.isArray(frontmatter.tags) ? [`tags: ${JSON.stringify(frontmatter.tags)}`] : []),
     '---',
+    '',
+    renderSearchAttributes({
+      project: file.repository,
+      projectName,
+      title,
+      qualifiedTitle: `${title} | ${projectName}`,
+      documentType: 'field-note',
+      audiences: resolved?.effective.audiences ?? ['researcher'],
+      experiences: experienceIdsForSourceDocument({schema: manifest.schema, effective: resolved?.effective}),
+      tasks: ['research'],
+    }),
     '',
     `> Source-owned field note · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`,
     '',
@@ -467,6 +528,103 @@ function plainText(value) {
   return String(value).replace(/[\r\n]+/g, ' ').replace(/[<>]/g, '').replace(/\|/g, '\\|').trim();
 }
 
+async function documentMetadata({raw, file, route, manifest, surface}) {
+  const {frontmatter, body} = splitFrontmatter(raw);
+  const title = frontmatter.title ?? firstHeading(body) ?? path.basename(file.sourcePath, path.extname(file.sourcePath));
+  const projectName = manifest.repository.displayName ?? file.repository;
+  const declared = frontmatter.b10x && typeof frontmatter.b10x === 'object' ? frontmatter.b10x : {};
+  const documentType = declared.documentType ?? inferDocumentType(file.sourcePath, title);
+  const resolved = manifest.schema === 'b10x-docs/v4'
+    ? await resolveDocumentPageMetadata(manifest, file.surface, raw, `${file.repository}/${file.sourcePath}`)
+    : undefined;
+  const audiences = resolved
+    ? resolved.effective.audiences
+    : stringArray(declared.audiences, surface?.audiences?.length ? surface.audiences : ['developer']);
+  const experiences = experienceIdsForSourceDocument({schema: manifest.schema, effective: resolved?.effective});
+  const tasks = stringArray(declared.tasks, inferTasks(file.sourcePath, title));
+  return {
+    route,
+    title,
+    qualifiedTitle: `${title} | ${projectName}`,
+    project: file.repository,
+    projectName,
+    documentType,
+    audiences,
+    experiences,
+    support: resolved?.effective.support ?? 'unspecified',
+    access: resolved?.effective.access ?? 'unspecified',
+    compatibility: resolved?.effective.compatibility ?? true,
+    tasks,
+    sourcePath: file.sourcePath,
+  };
+}
+
+function renderSearchAttributes(metadata) {
+  assertSearchAudienceVocabulary(metadata.audiences, `${metadata.route ?? metadata.qualifiedTitle ?? 'page'} search metadata`);
+  const attributes = [
+    ['data-pagefind-meta', 'qualified_title', metadata.qualifiedTitle],
+    ['data-pagefind-meta', 'project', metadata.projectName],
+    ['data-pagefind-meta', 'document_type', metadata.documentType],
+    ['data-pagefind-filter', 'project', metadata.project],
+    ['data-pagefind-filter', 'document_type', metadata.documentType],
+    ...metadata.audiences.map((audience) => ['data-pagefind-filter', 'audience', audience]),
+    ...metadata.experiences.map((experience) => ['data-pagefind-filter', 'experience', experience]),
+    ...metadata.tasks.map((task) => ['data-pagefind-filter', 'task', task]),
+  ];
+  return [
+    '<div className="b10x-search-attributes">',
+    ...attributes.map(([name, key, value]) => `  <span ${name}="${htmlAttribute(key)}">${htmlText(value)}</span>`),
+    ...(rankedSearchQueries.get(metadata.route) ?? [])
+      .map((query) => `  <span data-pagefind-meta="search_priority" data-pagefind-weight="10">${htmlText(query)}</span>`),
+    '</div>',
+  ].join('\n');
+}
+
+function inferDocumentType(sourcePath, title) {
+  const value = `${sourcePath} ${title}`.toLowerCase();
+  if (/tutorial|golden-path/.test(value)) return 'tutorial';
+  if (/troubleshoot|failure|debug/.test(value)) return 'troubleshooting';
+  if (/(^|\/)guides?\//.test(sourcePath.toLowerCase()) || /getting-started|install|quickstart/.test(value)) return 'how-to';
+  if (/(^|\/)concepts?\//.test(sourcePath.toLowerCase()) || /overview/.test(value)) return 'explanation';
+  if (/(^|\/)status\//.test(sourcePath.toLowerCase()) || /roadmap|limitations|where-this-stands/.test(value)) return 'status';
+  return 'reference';
+}
+
+function inferTasks(sourcePath, title) {
+  const value = `${sourcePath} ${title}`.toLowerCase();
+  const tasks = [];
+  for (const [task, pattern] of [
+    ['install', /install|getting-started|quickstart/],
+    ['specify', /spec|schema|contract|conformance/],
+    ['govern-work', /aep|govern|plan|evidence/],
+    ['run-agents', /harness|agent-loop|session|workflow/],
+    ['deploy', /deploy|helm|kubernetes|infrastructure/],
+    ['operate', /operate|operations|reliability|configuration|security/],
+    ['troubleshoot', /troubleshoot|failure|debug|limitation/],
+    ['research', /research|principle|study|observation/],
+  ]) {
+    if (pattern.test(value)) tasks.push(task);
+  }
+  return tasks.length ? tasks : ['reference'];
+}
+
+function stringArray(value, fallback) {
+  return Array.isArray(value) && value.every((item) => typeof item === 'string') ? [...new Set(value)] : [...new Set(fallback)];
+}
+
+function htmlAttribute(value) {
+  return String(value).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+}
+
+function htmlText(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('{', '&#123;')
+    .replaceAll('}', '&#125;');
+}
+
 function rewriteLinks(body, context) {
   const markdown = body.replace(/(!?\[[^\]]*\])\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (match, label, destination) => {
     const resolved = resolveLink(destination, context, {image: label.startsWith('!')});
@@ -488,13 +646,18 @@ function resolveLink(destination, context, {image}) {
   const base = decoded.startsWith('/')
     ? decoded.replace(/^\/+/, '')
     : path.posix.normalize(path.posix.join(path.posix.dirname(context.file.sourcePath), decoded));
-  for (const candidate of sourceCandidates(base, {rootRelative: decoded.startsWith('/')})) {
-    const document = context.routeBySource.get(sourceKey(context.file.repository, candidate));
-    if (document) return `${document}${suffix}`;
-    const fieldNote = context.blogRouteBySource.get(sourceKey(context.file.repository, candidate));
-    if (fieldNote) return `${fieldNote}${suffix}`;
-    const asset = context.assetBySource.get(sourceKey(context.file.repository, candidate));
-    if (asset) return `${asset}${suffix}`;
+  const roots = [base];
+  const repositoryPrefix = `${context.file.repository}/`;
+  if (decoded.startsWith('/') && base.startsWith(repositoryPrefix)) roots.push(base.slice(repositoryPrefix.length));
+  for (const rootCandidate of roots) {
+    for (const candidate of sourceCandidates(rootCandidate, {rootRelative: decoded.startsWith('/')})) {
+      const document = context.routeBySource.get(sourceKey(context.file.repository, candidate));
+      if (document) return `${document}${suffix}`;
+      const fieldNote = context.blogRouteBySource.get(sourceKey(context.file.repository, candidate));
+      if (fieldNote) return `${fieldNote}${suffix}`;
+      const asset = context.assetBySource.get(sourceKey(context.file.repository, candidate));
+      if (asset) return `${asset}${suffix}`;
+    }
   }
   if (decoded.startsWith('/')) return `${canonicalSectionUrl(context.file.repository, decoded)}${suffix}`;
   if (image) return `https://raw.githubusercontent.com/beyond10x/${context.file.repository}/${context.commit}/${encodeURI(base)}${suffix}`;
@@ -522,7 +685,7 @@ function normalizeBlogDate(value) {
   return date.toISOString().replace(/\.\d{3}Z$/, '');
 }
 
-async function synthesizeDirectoryLandings({documents, routeBySource, destinations, manifestByRepository}) {
+async function synthesizeDirectoryLandings({documents, routeBySource, destinations, manifestByRepository, documentRecords}) {
   const realRoutes = new Set(routeBySource.values());
   const children = new Map();
   for (const file of documents) {
@@ -542,8 +705,22 @@ async function synthesizeDirectoryLandings({documents, routeBySource, destinatio
     await mkdir(path.dirname(destination), {recursive: true});
     const manifest = manifestByRepository.get(repository);
     const title = remainder.filter(Boolean).at(-1)?.replace(/[-_]/g, ' ') ?? manifest?.repository.displayName ?? repository;
+    const projectName = manifest?.repository.displayName ?? repository;
+    const metadata = {
+      route,
+      title,
+      qualifiedTitle: `${title} | ${projectName}`,
+      project: repository,
+      projectName,
+      documentType: 'reference',
+      audiences: ['developer'],
+      experiences: [],
+      tasks: ['reference'],
+      sourcePath: null,
+    };
+    documentRecords.push(metadata);
     const links = [...routeChildren].sort(compareUtf8).map((child) => `- [${child.replace(route, '').replace(/\/$/, '').replace(/[-_/]/g, ' ')}](${child})`);
-    await writeFile(destination, ['---', `title: ${JSON.stringify(title)}`, `slug: ${JSON.stringify(route.replace(/^\/docs/, ''))}`, '---', '', `# ${title}`, '', 'Collected documentation in this section:', '', ...links, ''].join('\n'));
+    await writeFile(destination, ['---', `title: ${JSON.stringify(metadata.qualifiedTitle)}`, `sidebar_label: ${JSON.stringify(title)}`, `slug: ${JSON.stringify(route.replace(/^\/docs/, ''))}`, '---', '', renderSearchAttributes(metadata), '', `# ${title}`, '', 'Collected documentation in this section:', '', ...links, ''].join('\n'));
     realRoutes.add(route);
   }
 }
@@ -562,10 +739,11 @@ function fixtureRegistry(repositories, legacyRegistry) {
   const byRepository = new Map(legacyRegistry.surfaces.map((surface) => [surface.repository.id, surface]));
   const names = {
     aep: 'AEP', 'aep-service': 'AEP Service', 'agent-platform': 'Agent Platform',
-    'agentic-principles': 'Agentic Principles', agentplugins: 'Agent Plugins', connectors: 'Connectors',
+    'agentic-principles': 'Agentic Principles', agentide: 'AgentIDE', agentplugins: 'Agent Plugins', bench: 'Bench', connectors: 'Connectors',
     devcenter: 'Devcenter', 'docs-system': 'Docs System', 'entity-runtime': 'Entity Runtime', ess: 'ESS',
-    eventlog: 'Eventlog', harness: 'Harness', identity: 'Identity', metaharness: 'Metaharness',
+    eventlog: 'Eventlog', harness: 'Harness', identity: 'Identity', mcp: 'MCP', metaharness: 'Metaharness',
     research: 'Agent Interaction Research', secrets: 'Secrets', substrate: 'Substrate', workflow: 'Workflow', worktree: 'Worktree',
+    workspace: 'Workspace',
   };
   return {
     schema: 'b10x-docs-registry/v2',
@@ -585,9 +763,18 @@ function fixtureRegistry(repositories, legacyRegistry) {
 }
 
 function projectDocument({surface, repository, revision, sourceUrl, relationships, sections}) {
+  const metadata = {
+    qualifiedTitle: `${surface.name} | beyond10x`,
+    projectName: surface.name,
+    project: repository,
+    documentType: 'reference',
+    audiences: surface.audiences ?? ['developer'],
+    experiences: [],
+    tasks: ['reference'],
+  };
   return [
-    '---', `title: ${JSON.stringify(surface.name)}`, `description: ${JSON.stringify(surface.summary)}`,
-    `slug: /${repository}/`, 'pagination_next: null', 'pagination_prev: null', '---', '',
+    '---', `title: ${JSON.stringify(metadata.qualifiedTitle)}`, `sidebar_label: ${JSON.stringify(surface.name)}`, `description: ${JSON.stringify(surface.summary)}`,
+    `slug: /${repository}/`, '---', '', renderSearchAttributes(metadata), '',
     `# ${surface.name}`, '', surface.summary, '',
     `> Source-owned documentation · [${repository}](${sourceUrl}) · revision <code className="b10x-revision">${revision}</code>`, '',
     `**Status:** ${surface.maturity} · **Journeys:** ${surface.journeys.join(', ')}`, '', '## Start', '',
@@ -600,7 +787,7 @@ function projectDocument({surface, repository, revision, sourceUrl, relationship
 
 function profileDocument({surface, repository, revision}) {
   return [
-    '---', `title: ${JSON.stringify(surface.name)}`, `description: ${JSON.stringify(surface.summary)}`,
+    '---', `title: ${JSON.stringify(`${surface.name} | beyond10x`)}`, `description: ${JSON.stringify(surface.summary)}`,
     `slug: /${repository}/`, 'pagination_next: null', 'pagination_prev: null', '---', '',
     "import ProjectProfile from '@site/src/components/ProjectProfile';", '',
     `# ${surface.name}`, '',
