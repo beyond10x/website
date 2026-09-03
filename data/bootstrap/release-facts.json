@@ -2,6 +2,24 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "website",
+      "version": "0.3.0",
+      "publishedAt": "2026-09-03T07:44:06Z",
+      "url": "https://github.com/beyond10x/website/releases/tag/0.3.0"
+    },
+    {
+      "repository": "identity",
+      "version": "0.5.5",
+      "publishedAt": "2026-09-03T07:30:58Z",
+      "url": "https://github.com/beyond10x/identity/releases/tag/0.5.5"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.8.4",
+      "publishedAt": "2026-09-03T07:20:24Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.4"
+    },
+    {
       "repository": "devcenter",
       "version": "0.8.3",
       "publishedAt": "2026-09-03T06:02:26Z",

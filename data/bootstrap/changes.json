@@ -2,6 +2,78 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "website/0.3.0",
+      "id": "website/0.3.0",
+      "repository": "website",
+      "publishedAt": "2026-09-03T07:44:06Z",
+      "title": "beyond10x 0.3.0",
+      "summary": "beyond10x released version 0.3.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/website/releases/tag/0.3.0",
+        "version": "0.3.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify",
+        "understand"
+      ],
+      "affectedSurfaces": [
+        "website/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "identity/0.5.5",
+      "id": "identity/0.5.5",
+      "repository": "identity",
+      "publishedAt": "2026-09-03T07:30:58Z",
+      "title": "Identity 0.5.5",
+      "summary": "Identity released version 0.5.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/identity/releases/tag/0.5.5",
+        "version": "0.5.5"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "identity/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.8.4",
+      "id": "devcenter/0.8.4",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-03T07:20:24Z",
+      "title": "Devcenter 0.8.4",
+      "summary": "Devcenter released version 0.8.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.4",
+        "version": "0.8.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.8.3",
       "id": "devcenter/0.8.3",
       "repository": "devcenter",
