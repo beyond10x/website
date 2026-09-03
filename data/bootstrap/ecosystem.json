@@ -534,7 +534,7 @@
         {
           "kind": "quickstart",
           "label": "Install and run the local TUI",
-          "url": "https://beyond10x.github.io/docs/agentide/#install-the-released-linux-binary"
+          "url": "https://beyond10x.github.io/docs/agentide/#install-agentide"
         },
         {
           "kind": "guide",
@@ -925,6 +925,7 @@
             "README.md",
             "docs/frontend-review.md",
             "docs/source-build.md",
+            "docs/ess-deployment-model.md",
             "docs/production-deployment.md"
           ]
         },

@@ -2,6 +2,470 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/0.8.10",
+      "id": "devcenter/0.8.10",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-03T14:41:40Z",
+      "title": "Devcenter 0.8.10",
+      "summary": "Devcenter released version 0.8.10.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.10",
+        "version": "0.8.10"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.12",
+      "id": "workspace/0.2.12",
+      "repository": "workspace",
+      "publishedAt": "2026-09-03T14:34:02Z",
+      "title": "Workspace 0.2.12",
+      "summary": "Workspace released version 0.2.12.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.12",
+        "version": "0.2.12"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.46.0",
+      "id": "aep/0.46.0",
+      "repository": "aep",
+      "publishedAt": "2026-09-03T14:31:30Z",
+      "title": "AEP 0.46.0",
+      "summary": "AEP released version 0.46.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.46.0",
+        "version": "0.46.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.8.9",
+      "id": "devcenter/0.8.9",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-03T14:27:50Z",
+      "title": "Devcenter 0.8.9",
+      "summary": "Devcenter released version 0.8.9.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.9",
+        "version": "0.8.9"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.11",
+      "id": "workspace/0.2.11",
+      "repository": "workspace",
+      "publishedAt": "2026-09-03T14:24:25Z",
+      "title": "Workspace 0.2.11",
+      "summary": "Workspace released version 0.2.11.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.11",
+        "version": "0.2.11"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agent-platform/0.6.7",
+      "id": "agent-platform/0.6.7",
+      "repository": "agent-platform",
+      "publishedAt": "2026-09-03T14:19:36Z",
+      "title": "Agent Platform 0.6.7",
+      "summary": "Agent Platform released version 0.6.7.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agent-platform/releases/tag/0.6.7",
+        "version": "0.6.7"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agent-platform/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep-service/0.1.6",
+      "id": "aep-service/0.1.6",
+      "repository": "aep-service",
+      "publishedAt": "2026-09-03T14:11:07Z",
+      "title": "AEP Service 0.1.6",
+      "summary": "AEP Service released version 0.1.6.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.6",
+        "version": "0.1.6"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep-service/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.8.8",
+      "id": "devcenter/0.8.8",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-03T14:07:40Z",
+      "title": "Devcenter 0.8.8",
+      "summary": "Devcenter released version 0.8.8.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.8",
+        "version": "0.8.8"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.10",
+      "id": "workspace/0.2.10",
+      "repository": "workspace",
+      "publishedAt": "2026-09-03T13:48:32Z",
+      "title": "Workspace 0.2.10",
+      "summary": "Workspace released version 0.2.10.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.10",
+        "version": "0.2.10"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agent-platform/0.6.6",
+      "id": "agent-platform/0.6.6",
+      "repository": "agent-platform",
+      "publishedAt": "2026-09-03T13:43:11Z",
+      "title": "Agent Platform 0.6.6",
+      "summary": "Agent Platform released version 0.6.6.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agent-platform/releases/tag/0.6.6",
+        "version": "0.6.6"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agent-platform/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.9",
+      "id": "workspace/0.2.9",
+      "repository": "workspace",
+      "publishedAt": "2026-09-03T13:42:20Z",
+      "title": "Workspace 0.2.9",
+      "summary": "Workspace released version 0.2.9.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.9",
+        "version": "0.2.9"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workflow/0.1.0",
+      "id": "workflow/0.1.0",
+      "repository": "workflow",
+      "publishedAt": "2026-09-03T13:39:15Z",
+      "title": "Workflow 0.1.0",
+      "summary": "Workflow released version 0.1.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workflow/releases/tag/0.1.0",
+        "version": "0.1.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workflow/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentide/0.2.1",
+      "id": "agentide/0.2.1",
+      "repository": "agentide",
+      "publishedAt": "2026-09-03T13:39:02Z",
+      "title": "AgentIDE 0.2.1",
+      "summary": "AgentIDE released version 0.2.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentide/releases/tag/0.2.1",
+        "version": "0.2.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agentide/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.8",
+      "id": "workspace/0.2.8",
+      "repository": "workspace",
+      "publishedAt": "2026-09-03T13:31:28Z",
+      "title": "Workspace 0.2.8",
+      "summary": "Workspace released version 0.2.8.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.8",
+        "version": "0.2.8"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agent-platform/0.6.5",
+      "id": "agent-platform/0.6.5",
+      "repository": "agent-platform",
+      "publishedAt": "2026-09-03T13:04:00Z",
+      "title": "Agent Platform 0.6.5",
+      "summary": "Agent Platform released version 0.6.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agent-platform/releases/tag/0.6.5",
+        "version": "0.6.5"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agent-platform/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentide/0.2.0",
+      "id": "agentide/0.2.0",
+      "repository": "agentide",
+      "publishedAt": "2026-09-03T12:48:57Z",
+      "title": "AgentIDE 0.2.0",
+      "summary": "AgentIDE released version 0.2.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentide/releases/tag/0.2.0",
+        "version": "0.2.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agentide/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "harness/0.11.1",
+      "id": "harness/0.11.1",
+      "repository": "harness",
+      "publishedAt": "2026-09-03T12:33:05Z",
+      "title": "Harness 0.11.1",
+      "summary": "Harness released version 0.11.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/harness/releases/tag/0.11.1",
+        "version": "0.11.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "harness/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentide/0.1.4",
+      "id": "agentide/0.1.4",
+      "repository": "agentide",
+      "publishedAt": "2026-09-03T12:19:15Z",
+      "title": "AgentIDE 0.1.4",
+      "summary": "AgentIDE released version 0.1.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentide/releases/tag/0.1.4",
+        "version": "0.1.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "agentide/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.45.0",
+      "id": "aep/0.45.0",
+      "repository": "aep",
+      "publishedAt": "2026-09-03T12:08:13Z",
+      "title": "AEP 0.45.0",
+      "summary": "AEP released version 0.45.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.45.0",
+        "version": "0.45.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.8.7",
+      "id": "devcenter/0.8.7",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-03T11:57:43Z",
+      "title": "Devcenter 0.8.7",
+      "summary": "Devcenter released version 0.8.7.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.7",
+        "version": "0.8.7"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "website/0.3.2",
       "id": "website/0.3.2",
       "repository": "website",

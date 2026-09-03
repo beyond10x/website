@@ -2,7 +2,7 @@
 format: aep.planning-md/1
 id: story:site-wide-code-fence-rendering-audit
 kind: story
-status: active
+status: implemented
 title: Make every rendered code fence readable and visibly highlighted
 summary: Inventory the unified site’s code fences and harden source validation, Prism coverage, and visual presentation across every rendered docs route.
 tags:
@@ -39,7 +39,7 @@ scope:
   path: tests/fixtures/code-fence-corpus.md
 - confidence: cited
   path: tests/preview-workflow.test.mjs
-revision: 6
+revision: 7
 ---
 ## Problem
 
