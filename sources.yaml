@@ -10,7 +10,6 @@ repositories:
   - agentic-principles
   - agentide
   - agentplugins
-  - bench
   - connectors
   - devcenter
   - docs-system

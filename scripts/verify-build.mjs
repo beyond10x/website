@@ -74,6 +74,16 @@ if (!bootstrap && Object.keys(provenance.sourceCommits).length !== roster.reposi
 }
 
 const facts = await artifactFacts(build);
+const privateBenchRoutes = facts.routes.filter((route) => (
+  route === '/bench/'
+  || route.startsWith('/api/bench/')
+  || route.startsWith('/components/bench/')
+  || route.startsWith('/docs/bench/')
+  || route.startsWith('/ecosystem/bench/')
+));
+if (privateBenchRoutes.length > 0 || Object.hasOwn(provenance.sourceCommits, 'bench')) {
+  throw new Error(`private Bench material entered the public artifact: ${privateBenchRoutes.join(', ') || 'source commit'}`);
+}
 for (const property of ['artifactSha256', 'routesSha256']) {
   if (provenance[property] !== facts[property]) throw new Error(`provenance ${property} does not match the built artifact`);
 }

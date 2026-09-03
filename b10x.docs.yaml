@@ -79,8 +79,6 @@ surfaces:
   - kind: introduces
     target: agentplugins/docs
   - kind: introduces
-    target: bench/docs
-  - kind: introduces
     target: connectors/docs
   - kind: introduces
     target: devcenter/docs

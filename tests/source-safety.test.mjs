@@ -9,7 +9,7 @@ import test from 'node:test';
 import {assertPassiveMdx} from '@beyond10x/docs-system/collector';
 import {artifactFacts, sha256} from '../scripts/artifact-contract.mjs';
 import {validateBootstrapSnapshots} from '../scripts/bootstrap-contract.mjs';
-import {declaredAnchors, extractDeclaredSource, isCollectableManifestSchema, resolveWorkspaceCommit, safeTreePath, sourceWorkspaceFromEnvironment, staticPrefix} from '../scripts/git-source.mjs';
+import {credentialFreeGitEnvironment, credentialFreeRepositoryUrl, declaredAnchors, extractDeclaredSource, isCollectableManifestSchema, resolveCommit, resolveWorkspaceCommit, safeTreePath, sourceWorkspaceFromEnvironment, staticPrefix} from '../scripts/git-source.mjs';
 import {sourceKey, sourceMap} from '../scripts/source-routing.mjs';
 
 const execFile = promisify(execFileCallback);
@@ -37,6 +37,111 @@ test('source locking accepts explicit v3 compatibility and v4 experience manifes
   assert.equal(isCollectableManifestSchema('b10x-docs/v3'), true);
   assert.equal(isCollectableManifestSchema('b10x-docs/v4'), true);
   assert.equal(isCollectableManifestSchema('b10x-docs/v2'), false);
+});
+
+test('production source Git cannot inherit private URL rewrites or developer credentials', () => {
+  const sanitized = credentialFreeGitEnvironment({
+    PATH: '/usr/bin',
+    GIT_CONFIG_GLOBAL: '/tmp/developer.gitconfig',
+    GIT_CONFIG_SYSTEM: '/tmp/system.gitconfig',
+    GIT_CONFIG_PARAMETERS: "'url.ssh://git@github.com/.insteadOf'='https://anonymous:@github.com/'",
+    GIT_CONFIG_COUNT: '2',
+    GIT_CONFIG_KEY_0: 'url.ssh://git@github.com/.insteadOf',
+    GIT_CONFIG_VALUE_0: 'https://anonymous:@github.com/',
+    GIT_CONFIG_KEY_1: 'credential.https://github.com.helper',
+    GIT_CONFIG_VALUE_1: '!private-helper',
+    GIT_ASKPASS: '/tmp/private-askpass',
+    GIT_COMMON_DIR: '/tmp/private-common.git',
+    GIT_DIR: '/tmp/private-repository.git',
+    GIT_WORK_TREE: '/tmp/private-worktree',
+    GIT_SSH_COMMAND: 'ssh -i /tmp/private-key',
+    SSH_ASKPASS: '/tmp/private-ssh-askpass',
+    SSH_AUTH_SOCK: '/tmp/private-agent.sock',
+    NETRC: '/tmp/private-netrc',
+  });
+  assert.equal(sanitized.PATH, '/usr/bin');
+  assert.equal(sanitized.GIT_CONFIG_GLOBAL, os.devNull);
+  assert.equal(sanitized.GIT_CONFIG_NOSYSTEM, '1');
+  assert.equal(sanitized.GIT_TERMINAL_PROMPT, '0');
+  assert.equal(sanitized.GCM_INTERACTIVE, 'Never');
+  assert.equal(sanitized.NETRC, os.devNull);
+  assert.equal(sanitized.SSH_ASKPASS_REQUIRE, 'never');
+  for (const key of [
+    'GIT_CONFIG_SYSTEM', 'GIT_CONFIG_PARAMETERS', 'GIT_CONFIG_COUNT', 'GIT_CONFIG_KEY_0', 'GIT_CONFIG_VALUE_0',
+    'GIT_CONFIG_KEY_1', 'GIT_CONFIG_VALUE_1', 'GIT_ASKPASS', 'GIT_SSH_COMMAND',
+    'GIT_COMMON_DIR', 'GIT_DIR', 'GIT_WORK_TREE', 'SSH_ASKPASS', 'SSH_AUTH_SOCK',
+  ]) assert.equal(sanitized[key], undefined, `${key} must not cross the publication boundary`);
+});
+
+test('production Git transports canonical source identities with explicit anonymous credentials', () => {
+  assert.equal(
+    credentialFreeRepositoryUrl('https://github.com/beyond10x/aep'),
+    'https://anonymous:@github.com/beyond10x/aep.git',
+  );
+  assert.throws(() => credentialFreeRepositoryUrl('https://github.com/example/private'), /outside the public beyond10x allowlist/);
+});
+
+test('remote source resolution applies the credential-free boundary to the Git process', async (context) => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'b10x-remote-source-'));
+  context.after(() => rm(directory, {recursive: true, force: true}));
+  const bin = path.join(directory, 'bin');
+  await mkdir(bin, {recursive: true});
+  await writeFile(path.join(bin, 'git'), [
+    '#!/usr/bin/env node',
+    "import assert from 'node:assert/strict';",
+    "assert.deepEqual(process.argv.slice(2, 12), ['-c', 'credential.helper=', '-c', 'credential.interactive=false', '-c', 'core.askPass=', '-c', 'http.extraHeader=', '-c', 'http.proactiveAuth=none']);",
+    "assert.equal(process.env.GIT_CONFIG_GLOBAL, '/dev/null');",
+    "assert.equal(process.env.GIT_CONFIG_NOSYSTEM, '1');",
+    "assert.equal(process.env.GIT_TERMINAL_PROMPT, '0');",
+    "assert.equal(process.env.NETRC, '/dev/null');",
+    "assert.equal(process.env.GIT_CONFIG_COUNT, undefined);",
+    "assert.equal(process.env.GIT_ASKPASS, undefined);",
+    "assert.equal(process.env.GIT_SSH_COMMAND, undefined);",
+    "assert.equal(process.env.SSH_AUTH_SOCK, undefined);",
+    "assert.ok(process.argv.includes('https://anonymous:@github.com/beyond10x/aep.git'));",
+    `process.stdout.write('${'a'.repeat(40)}\\trefs/heads/main\\n');`,
+    '',
+  ].join('\n'), {mode: 0o755});
+  const commit = await resolveCommit(
+    'https://github.com/beyond10x/aep',
+    'refs/heads/main',
+    {
+      ...process.env,
+      PATH: `${bin}:${process.env.PATH}`,
+      GIT_CONFIG_GLOBAL: '/tmp/developer.gitconfig',
+      GIT_CONFIG_PARAMETERS: "'url.ssh://git@github.com/.insteadOf'='https://anonymous:@github.com/'",
+      GIT_CONFIG_COUNT: '1',
+      GIT_CONFIG_KEY_0: 'url.ssh://git@github.com/.insteadOf',
+      GIT_CONFIG_VALUE_0: 'https://anonymous:@github.com/',
+      GIT_ASKPASS: '/tmp/private-askpass',
+      GIT_COMMON_DIR: '/tmp/private-common.git',
+      GIT_SSH_COMMAND: 'ssh -i /tmp/private-key',
+      SSH_AUTH_SOCK: '/tmp/private-agent.sock',
+      NETRC: '/tmp/private-netrc',
+    },
+  );
+  assert.equal(commit, 'a'.repeat(40));
+});
+
+test('production extraction refuses URL rewrites planted in its persistent object cache', async (context) => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), 'b10x-source-cache-'));
+  context.after(() => rm(directory, {recursive: true, force: true}));
+  const bare = path.join(directory, 'objects', 'aep.git');
+  await mkdir(path.dirname(bare), {recursive: true});
+  await testGit(directory, ['init', '--bare', bare]);
+  await testGit(directory, [
+    `--git-dir=${bare}`,
+    'config',
+    'url.file:///tmp/private-aep.git.insteadOf',
+    'https://anonymous:@github.com/beyond10x/aep.git',
+  ]);
+  await assert.rejects(extractDeclaredSource({
+    repository: 'aep',
+    url: 'https://github.com/beyond10x/aep',
+    commit: 'a'.repeat(40),
+    manifestPath: 'b10x.docs.yaml',
+    cacheRoot: directory,
+  }), /unsupported local Git configuration: url\.file:\/\/\/tmp\/private-aep\.git\.insteadof/);
 });
 
 test('local preview collection extracts the locked Git object and ignores dirty checkout bytes', async (context) => {

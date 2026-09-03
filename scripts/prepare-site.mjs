@@ -758,7 +758,7 @@ function fixtureRegistry(repositories, legacyRegistry) {
   const byRepository = new Map(legacyRegistry.surfaces.map((surface) => [surface.repository.id, surface]));
   const names = {
     aep: 'AEP', 'aep-service': 'AEP Service', 'agent-platform': 'Agent Platform',
-    'agentic-principles': 'Agentic Principles', agentide: 'AgentIDE', agentplugins: 'Agent Plugins', bench: 'Bench', connectors: 'Connectors',
+    'agentic-principles': 'Agentic Principles', agentide: 'AgentIDE', agentplugins: 'Agent Plugins', connectors: 'Connectors',
     devcenter: 'Devcenter', 'docs-system': 'Docs System', 'entity-runtime': 'Entity Runtime', ess: 'ESS',
     eventlog: 'Eventlog', harness: 'Harness', identity: 'Identity', mcp: 'MCP', metaharness: 'Metaharness',
     research: 'Agent Interaction Research', secrets: 'Secrets', substrate: 'Substrate', workflow: 'Workflow', worktree: 'Worktree',

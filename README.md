@@ -48,7 +48,11 @@ children are the repositories in `sources.yaml`. The lock command requires every
 checked out, then pins that exact local HEAD. Collection fetches those locked commits from each
 checkout's Git object database into the same bounded bare cache; source worktree bytes are never
 used as publication input. With the variable unset, including in production, lock resolution and
-collection remain remote-only.
+collection remain remote-only. Production fetches use explicit anonymous HTTPS credentials and
+discard developer and system Git configuration, URL rewrites, credential helpers, askpass programs,
+and SSH-agent access. The source
+roster therefore contains only repositories that anonymous HTTPS can fetch; private research
+corpora never become Website inputs just because a developer can access them locally.
 
 Before pushing Website, push every commit named by the lock and run `npm run gate` once with
 `B10X_SOURCE_WORKSPACE` unset. This makes remote publication availability part of the handoff

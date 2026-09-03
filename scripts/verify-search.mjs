@@ -50,6 +50,9 @@ try {
   if (undeclaredAudiences.length > 0) {
     throw new Error(`Pagefind emitted undeclared audience filters: ${undeclaredAudiences.join(', ')}`);
   }
+  if (filters.project.bench || documentIndex.documents.some((document) => document.project === 'bench' || document.route.startsWith('/docs/bench/'))) {
+    throw new Error('private Bench material must not enter the public document index or Pagefind project filters');
+  }
 
   for (const goldenQuery of golden.queries) {
     const response = await pagefind.search(goldenQuery.query);

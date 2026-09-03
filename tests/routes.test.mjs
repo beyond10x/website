@@ -83,14 +83,17 @@ test('source roster is complete, sorted, and lock is either the explicit bootstr
   const rosterDocument = parse(roster);
   const repositories = rosterDocument.repositories;
   assert.ok(repositories.length > 0);
+  assert.equal(repositories.length, 22);
   assert.deepEqual(repositories, [...repositories].sort());
   assert.deepEqual(rosterDocument.compatibilityRepositories, ['getting-started']);
   assert.ok(!repositories.includes('getting-started'));
+  assert.ok(!repositories.includes('bench'), 'private Bench must never enter the public source roster');
   const lock = JSON.parse(await readFile(path.join(root, 'sources.lock.json'), 'utf8'));
   assert.equal(lock.schema, 'b10x-sources/v1');
   if (lock.sources.length > 0) {
     assert.equal(lock.sources.length, repositories.length);
     assert.deepEqual(lock.sources.map((source) => source.repository), repositories);
+    assert.ok(lock.sources.every((source) => source.url !== 'https://github.com/beyond10x/bench'));
   }
 });
 

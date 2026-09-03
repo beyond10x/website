@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import {execFile as execFileCallback} from 'node:child_process';
 import {mkdir, readFile, realpath, rm, writeFile} from 'node:fs/promises';
+import {devNull} from 'node:os';
 import path from 'node:path';
 import {promisify} from 'node:util';
 import {parse} from 'yaml';
@@ -35,10 +36,15 @@ export function repositoryUrl(repository) {
   return `https://github.com/beyond10x/${repository}`;
 }
 
-export async function resolveCommit(url, ref = 'refs/heads/main') {
+export function credentialFreeRepositoryUrl(url) {
+  validateRepositoryUrl(url);
+  return `https://anonymous:@${url.slice('https://'.length)}.git`;
+}
+
+export async function resolveCommit(url, ref = 'refs/heads/main', environment = process.env) {
   validateRepositoryUrl(url);
   if (!/^refs\/heads\/[a-zA-Z0-9._/-]+$/.test(ref) || ref.includes('..')) throw new Error(`unsafe source ref ${ref}`);
-  const {stdout} = await runGit(['ls-remote', `${url}.git`, ref]);
+  const {stdout} = await runGit(['ls-remote', credentialFreeRepositoryUrl(url), ref], {}, environment);
   const lines = stdout.trim().split(/\r?\n/).filter(Boolean);
   if (lines.length !== 1) throw new Error(`${url} ${ref} did not resolve exactly once`);
   const commit = lines[0].split(/\s+/)[0];
@@ -76,13 +82,14 @@ export async function extractDeclaredSource({repository, url, commit, manifestPa
   const treeRoot = path.join(cacheRoot, 'trees', `${repository}-${commit}`);
   const fetchSource = sourceWorkspace
     ? await localGitSource(sourceWorkspace, repository, commit)
-    : `${url}.git`;
+    : credentialFreeRepositoryUrl(url);
   await mkdir(path.dirname(bare), {recursive: true});
   try {
     await runGit([`--git-dir=${bare}`, 'rev-parse', '--is-bare-repository']);
   } catch {
     await runGit(['init', '--bare', bare]);
   }
+  await assertCredentialNeutralBareRepository(bare);
   await runGit([`--git-dir=${bare}`, 'fetch', '--no-tags', '--depth=1', fetchSource, commit]);
   await runGit([`--git-dir=${bare}`, 'cat-file', '-e', `${commit}^{commit}`]);
 
@@ -131,6 +138,68 @@ export function sourceWorkspaceFromEnvironment(environment = process.env) {
     throw new Error('B10X_SOURCE_WORKSPACE must be an absolute directory containing direct repository children');
   }
   return path.resolve(value);
+}
+
+/**
+ * Remote source discovery and extraction are a credential-free publication
+ * boundary. Do not let a developer's URL rewrites, credential helpers, askpass
+ * programs, or SSH agent turn a private checkout into an apparently public
+ * production source.
+ */
+export function credentialFreeGitEnvironment(environment = process.env) {
+  const sanitized = {...environment};
+  for (const key of Object.keys(sanitized)) {
+    if (/^GIT_CONFIG_(?:COUNT|KEY_[0-9]+|VALUE_[0-9]+)$/.test(key)) delete sanitized[key];
+  }
+  for (const key of [
+    'GIT_ASKPASS',
+    'GIT_ALTERNATE_OBJECT_DIRECTORIES',
+    'GIT_COMMON_DIR',
+    'GIT_CONFIG_PARAMETERS',
+    'GIT_CONFIG_SYSTEM',
+    'GIT_DIR',
+    'GIT_INDEX_FILE',
+    'GIT_OBJECT_DIRECTORY',
+    'GIT_PROXY_COMMAND',
+    'GIT_SSH',
+    'GIT_SSH_COMMAND',
+    'GIT_WORK_TREE',
+    'SSH_ASKPASS',
+    'SSH_AUTH_SOCK',
+  ]) delete sanitized[key];
+  sanitized.GIT_CONFIG_GLOBAL = devNull;
+  sanitized.GIT_CONFIG_NOSYSTEM = '1';
+  sanitized.GIT_TERMINAL_PROMPT = '0';
+  sanitized.GCM_INTERACTIVE = 'Never';
+  // Git enables libcurl's optional netrc lookup; pin it to an empty file
+  // instead of changing HOME or consulting the developer's ~/.netrc.
+  sanitized.NETRC = devNull;
+  sanitized.SSH_ASKPASS_REQUIRE = 'never';
+  return sanitized;
+}
+
+async function assertCredentialNeutralBareRepository(bare) {
+  const {stdout} = await runGit(
+    [`--git-dir=${bare}`, 'config', '--local', '--null', '--list'],
+    {encoding: 'buffer'},
+  );
+  const allowed = new Map([
+    ['core.bare', new Set(['true'])],
+    ['core.filemode', new Set(['false', 'true'])],
+    ['core.repositoryformatversion', new Set(['0'])],
+  ]);
+  const entries = stdout.toString('utf8').split('\0').filter(Boolean).map((entry) => {
+    const separator = entry.indexOf('\n');
+    return separator < 0 ? [entry, ''] : [entry.slice(0, separator), entry.slice(separator + 1)];
+  });
+  const unsupported = entries
+    .filter(([name, value]) => !allowed.get(name)?.has(value))
+    .map(([name]) => name)
+    .sort();
+  if (new Set(entries.map(([name]) => name)).size !== entries.length) unsupported.push('duplicate key');
+  if (unsupported.length > 0) {
+    throw new Error(`source object cache contains unsupported local Git configuration: ${unsupported.join(', ')}`);
+  }
 }
 
 export function declaredAnchors(manifest) {
@@ -238,6 +307,22 @@ async function readObject(bare, object) {
   return stdout;
 }
 
-async function runGit(args, options = {}) {
-  return execFile('git', args, {encoding: options.encoding ?? 'utf8', maxBuffer: 128 * 1024 * 1024});
+async function runGit(args, options = {}, environment = process.env) {
+  return execFile(
+    'git',
+    [
+      '-c', 'credential.helper=',
+      '-c', 'credential.interactive=false',
+      '-c', 'core.askPass=',
+      '-c', 'http.extraHeader=',
+      '-c', 'http.proactiveAuth=none',
+      ...args,
+    ],
+    {
+      cwd: options.cwd ?? path.parse(process.cwd()).root,
+      encoding: options.encoding ?? 'utf8',
+      env: credentialFreeGitEnvironment(environment),
+      maxBuffer: 128 * 1024 * 1024,
+    },
+  );
 }
