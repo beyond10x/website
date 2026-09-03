@@ -7,6 +7,8 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 const build = path.join(root, 'build');
+const chromeStartupTimeoutMs = 30_000;
+const chromeStartupPollMs = 50;
 const chromeBinary = await findChrome();
 const profile = await mkdtemp(path.join(os.tmpdir(), 'b10x-navigation-chrome-'));
 const server = createServer((request, response) => void serveBuild(request, response));
@@ -213,15 +215,20 @@ async function findChrome() {
 }
 
 async function waitForDevtools(file) {
-  for (let attempt = 0; attempt < 120; attempt += 1) {
-    if (chrome.exitCode !== null) throw new Error(`Chrome exited before exposing DevTools (${chrome.exitCode})`);
+  const deadline = performance.now() + chromeStartupTimeoutMs;
+  while (true) {
+    if (chrome.exitCode !== null || chrome.signalCode !== null) {
+      throw new Error(`Chrome exited before exposing DevTools (${chrome.exitCode ?? chrome.signalCode})`);
+    }
     try {
       const [port] = (await readFile(file, 'utf8')).trim().split(/\r?\n/);
       if (/^[0-9]+$/.test(port)) return Number(port);
     } catch { /* Chrome has not created the endpoint yet */ }
-    await delay(50);
+    const remaining = deadline - performance.now();
+    if (remaining <= 0) break;
+    await delay(Math.min(chromeStartupPollMs, remaining));
   }
-  throw new Error('timed out waiting for Chrome DevTools endpoint');
+  throw new Error(`timed out after ${chromeStartupTimeoutMs}ms waiting for Chrome DevTools endpoint`);
 }
 
 async function connectCdp(url) {

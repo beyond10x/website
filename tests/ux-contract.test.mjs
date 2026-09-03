@@ -200,6 +200,17 @@ test('the browser navigation audit waits for Chrome teardown before retrying pro
   assert.match(audit, /maxRetries: 10, retryDelay: 100/);
 });
 
+test('the browser navigation audit gives Chrome a bounded startup deadline of at least 30 seconds', async () => {
+  const audit = await readFile(path.join(root, 'scripts/verify-navigation-layout.mjs'), 'utf8');
+  const timeout = audit.match(/const chromeStartupTimeoutMs = ([\d_]+);/);
+  assert.ok(timeout, 'Chrome startup must declare an explicit timeout');
+  assert.ok(Number(timeout[1].replaceAll('_', '')) >= 30_000, 'Chrome startup timeout must allow at least 30 seconds');
+  assert.match(audit, /const deadline = performance\.now\(\) \+ chromeStartupTimeoutMs;/);
+  assert.match(audit, /const remaining = deadline - performance\.now\(\);/);
+  assert.match(audit, /if \(chrome\.exitCode !== null \|\| chrome\.signalCode !== null\)/);
+  assert.doesNotMatch(audit, /attempt < 120/, 'Chrome startup must not regress to the six-second attempt budget');
+});
+
 test('shared status/filter tokens remain unshadowed and footer copy meets WCAG AA contrast', async () => {
   const css = await readFile(path.join(root, 'src/css/custom.css'), 'utf8');
   assert.doesNotMatch(css, /--b10x-(?:ink|ink-raised|signal|warning|danger):/);
