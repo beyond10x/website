@@ -1,7 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import docsSystemPlugin, {ecosystemFooterGroup} from '@beyond10x/docs-system/docusaurus';
+import docsSystemPlugin from '@beyond10x/docs-system/docusaurus';
 import {PRISM_ADDITIONAL_LANGUAGES} from '@beyond10x/docs-system/code';
 
 const config: Config = {
@@ -82,6 +82,12 @@ const config: Config = {
           path: '.generated/docs',
           routeBasePath: 'docs',
           sidebarPath: '.generated/sidebars.cjs',
+          sidebarItemsGenerator: async ({defaultSidebarItemsGenerator, ...args}) => {
+            const rootId = `${args.item.dirName}/index`;
+            const docs = args.docs.filter((doc) => doc.id !== rootId);
+            const hasNestedDocs = docs.some((doc) => doc.id.startsWith(`${args.item.dirName}/`));
+            return hasNestedDocs ? defaultSidebarItemsGenerator({...args, docs}) : [];
+          },
           showLastUpdateAuthor: false,
           showLastUpdateTime: false,
         },
@@ -133,11 +139,10 @@ const config: Config = {
         src: 'img/mark.svg',
       },
       items: [
-        {to: '/start/', label: 'Try', position: 'left'},
-        {to: '/learn/', label: 'Learn', position: 'left'},
-        {to: '/build/', label: 'Build', position: 'left'},
-        {to: '/products/', label: 'Products', position: 'left'},
-        {to: '/docs/', label: 'Docs', position: 'left'},
+        {to: '/start/', label: 'Start', position: 'left', activeBaseRegex: '^/(start|learn|build|products|operate|contribute)(/|$)'},
+        {to: '/ecosystem/', label: 'Explore', position: 'left', activeBasePath: '/ecosystem'},
+        {to: '/docs/', label: 'Docs', position: 'left', activeBaseRegex: '^/(docs|api|components|architecture)(/|$)'},
+        {to: '/updates/', label: 'Updates', position: 'left', activeBaseRegex: '^/(updates|changes|releases)(/|$)'},
         {to: '/search/', label: 'Search', position: 'left'},
         {
           href: 'https://github.com/beyond10x',
@@ -150,7 +155,7 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Get started',
+          title: 'Start',
           items: [
             {label: 'Try a governed change', href: '/start/spec-driven-development/'},
             {label: 'Learn safe agentic coding', href: '/learn/safe-agentic-coding/'},
@@ -158,23 +163,30 @@ const config: Config = {
           ],
         },
         {
-          title: 'Products and operations',
+          title: 'Adopt',
           items: [
             {label: 'Evaluate products', href: '/products/evaluate/'},
             {label: 'Operate services', href: '/operate/'},
-            {label: 'Public project map', href: '/ecosystem/'},
+            {label: 'Explore the project map', href: '/ecosystem/'},
           ],
         },
         {
-          title: 'Reference',
+          title: 'Documentation',
           items: [
             {label: 'Technical documentation', to: '/docs/'},
-            {label: 'Changes and field notes', to: '/updates/'},
-            {label: 'Release stream', to: '/releases/'},
-            {label: 'Architecture', to: '/architecture/'},
+            {label: 'Search all documentation', to: '/search/'},
+            {label: 'Updates and field notes', to: '/updates/'},
+            {label: 'Releases', to: '/releases/'},
           ],
         },
-        ecosystemFooterGroup(),
+        {
+          title: 'About',
+          items: [
+            {label: 'Vision', to: '/vision/'},
+            {label: 'Architecture', to: '/architecture/'},
+            {label: 'GitHub organization', href: 'https://github.com/beyond10x'},
+          ],
+        },
       ],
       copyright: '© 2026 beyond10x · Make the decision explicit.',
     },

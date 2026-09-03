@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.3.0 — 2026-09-03
+
+- Restore a stable global navigation map (`Start`, `Explore`, `Docs`, `Updates`, and `Search`), retain its section state on child routes, remove duplicate and cross-context project-family links, preserve source-owned sidebar ordering, and send Devcenter availability checks to the owning status page.
+
 - Add MCP as the twentieth exact-commit public documentation source and bind its generated project surface into the unified site.
 - Admit bot-authored, GitHub-verified `web-flow` commits behind App-only ref authority as immutable root and redirect-façade controls without relying on shallow-checkout parent topology.
 

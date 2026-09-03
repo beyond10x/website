@@ -63,7 +63,7 @@ test('Devcenter keeps evaluation paths separate from operator-only production de
   const frontendPage = presentation.pages.find((page) => page.experienceId === 'evaluate-beyond10x-products');
   assert.deepEqual(
     frontendPage.sections.flatMap((section) => section.steps).filter((step) => step.url.startsWith('/docs/devcenter/')).map((step) => step.url),
-    ['/docs/devcenter/frontend-review/', '/docs/devcenter/frontend-review/'],
+    ['/docs/devcenter/frontend-review/', '/docs/devcenter/production-deployment/'],
   );
   const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
   assert.match(artifacts.get('devcenter-source').note, /PolyForm.*less than 32 consecutive calendar days/i);

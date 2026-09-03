@@ -73,7 +73,7 @@ export default function EcosystemFamilyOrientation({
                 </Link>
               </li>
               <li>
-                <Link to={familyExplorePath(next.id)}>
+                <Link to={familyDocsPath(next.slug)}>
                   <span>
                     <strong>Next · {next.label}</strong>
                     <small>{family.next.label}</small>

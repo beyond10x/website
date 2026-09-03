@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from '../scripts/api-catalog.mjs';
-import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars} from '../scripts/sidebar-contract.mjs';
+import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars, sourceSidebarMetadata} from '../scripts/sidebar-contract.mjs';
 import {escapePlaceholderTags, normalizePassiveMarkdown, stripManagedRanges} from '../scripts/passive-markdown.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -103,11 +103,11 @@ test('technical documentation keeps an overview while every project receives one
   })).concat([{repository: {id: 'website'}, surfaces: [{source: {navigation: {label: 'Start', order: 0, sidebar: 'flat'}}}]}]);
   const source = renderSidebars(registry, manifests);
   const document = JSON.parse(source.replace(/^module\.exports = /, '').replace(/;\n$/, ''));
-  assert.deepEqual(document.docs[0], {type: 'link', label: 'Choose an outcome', href: '/start/'});
+  assert.deepEqual(document.docs[0], {type: 'link', label: 'Start by outcome', href: '/start/'});
   assert.deepEqual(document.docs[1], {type: 'doc', id: 'index', label: 'Technical documentation'});
-  assert.deepEqual(document.docs[2], {type: 'link', label: 'Website internals', href: '/docs/website/'});
+  assert.deepEqual(document.docs.at(-1), {type: 'link', label: 'About this documentation site', href: '/docs/website/'});
   assert.ok(document.docs.every((item) => item.label !== 'Start'));
-  const families = document.docs.slice(3);
+  const families = document.docs.slice(2, -1);
   assert.deepEqual(families.map((family) => family.label), documentationFamilies.map((family) => family.label));
   assert.ok(families.every((family) => family.collapsed && family.link.type === 'doc'));
   assert.deepEqual(families.map((family) => family.link.id), ['families/foundations', 'families/build', 'families/services', 'families/products']);
@@ -120,7 +120,8 @@ test('technical documentation keeps an overview while every project receives one
     const project = document[`project_${repository.replaceAll('-', '_')}`];
     const label = repository === 'website' ? 'Website internals' : repositories.find(([id]) => id === repository)[1];
     assert.deepEqual(project, [
-      {type: 'link', label: 'Technical docs', href: '/docs/'},
+      {type: 'link', label: 'Start by outcome', href: '/start/'},
+      {type: 'link', label: 'All technical docs', href: '/docs/'},
       {
         type: 'category',
         label,
@@ -132,8 +133,18 @@ test('technical documentation keeps an overview while every project receives one
   }
 });
 
+test('source-owned sidebar labels and positions survive canonical rendering', () => {
+  assert.deepEqual(sourceSidebarMetadata({sidebar_label: '  Start here  ', sidebar_position: 2}, 'Fallback'), {label: 'Start here', position: 2});
+  assert.deepEqual(sourceSidebarMetadata({}, 'Fallback'), {label: 'Fallback'});
+  assert.deepEqual(sourceSidebarMetadata({sidebar_label: ''}, 'Fallback'), {label: 'Fallback'});
+  assert.throws(() => sourceSidebarMetadata({sidebar_position: '2'}, 'Fallback'), /safe YAML integer/);
+  assert.throws(() => sourceSidebarMetadata({sidebar_position: 2.5}, 'Fallback'), /safe YAML integer/);
+  assert.throws(() => sourceSidebarMetadata({sidebar_position: Number.POSITIVE_INFINITY}, 'Fallback'), /safe YAML integer/);
+});
+
 test('the authored family map explains purpose, start, and a valid cross-family next step without owning membership', async () => {
   const taxonomy = JSON.parse(await readFile(path.join(root, 'data/ecosystem-families.json'), 'utf8'));
+  const orientation = await readFile(path.join(root, 'src/components/EcosystemFamilyOrientation.tsx'), 'utf8');
   assert.equal(taxonomy.schema, 'b10x-ecosystem-families/v1');
   assert.deepEqual(taxonomy.families.map((family) => family.id), ['Foundation', 'Build', 'Services', 'Products']);
   assert.deepEqual(documentationFamilyOrder, taxonomy.families.map((family) => family.id));
@@ -148,6 +159,8 @@ test('the authored family map explains purpose, start, and a valid cross-family 
     assert.equal(family.repositories, undefined);
   }
   assert.match(taxonomy.families.find((family) => family.id === 'Products').purpose, /active development.*credential-free review mode.*not as a production adoption promise/i);
+  assert.match(orientation, /<Link to=\{familyDocsPath\(next\.slug\)\}>/);
+  assert.doesNotMatch(orientation, /<Link to=\{familyExplorePath\(next\.id\)\}>/);
 });
 
 test('the family contract derives current repository counts without freezing the production roster', () => {
@@ -181,15 +194,29 @@ test('global navigation stays sticky, uses gateway routes, and retains mobile to
   assert.match(css, /\.navbar__toggle \{[^}]*min-width: 44px;[^}]*min-height: 44px;/s);
   const navbarConfig = config.slice(config.indexOf('navbar:'), config.indexOf('footer:'));
   assert.match(navbarConfig, /hideOnScroll: false/);
-  assert.deepEqual([...navbarConfig.matchAll(/label: '([^']+)'/g)].map((match) => match[1]), ['Try', 'Learn', 'Build', 'Products', 'Docs', 'Search', 'GitHub']);
+  assert.deepEqual([...navbarConfig.matchAll(/label: '([^']+)'/g)].map((match) => match[1]), ['Start', 'Explore', 'Docs', 'Updates', 'Search', 'GitHub']);
   assert.deepEqual(
-    [...navbarConfig.matchAll(/\{to: '([^']+)', label: '(Try|Learn|Build|Products|Docs|Search)'/g)].map((match) => match[1]),
-    ['/start/', '/learn/', '/build/', '/products/', '/docs/', '/search/'],
+    [...navbarConfig.matchAll(/\{to: '([^']+)', label: '(Start|Explore|Docs|Updates|Search)'/g)].map((match) => match[1]),
+    ['/start/', '/ecosystem/', '/docs/', '/updates/', '/search/'],
   );
+  assert.match(navbarConfig, /label: 'Start'[^\n]+activeBaseRegex: '\^\/\(start\|learn\|build\|products\|operate\|contribute\)\(\/\|\$\)'/);
+  assert.match(navbarConfig, /label: 'Explore'[^\n]+activeBasePath: '\/ecosystem'/);
+  assert.match(navbarConfig, /label: 'Docs'[^\n]+activeBaseRegex: '\^\/\(docs\|api\|components\|architecture\)\(\/\|\$\)'/);
+  assert.match(navbarConfig, /label: 'Updates'[^\n]+activeBaseRegex: '\^\/\(updates\|changes\|releases\)\(\/\|\$\)'/);
   for (const gateway of ['start', 'learn', 'build', 'products']) {
     await readFile(path.join(root, 'src/pages', gateway, 'index.tsx'), 'utf8');
   }
+  const footerConfig = config.slice(config.indexOf('footer:'), config.indexOf('prism:'));
+  assert.doesNotMatch(footerConfig, /ecosystemFooterGroup|https:\/\/beyond10x\.github\.io/);
+  assert.deepEqual([...footerConfig.matchAll(/title: '([^']+)'/g)].map((match) => match[1]), ['Start', 'Adopt', 'Documentation', 'About']);
+  assert.match(config, /sidebarItemsGenerator:[\s\S]+doc\.id !== rootId/);
   assert.match(config, /autoCollapseCategories: true/);
+});
+
+test('the technical documentation front door renders one family chooser', async () => {
+  const preparation = await readFile(path.join(root, 'scripts/prepare-site.mjs'), 'utf8');
+  assert.equal([...preparation.matchAll(/<EcosystemFamilyOrientation surfaces=/g)].length, 1);
+  assert.doesNotMatch(preparation, /<EcosystemFamilyGateway surfaces=/);
 });
 
 test('the browser navigation audit waits for Chrome teardown before retrying profile cleanup', async () => {
@@ -316,7 +343,7 @@ test('repository families stay in reference views instead of the practitioner ho
   assert.doesNotMatch(home, /EcosystemFamilyOrientation|EcosystemFamilyGateway/);
   assert.match(preparation, /path\.join\(docs, 'index\.mdx'\)/);
   assert.match(preparation, /<EcosystemFamilyOrientation surfaces=/);
-  assert.match(preparation, /<EcosystemFamilyGateway surfaces=/);
+  assert.doesNotMatch(preparation, /<EcosystemFamilyGateway surfaces=/);
   assert.match(preparation, /<EcosystemFamilyLanding family=/);
   assert.match(ecosystem, /deriveEcosystemNavigation\(registry, \{familyOrder\}\)/);
   assert.match(ecosystem, /label="Ecosystem family"/);

@@ -10,7 +10,7 @@ import {sourceKey, sourceMap} from './source-routing.mjs';
 import {bootstrapEnabled, validateSourceLock} from './source-lock-contract.mjs';
 import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
 import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from './api-catalog.mjs';
-import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars} from './sidebar-contract.mjs';
+import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars, sourceSidebarMetadata} from './sidebar-contract.mjs';
 import {normalizePassiveMarkdown} from './passive-markdown.mjs';
 import {assertSearchAudienceVocabulary, experienceIdsForSourceDocument} from './search-metadata-contract.mjs';
 
@@ -159,7 +159,6 @@ await writeFile(
     'description: Browse source-locked technical references or return to an audience-first path.',
     '---',
     '',
-    "import {EcosystemFamilyGateway} from '@beyond10x/docs-system/components';",
     "import EcosystemFamilyOrientation from '@site/src/components/EcosystemFamilyOrientation';",
     "import registry from '@site/.generated/data/ecosystem.json';",
     '',
@@ -170,8 +169,6 @@ await writeFile(
     '## Browse by technical boundary',
     '',
     '<EcosystemFamilyOrientation surfaces={registry.surfaces} title="Choose the family that owns your question" description="Families organize technical reference. They are not a required onboarding sequence or one deployment stack." />',
-    '',
-    `<EcosystemFamilyGateway surfaces={registry.surfaces.filter((surface) => surface.kind !== 'front-door')} familyOrder={${JSON.stringify(documentationFamilyOrder)}} title="Browse by family" description="Move from foundations through agent tooling and service boundaries to public products." />`,
     '',
   ].join('\n'),
 );
@@ -369,11 +366,13 @@ function docDestination(route, sourcePath) {
 function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, metadata}) {
   const {frontmatter, body} = splitFrontmatter(raw);
   const title = metadata.title;
+  const sidebar = sourceSidebarMetadata(frontmatter, title);
   const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource});
   return [
     '---',
     `title: ${JSON.stringify(metadata.qualifiedTitle)}`,
-    `sidebar_label: ${JSON.stringify(title)}`,
+    `sidebar_label: ${JSON.stringify(sidebar.label)}`,
+    ...(sidebar.position === undefined ? [] : [`sidebar_position: ${JSON.stringify(sidebar.position)}`]),
     `description: ${JSON.stringify(metadata.description)}`,
     `slug: ${JSON.stringify(route.replace(/^\/docs/, ''))}`,
     '---',

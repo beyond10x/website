@@ -68,8 +68,8 @@ const frontendPresentation = presentation.pages.find((page) => page.experienceId
 const devcenterStepUrls = frontendPresentation?.sections.flatMap((section) => section.steps)
   .filter((step) => step.url.startsWith('/docs/devcenter/'))
   .map((step) => step.url) ?? [];
-if (devcenterStepUrls.join(',') !== '/docs/devcenter/frontend-review/,/docs/devcenter/frontend-review/') {
-  throw new Error('the public Devcenter review path must link only to its evaluator-owned documentation page');
+if (devcenterStepUrls.join(',') !== '/docs/devcenter/frontend-review/,/docs/devcenter/production-deployment/') {
+  throw new Error('the public Devcenter review path must separate credential-free review from production availability');
 }
 const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
 for (const [id, version, url] of [

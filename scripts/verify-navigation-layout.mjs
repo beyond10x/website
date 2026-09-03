@@ -53,20 +53,22 @@ try {
   assert.equal(desktop.position, 'sticky', 'desktop navbar must retain sticky positioning on docs pages');
   assert.ok(Number.parseInt(desktop.zIndex, 10) > 0, 'desktop navbar must establish a positive stacking layer');
   assert.ok(Math.abs(desktop.navbar.top) <= 1 && desktop.navbar.bottom >= 63, 'desktop navbar must remain at the viewport top after anchor scrolling');
-  assert.deepEqual(desktop.labels.map((item) => item.label), ['Try', 'Learn', 'Build', 'Products', 'Docs', 'Search']);
+  assert.deepEqual(desktop.labels.map((item) => item.label), ['Start', 'Explore', 'Docs', 'Updates', 'Search']);
   for (const label of desktop.labels) {
     assert.ok(label.visible, `${label.label} must be visible in the desktop navbar`);
     assert.ok(label.topmost, `${label.label} must not be occluded by the docs sidebar`);
   }
   assert.equal(desktop.sidebarLogo, false, 'docs sidebar must not render a competing navbar logo');
   assert.ok(desktop.sidebarTop >= desktop.navbar.bottom - 1, 'docs sidebar navigation must begin below the global navbar');
-  await clickNavigationLink(client, 'nav[aria-label="Docs sidebar"]', 'Choose an outcome');
+  await clickNavigationLink(client, 'nav[aria-label="Docs sidebar"]', 'Start by outcome');
   await waitForPath(client, '/start/', 1440);
 
   await navigate(client, `${site}/docs/aep/getting-started/`);
   const projectContext = await evaluate(client, projectContextSnapshot());
-  assert.ok(projectContext.sidebar.some((item) => item.label === 'Technical docs' && item.path === '/docs/'), 'deep project sidebar must return to Technical docs');
-  assert.ok(projectContext.sidebar.some((item) => item.label === 'AEP' && item.path === '/docs/aep/'), 'deep project sidebar must expose the AEP owner and root');
+  assert.ok(projectContext.sidebar.some((item) => item.label === 'Start by outcome' && item.path === '/start/'), 'deep project sidebar must return to an audience path');
+  assert.ok(projectContext.sidebar.some((item) => item.label === 'All technical docs' && item.path === '/docs/'), 'deep project sidebar must return to all technical docs');
+  assert.equal(projectContext.sidebar.filter((item) => item.path === '/docs/aep/').length, 1, 'deep project sidebar must expose the AEP root exactly once');
+  assert.deepEqual(projectContext.sidebar.filter((item) => item.path?.startsWith('/docs/aep/')).slice(0, 2).map((item) => item.label), ['AEP', 'Getting started'], 'deep project sidebar must preserve AEP source ordering');
   assert.ok(projectContext.breadcrumbs.some((item) => item.label === 'AEP' && item.path === '/docs/aep/'), 'deep project breadcrumb must retain the linked AEP parent');
   assert.match(projectContext.banner, /AEP source-owned documentation/, 'deep project source banner must name AEP');
   assert.match(projectContext.banner, /aep\/website\/docs\/getting-started\.md/, 'deep project source banner must qualify the source path with its repository');
@@ -86,11 +88,11 @@ try {
   assert.ok(drawer.visible, 'mobile navigation drawer must be visible after opening');
   assert.ok(drawer.close.width >= 44 && drawer.close.height >= 44, 'mobile drawer close control must meet the 44px touch target');
   assert.equal(drawer.mode, 'docs', 'docs routes must open the visible contextual docs menu first');
-  assert.equal(drawer.labels[0]?.label, 'Choose an outcome', 'the first visible docs item must return to the outcome chooser');
-  assert.ok(drawer.labels.some((item) => item.label === 'Website internals'), 'the Website reference must be labelled as internals');
+  assert.equal(drawer.labels[0]?.label, 'Start by outcome', 'the first visible docs item must return to the outcome chooser');
+  assert.ok(drawer.labels.some((item) => item.label === 'About this documentation site'), 'the Website reference must be labelled as documentation-system context');
   assert.ok(drawer.labels.every((item) => item.label !== 'Start'), 'the Website reference must not masquerade as Start');
   assertVisibleLabels(drawer.labels, 390, 'mobile docs drawer');
-  await clickNavigationLink(client, '.navbar-sidebar__item:not([inert])', 'Choose an outcome');
+  await clickNavigationLink(client, '.navbar-sidebar__item:not([inert])', 'Start by outcome');
   await waitForPath(client, '/start/', 390);
 
   await navigate(client, `${site}/docs/`);
@@ -100,9 +102,9 @@ try {
   await settle(client);
   const mobileGlobal = await evaluate(client, activeDrawerSnapshot());
   assert.equal(mobileGlobal.mode, 'global', 'Back to main menu must expose global navigation');
-  assert.deepEqual(mobileGlobal.labels.map((item) => item.label), ['Try', 'Learn', 'Build', 'Products', 'Docs', 'Search', 'GitHub']);
+  assert.deepEqual(mobileGlobal.labels.map((item) => item.label), ['Start', 'Explore', 'Docs', 'Updates', 'Search', 'GitHub']);
   assertVisibleLabels(mobileGlobal.labels, 390, 'mobile global drawer');
-  await clickNavigationLink(client, '.navbar-sidebar__item:not([inert])', 'Try');
+  await clickNavigationLink(client, '.navbar-sidebar__item:not([inert])', 'Start');
   await waitForPath(client, '/start/', 390);
 
   for (const viewport of [
@@ -130,27 +132,28 @@ try {
       const responsiveDrawer = await evaluate(client, activeDrawerSnapshot());
       assert.ok(responsiveDrawer.visible, `navigation drawer must open at ${width}px`);
       assert.equal(responsiveDrawer.mode, 'docs', `docs submenu must be active at ${width}px`);
-      assert.equal(responsiveDrawer.labels[0]?.label, 'Choose an outcome', `docs submenu must lead to the outcome chooser at ${width}px`);
+      assert.equal(responsiveDrawer.labels[0]?.label, 'Start by outcome', `docs submenu must lead to the outcome chooser at ${width}px`);
       assertVisibleLabels(responsiveDrawer.labels, width, `docs drawer at ${width}px`);
       await clickVisibleElement(client, '.navbar-sidebar__item:not([inert]) .navbar-sidebar__back', `Back to main menu at ${width}px`);
       await settle(client);
       const responsiveGlobal = await evaluate(client, activeDrawerSnapshot());
       assert.equal(responsiveGlobal.mode, 'global', `Back to main menu must expose global links at ${width}px`);
-      assert.deepEqual(responsiveGlobal.labels.map((item) => item.label), ['Try', 'Learn', 'Build', 'Products', 'Docs', 'Search', 'GitHub']);
+      assert.deepEqual(responsiveGlobal.labels.map((item) => item.label), ['Start', 'Explore', 'Docs', 'Updates', 'Search', 'GitHub']);
       assertVisibleLabels(responsiveGlobal.labels, width, `global drawer at ${width}px`);
-      await clickNavigationLink(client, '.navbar-sidebar__item:not([inert])', 'Try');
+      await clickNavigationLink(client, '.navbar-sidebar__item:not([inert])', 'Start');
     } else {
       assert.equal(state.toggle.visible, false, `navigation toggle must be hidden when no drawer exists at ${width}px`);
-      assert.deepEqual(state.labels.map((label) => label.label), ['Try', 'Learn', 'Build', 'Products', 'Docs', 'Search']);
+      assert.deepEqual(state.labels.map((label) => label.label), ['Start', 'Explore', 'Docs', 'Updates', 'Search']);
       for (const label of state.labels) {
         assert.ok(label.visible, `${label.label} must be visible at ${width}px`);
         assert.ok(label.topmost, `${label.label} must be unobstructed at ${width}px`);
       }
-      await clickNavigationLink(client, '.navbar__items:not(.navbar__items--right)', 'Try');
+      await clickNavigationLink(client, '.navbar__items:not(.navbar__items--right)', 'Start');
     }
     await waitForPath(client, '/start/', width);
   }
 
+  await verifyGlobalSectionState(client, site);
   await verifySearchCards(client, site);
 
   process.stdout.write(`verified global navigation, project context, readable search cards, pointer activation, and trapped keyboard drawer flow at 1440×1000, 320/390×844, and ${boundaryWidths.join('/')}×844\n`);
@@ -357,6 +360,7 @@ async function verifyKeyboardDrawer(cdp, siteUrl, viewport) {
   assert.equal(opened.mode, 'docs', `deep docs must open the contextual drawer at ${viewport.width}px`);
   assert.ok(opened.active.inDrawer && opened.active.inActivePanel, `opening must move focus into the visible drawer view at ${viewport.width}px: ${JSON.stringify(opened)}`);
   assert.ok(opened.active.visible, `opening focus must be visible at ${viewport.width}px`);
+  assert.ok(opened.labels.includes('Start by outcome'), `deep docs drawer must expose the audience-path escape at ${viewport.width}px`);
   assert.equal(opened.active.identity, opened.firstActiveIdentity, `opening must focus the first visible drawer control or link at ${viewport.width}px`);
   assert.match(opened.active.label, /Back to main menu/, `deep docs opening focus must expose the menu switch at ${viewport.width}px`);
 
@@ -366,7 +370,7 @@ async function verifyKeyboardDrawer(cdp, siteUrl, viewport) {
   assert.equal(switched.mode, 'global', `keyboard menu switch must expose global navigation at ${viewport.width}px`);
   assert.ok(switched.active.inActivePanel && switched.active.visible, `menu switch must move focus into the visible global view at ${viewport.width}px`);
   assert.equal(switched.active.identity, switched.firstActiveIdentity, `menu switch must focus the first visible global link at ${viewport.width}px`);
-  assert.equal(switched.active.label, 'Try', `first global keyboard target must be Try at ${viewport.width}px`);
+  assert.equal(switched.active.label, 'Start', `first global keyboard target must be Start at ${viewport.width}px`);
 
   const cycleStart = switched.active.identity;
   assert.ok(switched.focusableCount > 1, `drawer must expose multiple keyboard targets at ${viewport.width}px`);
@@ -388,6 +392,24 @@ async function verifyKeyboardDrawer(cdp, siteUrl, viewport) {
   assert.equal(closed.visible, false, `Escape must close the drawer at ${viewport.width}px`);
   assert.equal(closed.expanded, 'false', `Escape must collapse the drawer trigger at ${viewport.width}px`);
   assert.ok(closed.active.isToggle, `Escape must restore focus to the drawer trigger at ${viewport.width}px`);
+}
+
+async function verifyGlobalSectionState(cdp, siteUrl) {
+  await setViewport(cdp, {width: 1440, height: 1000, mobile: false});
+  const cases = [
+    ['Start', ['/start/', '/learn/', '/build/', '/products/evaluate/', '/operate/', '/contribute/']],
+    ['Explore', ['/ecosystem/', '/ecosystem/aep/']],
+    ['Docs', ['/docs/', '/docs/aep/', '/architecture/']],
+    ['Updates', ['/updates/', '/changes/', '/releases/']],
+    ['Search', ['/search/']],
+  ];
+  for (const [expected, routes] of cases) {
+    for (const route of routes) {
+      await navigate(cdp, `${siteUrl}${route}`);
+      const active = await evaluate(cdp, `([...document.querySelectorAll('.navbar__items:not(.navbar__items--right) a.navbar__link--active')].map((item) => item.textContent.trim()))`);
+      assert.deepEqual(active, [expected], `${route} must retain the ${expected} global section context`);
+    }
+  }
 }
 
 async function verifySearchCards(cdp, siteUrl) {
@@ -655,6 +677,7 @@ function keyboardDrawerSnapshot() {
     expanded: toggle?.getAttribute('aria-expanded') ?? null,
     mode: activePanel?.querySelector('.navbar-sidebar__back') ? 'docs' : 'global',
     focusableCount: focusable.length,
+    labels: [...(activePanel?.querySelectorAll('a') ?? [])].filter(rendered).map((item) => item.textContent.trim()),
     firstActiveIdentity: identity(activePanelFocusable[0]),
     active: {
       identity: identity(active),

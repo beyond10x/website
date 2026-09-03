@@ -67,13 +67,8 @@ export function renderSidebars(ecosystemRegistry, sourceManifests) {
     throw new Error('sidebar family projection does not cover the public registry exactly once');
   }
   const overview = [
-    {type: 'link', label: 'Choose an outcome', href: '/start/'},
+    {type: 'link', label: 'Start by outcome', href: '/start/'},
     {type: 'doc', id: 'index', label: 'Technical documentation'},
-    ...frontDoors.map((item) => ({
-      type: 'link',
-      label: item.repository === 'website' ? 'Website internals' : item.label,
-      href: `/docs/${item.repository}/`,
-    })),
     ...families.map((family) => ({
       type: 'category',
       label: family.label,
@@ -87,6 +82,11 @@ export function renderSidebars(ecosystemRegistry, sourceManifests) {
         href: `/docs/${item.repository}/`,
       })),
     })),
+    ...frontDoors.map((item) => ({
+      type: 'link',
+      label: item.repository === 'website' ? 'About this documentation site' : item.label,
+      href: `/docs/${item.repository}/`,
+    })),
   ];
   const projectSidebars = Object.fromEntries(
     repositories
@@ -94,7 +94,8 @@ export function renderSidebars(ecosystemRegistry, sourceManifests) {
       .map((item) => [
         `project_${item.repository.replaceAll('-', '_')}`,
         [
-          {type: 'link', label: 'Technical docs', href: '/docs/'},
+          {type: 'link', label: 'Start by outcome', href: '/start/'},
+          {type: 'link', label: 'All technical docs', href: '/docs/'},
           {
             type: 'category',
             label: item.repository === 'website' ? 'Website internals' : item.label,
@@ -106,6 +107,19 @@ export function renderSidebars(ecosystemRegistry, sourceManifests) {
       ]),
   );
   return `module.exports = ${JSON.stringify({docs: overview, ...projectSidebars}, null, 2)};\n`;
+}
+
+export function sourceSidebarMetadata(frontmatter, fallbackLabel) {
+  const declaredLabel = frontmatter.sidebar_label;
+  const label = typeof declaredLabel === 'string' && declaredLabel.trim()
+    ? declaredLabel.trim()
+    : fallbackLabel;
+  const declaredPosition = frontmatter.sidebar_position;
+  if (declaredPosition === undefined || declaredPosition === null) return {label};
+  if (typeof declaredPosition !== 'number' || !Number.isSafeInteger(declaredPosition)) {
+    throw new Error('sidebar_position must be a safe YAML integer');
+  }
+  return {label, position: declaredPosition};
 }
 
 function navigationByRepository(sourceManifests) {
