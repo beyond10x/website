@@ -24,7 +24,7 @@ export async function validateBootstrapSnapshots(root, rosterRepositories) {
     if (metadata.files?.[name] !== sha256(bytes)) throw new Error(`bootstrap ${name} does not match its typed snapshot metadata`);
     documents[name] = JSON.parse(bytes);
   }
-  const known = new Set(rosterRepositories);
+  const known = new Set([...rosterRepositories, 'website']);
   const ecosystem = documents['ecosystem.json'];
   if (ecosystem.schema !== 'b10x-docs-registry/v2' || !Array.isArray(ecosystem.surfaces)) throw new Error('bootstrap ecosystem registry is invalid');
   const surfaceKeys = new Set();

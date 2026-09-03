@@ -269,8 +269,18 @@ test('bootstrap snapshots accept the Website surface and bind the exact source l
   await mkdir(directory, {recursive: true});
 
   const sourceLock = Buffer.from(`${JSON.stringify({schema: 'b10x-sources/v1', sources: []}, null, 2)}\n`);
+  const websitePublishedAt = '2026-09-03T07:44:06Z';
+  const websiteReleaseUrl = 'https://github.com/beyond10x/website/releases/tag/0.3.0';
   const snapshots = {
-    'changes.json': Buffer.from(`${JSON.stringify({schema: 'b10x-change-ledger/v1', changes: []}, null, 2)}\n`),
+    'changes.json': Buffer.from(`${JSON.stringify({
+      schema: 'b10x-change-ledger/v1',
+      changes: [{
+        key: 'website/0.3.0',
+        repository: 'website',
+        publishedAt: websitePublishedAt,
+        source: {url: websiteReleaseUrl},
+      }],
+    }, null, 2)}\n`),
     'ecosystem.json': Buffer.from(`${JSON.stringify({
       schema: 'b10x-docs-registry/v2',
       surfaces: [{
@@ -280,7 +290,15 @@ test('bootstrap snapshots accept the Website surface and bind the exact source l
         repository: {id: 'website', url: 'https://github.com/beyond10x/website'},
       }],
     }, null, 2)}\n`),
-    'release-facts.json': Buffer.from(`${JSON.stringify({schema: 'b10x-release-facts/v1', releases: []}, null, 2)}\n`),
+    'release-facts.json': Buffer.from(`${JSON.stringify({
+      schema: 'b10x-release-facts/v1',
+      releases: [{
+        repository: 'website',
+        version: '0.3.0',
+        publishedAt: websitePublishedAt,
+        url: websiteReleaseUrl,
+      }],
+    }, null, 2)}\n`),
   };
   await writeFile(path.join(root, 'sources.lock.json'), sourceLock);
   for (const [name, bytes] of Object.entries(snapshots)) await writeFile(path.join(directory, name), bytes);
