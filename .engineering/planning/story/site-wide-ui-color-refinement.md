@@ -14,7 +14,11 @@ relations:
 - decomposes: epic:website-experience-refinement
 scope:
 - confidence: cited
+  path: data/bootstrap
+- confidence: cited
   path: scripts/verify-navigation-layout.mjs
+- confidence: cited
+  path: sources.lock.json
 - confidence: cited
   path: src/components/ExperienceView.module.css
 - confidence: cited
@@ -27,7 +31,7 @@ scope:
   path: src/pages/start.module.css
 - confidence: cited
   path: tests/ux-contract.test.mjs
-revision: 7
+revision: 8
 ---
 ## Context
 
