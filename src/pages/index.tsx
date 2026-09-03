@@ -14,24 +14,28 @@ const loop = [
 
 const gateways = [
   {
+    accent: 'mint',
     eyebrow: 'Build',
     title: 'Build observable agent systems',
     description: 'Move from host guidance to Harness, Substrate, and outside-in evaluation only when the work needs them.',
     url: '/build/agent-systems/',
   },
   {
+    accent: 'violet',
     eyebrow: 'Evaluate',
     title: 'Evaluate a beyond10x product',
     description: 'See what is public, what is preview, and what remains access-gated before planning adoption.',
     url: '/products/evaluate/',
   },
   {
+    accent: 'amber',
     eyebrow: 'Operate',
     title: 'Deploy an available service',
     description: 'Go directly to service and platform operations without putting cluster detail in the beginner path.',
     url: '/operate/',
   },
   {
+    accent: 'coral',
     eyebrow: 'Contribute',
     title: 'Maintain the documentation system',
     description: 'Change technical truth in its owning repository and preview it through the canonical Website shell.',
@@ -58,7 +62,9 @@ export default function Home(): ReactNode {
           <div className={`container ${styles.heroInner}`}>
             <div className={styles.heroCopy}>
               <p className={styles.eyebrow}>SAFE AUTONOMOUS CODING</p>
-              <Heading as="h1">Plan with agents without hiding the decisions.</Heading>
+              <Heading as="h1">
+                Plan with agents <span className={styles.heroSignal}>without hiding the decisions.</span>
+              </Heading>
               <p className={styles.lede}>
                 Start with one small feature idea in Claude. Keep intent explicit, give the agent
                 focused instructions, validate the system model, generate documentation from it,
@@ -131,7 +137,7 @@ export default function Home(): ReactNode {
             </div>
             <div className={styles.gatewayGrid}>
               {gateways.map((gateway) => (
-                <article key={gateway.eyebrow}>
+                <article key={gateway.eyebrow} data-accent={gateway.accent}>
                   <span>{gateway.eyebrow}</span>
                   <Heading as="h3"><Link to={gateway.url}>{gateway.title}</Link></Heading>
                   <p>{gateway.description}</p>

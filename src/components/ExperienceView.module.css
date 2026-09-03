@@ -44,19 +44,39 @@
 
 .pathGrid {
   display: grid;
-  gap: 1rem;
+  gap: 1.15rem;
   margin-top: 2rem;
 }
 
 .pathCard {
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: var(--ifm-global-radius);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--b10x-color-line);
+  border-radius: 13px;
   padding: clamp(1.5rem, 4vw, 2.25rem);
-  background: var(--ifm-background-surface-color);
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--b10x-blue) 8%, transparent), transparent 23rem),
+    var(--b10x-color-surface);
+  box-shadow: var(--b10x-shadow-card);
+}
+
+.pathCard::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(var(--b10x-green), var(--b10x-blue));
+  content: '';
 }
 
 .pathCardBlocked {
   border-color: var(--b10x-warning-border, #b7791f);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--b10x-amber) 9%, transparent), transparent 38%),
+    var(--b10x-color-surface);
+}
+
+.pathCardBlocked::before {
+  background: var(--b10x-amber);
 }
 
 .pathHeader {
@@ -82,7 +102,7 @@
 }
 
 .pathRole {
-  color: var(--ifm-color-primary);
+  color: var(--b10x-color-link);
   text-transform: uppercase;
 }
 
@@ -90,7 +110,8 @@
   flex: 0 0 auto;
   border: 1px solid currentColor;
   border-radius: 999px;
-  padding: 0.35rem 0.65rem;
+  padding: 0.4rem 0.72rem;
+  background: color-mix(in srgb, currentColor 7%, var(--b10x-color-surface));
 }
 
 .pathStateAvailable {
@@ -116,20 +137,21 @@
 }
 
 .pathFacts span {
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: 1px solid var(--b10x-color-line);
   border-radius: 999px;
   padding: 0.35rem 0.65rem;
-  color: var(--ifm-color-emphasis-800);
+  color: var(--b10x-color-text);
+  background: var(--b10x-color-surface-muted);
 }
 
 .pathOutcome {
   max-width: 56rem;
-  color: var(--ifm-color-emphasis-800);
+  color: var(--b10x-color-text);
   font-size: 1.05rem;
 }
 
 .pathEstimate {
-  color: var(--ifm-color-emphasis-700);
+  color: var(--b10x-color-muted);
 }
 
 .pathPrerequisites,
@@ -157,7 +179,7 @@
 }
 
 .pathArtifacts li {
-  border-left: 2px solid var(--ifm-color-emphasis-300);
+  border-left: 2px solid color-mix(in srgb, var(--b10x-blue) 55%, var(--b10x-color-line));
   padding-left: 0.85rem;
 }
 
@@ -174,19 +196,21 @@
 }
 
 .pathArtifacts li span {
-  color: var(--ifm-color-emphasis-700);
+  color: var(--b10x-color-muted);
 }
 
 .pathArtifacts li p {
   margin: 0.25rem 0 0;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--b10x-color-muted);
   font-size: 0.85rem;
 }
 
 .pathBlocker {
   margin-top: 1.5rem;
-  border-left: 3px solid var(--ifm-color-warning-dark);
-  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 3px solid var(--b10x-amber);
+  border-radius: 0 9px 9px 0;
+  padding: 0.8rem 1rem;
+  background: color-mix(in srgb, var(--b10x-amber) 8%, transparent);
 }
 
 .pathBlocker p {
@@ -202,17 +226,21 @@
 
 .pathNote {
   margin: 1.5rem 0 0;
-  border-left: 3px solid var(--ifm-color-warning-dark);
-  padding-left: 1rem;
+  border-left: 3px solid var(--b10x-amber);
+  border-radius: 0 9px 9px 0;
+  padding: 0.7rem 1rem;
+  background: color-mix(in srgb, var(--b10x-amber) 8%, transparent);
 }
 
 .progress {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 1rem 0 5rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: var(--ifm-global-radius);
+  border: 1px solid var(--b10x-color-line);
+  border-radius: 12px;
   overflow: hidden;
+  background: var(--b10x-color-line);
+  box-shadow: var(--b10x-shadow-card);
 }
 
 .progress a {
@@ -221,20 +249,27 @@
   align-items: center;
   min-height: 4.25rem;
   padding: 1rem 1.25rem;
-  color: var(--ifm-font-color-base);
+  color: var(--b10x-color-text);
   text-decoration: none;
-  background: var(--ifm-background-surface-color);
+  background: var(--b10x-color-surface);
+  transition: color 150ms ease, background-color 150ms ease;
 }
 
 .progress a + a {
-  border-left: 1px solid var(--ifm-color-emphasis-300);
+  border-left: 1px solid var(--b10x-color-line);
+}
+
+.progress a:hover,
+.progress a:focus-visible {
+  color: var(--b10x-color-heading);
+  background: color-mix(in srgb, var(--b10x-color-link) 10%, var(--b10x-color-surface));
 }
 
 .progress span,
 .stepNumber,
 .completion span,
 .loop li > span {
-  color: var(--ifm-color-primary);
+  color: var(--b10x-color-link);
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.7rem;
   font-weight: 700;
@@ -243,29 +278,48 @@
 }
 
 .section {
+  position: relative;
   padding: 1rem 0 5rem;
   scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
 }
 
 .steps {
   display: grid;
-  gap: 1rem;
+  gap: 1.1rem;
   margin: 2rem 0 0;
   padding: 0;
   list-style: none;
 }
 
 .steps > li {
+  --step-accent: var(--b10x-green);
+  position: relative;
   display: grid;
   grid-template-columns: 3rem minmax(0, 1fr);
   gap: 1rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+  border: 1px solid var(--b10x-color-line);
+  border-radius: 12px;
   padding: clamp(1.25rem, 3vw, 2rem);
-  background: var(--ifm-background-surface-color);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--step-accent) 7%, transparent), transparent 38%),
+    var(--b10x-color-surface);
+  box-shadow: var(--b10x-shadow-card);
+}
+
+.steps > li:nth-child(3n + 2) { --step-accent: var(--b10x-blue); }
+.steps > li:nth-child(3n) { --step-accent: var(--b10x-violet); }
+
+.steps > li::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--step-accent);
+  content: '';
 }
 
 .stepNumber {
+  color: var(--step-accent);
   padding-top: 0.35rem;
 }
 
@@ -274,18 +328,23 @@
 }
 
 .steps h3 a {
-  color: var(--ifm-heading-color);
+  color: var(--b10x-color-heading);
+  text-decoration-color: color-mix(in srgb, var(--step-accent) 45%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
 }
 
 .steps article > p {
   max-width: 52rem;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--b10x-color-muted);
 }
 
 .completion {
   margin: 1.25rem 0;
-  border-left: 3px solid var(--ifm-color-primary);
-  padding: 0.1rem 0 0.1rem 1rem;
+  border-left: 3px solid var(--step-accent);
+  border-radius: 0 8px 8px 0;
+  padding: 0.65rem 1rem;
+  background: color-mix(in srgb, var(--step-accent) 7%, transparent);
 }
 
 .completion p {
@@ -298,10 +357,13 @@
 
 .loop {
   margin: 0 0 5rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: var(--ifm-global-radius);
+  border: 1px solid var(--b10x-color-line);
+  border-radius: 13px;
   padding: clamp(1.5rem, 4vw, 3rem);
-  background: var(--ifm-background-surface-color);
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--b10x-violet) 9%, transparent), transparent 24rem),
+    var(--b10x-color-surface);
+  box-shadow: var(--b10x-shadow-card);
 }
 
 .loop ol {
@@ -309,7 +371,7 @@
   gap: 1px;
   margin: 2rem 0 0;
   padding: 0;
-  background: var(--ifm-color-emphasis-300);
+  background: var(--b10x-color-line);
   list-style: none;
 }
 
@@ -318,11 +380,11 @@
   grid-template-columns: 2.5rem minmax(0, 1fr);
   gap: 1rem;
   padding: 1.25rem;
-  background: var(--ifm-background-color);
+  background: color-mix(in srgb, var(--b10x-color-canvas) 86%, var(--b10x-color-surface));
 }
 
 .loop strong {
-  color: var(--ifm-heading-color);
+  color: var(--b10x-color-heading);
 }
 
 .loop p {
@@ -335,7 +397,7 @@
   justify-content: space-between;
   gap: 1rem;
   margin-top: 3rem;
-  border-top: 1px solid var(--ifm-color-emphasis-300);
+  border-top: 1px solid var(--b10x-color-line);
   padding-top: 2rem;
 }
 

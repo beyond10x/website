@@ -350,17 +350,23 @@ async function clickVisibleElement(cdp, selector, context) {
   const target = await evaluate(cdp, `(() => {
     const element = document.querySelector(${JSON.stringify(selector)});
     if (!element) return null;
-    const bounds = element.getBoundingClientRect();
-    const hit = bounds.width > 0 && bounds.height > 0
-      ? document.elementFromPoint(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2)
-      : null;
+    const fragments = [...element.getClientRects()]
+      .filter((bounds) => bounds.width > 0 && bounds.height > 0)
+      .map((bounds) => {
+        const x = bounds.left + bounds.width / 2;
+        const y = bounds.top + bounds.height / 2;
+        const hit = document.elementFromPoint(x, y);
+        return {bounds, x, y, topmost: Boolean(hit && (hit === element || element.contains(hit)))};
+      });
+    const fragment = fragments.find(({topmost}) => topmost) ?? fragments[0];
+    const bounds = fragment?.bounds;
     return {
-      x: bounds.left + bounds.width / 2,
-      y: bounds.top + bounds.height / 2,
-      visible: bounds.width > 0 && bounds.height > 0 && bounds.right > 0 && bounds.bottom > 0
+      x: fragment?.x,
+      y: fragment?.y,
+      visible: Boolean(bounds && bounds.right > 0 && bounds.bottom > 0
         && bounds.left < innerWidth && bounds.top < innerHeight
-        && getComputedStyle(element).visibility !== 'hidden',
-      topmost: Boolean(hit && (hit === element || element.contains(hit))),
+        && getComputedStyle(element).visibility !== 'hidden'),
+      topmost: Boolean(fragment?.topmost),
     };
   })()`);
   assert.ok(target?.visible, `${context} must intersect the viewport`);

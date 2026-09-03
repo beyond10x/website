@@ -213,6 +213,35 @@ test('global navigation stays sticky, uses gateway routes, and retains mobile to
   assert.match(config, /autoCollapseCategories: true/);
 });
 
+test('the site-wide visual system retains its color, interaction, and reading contracts', async () => {
+  const [css, home, homeStyles, ecosystemStyles, experienceStyles] = await Promise.all([
+    'src/css/custom.css',
+    'src/pages/index.tsx',
+    'src/pages/start.module.css',
+    'src/pages/ecosystem.module.css',
+    'src/components/ExperienceView.module.css',
+  ].map((file) => readFile(path.join(root, file), 'utf8')));
+  for (const accent of ['green', 'blue', 'violet', 'amber', 'coral']) {
+    assert.match(css, new RegExp(`--b10x-${accent}:`), `${accent} must remain part of the accent sequence`);
+  }
+  assert.match(css, /body \{[^}]*radial-gradient[^}]*background-attachment: fixed;/s);
+  assert.match(css, /\.navbar__link--active::after/);
+  assert.match(css, /\.b10x-page-header \{[^}]*radial-gradient[^}]*box-shadow:/s);
+  assert.match(css, /\.b10x-filter-chips button\[aria-pressed='true'\]/);
+  assert.match(css, /\.theme-doc-sidebar-menu \.menu__link--active/);
+  assert.match(css, /\.theme-doc-markdown table th/);
+  assert.match(css, /\.theme-doc-markdown :not\(pre\) > code/);
+  assert.match(home, /className=\{styles\.heroSignal\}/);
+  assert.deepEqual([...home.matchAll(/accent: '([^']+)'/g)].map((match) => match[1]), ['mint', 'violet', 'amber', 'coral']);
+  assert.match(home, /data-accent=\{gateway\.accent\}/);
+  assert.match(homeStyles, /\.loopGrid li:nth-child\(5\).*--stage-color: var\(--b10x-coral\)/);
+  assert.match(homeStyles, /\.gatewayGrid article:focus-within/);
+  assert.match(homeStyles, /\.reference \{[^}]*#091620/s);
+  assert.match(ecosystemStyles, /\.searchFilters select:focus-visible/);
+  assert.match(experienceStyles, /\.steps > li:nth-child\(3n\).*--step-accent: var\(--b10x-violet\)/);
+  assert.match(experienceStyles, /\.pathCardBlocked::before/);
+});
+
 test('the technical documentation front door renders one family chooser', async () => {
   const preparation = await readFile(path.join(root, 'scripts/prepare-site.mjs'), 'utf8');
   assert.equal([...preparation.matchAll(/<EcosystemFamilyOrientation surfaces=/g)].length, 1);
@@ -241,6 +270,12 @@ test('the browser navigation audit waits for Chrome teardown before retrying pro
   assert.match(audit, /await stopChrome\(chrome, chromeClosed\)/);
   assert.match(audit, /process\.kill\('SIGKILL'\)/);
   assert.match(audit, /maxRetries: 10, retryDelay: 100/);
+});
+
+test('the browser navigation audit clicks a visible fragment of wrapped inline links', async () => {
+  const audit = await readFile(path.join(root, 'scripts/verify-navigation-layout.mjs'), 'utf8');
+  assert.match(audit, /\[\.\.\.element\.getClientRects\(\)\]/);
+  assert.match(audit, /fragments\.find\(\(\{topmost\}\) => topmost\)/);
 });
 
 test('the browser navigation audit gives Chrome a bounded startup deadline of at least 30 seconds', async () => {
