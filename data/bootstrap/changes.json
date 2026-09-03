@@ -2,6 +2,99 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/0.8.0",
+      "id": "ess/0.8.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-03T09:39:37Z",
+      "title": "ESS 0.8.0",
+      "summary": "ESS released version 0.8.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.8.0",
+        "version": "0.8.0"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.6.1",
+      "id": "agentplugins/0.6.1",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-03T09:21:33Z",
+      "title": "Agent Plugins 0.6.1",
+      "summary": "Agent Plugins released version 0.6.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.6.1",
+        "version": "0.6.1"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.8.5",
+      "id": "devcenter/0.8.5",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-03T08:53:21Z",
+      "title": "Devcenter 0.8.5",
+      "summary": "Devcenter released version 0.8.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.5",
+        "version": "0.8.5"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "identity/0.5.6",
+      "id": "identity/0.5.6",
+      "repository": "identity",
+      "publishedAt": "2026-09-03T08:15:42Z",
+      "title": "Identity 0.5.6",
+      "summary": "Identity released version 0.5.6.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/identity/releases/tag/0.5.6",
+        "version": "0.5.6"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "identity/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "website/0.3.0",
       "id": "website/0.3.0",
       "repository": "website",

@@ -477,23 +477,6 @@
     },
     {
       "accent": "#a78bfa",
-      "adoption": {
-        "estimatedMinutes": 10,
-        "label": "Start an agent coding session",
-        "mode": "source-build",
-        "outcome": "Run one typed coding intent and inspect the shared replayable workbench.",
-        "prerequisites": [
-          "Rust toolchain",
-          "Linux"
-        ],
-        "url": "https://beyond10x.github.io/docs/agentide/#build-and-run"
-      },
-      "audiences": [
-        "adopter",
-        "developer",
-        "operator"
-      ],
-      "availability": "published",
       "canonicalUrl": "https://beyond10x.github.io/docs/agentide/",
       "capabilities": [
         "semantic-coding-intents",
@@ -503,7 +486,24 @@
         "executable-specifications",
         "openapi"
       ],
-      "discoverability": "public",
+      "documentDefaults": {
+        "access": "public",
+        "audiences": [
+          "evaluator",
+          "adopter",
+          "developer",
+          "operator"
+        ],
+        "experienceIds": [
+          "evaluate-beyond10x-products",
+          "build-agent-systems"
+        ],
+        "support": "preview"
+      },
+      "experienceIds": [
+        "evaluate-beyond10x-products",
+        "build-agent-systems"
+      ],
       "id": "docs",
       "journeys": [
         "build-agents",
@@ -513,6 +513,10 @@
       "maturity": "development",
       "name": "AgentIDE",
       "primaryJourney": "build-agents",
+      "publication": {
+        "availability": "published",
+        "discoverability": "public"
+      },
       "relationships": [
         {
           "kind": "uses",
@@ -521,7 +525,7 @@
         },
         {
           "kind": "uses",
-          "label": "Derives executable intent contracts from ESS",
+          "label": "Derives executable intent contracts and realization IR from ESS",
           "target": "ess/docs"
         }
       ],
@@ -529,18 +533,23 @@
       "sections": [
         {
           "kind": "quickstart",
-          "label": "Build and run",
-          "url": "https://beyond10x.github.io/docs/agentide/#build-and-run"
+          "label": "Install and run the local TUI",
+          "url": "https://beyond10x.github.io/docs/agentide/#install-the-released-linux-binary"
         },
         {
           "kind": "guide",
-          "label": "Architecture",
-          "url": "https://beyond10x.github.io/docs/agentide/architecture/"
+          "label": "Compare running modes",
+          "url": "https://beyond10x.github.io/docs/agentide/running-modes/"
         },
         {
           "kind": "guide",
           "label": "Harness-native TUI",
           "url": "https://beyond10x.github.io/docs/agentide/harness-tui/"
+        },
+        {
+          "kind": "guide",
+          "label": "Architecture",
+          "url": "https://beyond10x.github.io/docs/agentide/architecture/"
         },
         {
           "kind": "guide",
@@ -564,7 +573,21 @@
         }
       ],
       "source": {
+        "assets": {
+          "include": [
+            "docs/assets/**/*"
+          ]
+        },
         "documents": {
+          "exclude": [
+            "docs/adr/**",
+            "docs/adrs/**",
+            "docs/decisions/**",
+            "docs/internal/**",
+            "docs/plans/**",
+            "docs/stories/**",
+            "docs/worklogs/**"
+          ],
           "include": [
             "README.md",
             "CHANGELOG.md",
@@ -590,6 +613,14 @@
         ]
       },
       "summary": "Agent-first coding sessions through typed intents, exact approvals, replayable workbench state, and pluggable Harness-backed execution.",
+      "availability": "published",
+      "discoverability": "public",
+      "audiences": [
+        "evaluator",
+        "adopter",
+        "developer",
+        "operator"
+      ],
       "key": "agentide/docs",
       "repository": {
         "displayName": "AgentIDE",
