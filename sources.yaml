@@ -22,6 +22,7 @@ repositories:
   - metaharness
   - research
   - secrets
+  - service-sdk
   - substrate
   - workflow
   - workspace
