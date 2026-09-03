@@ -2,7 +2,7 @@
 format: aep.planning-md/1
 id: task:deliver-website-ui-refinement
 kind: task
-status: active
+status: implemented
 title: Deliver the approved Website UI revision
 summary: Refresh deterministic public inputs, render the Atlas snapshot, and publish one verified Website artifact.
 tags:
@@ -13,7 +13,7 @@ refs:
   reference: 0ed89f734bc78215fb12bd6d71306724d65f2d28
 relations:
 - decomposes: story:site-wide-ui-color-refinement
-revision: 3
+revision: 4
 ---
 ## Context
 
