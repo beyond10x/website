@@ -24,7 +24,9 @@ function commandPlan(mode, extraArguments) {
       owner: 'complete site build',
       commands: [
         ['npm', ['run', 'prepare:site'], true],
+        [process.execPath, ['scripts/code-contract.mjs', 'source'], true],
         ['npm', ['run', 'build:site'], true],
+        [process.execPath, ['scripts/code-contract.mjs', 'build'], true],
         ['npm', ['run', 'redirects:root'], false],
         ['npm', ['run', 'verify:navigation'], false],
         ['npm', ['run', 'index:search'], false],

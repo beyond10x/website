@@ -2,7 +2,7 @@
 format: aep.planning-md/1
 id: story:site-wide-code-fence-rendering-audit
 kind: story
-status: draft
+status: active
 title: Make every rendered code fence readable and visibly highlighted
 summary: Inventory the unified site’s code fences and harden source validation, Prism coverage, and visual presentation across every rendered docs route.
 tags:
@@ -18,7 +18,26 @@ refs:
   reference: https://github.com/beyond10x/website
 - provider: shared-renderer
   reference: https://github.com/beyond10x/docs-system
-revision: 1
+scope:
+- confidence: cited
+  path: CHANGELOG.md
+- confidence: cited
+  path: package-lock.json
+- confidence: cited
+  path: package.json
+- confidence: cited
+  path: scripts/code-contract.mjs
+- confidence: cited
+  path: scripts/generation-command.mjs
+- confidence: cited
+  path: sources.lock.json
+- confidence: cited
+  path: tests/code-contract.test.mjs
+- confidence: cited
+  path: tests/fixtures/code-fence-corpus.md
+- confidence: cited
+  path: tests/preview-workflow.test.mjs
+revision: 5
 ---
 ## Problem
 

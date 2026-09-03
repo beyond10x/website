@@ -159,6 +159,7 @@ test('package scripts expose the bounded preview workflow and production origin 
   assert.equal(packageDocument.scripts.build, 'node scripts/generation-command.mjs build');
   assert.equal(packageDocument.scripts['build:site'], 'node scripts/generation-command.mjs build-site');
   assert.equal(packageDocument.scripts.clear, 'node scripts/generation-command.mjs clear');
+  assert.equal(packageDocument.scripts['audit:code-rendering'], 'node scripts/code-contract.mjs source && node scripts/code-contract.mjs build');
 
   const config = await readFile(path.join(root, 'docusaurus.config.ts'), 'utf8');
   const rootTheme = await readFile(path.join(root, 'src/theme/Root.tsx'), 'utf8');
@@ -166,6 +167,7 @@ test('package scripts expose the bounded preview workflow and production origin 
   const preparation = await readFile(path.join(root, 'scripts/prepare-site.mjs'), 'utf8');
   const collection = await readFile(path.join(root, 'scripts/collect-sources.mjs'), 'utf8');
   const sourceLockUpdate = await readFile(path.join(root, 'scripts/update-source-lock.mjs'), 'utf8');
+  const generation = await readFile(path.join(root, 'scripts/generation-command.mjs'), 'utf8');
   assert.match(config, /const localPreview = process\.env\.B10X_LOCAL_PREVIEW === '1'/);
   assert.match(config, /faster: localPreview \? false : undefined/);
   assert.match(rootTheme, /window\.location\.origin !== WEBSITE_ORIGIN/);
@@ -175,4 +177,6 @@ test('package scripts expose the bounded preview workflow and production origin 
   assert.match(preparation, /withGenerationLease\('site preparation'/);
   assert.match(collection, /withGenerationLease\('source collection'/);
   assert.match(sourceLockUpdate, /withGenerationLease\('source lock update'/);
+  assert.match(generation, /\['scripts\/code-contract\.mjs', 'source'\]/);
+  assert.match(generation, /\['scripts\/code-contract\.mjs', 'build'\]/);
 });
