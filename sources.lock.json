@@ -84,10 +84,10 @@
     {
       "repository": "ess",
       "url": "https://github.com/beyond10x/ess",
-      "commit": "8e007b00b08cbe4d8e55ce4172d41b48f6e0ca29",
+      "commit": "cdf2c5c9b1e62349d7f262d8fc81c22d00831fb6",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "af67e8dbbd482583c9c72afc2cf7800f134dcda7ac6cd129381e21aaace0df49",
-      "contentSha256": "9893c1695c48f23cc48a1062528a74dc3992edbf1c5e0962ee37cf2144b9021c"
+      "contentSha256": "df2152404b0a667e6a9edb7371df565933c663cb77317f48131e0ae389f733f7"
     },
     {
       "repository": "eventlog",

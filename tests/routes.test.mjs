@@ -22,6 +22,9 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));
   assert.ok(html.some((route) => route.from === '/journeys/understand/' && route.to === '/learn/safe-agentic-coding/'));
+  assert.ok(html.some((route) => route.from === '/agentic-principles/principles' && route.to === '/components/agentic-principles/principles/'));
+  assert.ok(html.some((route) => route.from === '/agentic-principles/research/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure'
+    && route.to === '/docs/agentic-principles/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure/'));
   assert.deepEqual(
     html.filter((route) => ROOT_OWNED_REDIRECTS.some((expected) => expected.from === route.from)),
     ROOT_OWNED_REDIRECTS,

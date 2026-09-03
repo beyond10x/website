@@ -80,9 +80,19 @@ function canonicalTarget(repository, pathname) {
     return `/api/${repository}/${suffix}`;
   }
   if (relative === 'releases' || relative.startsWith('releases/')) return '/releases/';
-  if (repository === 'agentic-principles' && (relative === 'blog' || relative.startsWith('blog/'))) {
-    const suffix = relative === 'blog' ? '' : `${relative.slice(5)}/`;
-    return `/updates/field-notes/${suffix}`;
+  if (repository === 'agentic-principles') {
+    if (relative === 'blog' || relative.startsWith('blog/')) {
+      const suffix = relative === 'blog' ? '' : `${relative.slice(5)}/`;
+      return `/updates/field-notes/${suffix}`;
+    }
+    if (relative === 'principles') return '/components/agentic-principles/principles/';
+    if (relative === 'research/VISION') return '/docs/agentic-principles/VISION/';
+    if (relative === 'research/research/2026-08-25T001613+0200_seed') {
+      return '/docs/agentic-principles/research/';
+    }
+    if (relative.startsWith('research/research/')) {
+      return `/docs/agentic-principles/research/${relative.slice('research/research/'.length)}/`;
+    }
   }
   return `/docs/${repository}/${relative}/`;
 }

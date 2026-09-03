@@ -17,6 +17,14 @@ test('canonical Website links stay on the rendering origin', () => {
   assert.equal(localizeWebsiteHref('/metaharness/'), '/ecosystem/metaharness/');
   assert.equal(localizeWebsiteHref('/getting-started/'), '/');
   assert.equal(
+    localizeWebsiteHref('https://beyond10x.github.io/agentic-principles/principles'),
+    '/components/agentic-principles/principles/',
+  );
+  assert.equal(
+    localizeWebsiteHref('https://beyond10x.github.io/agentic-principles/research/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure'),
+    '/docs/agentic-principles/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure/',
+  );
+  assert.equal(
     localizeWebsiteHref('/aep/releases/rss.xml?reader=local#latest'),
     '/releases/aep/rss.xml?reader=local#latest',
   );

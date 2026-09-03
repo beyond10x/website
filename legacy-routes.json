@@ -485,7 +485,7 @@
     },
     {
       "from": "/agentic-principles/principles",
-      "to": "/docs/agentic-principles/principles/",
+      "to": "/components/agentic-principles/principles/",
       "type": "html"
     },
     {
@@ -495,47 +495,47 @@
     },
     {
       "from": "/agentic-principles/research/research/2026-08-25T001613+0200_seed",
-      "to": "/docs/agentic-principles/research/research/2026-08-25T001613+0200_seed/",
+      "to": "/docs/agentic-principles/research/",
       "type": "html"
     },
     {
       "from": "/agentic-principles/research/research/2026-08-25T001928+0200_seed",
-      "to": "/docs/agentic-principles/research/research/2026-08-25T001928+0200_seed/",
+      "to": "/docs/agentic-principles/research/2026-08-25T001928+0200_seed/",
       "type": "html"
     },
     {
       "from": "/agentic-principles/research/research/2026-08-25T004318+0200_engineering-protocols-workflow-fit",
-      "to": "/docs/agentic-principles/research/research/2026-08-25T004318+0200_engineering-protocols-workflow-fit/",
+      "to": "/docs/agentic-principles/research/2026-08-25T004318+0200_engineering-protocols-workflow-fit/",
       "type": "html"
     },
     {
       "from": "/agentic-principles/research/research/2026-08-25T005715+0200_fix-the-source-not-the-adopter",
-      "to": "/docs/agentic-principles/research/research/2026-08-25T005715+0200_fix-the-source-not-the-adopter/",
+      "to": "/docs/agentic-principles/research/2026-08-25T005715+0200_fix-the-source-not-the-adopter/",
       "type": "html"
     },
     {
       "from": "/agentic-principles/research/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure",
-      "to": "/docs/agentic-principles/research/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure/",
+      "to": "/docs/agentic-principles/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure/",
       "type": "html"
     },
     {
       "from": "/agentic-principles/research/research/evidence/scoped-progress-partial-failure",
-      "to": "/docs/agentic-principles/research/research/evidence/scoped-progress-partial-failure/",
+      "to": "/docs/agentic-principles/research/evidence/scoped-progress-partial-failure/",
       "type": "html"
     },
     {
       "from": "/agentic-principles/research/research/evidence/scoped-progress-partial-failure/analysis",
-      "to": "/docs/agentic-principles/research/research/evidence/scoped-progress-partial-failure/analysis/",
+      "to": "/docs/agentic-principles/research/evidence/scoped-progress-partial-failure/analysis/",
       "type": "html"
     },
     {
       "from": "/agentic-principles/research/research/evidence/scoped-progress-partial-failure/sources",
-      "to": "/docs/agentic-principles/research/research/evidence/scoped-progress-partial-failure/sources/",
+      "to": "/docs/agentic-principles/research/evidence/scoped-progress-partial-failure/sources/",
       "type": "html"
     },
     {
       "from": "/agentic-principles/research/VISION",
-      "to": "/docs/agentic-principles/research/VISION/",
+      "to": "/docs/agentic-principles/VISION/",
       "type": "html"
     },
     {
