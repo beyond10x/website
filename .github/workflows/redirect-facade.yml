@@ -95,7 +95,7 @@ jobs:
           test "$(git -C .website-data rev-parse HEAD)" = "$WEBSITE_SHA"
           test "$(git ls-remote --refs "https://github.com/${GITHUB_REPOSITORY}.git" refs/heads/main | awk 'NF == 2 { print $1 }')" = "$CONTROL_SHA"
 
-          assert_git_bot_or_verified_merge() {
+          assert_git_authority_identity() {
             local repository=$1 revision=$2
             mapfile -t identity < <(git -C "$repository" show -s --format='%an%n%ae%n%cn%n%ce' "$revision")
             test "${#identity[@]}" -eq 4
@@ -104,11 +104,12 @@ jobs:
               return
             fi
             test "${identity[2]}" = GitHub && test "${identity[3]}" = 'noreply@github.com'
-            test "$(git -C "$repository" show -s --format='%P' "$revision" | wc -w)" -eq 2
           }
-          assert_git_bot_or_verified_merge .runtime "$RUNTIME_SHA"
-          assert_git_bot_or_verified_merge .control-data "$CONTROL_SHA"
-          assert_git_bot_or_verified_merge .website-data "$WEBSITE_SHA"
+          # Parent topology is deliberately absent: depth-one checkouts hide it, and the
+          # App-only caller ref plus the API identity below are the durable authority.
+          assert_git_authority_identity .runtime "$RUNTIME_SHA"
+          assert_git_authority_identity .control-data "$CONTROL_SHA"
+          assert_git_authority_identity .website-data "$WEBSITE_SHA"
 
           mkdir -p "$RUNNER_TEMP/b10x-facade-boundary"
           api_commit() {
@@ -122,16 +123,21 @@ jobs:
           api_commit beyond10x/website "$RUNTIME_SHA" "$RUNNER_TEMP/b10x-facade-boundary/runtime.json"
           api_commit "$GITHUB_REPOSITORY" "$CONTROL_SHA" "$RUNNER_TEMP/b10x-facade-boundary/control.json"
           api_commit beyond10x/website "$WEBSITE_SHA" "$RUNNER_TEMP/b10x-facade-boundary/website.json"
-          for document in "$RUNNER_TEMP"/b10x-facade-boundary/*.json; do
+          assert_api_authority() {
+            local document=$1 revision=$2
             jq -e --arg login "$BOT_LOGIN" \
-              '.author.login == $login and (
+              --arg revision "$revision" \
+              '.sha == $revision and .author.login == $login and (
                 .committer.login == $login or (
                   .committer.login == "web-flow" and
-                  (.parents | length) == 2 and
-                  .commit.verification.verified == true
+                  .commit.verification.verified == true and
+                  .commit.verification.reason == "valid"
                 )
               )' "$document" >/dev/null
-          done
+          }
+          assert_api_authority "$RUNNER_TEMP/b10x-facade-boundary/runtime.json" "$RUNTIME_SHA"
+          assert_api_authority "$RUNNER_TEMP/b10x-facade-boundary/control.json" "$CONTROL_SHA"
+          assert_api_authority "$RUNNER_TEMP/b10x-facade-boundary/website.json" "$WEBSITE_SHA"
 
           git -C .website-data fetch --quiet --no-tags origin \
             '+refs/heads/main:refs/remotes/origin/main'

@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Add MCP as the twentieth exact-commit public documentation source and bind its generated project surface into the unified site.
+- Admit bot-authored, GitHub-verified `web-flow` commits behind App-only ref authority as immutable root and redirect-façade controls without relying on shallow-checkout parent topology.
 
 ## 0.2.0 — 2026-09-01
 
