@@ -2,6 +2,77 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/0.11.0",
+      "id": "ess/0.11.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-03T20:11:17Z",
+      "title": "ESS 0.11.0",
+      "summary": "ESS released version 0.11.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.11.0",
+        "version": "0.11.0"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.50.0",
+      "id": "aep/0.50.0",
+      "repository": "aep",
+      "publishedAt": "2026-09-03T19:35:03Z",
+      "title": "AEP 0.50.0",
+      "summary": "AEP released version 0.50.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.50.0",
+        "version": "0.50.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/0.8.14",
+      "id": "devcenter/0.8.14",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-03T18:53:23Z",
+      "title": "Devcenter 0.8.14",
+      "summary": "Devcenter released version 0.8.14.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.14",
+        "version": "0.8.14"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.8.12",
       "id": "devcenter/0.8.12",
       "repository": "devcenter",
