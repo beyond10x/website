@@ -3,6 +3,18 @@
   "releases": [
     {
       "repository": "ess",
+      "version": "0.9.1",
+      "publishedAt": "2026-09-03T10:04:10Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.9.1"
+    },
+    {
+      "repository": "ess",
+      "version": "0.9.0",
+      "publishedAt": "2026-09-03T10:02:38Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.9.0"
+    },
+    {
+      "repository": "ess",
       "version": "0.8.0",
       "publishedAt": "2026-09-03T09:39:37Z",
       "url": "https://github.com/beyond10x/ess/releases/tag/0.8.0"

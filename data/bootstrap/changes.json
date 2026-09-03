@@ -2,6 +2,52 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/0.9.1",
+      "id": "ess/0.9.1",
+      "repository": "ess",
+      "publishedAt": "2026-09-03T10:04:10Z",
+      "title": "ESS 0.9.1",
+      "summary": "ESS released version 0.9.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.9.1",
+        "version": "0.9.1"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/0.9.0",
+      "id": "ess/0.9.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-03T10:02:38Z",
+      "title": "ESS 0.9.0",
+      "summary": "ESS released version 0.9.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.9.0",
+        "version": "0.9.0"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "ess/0.8.0",
       "id": "ess/0.8.0",
       "repository": "ess",
