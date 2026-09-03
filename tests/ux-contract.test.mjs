@@ -219,6 +219,22 @@ test('the technical documentation front door renders one family chooser', async 
   assert.doesNotMatch(preparation, /<EcosystemFamilyGateway surfaces=/);
 });
 
+test('deep source documentation keeps audience context while suppressing cross-audience pagination', async () => {
+  const preparation = await readFile(path.join(root, 'scripts/prepare-site.mjs'), 'utf8');
+  const context = await readFile(path.join(root, 'src/components/DocContext.tsx'), 'utf8');
+  assert.match(preparation, /import DocContext from '@site\/src\/components\/DocContext'/);
+  assert.match(preparation, /insertDocContextAfterTitle\(rewritten\.trim\(\)/);
+  assert.match(preparation, /'pagination_next: null'/);
+  assert.match(preparation, /'pagination_prev: null'/);
+  assert.match(preparation, /immediateRoutes/);
+  assert.match(preparation, /unionMetadata\(descendants, 'audiences'/);
+  assert.match(preparation, /experienceStepRoutes\(experiencePresentation\)/);
+  assert.match(preparation, /presentedExperienceIdsByRoute\.get\(route\)/);
+  assert.match(context, /aria-label="Documentation context"/);
+  assert.match(context, /data-b10x-source-provenance/);
+  assert.match(context, /target="_blank" rel="noopener noreferrer"/);
+});
+
 test('the browser navigation audit waits for Chrome teardown before retrying profile cleanup', async () => {
   const audit = await readFile(path.join(root, 'scripts/verify-navigation-layout.mjs'), 'utf8');
   assert.match(audit, /const chromeClosed = new Promise/);
@@ -293,7 +309,7 @@ test('project profiles derive adoption, references, revisions, releases, and bot
   assert.match(profile, /<AdoptionCard surface=\{surface\} journey=\{primaryJourneyOf\(surface\)\}/);
   assert.match(profile, /surface\.source\.specifications/);
   assert.match(profile, /surface\.feeds/);
-  assert.match(profile, /item\.external \? <a href=\{localizeWebsiteHref\(item\.url\)\}>/);
+  assert.match(profile, /item\.external \? <a href=\{localizeWebsiteHref\(item\.url\)\} target="_blank" rel="noopener noreferrer">/);
   assert.match(profile, /external: true/);
   assert.match(profile, /latestReleaseFor\(repository\)/);
   assert.match(profile, /ownedKeys\.has\(relationship\.target\)/);

@@ -1,0 +1,170 @@
+.context {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.65fr) minmax(10rem, 0.8fr) minmax(15rem, 1.5fr) auto;
+  gap: 0.7rem 1rem;
+  align-items: center;
+  margin: 0.75rem 0 1.5rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--b10x-color-line) 65%, transparent);
+  border-left: 3px solid var(--b10x-project-accent);
+  border-radius: 0 var(--b10x-radius) var(--b10x-radius) 0;
+  background: color-mix(in srgb, var(--b10x-color-surface-muted) 55%, transparent);
+  color: var(--b10x-color-text);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.identity,
+.audience,
+.paths {
+  min-width: 0;
+}
+
+.identity {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.identity > span,
+.audience > span,
+.paths > span {
+  color: var(--b10x-color-muted);
+  font: 750 0.64rem/1.25 var(--b10x-font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.identity > a {
+  overflow: hidden;
+  color: var(--b10x-color-heading);
+  font-size: 0.9rem;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.audience {
+  display: grid;
+  gap: 0.1rem;
+  margin: 0;
+}
+
+.audience strong {
+  color: var(--b10x-color-heading);
+  font-weight: 680;
+}
+
+.paths {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.paths > div {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.9rem;
+}
+
+.paths a {
+  font-weight: 680;
+}
+
+.path {
+  display: grid;
+  gap: 0.05rem;
+}
+
+.path small {
+  color: var(--b10x-color-muted);
+  font: 0.62rem/1.35 var(--b10x-font-mono);
+}
+
+.path small a {
+  font: inherit;
+}
+
+.states {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.states span {
+  padding: 0.22rem 0.45rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: var(--b10x-color-muted);
+  font: 750 0.62rem/1.1 var(--b10x-font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.states span[data-state='paused'],
+.states span[data-state='planned'],
+.states span[data-state='approval-required'] {
+  color: var(--b10x-color-warning);
+}
+
+.states span[data-state='private'],
+.states span[data-state='retired'] {
+  color: var(--b10x-color-danger);
+}
+
+.source {
+  grid-column: 1 / -1;
+  padding-top: 0.55rem;
+  border-top: 1px solid color-mix(in srgb, var(--b10x-color-line) 45%, transparent);
+}
+
+.source summary {
+  width: max-content;
+  color: var(--b10x-color-muted);
+  cursor: pointer;
+  font: 700 0.68rem/1.4 var(--b10x-font-mono);
+}
+
+.source p {
+  margin: 0.55rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.source code {
+  font-size: 0.72rem;
+}
+
+@media (max-width: 1200px) {
+  .context {
+    grid-template-columns: minmax(8rem, 0.7fr) minmax(10rem, 0.9fr) minmax(14rem, 1.4fr);
+  }
+
+  .states {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 700px) {
+  .context {
+    grid-template-columns: minmax(7rem, 0.75fr) minmax(0, 1.25fr);
+    gap: 0.65rem 0.9rem;
+    margin-top: 0.55rem;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .audience {
+    text-align: right;
+  }
+
+  .paths,
+  .states,
+  .source {
+    grid-column: 1 / -1;
+  }
+
+  .paths > div {
+    gap: 0.35rem 0.8rem;
+  }
+}

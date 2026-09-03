@@ -3,7 +3,10 @@
   "pages": [
     {
       "experienceId": "try-spec-driven-development",
+      "route": "/start/spec-driven-development/",
+      "navigationLabel": "Try spec-driven development",
       "adoptionPathId": "claude-code",
+      "primaryStepId": "understand-the-loop",
       "sections": [
         {
           "kind": "learn",
@@ -76,7 +79,10 @@
     },
     {
       "experienceId": "understand-safe-agentic-coding",
+      "route": "/learn/safe-agentic-coding/",
+      "navigationLabel": "Learn safe agentic coding",
       "adoptionPathId": "concept-first",
+      "primaryStepId": "safe-loop",
       "sections": [
         {
           "kind": "learn",
@@ -86,7 +92,7 @@
               "id": "safe-loop",
               "title": "Learn the safe coding loop",
               "description": "See why a useful autonomous coding loop separates intent, execution, review, evidence, and authority.",
-              "url": "/learn/safe-agentic-coding/",
+              "url": "#safe-loop",
               "completion": "You can identify the five boundaries in an agentic coding task."
             },
             {
@@ -142,7 +148,10 @@
     },
     {
       "experienceId": "build-agent-systems",
+      "route": "/build/agent-systems/",
+      "navigationLabel": "Build agent systems",
       "adoptionPathId": "observable-agent-loop",
+      "primaryStepId": "run-harness",
       "sections": [
         {
           "kind": "learn",
@@ -208,7 +217,10 @@
     },
     {
       "experienceId": "evaluate-beyond10x-products",
+      "route": "/products/evaluate/",
+      "navigationLabel": "Evaluate products",
       "adoptionPathId": "agentide-local-tui",
+      "primaryStepId": "agentide-install",
       "sections": [
         {
           "kind": "learn",
@@ -253,7 +265,10 @@
     },
     {
       "experienceId": "deploy-operate-products",
+      "route": "/operate/",
+      "navigationLabel": "Operate services",
       "adoptionPathId": "public-source-service",
+      "primaryStepId": "inspect-service-map",
       "sections": [
         {
           "kind": "learn",
@@ -305,7 +320,10 @@
     },
     {
       "experienceId": "contribute-maintain",
+      "route": "/contribute/",
+      "navigationLabel": "Contribute documentation",
       "adoptionPathId": "source-owned-documentation",
+      "primaryStepId": "docs-system-contract",
       "sections": [
         {
           "kind": "learn",

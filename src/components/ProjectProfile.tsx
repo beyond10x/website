@@ -69,7 +69,7 @@ export default function ProjectProfile({repository, revision}: {repository: stri
 }
 
 function ReferenceGroup({title, items, empty}: {title: string; items: Array<{key: string; label: string; url: string; detail?: string; external?: boolean}>; empty: string}): ReactNode {
-  return <ContentCard title={title}>{items.length ? <ul>{items.map((item) => <li key={item.key}>{item.external ? <a href={localizeWebsiteHref(item.url)}>{item.label}</a> : <Link to={localTarget(item.url)}>{item.label}</Link>}{item.detail ? <small>{item.detail}</small> : null}</li>)}</ul> : <p className={styles.empty}>{empty}</p>}</ContentCard>;
+  return <ContentCard title={title}>{items.length ? <ul>{items.map((item) => <li key={item.key}>{item.external ? <a href={localizeWebsiteHref(item.url)} target="_blank" rel="noopener noreferrer">{item.label}</a> : <Link to={localTarget(item.url)}>{item.label}</Link>}{item.detail ? <small>{item.detail}</small> : null}</li>)}</ul> : <p className={styles.empty}>{empty}</p>}</ContentCard>;
 }
 
 function experienceRouteForJourney(journey: string): string {

@@ -3,12 +3,7 @@
   right: 0.75rem;
   bottom: 0.75rem;
   z-index: 1000;
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 0.35rem 0.7rem;
-  align-items: center;
   max-width: calc(100vw - 1.5rem);
-  padding: 0.55rem 0.75rem;
   border: 1px solid rgb(255 255 255 / 18%);
   border-radius: 0.55rem;
   background: rgb(20 24 33 / 94%);
@@ -16,16 +11,52 @@
   color: #f7f8fb;
   font-size: 0.72rem;
   line-height: 1.2;
-  pointer-events: none;
+}
+
+.badge summary {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+  list-style: none;
   white-space: nowrap;
 }
 
-.badge code {
+.badge summary::-webkit-details-marker {
+  display: none;
+}
+
+.badge summary::before {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #59d89d;
+  content: '';
+}
+
+.badge strong {
+  font-size: 0.67rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.badge summary code {
   padding: 0;
   border: 0;
   background: transparent;
   color: #cbd5ff;
   font-size: inherit;
+}
+
+.details {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 13rem;
+  padding: 0.55rem 0.7rem 0.65rem;
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  white-space: nowrap;
 }
 
 .warning {
@@ -38,8 +69,12 @@
     right: 0.5rem;
     bottom: 0.5rem;
     max-width: calc(100vw - 1rem);
-    overflow: hidden;
     font-size: 0.65rem;
+  }
+
+  .badge summary {
+    min-height: 2rem;
+    padding: 0.35rem 0.55rem;
   }
 }
 

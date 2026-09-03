@@ -42,6 +42,8 @@ const legacyRegistry = JSON.parse(await readFile(path.join(root, 'data/bootstrap
 const legacyLedgerInput = JSON.parse(await readFile(path.join(root, 'data/bootstrap/changes.json'), 'utf8'));
 const searchGolden = JSON.parse(await readFile(path.join(root, 'data/search-golden.json'), 'utf8'));
 const experienceCatalog = await readExperienceCatalog(path.join(root, 'data/experiences.json'));
+const experiencePresentation = JSON.parse(await readFile(path.join(root, 'data/experience-pages.json'), 'utf8'));
+const presentedExperienceIdsByRoute = experienceStepRoutes(experiencePresentation);
 const evaluatedExperienceCatalog = {
   schema: 'b10x-evaluated-experiences/v1',
   experiences: evaluateExperienceCatalog(experienceCatalog),
@@ -390,6 +392,12 @@ function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeB
   const title = metadata.title;
   const sidebar = sourceSidebarMetadata(frontmatter, title);
   const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource});
+  const contextualized = insertDocContextAfterTitle(rewritten.trim(), renderDocContext({
+    file,
+    commit,
+    repositoryUrl,
+    metadata,
+  }), title);
   return [
     '---',
     `title: ${JSON.stringify(metadata.qualifiedTitle)}`,
@@ -397,15 +405,60 @@ function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeB
     ...(sidebar.position === undefined ? [] : [`sidebar_position: ${JSON.stringify(sidebar.position)}`]),
     `description: ${JSON.stringify(metadata.description)}`,
     `slug: ${JSON.stringify(route.replace(/^\/docs/, ''))}`,
+    'pagination_next: null',
+    'pagination_prev: null',
     '---',
+    '',
+    "import DocContext from '@site/src/components/DocContext';",
     '',
     renderSearchAttributes(metadata),
     '',
-    renderSourceBanner(`> **${metadata.projectName}** source-owned documentation · [${file.repository}/${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision ${renderRevision(commit)}`),
-    '',
-    rewritten.trim(),
+    contextualized,
     '',
   ].join('\n');
+}
+
+function renderDocContext({file, commit, repositoryUrl, metadata}) {
+  return [
+    '<DocContext',
+    `  currentRoute={${JSON.stringify(metadata.route)}}`,
+    `  repository={${JSON.stringify(file.repository)}}`,
+    `  projectName={${JSON.stringify(metadata.projectName)}}`,
+    `  documentType={${JSON.stringify(metadata.documentType)}}`,
+    `  audiences={${JSON.stringify(metadata.audiences)}}`,
+    `  experienceIds={${JSON.stringify(metadata.experiences)}}`,
+    `  support={${JSON.stringify(metadata.support)}}`,
+    `  access={${JSON.stringify(metadata.access)}}`,
+    `  sourceLabel={${JSON.stringify(`${file.repository}/${file.sourcePath}`)}}`,
+    `  sourceHref={${JSON.stringify(`${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}`)}}`,
+    `  revision={${JSON.stringify(commit)}}`,
+    '/>',
+  ].join('\n');
+}
+
+function insertDocContextAfterTitle(markdown, context, title) {
+  const lines = markdown.split('\n');
+  let fenceCharacter;
+  let fenceLength = 0;
+  for (let index = 0; index < lines.length; index += 1) {
+    const fence = /^\s*(`{3,}|~{3,})/.exec(lines[index]);
+    if (fence) {
+      const character = fence[1][0];
+      if (!fenceCharacter) {
+        fenceCharacter = character;
+        fenceLength = fence[1].length;
+      } else if (character === fenceCharacter && fence[1].length >= fenceLength) {
+        fenceCharacter = undefined;
+        fenceLength = 0;
+      }
+      continue;
+    }
+    if (!fenceCharacter && /^#\s+.+$/.test(lines[index])) {
+      lines.splice(index + 1, 0, '', context);
+      return lines.join('\n');
+    }
+  }
+  return `# ${title}\n\n${context}\n\n${markdown}`;
 }
 
 async function renderBlog({raw, file, route, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, projectName, manifest}) {
@@ -567,7 +620,10 @@ async function documentMetadata({raw, file, route, manifest, surface}) {
   const audiences = resolved
     ? resolved.effective.audiences
     : stringArray(declared.audiences, surface?.audiences?.length ? surface.audiences : ['developer']);
-  const experiences = experienceIdsForSourceDocument({schema: manifest.schema, effective: resolved?.effective});
+  const experiences = [...new Set([
+    ...experienceIdsForSourceDocument({schema: manifest.schema, effective: resolved?.effective}),
+    ...(presentedExperienceIdsByRoute.get(route) ?? []),
+  ])].sort(compareUtf8);
   const tasks = stringArray(declared.tasks, inferTasks(file.sourcePath, title));
   return {
     route,
@@ -585,6 +641,19 @@ async function documentMetadata({raw, file, route, manifest, surface}) {
     tasks,
     sourcePath: file.sourcePath,
   };
+}
+
+function experienceStepRoutes(presentation) {
+  const routes = new Map();
+  for (const page of presentation.pages ?? []) {
+    for (const step of (page.sections ?? []).flatMap((section) => section.steps ?? [])) {
+      if (!step.url?.startsWith('/')) continue;
+      const experiences = routes.get(step.url) ?? new Set();
+      experiences.add(page.experienceId);
+      routes.set(step.url, experiences);
+    }
+  }
+  return new Map([...routes].map(([route, experiences]) => [route, [...experiences].sort(compareUtf8)]));
 }
 
 function renderSearchAttributes(metadata) {
@@ -742,6 +811,7 @@ async function synthesizeDirectoryLandings({documents, routeBySource, destinatio
       children.get(directory).add(route);
     }
   }
+  const realRecordByRoute = new Map(documentRecords.map((record) => [record.route, record]));
   for (const [route, routeChildren] of [...children.entries()].sort(([left], [right]) => compareUtf8(left, right))) {
     if (realRoutes.has(route)) continue;
     const [, , repository, ...remainder] = route.split('/');
@@ -749,8 +819,14 @@ async function synthesizeDirectoryLandings({documents, routeBySource, destinatio
     assertUniqueDestination(destinations, destination);
     await mkdir(path.dirname(destination), {recursive: true});
     const manifest = manifestByRepository.get(repository);
-    const title = remainder.filter(Boolean).at(-1)?.replace(/[-_]/g, ' ') ?? manifest?.repository.displayName ?? repository;
+    const title = navigationLabel(remainder.filter(Boolean).at(-1) ?? manifest?.repository.displayName ?? repository);
     const projectName = manifest?.repository.displayName ?? repository;
+    const descendants = [...routeChildren]
+      .map((child) => realRecordByRoute.get(child))
+      .filter(Boolean);
+    const audiences = unionMetadata(descendants, 'audiences', ['developer']);
+    const experiences = unionMetadata(descendants, 'experiences', []);
+    const tasks = unionMetadata(descendants, 'tasks', ['reference']);
     const metadata = {
       route,
       title,
@@ -759,16 +835,60 @@ async function synthesizeDirectoryLandings({documents, routeBySource, destinatio
       projectName,
       description: `Browse the ${title} section of the source-owned ${projectName} documentation.`,
       documentType: 'reference',
-      audiences: ['developer'],
-      experiences: [],
-      tasks: ['reference'],
+      audiences,
+      experiences,
+      tasks,
       sourcePath: null,
     };
     documentRecords.push(metadata);
-    const links = [...routeChildren].sort(compareUtf8).map((child) => `- [${child.replace(route, '').replace(/\/$/, '').replace(/[-_/]/g, ' ')}](${child})`);
-    await writeFile(destination, ['---', `title: ${JSON.stringify(metadata.qualifiedTitle)}`, `sidebar_label: ${JSON.stringify(title)}`, `slug: ${JSON.stringify(route.replace(/^\/docs/, ''))}`, '---', '', renderSearchAttributes(metadata), '', `# ${title}`, '', 'Collected documentation in this section:', '', ...links, ''].join('\n'));
+    const immediateRoutes = [...new Set([...routeChildren].map((child) => {
+      const segment = child.slice(route.length).split('/').filter(Boolean)[0];
+      return segment ? `${route}${segment}/` : undefined;
+    }).filter(Boolean))].sort(compareUtf8);
+    const links = immediateRoutes.map((child) => {
+      const label = realRecordByRoute.get(child)?.title ?? navigationLabel(child.slice(route.length).replace(/\/$/, ''));
+      return `- [${label}](${child})`;
+    });
+    await writeFile(destination, [
+      '---',
+      `title: ${JSON.stringify(metadata.qualifiedTitle)}`,
+      `sidebar_label: ${JSON.stringify(title)}`,
+      `slug: ${JSON.stringify(route.replace(/^\/docs/, ''))}`,
+      'pagination_next: null',
+      'pagination_prev: null',
+      '---',
+      '',
+      renderSearchAttributes(metadata),
+      '',
+      `# ${title}`,
+      '',
+      'Collected documentation in this section:',
+      '',
+      ...links,
+      '',
+    ].join('\n'));
     realRoutes.add(route);
   }
+}
+
+function unionMetadata(records, key, fallback) {
+  const values = [...new Set(records.flatMap((record) => record[key] ?? []))].sort(compareUtf8);
+  return values.length ? values : fallback;
+}
+
+function navigationLabel(value) {
+  const acronyms = new Map([
+    ['adp', 'ADP'],
+    ['aep', 'AEP'],
+    ['api', 'API'],
+    ['cli', 'CLI'],
+    ['ess', 'ESS'],
+    ['mcp', 'MCP'],
+    ['sdk', 'SDK'],
+  ]);
+  return String(value).split(/[-_\s]+/).filter(Boolean)
+    .map((part) => acronyms.get(part.toLowerCase()) ?? `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
+    .join(' ');
 }
 
 function splitFrontmatter(source) {

@@ -75,8 +75,8 @@ try {
   assert.equal(projectContext.sidebar.filter((item) => item.path === '/docs/aep/').length, 1, 'deep project sidebar must expose the AEP root exactly once');
   assert.deepEqual(projectContext.sidebar.filter((item) => item.path?.startsWith('/docs/aep/')).slice(0, 2).map((item) => item.label), ['AEP', 'Getting started'], 'deep project sidebar must preserve AEP source ordering');
   assert.ok(projectContext.breadcrumbs.some((item) => item.label === 'AEP' && item.path === '/docs/aep/'), 'deep project breadcrumb must retain the linked AEP parent');
-  assert.match(projectContext.banner, /AEP source-owned documentation/, 'deep project source banner must name AEP');
-  assert.match(projectContext.banner, /aep\/website\/docs\/getting-started\.md/, 'deep project source banner must qualify the source path with its repository');
+  assert.match(projectContext.context, /AEP/, 'deep project context must name AEP');
+  assert.match(projectContext.provenance, /aep\/website\/docs\/getting-started\.md/, 'deep project provenance must qualify the source path with its repository');
 
   await setViewport(client, {width: 390, height: 844, mobile: true});
   await navigate(client, `${site}/docs/`);
@@ -684,7 +684,8 @@ function projectContextSnapshot() {
   return {
     sidebar: entries('nav[aria-label="Docs sidebar"] a'),
     breadcrumbs: entries('.theme-doc-breadcrumbs .breadcrumbs__item > :first-child'),
-    banner: document.querySelector('.theme-doc-markdown blockquote')?.textContent.trim() ?? '',
+    context: document.querySelector('[aria-label="Documentation context"]')?.textContent.trim() ?? '',
+    provenance: document.querySelector('[data-b10x-source-provenance]')?.textContent.trim() ?? '',
   };
 })()`;
 }

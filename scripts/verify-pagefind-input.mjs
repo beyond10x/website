@@ -10,7 +10,7 @@ const htmlFiles = await findHtmlFiles(build);
 if (htmlFiles.length === 0) throw new Error('Pagefind input contains no HTML files');
 
 let searchAttributePages = 0;
-let sourceBannerCount = 0;
+let sourceProvenanceCount = 0;
 const prepared = [];
 for (const file of htmlFiles) {
   const source = await readFile(file, 'utf8');
@@ -28,9 +28,12 @@ for (const file of htmlFiles) {
     }
   }
 
-  const sourceBanners = findElements(document, (element) => attribute(element, 'class')?.split(/\s+/).includes('b10x-source-banner'));
-  sourceBannerCount += sourceBanners.length;
-  for (const element of sourceBanners) {
+  const sourceProvenance = findElements(document, (element) => (
+    attribute(element, 'class')?.split(/\s+/).includes('b10x-source-banner')
+    || attribute(element, 'data-b10x-source-provenance') !== undefined
+  ));
+  sourceProvenanceCount += sourceProvenance.length;
+  for (const element of sourceProvenance) {
     if (attribute(element, 'data-pagefind-ignore') === undefined) {
       throw new Error(`${path.relative(build, file)} source provenance must be excluded from Pagefind body excerpts`);
     }
@@ -47,9 +50,9 @@ for (const file of htmlFiles) {
 }
 
 if (searchAttributePages === 0) throw new Error('Pagefind input contains no typed search metadata');
-if (sourceBannerCount === 0) throw new Error('Pagefind input contains no source provenance banners');
+if (sourceProvenanceCount === 0) throw new Error('Pagefind input contains no source provenance');
 await Promise.all(prepared.map(([file, source]) => writeFile(file, source)));
-process.stdout.write(`verified and marked ${htmlFiles.length} Pagefind main inputs with ignored filter payloads on ${searchAttributePages} pages and ${sourceBannerCount} ignored source banners\n`);
+process.stdout.write(`verified and marked ${htmlFiles.length} Pagefind main inputs with ignored filter payloads on ${searchAttributePages} pages and ${sourceProvenanceCount} ignored source provenance blocks\n`);
 
 async function findHtmlFiles(directory) {
   const files = [];

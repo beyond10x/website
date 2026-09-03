@@ -23,7 +23,7 @@ export default function DataCatalogReference({sourceUrl, sourceRepository, title
 
   if (error) return <p role="alert">Could not render this catalog: {error}. <a href={sourceUrl}>Download the data</a>.</p>;
   if (!items) return <p aria-live="polite">Loading the pinned data catalog…</p>;
-  return <><p><a href={sourceUrl}>Download data</a> · <a href={sourceRepository}>View owning source</a></p><DataCatalog items={items} title={title} /></>;
+  return <><p><a href={sourceUrl}>Download data</a> · <a href={sourceRepository} target="_blank" rel="noopener noreferrer">View owning source</a></p><DataCatalog items={items} title={title} /></>;
 }
 
 function normalizeCatalog(document: unknown): DataCatalogItem[] {

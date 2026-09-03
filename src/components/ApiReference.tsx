@@ -31,7 +31,7 @@ export default function ApiReference({format, sourceUrl, sourceRepository}: Prop
   if (format === 'openapi') return <OpenApiReference document={document as OpenApiDocument} sourceUrl={sourceUrl} headingLevel={3} />;
   return (
     <section>
-      <p><a href={sourceUrl}>Download JSON Schema</a> · <a href={sourceRepository}>View its owning source</a></p>
+      <p><a href={sourceUrl}>Download JSON Schema</a> · <a href={sourceRepository} target="_blank" rel="noopener noreferrer">View its owning source</a></p>
       <JsonSchemaViewer schema={document as JsonSchema} />
     </section>
   );

@@ -13,7 +13,21 @@ test('Docs System validates the audience-first catalog and its evaluated adoptio
   const presentation = JSON.parse(await readFile(path.join(root, 'data', 'experience-pages.json'), 'utf8'));
   const result = validateExperiencePresentation(catalog, presentation);
   assert.equal(result.experienceCount, 6);
+  assert.equal(result.routeCount, 6);
   assert.ok(result.stepCount >= 20);
+  assert.deepEqual(presentation.pages.map((page) => [page.experienceId, page.route, page.navigationLabel, page.primaryStepId]), [
+    ['try-spec-driven-development', '/start/spec-driven-development/', 'Try spec-driven development', 'understand-the-loop'],
+    ['understand-safe-agentic-coding', '/learn/safe-agentic-coding/', 'Learn safe agentic coding', 'safe-loop'],
+    ['build-agent-systems', '/build/agent-systems/', 'Build agent systems', 'run-harness'],
+    ['evaluate-beyond10x-products', '/products/evaluate/', 'Evaluate products', 'agentide-install'],
+    ['deploy-operate-products', '/operate/', 'Operate services', 'inspect-service-map'],
+    ['contribute-maintain', '/contribute/', 'Contribute documentation', 'docs-system-contract'],
+  ]);
+  for (const page of presentation.pages) {
+    const primaryStep = page.sections.flatMap((section) => section.steps).find((step) => step.id === page.primaryStepId);
+    assert.ok(primaryStep, `${page.experienceId} primary step must exist`);
+    assert.notEqual(primaryStep.url, page.route, `${page.experienceId} primary step must not loop to its own page`);
+  }
   assert.equal(catalog.artifacts.length, 25);
   const evaluated = evaluateExperienceCatalog(catalog);
   const evaluatedById = new Map(evaluated.map((experience) => [experience.id, experience]));

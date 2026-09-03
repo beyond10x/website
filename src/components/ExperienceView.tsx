@@ -55,13 +55,21 @@ export interface ExperienceDefinition {
   estimatedMinutes: number;
   prerequisites: string[];
   primaryPathId: string;
+  primaryStep: ExperienceStep;
   adoptionPaths: EvaluatedAdoptionPath[];
   sections: ExperienceSection[];
 }
 
 interface ExperiencePageCatalog {
   schema: 'b10x-website-experience-pages/v1';
-  pages: Array<{experienceId: string; adoptionPathId: string; sections: ExperienceSection[]}>;
+  pages: Array<{
+    experienceId: string;
+    route: string;
+    navigationLabel: string;
+    adoptionPathId: string;
+    primaryStepId: string;
+    sections: ExperienceSection[];
+  }>;
 }
 
 interface SearchGoldenContract {
@@ -104,9 +112,9 @@ export default function ExperienceView({id}: {id: string}): ReactNode {
             title={experience.title}
             description={experience.summary}
             actions={
-              <Link className="button button--primary" to={localizeWebsiteHref(experience.sections[0].steps[0].url)}>
-                Begin with the first step
-              </Link>
+              <ExperienceLink className="button button--primary" href={experience.primaryStep.url}>
+                {experience.primaryStep.title}
+              </ExperienceLink>
             }>
             <FactGrid
               label="Experience facts"
@@ -147,17 +155,13 @@ export default function ExperienceView({id}: {id: string}): ReactNode {
                     {String(stepIndex + 1).padStart(2, '0')}
                   </div>
                   <article>
-                    <h3>{step.url.startsWith('#') ? <a href={step.url}>{step.title}</a> : <Link to={localizeWebsiteHref(step.url)}>{step.title}</Link>}</h3>
+                    <h3><ExperienceLink href={step.url}>{step.title}</ExperienceLink></h3>
                     <p>{step.description}</p>
                     <div className={styles.completion}>
                       <span>Complete when</span>
                       <p>{step.completion}</p>
                     </div>
-                    {step.url.startsWith('#') ? (
-                      <a className={styles.stepAction} href={step.url}>Open this step <span aria-hidden="true">→</span></a>
-                    ) : (
-                      <Link className={styles.stepAction} to={localizeWebsiteHref(step.url)}>Open this step <span aria-hidden="true">→</span></Link>
-                    )}
+                    <ExperienceLink className={styles.stepAction} href={step.url}>Open this step <span aria-hidden="true">→</span></ExperienceLink>
                   </article>
                 </li>
               ))}
@@ -189,6 +193,8 @@ function composeExperience(page: ExperiencePageCatalog['pages'][number]): Experi
   const path = experience.adoptionPaths.find((candidate) => candidate.id === page.adoptionPathId);
   if (!path) throw new Error(`${experience.id} has no adoption path ${page.adoptionPathId}`);
   if (!path.url || !path.outcome || !path.estimatedMinutes) throw new Error(`${experience.id}/${path.id} must declare URL, outcome, and estimate`);
+  const primaryStep = page.sections.flatMap((section) => section.steps).find((step) => step.id === page.primaryStepId);
+  if (!primaryStep) throw new Error(`${experience.id} has no primary step ${page.primaryStepId}`);
   const url = new URL(path.url);
   if (url.origin !== 'https://beyond10x.github.io') throw new Error(`${experience.id}/${path.id} must route through the canonical Website`);
   return {
@@ -198,7 +204,7 @@ function composeExperience(page: ExperiencePageCatalog['pages'][number]): Experi
     summary: experience.summary,
     audiences: experience.audiences,
     outcome: path.outcome,
-    route: url.pathname,
+    route: page.route,
     support: path.support,
     effectiveAccess: path.effectiveAccess,
     actionable: path.actionable,
@@ -208,6 +214,7 @@ function composeExperience(page: ExperiencePageCatalog['pages'][number]): Experi
     estimatedMinutes: path.estimatedMinutes,
     prerequisites: path.prerequisites ?? [],
     primaryPathId: path.id,
+    primaryStep,
     adoptionPaths: experience.adoptionPaths,
     sections: page.sections,
   };
@@ -263,7 +270,7 @@ function AdoptionPathContracts({experience}: {experience: ExperienceDefinition})
                   {path.artifacts.map((artifact) => (
                     <li key={artifact.id}>
                       <div>
-                        {artifact.url ? <a href={localizeWebsiteHref(artifact.url)}>{artifactLabel(artifact.id)}</a> : <strong>{artifactLabel(artifact.id)}</strong>}
+                        {artifact.url ? <ExperienceLink href={artifact.url}>{artifactLabel(artifact.id)}</ExperienceLink> : <strong>{artifactLabel(artifact.id)}</strong>}
                         <span>
                           {artifact.version ? `Version ${artifact.version} · ` : ''}
                           {label(artifact.kind)} · {label(artifact.availability)} · {label(artifact.access)}
@@ -280,11 +287,11 @@ function AdoptionPathContracts({experience}: {experience: ExperienceDefinition})
                   <strong>Why this cannot be started</strong>
                   {path.explanation ? <p>{path.explanation}</p> : null}
                   {path.note ? <p>{path.note}</p> : null}
-                  {path.url ? <Link to={localizeWebsiteHref(path.url)}>Review operator documentation — this does not grant artifact access</Link> : null}
+                  {path.url ? <ExperienceLink href={path.url}>Review operator documentation — this does not grant artifact access</ExperienceLink> : null}
                 </div>
               ) : path.note ? <p className={styles.pathNote}>{path.note}</p> : null}
 
-              {path.actionable && !primary && path.url ? <Link className={styles.pathLink} to={localizeWebsiteHref(path.url)}>{restricted ? 'Review access requirements' : 'Open this available path'} <span aria-hidden="true">→</span></Link> : null}
+              {path.actionable && !primary && path.url ? <ExperienceLink className={styles.pathLink} href={path.url}>{restricted ? 'Review access requirements' : 'Open this available path'} <span aria-hidden="true">→</span></ExperienceLink> : null}
             </article>
           );
         })}
@@ -357,4 +364,13 @@ function artifactLabel(id: string): string {
     ['ess', 'ESS'],
   ]);
   return id.split('-').map((part) => acronyms.get(part) ?? `${part.charAt(0).toUpperCase()}${part.slice(1)}`).join(' ');
+}
+
+function ExperienceLink({href, className, children}: {href: string; className?: string; children: ReactNode}): ReactNode {
+  if (href.startsWith('#')) return <a className={className} href={href}>{children}</a>;
+  const localized = localizeWebsiteHref(href);
+  if (/^https?:\/\//i.test(localized)) {
+    return <a className={className} href={localized} target="_blank" rel="noopener noreferrer">{children}</a>;
+  }
+  return <Link className={className} to={localized}>{children}</Link>;
 }

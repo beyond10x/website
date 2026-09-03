@@ -49,7 +49,7 @@ export default function ApiCatalog({catalog}: {catalog: ApiCatalogDocument}): Re
         eyebrow={`${repository.specifications.length} ${repository.specifications.length === 1 ? 'contract' : 'contracts'}`}
         meta={<code>{formatKinds(repository.specifications)}</code>}
         description="Rendered from the repository-owned machine contracts at a locked revision."
-        footer={<a href={repository.sourceUrl}>View locked source</a>}
+        footer={<a href={repository.sourceUrl} target="_blank" rel="noopener noreferrer">View locked source</a>}
         actionUrl={repository.route}
         actionLabel="Browse collection"
         headingLevel={2}

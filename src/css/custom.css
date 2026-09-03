@@ -205,6 +205,31 @@ body {
   font: 0.72rem var(--b10x-font-mono);
 }
 
+/* Infima supplies table overflow; keep multi-column reference cells legible within it. */
+@media screen and (max-width: 600px) {
+  .theme-doc-markdown table > :is(thead, tbody) > tr > :first-child:nth-last-child(n + 3),
+  .theme-doc-markdown table > :is(thead, tbody) > tr > :first-child:nth-last-child(n + 3) ~ * {
+    min-width: 11rem;
+  }
+
+  .theme-doc-markdown table code {
+    overflow-wrap: normal;
+    white-space: nowrap;
+    word-break: normal;
+  }
+}
+
+/* At the desktop breakpoint the sidebar, article, and TOC otherwise compete for ~100px. */
+@media screen and (min-width: 997px) and (max-width: 1100px) {
+  html.docs-doc-page main > .container > .row > .col:first-child {
+    min-width: 100%;
+  }
+
+  html.docs-doc-page main > .container > .row > .col--3:last-child {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

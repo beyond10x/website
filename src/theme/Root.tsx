@@ -73,14 +73,20 @@ export default function Root({children}: Props): ReactNode {
       {children}
       {showBadge && metadata ? (
         <aside className={styles.badge} aria-label="Local preview status">
-          <strong>Local preview</strong>
-          <code title={metadata.revision}>{metadata.revision.slice(0, 7)}</code>
-          <span className={metadata.treeState === 'dirty' ? styles.warning : undefined}>
-            {metadata.treeState} at launch
-          </span>
-          <span className={metadata.reusedInputs ? styles.warning : undefined}>
-            {metadata.reusedInputs ? 'reused inputs' : 'fresh inputs'}
-          </span>
+          <details>
+            <summary>
+              <strong>Local</strong>
+              <code title={metadata.revision}>{metadata.revision.slice(0, 7)}</code>
+            </summary>
+            <div className={styles.details}>
+              <span className={metadata.treeState === 'dirty' ? styles.warning : undefined}>
+                Tree {metadata.treeState} at launch
+              </span>
+              <span className={metadata.reusedInputs ? styles.warning : undefined}>
+                {metadata.reusedInputs ? 'Reused generated inputs' : 'Fresh generated inputs'}
+              </span>
+            </div>
+          </details>
         </aside>
       ) : null}
     </>

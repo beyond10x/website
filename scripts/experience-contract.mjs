@@ -30,14 +30,20 @@ export function validateExperiencePresentation(catalog, presentation) {
     }
     const adoptionPath = experience.adoptionPaths.find((path) => path.id === page.adoptionPathId);
     if (!adoptionPath) throw new Error(`${page.experienceId} has no primary adoption path ${page.adoptionPathId}`);
-    const route = websiteRoute(adoptionPath.url, `${page.experienceId}/${adoptionPath.id}`);
+    assertIdentifier(page.primaryStepId, `${page.experienceId} primary step id`);
+    assertRoute(page.route, `${page.experienceId} page route`);
+    const route = page.route;
     if (routes.has(route)) throw new Error(`duplicate experience route ${route}`);
     routes.add(route);
+    if (typeof page.navigationLabel !== 'string' || !page.navigationLabel.trim() || page.navigationLabel.length > 80) {
+      throw new Error(`${page.experienceId} must declare a concise navigation label`);
+    }
     if (!adoptionPath.outcome || adoptionPath.outcome.length < 40) throw new Error(`${page.experienceId} must define a concrete outcome`);
     if (!Number.isInteger(adoptionPath.estimatedMinutes) || adoptionPath.estimatedMinutes < 1) throw new Error(`${page.experienceId} must define a positive estimate`);
     if (JSON.stringify(page.sections?.map((section) => section.kind)) !== JSON.stringify(sectionOrder)) {
       throw new Error(`${page.experienceId} sections must be ordered learn, do, verify`);
     }
+    let primaryStep;
     for (const section of page.sections) {
       if (!section.title || !Array.isArray(section.steps) || section.steps.length === 0) throw new Error(`${page.experienceId}/${section.kind} must contain steps`);
       for (const step of section.steps) {
@@ -47,8 +53,11 @@ export function validateExperiencePresentation(catalog, presentation) {
         stepIdentifiers.add(key);
         assertRoute(step.url, `${key} URL`, {allowFragment: true});
         if (!step.completion || step.completion.length < 30) throw new Error(`${key} must state when it is complete`);
+        if (step.id === page.primaryStepId) primaryStep = step;
       }
     }
+    if (!primaryStep) throw new Error(`${page.experienceId} has no primary step ${page.primaryStepId}`);
+    if (primaryStep.url === page.route) throw new Error(`${page.experienceId} primary step must not link back to its own page`);
   }
   if (identifiers.size !== experienceById.size || [...experienceById.keys()].some((id) => !identifiers.has(id))) {
     throw new Error('canonical experiences and Website experience pages must have exact identifier parity');
@@ -61,6 +70,8 @@ export function experienceRoutes(catalog, presentation) {
     .filter((path) => path.url)
     .map((path) => websiteRoute(path.url, `${experience.id}/${path.id}`))));
   for (const page of presentation.pages) {
+    assertRoute(page.route, `${page.experienceId} page route`);
+    routes.add(page.route);
     for (const section of page.sections) {
       for (const step of section.steps) {
         if (step.url.startsWith('/')) routes.add(step.url);
