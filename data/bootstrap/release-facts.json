@@ -3,6 +3,84 @@
   "releases": [
     {
       "repository": "devcenter",
+      "version": "0.8.12",
+      "publishedAt": "2026-09-03T18:21:46Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.12"
+    },
+    {
+      "repository": "workspace",
+      "version": "0.2.13",
+      "publishedAt": "2026-09-03T18:11:29Z",
+      "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.13"
+    },
+    {
+      "repository": "aep",
+      "version": "0.49.0",
+      "publishedAt": "2026-09-03T17:57:16Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.49.0"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.8.11",
+      "publishedAt": "2026-09-03T17:56:19Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.11"
+    },
+    {
+      "repository": "agentide",
+      "version": "0.3.1",
+      "publishedAt": "2026-09-03T17:52:25Z",
+      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.1"
+    },
+    {
+      "repository": "workflow",
+      "version": "0.2.0",
+      "publishedAt": "2026-09-03T17:44:01Z",
+      "url": "https://github.com/beyond10x/workflow/releases/tag/0.2.0"
+    },
+    {
+      "repository": "agentide",
+      "version": "0.3.0",
+      "publishedAt": "2026-09-03T17:41:51Z",
+      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.0"
+    },
+    {
+      "repository": "service-sdk",
+      "version": "0.4.2",
+      "publishedAt": "2026-09-03T17:41:21Z",
+      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.4.2"
+    },
+    {
+      "repository": "service-sdk",
+      "version": "0.4.1",
+      "publishedAt": "2026-09-03T17:38:27Z",
+      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.4.1"
+    },
+    {
+      "repository": "ess",
+      "version": "0.10.0",
+      "publishedAt": "2026-09-03T17:31:20Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.10.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.47.0",
+      "publishedAt": "2026-09-03T17:27:18Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.47.0"
+    },
+    {
+      "repository": "service-sdk",
+      "version": "0.4.0",
+      "publishedAt": "2026-09-03T17:24:06Z",
+      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.4.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.48.0",
+      "publishedAt": "2026-09-03T17:23:20Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.48.0"
+    },
+    {
+      "repository": "devcenter",
       "version": "0.8.10",
       "publishedAt": "2026-09-03T14:41:40Z",
       "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.10"
