@@ -9,7 +9,7 @@ import {
 } from '@beyond10x/docs-system/components';
 import type {EcosystemRegistry} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
-import {prioritizeSearchResults, resultCountDescription} from '../search-result-contract.mjs';
+import {prioritizeSearchResults, resultCountDescription, resultSummary} from '../search-result-contract.mjs';
 import styles from './ecosystem.module.css';
 
 const registry = registryDocument as EcosystemRegistry;
@@ -198,7 +198,7 @@ export default function Search(): ReactNode {
                 eyebrow={result.meta.project ?? result.meta.document_type}
                 title={qualifiedTitle(result)}
                 titleUrl={result.url}
-                description={<p dangerouslySetInnerHTML={{__html: safeExcerpt(result.excerpt)}} />}
+                description={resultSummary(result, {preferDescription: !query.trim()})}
                 meta={[result.meta.document_type, result.meta.experience]
                   .filter((value): value is string => Boolean(value))
                   .map(humanize)
@@ -238,13 +238,4 @@ function qualifiedTitle(result: PagefindResultData): string {
 
 function humanize(value: string): string {
   return value.replaceAll('-', ' ').replaceAll('_', ' ').replace(/\b\w/g, (character) => character.toUpperCase());
-}
-
-function safeExcerpt(value: string): string {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('&lt;mark&gt;', '<mark>')
-    .replaceAll('&lt;/mark&gt;', '</mark>');
 }

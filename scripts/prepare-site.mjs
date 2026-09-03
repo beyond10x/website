@@ -374,13 +374,13 @@ function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeB
     '---',
     `title: ${JSON.stringify(metadata.qualifiedTitle)}`,
     `sidebar_label: ${JSON.stringify(title)}`,
-    `description: ${JSON.stringify(frontmatter.description ?? `Source-owned documentation from ${file.repository}.`)}`,
+    `description: ${JSON.stringify(metadata.description)}`,
     `slug: ${JSON.stringify(route.replace(/^\/docs/, ''))}`,
     '---',
     '',
     renderSearchAttributes(metadata),
     '',
-    `> Source-owned documentation · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`,
+    renderSourceBanner(`> **${metadata.projectName}** source-owned documentation · [${file.repository}/${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`),
     '',
     rewritten.trim(),
     '',
@@ -409,13 +409,14 @@ async function renderBlog({raw, file, route, commit, repositoryUrl, routeBySourc
       projectName,
       title,
       qualifiedTitle: `${title} | ${projectName}`,
+      description: summaryText(frontmatter.description ?? `${title} in the source-owned ${projectName} documentation.`),
       documentType: 'field-note',
       audiences: resolved?.effective.audiences ?? ['researcher'],
       experiences: experienceIdsForSourceDocument({schema: manifest.schema, effective: resolved?.effective}),
       tasks: ['research'],
     }),
     '',
-    `> Source-owned field note · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`,
+    renderSourceBanner(`> Source-owned field note · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`),
     '',
     rewritten.trim(),
     '',
@@ -528,10 +529,15 @@ function plainText(value) {
   return String(value).replace(/[\r\n]+/g, ' ').replace(/[<>]/g, '').replace(/\|/g, '\\|').trim();
 }
 
+function summaryText(value) {
+  return String(value).replace(/\s+/g, ' ').trim();
+}
+
 async function documentMetadata({raw, file, route, manifest, surface}) {
   const {frontmatter, body} = splitFrontmatter(raw);
   const title = frontmatter.title ?? firstHeading(body) ?? path.basename(file.sourcePath, path.extname(file.sourcePath));
   const projectName = manifest.repository.displayName ?? file.repository;
+  const description = summaryText(frontmatter.description ?? `${title} in the source-owned ${projectName} documentation.`);
   const declared = frontmatter.b10x && typeof frontmatter.b10x === 'object' ? frontmatter.b10x : {};
   const documentType = declared.documentType ?? inferDocumentType(file.sourcePath, title);
   const resolved = manifest.schema === 'b10x-docs/v4'
@@ -548,6 +554,7 @@ async function documentMetadata({raw, file, route, manifest, surface}) {
     qualifiedTitle: `${title} | ${projectName}`,
     project: file.repository,
     projectName,
+    description,
     documentType,
     audiences,
     experiences,
@@ -563,6 +570,7 @@ function renderSearchAttributes(metadata) {
   assertSearchAudienceVocabulary(metadata.audiences, `${metadata.route ?? metadata.qualifiedTitle ?? 'page'} search metadata`);
   const attributes = [
     ['data-pagefind-meta', 'qualified_title', metadata.qualifiedTitle],
+    ['data-pagefind-meta', 'description', metadata.description],
     ['data-pagefind-meta', 'project', metadata.projectName],
     ['data-pagefind-meta', 'document_type', metadata.documentType],
     ['data-pagefind-filter', 'project', metadata.project],
@@ -572,10 +580,20 @@ function renderSearchAttributes(metadata) {
     ...metadata.tasks.map((task) => ['data-pagefind-filter', 'task', task]),
   ];
   return [
-    '<div className="b10x-search-attributes">',
+    '<div className="b10x-search-attributes" data-pagefind-ignore>',
     ...attributes.map(([name, key, value]) => `  <span ${name}="${htmlAttribute(key)}">${htmlText(value)}</span>`),
     ...(rankedSearchQueries.get(metadata.route) ?? [])
       .map((query) => `  <span data-pagefind-meta="search_priority" data-pagefind-weight="10">${htmlText(query)}</span>`),
+    '</div>',
+  ].join('\n');
+}
+
+function renderSourceBanner(markdown) {
+  return [
+    '<div className="b10x-source-banner" data-pagefind-ignore>',
+    '',
+    markdown,
+    '',
     '</div>',
   ].join('\n');
 }
@@ -712,6 +730,7 @@ async function synthesizeDirectoryLandings({documents, routeBySource, destinatio
       qualifiedTitle: `${title} | ${projectName}`,
       project: repository,
       projectName,
+      description: `Browse the ${title} section of the source-owned ${projectName} documentation.`,
       documentType: 'reference',
       audiences: ['developer'],
       experiences: [],
@@ -767,6 +786,7 @@ function projectDocument({surface, repository, revision, sourceUrl, relationship
     qualifiedTitle: `${surface.name} | beyond10x`,
     projectName: surface.name,
     project: repository,
+    description: surface.summary,
     documentType: 'reference',
     audiences: surface.audiences ?? ['developer'],
     experiences: [],
@@ -776,7 +796,7 @@ function projectDocument({surface, repository, revision, sourceUrl, relationship
     '---', `title: ${JSON.stringify(metadata.qualifiedTitle)}`, `sidebar_label: ${JSON.stringify(surface.name)}`, `description: ${JSON.stringify(surface.summary)}`,
     `slug: /${repository}/`, '---', '', renderSearchAttributes(metadata), '',
     `# ${surface.name}`, '', surface.summary, '',
-    `> Source-owned documentation · [${repository}](${sourceUrl}) · revision <code className="b10x-revision">${revision}</code>`, '',
+    renderSourceBanner(`> Source-owned documentation · [${repository}](${sourceUrl}) · revision <code className="b10x-revision">${revision}</code>`), '',
     `**Status:** ${surface.maturity} · **Journeys:** ${surface.journeys.join(', ')}`, '', '## Start', '',
     `[${surface.adoption?.label ?? 'Open the source'}](${surface.adoption?.url ?? surface.repository.url})`, '',
     surface.adoption?.outcome ?? '', '',

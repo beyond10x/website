@@ -1,6 +1,16 @@
 import {normalizeMarkdownFenceLanguage} from '@beyond10x/docs-system/code';
 
 const managedMarker = /^\s*<!--\s*(b10x-docs(?:[-:][a-z0-9-]+)*):(start|end)\s*-->\s*$/i;
+const htmlElements = new Set([
+  'a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b', 'bdi', 'bdo', 'blockquote', 'br', 'button',
+  'canvas', 'caption', 'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del', 'details', 'dfn',
+  'dialog', 'div', 'dl', 'dt', 'em', 'fieldset', 'figcaption', 'figure', 'footer', 'h1', 'h2', 'h3', 'h4',
+  'h5', 'h6', 'header', 'hgroup', 'hr', 'i', 'img', 'ins', 'kbd', 'label', 'legend', 'li', 'main', 'map',
+  'mark', 'menu', 'meter', 'nav', 'noscript', 'ol', 'optgroup', 'option', 'output', 'p', 'picture', 'pre',
+  'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'search', 'section', 'select', 'slot', 'small', 'source',
+  'span', 'strong', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th',
+  'thead', 'time', 'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr',
+]);
 
 export function normalizePassiveMarkdown(source) {
   const output = [];
@@ -36,11 +46,41 @@ export function normalizePassiveMarkdown(source) {
       }
       line = `${line.slice(0, start)}${line.slice(end + 3)}`;
     }
+    line = escapePlaceholderTags(line);
     const heading = /^(#{1,6})\s+(.+?)\s+\{#([A-Za-z][A-Za-z0-9_.:-]*)\}\s*$/.exec(line);
     if (heading) output.push(`<a id=${JSON.stringify(heading[3])}></a>`, `${heading[1]} ${heading[2]}`);
     else if (line || !htmlComment) output.push(line);
   }
   return output.join('\n');
+}
+
+/**
+ * Bare placeholder tokens such as `<task>` are valid repository prose but are
+ * parsed as JSX by MDX. Escape only unknown, attribute-free lowercase tags and
+ * leave code spans plus deliberately authored HTML untouched.
+ */
+export function escapePlaceholderTags(line) {
+  let output = '';
+  let cursor = 0;
+  while (cursor < line.length) {
+    const opening = line.indexOf('`', cursor);
+    if (opening < 0) return output + escapeProsePlaceholderTags(line.slice(cursor));
+    let runEnd = opening;
+    while (line[runEnd] === '`') runEnd += 1;
+    const marker = line.slice(opening, runEnd);
+    const closing = line.indexOf(marker, runEnd);
+    if (closing < 0) return output + escapeProsePlaceholderTags(line.slice(cursor));
+    output += escapeProsePlaceholderTags(line.slice(cursor, opening));
+    output += line.slice(opening, closing + marker.length);
+    cursor = closing + marker.length;
+  }
+  return output;
+}
+
+function escapeProsePlaceholderTags(value) {
+  return value.replace(/<([a-z][a-z0-9.-]*)>/g, (match, tag) => (
+    htmlElements.has(tag) ? match : `&lt;${tag}&gt;`
+  ));
 }
 
 /**

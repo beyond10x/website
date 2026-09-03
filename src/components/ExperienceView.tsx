@@ -294,8 +294,9 @@ function AdoptionPathContracts({experience}: {experience: ExperienceDefinition})
 
 function SearchAttributes({experience}: {experience: ExperienceDefinition}): ReactNode {
   return (
-    <div className={styles.searchAttributes}>
+    <div className={styles.searchAttributes} data-pagefind-ignore>
       <span data-pagefind-meta="qualified_title">{experience.title} | beyond10x</span>
+      <span data-pagefind-meta="description">{experience.summary}</span>
       <span data-pagefind-meta="experience">{experience.id}</span>
       <span data-pagefind-meta="document_type">experience</span>
       <span data-pagefind-filter="experience">{experience.id}</span>

@@ -42,6 +42,7 @@ test('Docs System validates the audience-first catalog and its evaluated adoptio
 
 test('Devcenter keeps evaluation paths separate from operator-only production deployment', async () => {
   const catalog = await readExperienceCatalog(path.join(root, 'data', 'experiences.json'));
+  const presentation = JSON.parse(await readFile(path.join(root, 'data', 'experience-pages.json'), 'utf8'));
   const product = evaluateExperienceCatalog(catalog).find((experience) => experience.id === 'evaluate-beyond10x-products');
   assert.deepEqual(product.adoptionPaths.map((path) => path.id), ['frontend-review', 'approved-source-build']);
   assert.deepEqual(product.adoptionPaths.map((path) => ({
@@ -54,9 +55,16 @@ test('Devcenter keeps evaluation paths separate from operator-only production de
     {support: 'preview', access: 'public', effectiveAccess: 'public', actionable: true, artifactIds: ['devcenter-docs', 'devcenter-source']},
     {support: 'preview', access: 'approval-required', effectiveAccess: 'approval-required', actionable: true, artifactIds: ['devcenter-docs', 'devcenter-source', 'devcenter-private-build-dependencies']},
   ]);
+  assert.equal(product.adoptionPaths.find((path) => path.id === 'approved-source-build').url, 'https://beyond10x.github.io/docs/devcenter/source-build/');
   const operations = evaluateExperienceCatalog(catalog).find((experience) => experience.id === 'deploy-operate-products');
   assert.deepEqual(operations.audiences, ['operator']);
   assert.deepEqual(operations.adoptionPaths.map((path) => path.id), ['public-source-service', 'company-cluster-devcenter']);
+  assert.equal(operations.adoptionPaths.find((path) => path.id === 'company-cluster-devcenter').url, 'https://beyond10x.github.io/docs/devcenter/production-deployment/');
+  const frontendPage = presentation.pages.find((page) => page.experienceId === 'evaluate-beyond10x-products');
+  assert.deepEqual(
+    frontendPage.sections.flatMap((section) => section.steps).filter((step) => step.url.startsWith('/docs/devcenter/')).map((step) => step.url),
+    ['/docs/devcenter/frontend-review/', '/docs/devcenter/frontend-review/'],
+  );
   const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
   assert.match(artifacts.get('devcenter-source').note, /PolyForm.*less than 32 consecutive calendar days/i);
   assert.deepEqual(

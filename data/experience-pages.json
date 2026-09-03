@@ -231,7 +231,7 @@
               "id": "devcenter-docs",
               "title": "Run the frontend review without private artifacts",
               "description": "Follow the source-owned frontend review workflow; the separate full-service build requires approved private dependencies.",
-              "url": "/docs/devcenter/",
+              "url": "/docs/devcenter/frontend-review/",
               "completion": "The credential-free review runs locally, and your notes preserve the less-than-32-day evaluation license boundary."
             }
           ]
@@ -244,7 +244,7 @@
               "id": "confirm-availability",
               "title": "Confirm the current availability statement",
               "description": "Treat private images and internal-only services as blockers to public deployment until the owning project says otherwise.",
-              "url": "/docs/devcenter/",
+              "url": "/docs/devcenter/frontend-review/",
               "completion": "Your evaluation notes distinguish review access from deployability."
             }
           ]

@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
-import {prioritizeSearchResults} from '../src/search-result-contract.mjs';
+import {prioritizeSearchResults, resultSummary} from '../src/search-result-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const pagefindRoot = path.join(root, 'build', 'pagefind');
@@ -70,8 +70,44 @@ try {
   if (firstExperience?.url !== '/start/spec-driven-development/') {
     throw new Error(`filter-only practitioner search must surface the canonical experience first, received ${firstExperience?.url ?? 'no result'}`);
   }
+
+  for (const query of ['agent plugins', 'approval']) {
+    const typedResponse = await pagefind.search(query);
+    const typedCandidates = await Promise.all(typedResponse.results.slice(0, 10).map((result) => result.data()));
+    if (typedCandidates.length === 0) throw new Error(`typed search ${JSON.stringify(query)} must return indexed documentation`);
+    for (const candidate of typedCandidates) {
+      const summary = resultSummary(candidate);
+      if (/source-owned (?:documentation|field note)|\b[0-9a-f]{40}\b/i.test(summary.slice(0, 240))) {
+        throw new Error(`typed search ${JSON.stringify(query)} result ${candidate.url} leads with source provenance: ${summary}`);
+      }
+    }
+  }
+
+  const entityResponse = await pagefind.search('shared capability layer', {filters: {project: 'agentplugins'}});
+  const entityCandidate = entityResponse.results[0] ? await entityResponse.results[0].data() : undefined;
+  const entitySummary = resultSummary(entityCandidate);
+  if (!entitySummary.includes('skills/<name>/SKILL.md') || entitySummary.includes('&lt;name')) {
+    throw new Error(`typed search summaries must decode code placeholders as plain text: ${entitySummary || 'no result'}`);
+  }
+
+  const operatorResponse = await pagefind.search(null, {filters: {audience: 'operator'}});
+  const operatorCandidates = await Promise.all(operatorResponse.results.map((result) => result.data()));
+  if (operatorCandidates.length === 0) throw new Error('operator search must return indexed documentation');
+  for (const candidate of operatorCandidates) {
+    if (!candidate.meta.description || !resultSummary(candidate, {preferDescription: true})) {
+      throw new Error(`operator search result ${candidate.url} must expose an explicit human description`);
+    }
+    if (/Skip to main content|On this page|(?:experience|reference){2,}|[a-z-]+(?:experience|reference)(?:adopter|developer|evaluator|operator|researcher)/i.test(candidate.excerpt)) {
+      throw new Error(`operator search result ${candidate.url} excerpt contains navigation chrome or concatenated filter payload`);
+    }
+  }
+  const operate = operatorCandidates.find((candidate) => candidate.url === '/operate/');
+  const expectedOperateSummary = 'Find service operations material without pushing cluster and chart detail into the practitioner onboarding path.';
+  if (resultSummary(operate, {preferDescription: true}) !== expectedOperateSummary) {
+    throw new Error(`operator experience summary is not the canonical human description: ${resultSummary(operate, {preferDescription: true}) || 'missing'}`);
+  }
 } finally {
   globalThis.fetch = nativeFetch;
 }
 
-process.stdout.write(`verified ${golden.queries.length} golden searches across ${indexedPages} indexed pages\n`);
+process.stdout.write(`verified ${golden.queries.length} golden searches and typed-query summaries across ${indexedPages} indexed pages\n`);

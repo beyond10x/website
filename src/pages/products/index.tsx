@@ -35,8 +35,9 @@ export default function Products(): ReactNode {
   return (
     <Layout title="Products" description="Evaluate beyond10x products and find operations guidance without confusing the two audiences.">
       <main className={`container ${styles.page}`}>
-        <div className="b10x-search-attributes">
+        <div className="b10x-search-attributes" data-pagefind-ignore>
           <span data-pagefind-meta="qualified_title">Products | beyond10x</span>
+          <span data-pagefind-meta="description">Evaluate beyond10x products and find operations guidance without confusing the two audiences.</span>
           <span data-pagefind-filter="audience">evaluator</span>
           <span data-pagefind-filter="document_type">landing</span>
         </div>

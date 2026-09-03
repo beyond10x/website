@@ -45,8 +45,9 @@ export default function Home(): ReactNode {
       title="Safe autonomous coding, from intent to evidence"
       description="Learn agentic coding and turn one feature idea into a governed, spec-driven plan with Claude and beyond10x tools.">
       <main>
-        <div className={styles.searchAttributes} aria-hidden="true">
+        <div className={styles.searchAttributes} aria-hidden="true" data-pagefind-ignore>
           <span data-pagefind-meta="qualified_title">Safe autonomous coding | beyond10x</span>
+          <span data-pagefind-meta="description">Learn agentic coding and turn one feature idea into a governed, spec-driven plan with Claude and beyond10x tools.</span>
           <span data-pagefind-filter="experience">try-spec-driven-development</span>
           <span data-pagefind-filter="audience">developer</span>
           <span data-pagefind-filter="audience">adopter</span>

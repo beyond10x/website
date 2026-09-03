@@ -41,8 +41,9 @@ export default function Build(): ReactNode {
   return (
     <Layout title="Build agent systems" description="Choose the smallest beyond10x building path that matches the system boundary you own.">
       <main className={`container ${styles.page}`}>
-        <div className="b10x-search-attributes">
+        <div className="b10x-search-attributes" data-pagefind-ignore>
           <span data-pagefind-meta="qualified_title">Build agent systems | beyond10x</span>
+          <span data-pagefind-meta="description">Choose the smallest beyond10x building path that matches the system boundary you own.</span>
           <span data-pagefind-filter="audience">developer</span>
           <span data-pagefind-filter="document_type">landing</span>
         </div>

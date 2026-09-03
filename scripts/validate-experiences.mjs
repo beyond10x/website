@@ -54,13 +54,22 @@ if (!frontendReview.actionable || frontendReview.support !== 'preview' || fronte
   throw new Error('the Devcenter frontend review must remain a public preview backed only by public docs and PolyForm evaluation source');
 }
 if (!approvedSourceBuild.actionable || approvedSourceBuild.support !== 'preview' || approvedSourceBuild.effectiveAccess !== 'approval-required'
-  || approvedSourceBuild.artifactIds.join(',') !== 'devcenter-docs,devcenter-source,devcenter-private-build-dependencies') {
+  || approvedSourceBuild.artifactIds.join(',') !== 'devcenter-docs,devcenter-source,devcenter-private-build-dependencies'
+  || approvedSourceBuild.url !== 'https://beyond10x.github.io/docs/devcenter/source-build/') {
   throw new Error('the Devcenter full source build must remain a preview path requiring approved private dependencies');
 }
 const operations = evaluatedById.get('deploy-operate-products');
 if (!operations || operations.audiences.join(',') !== 'operator'
-  || operations.adoptionPaths.map((path) => path.id).join(',') !== 'public-source-service,company-cluster-devcenter') {
+  || operations.adoptionPaths.map((path) => path.id).join(',') !== 'public-source-service,company-cluster-devcenter'
+  || devcenterCluster.url !== 'https://beyond10x.github.io/docs/devcenter/production-deployment/') {
   throw new Error('production deployment belongs only to the operator experience and must not leak into product evaluation');
+}
+const frontendPresentation = presentation.pages.find((page) => page.experienceId === 'evaluate-beyond10x-products');
+const devcenterStepUrls = frontendPresentation?.sections.flatMap((section) => section.steps)
+  .filter((step) => step.url.startsWith('/docs/devcenter/'))
+  .map((step) => step.url) ?? [];
+if (devcenterStepUrls.join(',') !== '/docs/devcenter/frontend-review/,/docs/devcenter/frontend-review/') {
+  throw new Error('the public Devcenter review path must link only to its evaluator-owned documentation page');
 }
 const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
 for (const [id, version, url] of [

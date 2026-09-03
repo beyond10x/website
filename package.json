@@ -16,7 +16,7 @@
     "redirects:root": "node scripts/write-root-redirects.mjs",
     "verify:navigation": "node scripts/verify-navigation.mjs",
     "audit:navigation-layout": "node scripts/verify-navigation-layout.mjs",
-    "index:search": "pagefind --site build --output-subdir pagefind",
+    "index:search": "node scripts/verify-pagefind-input.mjs && pagefind --site build --output-subdir pagefind --exclude-selectors '.theme-doc-breadcrumbs,.theme-doc-toc-mobile,.pagination-nav'",
     "verify:search": "node --no-warnings scripts/verify-search.mjs",
     "redirects:effective": "node scripts/write-effective-redirects.mjs",
     "crawl": "node scripts/crawl-build.mjs",

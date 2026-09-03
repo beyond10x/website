@@ -35,8 +35,9 @@ export default function Learn(): ReactNode {
   return (
     <Layout title="Learn safe agentic coding" description="Understand the beyond10x operating model before choosing implementation detail.">
       <main className={`container ${styles.page}`}>
-        <div className="b10x-search-attributes">
+        <div className="b10x-search-attributes" data-pagefind-ignore>
           <span data-pagefind-meta="qualified_title">Learn safe agentic coding | beyond10x</span>
+          <span data-pagefind-meta="description">Understand the beyond10x operating model before choosing implementation detail.</span>
           <span data-pagefind-filter="audience">developer</span>
           <span data-pagefind-filter="audience">evaluator</span>
           <span data-pagefind-filter="audience">researcher</span>

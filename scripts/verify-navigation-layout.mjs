@@ -30,6 +30,7 @@ const chrome = spawn(chromeBinary, [
   `--user-data-dir=${profile}`,
   'about:blank',
 ], {stdio: ['ignore', 'ignore', 'pipe']});
+const chromeClosed = new Promise((resolve) => chrome.once('close', resolve));
 let chromeErrors = '';
 chrome.stderr.setEncoding('utf8');
 chrome.stderr.on('data', (chunk) => { chromeErrors = `${chromeErrors}${chunk}`.slice(-8000); });
@@ -59,6 +60,14 @@ try {
   assert.ok(desktop.sidebarTop >= desktop.navbar.bottom - 1, 'docs sidebar navigation must begin below the global navbar');
   await clickNavigationLink(client, 'nav[aria-label="Docs sidebar"]', 'Choose an outcome');
   await waitForPath(client, '/start/', 1440);
+
+  await navigate(client, `${site}/docs/aep/getting-started/`);
+  const projectContext = await evaluate(client, projectContextSnapshot());
+  assert.ok(projectContext.sidebar.some((item) => item.label === 'Technical docs' && item.path === '/docs/'), 'deep project sidebar must return to Technical docs');
+  assert.ok(projectContext.sidebar.some((item) => item.label === 'AEP' && item.path === '/docs/aep/'), 'deep project sidebar must expose the AEP owner and root');
+  assert.ok(projectContext.breadcrumbs.some((item) => item.label === 'AEP' && item.path === '/docs/aep/'), 'deep project breadcrumb must retain the linked AEP parent');
+  assert.match(projectContext.banner, /AEP source-owned documentation/, 'deep project source banner must name AEP');
+  assert.match(projectContext.banner, /aep\/website\/docs\/getting-started\.md/, 'deep project source banner must qualify the source path with its repository');
 
   await setViewport(client, {width: 390, height: 844, mobile: true});
   await navigate(client, `${site}/docs/`);
@@ -93,6 +102,14 @@ try {
   assertVisibleLabels(mobileGlobal.labels, 390, 'mobile global drawer');
   await clickNavigationLink(client, '.navbar-sidebar__item:not([inert])', 'Try');
   await waitForPath(client, '/start/', 390);
+
+  for (const viewport of [
+    {width: 320, height: 844, mobile: true},
+    {width: 390, height: 844, mobile: true},
+    {width: 996, height: 844, mobile: false},
+  ]) {
+    await verifyKeyboardDrawer(client, site, viewport);
+  }
 
   const boundaryWidths = [995, 996, 997, 1000, 1050, 1099, 1100, 1101];
   for (const width of boundaryWidths) {
@@ -132,17 +149,32 @@ try {
     await waitForPath(client, '/start/', width);
   }
 
-  process.stdout.write(`verified global navigation stacking, drawer behavior, and link activation on /docs/ at 1440×1000, 390×844, and ${boundaryWidths.join('/')}×844\n`);
+  await verifySearchCards(client, site);
+
+  process.stdout.write(`verified global navigation, project context, readable search cards, pointer activation, and trapped keyboard drawer flow at 1440×1000, 320/390×844, and ${boundaryWidths.join('/')}×844\n`);
 } catch (error) {
   if (chromeErrors.trim()) error.message = `${error.message}\nChrome diagnostics:\n${chromeErrors.trim()}`;
   throw error;
 } finally {
   client?.close();
-  chrome.kill('SIGTERM');
-  await Promise.race([new Promise((resolve) => chrome.once('exit', resolve)), delay(2000)]);
-  if (chrome.exitCode === null) chrome.kill('SIGKILL');
+  await stopChrome(chrome, chromeClosed);
   await new Promise((resolve) => server.close(resolve));
-  await rm(profile, {recursive: true, force: true});
+  await rm(profile, {recursive: true, force: true, maxRetries: 10, retryDelay: 100});
+}
+
+async function stopChrome(process, closed) {
+  if (process.exitCode === null && process.signalCode === null) process.kill('SIGTERM');
+  const stoppedGracefully = await Promise.race([
+    closed.then(() => true),
+    delay(2000).then(() => false),
+  ]);
+  if (stoppedGracefully) return;
+
+  process.kill('SIGKILL');
+  await Promise.race([
+    closed,
+    rejectAfter(5000, 'Chrome did not exit after SIGKILL'),
+  ]);
 }
 
 async function serveBuild(request, response) {
@@ -305,6 +337,122 @@ async function dispatchPointerClick(cdp, {x, y}) {
   await cdp.command('Input.dispatchMouseEvent', {type: 'mouseReleased', x, y, button: 'left', clickCount: 1});
 }
 
+async function verifyKeyboardDrawer(cdp, siteUrl, viewport) {
+  await setViewport(cdp, viewport);
+  await navigate(cdp, `${siteUrl}/docs/aep/getting-started/`);
+  await tabToSelector(cdp, '.navbar__toggle', viewport.width);
+  await pressKey(cdp, 'Enter');
+  await settle(cdp);
+
+  const opened = await evaluate(cdp, keyboardDrawerSnapshot());
+  assert.ok(opened.visible, `keyboard must open the drawer at ${viewport.width}px`);
+  assert.equal(opened.expanded, 'true', `drawer trigger must expose expanded state at ${viewport.width}px`);
+  assert.equal(opened.mode, 'docs', `deep docs must open the contextual drawer at ${viewport.width}px`);
+  assert.ok(opened.active.inDrawer && opened.active.inActivePanel, `opening must move focus into the visible drawer view at ${viewport.width}px: ${JSON.stringify(opened)}`);
+  assert.ok(opened.active.visible, `opening focus must be visible at ${viewport.width}px`);
+  assert.equal(opened.active.identity, opened.firstActiveIdentity, `opening must focus the first visible drawer control or link at ${viewport.width}px`);
+  assert.match(opened.active.label, /Back to main menu/, `deep docs opening focus must expose the menu switch at ${viewport.width}px`);
+
+  await pressKey(cdp, 'Enter');
+  await settle(cdp);
+  const switched = await evaluate(cdp, keyboardDrawerSnapshot());
+  assert.equal(switched.mode, 'global', `keyboard menu switch must expose global navigation at ${viewport.width}px`);
+  assert.ok(switched.active.inActivePanel && switched.active.visible, `menu switch must move focus into the visible global view at ${viewport.width}px`);
+  assert.equal(switched.active.identity, switched.firstActiveIdentity, `menu switch must focus the first visible global link at ${viewport.width}px`);
+  assert.equal(switched.active.label, 'Try', `first global keyboard target must be Try at ${viewport.width}px`);
+
+  const cycleStart = switched.active.identity;
+  assert.ok(switched.focusableCount > 1, `drawer must expose multiple keyboard targets at ${viewport.width}px`);
+  for (let index = 0; index < switched.focusableCount; index += 1) {
+    await pressKey(cdp, 'Tab');
+    const tabbed = await evaluate(cdp, keyboardDrawerSnapshot());
+    assert.ok(tabbed.active.inDrawer && tabbed.active.visible, `Tab ${index + 1} must stay in the visible drawer at ${viewport.width}px`);
+  }
+  const cycled = await evaluate(cdp, keyboardDrawerSnapshot());
+  assert.equal(cycled.active.identity, cycleStart, `Tab must cycle within the drawer at ${viewport.width}px`);
+
+  await pressKey(cdp, 'Tab', {shift: true});
+  const reverseTabbed = await evaluate(cdp, keyboardDrawerSnapshot());
+  assert.ok(reverseTabbed.active.inDrawer && reverseTabbed.active.visible, `Shift+Tab must stay in the visible drawer at ${viewport.width}px`);
+
+  await pressKey(cdp, 'Escape');
+  await settle(cdp);
+  const closed = await evaluate(cdp, keyboardDrawerSnapshot());
+  assert.equal(closed.visible, false, `Escape must close the drawer at ${viewport.width}px`);
+  assert.equal(closed.expanded, 'false', `Escape must collapse the drawer trigger at ${viewport.width}px`);
+  assert.ok(closed.active.isToggle, `Escape must restore focus to the drawer trigger at ${viewport.width}px`);
+}
+
+async function verifySearchCards(cdp, siteUrl) {
+  await setViewport(cdp, {width: 1440, height: 1000, mobile: false});
+  const cards = await loadSearchCards(cdp, `${siteUrl}/search/?audience=operator`);
+  assert.ok(cards.length > 0, 'operator search must render result cards in the browser');
+  for (const card of cards) {
+    assert.ok(card.description.length > 20, `${card.path} search card must expose a human-readable summary`);
+    assert.doesNotMatch(card.description, /Skip to main content|On this page|(?:experience|reference){2,}|[a-z-]+(?:experience|reference)(?:adopter|developer|evaluator|operator|researcher)/i, `${card.path} search card must not expose navigation chrome or filter payloads`);
+  }
+  const operate = cards.find((card) => card.path === '/operate/');
+  assert.equal(
+    operate?.description,
+    'Find service operations material without pushing cluster and chart detail into the practitioner onboarding path.',
+    'operator search must render the canonical Operate summary',
+  );
+
+  for (const query of ['agent plugins', 'approval']) {
+    const typedCards = await loadSearchCards(cdp, `${siteUrl}/search/?q=${encodeURIComponent(query)}`);
+    assert.ok(typedCards.length > 0, `${query} search must render result cards in the browser`);
+    for (const card of typedCards.slice(0, 10)) {
+      assert.doesNotMatch(card.description.slice(0, 240), /source-owned (?:documentation|field note)|\b[0-9a-f]{40}\b/i, `${query} search card ${card.path} must not lead with source provenance`);
+    }
+  }
+
+  const entityCards = await loadSearchCards(cdp, `${siteUrl}/search/?q=shared%20capability%20layer&project=agentplugins`);
+  const decoded = entityCards.find((card) => card.description.includes('skills/<name>/SKILL.md'));
+  assert.ok(decoded, 'typed search cards must display decoded <name> code placeholders as safe text');
+  assert.doesNotMatch(decoded.description, /&lt;name/i, 'typed search cards must not expose encoded entities to readers');
+}
+
+async function loadSearchCards(cdp, url) {
+  await navigate(cdp, url);
+  let cards = [];
+  for (let attempt = 0; attempt < 200; attempt += 1) {
+    cards = await evaluate(cdp, searchCardSnapshot());
+    if (cards.length > 0) break;
+    await delay(50);
+  }
+  return cards;
+}
+
+async function tabToSelector(cdp, selector, width) {
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    await pressKey(cdp, 'Tab');
+    const matches = await evaluate(cdp, `document.activeElement?.matches(${JSON.stringify(selector)}) ?? false`);
+    if (matches) return;
+  }
+  throw new Error(`keyboard focus did not reach ${selector} at ${width}px`);
+}
+
+async function pressKey(cdp, key, {shift = false} = {}) {
+  const definition = {
+    Tab: {code: 'Tab', keyCode: 9},
+    Enter: {code: 'Enter', keyCode: 13, text: '\r'},
+    Escape: {code: 'Escape', keyCode: 27},
+  }[key];
+  if (!definition) throw new Error(`unsupported navigation audit key ${key}`);
+  const common = {
+    key,
+    code: definition.code,
+    windowsVirtualKeyCode: definition.keyCode,
+    nativeVirtualKeyCode: definition.keyCode,
+    modifiers: shift ? 8 : 0,
+    text: definition.text ?? '',
+    unmodifiedText: definition.text ?? '',
+  };
+  await cdp.command('Input.dispatchKeyEvent', {type: definition.text ? 'keyDown' : 'rawKeyDown', ...common});
+  await cdp.command('Input.dispatchKeyEvent', {type: 'keyUp', ...common});
+  await delay(30);
+}
+
 function assertVisibleLabels(labels, width, context) {
   assert.ok(labels.length > 0, `${context} must contain links`);
   for (const label of labels) {
@@ -428,6 +576,20 @@ function responsiveNavigationSnapshot() {
 })()`;
 }
 
+function projectContextSnapshot() {
+  return `(() => {
+  const entries = (selector) => [...document.querySelectorAll(selector)].map((element) => ({
+    label: element.textContent.trim(),
+    path: element instanceof HTMLAnchorElement ? new URL(element.href, location.href).pathname : null,
+  }));
+  return {
+    sidebar: entries('nav[aria-label="Docs sidebar"] a'),
+    breadcrumbs: entries('.theme-doc-breadcrumbs .breadcrumbs__item > :first-child'),
+    banner: document.querySelector('.theme-doc-markdown blockquote')?.textContent.trim() ?? '',
+  };
+})()`;
+}
+
 function activeDrawerSnapshot() {
   return `(() => {
   const drawer = document.querySelector('.navbar-sidebar');
@@ -456,4 +618,52 @@ function activeDrawerSnapshot() {
     close: {width: close.width, height: close.height},
   };
 })()`;
+}
+
+function keyboardDrawerSnapshot() {
+  return `(() => {
+  const drawer = document.querySelector('.navbar-sidebar');
+  const toggle = document.querySelector('.navbar__toggle');
+  const activePanel = [...(drawer?.querySelectorAll('.navbar-sidebar__item') ?? [])].find((panel) => !panel.inert);
+  const rendered = (element) => {
+    if (!(element instanceof HTMLElement)) return false;
+    const bounds = element.getBoundingClientRect();
+    const style = getComputedStyle(element);
+    return bounds.width > 0 && bounds.height > 0
+      && bounds.right > 0 && bounds.bottom > 0 && bounds.left < innerWidth && bounds.top < innerHeight
+      && style.display !== 'none' && style.visibility !== 'hidden'
+      && !element.closest('[inert], [aria-hidden="true"]');
+  };
+  const identity = (element) => element instanceof HTMLElement
+    ? [element.tagName, element.getAttribute('href') ?? '', element.getAttribute('aria-label') ?? '', element.textContent.trim()].join('|')
+    : '';
+  const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  const focusable = [...(drawer?.querySelectorAll(focusableSelector) ?? [])].filter(rendered);
+  const activePanelFocusable = [...(activePanel?.querySelectorAll(focusableSelector) ?? [])].filter(rendered);
+  const active = document.activeElement;
+  const drawerBounds = drawer?.getBoundingClientRect();
+  const drawerStyle = drawer ? getComputedStyle(drawer) : undefined;
+  return {
+    visible: Boolean(drawer && drawerBounds.width > 0 && drawerBounds.height > 0 && drawerStyle.visibility !== 'hidden'),
+    expanded: toggle?.getAttribute('aria-expanded') ?? null,
+    mode: activePanel?.querySelector('.navbar-sidebar__back') ? 'docs' : 'global',
+    focusableCount: focusable.length,
+    firstActiveIdentity: identity(activePanelFocusable[0]),
+    active: {
+      identity: identity(active),
+      label: active instanceof HTMLElement ? active.textContent.trim() : '',
+      inDrawer: Boolean(drawer?.contains(active)),
+      inActivePanel: Boolean(activePanel?.contains(active)),
+      visible: rendered(active),
+      isToggle: active === toggle,
+    },
+  };
+})()`;
+}
+
+function searchCardSnapshot() {
+  return `(() => [...document.querySelectorAll('section[aria-label="Documentation search results"] .b10x-content-card')].map((card) => ({
+  path: new URL(card.querySelector('h2 a, h3 a, h4 a')?.href ?? '/', location.href).pathname,
+  description: card.querySelector('.b10x-content-card__description')?.textContent.trim().replace(/\\s+/g, ' ') ?? '',
+})))()`;
 }
