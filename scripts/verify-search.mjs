@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
-import {prioritizeSearchResults, resultSummary} from '../src/search-result-contract.mjs';
+import {preferredExperienceFilters, prioritizeSearchResults, resultSummary} from '../src/search-result-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const pagefindRoot = path.join(root, 'build', 'pagefind');
@@ -67,7 +67,9 @@ try {
 
   const experienceFilters = {experience: 'try-spec-driven-development'};
   const experienceResponse = await pagefind.search(null, {filters: experienceFilters});
-  const landingResponse = await pagefind.search(null, {filters: {...experienceFilters, document_type: 'experience'}});
+  const preferredExperience = preferredExperienceFilters('', experienceFilters);
+  if (!preferredExperience) throw new Error('filter-only experience search must request its canonical landing');
+  const landingResponse = await pagefind.search(null, {filters: preferredExperience});
   const experienceCandidates = prioritizeSearchResults(experienceResponse.results, landingResponse.results, 40);
   const firstExperience = experienceCandidates[0] ? await experienceCandidates[0].data() : undefined;
   if (firstExperience?.url !== '/start/spec-driven-development/') {
@@ -93,7 +95,8 @@ try {
     throw new Error(`typed search summaries must decode code placeholders as plain text: ${entitySummary || 'no result'}`);
   }
 
-  const operatorResponse = await pagefind.search(null, {filters: {audience: 'operator'}});
+  const operatorFilters = {audience: 'operator'};
+  const operatorResponse = await pagefind.search(null, {filters: operatorFilters});
   const operatorCandidates = await Promise.all(operatorResponse.results.map((result) => result.data()));
   if (operatorCandidates.length === 0) throw new Error('operator search must return indexed documentation');
   for (const candidate of operatorCandidates) {
@@ -104,7 +107,12 @@ try {
       throw new Error(`operator search result ${candidate.url} excerpt contains navigation chrome or concatenated filter payload`);
     }
   }
-  const operate = operatorCandidates.find((candidate) => candidate.url === '/operate/');
+  const preferredOperator = preferredExperienceFilters('', operatorFilters);
+  if (!preferredOperator) throw new Error('filter-only operator search must request matching canonical experiences');
+  const operatorLandingResponse = await pagefind.search(null, {filters: preferredOperator});
+  const displayedOperatorCandidates = prioritizeSearchResults(operatorResponse.results, operatorLandingResponse.results, 40);
+  const displayedOperatorData = await Promise.all(displayedOperatorCandidates.map((result) => result.data()));
+  const operate = displayedOperatorData.find((candidate) => candidate.url === '/operate/');
   const expectedOperateSummary = 'Find service operations material without pushing cluster and chart detail into the practitioner onboarding path.';
   if (resultSummary(operate, {preferDescription: true}) !== expectedOperateSummary) {
     throw new Error(`operator experience summary is not the canonical human description: ${resultSummary(operate, {preferDescription: true}) || 'missing'}`);

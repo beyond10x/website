@@ -9,7 +9,12 @@ import {
 } from '@beyond10x/docs-system/components';
 import type {EcosystemRegistry} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
-import {prioritizeSearchResults, resultCountDescription, resultSummary} from '../search-result-contract.mjs';
+import {
+  preferredExperienceFilters,
+  prioritizeSearchResults,
+  resultCountDescription,
+  resultSummary,
+} from '../search-result-contract.mjs';
 import styles from './ecosystem.module.css';
 
 const registry = registryDocument as EcosystemRegistry;
@@ -109,9 +114,9 @@ export default function Search(): ReactNode {
     }
     setSearching(true);
     pagefind.search(needle.length >= 2 ? needle : null, {filters: activeFilters}).then(async ({results}) => {
-      const preferExperienceLanding = needle.length < 2 && activeFilters.experience && !activeFilters.document_type;
-      const preferred = preferExperienceLanding
-        ? (await pagefind.search(null, {filters: {...activeFilters, document_type: 'experience'}})).results
+      const preferredFilters = preferredExperienceFilters(needle, activeFilters);
+      const preferred = preferredFilters
+        ? (await pagefind.search(null, {filters: preferredFilters})).results
         : [];
       const selected = prioritizeSearchResults(results, preferred, 40);
       const resolved = await Promise.all(selected.map((result) => result.data()));

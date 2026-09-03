@@ -12,6 +12,12 @@ export function prioritizeSearchResults(results, preferred, limit = 40) {
   return ordered;
 }
 
+export function preferredExperienceFilters(query, filters) {
+  const hasContext = Object.values(filters).some(Boolean);
+  if (String(query ?? '').trim().length >= 2 || !hasContext || filters.document_type) return undefined;
+  return {...filters, document_type: 'experience'};
+}
+
 export function resultCountDescription(displayed, total) {
   return `Showing ${displayed} of ${total} matching ${total === 1 ? 'page' : 'pages'}.`;
 }

@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {prioritizeSearchResults, resultCountDescription, resultSummary} from '../src/search-result-contract.mjs';
+import {
+  preferredExperienceFilters,
+  prioritizeSearchResults,
+  resultCountDescription,
+  resultSummary,
+} from '../src/search-result-contract.mjs';
 
 test('filter-only experience searches put the canonical experience before source references', () => {
   const references = Array.from({length: 56}, (_, index) => ({id: `reference-${index}`}));
@@ -12,6 +17,20 @@ test('filter-only experience searches put the canonical experience before source
   assert.equal(new Set(selected).size, selected.length);
   assert.equal(resultCountDescription(selected.length, all.length), 'Showing 40 of 57 matching pages.');
   assert.equal(resultCountDescription(1, 1), 'Showing 1 of 1 matching page.');
+});
+
+test('filter-only contexts request matching canonical experiences before the result cap', () => {
+  assert.deepEqual(
+    preferredExperienceFilters('', {audience: 'operator'}),
+    {audience: 'operator', document_type: 'experience'},
+  );
+  assert.deepEqual(
+    preferredExperienceFilters(' ', {project: 'agentplugins'}),
+    {project: 'agentplugins', document_type: 'experience'},
+  );
+  assert.equal(preferredExperienceFilters('', {}), undefined);
+  assert.equal(preferredExperienceFilters('approval', {audience: 'operator'}), undefined);
+  assert.equal(preferredExperienceFilters('', {audience: 'operator', document_type: 'reference'}), undefined);
 });
 
 test('search cards prefer human descriptions and strip chrome from legacy excerpt fallbacks', () => {
