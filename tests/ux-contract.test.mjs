@@ -238,6 +238,14 @@ test('the browser navigation audit gives Chrome a bounded startup deadline of at
   assert.doesNotMatch(audit, /attempt < 120/, 'Chrome startup must not regress to the six-second attempt budget');
 });
 
+test('the browser navigation audit allows a bounded slow-runner navigation budget', async () => {
+  const audit = await readFile(path.join(root, 'scripts/verify-navigation-layout.mjs'), 'utf8');
+  const timeout = audit.match(/const navigationPathTimeoutMs = ([\d_]+);/);
+  assert.ok(timeout, 'path navigation must declare an explicit timeout');
+  assert.ok(Number(timeout[1].replaceAll('_', '')) >= 15_000, 'path navigation must tolerate a loaded CI runner');
+  assert.match(audit, /observed \$\{JSON\.stringify\(observed\)\}/, 'path failures must report the observed browser location');
+});
+
 test('shared status/filter tokens remain unshadowed and footer copy meets WCAG AA contrast', async () => {
   const css = await readFile(path.join(root, 'src/css/custom.css'), 'utf8');
   assert.doesNotMatch(css, /--b10x-(?:ink|ink-raised|signal|warning|danger):/);

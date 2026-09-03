@@ -9,6 +9,8 @@ const root = path.resolve(import.meta.dirname, '..');
 const build = path.join(root, 'build');
 const chromeStartupTimeoutMs = 30_000;
 const chromeStartupPollMs = 50;
+const navigationPathTimeoutMs = 15_000;
+const navigationPathPollMs = 50;
 const chromeBinary = await findChrome();
 const profile = await mkdtemp(path.join(os.tmpdir(), 'b10x-navigation-chrome-'));
 const server = createServer((request, response) => void serveBuild(request, response));
@@ -527,16 +529,24 @@ function assertVisibleLabels(labels, width, context) {
 }
 
 async function waitForPath(cdp, expected, width) {
-  for (let attempt = 0; attempt < 100; attempt += 1) {
+  const deadline = performance.now() + navigationPathTimeoutMs;
+  let observed = {pathname: '<unavailable>', href: '<unavailable>', readyState: '<unavailable>'};
+  while (performance.now() < deadline) {
     try {
-      const pathname = await evaluate(cdp, 'window.location.pathname');
-      if (pathname === expected) return;
+      observed = await evaluate(cdp, `({
+        pathname: window.location.pathname,
+        href: window.location.href,
+        readyState: document.readyState,
+      })`);
+      if (observed.pathname === expected) return;
     } catch {
       // A full-page navigation can briefly replace the execution context.
     }
-    await delay(50);
+    await delay(navigationPathPollMs);
   }
-  throw new Error(`navigation link did not reach ${expected} at ${width}px`);
+  throw new Error(
+    `navigation link did not reach ${expected} at ${width}px within ${navigationPathTimeoutMs}ms; observed ${JSON.stringify(observed)}`,
+  );
 }
 
 function mediaType(file) {
