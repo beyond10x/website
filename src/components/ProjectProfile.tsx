@@ -4,6 +4,7 @@ import {AdoptionCard, CardGrid, ContentCard, FactGrid, SectionHeader, StatusBadg
 import type {Journey, RegistrySurface, ReleaseFact, ReleaseFactsDocument, SurfaceLink, SurfaceRelationship} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import releaseFactsDocument from '../../.generated/data/release-facts.json';
+import {localizedAdoptionHref, localizeWebsiteHref} from '../lib/links';
 import styles from './ProjectProfile.module.css';
 
 const surfaces = (registryDocument as {surfaces: RegistrySurface[]}).surfaces;
@@ -43,7 +44,7 @@ export default function ProjectProfile({repository, revision}: {repository: stri
     <section className={styles.section} aria-labelledby="profile-start">
       <SectionHeader eyebrow="Recommended start" title="Begin with the repository-owned adoption path." id="profile-start" />
       <CardGrid>{owned.map((surface) => <div className={styles.adoptionItem} key={surface.key}>
-        <AdoptionCard surface={surface} journey={primaryJourneyOf(surface)} />
+        <AdoptionCard surface={surface} journey={primaryJourneyOf(surface)} actionUrl={localizedAdoptionHref(surface)} />
         <p className={styles.audience}><span className={styles.label}>Audience </span>{(surface.audiences ?? []).map(label).join(', ') || 'not declared'}</p>
       </div>)}</CardGrid>
     </section>
@@ -68,7 +69,7 @@ export default function ProjectProfile({repository, revision}: {repository: stri
 }
 
 function ReferenceGroup({title, items, empty}: {title: string; items: Array<{key: string; label: string; url: string; detail?: string; external?: boolean}>; empty: string}): ReactNode {
-  return <ContentCard title={title}>{items.length ? <ul>{items.map((item) => <li key={item.key}>{item.external ? <a href={item.url}>{item.label}</a> : <Link to={localTarget(item.url)}>{item.label}</Link>}{item.detail ? <small>{item.detail}</small> : null}</li>)}</ul> : <p className={styles.empty}>{empty}</p>}</ContentCard>;
+  return <ContentCard title={title}>{items.length ? <ul>{items.map((item) => <li key={item.key}>{item.external ? <a href={localizeWebsiteHref(item.url)}>{item.label}</a> : <Link to={localTarget(item.url)}>{item.label}</Link>}{item.detail ? <small>{item.detail}</small> : null}</li>)}</ul> : <p className={styles.empty}>{empty}</p>}</ContentCard>;
 }
 
 function experienceRouteForJourney(journey: string): string {
@@ -132,8 +133,7 @@ function isPresentedRelationship(relationship: SurfaceRelationship): boolean {
 }
 
 function localTarget(value: string): string {
-  const url = new URL(value, 'https://beyond10x.github.io');
-  return url.origin === 'https://beyond10x.github.io' ? `${url.pathname}${url.search}${url.hash}` : value;
+  return localizeWebsiteHref(value);
 }
 
 function label(value: string): string {

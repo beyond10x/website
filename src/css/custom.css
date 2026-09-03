@@ -159,8 +159,12 @@ body {
 }
 
 .b10x-revision {
-  overflow-wrap: anywhere;
-  word-break: break-all;
+  display: inline-block;
+  max-width: 13ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
 }
 
 .b10x-api-catalog {

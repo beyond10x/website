@@ -7,12 +7,39 @@
   padding: clamp(3rem, 7vw, 6rem) 0 3rem;
 }
 
+.hero :global(.b10x-page-header) {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 0;
+}
+
+.hero :global(.b10x-page-header__copy) {
+  max-inline-size: none;
+}
+
+.hero :global(.b10x-page-header__actions) {
+  justify-content: flex-start;
+}
+
+.hero :global(.b10x-fact-grid) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-inline-size: 58rem;
+}
+
+.hero :global(.b10x-fact-grid > div:last-child) {
+  grid-column: 1 / -1;
+}
+
 .searchAttributes {
   display: none;
 }
 
 .pathContracts {
   margin: 0 0 5rem;
+}
+
+.pathContracts > :global(.b10x-section-header:first-child) {
+  margin-top: 0;
 }
 
 .pathGrid {
@@ -327,6 +354,10 @@
 }
 
 @media (max-width: 720px) {
+  .hero :global(.b10x-fact-grid) {
+    grid-template-columns: 1fr;
+  }
+
   .pathHeader {
     flex-direction: column;
   }

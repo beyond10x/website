@@ -6,6 +6,7 @@ import {CodeExample, ProjectCard} from '@beyond10x/docs-system/components';
 import EcosystemFamilyOrientation from '../../components/EcosystemFamilyOrientation';
 import type {EcosystemRegistry} from '@beyond10x/docs-system/types';
 import registryDocument from '../../../.generated/data/ecosystem.json';
+import {localizedAdoptionHref} from '../../lib/links';
 
 import styles from '../index.module.css';
 
@@ -221,6 +222,7 @@ export default function FromPrincipleToAction(): ReactNode {
                   surface={surface}
                   headingLevel={3}
                   titleUrl={`/ecosystem/${surface.repository.id}/`}
+                  actionUrl={localizedAdoptionHref(surface)}
                 />
               ))}
             </div>

@@ -10,12 +10,16 @@ import type {
 } from '@beyond10x/docs-system/types';
 import ledgerDocument from '../../.generated/data/changes.json';
 import registryDocument from '../../.generated/data/ecosystem.json';
+import {localizeWebsiteHref} from '../lib/links';
 import styles from './ecosystem.module.css';
 
 const ledger = ledgerDocument as ChangeLedger;
 const registry = registryDocument as EcosystemRegistry;
 const surfaces = new Map<string, AnyDocumentationSurface>(
-  registry.surfaces.map((surface) => [surface.key, surface]),
+  registry.surfaces.map((surface) => [surface.key, {
+    ...surface,
+    canonicalUrl: localizeWebsiteHref(surface.canonicalUrl),
+  }]),
 );
 const journeys: Array<{id: Journey | 'all'; label: string}> = [
   {id: 'all', label: 'All journeys'},
@@ -87,11 +91,19 @@ export default function Changes(): ReactNode {
         </div>
         <section className={styles.timeline} aria-label={`${visible.length} ecosystem changes`}>
           {visible.map((change) => (
-            <ChangeTimelineEntry key={change.key} change={change} surfaces={surfaces} />
+            <ChangeTimelineEntry key={change.key} change={localizeChangeLinks(change)} surfaces={surfaces} />
           ))}
         </section>
         {!visible.length && <Callout title="No matching changes">Try a broader search or reset one of the filters.</Callout>}
       </main>
     </Layout>
   );
+}
+
+function localizeChangeLinks(change: ChangeLedger['changes'][number]): ChangeLedger['changes'][number] {
+  return {
+    ...change,
+    source: {...change.source, url: localizeWebsiteHref(change.source.url)},
+    ...(change.action ? {action: {...change.action, url: localizeWebsiteHref(change.action.url)}} : {}),
+  };
 }

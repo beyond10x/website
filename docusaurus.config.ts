@@ -4,6 +4,20 @@ import type * as Preset from '@docusaurus/preset-classic';
 import docsSystemPlugin from '@beyond10x/docs-system/docusaurus';
 import {PRISM_ADDITIONAL_LANGUAGES} from '@beyond10x/docs-system/code';
 
+const localPreview = process.env.B10X_LOCAL_PREVIEW === '1';
+
+function localPreviewMetadata(): Record<string, unknown> {
+  if (!localPreview) return {enabled: false};
+  const revision = process.env.B10X_PREVIEW_REVISION;
+  const treeState = process.env.B10X_PREVIEW_TREE_STATE;
+  return {
+    enabled: true,
+    revision: revision && /^(?:[0-9a-f]{12}|unavailable)$/.test(revision) ? revision : 'unavailable',
+    treeState: treeState && /^(?:clean|dirty|unknown)$/.test(treeState) ? treeState : 'unknown',
+    reusedInputs: process.env.B10X_PREVIEW_REUSED_INPUTS === 'true',
+  };
+}
+
 const config: Config = {
   title: 'beyond10x',
   tagline: 'Safe autonomous coding, from explicit intent to inspectable evidence',
@@ -11,6 +25,13 @@ const config: Config = {
 
   future: {
     v4: true,
+    // Rspack currently panics while rebuilding this large generated route graph. Keep the
+    // production fast path, but use Webpack's stable HMR for an unambiguous local review loop.
+    faster: localPreview ? false : undefined,
+  },
+
+  customFields: {
+    localPreview: localPreviewMetadata(),
   },
 
   url: 'https://beyond10x.github.io',

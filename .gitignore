@@ -7,6 +7,7 @@
 /.cache-loader
 /.cache
 /.generated
+/.b10x-website-generation.json
 
 # Local environment
 .env.local

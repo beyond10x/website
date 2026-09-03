@@ -47,6 +47,8 @@ try {
   await client.command('Page.enable');
   await client.command('Runtime.enable');
 
+  await verifyLocalAnchorPresentation(client, site);
+
   await setViewport(client, {width: 1440, height: 1000, mobile: false});
   await navigate(client, `${site}/docs/#browse-by-technical-boundary`);
   const desktop = await evaluate(client, desktopSnapshot());
@@ -412,6 +414,40 @@ async function verifyGlobalSectionState(cdp, siteUrl) {
   }
 }
 
+async function verifyLocalAnchorPresentation(cdp, siteUrl) {
+  await setViewport(cdp, {width: 1440, height: 1000, mobile: false});
+  const routes = [
+    '/ecosystem/',
+    '/changes/',
+    '/docs/foundations/',
+    '/ecosystem/website/',
+    '/start/spec-driven-development/',
+    '/docs/aep',
+    '/docs/aep/',
+    '/docs/website/',
+  ];
+  for (const route of routes) {
+    await navigate(cdp, `${siteUrl}${route}`);
+    const snapshot = await evaluate(cdp, localAnchorSnapshot());
+    assert.deepEqual(snapshot.absoluteSameOriginAnchors, [], `${route} must not escape a local preview through canonical Website anchors`);
+    assert.deepEqual(snapshot.localBlankAnchors, [], `${route} must not open local navigation in a new tab`);
+    assert.match(snapshot.canonical ?? '', /^https:\/\/beyond10x\.github\.io\//, `${route} must retain absolute canonical metadata`);
+  }
+
+  await navigate(cdp, `${siteUrl}/docs/aep/`);
+  await evaluate(
+    cdp,
+    `document.querySelector('main a[href="/ecosystem/agentplugins/"]')?.scrollIntoView({block: 'center'})`,
+  );
+  await settle(cdp);
+  await clickVisibleElement(
+    cdp,
+    'main a[href="/ecosystem/agentplugins/"]',
+    'AEP compatibility link to the integrated Agent Plugins profile',
+  );
+  await waitForPath(cdp, '/ecosystem/agentplugins/', 1440);
+}
+
 async function verifySearchCards(cdp, siteUrl) {
   await setViewport(cdp, {width: 1440, height: 1000, mobile: false});
   const cards = await loadSearchCards(cdp, `${siteUrl}/search/?audience=operator`);
@@ -696,4 +732,16 @@ function searchCardSnapshot() {
   path: new URL(card.querySelector('h2 a, h3 a, h4 a')?.href ?? '/', location.href).pathname,
   description: card.querySelector('.b10x-content-card__description')?.textContent.trim().replace(/\\s+/g, ' ') ?? '',
 })))()`;
+}
+
+function localAnchorSnapshot() {
+  return `(() => ({
+  absoluteSameOriginAnchors: [...document.querySelectorAll('a[href]')]
+    .map((anchor) => anchor.getAttribute('href'))
+    .filter((href) => href?.startsWith('https://beyond10x.github.io')),
+  localBlankAnchors: [...document.querySelectorAll('a[href][target="_blank"]')]
+    .map((anchor) => anchor.getAttribute('href'))
+    .filter((href) => href?.startsWith('/')),
+  canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') ?? null,
+}))()`;
 }

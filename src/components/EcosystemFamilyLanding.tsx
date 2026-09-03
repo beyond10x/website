@@ -5,6 +5,7 @@ import {surfaceNavigation} from '@beyond10x/docs-system/navigation';
 import type {RegistrySurface} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import familyTaxonomyDocument from '../../data/ecosystem-families.json';
+import {localizedAdoptionHref} from '../lib/links';
 import styles from './EcosystemFamilyLanding.module.css';
 
 interface FamilyDefinition {
@@ -44,7 +45,7 @@ export default function EcosystemFamilyLanding({family: familyId}: {family: stri
         description={`The action and prerequisites below are owned by ${start.repository.displayName ?? start.name} at the Website's locked source revision.`}
       />
       <div className={styles.startGrid}>
-        <AdoptionCard surface={start} journey={primaryJourneyOf(start)} />
+        <AdoptionCard surface={start} journey={primaryJourneyOf(start)} actionUrl={localizedAdoptionHref(start)} />
         <ContentCard
           title="Current availability"
           meta={<StatusBadge maturity={start.maturity} />}

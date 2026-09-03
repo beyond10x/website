@@ -19,6 +19,7 @@ import type {
 import evaluatedExperienceDocument from '../../.generated/data/experiences.json';
 import experiencePagesDocument from '../../data/experience-pages.json';
 import searchGoldenDocument from '../../data/search-golden.json';
+import {localizeWebsiteHref} from '../lib/links';
 import styles from './ExperienceView.module.css';
 
 export type ExperienceSectionKind = 'learn' | 'do' | 'verify';
@@ -103,7 +104,7 @@ export default function ExperienceView({id}: {id: string}): ReactNode {
             title={experience.title}
             description={experience.summary}
             actions={
-              <Link className="button button--primary" to={experience.sections[0].steps[0].url}>
+              <Link className="button button--primary" to={localizeWebsiteHref(experience.sections[0].steps[0].url)}>
                 Begin with the first step
               </Link>
             }>
@@ -146,7 +147,7 @@ export default function ExperienceView({id}: {id: string}): ReactNode {
                     {String(stepIndex + 1).padStart(2, '0')}
                   </div>
                   <article>
-                    <h3>{step.url.startsWith('#') ? <a href={step.url}>{step.title}</a> : <Link to={step.url}>{step.title}</Link>}</h3>
+                    <h3>{step.url.startsWith('#') ? <a href={step.url}>{step.title}</a> : <Link to={localizeWebsiteHref(step.url)}>{step.title}</Link>}</h3>
                     <p>{step.description}</p>
                     <div className={styles.completion}>
                       <span>Complete when</span>
@@ -155,7 +156,7 @@ export default function ExperienceView({id}: {id: string}): ReactNode {
                     {step.url.startsWith('#') ? (
                       <a className={styles.stepAction} href={step.url}>Open this step <span aria-hidden="true">→</span></a>
                     ) : (
-                      <Link className={styles.stepAction} to={step.url}>Open this step <span aria-hidden="true">→</span></Link>
+                      <Link className={styles.stepAction} to={localizeWebsiteHref(step.url)}>Open this step <span aria-hidden="true">→</span></Link>
                     )}
                   </article>
                 </li>
@@ -262,7 +263,7 @@ function AdoptionPathContracts({experience}: {experience: ExperienceDefinition})
                   {path.artifacts.map((artifact) => (
                     <li key={artifact.id}>
                       <div>
-                        {artifact.url ? <a href={artifact.url}>{artifactLabel(artifact.id)}</a> : <strong>{artifactLabel(artifact.id)}</strong>}
+                        {artifact.url ? <a href={localizeWebsiteHref(artifact.url)}>{artifactLabel(artifact.id)}</a> : <strong>{artifactLabel(artifact.id)}</strong>}
                         <span>
                           {artifact.version ? `Version ${artifact.version} · ` : ''}
                           {label(artifact.kind)} · {label(artifact.availability)} · {label(artifact.access)}
@@ -279,11 +280,11 @@ function AdoptionPathContracts({experience}: {experience: ExperienceDefinition})
                   <strong>Why this cannot be started</strong>
                   {path.explanation ? <p>{path.explanation}</p> : null}
                   {path.note ? <p>{path.note}</p> : null}
-                  {path.url ? <Link to={path.url}>Review operator documentation — this does not grant artifact access</Link> : null}
+                  {path.url ? <Link to={localizeWebsiteHref(path.url)}>Review operator documentation — this does not grant artifact access</Link> : null}
                 </div>
               ) : path.note ? <p className={styles.pathNote}>{path.note}</p> : null}
 
-              {path.actionable && !primary && path.url ? <Link className={styles.pathLink} to={path.url}>{restricted ? 'Review access requirements' : 'Open this available path'} <span aria-hidden="true">→</span></Link> : null}
+              {path.actionable && !primary && path.url ? <Link className={styles.pathLink} to={localizeWebsiteHref(path.url)}>{restricted ? 'Review access requirements' : 'Open this available path'} <span aria-hidden="true">→</span></Link> : null}
             </article>
           );
         })}

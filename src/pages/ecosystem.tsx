@@ -6,6 +6,7 @@ import {deriveEcosystemNavigation, surfaceNavigation} from '@beyond10x/docs-syst
 import type {EcosystemRegistry, Journey} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import familyTaxonomy from '../../data/ecosystem-families.json';
+import {localizedAdoptionHref} from '../lib/links';
 import styles from './ecosystem.module.css';
 
 const registry = registryDocument as EcosystemRegistry;
@@ -78,6 +79,7 @@ export default function Ecosystem(): ReactNode {
             surface={surface}
             headingLevel={2}
             titleUrl={`/ecosystem/${surface.repository.id}/`}
+            actionUrl={localizedAdoptionHref(surface)}
           />)}
         </CardGrid>
       </section> : <p className={styles.empty}>No public surface matches those family, journey, and search filters.</p>}

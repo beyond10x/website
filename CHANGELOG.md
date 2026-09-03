@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 0.3.1 — 2026-09-03
+
+- Keep deep Website and source-owned documentation navigation on the current rendering origin,
+  resolve compatibility routes to their integrated local targets, and retain absolute canonical
+  metadata without opening internal links in new tabs.
+- Add a visibly identified, source-aware local HMR workflow with a fast generated-input reuse mode,
+  stable sub-second rebuilds, and exclusive generation ownership so production checks cannot
+  invalidate a running review server.
+- Tighten audience-path page composition so the adoption contract follows the outcome summary in
+  the first desktop viewport.
+
 ## 0.3.0 — 2026-09-03
 
 - Restore a stable global navigation map (`Start`, `Explore`, `Docs`, `Updates`, and `Search`), retain its section state on child routes, remove duplicate and cross-context project-family links, preserve source-owned sidebar ordering, and send Devcenter availability checks to the owning status page.

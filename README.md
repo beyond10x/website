@@ -22,17 +22,64 @@ the extracted passive tree. Atlas uses those indexes to verify every selected by
 
 ## Develop
 
+Install the Node 24 dependencies once:
+
 ```bash
 npm ci --ignore-scripts
-npm run gate
-npm start
 ```
 
-Node 24 is the supported build runtime. `npm run gate` is the reproducible production gate: it
-builds only the exact commits in the source lock, verifies artifact/deployment digests, and crawls
-every same-origin manifest, redirect, alias, and rendered HTML link. The empty-lock bootstrap
-fixture is accepted only with `B10X_BOOTSTRAP_FIXTURE=1` (or `npm run gate:fixture`) while bringing
-up a new catalog; it is never valid production provenance.
+For the normal edit-and-review loop, prepare the locked documentation once and start Docusaurus
+with hot module replacement:
+
+```bash
+npm run dev -- --host 127.0.0.1 --port 3000 --no-open
+```
+
+`npm start` is an alias for the same safe path. Host and port arguments after `--` are passed to
+Docusaurus. The preview shows a small revision, working-tree and generated-input status badge on
+any non-production origin; the badge cannot appear on the canonical production origin.
+
+When `.generated/` already represents the inputs you intend to review, skip collection on a
+restart:
+
+```bash
+npm run dev:fast -- --host 127.0.0.1 --port 3000 --no-open
+```
+
+Fast mode requires the completion marker from a successful preparation and refuses a changed source
+lock. It labels the running site **reused generated inputs** so other stale source content cannot
+look fresh. Changes under `src/` hot-reload in either mode. Changes to source locks, manifests,
+imported repository docs, bootstrap data or the experience catalog require `npm run dev` again.
+
+Preview and production generation hold one cross-platform workspace lease. Stop a running preview
+with `Ctrl-C` before `npm run gate` or `npm run preview:build`; overlapping commands fail clearly
+instead of deleting generated modules underneath the review server.
+
+For a local static compile without search indexing, crawl, redirects or provenance checks, run:
+
+```bash
+npm run preview:build
+```
+
+If the exact locked commits already exist in the direct sibling checkouts, the supported local
+object path avoids remote fetch latency without reading dirty worktree bytes:
+
+```bash
+B10X_SOURCE_WORKSPACE=/absolute/path/to/beyond10x npm run dev -- --no-open
+```
+
+Before pushing, unset `B10X_SOURCE_WORKSPACE` and run the complete production gate:
+
+```bash
+unset B10X_SOURCE_WORKSPACE
+npm run gate
+```
+
+Node 24 is the supported build runtime. `npm run gate` builds only the exact commits in the source
+lock, verifies artifact/deployment digests, and crawls every same-origin manifest, redirect, alias,
+and rendered HTML link. The empty-lock bootstrap fixture is accepted only with
+`B10X_BOOTSTRAP_FIXTURE=1` (or `npm run gate:fixture`) while bringing up a new catalog; it is never
+valid production provenance.
 
 When the source lock intentionally names local commits that have not been pushed yet, preview those
 exact Git objects from sibling checkouts:

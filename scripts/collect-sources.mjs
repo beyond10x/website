@@ -4,6 +4,7 @@ import {collectManifestSources, verifyCollectionLock} from '@beyond10x/docs-syst
 import {validateManifestExperienceReferences} from '@beyond10x/docs-system/experiences';
 import {buildRegistry, readExperienceCatalog, readManifest, readSourceLock} from '@beyond10x/docs-system/manifest';
 import {extractDeclaredSource, isCollectableManifestSchema, readRoster, repositoryUrl, sha256, sourceWorkspaceFromEnvironment} from './git-source.mjs';
+import {withGenerationLease} from './generation-lease.mjs';
 
 export async function collectSources({root, outputRoot, sourceWorkspace = sourceWorkspaceFromEnvironment()}) {
   const roster = await readRoster(path.join(root, 'sources.yaml'));
@@ -55,6 +56,8 @@ export async function collectSources({root, outputRoot, sourceWorkspace = source
 if (process.argv[1] === new URL(import.meta.url).pathname) {
   const root = path.resolve(import.meta.dirname, '..');
   const outputRoot = path.join(root, '.generated');
-  const result = await collectSources({root, outputRoot});
-  process.stdout.write(`collected ${result.indexes.reduce((count, index) => count + index.files.length, 0)} files from ${result.indexes.length} locked repositories\n`);
+  await withGenerationLease('source collection', async () => {
+    const result = await collectSources({root, outputRoot});
+    process.stdout.write(`collected ${result.indexes.reduce((count, index) => count + index.files.length, 0)} files from ${result.indexes.length} locked repositories\n`);
+  });
 }

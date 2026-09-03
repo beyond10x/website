@@ -4,7 +4,9 @@ import {collectManifestSources} from '@beyond10x/docs-system/collector';
 import {validateManifestExperienceReferences} from '@beyond10x/docs-system/experiences';
 import {readExperienceCatalog, readManifest} from '@beyond10x/docs-system/manifest';
 import {extractDeclaredSource, isCollectableManifestSchema, readRoster, repositoryUrl, resolveCommit, resolveWorkspaceCommit, sha256, sourceWorkspaceFromEnvironment} from './git-source.mjs';
+import {withGenerationLease} from './generation-lease.mjs';
 
+async function updateSourceLock(checkMode) {
 const root = path.resolve(import.meta.dirname, '..');
 const roster = await readRoster(path.join(root, 'sources.yaml'));
 const cacheRoot = path.join(root, '.cache', 'sources');
@@ -36,9 +38,17 @@ for (const repository of roster.repositories) {
 
 const document = `${JSON.stringify({schema: 'b10x-sources/v1', sources}, null, 2)}\n`;
 const target = path.join(root, 'sources.lock.json');
-if (process.argv.includes('--check')) {
+if (checkMode) {
   const current = await readFile(target, 'utf8');
   if (current !== document) throw new Error('sources.lock.json is stale; run npm run sources:lock');
 } else {
   await writeFile(target, document);
+}
+}
+
+const checkMode = process.argv.includes('--check');
+if (checkMode) {
+  await updateSourceLock(true);
+} else {
+  await withGenerationLease('source lock update', () => updateSourceLock(false));
 }

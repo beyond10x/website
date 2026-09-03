@@ -1,4 +1,5 @@
-import {copyFile, mkdir, readFile, rm, writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {copyFile, mkdir, readFile, rename, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {parse} from 'yaml';
 import {resolveDocumentPageMetadata} from '@beyond10x/docs-system/documents';
@@ -13,7 +14,9 @@ import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from
 import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars, sourceSidebarMetadata} from './sidebar-contract.mjs';
 import {normalizePassiveMarkdown} from './passive-markdown.mjs';
 import {assertSearchAudienceVocabulary, experienceIdsForSourceDocument} from './search-metadata-contract.mjs';
+import {withGenerationLease} from './generation-lease.mjs';
 
+await withGenerationLease('site preparation', async () => {
 const root = path.resolve(import.meta.dirname, '..');
 const generated = path.join(root, '.generated');
 const docs = path.join(generated, 'docs');
@@ -30,6 +33,10 @@ await Promise.all(
 );
 
 const {roster, lock, bootstrap} = await validateSourceLock(root, {allowBootstrap: bootstrapEnabled()});
+const sourceLockPath = path.join(root, 'sources.lock.json');
+const preparedSourceLockSha256 = createHash('sha256')
+  .update(await readFile(sourceLockPath))
+  .digest('hex');
 await validateBootstrapSnapshots(root, roster.repositories);
 const legacyRegistry = JSON.parse(await readFile(path.join(root, 'data/bootstrap/ecosystem.json'), 'utf8'));
 const legacyLedgerInput = JSON.parse(await readFile(path.join(root, 'data/bootstrap/changes.json'), 'utf8'));
@@ -250,6 +257,21 @@ for (const surface of surfaces) {
   }
 }
 
+const currentSourceLockSha256 = createHash('sha256')
+  .update(await readFile(sourceLockPath))
+  .digest('hex');
+if (currentSourceLockSha256 !== preparedSourceLockSha256) {
+  throw new Error('sources.lock.json changed during site preparation; generated inputs are incomplete');
+}
+const completion = {
+  schema: 'b10x-website-generated-completion/v1',
+  sourceLockSha256: preparedSourceLockSha256,
+};
+const completionPath = path.join(generated, '.complete.json');
+const temporaryCompletionPath = `${completionPath}.${process.pid}.tmp`;
+await writeFile(temporaryCompletionPath, `${JSON.stringify(completion, null, 2)}\n`, {flag: 'wx'});
+await rename(temporaryCompletionPath, completionPath);
+
 async function materializeCollection({manifests: sourceManifests, indexes: sourceIndexes, collectionRoot: collectedRoot}) {
   const manifestByRepository = new Map(sourceManifests.map((manifest) => [manifest.repository.id, manifest]));
   const surfaceByKey = new Map(
@@ -379,7 +401,7 @@ function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeB
     '',
     renderSearchAttributes(metadata),
     '',
-    renderSourceBanner(`> **${metadata.projectName}** source-owned documentation · [${file.repository}/${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`),
+    renderSourceBanner(`> **${metadata.projectName}** source-owned documentation · [${file.repository}/${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision ${renderRevision(commit)}`),
     '',
     rewritten.trim(),
     '',
@@ -415,7 +437,7 @@ async function renderBlog({raw, file, route, commit, repositoryUrl, routeBySourc
       tasks: ['research'],
     }),
     '',
-    renderSourceBanner(`> Source-owned field note · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision <code className="b10x-revision">${commit}</code>`),
+    renderSourceBanner(`> Source-owned field note · [${file.sourcePath}](${repositoryUrl}/blob/${commit}/${encodeURI(file.sourcePath)}) · revision ${renderRevision(commit)}`),
     '',
     rewritten.trim(),
     '',
@@ -595,6 +617,12 @@ function renderSourceBanner(markdown) {
     '',
     '</div>',
   ].join('\n');
+}
+
+function renderRevision(revision) {
+  const value = String(revision);
+  const label = /^[0-9a-f]{40}$/.test(value) ? value.slice(0, 12) : value;
+  return `<code className="b10x-revision" title="${htmlAttribute(value)}">${htmlText(label)}</code>`;
 }
 
 function inferDocumentType(sourcePath, title) {
@@ -795,7 +823,7 @@ function projectDocument({surface, repository, revision, sourceUrl, relationship
     '---', `title: ${JSON.stringify(metadata.qualifiedTitle)}`, `sidebar_label: ${JSON.stringify(surface.name)}`, `description: ${JSON.stringify(surface.summary)}`,
     `slug: /${repository}/`, '---', '', renderSearchAttributes(metadata), '',
     `# ${surface.name}`, '', surface.summary, '',
-    renderSourceBanner(`> Source-owned documentation · [${repository}](${sourceUrl}) · revision <code className="b10x-revision">${revision}</code>`), '',
+    renderSourceBanner(`> Source-owned documentation · [${repository}](${sourceUrl}) · revision ${renderRevision(revision)}`), '',
     `**Status:** ${surface.maturity} · **Journeys:** ${surface.journeys.join(', ')}`, '', '## Start', '',
     `[${surface.adoption?.label ?? 'Open the source'}](${surface.adoption?.url ?? surface.repository.url})`, '',
     surface.adoption?.outcome ?? '', '',
@@ -893,3 +921,4 @@ function renderAtom(entries, title, selfUrl) {
 function xml(value) {
   return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
 }
+});

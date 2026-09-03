@@ -1,0 +1,50 @@
+.badge {
+  position: fixed;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.35rem 0.7rem;
+  align-items: center;
+  max-width: calc(100vw - 1.5rem);
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 0.55rem;
+  background: rgb(20 24 33 / 94%);
+  box-shadow: 0 0.4rem 1.4rem rgb(0 0 0 / 28%);
+  color: #f7f8fb;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.badge code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #cbd5ff;
+  font-size: inherit;
+}
+
+.warning {
+  color: #ffd479;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .badge {
+    right: 0.5rem;
+    bottom: 0.5rem;
+    max-width: calc(100vw - 1rem);
+    overflow: hidden;
+    font-size: 0.65rem;
+  }
+}
+
+@media print {
+  .badge {
+    display: none;
+  }
+}

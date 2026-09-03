@@ -281,7 +281,7 @@ test('project profiles derive adoption, references, revisions, releases, and bot
   assert.match(profile, /<AdoptionCard surface=\{surface\} journey=\{primaryJourneyOf\(surface\)\}/);
   assert.match(profile, /surface\.source\.specifications/);
   assert.match(profile, /surface\.feeds/);
-  assert.match(profile, /item\.external \? <a href=\{item\.url\}>/);
+  assert.match(profile, /item\.external \? <a href=\{localizeWebsiteHref\(item\.url\)\}>/);
   assert.match(profile, /external: true/);
   assert.match(profile, /latestReleaseFor\(repository\)/);
   assert.match(profile, /ownedKeys\.has\(relationship\.target\)/);
