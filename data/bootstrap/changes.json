@@ -2,6 +2,32 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "website/0.3.1",
+      "id": "website/0.3.1",
+      "repository": "website",
+      "publishedAt": "2026-09-03T10:29:33Z",
+      "title": "beyond10x 0.3.1",
+      "summary": "beyond10x released version 0.3.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/website/releases/tag/0.3.1",
+        "version": "0.3.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify",
+        "understand"
+      ],
+      "affectedSurfaces": [
+        "website/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "ess/0.9.1",
       "id": "ess/0.9.1",
       "repository": "ess",
