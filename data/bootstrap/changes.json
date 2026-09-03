@@ -443,6 +443,29 @@
       "channel": "releases"
     },
     {
+      "key": "service-sdk/0.3.4",
+      "id": "service-sdk/0.3.4",
+      "repository": "service-sdk",
+      "publishedAt": "2026-09-03T12:07:25Z",
+      "title": "Service SDK 0.3.4",
+      "summary": "Service SDK released version 0.3.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.3.4",
+        "version": "0.3.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "service-sdk/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.8.7",
       "id": "devcenter/0.8.7",
       "repository": "devcenter",
@@ -626,6 +649,29 @@
       ],
       "affectedSurfaces": [
         "agentide/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "service-sdk/0.3.3",
+      "id": "service-sdk/0.3.3",
+      "repository": "service-sdk",
+      "publishedAt": "2026-09-03T10:40:56Z",
+      "title": "Service SDK 0.3.3",
+      "summary": "Service SDK released version 0.3.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.3.3",
+        "version": "0.3.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "service-sdk/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -1540,6 +1586,29 @@
       "channel": "releases"
     },
     {
+      "key": "service-sdk/0.3.0",
+      "id": "service-sdk/0.3.0",
+      "repository": "service-sdk",
+      "publishedAt": "2026-09-02T19:38:19Z",
+      "title": "Service SDK 0.3.0",
+      "summary": "Service SDK released version 0.3.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.3.0",
+        "version": "0.3.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "service-sdk/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "agentide/0.1.1",
       "id": "agentide/0.1.1",
       "repository": "agentide",
@@ -1789,6 +1858,52 @@
       "channel": "impact"
     },
     {
+      "key": "service-sdk/0.2.4",
+      "id": "service-sdk/0.2.4",
+      "repository": "service-sdk",
+      "publishedAt": "2026-09-02T13:55:33Z",
+      "title": "Service SDK 0.2.4",
+      "summary": "Service SDK released version 0.2.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.2.4",
+        "version": "0.2.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "service-sdk/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "service-sdk/0.2.3",
+      "id": "service-sdk/0.2.3",
+      "repository": "service-sdk",
+      "publishedAt": "2026-09-02T13:16:20Z",
+      "title": "Service SDK 0.2.3",
+      "summary": "Service SDK released version 0.2.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.2.3",
+        "version": "0.2.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "service-sdk/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.5.10",
       "id": "devcenter/0.5.10",
       "repository": "devcenter",
@@ -1835,6 +1950,29 @@
       "channel": "releases"
     },
     {
+      "key": "service-sdk/0.2.2",
+      "id": "service-sdk/0.2.2",
+      "repository": "service-sdk",
+      "publishedAt": "2026-09-02T12:47:11Z",
+      "title": "Service SDK 0.2.2",
+      "summary": "Service SDK released version 0.2.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.2.2",
+        "version": "0.2.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "service-sdk/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "connectors/v0.4.4",
       "id": "connectors/v0.4.4",
       "repository": "connectors",
@@ -1853,6 +1991,29 @@
       ],
       "affectedSurfaces": [
         "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "service-sdk/0.2.0",
+      "id": "service-sdk/0.2.0",
+      "repository": "service-sdk",
+      "publishedAt": "2026-09-02T12:36:41Z",
+      "title": "Service SDK 0.2.0",
+      "summary": "Service SDK released version 0.2.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.2.0",
+        "version": "0.2.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "service-sdk/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -1947,6 +2108,29 @@
       ],
       "affectedSurfaces": [
         "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "service-sdk/0.1.1",
+      "id": "service-sdk/0.1.1",
+      "repository": "service-sdk",
+      "publishedAt": "2026-09-02T11:50:02Z",
+      "title": "Service SDK 0.1.1",
+      "summary": "Service SDK released version 0.1.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.1.1",
+        "version": "0.1.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "service-sdk/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -2063,6 +2247,29 @@
       ],
       "affectedSurfaces": [
         "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "service-sdk/0.1.0",
+      "id": "service-sdk/0.1.0",
+      "repository": "service-sdk",
+      "publishedAt": "2026-09-02T08:53:16Z",
+      "title": "Service SDK 0.1.0",
+      "summary": "Service SDK released version 0.1.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.1.0",
+        "version": "0.1.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "service-sdk/docs"
       ],
       "automatic": true,
       "channel": "releases"
