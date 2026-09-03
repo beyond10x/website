@@ -35,6 +35,15 @@ export function localizeWebsiteHref(value: string): string {
   return `${effectivePath}${url.search}${url.hash}`;
 }
 
+/** Tell presentation code whether a link actually leaves the canonical Website. */
+export function isExternalWebsiteHref(value: string): boolean {
+  try {
+    return new URL(value, WEBSITE_ORIGIN).origin !== WEBSITE_ORIGIN;
+  } catch {
+    return false;
+  }
+}
+
 function effectiveLegacyTarget(pathname: string): string | undefined {
   const exact = effectiveLegacyTargets.get(pathname);
   if (exact) return exact;

@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## 0.3.2 — 2026-09-03
+
+- Keep adopters oriented inside deep technical documentation with visible document type, project,
+  audience, support, access, source revision, and outcome-journey context.
+- Replace cross-audience generated pagination and oversized directory listings with scoped project
+  navigation, intentional first actions, and immediate-child indexes.
+- Improve narrow desktop and mobile reading, keep local preview navigation on localhost, and open
+  only genuinely external references in a separate tab.
+
 ## 0.3.1 — 2026-09-03
 
 - Keep deep Website and source-owned documentation navigation on the current rendering origin,

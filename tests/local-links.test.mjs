@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
-import {localizeWebsiteHref} from '../src/lib/links.ts';
+import {isExternalWebsiteHref, localizeWebsiteHref} from '../src/lib/links.ts';
 
 const root = path.resolve(import.meta.dirname, '..');
 
@@ -36,6 +36,11 @@ test('local and genuinely external links retain their authored meaning', () => {
   assert.equal(localizeWebsiteHref('guide/next'), 'guide/next');
   assert.equal(localizeWebsiteHref('https://github.com/beyond10x/aep/tree/abc123'), 'https://github.com/beyond10x/aep/tree/abc123');
   assert.equal(localizeWebsiteHref('mailto:docs@beyond10x.dev'), 'mailto:docs@beyond10x.dev');
+  assert.equal(isExternalWebsiteHref('https://beyond10x.github.io/releases/rss.xml'), false);
+  assert.equal(isExternalWebsiteHref('/changes/impact.feed.json'), false);
+  assert.equal(isExternalWebsiteHref('#evidence'), false);
+  assert.equal(isExternalWebsiteHref('https://github.com/beyond10x/aep/tree/abc123'), true);
+  assert.equal(isExternalWebsiteHref('mailto:docs@beyond10x.dev'), true);
 });
 
 test('source-owned canonical links remain same-tab and localhost has a global confinement backstop', async () => {

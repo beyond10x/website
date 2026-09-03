@@ -4,7 +4,7 @@ import {AdoptionCard, CardGrid, ContentCard, FactGrid, SectionHeader, StatusBadg
 import type {Journey, RegistrySurface, ReleaseFact, ReleaseFactsDocument, SurfaceLink, SurfaceRelationship} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import releaseFactsDocument from '../../.generated/data/release-facts.json';
-import {localizedAdoptionHref, localizeWebsiteHref} from '../lib/links';
+import {isExternalWebsiteHref, localizedAdoptionHref, localizeWebsiteHref} from '../lib/links';
 import styles from './ProjectProfile.module.css';
 
 const surfaces = (registryDocument as {surfaces: RegistrySurface[]}).surfaces;
@@ -69,7 +69,15 @@ export default function ProjectProfile({repository, revision}: {repository: stri
 }
 
 function ReferenceGroup({title, items, empty}: {title: string; items: Array<{key: string; label: string; url: string; detail?: string; external?: boolean}>; empty: string}): ReactNode {
-  return <ContentCard title={title}>{items.length ? <ul>{items.map((item) => <li key={item.key}>{item.external ? <a href={localizeWebsiteHref(item.url)} target="_blank" rel="noopener noreferrer">{item.label}</a> : <Link to={localTarget(item.url)}>{item.label}</Link>}{item.detail ? <small>{item.detail}</small> : null}</li>)}</ul> : <p className={styles.empty}>{empty}</p>}</ContentCard>;
+  return <ContentCard title={title}>{items.length ? <ul>{items.map((item) => <li key={item.key}><ReferenceLink item={item} />{item.detail ? <small>{item.detail}</small> : null}</li>)}</ul> : <p className={styles.empty}>{empty}</p>}</ContentCard>;
+}
+
+function ReferenceLink({item}: {item: {label: string; url: string; external?: boolean}}): ReactNode {
+  if (!item.external) return <Link to={localTarget(item.url)}>{item.label}</Link>;
+  const href = localizeWebsiteHref(item.url);
+  return isExternalWebsiteHref(item.url)
+    ? <a href={href} target="_blank" rel="noopener noreferrer">{item.label}</a>
+    : <a href={href}>{item.label}</a>;
 }
 
 function experienceRouteForJourney(journey: string): string {
