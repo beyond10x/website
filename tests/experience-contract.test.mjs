@@ -14,7 +14,7 @@ test('Docs System validates the audience-first catalog and its evaluated adoptio
   const result = validateExperiencePresentation(catalog, presentation);
   assert.equal(result.experienceCount, 6);
   assert.ok(result.stepCount >= 20);
-  assert.equal(catalog.artifacts.length, 20);
+  assert.equal(catalog.artifacts.length, 25);
   const evaluated = evaluateExperienceCatalog(catalog);
   const evaluatedById = new Map(evaluated.map((experience) => [experience.id, experience]));
   const primaryPaths = presentation.pages.map((page) => evaluatedById.get(page.experienceId).adoptionPaths.find((path) => path.id === page.adoptionPathId));
@@ -40,11 +40,16 @@ test('Docs System validates the audience-first catalog and its evaluated adoptio
   assert.match(devcenterCluster.explanation, /paused.*unpublished.*private/i);
 });
 
-test('Devcenter keeps evaluation paths separate from operator-only production deployment', async () => {
+test('AgentIDE and Devcenter keep public, approved, and unavailable paths distinct', async () => {
   const catalog = await readExperienceCatalog(path.join(root, 'data', 'experiences.json'));
   const presentation = JSON.parse(await readFile(path.join(root, 'data', 'experience-pages.json'), 'utf8'));
   const product = evaluateExperienceCatalog(catalog).find((experience) => experience.id === 'evaluate-beyond10x-products');
-  assert.deepEqual(product.adoptionPaths.map((path) => path.id), ['frontend-review', 'approved-source-build']);
+  assert.deepEqual(product.adoptionPaths.map((path) => path.id), [
+    'agentide-local-tui',
+    'agentide-hosted-preview',
+    'frontend-review',
+    'approved-source-build',
+  ]);
   assert.deepEqual(product.adoptionPaths.map((path) => ({
     support: path.support,
     access: path.access,
@@ -52,18 +57,37 @@ test('Devcenter keeps evaluation paths separate from operator-only production de
     actionable: path.actionable,
     artifactIds: path.artifactIds,
   })), [
+    {support: 'preview', access: 'public', effectiveAccess: 'public', actionable: true, artifactIds: ['agentide-documentation', 'agentide-source', 'agentide-linux-binary']},
+    {support: 'paused', access: 'approval-required', effectiveAccess: 'approval-required', actionable: false, artifactIds: ['agentide-documentation', 'agentide-hosted-service']},
     {support: 'preview', access: 'public', effectiveAccess: 'public', actionable: true, artifactIds: ['devcenter-docs', 'devcenter-source']},
     {support: 'preview', access: 'approval-required', effectiveAccess: 'approval-required', actionable: true, artifactIds: ['devcenter-docs', 'devcenter-source', 'devcenter-private-build-dependencies']},
   ]);
+  const hostedAgentide = product.adoptionPaths.find((path) => path.id === 'agentide-hosted-preview');
+  assert.deepEqual(hostedAgentide.blockers, ['non-actionable-support', 'unavailable-artifact']);
+  const agentideSourceBuild = evaluateExperienceCatalog(catalog)
+    .find((experience) => experience.id === 'build-agent-systems')
+    .adoptionPaths.find((path) => path.id === 'agentide-approved-source-build');
+  assert.deepEqual({
+    support: agentideSourceBuild.support,
+    effectiveAccess: agentideSourceBuild.effectiveAccess,
+    actionable: agentideSourceBuild.actionable,
+    artifactIds: agentideSourceBuild.artifactIds,
+  }, {
+    support: 'preview',
+    effectiveAccess: 'approval-required',
+    actionable: true,
+    artifactIds: ['agentide-documentation', 'agentide-source', 'agentide-private-build-dependencies'],
+  });
   assert.equal(product.adoptionPaths.find((path) => path.id === 'approved-source-build').url, 'https://beyond10x.github.io/docs/devcenter/source-build/');
   const operations = evaluateExperienceCatalog(catalog).find((experience) => experience.id === 'deploy-operate-products');
   assert.deepEqual(operations.audiences, ['operator']);
   assert.deepEqual(operations.adoptionPaths.map((path) => path.id), ['public-source-service', 'company-cluster-devcenter']);
   assert.equal(operations.adoptionPaths.find((path) => path.id === 'company-cluster-devcenter').url, 'https://beyond10x.github.io/docs/devcenter/production-deployment/');
-  const frontendPage = presentation.pages.find((page) => page.experienceId === 'evaluate-beyond10x-products');
+  const productPage = presentation.pages.find((page) => page.experienceId === 'evaluate-beyond10x-products');
+  assert.equal(productPage.adoptionPathId, 'agentide-local-tui');
   assert.deepEqual(
-    frontendPage.sections.flatMap((section) => section.steps).filter((step) => step.url.startsWith('/docs/devcenter/')).map((step) => step.url),
-    ['/docs/devcenter/frontend-review/', '/docs/devcenter/production-deployment/'],
+    productPage.sections.flatMap((section) => section.steps).map((step) => step.url),
+    ['/docs/agentide/running-modes/', '/docs/agentide/', '/docs/agentide/running-modes/'],
   );
   const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
   assert.match(artifacts.get('devcenter-source').note, /PolyForm.*less than 32 consecutive calendar days/i);
@@ -76,6 +100,17 @@ test('Devcenter keeps evaluation paths separate from operator-only production de
       ['devcenter-private-build-dependencies', 'package', 'available', 'approval-required'],
       ['devcenter-chart', 'helm-chart', 'available', 'public'],
       ['devcenter-production-container', 'container', 'unpublished', 'private'],
+    ],
+  );
+  assert.deepEqual(
+    ['agentide-documentation', 'agentide-source', 'agentide-linux-binary', 'agentide-private-build-dependencies', 'agentide-hosted-service']
+      .map((id) => [id, artifacts.get(id).kind, artifacts.get(id).availability, artifacts.get(id).access]),
+    [
+      ['agentide-documentation', 'documentation', 'available', 'public'],
+      ['agentide-source', 'source', 'available', 'public'],
+      ['agentide-linux-binary', 'binary', 'available', 'public'],
+      ['agentide-private-build-dependencies', 'package', 'available', 'approval-required'],
+      ['agentide-hosted-service', 'hosted-service', 'unpublished', 'approval-required'],
     ],
   );
   assert.match(artifacts.get('devcenter-chart').note, /insufficient.*private images/i);
@@ -92,7 +127,7 @@ test('the Claude practitioner path pins its actual plugin and CLI releases', asy
     [
       ['agentplugins-release-source', 'source', '0.5.1', 'https://github.com/beyond10x/agentplugins/releases/tag/0.5.1', 'available', 'public'],
       ['aep-cli-binary', 'binary', '0.44.0', 'https://github.com/beyond10x/aep/releases/tag/0.44.0', 'available', 'public'],
-      ['ess-cli-binary', 'binary', '0.5.1', 'https://github.com/beyond10x/ess/releases/tag/0.5.1', 'available', 'public'],
+      ['ess-cli-binary', 'binary', '0.8.0', 'https://github.com/beyond10x/ess/releases/tag/0.8.0', 'available', 'public'],
     ],
   );
   const claude = catalog.experiences.find((experience) => experience.id === 'try-spec-driven-development').adoptionPaths.find((path) => path.id === 'claude-code');

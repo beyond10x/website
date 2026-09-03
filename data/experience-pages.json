@@ -208,44 +208,44 @@
     },
     {
       "experienceId": "evaluate-beyond10x-products",
-      "adoptionPathId": "frontend-review",
+      "adoptionPathId": "agentide-local-tui",
       "sections": [
         {
           "kind": "learn",
-          "title": "Start with the product boundary",
+          "title": "Choose the AgentIDE realization you can actually access",
           "steps": [
             {
-              "id": "devcenter-profile",
-              "title": "Read the Devcenter profile",
-              "description": "Separate the product proposition from its current public artifacts and deployment access.",
-              "url": "/ecosystem/devcenter/",
-              "completion": "You can state what is publicly inspectable and what remains gated."
+              "id": "agentide-running-modes",
+              "title": "Compare the typed running modes",
+              "description": "Start with the ESS-derived mode table so local interaction, attachment, support, artifacts, and hosted availability stay distinct.",
+              "url": "/docs/agentide/running-modes/",
+              "completion": "You can explain which four modes are in the local binary and why hosted DevCenter is a separate, paused realization."
             }
           ]
         },
         {
           "kind": "do",
-          "title": "Use the credential-free public review path",
+          "title": "Run the public local path",
           "steps": [
             {
-              "id": "devcenter-docs",
-              "title": "Run the frontend review without private artifacts",
-              "description": "Follow the source-owned frontend review workflow; the separate full-service build requires approved private dependencies.",
-              "url": "/docs/devcenter/frontend-review/",
-              "completion": "The credential-free review runs locally, and your notes preserve the less-than-32-day evaluation license boundary."
+              "id": "agentide-install",
+              "title": "Verify and start the released Linux binary",
+              "description": "Follow the source-owned checksum, session, model endpoint, and credential instructions for the recommended model-backed local TUI.",
+              "url": "/docs/agentide/",
+              "completion": "The 0.1.1 archive verifies, a local session starts, and the TUI opens against the model endpoint without journaling the credential."
             }
           ]
         },
         {
           "kind": "verify",
-          "title": "Verify access before planning adoption",
+          "title": "Preserve the runtime and access boundaries",
           "steps": [
             {
-              "id": "confirm-availability",
-              "title": "Confirm the current availability statement",
-              "description": "Treat private images and internal-only services as blockers to public deployment until the owning project says otherwise.",
-              "url": "/docs/devcenter/production-deployment/",
-              "completion": "Your evaluation notes distinguish review access from deployability."
+              "id": "agentide-boundaries",
+              "title": "Check confinement and hosted availability",
+              "description": "Confirm the Linux cgroup v2 requirement, private source-build dependency, and lack of a public hosted endpoint before planning adoption.",
+              "url": "/docs/agentide/running-modes/",
+              "completion": "Your evaluation notes distinguish the available local binary from approval-required source builds and the unpublished hosted service."
             }
           ]
         }
