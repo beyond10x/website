@@ -12,10 +12,11 @@ export function synthesizeFacadeRoutes(repository, input, rootRoutes, stableRout
     ?? (rootRoutes.has(`/ecosystem/${repository}/`) ? `/ecosystem/${repository}/` : '/ecosystem/');
   const documentation = stableRoutes.canonicalRoute
     ?? (rootRoutes.has(`/docs/${repository}/`) ? `/docs/${repository}/` : '/');
+  const landing = facadeLandingRoute(repository, documentation, profile);
   assertCanonicalRoute(profile, 'profile route');
   assertCanonicalRoute(documentation, 'canonical route');
   if (!routes.some((redirect) => redirect.from === '/')) {
-    routes.push({from: '/', to: profile, type: 'html'});
+    routes.push({from: '/', to: landing, type: 'html'});
   }
   if (!routes.some((redirect) => redirect.from === '/docs' || redirect.from === '/docs/')) {
     routes.push({from: '/docs/', to: documentation, type: 'html'});
@@ -24,7 +25,7 @@ export function synthesizeFacadeRoutes(repository, input, rootRoutes, stableRout
     routes.push({from: '/ecosystem/', to: profile, type: 'html'});
   }
   if (stableRoutes.profileRoute || stableRoutes.canonicalRoute) {
-    assertEntryPoint(routes, '/', profile, repository);
+    assertEntryPoint(routes, '/', landing, repository);
     assertEntryPoint(routes, '/docs/', documentation, repository);
     assertEntryPoint(routes, '/ecosystem/', profile, repository);
   }
@@ -103,7 +104,12 @@ export function validateFacadeProvenance(document, expected = {}) {
     || routeManifestSha256(normalizedManifest) !== document.routeManifestSha256) {
     throw new Error('façade provenance route manifest or digest is invalid');
   }
-  assertEntryPoint(normalizedManifest, '/', document.profileRoute, document.repository);
+  assertEntryPoint(
+    normalizedManifest,
+    '/',
+    facadeLandingRoute(document.repository, document.canonicalRoute, document.profileRoute),
+    document.repository,
+  );
   assertEntryPoint(normalizedManifest, '/docs/', document.canonicalRoute, document.repository);
   assertEntryPoint(normalizedManifest, '/ecosystem/', document.profileRoute, document.repository);
   if (document.routes.length === 0
@@ -169,6 +175,12 @@ function assertEntryPoint(routes, from, to, repository) {
   if (accepted.length !== 1 || accepted[0].type !== 'html' || accepted[0].to !== to) {
     throw new Error(`${repository} façade ${from} must target ${to}`);
   }
+}
+
+function facadeLandingRoute(repository, canonicalRoute, profileRoute) {
+  // `getting-started` predates repository profiles: its historical root alias is the
+  // organization start page, while its explicit ecosystem alias remains the ecosystem landing.
+  return repository === 'getting-started' ? canonicalRoute : profileRoute;
 }
 
 function assertCanonicalRoute(value, label) {

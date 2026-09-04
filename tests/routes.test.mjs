@@ -136,6 +136,13 @@ test('the superseded getting-started source remains an explicit compatibility-on
     {from: '/docs/', to: '/', type: 'html'},
     {from: '/ecosystem/', to: '/ecosystem/', type: 'html'},
   ]);
+  const stableRedirects = synthesizeFacadeRoutes(
+    'getting-started',
+    [{from: '/', to: '/', type: 'html'}],
+    new Set(['/', '/ecosystem/']),
+    {canonicalRoute: '/', profileRoute: '/ecosystem/'},
+  );
+  assert.deepEqual(stableRedirects, redirects);
 });
 
 test('active repositories receive profile and documentation façade entry points', () => {
