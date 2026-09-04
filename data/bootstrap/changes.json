@@ -2,6 +2,194 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "aep-service/0.1.7",
+      "id": "aep-service/0.1.7",
+      "repository": "aep-service",
+      "publishedAt": "2026-09-04T00:42:49Z",
+      "title": "AEP Service 0.1.7",
+      "summary": "AEP Service released version 0.1.7.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.7",
+        "version": "0.1.7"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep-service/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.51.0",
+      "id": "aep/0.51.0",
+      "repository": "aep",
+      "publishedAt": "2026-09-03T23:52:14Z",
+      "title": "AEP 0.51.0",
+      "summary": "AEP released version 0.51.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.51.0",
+        "version": "0.51.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "connectors/v0.5.7",
+      "id": "connectors/v0.5.7",
+      "repository": "connectors",
+      "publishedAt": "2026-09-03T23:44:52Z",
+      "title": "Connectors v0.5.7",
+      "summary": "Connectors released version v0.5.7.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.7",
+        "version": "v0.5.7"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/0.11.1",
+      "id": "ess/0.11.1",
+      "repository": "ess",
+      "publishedAt": "2026-09-03T23:38:32Z",
+      "title": "ESS 0.11.1",
+      "summary": "ESS released version 0.11.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.11.1",
+        "version": "0.11.1"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.7.0",
+      "id": "agentplugins/0.7.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-03T23:36:40Z",
+      "title": "Agent Plugins 0.7.0",
+      "summary": "Agent Plugins released version 0.7.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.7.0",
+        "version": "0.7.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.3.4",
+      "id": "worktree/0.3.4",
+      "repository": "worktree",
+      "publishedAt": "2026-09-03T22:50:12Z",
+      "title": "Worktree 0.3.4",
+      "summary": "Worktree released version 0.3.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.4",
+        "version": "0.3.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.3.3",
+      "id": "worktree/0.3.3",
+      "repository": "worktree",
+      "publishedAt": "2026-09-03T22:48:32Z",
+      "title": "Worktree 0.3.3",
+      "summary": "Worktree released version 0.3.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.3.3",
+        "version": "0.3.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.17.6",
+      "id": "entity-runtime/0.17.6",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-09-03T22:03:15Z",
+      "title": "Entity Runtime 0.17.6",
+      "summary": "Entity Runtime released version 0.17.6.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.17.6",
+        "version": "0.17.6"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "ess/0.11.0",
       "id": "ess/0.11.0",
       "repository": "ess",
