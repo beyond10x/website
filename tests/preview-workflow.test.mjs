@@ -67,6 +67,36 @@ test('fast preview accepts only a completed generated tree for the current sourc
   assert.match(generatedInputIssue(siteRoot), /missing \.generated\/\.complete\.json/);
 });
 
+test('fast preview binds generated source-set inputs by exact bytes', async (context) => {
+  const siteRoot = await mkdtemp(path.join(os.tmpdir(), 'b10x-website-generated-source-set-'));
+  context.after(() => rm(siteRoot, {recursive: true, force: true}));
+  const sourceSetPath = path.join(siteRoot, 'inputs', 'source-set.json');
+  const sourceSet = '{"schema":"b10x-docs-source-set/v1"}\n';
+  await mkdir(path.dirname(sourceSetPath), {recursive: true});
+  await writeFile(sourceSetPath, sourceSet);
+  for (const relative of [
+    '.generated/data/ecosystem.json',
+    '.generated/data/experiences.json',
+    '.generated/docs/index.mdx',
+    '.generated/sidebars.cjs',
+  ]) {
+    const target = path.join(siteRoot, relative);
+    await mkdir(path.dirname(target), {recursive: true});
+    await writeFile(target, 'prepared\n');
+  }
+  const completionPath = path.join(siteRoot, '.generated', '.complete.json');
+  await writeFile(completionPath, `${JSON.stringify({
+    schema: 'b10x-website-generated-completion/v2',
+    inputSchema: 'b10x-docs-source-set/v1',
+    inputSha256: createHash('sha256').update(sourceSet).digest('hex'),
+  })}\n`);
+  const environment = {B10X_DOCS_SOURCE_SET: sourceSetPath};
+  assert.equal(generatedInputIssue(siteRoot, environment), undefined);
+
+  await writeFile(sourceSetPath, '{"schema":"changed"}\n');
+  assert.match(generatedInputIssue(siteRoot, environment), /source-set\.json changed/);
+});
+
 test('preview server processes receive status metadata but no ambient credentials or lease capability', () => {
   const environment = previewEnvironment({
     PATH: '/usr/bin',

@@ -65,7 +65,7 @@ export function missingGeneratedInputs(siteRoot = root) {
   return requiredGeneratedInputs.filter((relative) => !existsSync(path.join(siteRoot, relative)));
 }
 
-export function generatedInputIssue(siteRoot = root) {
+export function generatedInputIssue(siteRoot = root, environment = process.env) {
   const missing = missingGeneratedInputs(siteRoot);
   if (missing.length > 0) return `missing ${missing.join(', ')}`;
   let completion;
@@ -74,21 +74,41 @@ export function generatedInputIssue(siteRoot = root) {
   } catch (error) {
     return `invalid .generated/.complete.json: ${error instanceof Error ? error.message : String(error)}`;
   }
-  if (completion?.schema !== 'b10x-website-generated-completion/v1'
-    || typeof completion.sourceLockSha256 !== 'string'
-    || !/^[0-9a-f]{64}$/.test(completion.sourceLockSha256)) {
+  if (completion?.schema === 'b10x-website-generated-completion/v1') {
+    if (typeof completion.sourceLockSha256 !== 'string' || !/^[0-9a-f]{64}$/.test(completion.sourceLockSha256)) {
+      return 'invalid .generated/.complete.json contract';
+    }
+    let sourceLockSha256;
+    try {
+      sourceLockSha256 = createHash('sha256')
+        .update(readFileSync(path.join(siteRoot, 'sources.lock.json')))
+        .digest('hex');
+    } catch (error) {
+      return `cannot inspect sources.lock.json: ${error instanceof Error ? error.message : String(error)}`;
+    }
+    if (completion.sourceLockSha256 !== sourceLockSha256) {
+      return 'sources.lock.json changed after the last complete preparation';
+    }
+    return undefined;
+  }
+  if (completion?.schema !== 'b10x-website-generated-completion/v2'
+    || completion.inputSchema !== 'b10x-docs-source-set/v1'
+    || typeof completion.inputSha256 !== 'string'
+    || !/^[0-9a-f]{64}$/.test(completion.inputSha256)) {
     return 'invalid .generated/.complete.json contract';
   }
-  let sourceLockSha256;
-  try {
-    sourceLockSha256 = createHash('sha256')
-      .update(readFileSync(path.join(siteRoot, 'sources.lock.json')))
-      .digest('hex');
-  } catch (error) {
-    return `cannot inspect sources.lock.json: ${error instanceof Error ? error.message : String(error)}`;
+  const sourceSet = environment.B10X_DOCS_SOURCE_SET;
+  if (typeof sourceSet !== 'string' || !path.isAbsolute(sourceSet)) {
+    return 'prepared source-set inputs require absolute B10X_DOCS_SOURCE_SET';
   }
-  if (completion.sourceLockSha256 !== sourceLockSha256) {
-    return 'sources.lock.json changed after the last complete preparation';
+  let inputSha256;
+  try {
+    inputSha256 = createHash('sha256').update(readFileSync(sourceSet)).digest('hex');
+  } catch (error) {
+    return `cannot inspect source-set.json: ${error instanceof Error ? error.message : String(error)}`;
+  }
+  if (completion.inputSha256 !== inputSha256) {
+    return 'source-set.json changed after the last complete preparation';
   }
   return undefined;
 }

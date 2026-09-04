@@ -6,8 +6,15 @@ import path from 'node:path';
 import test from 'node:test';
 import {parse} from 'yaml';
 import {renderRedirectHtml} from '@beyond10x/docs-system/redirects';
+import {buildRedirectFacade} from '../scripts/build-redirect-facade.mjs';
 import {routesFromFiles} from '../scripts/provenance-routes.mjs';
-import {facadeRepositories, synthesizeFacadeRoutes} from '../scripts/facade-contract.mjs';
+import {
+  facadeRepositories,
+  facadeRouteManifest,
+  routeManifestSha256,
+  synthesizeFacadeRoutes,
+  validateFacadeProvenance,
+} from '../scripts/facade-contract.mjs';
 import {effectiveRedirectMap} from '../scripts/redirect-contract.mjs';
 import {ROOT_OWNED_REDIRECTS, writeRootOwnedRedirects} from '../scripts/root-redirect-contract.mjs';
 
@@ -138,6 +145,82 @@ test('active repositories receive profile and documentation façade entry points
     {from: '/docs/', to: '/docs/harness/', type: 'html'},
     {from: '/ecosystem/', to: '/ecosystem/harness/', type: 'html'},
   ]);
+});
+
+test('stable façade provenance binds routes and immutable controls without root content state', async (context) => {
+  const temporary = await mkdtemp(path.join(os.tmpdir(), 'b10x-stable-facade-'));
+  context.after(() => rm(temporary, {recursive: true, force: true}));
+  const runtimeCommit = 'a'.repeat(40);
+  const controlCommit = 'b'.repeat(40);
+  const output = path.join(temporary, 'site');
+  const result = await buildRedirectFacade({
+    repository: 'harness',
+    canonicalRoute: '/docs/harness/',
+    profileRoute: '/ecosystem/harness/',
+    runtimeSha: runtimeCommit,
+    controlSha: controlCommit,
+    out: output,
+  });
+  assert.equal(result.mode, 'v2');
+  assert.equal(result.provenance.schema, 'b10x-facade-provenance/v2');
+  assert.equal(result.provenance.runtimeCommit, runtimeCommit);
+  assert.equal(result.provenance.controlCommit, controlCommit);
+  assert.equal(result.provenance.routeManifestSha256, routeManifestSha256(result.provenance.routeManifest));
+  assert.deepEqual(result.provenance.routeManifest, facadeRouteManifest(result.redirects));
+  for (const forbidden of [
+    'websiteCommit', 'sourcesLockSha256', 'sourceSetSha256', 'sourceCommits',
+    'legacyRoutesSha256', 'upstreamRoot',
+  ]) assert.equal(Object.hasOwn(result.provenance, forbidden), false, forbidden);
+  assert.doesNotThrow(() => validateFacadeProvenance(result.provenance, {
+    repository: 'harness',
+    canonicalRoute: '/docs/harness/',
+    profileRoute: '/ecosystem/harness/',
+    runtimeCommit,
+    controlCommit,
+  }));
+  assert.deepEqual(
+    JSON.parse(await readFile(path.join(output, 'PROVENANCE.json'), 'utf8')),
+    result.provenance,
+  );
+});
+
+test('stable façade requires a fixed migration Website for compatibility aliases', async (context) => {
+  const temporary = await mkdtemp(path.join(os.tmpdir(), 'b10x-stable-alias-facade-'));
+  context.after(() => rm(temporary, {recursive: true, force: true}));
+  await assert.rejects(buildRedirectFacade({
+    repository: 'aep',
+    canonicalRoute: '/docs/aep/',
+    profileRoute: '/ecosystem/aep/',
+    runtimeSha: 'a'.repeat(40),
+    controlSha: 'b'.repeat(40),
+    out: path.join(temporary, 'site'),
+  }), /requires migration-website-sha to materialize stable alias bytes/);
+});
+
+test('façade provenance reader retains v1 rollback compatibility', () => {
+  const document = {
+    schema: 'b10x-facade-provenance/v1',
+    websiteCommit: 'a'.repeat(40),
+    repository: 'harness',
+    deliveryRole: 'legacy-redirect',
+    routes: ['/'],
+    files: [{path: 'index.html'}],
+  };
+  assert.equal(validateFacadeProvenance(document, {repository: 'harness'}).version, 1);
+});
+
+test('stable façade manifests identify alias sources as canonical root routes', () => {
+  assert.deepEqual(facadeRouteManifest([{
+    from: '/releases/rss.xml',
+    source: 'releases/aep/rss.xml',
+    type: 'alias',
+    mediaType: 'application/rss+xml',
+  }]), [{
+    from: '/releases/rss.xml',
+    source: '/releases/aep/rss.xml',
+    type: 'alias',
+    mediaType: 'application/rss+xml',
+  }]);
 });
 
 test('effective redirects are an exact safe projection of declared compatibility routes', () => {

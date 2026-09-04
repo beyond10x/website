@@ -315,7 +315,7 @@ test('bootstrap snapshots accept the Website surface and bind the exact source l
   await assert.rejects(validateBootstrapSnapshots(root, []), /source-lock digest/);
 });
 
-test('reusable façade workflow executes its own immutable revision and treats the deployed Website as data', async () => {
+test('reusable façade workflow dual-reads legacy root state and stable route controls', async () => {
   const workflow = await readFile(path.join(path.resolve(import.meta.dirname, '..'), '.github', 'workflows', 'redirect-facade.yml'), 'utf8');
   assert.match(workflow, /repository: \$\{\{ job\.workflow_repository \}\}/);
   assert.match(workflow, /ref: \$\{\{ job\.workflow_sha \}\}/);
@@ -323,6 +323,14 @@ test('reusable façade workflow executes its own immutable revision and treats t
   assert.match(workflow, /path: \.control-data/);
   assert.match(workflow, /path: \.website-data/);
   assert.match(workflow, /--data \.\.\/\.website-data/);
+  assert.match(workflow, /canonical_route:/);
+  assert.match(workflow, /profile_route:/);
+  assert.match(workflow, /migration_website_sha:/);
+  assert.match(workflow, /test -z "\$CANONICAL_ROUTE" && test -z "\$PROFILE_ROUTE"/);
+  assert.match(workflow, /--canonical-route "\$CANONICAL_ROUTE"/);
+  assert.match(workflow, /--profile-route "\$PROFILE_ROUTE"/);
+  assert.match(workflow, /--runtime-sha "\$RUNTIME_SHA"/);
+  assert.match(workflow, /--control-sha "\$CONTROL_SHA"/);
   assert.match(workflow, /github\.triggering_actor == 'b10x-bot\[bot\]'/);
   assert.match(workflow, /github\.sha == inputs\.control_sha/);
   assert.match(workflow, /refs\/heads\/main/);
@@ -341,8 +349,12 @@ test('reusable root workflow executes immutable controls and blocks human reruns
   assert.match(workflow, /ref: \$\{\{ job\.workflow_sha \}\}/);
   assert.match(workflow, /github\.triggering_actor == 'b10x-bot\[bot\]'/);
   assert.match(workflow, /github\.sha == inputs\.control_sha/);
+  assert.match(workflow, /path: _publication/);
+  assert.match(workflow, /publication-layout\.mjs resolve --publication _publication/);
   assert.match(workflow, /node \.runtime\/scripts\/verify-build\.mjs/);
-  assert.match(workflow, /--data \.website-data/);
+  assert.match(workflow, /--publication _publication/);
+  assert.match(workflow, /--website-data \.website-data/);
+  assert.match(workflow, /path: \$\{\{ steps\.layout\.outputs\.site_path \}\}/);
   assert.match(workflow, /\.committer\.login == "web-flow"/);
   assert.match(workflow, /\.commit\.verification\.verified == true/);
   assert.match(workflow, /\.commit\.verification\.reason == "valid"/);

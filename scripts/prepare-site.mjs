@@ -1,4 +1,3 @@
-import {createHash} from 'node:crypto';
 import {copyFile, mkdir, readFile, rename, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {parse} from 'yaml';
@@ -8,13 +7,14 @@ import {writeJsonFeed, writeRss} from '@beyond10x/docs-system/feeds';
 import {readExperienceCatalog} from '@beyond10x/docs-system/manifest';
 import {compareUtf8} from './order-contract.mjs';
 import {sourceKey, sourceMap} from './source-routing.mjs';
-import {bootstrapEnabled, validateSourceLock} from './source-lock-contract.mjs';
+import {bootstrapEnabled} from './source-lock-contract.mjs';
 import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
 import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from './api-catalog.mjs';
 import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars, sourceSidebarMetadata} from './sidebar-contract.mjs';
 import {normalizePassiveMarkdown} from './passive-markdown.mjs';
 import {assertSearchAudienceVocabulary, experienceIdsForSourceDocument} from './search-metadata-contract.mjs';
 import {withGenerationLease} from './generation-lease.mjs';
+import {loadPublicationInputs} from './publication-inputs.mjs';
 
 await withGenerationLease('site preparation', async () => {
 const root = path.resolve(import.meta.dirname, '..');
@@ -32,14 +32,18 @@ await Promise.all(
   [docs, data, ecosystem, api, components, blog, generatedStatic].map((directory) => mkdir(directory, {recursive: true})),
 );
 
-const {roster, lock, bootstrap} = await validateSourceLock(root, {allowBootstrap: bootstrapEnabled()});
-const sourceLockPath = path.join(root, 'sources.lock.json');
-const preparedSourceLockSha256 = createHash('sha256')
-  .update(await readFile(sourceLockPath))
-  .digest('hex');
-await validateBootstrapSnapshots(root, roster.repositories);
-const legacyRegistry = JSON.parse(await readFile(path.join(root, 'data/bootstrap/ecosystem.json'), 'utf8'));
-const legacyLedgerInput = JSON.parse(await readFile(path.join(root, 'data/bootstrap/changes.json'), 'utf8'));
+const inputs = await loadPublicationInputs({root, allowBootstrap: bootstrapEnabled()});
+const {roster, lock, bootstrap} = inputs;
+const preparedInputSha256 = inputs.inputSha256;
+await validateBootstrapSnapshots(root, roster.repositories, {
+  directory: inputs.bootstrapRoot,
+  sourceLockBytes: inputs.sourceLockBytes,
+  sourceSetSha256: inputs.sourceSetSha256,
+  websiteRevision: inputs.sourceSet?.websiteRuntimeCommit,
+  sourceRevision: inputs.sourceSet?.atlasControlCommit,
+});
+const legacyRegistry = JSON.parse(await readFile(path.join(inputs.bootstrapRoot, 'ecosystem.json'), 'utf8'));
+const legacyLedgerInput = JSON.parse(await readFile(path.join(inputs.bootstrapRoot, 'changes.json'), 'utf8'));
 const searchGolden = JSON.parse(await readFile(path.join(root, 'data/search-golden.json'), 'utf8'));
 const experienceCatalog = await readExperienceCatalog(path.join(root, 'data/experiences.json'));
 const experiencePresentation = JSON.parse(await readFile(path.join(root, 'data/experience-pages.json'), 'utf8'));
@@ -74,7 +78,7 @@ let documentIndex = {schema: 'b10x-document-index/v1', documents: []};
 
 if (lock.sources.length > 0) {
   const {collectSources} = await import('./collect-sources.mjs');
-  const collected = await collectSources({root, outputRoot: generated});
+  const collected = await collectSources({root, outputRoot: generated, inputs});
   ({registry, manifests, indexes, collectionRoot} = collected);
   assertDocumentationFamilyDistribution(manifests);
   ({apiCatalog, documentIndex} = await materializeCollection({manifests, indexes, collectionRoot}));
@@ -106,10 +110,10 @@ const dependencyGraph = buildDependencyGraph(surfaces);
 await Promise.all([
   writeFile(path.join(data, 'ecosystem.json'), `${JSON.stringify(registry, null, 2)}\n`),
   writeFile(path.join(data, 'changes.json'), `${JSON.stringify(legacyLedger, null, 2)}\n`),
-  writeFile(path.join(data, 'release-facts.json'), await readFile(path.join(root, 'data/bootstrap/release-facts.json'), 'utf8')),
+  writeFile(path.join(data, 'release-facts.json'), await readFile(path.join(inputs.bootstrapRoot, 'release-facts.json'), 'utf8')),
   writeFile(path.join(generatedStatic, 'ecosystem.json'), `${JSON.stringify(registry, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'changes.json'), `${JSON.stringify(legacyLedger, null, 2)}\n`),
-  writeFile(path.join(generatedStatic, 'release-facts.json'), await readFile(path.join(root, 'data/bootstrap/release-facts.json'), 'utf8')),
+  writeFile(path.join(generatedStatic, 'release-facts.json'), await readFile(path.join(inputs.bootstrapRoot, 'release-facts.json'), 'utf8')),
   writeFile(path.join(data, 'dependencies.json'), `${JSON.stringify(dependencyGraph, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'dependencies.json'), `${JSON.stringify(dependencyGraph, null, 2)}\n`),
   writeFile(path.join(data, 'manifests.json'), `${JSON.stringify(manifests, null, 2)}\n`),
@@ -259,16 +263,20 @@ for (const surface of surfaces) {
   }
 }
 
-const currentSourceLockSha256 = createHash('sha256')
-  .update(await readFile(sourceLockPath))
-  .digest('hex');
-if (currentSourceLockSha256 !== preparedSourceLockSha256) {
-  throw new Error('sources.lock.json changed during site preparation; generated inputs are incomplete');
+const currentInputs = await loadPublicationInputs({root, allowBootstrap: bootstrapEnabled()});
+await validateBootstrapSnapshots(root, roster.repositories, {
+  directory: currentInputs.bootstrapRoot,
+  sourceLockBytes: currentInputs.sourceLockBytes,
+  sourceSetSha256: currentInputs.sourceSetSha256,
+  websiteRevision: currentInputs.sourceSet?.websiteRuntimeCommit,
+  sourceRevision: currentInputs.sourceSet?.atlasControlCommit,
+});
+if (currentInputs.mode !== inputs.mode || currentInputs.inputSha256 !== preparedInputSha256) {
+  throw new Error('publication inputs changed during site preparation; generated inputs are incomplete');
 }
-const completion = {
-  schema: 'b10x-website-generated-completion/v1',
-  sourceLockSha256: preparedSourceLockSha256,
-};
+const completion = inputs.mode === 'legacy'
+  ? {schema: 'b10x-website-generated-completion/v1', sourceLockSha256: preparedInputSha256}
+  : {schema: 'b10x-website-generated-completion/v2', inputSchema: inputs.inputSchema, inputSha256: preparedInputSha256};
 const completionPath = path.join(generated, '.complete.json');
 const temporaryCompletionPath = `${completionPath}.${process.pid}.tmp`;
 await writeFile(temporaryCompletionPath, `${JSON.stringify(completion, null, 2)}\n`, {flag: 'wx'});

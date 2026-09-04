@@ -14,8 +14,10 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
 
 - This repository owns organization narrative, journeys, information architecture, visual shell,
   collection orchestration, and the root site build.
-- Technical claims and documentation stay owned by their individual public repositories. Import
-  only paths declared by their `b10x-docs/v3` manifests at commits in `sources.lock.json`.
+- Technical claims and documentation stay owned by their individual public repositories.
+  Production imports only normalized `b10x-docs-bundle/v1` inputs selected by Atlas in an explicit
+  `b10x-docs-source-set/v1`; local and migration workflows may still import only paths declared by
+  repository manifests at commits in `sources.lock.json`.
 - Collect sources through bounded bare Git object stores. Never create source worktrees, execute
   source code, load repository sidebars, or accept active MDX. Preserve the canonical collection
   index and extracted passive tree for each exact source revision so Atlas can verify locked content
@@ -25,12 +27,13 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
   lock and Git-object fetch origins: `npm run sources:lock` requires clean checked-out `main` heads,
   while extraction still uses the exact locked commits and never reads dirty worktree bytes. Leave
   it unset for production and ordinary remote-backed builds.
-- Before pushing Website, publish every commit named by `sources.lock.json`, unset
-  `B10X_SOURCE_WORKSPACE`, and run the gate against the remote sources. A local object database is
-  preview evidence, not publication availability.
+- Before pushing a Website change against the retained lock path, publish every commit named by
+  `sources.lock.json`, unset `B10X_SOURCE_WORKSPACE`, and run the gate against remote sources. A
+  local object database is preview evidence, not publication availability. A production
+  source-set build instead validates every bundle and must not read Git or execute source code.
 - `beyond10x.github.io` is a generated deployment mirror. Do not author content there.
 - `getting-started` is predecessor history, not an authority or a source dependency. It remains an
-  explicit compatibility-only façade; do not add it to the 22-source lock.
+  explicit compatibility-only façade; do not add it to the active source roster.
 
 ## Presentation
 
@@ -52,7 +55,7 @@ npm run gate
 
 Broken links and anchors fail the build. Lock, registry, route map, feeds, and provenance output
 must be deterministic. Production provenance requires a nonzero full Website commit and the exact
-22 source commits. The artifact crawler must cover manifest URLs, effective redirect targets, alias
+catalog source set. The artifact crawler must cover manifest URLs, effective redirect targets, alias
 sources, and rendered same-origin links. Use `npm run sources:freshness` as an explicit promotion
 check against moving remote heads; never make rebuilding an immutable Website commit depend on
 those heads remaining unchanged. File and route inventories are ordered by UTF-8 bytes, never by a

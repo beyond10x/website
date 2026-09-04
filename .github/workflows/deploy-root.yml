@@ -69,29 +69,13 @@ jobs:
           path: .control-data
           persist-credentials: false
 
-      - name: Check out the exact generated artifact
+      - name: Check out the exact generated publication
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: beyond10x/beyond10x.github.io
           ref: ${{ inputs.published_sha }}
-          path: _site
+          path: _publication
           fetch-depth: 1
-          persist-credentials: false
-
-      - name: Resolve the exact Website data revision
-        id: website
-        run: |
-          set -euo pipefail
-          revision="$(jq -er '.websiteCommit | select(test("^[0-9a-f]{40}$")) | select(test("^0+$") | not)' _site/PROVENANCE.json)"
-          printf 'sha=%s\n' "$revision" >> "$GITHUB_OUTPUT"
-
-      - name: Check out Website inputs as immutable data
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          repository: beyond10x/website
-          ref: ${{ steps.website.outputs.sha }}
-          path: .website-data
-          fetch-depth: 0
           persist-credentials: false
 
       - name: Set up Node.js
@@ -105,6 +89,37 @@ jobs:
         working-directory: .runtime
         run: npm ci --ignore-scripts
 
+      - name: Resolve the exact publication layout
+        id: layout
+        run: |
+          set -euo pipefail
+          layout="$(node .runtime/scripts/publication-layout.mjs resolve --publication _publication)"
+          schema="$(jq -er '.schema' <<<"$layout")"
+          relative="$(jq -er '.site' <<<"$layout")"
+          case "$schema:$relative" in
+            b10x-publication-layout/v1:.) site_path=_publication ;;
+            b10x-publication-layout/v2:site) site_path=_publication/site ;;
+            *) echo "unsafe publication layout resolution" >&2; exit 1 ;;
+          esac
+          printf 'schema=%s\n' "$schema" >> "$GITHUB_OUTPUT"
+          printf 'site_path=%s\n' "$site_path" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve the exact Website data revision
+        id: website
+        run: |
+          set -euo pipefail
+          revision="$(jq -er '.websiteCommit | select(test("^[0-9a-f]{40}$")) | select(test("^0+$") | not)' "${{ steps.layout.outputs.site_path }}/PROVENANCE.json")"
+          printf 'sha=%s\n' "$revision" >> "$GITHUB_OUTPUT"
+
+      - name: Check out Website inputs as immutable data
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: beyond10x/website
+          ref: ${{ steps.website.outputs.sha }}
+          path: .website-data
+          fetch-depth: 0
+          persist-credentials: false
+
       - name: Verify Git and GitHub publication boundaries
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -114,8 +129,11 @@ jobs:
           set -euo pipefail
           test "$(git -C .runtime rev-parse HEAD)" = "$RUNTIME_SHA"
           test "$(git -C .control-data rev-parse HEAD)" = "$CONTROL_SHA"
-          test "$(git -C _site rev-parse HEAD)" = "$PUBLISHED_SHA"
+          test "$(git -C _publication rev-parse HEAD)" = "$PUBLISHED_SHA"
           test "$(git -C .website-data rev-parse HEAD)" = "$WEBSITE_SHA"
+          if test "${{ steps.layout.outputs.schema }}" = b10x-publication-layout/v2; then
+            test "$RUNTIME_SHA" = "$WEBSITE_SHA"
+          fi
 
           remote_head() {
             local repository=$1 branch=$2
@@ -141,7 +159,7 @@ jobs:
           # App-only control refs plus the API identities below are the durable authority.
           assert_git_authority_identity .runtime "$RUNTIME_SHA" runtime
           assert_git_authority_identity .control-data "$CONTROL_SHA" controls
-          assert_git_authority_identity _site "$PUBLISHED_SHA" publication
+          assert_git_authority_identity _publication "$PUBLISHED_SHA" publication
           assert_git_authority_identity .website-data "$WEBSITE_SHA" Website
 
           mkdir -p "$RUNNER_TEMP/b10x-root-boundary"
@@ -185,10 +203,10 @@ jobs:
           WEBSITE_SHA: ${{ steps.website.outputs.sha }}
         run: |
           set -euo pipefail
-          rm -rf -- _site/.git
+          rm -rf -- _publication/.git
           node .runtime/scripts/verify-build.mjs \
-            --artifact _site \
-            --data .website-data \
+            --publication _publication \
+            --website-data .website-data \
             --website-sha "$WEBSITE_SHA"
 
       - name: Configure Pages
@@ -199,7 +217,7 @@ jobs:
       - name: Upload static artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
         with:
-          path: _site
+          path: ${{ steps.layout.outputs.site_path }}
 
       - name: Deploy Pages
         id: deployment

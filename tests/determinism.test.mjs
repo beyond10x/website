@@ -11,6 +11,8 @@ const root = path.resolve(import.meta.dirname, '..');
 
 test('site preparation is byte deterministic for one source lock', async () => {
   const env = {...process.env, B10X_BOOTSTRAP_FIXTURE: '1'};
+  delete env.B10X_DOCS_SOURCE_SET;
+  delete env.B10X_SOURCE_WORKSPACE;
   await exec('node', ['scripts/prepare-site.mjs'], {cwd: root, env});
   const first = await treeDigest(path.join(root, '.generated'));
   await exec('node', ['scripts/prepare-site.mjs'], {cwd: root, env});

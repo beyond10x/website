@@ -4,21 +4,25 @@ The authored source for the unified public beyond10x website at
 <https://beyond10x.github.io/>. It combines organization-owned vision and audience-first experiences with
 technical documentation selected by each public repository.
 
-The source contract is deliberately split:
+The source contract has a production bundle path and a retained local/legacy lock path:
 
 - `sources.yaml` lists the complete active-source roster and the separate compatibility-only predecessor
   repositories; compatibility entries never enter the source lock.
-- `sources.lock.json` pins an exact commit and content digest for every source.
+- `b10x-docs-source-set/v1` selects one immutable, normalized Docs System bundle from the latest
+  successful `main` producer run in every active source repository.
+- `sources.lock.json` is the deterministic projection of that source set in production and remains
+  the direct input for local preview and migration compatibility.
 - each repository's `b10x.docs.yaml` declares the public, passive content it permits the site to
   publish.
 - `legacy-routes.json` describes project Pages compatibility façades.
 - the generated site carries byte-identical `/.well-known/b10x-docs.json` and `PROVENANCE.json`,
   plus `/._b10x/deployment.json` in the artifact and on the public URL.
 
-Collection uses bare Git object databases and never creates worktrees or runs source code.
-Each build also records the canonical Docs System collection index for every locked source beside
-the extracted passive tree. Atlas uses those indexes to verify every selected byte and the locked
-`contentSha256` independently before publication.
+Production collection reads only normalized bundle directories selected by Atlas and validates
+their repository, commit, run, manifest, collection, content, and file digests before rendering.
+It never checks out a source repository or runs source code. The local/legacy path continues to use
+bounded bare Git object databases and likewise never creates worktrees or executes source code.
+Both paths preserve the canonical Docs System collection index beside every passive source tree.
 
 ## Develop
 
@@ -75,9 +79,10 @@ unset B10X_SOURCE_WORKSPACE
 npm run gate
 ```
 
-Node 24 is the supported build runtime. `npm run gate` builds only the exact commits in the source
-lock, verifies artifact/deployment digests, and crawls every same-origin manifest, redirect, alias,
-and rendered HTML link. The empty-lock bootstrap fixture is accepted only with
+Node 24 is the supported build runtime. `npm run gate` uses the source set named by
+`B10X_DOCS_SOURCE_SET` when present; otherwise it builds the exact commits in the local/legacy
+source lock. It verifies artifact/deployment digests and crawls every same-origin manifest,
+redirect, alias, and rendered HTML link. The empty-lock bootstrap fixture is accepted only with
 `B10X_BOOTSTRAP_FIXTURE=1` (or `npm run gate:fixture`) while bringing up a new catalog; it is never
 valid production provenance.
 
@@ -120,17 +125,19 @@ and output, and `text` for plain output or diagrams. The shared Prism list loads
 language grammars. `npm run gate` rejects unlabeled or ambiguous `console` fences, raw React
 `<pre>` elements, and rendered code that bypasses Prism.
 
-Refresh `sources.lock.json` only through the deterministic lock command after repository-owned
-manifest changes have merged. Atlas and release operators can run `npm run sources:freshness` to
-compare the committed lock with the current roster's remote `main` heads; moving-tip freshness is kept
-separate from rebuilding an immutable Website commit. The generated `beyond10x.github.io` artifact
-is published by Atlas-owned bot automation, not from developer credentials in this repository.
+Refresh the retained `sources.lock.json` only through the deterministic lock command after
+repository-owned manifest changes have merged. Production freshness is decided by Atlas from the
+latest successful bundle artifact for every source, not by Website or a moving Git checkout. The
+generated `b10x-publication-layout/v2` stores `site/` beside the exact source bundles and bootstrap
+inputs on `beyond10x.github.io`'s `published` branch; Pages uploads only `site/`. Publication is
+performed by Atlas-owned bot automation, never by developer credentials in this repository.
 
-Active and retired repository Pages sites are redirect façades. They call
-`.github/workflows/redirect-facade.yml` at an immutable Website commit, verify downloaded aliases
-against the deployed root provenance, and publish their own façade provenance. The reusable
-workflow executes the generator and dependency lock from its own immutable `job.workflow_sha`;
-the newly deployed Website revision is checked out separately and parsed only as data.
+Active and retired repository Pages sites are stable redirect façades. They call
+`.github/workflows/redirect-facade.yml` at an immutable Website runtime and bind v2 provenance to
+the repository's stable canonical/profile routes plus the runtime and caller control commits. A
+fixed Website snapshot is accepted only during the one-time v1-to-v2 migration to preserve legacy
+alias bytes; later content promotions do not rebuild or deploy façades. The reusable workflow
+executes the generator and dependency lock from its own immutable `job.workflow_sha`.
 `getting-started` remains explicitly admitted only for this permanent compatibility role.
 
 Apache-2.0.

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Accept Atlas-selected immutable Docs System bundles through `b10x-docs-source-set/v1`, derive
+  the compatibility source lock without Git access, and write/verify a self-contained
+  `b10x-publication-layout/v2` whose exact inputs remain available for audit and rollback.
+- Make project Pages a stable `b10x-facade-provenance/v2` route contract independent of content
+  revisions, while retaining dual readers and an optional fixed Website snapshot for migration.
+
 - Inventory every fenced example from the exact locked documentation sources through its rendered
   route and exact body, retain source-aware diagnostics and field-note projection attribution, and
   publish the deterministic source/render report with the site artifact.

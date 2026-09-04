@@ -1,7 +1,8 @@
 import {spawnSync} from 'node:child_process';
 import path from 'node:path';
-import {bootstrapEnabled, validateSourceLock} from './source-lock-contract.mjs';
+import {bootstrapEnabled} from './source-lock-contract.mjs';
 import {claimGenerationLease, releaseGenerationLease} from './generation-lease.mjs';
+import {loadPublicationInputs} from './publication-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const allowBootstrap = bootstrapEnabled();
@@ -34,7 +35,7 @@ const commands = [
 const lease = claimGenerationLease('production gate');
 let exitCode = 0;
 try {
-  await validateSourceLock(root, {allowBootstrap});
+  await loadPublicationInputs({root, allowBootstrap});
   for (const [command, args, borrowLease] of commands) {
     const environment = {...process.env};
     delete environment.B10X_GENERATION_LEASE_TOKEN;

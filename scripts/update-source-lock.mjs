@@ -7,6 +7,7 @@ import {extractDeclaredSource, isCollectableManifestSchema, readRoster, reposito
 import {withGenerationLease} from './generation-lease.mjs';
 
 async function updateSourceLock(checkMode) {
+if (process.env.B10X_DOCS_SOURCE_SET) throw new Error('source lock update refuses B10X_DOCS_SOURCE_SET; Atlas owns source-set desired state');
 const root = path.resolve(import.meta.dirname, '..');
 const roster = await readRoster(path.join(root, 'sources.yaml'));
 const cacheRoot = path.join(root, '.cache', 'sources');

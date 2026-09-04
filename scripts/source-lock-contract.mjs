@@ -9,6 +9,10 @@ const hex64 = /^[0-9a-f]{64}$/;
 export async function validateSourceLock(root, {allowBootstrap = false} = {}) {
   const roster = parse(await readFile(path.join(root, 'sources.yaml'), 'utf8'));
   const lock = JSON.parse(await readFile(path.join(root, 'sources.lock.json'), 'utf8'));
+  return validateSourceLockDocument(roster, lock, {allowBootstrap});
+}
+
+export function validateSourceLockDocument(roster, lock, {allowBootstrap = false} = {}) {
   if (roster?.schema !== 'b10x-website-sources/v1' || !Array.isArray(roster.repositories)) {
     throw new Error('sources.yaml is not a b10x-website-sources/v1 roster');
   }

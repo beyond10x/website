@@ -31,6 +31,22 @@ export async function artifactFacts(build) {
 }
 
 export function deploymentFromProvenance(provenance) {
+  if (provenance.schema === 'b10x-website-provenance/v2') {
+    return {
+      schema: 'b10x-docs-deployment/v2',
+      websiteCommit: provenance.websiteCommit,
+      atlasControlCommit: provenance.atlasControlCommit,
+      sourceSetSha256: provenance.sourceSetSha256,
+      sourcesLockSha256: provenance.sourcesLockSha256,
+      legacyRoutesSha256: provenance.legacyRoutesSha256,
+      routesSha256: provenance.routesSha256,
+      artifactSha256: provenance.artifactSha256,
+      sourceCount: Object.keys(provenance.sourceCommits).length,
+      routeCount: provenance.routes.length,
+      fileCount: provenance.files.length,
+      bootstrap: false,
+    };
+  }
   return {
     schema: 'b10x-docs-deployment/v1',
     websiteCommit: provenance.websiteCommit,

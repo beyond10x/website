@@ -15,6 +15,7 @@ import {mdxjs} from 'micromark-extension-mdxjs';
 import {parse as parseHtml} from 'parse5';
 import {parse as parseYaml} from 'yaml';
 import {compareUtf8} from './order-contract.mjs';
+import {loadPublicationInputs} from './publication-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const acceptedLanguages = new Set(PRISM_LANGUAGES);
@@ -212,7 +213,8 @@ async function inspectSourceTree() {
   const diagnostics = [];
   const fences = [];
   const markdownSources = [];
-  const {descriptors, lockedSources} = await collectedMarkdownSources();
+  const inputs = await loadPublicationInputs({root, allowBootstrap: process.env.B10X_BOOTSTRAP_FIXTURE === '1'});
+  const {descriptors, lockedSources} = await collectedMarkdownSources(inputs);
   for (const descriptor of descriptors) {
     const source = await readFile(descriptor.collectedFile, 'utf8');
     const inspected = inventoryMarkdownFences(source, descriptor);
@@ -245,7 +247,7 @@ async function inspectSourceTree() {
   for (const file of await filesBelow(path.join(root, 'src'), /\.[jt]sx$/)) {
     diagnostics.push(...inspectComponentSource(await readFile(file, 'utf8'), relative(file)));
   }
-  const sourceLockSha256 = createHash('sha256').update(await readFile(path.join(root, 'sources.lock.json'))).digest('hex');
+  const sourceLockSha256 = createHash('sha256').update(inputs.sourceLockBytes).digest('hex');
   const inventory = {
     schema: CODE_FENCE_INVENTORY_SCHEMA,
     phase: 'source',
@@ -265,9 +267,10 @@ async function inspectSourceTree() {
 
 async function inspectBuild() {
   const sourceInventory = JSON.parse(await readFile(sourceInventoryPath, 'utf8'));
-  const sourceLockSha256 = createHash('sha256').update(await readFile(path.join(root, 'sources.lock.json'))).digest('hex');
+  const inputs = await loadPublicationInputs({root, allowBootstrap: process.env.B10X_BOOTSTRAP_FIXTURE === '1'});
+  const sourceLockSha256 = createHash('sha256').update(inputs.sourceLockBytes).digest('hex');
   if (sourceInventory.sourceLockSha256 !== sourceLockSha256) {
-    throw new Error('source code-fence inventory does not match sources.lock.json; run the source check again');
+    throw new Error('source code-fence inventory does not match the current publication inputs; run the source check again');
   }
   const diagnostics = [];
   const renderedByRoute = new Map();
@@ -284,8 +287,8 @@ async function inspectBuild() {
   return {diagnostics, inventory: reconciled.inventory};
 }
 
-async function collectedMarkdownSources() {
-  const lock = JSON.parse(await readFile(path.join(root, 'sources.lock.json'), 'utf8'));
+async function collectedMarkdownSources(inputs) {
+  const lock = inputs.lock;
   const documentIndex = JSON.parse(await readFile(path.join(root, '.generated', 'data', 'document-index.json'), 'utf8'));
   if (documentIndex?.schema !== 'b10x-document-index/v1' || !Array.isArray(documentIndex.documents)) {
     throw new Error('run npm run prepare:site before the code source contract');

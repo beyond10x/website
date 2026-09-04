@@ -23,6 +23,7 @@
     "verify:search": "node --no-warnings scripts/verify-search.mjs",
     "redirects:effective": "node scripts/write-effective-redirects.mjs",
     "crawl": "node scripts/crawl-build.mjs",
+    "publication:write": "node scripts/publication-layout.mjs write",
     "build": "node scripts/generation-command.mjs build",
     "clear": "node scripts/generation-command.mjs clear",
     "serve": "docusaurus serve",
@@ -36,7 +37,7 @@
     "gate:fixture": "B10X_BOOTSTRAP_FIXTURE=1 node scripts/run-gate.mjs"
   },
   "dependencies": {
-    "@beyond10x/docs-system": "git+https://github.com/beyond10x/docs-system.git#1ef1890272ce308eb6fec5446091f93afd14046f",
+    "@beyond10x/docs-system": "git+https://github.com/beyond10x/docs-system.git#674157e32ba53b25bd67ea1f426b71368bebcdc2",
     "@docusaurus/core": "3.10.2",
     "@docusaurus/faster": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
@@ -52,6 +53,8 @@
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
     "yaml": "2.9.0"
   },
   "devDependencies": {

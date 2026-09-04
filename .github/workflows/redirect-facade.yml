@@ -5,7 +5,23 @@ on:
     inputs:
       website_sha:
         description: Exact website commit already deployed at the organization root.
-        required: true
+        required: false
+        default: ""
+        type: string
+      canonical_route:
+        description: Stable canonical documentation route for provenance v2.
+        required: false
+        default: ""
+        type: string
+      profile_route:
+        description: Stable ecosystem profile route for provenance v2.
+        required: false
+        default: ""
+        type: string
+      migration_website_sha:
+        description: Optional fixed root snapshot used once to preserve aliases during v2 migration.
+        required: false
+        default: ""
         type: string
       repository:
         description: Calling beyond10x repository name.
@@ -36,28 +52,40 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Validate immutable inputs
+        id: mode
         env:
+          CANONICAL_ROUTE: ${{ inputs.canonical_route }}
           WEBSITE_SHA: ${{ inputs.website_sha }}
           CONTROL_SHA: ${{ inputs.control_sha }}
+          MIGRATION_WEBSITE_SHA: ${{ inputs.migration_website_sha }}
+          PROFILE_ROUTE: ${{ inputs.profile_route }}
           SOURCE_REPOSITORY: ${{ inputs.repository }}
           RUNTIME_REPOSITORY: ${{ job.workflow_repository }}
           RUNTIME_SHA: ${{ job.workflow_sha }}
         run: |
-          case "$WEBSITE_SHA" in
-            *[!0-9a-f]*|'') exit 1 ;;
-          esac
-          test "${#WEBSITE_SHA}" -eq 40
-          case "$CONTROL_SHA" in
-            *[!0-9a-f]*|'') exit 1 ;;
-          esac
-          test "${#CONTROL_SHA}" -eq 40
-          case "$RUNTIME_SHA" in
-            *[!0-9a-f]*|'') exit 1 ;;
-          esac
-          test "${#RUNTIME_SHA}" -eq 40
+          set -euo pipefail
+          for revision in "$CONTROL_SHA" "$RUNTIME_SHA"; do
+            case "$revision" in *[!0-9a-f]*|'') exit 1 ;; esac
+            test "${#revision}" -eq 40
+            test "$revision" != 0000000000000000000000000000000000000000
+          done
+          if test -n "$WEBSITE_SHA"; then
+            test -z "$CANONICAL_ROUTE" && test -z "$PROFILE_ROUTE" && test -z "$MIGRATION_WEBSITE_SHA"
+            mode=v1
+          else
+            test -n "$CANONICAL_ROUTE" && test -n "$PROFILE_ROUTE"
+            mode=v2
+          fi
+          for revision in "$WEBSITE_SHA" "$MIGRATION_WEBSITE_SHA"; do
+            test -z "$revision" && continue
+            case "$revision" in *[!0-9a-f]*|'') exit 1 ;; esac
+            test "${#revision}" -eq 40
+            test "$revision" != 0000000000000000000000000000000000000000
+          done
           test "$CONTROL_SHA" = "$GITHUB_SHA"
           test "$RUNTIME_REPOSITORY" = beyond10x/website
           test "$GITHUB_REPOSITORY" = "beyond10x/$SOURCE_REPOSITORY"
+          printf 'mode=%s\n' "$mode" >> "$GITHUB_OUTPUT"
       - name: Check out the immutable façade runtime
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -72,27 +100,30 @@ jobs:
           ref: ${{ inputs.control_sha }}
           path: .control-data
           persist-credentials: false
-      - name: Check out the deployed Website revision as data
+      - name: Check out the fixed Website data revision when required
+        if: inputs.website_sha != '' || inputs.migration_website_sha != ''
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: beyond10x/website
-          ref: ${{ inputs.website_sha }}
+          ref: ${{ inputs.website_sha || inputs.migration_website_sha }}
           path: .website-data
           fetch-depth: 0
           persist-credentials: false
-      - name: Verify caller, runtime, and Website authority
+      - name: Verify caller, runtime, and optional Website data authority
         env:
           BOT_EMAIL: 316511680+b10x-bot[bot]@users.noreply.github.com
           BOT_LOGIN: b10x-bot[bot]
           CONTROL_SHA: ${{ inputs.control_sha }}
           GITHUB_TOKEN: ${{ github.token }}
           RUNTIME_SHA: ${{ job.workflow_sha }}
-          WEBSITE_SHA: ${{ inputs.website_sha }}
+          DATA_SHA: ${{ inputs.website_sha || inputs.migration_website_sha }}
         run: |
           set -euo pipefail
           test "$(git -C .runtime rev-parse HEAD)" = "$RUNTIME_SHA"
           test "$(git -C .control-data rev-parse HEAD)" = "$CONTROL_SHA"
-          test "$(git -C .website-data rev-parse HEAD)" = "$WEBSITE_SHA"
+          if test -n "$DATA_SHA"; then
+            test "$(git -C .website-data rev-parse HEAD)" = "$DATA_SHA"
+          fi
           test "$(git ls-remote --refs "https://github.com/${GITHUB_REPOSITORY}.git" refs/heads/main | awk 'NF == 2 { print $1 }')" = "$CONTROL_SHA"
 
           assert_git_authority_identity() {
@@ -109,7 +140,9 @@ jobs:
           # App-only caller ref plus the API identity below are the durable authority.
           assert_git_authority_identity .runtime "$RUNTIME_SHA"
           assert_git_authority_identity .control-data "$CONTROL_SHA"
-          assert_git_authority_identity .website-data "$WEBSITE_SHA"
+          if test -n "$DATA_SHA"; then
+            assert_git_authority_identity .website-data "$DATA_SHA"
+          fi
 
           mkdir -p "$RUNNER_TEMP/b10x-facade-boundary"
           api_commit() {
@@ -122,7 +155,9 @@ jobs:
           }
           api_commit beyond10x/website "$RUNTIME_SHA" "$RUNNER_TEMP/b10x-facade-boundary/runtime.json"
           api_commit "$GITHUB_REPOSITORY" "$CONTROL_SHA" "$RUNNER_TEMP/b10x-facade-boundary/control.json"
-          api_commit beyond10x/website "$WEBSITE_SHA" "$RUNNER_TEMP/b10x-facade-boundary/website.json"
+          if test -n "$DATA_SHA"; then
+            api_commit beyond10x/website "$DATA_SHA" "$RUNNER_TEMP/b10x-facade-boundary/website.json"
+          fi
           assert_api_authority() {
             local document=$1 revision=$2
             jq -e --arg login "$BOT_LOGIN" \
@@ -137,12 +172,18 @@ jobs:
           }
           assert_api_authority "$RUNNER_TEMP/b10x-facade-boundary/runtime.json" "$RUNTIME_SHA"
           assert_api_authority "$RUNNER_TEMP/b10x-facade-boundary/control.json" "$CONTROL_SHA"
-          assert_api_authority "$RUNNER_TEMP/b10x-facade-boundary/website.json" "$WEBSITE_SHA"
+          if test -n "$DATA_SHA"; then
+            assert_api_authority "$RUNNER_TEMP/b10x-facade-boundary/website.json" "$DATA_SHA"
+          fi
 
-          git -C .website-data fetch --quiet --no-tags origin \
+          git -C .runtime fetch --quiet --no-tags origin \
             '+refs/heads/main:refs/remotes/origin/main'
-          git -C .website-data merge-base --is-ancestor "$RUNTIME_SHA" refs/remotes/origin/main
-          git -C .website-data merge-base --is-ancestor "$WEBSITE_SHA" refs/remotes/origin/main
+          git -C .runtime merge-base --is-ancestor "$RUNTIME_SHA" refs/remotes/origin/main
+          if test -n "$DATA_SHA"; then
+            git -C .website-data fetch --quiet --no-tags origin \
+              '+refs/heads/main:refs/remotes/origin/main'
+            git -C .website-data merge-base --is-ancestor "$DATA_SHA" refs/remotes/origin/main
+          fi
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
@@ -152,14 +193,38 @@ jobs:
       - name: Install the pinned façade generator
         working-directory: .runtime
         run: npm ci --ignore-scripts
-      - name: Build compatibility routes after root convergence
+      - name: Build legacy or stable compatibility routes
         working-directory: .runtime
-        run: >-
-          node scripts/build-redirect-facade.mjs
-          --repository '${{ inputs.repository }}'
-          --website-sha '${{ inputs.website_sha }}'
-          --data ../.website-data
-          --out ../_site
+        env:
+          CANONICAL_ROUTE: ${{ inputs.canonical_route }}
+          CONTROL_SHA: ${{ inputs.control_sha }}
+          MIGRATION_WEBSITE_SHA: ${{ inputs.migration_website_sha }}
+          PROFILE_ROUTE: ${{ inputs.profile_route }}
+          REPOSITORY: ${{ inputs.repository }}
+          RUNTIME_SHA: ${{ job.workflow_sha }}
+          WEBSITE_SHA: ${{ inputs.website_sha }}
+        run: |
+          set -euo pipefail
+          if test '${{ steps.mode.outputs.mode }}' = v1; then
+            node scripts/build-redirect-facade.mjs \
+              --repository "$REPOSITORY" \
+              --website-sha "$WEBSITE_SHA" \
+              --data ../.website-data \
+              --out ../_site
+          else
+            arguments=(
+              --repository "$REPOSITORY"
+              --canonical-route "$CANONICAL_ROUTE"
+              --profile-route "$PROFILE_ROUTE"
+              --runtime-sha "$RUNTIME_SHA"
+              --control-sha "$CONTROL_SHA"
+              --out ../_site
+            )
+            if test -n "$MIGRATION_WEBSITE_SHA"; then
+              arguments+=(--migration-website-sha "$MIGRATION_WEBSITE_SHA" --data ../.website-data)
+            fi
+            node scripts/build-redirect-facade.mjs "${arguments[@]}"
+          fi
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
         with:
