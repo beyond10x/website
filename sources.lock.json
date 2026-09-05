@@ -60,10 +60,10 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "fec766248afb34660db1b2e12a6370c83a504649",
+      "commit": "0eed3b42b0e602fc74e398688eadf672498946cb",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "3bcca2413e59da1d67407c383ca41cf0c22777a61b267905d7ef35027153db8d",
-      "contentSha256": "50b8b8035462d363f787429ec8005ef5724a8242c50a39e94d8ba9a908861cea"
+      "contentSha256": "840b598a4848f3002183510af02735be7957a13acef6134a468dda694f9c7f6a"
     },
     {
       "repository": "docs-system",
@@ -84,7 +84,7 @@
     {
       "repository": "ess",
       "url": "https://github.com/beyond10x/ess",
-      "commit": "f13fc9d10e7e0d16fe3009b679fc2741bdf3481b",
+      "commit": "fd06a4d61bfb7b4990617810655dc181d6a3ab00",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "af67e8dbbd482583c9c72afc2cf7800f134dcda7ac6cd129381e21aaace0df49",
       "contentSha256": "0fde9e5189fe6f3cbe5d925713de466ab9d4fe4f782540e590e4737068b62b49"
