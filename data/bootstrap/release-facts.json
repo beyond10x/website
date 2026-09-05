@@ -3,6 +3,12 @@
   "releases": [
     {
       "repository": "devcenter",
+      "version": "0.8.20",
+      "publishedAt": "2026-09-05T11:57:49Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.20"
+    },
+    {
+      "repository": "devcenter",
       "version": "0.8.19",
       "publishedAt": "2026-09-05T11:25:18Z",
       "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.19"
