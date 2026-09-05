@@ -44,10 +44,10 @@
     {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
-      "commit": "2a08a69e4265783f041ba344113ceb47556cd090",
+      "commit": "fbf0508d9b05e2f3f1111b7dd8bd259bd3ccc9f7",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "f20deefa7497abccae0475135ad09d065c5bc240b0cd18bf356e7b3c662cecc0",
-      "contentSha256": "1493c5693f20d8915f0818c13f3e68ff042f5e606a393b98103cc7b4ade17683"
+      "contentSha256": "df535bbb2042417ae72f1b776ed1a3d510cdf42e8360ecbe1624061e87795bc9"
     },
     {
       "repository": "connectors",
@@ -76,10 +76,10 @@
     {
       "repository": "entity-runtime",
       "url": "https://github.com/beyond10x/entity-runtime",
-      "commit": "24dea3c8167d62c77905ff6f81881e341c71db1f",
+      "commit": "04e887baabde46d80cf97959534c952b8e235cb3",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "f8268dc4b28dcad0749ad69357d458f30f5874bee7968c91858cc15668179cbd",
-      "contentSha256": "9b00c4101eb4822a2588cf8ccb2c7327aad080156288cb0540c40dc5fccc2fc7"
+      "contentSha256": "535ccb21e362edd1ec14ad71cd73e365783d9943add18a6d389e507325e0545a"
     },
     {
       "repository": "ess",
@@ -156,7 +156,7 @@
     {
       "repository": "substrate",
       "url": "https://github.com/beyond10x/substrate",
-      "commit": "6baba6888d2d26a2d64287fc3a06c8037c4ed504",
+      "commit": "7ef5321832dad05a523c3cae0ac2463532df81e9",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "d5817ee13dd2ab37d94d6b197285fbe178c83e84b6ee495c92423abda0bae589",
       "contentSha256": "803387618afb09555aed1e15c03d1b6985a9dcea829aafcf7d134ec9a1334c05"
