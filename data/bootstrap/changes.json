@@ -2,6 +2,52 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "workspace/0.2.18",
+      "id": "workspace/0.2.18",
+      "repository": "workspace",
+      "publishedAt": "2026-09-05T01:30:19Z",
+      "title": "Workspace 0.2.18",
+      "summary": "Workspace released version 0.2.18.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.18",
+        "version": "0.2.18"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/publication-ctl-independent-20260905",
+      "id": "devcenter/publication-ctl-independent-20260905",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-05T01:10:11Z",
+      "title": "Devcenter publication-ctl-independent-20260905",
+      "summary": "Devcenter released version publication-ctl-independent-20260905.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-ctl-independent-20260905",
+        "version": "publication-ctl-independent-20260905"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.8.17",
       "id": "devcenter/0.8.17",
       "repository": "devcenter",
