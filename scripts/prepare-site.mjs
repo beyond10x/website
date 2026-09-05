@@ -12,7 +12,7 @@ import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
 import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from './api-catalog.mjs';
 import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars, sourceSidebarMetadata} from './sidebar-contract.mjs';
 import {normalizePassiveMarkdown} from './passive-markdown.mjs';
-import {assertSearchAudienceVocabulary, experienceIdsForSourceDocument} from './search-metadata-contract.mjs';
+import {assertSearchAudienceVocabulary, experienceIdsForSourceDocument, qualifiedDocumentTitle} from './search-metadata-contract.mjs';
 import {withGenerationLease} from './generation-lease.mjs';
 import {loadPublicationInputs} from './publication-inputs.mjs';
 
@@ -490,7 +490,7 @@ async function renderBlog({raw, file, route, commit, repositoryUrl, routeBySourc
       project: file.repository,
       projectName,
       title,
-      qualifiedTitle: `${title} | ${projectName}`,
+      qualifiedTitle: qualifiedDocumentTitle(title, projectName),
       description: summaryText(frontmatter.description ?? `${title} in the source-owned ${projectName} documentation.`),
       documentType: 'field-note',
       audiences: resolved?.effective.audiences ?? ['researcher'],
@@ -636,7 +636,7 @@ async function documentMetadata({raw, file, route, manifest, surface}) {
   return {
     route,
     title,
-    qualifiedTitle: `${title} | ${projectName}`,
+    qualifiedTitle: qualifiedDocumentTitle(title, projectName),
     project: file.repository,
     projectName,
     description,
@@ -838,7 +838,7 @@ async function synthesizeDirectoryLandings({documents, routeBySource, destinatio
     const metadata = {
       route,
       title,
-      qualifiedTitle: `${title} | ${projectName}`,
+      qualifiedTitle: qualifiedDocumentTitle(title, projectName),
       project: repository,
       projectName,
       description: `Browse the ${title} section of the source-owned ${projectName} documentation.`,

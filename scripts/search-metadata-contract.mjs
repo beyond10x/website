@@ -8,6 +8,12 @@ export const SEARCH_AUDIENCE_VOCABULARY = Object.freeze([
 
 const audienceVocabulary = new Set(SEARCH_AUDIENCE_VOCABULARY);
 
+export function qualifiedDocumentTitle(title, projectName) {
+  const page = title.trim();
+  const project = projectName.trim();
+  return page.toLowerCase() === project.toLowerCase() ? page : `${page} | ${project}`;
+}
+
 export function experienceIdsForSourceDocument({schema, effective}) {
   if (schema !== 'b10x-docs/v4') return [];
   if (!effective || !Array.isArray(effective.experienceIds)) {

@@ -160,6 +160,7 @@ try {
 
   await verifyGlobalSectionState(client, site);
   await verifySearchCards(client, site);
+  await verifyDocumentationViewports(client, site);
 
   process.stdout.write(`verified global navigation, project context, readable search cards, pointer activation, and trapped keyboard drawer flow at 1440×1000, 320/390×844, and ${boundaryWidths.join('/')}×844\n`);
 } catch (error) {
@@ -519,6 +520,90 @@ async function loadSearchCards(cdp, url) {
   return cards;
 }
 
+async function verifyDocumentationViewports(cdp, siteUrl) {
+  // 720 CSS pixels at scale 2 exercises the reflow of a 1440px display at 200% zoom.
+  const sizes = [
+    {width: 1440, height: 1000, mobile: false, scale: 1},
+    {width: 320, height: 844, mobile: true, scale: 1},
+    {width: 390, height: 844, mobile: true, scale: 1},
+    {width: 720, height: 500, mobile: false, scale: 2},
+  ];
+  for (const theme of ['light', 'dark']) {
+    await evaluate(cdp, `localStorage.setItem('theme', ${JSON.stringify(theme)})`);
+    for (const {width, height, mobile, scale} of sizes) {
+      const context = `${theme}, ${width}px, scale ${scale}`;
+      await cdp.command('Emulation.setDeviceMetricsOverride', {width, height, deviceScaleFactor: scale, mobile});
+      await navigate(cdp, `${siteUrl}/docs/connectors/architecture/specification/`);
+      let diagram;
+      for (let attempt = 0; attempt < 100; attempt += 1) {
+        diagram = await evaluate(cdp, `(() => {
+          const viewport = document.querySelector('.theme-doc-markdown .b10x-diagram__viewport');
+          const svg = viewport?.querySelector('svg');
+          if (!svg?.viewBox.baseVal.width) return null;
+          return {
+            nativeWidth: svg.viewBox.baseVal.width, width: svg.getBoundingClientRect().width,
+            focusable: viewport.tabIndex === 0, scrollWidth: viewport.scrollWidth,
+            clientWidth: viewport.clientWidth, hidden: Boolean(svg.closest('[aria-hidden="true"]')),
+            nested: Boolean(viewport.querySelector('.b10x-diagram__viewport')),
+            source: Boolean(document.querySelector('[data-b10x-mermaid-source]')),
+            described: Boolean(document.getElementById(viewport.getAttribute('aria-describedby').split(' ').at(-1))),
+          };
+        })()`);
+        if (diagram && diagram.width >= diagram.nativeWidth - 1) break;
+        await delay(50);
+      }
+      assert.ok(diagram, `ordinary Mermaid must render inside a shared viewport at ${context}`);
+      assert.ok(diagram.width >= diagram.nativeWidth - 1, `diagram labels must retain intrinsic size at ${context}`);
+      assert.ok(diagram.focusable && diagram.described, `diagram must expose keyboard focus and instructions at ${context}`);
+      assert.equal(diagram.hidden, false, 'ordinary Mermaid must retain its native accessible description');
+      assert.equal(diagram.nested, false, 'Mermaid must have exactly one scroll viewport');
+      assert.ok(diagram.source, 'Mermaid must retain the exact-source evidence marker');
+      if (diagram.scrollWidth > diagram.clientWidth + 1) {
+        await assertKeyboardPan(cdp, '.theme-doc-markdown .b10x-diagram__viewport', context);
+      }
+
+      const tables = await evaluate(cdp, `([...document.querySelectorAll('.theme-doc-markdown .b10x-table-wrap')].map((wrapper) => ({
+        columns: wrapper.querySelectorAll('thead th').length,
+        overflow: wrapper.scrollWidth > wrapper.clientWidth + 1,
+        focusable: wrapper.tabIndex === 0,
+        named: Boolean(wrapper.getAttribute('aria-label')),
+        hint: !document.getElementById(wrapper.getAttribute('aria-describedby'))?.hidden,
+      })))`);
+      assert.ok(tables.some((table) => table.columns >= 3), 'coverage comparison must retain its semantic column headers');
+      for (const [index, table] of tables.entries()) {
+        if (!table.overflow) continue;
+        assert.ok(table.focusable && table.named && table.hint, `overflowing table must be named and keyboard accessible at ${context}`);
+        // Select by inventory index: prose and other wrappers also participate in nth-of-type.
+        await evaluate(cdp, `document.querySelectorAll('.theme-doc-markdown .b10x-table-wrap')[${index}].id = 'viewport-audit-table'`);
+        await assertKeyboardPan(cdp, '#viewport-audit-table', context);
+        const lastColumnVisible = await evaluate(cdp, `(() => {
+          const wrapper = document.getElementById('viewport-audit-table');
+          wrapper.scrollLeft = wrapper.scrollWidth;
+          const column = wrapper.querySelector('thead th:last-child').getBoundingClientRect();
+          return column.right <= wrapper.getBoundingClientRect().right + 1;
+        })()`);
+        assert.ok(lastColumnVisible, `the final table column must be reachable at ${context}`);
+      }
+      assert.ok(await evaluate(cdp, 'document.documentElement.scrollWidth <= innerWidth + 1'), `documentation must not force whole-page horizontal scrolling at ${context}`);
+    }
+  }
+  await evaluate(cdp, "localStorage.removeItem('theme')");
+  process.stdout.write('verified readable diagrams and semantic tables in both themes at desktop, 320/390px, and 200% reflow\n');
+}
+
+async function assertKeyboardPan(cdp, selector, context) {
+  await evaluate(cdp, `(() => {
+    const viewport = document.querySelector(${JSON.stringify(selector)});
+    viewport.scrollIntoView({block: 'center'});
+    viewport.scrollLeft = 0;
+    viewport.focus();
+  })()`);
+  for (let count = 0; count < 4; count += 1) await pressKey(cdp, 'ArrowRight');
+  await settle(cdp);
+  const panned = await evaluate(cdp, `document.querySelector(${JSON.stringify(selector)}).scrollLeft > 0`);
+  assert.ok(panned, `arrow keys must pan ${selector} at ${context}`);
+}
+
 async function tabToSelector(cdp, selector, width) {
   for (let attempt = 0; attempt < 12; attempt += 1) {
     await pressKey(cdp, 'Tab');
@@ -533,6 +618,7 @@ async function pressKey(cdp, key, {shift = false} = {}) {
     Tab: {code: 'Tab', keyCode: 9},
     Enter: {code: 'Enter', keyCode: 13, text: '\r'},
     Escape: {code: 'Escape', keyCode: 27},
+    ArrowRight: {code: 'ArrowRight', keyCode: 39},
   }[key];
   if (!definition) throw new Error(`unsupported navigation audit key ${key}`);
   const common = {

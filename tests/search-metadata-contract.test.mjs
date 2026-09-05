@@ -5,10 +5,18 @@ import test from 'node:test';
 import {
   assertSearchAudienceVocabulary,
   experienceIdsForSourceDocument,
+  qualifiedDocumentTitle,
   SEARCH_AUDIENCE_VOCABULARY,
 } from '../scripts/search-metadata-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
+
+test('document titles qualify distinct pages without repeating a project landing name', () => {
+  assert.equal(qualifiedDocumentTitle('Connectors', 'Connectors'), 'Connectors');
+  assert.equal(qualifiedDocumentTitle(' ESS ', 'Ess'), 'ESS');
+  assert.equal(qualifiedDocumentTitle('Connect Slack', 'Connectors'), 'Connect Slack | Connectors');
+  assert.equal(qualifiedDocumentTitle('Connectors architecture', 'Connectors'), 'Connectors architecture | Connectors');
+});
 
 test('legacy source documents remain compatibility references without inferred experience membership', () => {
   for (const schema of ['b10x-docs/v1', 'b10x-docs/v2', 'b10x-docs/v3']) {

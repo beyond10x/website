@@ -478,7 +478,7 @@ html.docs-doc-page .main-wrapper {
 }
 
 .theme-doc-markdown table {
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid var(--b10x-color-line);
   border-radius: 9px;
   box-shadow: var(--b10x-shadow-card);
