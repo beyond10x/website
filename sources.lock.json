@@ -44,7 +44,7 @@
     {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
-      "commit": "87930510bde690ae84b38203ddbee27cb576c805",
+      "commit": "2a08a69e4265783f041ba344113ceb47556cd090",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "f20deefa7497abccae0475135ad09d065c5bc240b0cd18bf356e7b3c662cecc0",
       "contentSha256": "1493c5693f20d8915f0818c13f3e68ff042f5e606a393b98103cc7b4ade17683"
@@ -52,7 +52,7 @@
     {
       "repository": "connectors",
       "url": "https://github.com/beyond10x/connectors",
-      "commit": "42de4dbfa81e4fb3c6637070b864a6d3cd311a86",
+      "commit": "caf9e36de3dd0a6f7508eee5b67abf7c19872a90",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "dd501227463dc756b79faea8beafbfeb55d7a4040f3cbd6c92e1d65eb3aa20a0",
       "contentSha256": "544d6b240a1e3d63b1a603ad6cf29e2a6dd8be53a59e23ec57ad35278942b090"
@@ -60,10 +60,10 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "eb91601b9858e99a449b37e564f65f2d3a4749c7",
+      "commit": "bb7311b0a7bc03c61714e89f5379014d88c83210",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "3bcca2413e59da1d67407c383ca41cf0c22777a61b267905d7ef35027153db8d",
-      "contentSha256": "d787a079b08a636ab16698b44b8434c0ef94c960738cbbd6e17e88eb1bf3a6cd"
+      "contentSha256": "ffc9d0e0d63b4ef49391ea52d067e3648b7c55327e1cf97678193b2b57922809"
     },
     {
       "repository": "docs-system",
@@ -84,7 +84,7 @@
     {
       "repository": "ess",
       "url": "https://github.com/beyond10x/ess",
-      "commit": "0f80f71e7ef997e8a3c7d2ad19e9997090e8e769",
+      "commit": "6cbe372ea68487f11fa6d53500f2033a95f29b79",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "af67e8dbbd482583c9c72afc2cf7800f134dcda7ac6cd129381e21aaace0df49",
       "contentSha256": "0fde9e5189fe6f3cbe5d925713de466ab9d4fe4f782540e590e4737068b62b49"
@@ -156,10 +156,10 @@
     {
       "repository": "substrate",
       "url": "https://github.com/beyond10x/substrate",
-      "commit": "11ece7381ce6423f1e8582709df1aa71e514b0c7",
+      "commit": "1890e307cc33420d351206a0d6abbc4318a67c01",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "d5817ee13dd2ab37d94d6b197285fbe178c83e84b6ee495c92423abda0bae589",
-      "contentSha256": "e721b43a7cc13ddb3f087dacd55d3f0d77d58881f44f9c7147186a46d6e6a2c4"
+      "contentSha256": "e41d6cf0a6f65f1f8ddd3f31009c73c05687ee9fe787a30f19acdc8e10ef03ab"
     },
     {
       "repository": "workflow",
