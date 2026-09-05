@@ -567,7 +567,8 @@ async function verifyDocumentationViewports(cdp, siteUrl) {
         overflow: wrapper.scrollWidth > wrapper.clientWidth + 1,
         focusable: wrapper.tabIndex === 0,
         named: Boolean(wrapper.getAttribute('aria-label')),
-        hint: !document.getElementById(wrapper.getAttribute('aria-describedby'))?.hidden,
+        hint: Boolean(wrapper.getAttribute('aria-describedby'))
+          && document.getElementById(wrapper.getAttribute('aria-describedby'))?.hidden === false,
       })))`);
       assert.ok(tables.some((table) => table.columns >= 3), 'coverage comparison must retain its semantic column headers');
       for (const [index, table] of tables.entries()) {

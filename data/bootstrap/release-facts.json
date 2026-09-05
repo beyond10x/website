@@ -2,6 +2,24 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "substrate",
+      "version": "0.7.3",
+      "publishedAt": "2026-09-05T09:49:27Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.7.3"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.8.18",
+      "publishedAt": "2026-09-05T09:45:01Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.18"
+    },
+    {
+      "repository": "workspace",
+      "version": "0.2.19",
+      "publishedAt": "2026-09-05T09:43:40Z",
+      "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.19"
+    },
+    {
       "repository": "workspace",
       "version": "0.2.18",
       "publishedAt": "2026-09-05T01:30:19Z",
