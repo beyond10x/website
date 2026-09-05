@@ -2,6 +2,204 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "devcenter",
+      "version": "0.8.17",
+      "publishedAt": "2026-09-05T00:15:48Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.17"
+    },
+    {
+      "repository": "agentide",
+      "version": "0.3.5",
+      "publishedAt": "2026-09-05T00:05:51Z",
+      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.5"
+    },
+    {
+      "repository": "agentide",
+      "version": "0.3.4",
+      "publishedAt": "2026-09-04T23:32:20Z",
+      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.4"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.6.0",
+      "publishedAt": "2026-09-04T22:54:57Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.6.0"
+    },
+    {
+      "repository": "agent-platform",
+      "version": "0.6.8",
+      "publishedAt": "2026-09-04T16:05:55Z",
+      "url": "https://github.com/beyond10x/agent-platform/releases/tag/0.6.8"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.7.0",
+      "publishedAt": "2026-09-04T15:21:24Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.7.0"
+    },
+    {
+      "repository": "ess",
+      "version": "0.17.0",
+      "publishedAt": "2026-09-04T14:13:15Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.17.0"
+    },
+    {
+      "repository": "ess",
+      "version": "0.18.0",
+      "publishedAt": "2026-09-04T14:08:16Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.18.0"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.8.16",
+      "publishedAt": "2026-09-04T13:37:04Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.16"
+    },
+    {
+      "repository": "ess",
+      "version": "0.16.0",
+      "publishedAt": "2026-09-04T13:13:51Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.16.0"
+    },
+    {
+      "repository": "workspace",
+      "version": "0.2.15",
+      "publishedAt": "2026-09-04T13:04:42Z",
+      "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.15"
+    },
+    {
+      "repository": "service-sdk",
+      "version": "0.5.8",
+      "publishedAt": "2026-09-04T12:57:57Z",
+      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.5.8"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.6.0",
+      "publishedAt": "2026-09-04T11:05:07Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.6.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.54.0",
+      "publishedAt": "2026-09-04T10:13:28Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.54.0"
+    },
+    {
+      "repository": "ess",
+      "version": "0.14.0",
+      "publishedAt": "2026-09-04T10:01:53Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.14.0"
+    },
+    {
+      "repository": "devcenter",
+      "version": "0.8.15",
+      "publishedAt": "2026-09-04T07:46:47Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.15"
+    },
+    {
+      "repository": "service-sdk",
+      "version": "0.5.7",
+      "publishedAt": "2026-09-04T07:05:51Z",
+      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.5.7"
+    },
+    {
+      "repository": "aep-service",
+      "version": "0.1.8",
+      "publishedAt": "2026-09-04T05:54:42Z",
+      "url": "https://github.com/beyond10x/aep-service/releases/tag/0.1.8"
+    },
+    {
+      "repository": "agentide",
+      "version": "0.3.3",
+      "publishedAt": "2026-09-04T05:15:39Z",
+      "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.3"
+    },
+    {
+      "repository": "ess",
+      "version": "0.13.5",
+      "publishedAt": "2026-09-04T05:00:06Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.13.5"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.5.11",
+      "publishedAt": "2026-09-04T04:18:54Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.11"
+    },
+    {
+      "repository": "service-sdk",
+      "version": "0.5.6",
+      "publishedAt": "2026-09-04T04:13:44Z",
+      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.5.6"
+    },
+    {
+      "repository": "service-sdk",
+      "version": "0.5.5",
+      "publishedAt": "2026-09-04T04:07:14Z",
+      "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.5.5"
+    },
+    {
+      "repository": "aep",
+      "version": "0.53.0",
+      "publishedAt": "2026-09-04T03:56:27Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.53.0"
+    },
+    {
+      "repository": "ess",
+      "version": "0.13.4",
+      "publishedAt": "2026-09-04T03:30:03Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.13.4"
+    },
+    {
+      "repository": "ess",
+      "version": "0.13.3",
+      "publishedAt": "2026-09-04T03:14:50Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.13.3"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.5.9",
+      "publishedAt": "2026-09-04T03:13:06Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.9"
+    },
+    {
+      "repository": "ess",
+      "version": "0.13.2",
+      "publishedAt": "2026-09-04T02:33:48Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.13.2"
+    },
+    {
+      "repository": "aep",
+      "version": "0.52.0",
+      "publishedAt": "2026-09-04T02:28:57Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.52.0"
+    },
+    {
+      "repository": "ess",
+      "version": "0.13.1",
+      "publishedAt": "2026-09-04T01:56:41Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.13.1"
+    },
+    {
+      "repository": "ess",
+      "version": "0.13.0",
+      "publishedAt": "2026-09-04T01:38:38Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.13.0"
+    },
+    {
+      "repository": "ess",
+      "version": "0.12.0",
+      "publishedAt": "2026-09-04T01:32:32Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.12.0"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.5.8",
+      "publishedAt": "2026-09-04T01:29:44Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.8"
+    },
+    {
       "repository": "aep-service",
       "version": "0.1.7",
       "publishedAt": "2026-09-04T00:42:49Z",
