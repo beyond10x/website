@@ -36,18 +36,18 @@
     {
       "repository": "agentide",
       "url": "https://github.com/beyond10x/agentide",
-      "commit": "9095db7e90d175e7cfc7d161c99029959b1e6c44",
+      "commit": "176a57f58457a7c16f105584c66964263b3c2e41",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "c1013c33764515deb5e91a311e6175531ece4a0785e37f1fcbd01134e5d47879",
-      "contentSha256": "5713dc5f1f7413491e05d042c36fc2e827b4dd003fe2fc3cdde38b32688a15f4"
+      "contentSha256": "751ae54e5e60b4e7bee22c0036466f09fbe35fe1b3e1e4558d801b14939ac6d7"
     },
     {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
-      "commit": "121ba06d22a6a7eec5e0ead6d27cdf024de50163",
+      "commit": "87930510bde690ae84b38203ddbee27cb576c805",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "f20deefa7497abccae0475135ad09d065c5bc240b0cd18bf356e7b3c662cecc0",
-      "contentSha256": "2a24fc17f728b8ccfcd333ddef9332d4b169e0212fe27c082c6d8d445e45fb0a"
+      "contentSha256": "1493c5693f20d8915f0818c13f3e68ff042f5e606a393b98103cc7b4ade17683"
     },
     {
       "repository": "connectors",
@@ -60,10 +60,10 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "60fdc9620ab3934df781e2f4f4a1077760bee779",
+      "commit": "eb91601b9858e99a449b37e564f65f2d3a4749c7",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "3bcca2413e59da1d67407c383ca41cf0c22777a61b267905d7ef35027153db8d",
-      "contentSha256": "186d0ec3d9fc76e6a6ff81efd1161fdb712fc9ad040dfb432339e095d4fb0e2f"
+      "contentSha256": "d787a079b08a636ab16698b44b8434c0ef94c960738cbbd6e17e88eb1bf3a6cd"
     },
     {
       "repository": "docs-system",
