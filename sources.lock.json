@@ -156,10 +156,10 @@
     {
       "repository": "substrate",
       "url": "https://github.com/beyond10x/substrate",
-      "commit": "1890e307cc33420d351206a0d6abbc4318a67c01",
+      "commit": "6baba6888d2d26a2d64287fc3a06c8037c4ed504",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "d5817ee13dd2ab37d94d6b197285fbe178c83e84b6ee495c92423abda0bae589",
-      "contentSha256": "e41d6cf0a6f65f1f8ddd3f31009c73c05687ee9fe787a30f19acdc8e10ef03ab"
+      "contentSha256": "803387618afb09555aed1e15c03d1b6985a9dcea829aafcf7d134ec9a1334c05"
     },
     {
       "repository": "workflow",
