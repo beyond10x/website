@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/0.8.19",
+      "id": "devcenter/0.8.19",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-05T11:25:18Z",
+      "title": "Devcenter 0.8.19",
+      "summary": "Devcenter released version 0.8.19.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.19",
+        "version": "0.8.19"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "substrate/0.7.3",
       "id": "substrate/0.7.3",
       "repository": "substrate",

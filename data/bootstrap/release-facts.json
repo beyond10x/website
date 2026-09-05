@@ -2,6 +2,12 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "devcenter",
+      "version": "0.8.19",
+      "publishedAt": "2026-09-05T11:25:18Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.19"
+    },
+    {
       "repository": "substrate",
       "version": "0.7.3",
       "publishedAt": "2026-09-05T09:49:27Z",
