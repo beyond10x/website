@@ -2,6 +2,48 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "devcenter",
+      "version": "publication-0.8.25",
+      "publishedAt": "2026-09-05T21:58:22Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.25"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.7.4",
+      "publishedAt": "2026-09-05T21:11:07Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.7.4"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.24",
+      "publishedAt": "2026-09-05T21:07:20Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.24"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.23",
+      "publishedAt": "2026-09-05T20:14:33Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.23"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.22",
+      "publishedAt": "2026-09-05T19:35:42Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.22"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.21",
+      "publishedAt": "2026-09-05T18:22:55Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.21"
+    },
+    {
+      "repository": "workspace",
+      "version": "0.2.20",
+      "publishedAt": "2026-09-05T18:12:32Z",
+      "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.20"
+    },
+    {
       "repository": "agentplugins",
       "version": "0.8.0",
       "publishedAt": "2026-09-05T17:17:18Z",

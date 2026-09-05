@@ -2,6 +2,167 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/publication-0.8.25",
+      "id": "devcenter/publication-0.8.25",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-05T21:58:22Z",
+      "title": "Devcenter publication-0.8.25",
+      "summary": "Devcenter released version publication-0.8.25.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.25",
+        "version": "publication-0.8.25"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "substrate/0.7.4",
+      "id": "substrate/0.7.4",
+      "repository": "substrate",
+      "publishedAt": "2026-09-05T21:11:07Z",
+      "title": "Substrate 0.7.4",
+      "summary": "Substrate released version 0.7.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/substrate/releases/tag/0.7.4",
+        "version": "0.7.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "substrate/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/publication-0.8.24",
+      "id": "devcenter/publication-0.8.24",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-05T21:07:20Z",
+      "title": "Devcenter publication-0.8.24",
+      "summary": "Devcenter released version publication-0.8.24.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.24",
+        "version": "publication-0.8.24"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/publication-0.8.23",
+      "id": "devcenter/publication-0.8.23",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-05T20:14:33Z",
+      "title": "Devcenter publication-0.8.23",
+      "summary": "Devcenter released version publication-0.8.23.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.23",
+        "version": "publication-0.8.23"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/publication-0.8.22",
+      "id": "devcenter/publication-0.8.22",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-05T19:35:42Z",
+      "title": "Devcenter publication-0.8.22",
+      "summary": "Devcenter released version publication-0.8.22.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.22",
+        "version": "publication-0.8.22"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/publication-0.8.21",
+      "id": "devcenter/publication-0.8.21",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-05T18:22:55Z",
+      "title": "Devcenter publication-0.8.21",
+      "summary": "Devcenter released version publication-0.8.21.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.21",
+        "version": "publication-0.8.21"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.20",
+      "id": "workspace/0.2.20",
+      "repository": "workspace",
+      "publishedAt": "2026-09-05T18:12:32Z",
+      "title": "Workspace 0.2.20",
+      "summary": "Workspace released version 0.2.20.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.20",
+        "version": "0.2.20"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "agentplugins/0.8.0",
       "id": "agentplugins/0.8.0",
       "repository": "agentplugins",
