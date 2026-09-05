@@ -44,7 +44,7 @@
     {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
-      "commit": "fbf0508d9b05e2f3f1111b7dd8bd259bd3ccc9f7",
+      "commit": "0ef80f496e3debcd6b7e7a4b2eec218bade35af0",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "f20deefa7497abccae0475135ad09d065c5bc240b0cd18bf356e7b3c662cecc0",
       "contentSha256": "df535bbb2042417ae72f1b776ed1a3d510cdf42e8360ecbe1624061e87795bc9"
@@ -76,10 +76,10 @@
     {
       "repository": "entity-runtime",
       "url": "https://github.com/beyond10x/entity-runtime",
-      "commit": "04e887baabde46d80cf97959534c952b8e235cb3",
+      "commit": "513d3bc0c44d7ae0109df90935d984bd3f278afb",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "f8268dc4b28dcad0749ad69357d458f30f5874bee7968c91858cc15668179cbd",
-      "contentSha256": "535ccb21e362edd1ec14ad71cd73e365783d9943add18a6d389e507325e0545a"
+      "contentSha256": "3f24a6d4d445777a3e10ee2bb5aa4eab2d8f58556a35c7d0d12d9864993335be"
     },
     {
       "repository": "ess",
