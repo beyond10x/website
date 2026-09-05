@@ -2,6 +2,54 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.8.0",
+      "id": "agentplugins/0.8.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-05T17:17:18Z",
+      "title": "Agent Plugins 0.8.0",
+      "summary": "Agent Plugins released version 0.8.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.8.0",
+        "version": "0.8.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.17.7",
+      "id": "entity-runtime/0.17.7",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-09-05T16:42:08Z",
+      "title": "Entity Runtime 0.17.7",
+      "summary": "Entity Runtime released version 0.17.7.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.17.7",
+        "version": "0.17.7"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/0.8.20",
       "id": "devcenter/0.8.20",
       "repository": "devcenter",

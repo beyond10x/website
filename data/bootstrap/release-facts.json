@@ -2,6 +2,18 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "agentplugins",
+      "version": "0.8.0",
+      "publishedAt": "2026-09-05T17:17:18Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.8.0"
+    },
+    {
+      "repository": "entity-runtime",
+      "version": "0.17.7",
+      "publishedAt": "2026-09-05T16:42:08Z",
+      "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.17.7"
+    },
+    {
       "repository": "devcenter",
       "version": "0.8.20",
       "publishedAt": "2026-09-05T11:57:49Z",
