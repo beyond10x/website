@@ -16,6 +16,7 @@ repositories:
   - entity-runtime
   - ess
   - eventlog
+  - extensions
   - harness
   - identity
   - mcp
