@@ -2,6 +2,52 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/publication-0.8.30",
+      "id": "devcenter/publication-0.8.30",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-06T12:03:31Z",
+      "title": "Devcenter publication-0.8.30",
+      "summary": "Devcenter released version publication-0.8.30.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.30",
+        "version": "publication-0.8.30"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/publication-0.8.29",
+      "id": "devcenter/publication-0.8.29",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-06T10:59:18Z",
+      "title": "Devcenter publication-0.8.29",
+      "summary": "Devcenter released version publication-0.8.29.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.29",
+        "version": "publication-0.8.29"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "workspace/0.2.22",
       "id": "workspace/0.2.22",
       "repository": "workspace",

@@ -2,6 +2,18 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "devcenter",
+      "version": "publication-0.8.30",
+      "publishedAt": "2026-09-06T12:03:31Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.30"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.29",
+      "publishedAt": "2026-09-06T10:59:18Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.29"
+    },
+    {
       "repository": "workspace",
       "version": "0.2.22",
       "publishedAt": "2026-09-06T10:03:36Z",
