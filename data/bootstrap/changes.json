@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "workspace/0.2.22",
+      "id": "workspace/0.2.22",
+      "repository": "workspace",
+      "publishedAt": "2026-09-06T10:03:36Z",
+      "title": "Workspace 0.2.22",
+      "summary": "Workspace released version 0.2.22.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.22",
+        "version": "0.2.22"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/publication-0.8.28",
       "id": "devcenter/publication-0.8.28",
       "repository": "devcenter",
