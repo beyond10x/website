@@ -20,7 +20,7 @@ scope:
   path: data/bootstrap/release-facts.json
 - confidence: inferred
   path: sources.lock.json
-revision: 4
+revision: 5
 ---
 ## Outcome
 
@@ -39,3 +39,13 @@ Only sources.lock.json, data/bootstrap/ecosystem.json, changes.json, release-fac
 ## Workspace and resources
 
 Managed tree wt-5b72ec73c229, branch docs/cli-schema3-source-lock, exact published Website base d35d9297046f8f0af16c671dc1a372a7be33baa1. Scratch is under ~/.cache/cw6/p/schema3-website*. AEP recording actor is agent:cli-ten-slack-first. The wave's prospective12GiB reserve and single compiling workspace govern local builds; dependency installation and rendering remain paused until sufficient measured headroom and the compile slot are available. Source discovery and planning are read-only or isolated reversible preparation.
+
+## Published source and deterministic refresh — 2026-09-06
+
+Connectors PR18 merged at 2026-09-06T14:30:35Z by the normal bot-wrapper fast-forward. Main is 0c69450921ab1794c81dadec915b717a61bf0983, exact reviewed tree fdad9c0e21a3afb521a0b88fef222211293e5dc2. Repository CI34037821332 completed successfully: all twelve workspace gates, checks, four native platform builds and their smoke tests passed; the tag-only publish job was skipped. All nineteen introduced direct commits have the exact required bot author and committer. No release or tag was created.
+
+The existing Node24 toolchain completed npm ci --ignore-scripts with the exact committed package lock, exit 0, and no source changes. Website's ordinary anonymous remote-backed sources:lock then completed with all twenty-four sources and unchanged roster, repository URLs, manifest paths and manifest digests. Its generated refresh advances Connectors 4b32397d to 0c694509, Devcenter 321880bd to 5657c42d, ESS 6c78676c to 06b5f1d1, and Workspace 0e870c70 to 35b204b2. Workspace's declared content digest stays unchanged; the first three receive the exact newly collected content digests. All other rows stay identical. This is the unmodified collector's complete output, not a selectively assembled JSON edit.
+
+The source lock SHA256 is c709781ccaa1190430d2d24760c045c2a9b2d45a0364b4573e962fe62ac16365. Every locked commit already exists in its sibling Git object database; no primary checkout or ref was changed. The generated lock is checkpointed before Atlas's retained snapshot requires committed bytes. Subsequent snapshot, full Website gate, Atlas retained verification and new automatic production convergence are still required. The old live publication remains separately observed and supplies no claim of this source's delivery.
+
+Persistent command/resource records and exact lock delta are under ~/.cache/cw6/p using the schema3-website prefix; the source merge receipt is schema3-main-published-readback.json. Minimum available disk for install was 15,737,065,472 bytes and for collection 15,534,948,352 bytes; neither command was interrupted. The prospective 12 GiB reserve remains in force.
