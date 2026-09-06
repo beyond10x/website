@@ -2,6 +2,18 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "ess",
+      "version": "0.19.0",
+      "publishedAt": "2026-09-05T22:36:33Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.19.0"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.7.5",
+      "publishedAt": "2026-09-05T22:20:00Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.7.5"
+    },
+    {
       "repository": "devcenter",
       "version": "publication-0.8.25",
       "publishedAt": "2026-09-05T21:58:22Z",
