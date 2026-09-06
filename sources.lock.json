@@ -52,7 +52,7 @@
     {
       "repository": "connectors",
       "url": "https://github.com/beyond10x/connectors",
-      "commit": "caf9e36de3dd0a6f7508eee5b67abf7c19872a90",
+      "commit": "a61e0a748be58ad03cf1907a48f9fefbb4423434",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "dd501227463dc756b79faea8beafbfeb55d7a4040f3cbd6c92e1d65eb3aa20a0",
       "contentSha256": "544d6b240a1e3d63b1a603ad6cf29e2a6dd8be53a59e23ec57ad35278942b090"
@@ -60,7 +60,7 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "ab201760b3cdcd02abda72881dcada1080e5644a",
+      "commit": "760460152f884eb2339fa538c50e84cedcd4c91e",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "3bcca2413e59da1d67407c383ca41cf0c22777a61b267905d7ef35027153db8d",
       "contentSha256": "3bf32f2a6502ac12cd9e83633ee764f43b50fa58dcaf98840906aa0e498070c8"
@@ -84,10 +84,10 @@
     {
       "repository": "ess",
       "url": "https://github.com/beyond10x/ess",
-      "commit": "7fe3b0c146d16e2e42a0045d9f98e6523f150cf7",
+      "commit": "95a93ca1c79bad0716bd88bd10dd771bc95f9450",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "af67e8dbbd482583c9c72afc2cf7800f134dcda7ac6cd129381e21aaace0df49",
-      "contentSha256": "0745f0c7ade70dff02df30ea14aa21363b3e62c40f5719522b8dfdabd4112f8a"
+      "contentSha256": "8612ae76dbaf187fc97472da4371b84960b838eb523cb5023dd0d00806b293fc"
     },
     {
       "repository": "eventlog",
@@ -100,10 +100,10 @@
     {
       "repository": "extensions",
       "url": "https://github.com/beyond10x/extensions",
-      "commit": "dd96377944e1a2ff49a525b5077757bfda8d2bee",
+      "commit": "f9688b9ff24e96b877522cdd3da613e6cb5977ed",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "5e993458554326c5d8a4ffa10ef8cdd369800bbb9e6a2f383a160bd208e1ca19",
-      "contentSha256": "5698f0fa1196d33838bf691444414146b9c43adcdfaafa326d743b53cf07b9cc"
+      "contentSha256": "26d533990d62145fcd678e11154721ba576fe8669d0987cf07fd574417cb35b4"
     },
     {
       "repository": "harness",
