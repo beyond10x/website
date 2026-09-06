@@ -2,6 +2,75 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/publication-0.8.28",
+      "id": "devcenter/publication-0.8.28",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-06T09:26:14Z",
+      "title": "Devcenter publication-0.8.28",
+      "summary": "Devcenter released version publication-0.8.28.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.28",
+        "version": "publication-0.8.28"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.21",
+      "id": "workspace/0.2.21",
+      "repository": "workspace",
+      "publishedAt": "2026-09-06T09:12:04Z",
+      "title": "Workspace 0.2.21",
+      "summary": "Workspace released version 0.2.21.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.21",
+        "version": "0.2.21"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/publication-0.8.27",
+      "id": "devcenter/publication-0.8.27",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-06T08:27:41Z",
+      "title": "Devcenter publication-0.8.27",
+      "summary": "Devcenter released version publication-0.8.27.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.27",
+        "version": "publication-0.8.27"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/publication-0.8.26",
       "id": "devcenter/publication-0.8.26",
       "repository": "devcenter",

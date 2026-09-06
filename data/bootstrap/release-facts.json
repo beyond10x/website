@@ -3,6 +3,24 @@
   "releases": [
     {
       "repository": "devcenter",
+      "version": "publication-0.8.28",
+      "publishedAt": "2026-09-06T09:26:14Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.28"
+    },
+    {
+      "repository": "workspace",
+      "version": "0.2.21",
+      "publishedAt": "2026-09-06T09:12:04Z",
+      "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.21"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.27",
+      "publishedAt": "2026-09-06T08:27:41Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.27"
+    },
+    {
+      "repository": "devcenter",
       "version": "publication-0.8.26",
       "publishedAt": "2026-09-06T01:44:41Z",
       "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.26"
