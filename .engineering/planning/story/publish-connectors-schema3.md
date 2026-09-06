@@ -2,7 +2,7 @@
 format: aep.planning-md/1
 id: story:publish-connectors-schema3
 kind: story
-status: active
+status: implemented
 title: Deliver the reviewed GitLab and structured-rate documentation
 refs:
 - provider: github
@@ -20,11 +20,11 @@ scope:
   path: data/bootstrap/release-facts.json
 - confidence: inferred
   path: sources.lock.json
-revision: 5
+revision: 9
 ---
 ## Outcome
 
-Deliver the reviewed GitLab/source-fidelity and structured-rate documentation from Connectors PR18 through the existing public Website. This is the documentation obligation of the approved Connectors CLI wave and serves Website's existing O2 evidence and O5 coherent public-entry objectives. Candidate0c694509 passed all twelve local workspace gates and independent unit review; remote verification34037821332 is still running. The first batch's implemented delivery record remains unchanged.
+The reviewed GitLab and structured-rate documentation is delivered from exact Connectors main 0c69450921ab1794c81dadec915b717a61bf0983. The ordinary Website source-lock refresh, Atlas snapshot, full Website gate, retained-artifact validation and automatic bundle publication are verified. This serves Website O2 evidence and O5 coherent public entry. The generated maintenance changes proceed through the normal Website PR; production continues to use its unchanged pinned runtime and automatic source-set owner.
 
 ## Acceptance
 
@@ -49,3 +49,7 @@ The existing Node24 toolchain completed npm ci --ignore-scripts with the exact c
 The source lock SHA256 is c709781ccaa1190430d2d24760c045c2a9b2d45a0364b4573e962fe62ac16365. Every locked commit already exists in its sibling Git object database; no primary checkout or ref was changed. The generated lock is checkpointed before Atlas's retained snapshot requires committed bytes. Subsequent snapshot, full Website gate, Atlas retained verification and new automatic production convergence are still required. The old live publication remains separately observed and supplies no claim of this source's delivery.
 
 Persistent command/resource records and exact lock delta are under ~/.cache/cw6/p using the schema3-website prefix; the source merge receipt is schema3-main-published-readback.json. Minimum available disk for install was 15,737,065,472 bytes and for collection 15,534,948,352 bytes; neither command was interrupted. The prospective 12 GiB reserve remains in force.
+
+## Verified implementation and delivery
+
+Implementation and actual public delivery are verified by [the complete verification report](../verification-report/cli-schema3-website-delivery-20260906.md). Website source 5430e471 passed all 99 tests and its complete gate; Atlas retained-artifact verification passed. Automatic run 34039715421 published the new Connectors bundle, source-set freshness is true, full live delivery checks pass, and all 1,709 artifact files match durable mirror 31100dc7. The record preserves earlier baseline staleness and temporary convergence observations. No architecture acceptance, release, consumer migration or all-organization fence result is implied.
