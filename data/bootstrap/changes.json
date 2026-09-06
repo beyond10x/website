@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "devcenter/publication-0.8.26",
+      "id": "devcenter/publication-0.8.26",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-06T01:44:41Z",
+      "title": "Devcenter publication-0.8.26",
+      "summary": "Devcenter released version publication-0.8.26.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.26",
+        "version": "publication-0.8.26"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "substrate/0.7.5",
       "id": "substrate/0.7.5",
       "repository": "substrate",
