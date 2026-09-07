@@ -60,7 +60,7 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "ba8cf660bdded7872df3512548d33eef22e61555",
+      "commit": "22482c1bc85ea753a409c1fcc9b61a9d6703de86",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "812e82df4592daa0e1e51641bf7fd6d67e4f6950d0403ad8d6fc4f91fb475b28",
       "contentSha256": "4a1aad19fb242fb42328798c4548593cb5d0304d28d7fffdf2d850f161bf4f8a"
@@ -84,18 +84,18 @@
     {
       "repository": "ess",
       "url": "https://github.com/beyond10x/ess",
-      "commit": "dbe78c5b15df478ec2cd4883c67d0012cdf90e17",
+      "commit": "a45b4081de9352e0b2f0b7a8ec87bb91f99b6cc3",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "af67e8dbbd482583c9c72afc2cf7800f134dcda7ac6cd129381e21aaace0df49",
-      "contentSha256": "83f57c50fdbf1889120b54ac1100457ac2f31fc24d339d03efa0c67b24b2f08c"
+      "contentSha256": "064c7ebe47ed44cdb14837249ec08640417e5998931f5a859908624c5c9dc6ee"
     },
     {
       "repository": "eventlog",
       "url": "https://github.com/beyond10x/eventlog",
-      "commit": "20e00c1eeab5d67bd5f749bbbd871b1fbfe7f796",
+      "commit": "081815cdfcbf1c751e7ee91abd81af2ff7d460cb",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "18707ac9d1a8f8d157a914808592d29bda80542c5964694ec6567aeb781c38a1",
-      "contentSha256": "c3fbc8a93eb850e5964e94bbc9d9dddb57ce15a2e2a58aed1ec6b904d0205958"
+      "contentSha256": "348a6e5cd745eb0654f975f065b832a898d2c506c99d7c6abf9288d597f80db5"
     },
     {
       "repository": "extensions",
