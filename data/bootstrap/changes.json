@@ -2,6 +2,29 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "connectors/v0.7.0",
+      "id": "connectors/v0.7.0",
+      "repository": "connectors",
+      "publishedAt": "2026-09-07T08:18:02Z",
+      "title": "Connectors v0.7.0",
+      "summary": "Connectors released version v0.7.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.7.0",
+        "version": "v0.7.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "devcenter/publication-0.8.34",
       "id": "devcenter/publication-0.8.34",
       "repository": "devcenter",
