@@ -2,6 +2,99 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.8.1",
+      "id": "agentplugins/0.8.1",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-07T12:31:53Z",
+      "title": "Agent Plugins 0.8.1",
+      "summary": "Agent Plugins released version 0.8.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.8.1",
+        "version": "0.8.1"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "connectors/v0.7.1",
+      "id": "connectors/v0.7.1",
+      "repository": "connectors",
+      "publishedAt": "2026-09-07T12:28:45Z",
+      "title": "Connectors v0.7.1",
+      "summary": "Connectors released version v0.7.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.7.1",
+        "version": "v0.7.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "connectors/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.4.0",
+      "id": "worktree/0.4.0",
+      "repository": "worktree",
+      "publishedAt": "2026-09-07T12:27:43Z",
+      "title": "Worktree 0.4.0",
+      "summary": "Worktree released version 0.4.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.4.0",
+        "version": "0.4.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "devcenter/publication-0.8.35",
+      "id": "devcenter/publication-0.8.35",
+      "repository": "devcenter",
+      "publishedAt": "2026-09-07T10:01:00Z",
+      "title": "Devcenter publication-0.8.35",
+      "summary": "Devcenter released version publication-0.8.35.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.35",
+        "version": "publication-0.8.35"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "devcenter/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "connectors/v0.7.0",
       "id": "connectors/v0.7.0",
       "repository": "connectors",

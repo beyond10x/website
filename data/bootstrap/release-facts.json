@@ -2,6 +2,30 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "agentplugins",
+      "version": "0.8.1",
+      "publishedAt": "2026-09-07T12:31:53Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.8.1"
+    },
+    {
+      "repository": "connectors",
+      "version": "v0.7.1",
+      "publishedAt": "2026-09-07T12:28:45Z",
+      "url": "https://github.com/beyond10x/connectors/releases/tag/v0.7.1"
+    },
+    {
+      "repository": "worktree",
+      "version": "0.4.0",
+      "publishedAt": "2026-09-07T12:27:43Z",
+      "url": "https://github.com/beyond10x/worktree/releases/tag/0.4.0"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.35",
+      "publishedAt": "2026-09-07T10:01:00Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.35"
+    },
+    {
       "repository": "connectors",
       "version": "v0.7.0",
       "publishedAt": "2026-09-07T08:18:02Z",

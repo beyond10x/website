@@ -12,7 +12,7 @@ scope:
   path: data/bootstrap
 - confidence: cited
   path: sources.lock.json
-revision: 7
+revision: 8
 ---
 ## Acceptance
 
@@ -33,3 +33,7 @@ Operator approval on2026-09-07: "approved, do it, then cut release with that", c
 Connectors release source `c30e4f2475f6288b5e83c87ed09843882a882123` is published on main and under the annotated v0.7.2 tag. The actual release workflow is https://github.com/beyond10x/connectors/actions/runs/34123190042; archives are still being built. Source-bundle delivery can proceed from this published source; the Atlas snapshot waits for the release to become visible so its retained release facts include v0.7.2.
 
 Native `npm run sources:lock` ran with Node 24.20.0, remote origins and the full 24-source roster. Seven rows changed and were reviewed: agentplugins, Connectors, devcenter and worktree changed revision and content hash; ESS, service-sdk and workflow changed revision only. Manifest hashes, source roster, Website dependencies and immutable runtime/workflow pins did not change. Connectors is locked to the exact release commit above. The native collection transcript and complete lock diff are retained in assigned coordinator scratch.
+
+## Concurrent Website publication
+
+While release binaries built, Website main advanced from `02271aa02022818a75a99ca3702c8cc00d135b1f` to `487649f62e30eee02aaf07f8ea023ae495bec061`, publishing Worktree and Agentplugins release data. The incoming task and bootstrap files are preserved. Native Git union merge retained the two disjoint CLI-generated AEP journal additions; native AEP validation checks their combined store. The source-lock conflict was resolved by rerunning the complete remote owner command, retaining Connectors' exact 0.7.2 release source. No repository instruction, dependency or workflow changed.
