@@ -2,10 +2,14 @@
 format: aep.planning-md/1
 id: task:observed-bindings-docs
 kind: task
-status: active
+status: archived
 title: Refresh native observed-binding documentation delivery
-revision: 4
+revision: 6
 ---
-Refresh the deterministic source lock only after the ESS observed-binding command and realization v2 source commit are published. Render the Atlas-owned snapshot from exact clean committed producer authority; run the Website gate and Atlas delivery verification. Publish through the existing source-set workflow and verify live provenance. Do not change production runtime or redirect pins for a content-only publication. This bounded follow-through serves AGENTS objective O2 and carries no new product semantic claims.
+The synchronous Website follow-through for ESS observed bindings is superseded by the organization-wide asynchronous completion rule in Atlas b40fcb0a065a95b0b427dff9cccae52c1b71ea94, AGENTS.md (Organization-wide source release completion), and the operator's instruction that ordinary ESS releases must not drive synchronous Website/Atlas machinery.
 
-ESS bbbe0de65e01ad7dc22fd329bb5f73d70e648d1d is on remote main; PR 13 is merged after green Gate and documentation validation. The native source-lock refresh selects all 24 current source heads, including ESS and six other roster advances; no lock entries were hand-edited. The source bundle for this ESS commit passed. Preserve the current runtime pins and render the bootstrap from clean Atlas d10b7484d64c28830774c9dae0ec531fcc47acb2 and committed Website inputs.
+ESS bbbe0de65e01ad7dc22fd329bb5f73d70e648d1d is published on main (PR 13 merged); its exact Gate and documentation source bundle passed. Backend specs 4adb6790427ec58b7311e7c227230f42c3502af3 and system specs db2aba914b8db0f3eef9ec71094e950f90ea03e6 are published and usable independently.
+
+The previous source-lock refresh and Atlas snapshot were produced under the old completion rule. Those generated changes are withdrawn from this branch. Its final difference from the original base is this AEP disposition only. No runtime, source-set, route or delivery-control change is needed. The existing passive source bundle and scheduled Atlas reconciler own publication; no additional run is dispatched by this task.
+
+The attempted local Website gate did not complete successfully: a test Unix socket path exceeded the host path limit. This is not reported as a green gate. No live documentation publication has been verified by this task. Archive the obsolete synchronous task rather than claiming that the original full-publication acceptance was implemented. Temporary evidence remains outside repositories.
