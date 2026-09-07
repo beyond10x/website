@@ -11,7 +11,7 @@ scope:
   path: data/bootstrap
 - confidence: cited
   path: sources.lock.json
-revision: 4
+revision: 5
 ---
 ## Outcome
 
@@ -28,3 +28,9 @@ Regenerate the complete sources.lock.json with the Website owner command after C
 Run the full Website gate, normal GitHub publication and the organization delivery verifiers. Record the actual full Atlas fence result separately from the managed portal check, including any existing primary-workspace failures. Retire completed managed worktrees through the worktree CLI after publication and verification.
 
 This is one delivery story without a decomposition; no critic panel is scheduled.
+
+## Verified delivery and remaining work — 2026-09-07
+
+The Connectors overview and WHATS-NEW.md link are published, artifact-verified and live. Website PR 10, the full Website gate, managed Atlas portal check and immutable-bundle publication 34101442041 passed. Source-set freshness and live Pages verification passed. See verification-report:publish-connectors-release-highlights for the exact evidence.
+
+The production release feed still reuses older release facts, although the updated Website source snapshot includes v0.7.0. This story remains active for that acceptance item. Atlas must provide a supported release-fact refresh within current immutable-bundle publication before the feed can be declared current. The user-requested GitHub release and Connectors documentation have been delivered; do not recut or republish the release to address this feed issue.
