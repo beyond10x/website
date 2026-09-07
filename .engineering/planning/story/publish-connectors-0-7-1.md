@@ -2,7 +2,7 @@
 format: aep.planning-md/1
 id: story:publish-connectors-0-7-1
 kind: story
-status: active
+status: implemented
 title: Publish Connectors 0.7.2 documentation
 summary: Deliver the inspection command documentation through the existing source lock and Atlas publication.
 relations:
@@ -12,7 +12,7 @@ scope:
   path: data/bootstrap
 - confidence: cited
   path: sources.lock.json
-revision: 9
+revision: 11
 ---
 ## Acceptance
 
@@ -45,3 +45,15 @@ At Website commit `29b944d2dec6d49a852c71ade13ef9c6ff1d48f0`, native `npm run ga
 The built Connectors interfaces page contains `connectors inspect upgrade`. Atlas's native portal verifier passed: 24 locked public sources, 25 surfaces and 52 delivery records. The source lock selects published Connectors release commit `c30e4f2475f6288b5e83c87ed09843882a882123`; the Atlas snapshot includes the actual v0.7.2 release published at 2026-09-07T13:08:04Z. Gate transcript, exit status, portal result and built provenance are retained in coordinator evidence. These are the scoped delivery gates; no organization-wide workspace fence convergence is claimed.
 
 Publish this verified source, then invoke the existing Atlas reconciliation and verify live root delivery. The existing production release-feed refresh limitation remains tracked separately in `story:publish-connectors-release-highlights`; the retained snapshot's current release facts do not claim to fix that workflow behavior.
+
+## Live delivery and close
+
+Atlas reconciliation https://github.com/beyond10x/atlas/actions/runs/34126589527 completed successfully using the unchanged authority `d10b7484d64c28830774c9dae0ec531fcc47acb2`. Source resolution, immutable-bundle Website build, independent v2 artifact verification and root publication succeeded. Four legacy/rollback branches were intentionally skipped by the selected reconcile mode.
+
+Live production provenance is `b10x-website-provenance/v2`, Website runtime `fc4571534765c098ed861bc326da4d3da0d1df63`, source-set SHA256 `01491a19e72315310675a2d76aca04a69cff3fb4882f5127b2ee1ef5f7b62607`, and Connectors source `c30e4f2475f6288b5e83c87ed09843882a882123`. The actual https://beyond10x.github.io/docs/connectors/architecture/interfaces/ page contains `connectors inspect upgrade`.
+
+Native `atlas docs verify-pages --root-only` passed: 2 repository states, 1 Pages repository, 27 delivery routes and one Website commit. The source-bundle run for the exact Connectors release source is https://github.com/beyond10x/connectors/actions/runs/34123436952. The current local snapshot includes the published v0.7.2 release; public command documentation and GitHub release notes are delivered.
+
+The production changes feed still contains 273 older items and no v0.7.2 release item, consistent with the previously recorded release-fact reuse limitation. `story:publish-connectors-release-highlights` remains active for that existing issue; no workflow or runtime-pin change was introduced to expand this small wave.
+
+The full Website gate, portal result, live provenance/page/feed, publication job JSON and live route verifier output are retained in coordinator evidence. `npm run clear` removed normal build outputs; the remaining owned collection cache, generated inputs and installed dependencies were removed without force after preserving the checked page and provenance. The working tree is clean. Publish this closing record before managed finish and exact reviewed GC.
