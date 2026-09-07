@@ -20,7 +20,7 @@ scope:
   path: data/bootstrap/release-facts.json
 - confidence: cited
   path: sources.lock.json
-revision: 6
+revision: 7
 ---
 ## Outcome
 
@@ -51,4 +51,8 @@ The coordinator alone writes the planning store. This delivery changes no Websit
 
 ## Evidence and execution state
 
-Managed Website checkout begins at exact remote main d914fa947cc3e497e8770bb814af36d55b880f5c. Node24 npm ci --ignore-scripts completed successfully in the assigned checkout; the full gate has not yet run. The read-only delivery checklist and command inventory are retained under the assigned CLI-wave scratch root. Current Atlas authority d10b7484d64c28830774c9dae0ec531fcc47acb2 was compared with the remote advertisement. Its relevant binary and embedded build inputs are identical to the previously verified producer, whose SHA256 is 571ee4fcabc3dc62ab02084f5c7d210a8326f373ba64f8b151f19e6c4438ab74.
+The first full Website gate passed source/bootstrap validation, experience validation, all tests and its critical-level dependency audit, then failed the code-rendering contract on two `console` fences in newly published Devcenter docs/local-acceptance.md. The failure is retained. Devcenter PR60 fixes exactly those two labels as bash without changing command bytes; consumer diagnostics reproduced two failures before and zero after. Source main ba8cf660bdded7872df3512548d33eef22e61555 is published and documentation bundle 34072674071 passed. The complete lock and explicit freshness owner commands passed again, changing only the Devcenter row from the first refresh.
+
+The actual unmodified full Atlas fence ran against clean remote-main d10b7484d64c28830774c9dae0ec531fcc47acb2. All 149 Rust tests passed; catalog, live Pages, projection, markdown and brand checks were green. Three primary-workspace failures remain separately retained: Agentide v4 manifest rejected by the primary collector, primary Website dependency pin mismatch, and Widgets missing a Serves objective. These do not replace the required managed Website portal check. The 53-member evidence seal was independently verified; report SHA256 6e70c614f102bcb032cbe11f40404021d4ba865ef270b120672e23797d018d51. An initial preflight resource refusal launched nothing; the later complete run stayed above every reserve and changed no Atlas source.
+
+The snapshot is regenerated after this committed lock, then the full Website gate is repeated. Runtime, dependency, source roster, workflow and facade pins remain unchanged. The Devcenter producer was explicitly dispatched through its existing input because its generated path filter does not yet list the new guide; this delivery does not hand-edit that generated workflow.
