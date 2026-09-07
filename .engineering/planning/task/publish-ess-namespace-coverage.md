@@ -2,9 +2,9 @@
 format: aep.planning-md/1
 id: task:publish-ess-namespace-coverage
 kind: task
-status: active
+status: implemented
 title: Deliver the native namespace-coverage documentation
-revision: 4
+revision: 6
 ---
 Refresh the retained Website source lock after ESS PR #12 is merged, render the corresponding Atlas-owned snapshot, and run the Website and Atlas delivery gates required by workspace policy. ESS owns the public source; this task adds no authored technical claims or tool/runtime changes to Website.
 
@@ -23,3 +23,13 @@ On ef3de524cae83a0f74012468f69522a238f4b566, Node 24 npm run gate passed all 99 
 The unmodified broad Atlas fence remains red on pre-existing primary-workspace drift (AgentIDE manifest support, the primary Website Docs System pin, and the catalog map). This is distinct from the successful checks on the exact managed Website and Atlas trees; no unrelated primary checkout was changed.
 
 Production source-set reconciliation was dispatched through the b10x-bot App in https://github.com/beyond10x/atlas/actions/runs/34096309073. Publication and live provenance verification remain in progress. No runtime/control pins, release tags or binary publication are changed by this task.
+
+## Completed production delivery
+
+The retained Website lock, native snapshot and gate record were published to main at 585598c4a5cd5d838d48ad560f49dec5210d73c0 through the Atlas bot wrapper. The automatic source-set path independently completed successfully in https://github.com/beyond10x/atlas/actions/runs/34096309073; the ESS post-merge CI and documentation bundle also succeeded.
+
+The downloaded self-contained publication passed the native Website verifier: 357 routes, 1,332 files and b10x-publication-layout/v2 deployment agreement. Its source set selects ESS a45b4081de9352e0b2f0b7a8ec87bb91f99b6cc3 from producer run 34095802682, artifact 10008553008. Production keeps Website runtime fc4571534765c098ed861bc326da4d3da0d1df63 and Atlas controls d10b7484d64c28830774c9dae0ec531fcc47acb2. Source-set SHA-256: 18a4e13c0c850e2bab27e231450109a4a6e67ecc818ce7db44d5c6c4ac2b5af8. Site artifact SHA-256: a4616ad4124aa26893feb22a0ae65e1934e1935aa97da3401581e1b601a8056f.
+
+Live https://beyond10x.github.io/.well-known/b10x-docs.json was byte-identical to the verified artifact's site/PROVENANCE.json. Live https://beyond10x.github.io/docs/ess/guides/check-infrastructure/ was byte-identical to its generated artifact page (SHA-256 5932df1ae844ae69225fe124dd40b0fc34828e7438b612f1318426ae36811daf). The native Atlas docs verify-pages check passed: 37 repository states, 26 Pages repositories, 52 delivery routes and one Website commit.
+
+External verification inputs and logs are retained under /home/timo/.cache/ess-pr12-merge-20260907, including publication/, publication-verify.log, live-provenance.json, live-infrastructure-guide.html and live-pages.log. Generated build/dependency output is disposable and removed during managed worktree cleanup. The ESS and four specs worktrees have already been removed by exact reviewed worktree GC IDs with remote recovery evidence; the Website and Atlas task trees are next after this record is published. This interactive run required no fabricated approval or release authorization.
