@@ -2,7 +2,7 @@
 format: aep.planning-md/1
 id: story:publish-connectors-auth
 kind: story
-status: active
+status: implemented
 title: Deliver the reviewed Connectors login and authentication-recovery guidance
 refs:
 - provider: github
@@ -20,13 +20,11 @@ scope:
   path: data/bootstrap/release-facts.json
 - confidence: cited
   path: sources.lock.json
-revision: 7
+revision: 9
 ---
 ## Outcome
 
-Deliver the reviewed Connectors personal OAuth and authentication-recovery guidance through the existing organization documentation pipeline. Connectors PR19 is merged at main aab96797d227963ac06fde72ebd58230a773ab0f after both implementation reviews, all corrections and successful twelve-workspace/four-platform rehearsal 34069722221. Main documentation bundle 34071380358 completed successfully; its artifact 10000574260 was downloaded and its archive digest verified. This continues the operator-authorized CLI wave; source implementation is complete and Website delivery is active.
-
-The complete 24-source remote lock refresh and explicit freshness check passed. Seven source rows advance: AEP, Connectors, Devcenter, ESS, Identity, Substrate and Workspace; the source roster and Website runtime/dependency/workflow pins remain unchanged. Atlas snapshot and Website/delivery gates are the next checks.
+The reviewed Connectors guidance is published and independently verified end to end. Connectors PR19 and Website PR8 are merged; the complete Website gate, GitHub CI, managed Atlas portal, full publication-v2 verifier, source-set freshness and postpublication live Pages checks pass. All 1,713 artifact files match durable publication d0b1cb6ecc2c2c8343ab73561fc494b84ef12dd8, including byte-identical live provenance and both intended guidance pages. [The verification report](../verification-report/cli-auth-website-delivery-20260907.md) preserves the initial Devcenter source failure and correction, exact artifact identities, unchanged runtime pins and three separate primary-workspace Atlas fence failures. No release or tag is included.
 
 ## Acceptance
 
