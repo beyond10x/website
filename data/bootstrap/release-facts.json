@@ -2,6 +2,48 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "workspace",
+      "version": "0.2.24",
+      "publishedAt": "2026-09-06T21:00:48Z",
+      "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.24"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.33",
+      "publishedAt": "2026-09-06T20:24:48Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.33"
+    },
+    {
+      "repository": "workspace",
+      "version": "0.2.23",
+      "publishedAt": "2026-09-06T20:14:43Z",
+      "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.23"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.32",
+      "publishedAt": "2026-09-06T19:22:55Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.32"
+    },
+    {
+      "repository": "substrate",
+      "version": "0.7.6",
+      "publishedAt": "2026-09-06T18:42:33Z",
+      "url": "https://github.com/beyond10x/substrate/releases/tag/0.7.6"
+    },
+    {
+      "repository": "devcenter",
+      "version": "publication-0.8.31",
+      "publishedAt": "2026-09-06T18:34:38Z",
+      "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.31"
+    },
+    {
+      "repository": "ess",
+      "version": "0.20.0",
+      "publishedAt": "2026-09-06T16:07:45Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.20.0"
+    },
+    {
       "repository": "devcenter",
       "version": "publication-0.8.30",
       "publishedAt": "2026-09-06T12:03:31Z",
