@@ -945,6 +945,7 @@
           "include": [
             "README.md",
             "docs/frontend-review.md",
+            "docs/local-acceptance.md",
             "docs/source-build.md",
             "docs/ess-deployment-model.md",
             "docs/production-deployment.md"
