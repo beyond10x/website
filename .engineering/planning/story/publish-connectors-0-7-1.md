@@ -12,7 +12,7 @@ scope:
   path: data/bootstrap
 - confidence: cited
   path: sources.lock.json
-revision: 8
+revision: 9
 ---
 ## Acceptance
 
@@ -37,3 +37,11 @@ Native `npm run sources:lock` ran with Node 24.20.0, remote origins and the full
 ## Concurrent Website publication
 
 While release binaries built, Website main advanced from `02271aa02022818a75a99ca3702c8cc00d135b1f` to `487649f62e30eee02aaf07f8ea023ae495bec061`, publishing Worktree and Agentplugins release data. The incoming task and bootstrap files are preserved. Native Git union merge retained the two disjoint CLI-generated AEP journal additions; native AEP validation checks their combined store. The source-lock conflict was resolved by rerunning the complete remote owner command, retaining Connectors' exact 0.7.2 release source. No repository instruction, dependency or workflow changed.
+
+## Verified Website candidate
+
+At Website commit `29b944d2dec6d49a852c71ade13ef9c6ff1d48f0`, native `npm run gate` completed all 19 steps with exit 0: 99 tests passed, 0 failed, 0 skipped; 358 HTML pages, 357 routes and 23,847 references were checked. Navigation checks covered both themes, desktop, mobile widths, reflow, pointer activation and keyboard drawer behavior. The configured critical-level npm audit passed while reporting 9 moderate and 20 high advisories in the unchanged dependency graph; it is not a claim of no advisories.
+
+The built Connectors interfaces page contains `connectors inspect upgrade`. Atlas's native portal verifier passed: 24 locked public sources, 25 surfaces and 52 delivery records. The source lock selects published Connectors release commit `c30e4f2475f6288b5e83c87ed09843882a882123`; the Atlas snapshot includes the actual v0.7.2 release published at 2026-09-07T13:08:04Z. Gate transcript, exit status, portal result and built provenance are retained in coordinator evidence. These are the scoped delivery gates; no organization-wide workspace fence convergence is claimed.
+
+Publish this verified source, then invoke the existing Atlas reconciliation and verify live root delivery. The existing production release-feed refresh limitation remains tracked separately in `story:publish-connectors-release-highlights`; the retained snapshot's current release facts do not claim to fix that workflow behavior.
