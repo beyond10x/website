@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Include Gates in the public documentation roster and refresh the foundation sources. Update
+  the practitioner path to Agentplugins 0.9.0, AEP 0.55.0 binaries and ESS 0.22.0 source, with
+  accurate installation prerequisites for the source-only ESS release.
+
 - Accept Atlas-selected immutable Docs System bundles through `b10x-docs-source-set/v1`, derive
   the compatibility source lock without Git access, and write/verify a self-contained
   `b10x-publication-layout/v2` whose exact inputs remain available for audit and rollback.

@@ -134,34 +134,36 @@ test('the Claude practitioner path pins its actual plugin and CLI releases', asy
   const catalog = await readExperienceCatalog(path.join(root, 'data', 'experiences.json'));
   const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
   assert.deepEqual(
-    ['agentplugins-release-source', 'aep-cli-binary', 'ess-cli-binary'].map((id) => {
+    ['agentplugins-release-source', 'aep-cli-binary', 'ess-cli-source'].map((id) => {
       const artifact = artifacts.get(id);
       return [id, artifact.kind, artifact.version, artifact.url, artifact.availability, artifact.access];
     }),
     [
-      ['agentplugins-release-source', 'source', '0.5.1', 'https://github.com/beyond10x/agentplugins/releases/tag/0.5.1', 'available', 'public'],
-      ['aep-cli-binary', 'binary', '0.44.0', 'https://github.com/beyond10x/aep/releases/tag/0.44.0', 'available', 'public'],
-      ['ess-cli-binary', 'binary', '0.8.0', 'https://github.com/beyond10x/ess/releases/tag/0.8.0', 'available', 'public'],
+      ['agentplugins-release-source', 'source', '0.9.0', 'https://github.com/beyond10x/agentplugins/releases/tag/0.9.0', 'available', 'public'],
+      ['aep-cli-binary', 'binary', '0.55.0', 'https://github.com/beyond10x/aep/releases/tag/0.55.0', 'available', 'public'],
+      ['ess-cli-source', 'source', '0.22.0', 'https://github.com/beyond10x/ess/releases/tag/0.22.0', 'available', 'public'],
     ],
   );
   const claude = catalog.experiences.find((experience) => experience.id === 'try-spec-driven-development').adoptionPaths.find((path) => path.id === 'claude-code');
-  for (const artifactId of ['agentplugins-release-source', 'aep-cli-binary', 'ess-cli-binary']) {
+  for (const artifactId of ['agentplugins-release-source', 'aep-cli-binary', 'ess-cli-source']) {
     assert.ok(claude.artifactIds.includes(artifactId));
   }
   assert.deepEqual(claude.prerequisites, [
     'A Git repository',
     'Claude Code',
-    'The pinned AEP and ESS command-line binaries on PATH for a supported Linux or macOS target',
+    'AEP 0.55.0 on PATH for a supported Linux or macOS target',
+    'Rust to build ESS 0.22.0 from its source tag, with ess on PATH',
   ]);
   assert.ok(claude.prerequisites.every((prerequisite) => !/node(?:\.js)?/i.test(prerequisite)));
-  for (const artifactId of ['aep-cli-binary', 'ess-cli-binary']) {
+  for (const artifactId of ['aep-cli-binary']) {
     const artifact = artifacts.get(artifactId);
     assert.match(artifact.note, /x86_64.*aarch64.*Linux GNU.*x86_64.*aarch64.*macOS/i);
     assert.match(artifact.note, /SHA256SUMS/);
     assert.match(artifact.note, /No Windows archive is published/i);
   }
   assert.equal(claude.artifactIds.filter((artifactId) => artifactId === 'aep-cli-binary').length, 1);
-  assert.equal(claude.artifactIds.filter((artifactId) => artifactId === 'ess-cli-binary').length, 1);
+  assert.equal(claude.artifactIds.filter((artifactId) => artifactId === 'ess-cli-source').length, 1);
+  assert.match(artifacts.get('ess-cli-source').note, /source only.*no prebuilt CLI archives/i);
   assert.match(claude.label, /Plan one governed change/i);
   assert.match(claude.outcome, /validated ESS model.*generated docs.*scoped.*critic-reviewed plan.*blocker.*evidence/is);
   assert.match(claude.outcome, /implementation remains optional and experimental/i);

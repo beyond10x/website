@@ -20,9 +20,9 @@
       "kind": "source",
       "availability": "available",
       "access": "public",
-      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.5.1",
-      "version": "0.5.1",
-      "note": "Pinned source release for the focused Claude Code plugins used by the practitioner path."
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.9.0",
+      "version": "0.9.0",
+      "note": "Pinned source release for focused Claude Code and Codex plugins. Model-backed AEP driving uses Metaharness; planning and specification work use AEP and ESS."
     },
     {
       "id": "agentic-principles-documentation",
@@ -43,8 +43,8 @@
       "kind": "binary",
       "availability": "available",
       "access": "public",
-      "url": "https://github.com/beyond10x/aep/releases/tag/0.44.0",
-      "version": "0.44.0",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.55.0",
+      "version": "0.55.0",
       "note": "Choose one archive for your target: x86_64 or aarch64 Linux GNU, or x86_64 or aarch64 macOS. The release also publishes SHA256SUMS. No Windows archive is published."
     },
     {
@@ -93,13 +93,13 @@
       "url": "https://beyond10x.github.io/docs/ess/"
     },
     {
-      "id": "ess-cli-binary",
-      "kind": "binary",
+      "id": "ess-cli-source",
+      "kind": "source",
       "availability": "available",
       "access": "public",
-      "url": "https://github.com/beyond10x/ess/releases/tag/0.8.0",
-      "version": "0.8.0",
-      "note": "Choose one archive for your target: x86_64 or aarch64 Linux GNU, or x86_64 or aarch64 macOS. The release also publishes SHA256SUMS. No Windows archive is published."
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.22.0",
+      "version": "0.22.0",
+      "note": "Build the ess-cli package from the 0.22.0 source tag with the repository's Rust toolchain. This release contains source only; no prebuilt CLI archives or checksum asset are published."
     },
     {
       "id": "harness-documentation",
@@ -200,10 +200,10 @@
           "label": "Plan one governed change with Claude",
           "support": "experimental",
           "access": "public",
-          "artifactIds": ["agentplugins-documentation", "agentplugins-release-source", "ess-documentation", "ess-cli-binary", "aep-documentation", "aep-cli-binary"],
+          "artifactIds": ["agentplugins-documentation", "agentplugins-release-source", "ess-documentation", "ess-cli-source", "aep-documentation", "aep-cli-binary"],
           "url": "https://beyond10x.github.io/start/spec-driven-development/",
           "estimatedMinutes": 30,
-          "prerequisites": ["A Git repository", "Claude Code", "The pinned AEP and ESS command-line binaries on PATH for a supported Linux or macOS target"],
+          "prerequisites": ["A Git repository", "Claude Code", "AEP 0.55.0 on PATH for a supported Linux or macOS target", "Rust to build ESS 0.22.0 from its source tag, with ess on PATH"],
           "outcome": "Finish with a validated ESS model and generated docs, a scoped and critic-reviewed plan, and explicit blocker and evidence records; driven implementation remains optional and experimental."
         }
       ]
