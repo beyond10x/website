@@ -2,6 +2,239 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "agentplugins/0.9.0",
+      "id": "agentplugins/0.9.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-09-10T16:53:44Z",
+      "title": "Agent Plugins 0.9.0",
+      "summary": "Agent Plugins released version 0.9.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.9.0",
+        "version": "0.9.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "mcp/0.1.2",
+      "id": "mcp/0.1.2",
+      "repository": "mcp",
+      "publishedAt": "2026-09-10T16:48:49Z",
+      "title": "MCP 0.1.2",
+      "summary": "MCP released version 0.1.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/mcp/releases/tag/0.1.2",
+        "version": "0.1.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "mcp/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "metaharness/0.7.0",
+      "id": "metaharness/0.7.0",
+      "repository": "metaharness",
+      "publishedAt": "2026-09-10T16:48:44Z",
+      "title": "Metaharness 0.7.0",
+      "summary": "Metaharness released version 0.7.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/metaharness/releases/tag/0.7.0",
+        "version": "0.7.0"
+      },
+      "journeys": [
+        "build-agents",
+        "understand"
+      ],
+      "affectedSurfaces": [
+        "metaharness/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "harness/0.12.0",
+      "id": "harness/0.12.0",
+      "repository": "harness",
+      "publishedAt": "2026-09-10T16:48:39Z",
+      "title": "Harness 0.12.0",
+      "summary": "Harness released version 0.12.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/harness/releases/tag/0.12.0",
+        "version": "0.12.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "harness/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/0.22.0",
+      "id": "ess/0.22.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-10T12:27:04Z",
+      "title": "ESS 0.22.0",
+      "summary": "ESS released version 0.22.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.22.0",
+        "version": "0.22.0"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.55.0",
+      "id": "aep/0.55.0",
+      "repository": "aep",
+      "publishedAt": "2026-09-10T12:25:55Z",
+      "title": "AEP 0.55.0",
+      "summary": "AEP released version 0.55.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.55.0",
+        "version": "0.55.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.2.0",
+      "id": "eventlog/0.2.0",
+      "repository": "eventlog",
+      "publishedAt": "2026-09-10T12:25:35Z",
+      "title": "Eventlog 0.2.0",
+      "summary": "Eventlog released version 0.2.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.2.0",
+        "version": "0.2.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "gates/0.1.0",
+      "id": "gates/0.1.0",
+      "repository": "gates",
+      "publishedAt": "2026-09-10T10:08:11Z",
+      "title": "Gates 0.1.0",
+      "summary": "Gates released version 0.1.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/gates/releases/tag/0.1.0",
+        "version": "0.1.0"
+      },
+      "journeys": [
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "gates/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.1.0",
+      "id": "eventlog/0.1.0",
+      "repository": "eventlog",
+      "publishedAt": "2026-09-09T01:41:45Z",
+      "title": "Eventlog 0.1.0",
+      "summary": "Eventlog released version 0.1.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.1.0",
+        "version": "0.1.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.18.0",
+      "id": "entity-runtime/0.18.0",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-09-08T23:47:25Z",
+      "title": "Entity Runtime 0.18.0",
+      "summary": "Entity Runtime released version 0.18.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.18.0",
+        "version": "0.18.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "connectors/v0.7.2",
       "id": "connectors/v0.7.2",
       "repository": "connectors",
