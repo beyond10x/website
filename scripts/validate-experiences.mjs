@@ -91,14 +91,14 @@ if (agentideStepUrls.join(',') !== '/docs/agentide/running-modes/,/docs/agentide
   throw new Error('the primary product evaluation path must lead through AgentIDE modes, installation, and runtime boundaries');
 }
 const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
-for (const [id, version, url] of [
-  ['agentplugins-release-source', '0.5.1', 'https://github.com/beyond10x/agentplugins/releases/tag/0.5.1'],
-  ['aep-cli-binary', '0.44.0', 'https://github.com/beyond10x/aep/releases/tag/0.44.0'],
-  ['ess-cli-binary', '0.8.0', 'https://github.com/beyond10x/ess/releases/tag/0.8.0'],
-  ['agentide-linux-binary', '0.1.1', 'https://github.com/beyond10x/agentide/releases/tag/0.1.1'],
+for (const [id, kind, version, url] of [
+  ['agentplugins-release-source', 'source', '0.9.0', 'https://github.com/beyond10x/agentplugins/releases/tag/0.9.0'],
+  ['aep-cli-binary', 'binary', '0.55.0', 'https://github.com/beyond10x/aep/releases/tag/0.55.0'],
+  ['ess-cli-source', 'source', '0.22.0', 'https://github.com/beyond10x/ess/releases/tag/0.22.0'],
+  ['agentide-linux-binary', 'binary', '0.1.1', 'https://github.com/beyond10x/agentide/releases/tag/0.1.1'],
 ]) {
   const artifact = artifacts.get(id);
-  if (!artifact || artifact.availability !== 'available' || artifact.access !== 'public' || artifact.version !== version || artifact.url !== url) {
+  if (!artifact || artifact.kind !== kind || artifact.availability !== 'available' || artifact.access !== 'public' || artifact.version !== version || artifact.url !== url) {
     throw new Error(`${id} must name its exact available public ${version} release`);
   }
 }
@@ -106,7 +106,8 @@ const claudePath = evaluatedById.get('try-spec-driven-development')?.adoptionPat
 if (!claudePath || claudePath.prerequisites?.join('\n') !== [
   'A Git repository',
   'Claude Code',
-  'The pinned AEP and ESS command-line binaries on PATH for a supported Linux or macOS target',
+  'AEP 0.55.0 on PATH for a supported Linux or macOS target',
+  'Rust to build ESS 0.22.0 from its source tag, with ess on PATH',
 ].join('\n')) {
   throw new Error('the Claude path must declare only its real repository, host, and native CLI prerequisites');
 }
@@ -115,13 +116,16 @@ if (!/validated ESS model.*generated docs.*scoped.*critic-reviewed plan.*blocker
   || /reviewed change|implemented change|finished implementation/i.test(claudePath.outcome ?? '')) {
   throw new Error('the Claude path outcome must stop at the validated model, generated docs, reviewed plan, and visible blockers without promising completed implementation');
 }
-for (const id of ['aep-cli-binary', 'ess-cli-binary']) {
+for (const id of ['aep-cli-binary']) {
   const note = artifacts.get(id)?.note ?? '';
   if (!/x86_64.*aarch64.*Linux GNU.*x86_64.*aarch64.*macOS/i.test(note)
     || !note.includes('SHA256SUMS')
     || !/No Windows archive is published/i.test(note)) {
     throw new Error(`${id} must publish its four-target Unix archive family, checksum file, and explicit Windows boundary`);
   }
+}
+if (!/source only.*no prebuilt CLI archives/i.test(artifacts.get('ess-cli-source')?.note ?? '')) {
+  throw new Error('ESS 0.22.0 must declare its source-only installation contract');
 }
 process.stdout.write(
   `validated ${result.experienceCount} Docs System experiences, ${paths.length} adoption paths, ${catalog.artifacts.length} artifacts, `
