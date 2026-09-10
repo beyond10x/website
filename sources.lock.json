@@ -108,10 +108,10 @@
     {
       "repository": "gates",
       "url": "https://github.com/beyond10x/gates",
-      "commit": "8ab5cbd3272bd7b487d75721c61a863562a9fa0f",
+      "commit": "f8ebfdf16817ab0b2a3629b4e18cdd7fdf0d4e9b",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "a612f4bee6f00ab8ee11eaadf4ce729166679f7a558499bf5274951edc882243",
-      "contentSha256": "54b47f83a4f625b20d0ad32e2547814a83825c120207fc7b701a7ad5c717bf78"
+      "contentSha256": "eefda41240fc70abba2bfbf78dca03809d1bec9746bed3e67909b305d24cb500"
     },
     {
       "repository": "harness",
