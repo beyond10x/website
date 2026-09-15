@@ -7,7 +7,9 @@ technical documentation selected by each public repository.
 The source contract has a production bundle path and a retained local/legacy lock path:
 
 - `sources.yaml` lists the complete active-source roster and the separate compatibility-only predecessor
-  repositories; compatibility entries never enter the source lock.
+  repositories; compatibility entries never enter the source lock. It also records every repository a
+  reader could expect on the roster together with the evidence for why it is not, so absence by decision
+  is distinguishable from absence by oversight without leaving the file.
 - `b10x-docs-source-set/v1` selects one immutable, normalized Docs System bundle from the latest
   successful `main` producer run in every active source repository.
 - `sources.lock.json` is the deterministic projection of that source set in production and remains

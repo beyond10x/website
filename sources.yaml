@@ -29,3 +29,62 @@ repositories:
   - workflow
   - workspace
   - worktree
+# Absence from `repositories` above is a decision, not an oversight.
+#
+# Admission is organization-owned, not Website-owned: a repository joins the roster when the
+# organization catalog declares a `<repository> | website | documentation` surface for it, and the
+# roster above is exactly that set. A repository-root `b10x.docs.yaml` is a prerequisite for that
+# declaration, never the admission itself, and a private repository is never publishable from this
+# public site at all.
+#
+# There are therefore three ways to be absent, and all three are readable here:
+#   - `compatibilityRepositories` above — published predecessor history kept reachable as a
+#     redirect façade, never collected into the source lock.
+#   - `excludedRepositories` below — a repository a reviewer can reasonably expect to find on the
+#     roster, with the evidence for why it is not on it.
+#   - everything else — no `b10x.docs.yaml` at its `main`, so it declares no public documentation
+#     and is not a candidate. Local-only trees with no GitHub repository are likewise not
+#     candidates: a roster entry must resolve to https://github.com/beyond10x/<repository>.
+#
+# Keep this record current when a repository is admitted, retired, or publishes its first manifest.
+excludedRepositories:
+  - repository: bench
+    public: false
+    manifest: present
+    reason: >-
+      Private, so nothing in it can be published from this public site. Its b10x.docs.yaml is a
+      prerequisite for admission and not admission itself, and the organization catalog declares no
+      website documentation surface for it. Raised as ORG-0261 (run 1 lane 10 F8) and re-raised
+      against this file; this entry is the disposition, and the roster assertion in
+      tests/routes.test.mjs enforces it.
+  - repository: beyond10x.github.io
+    public: true
+    manifest: absent
+    reason: >-
+      The generated deployment mirror this site is published into. It carries no manifest and
+      authors no content; AGENTS.md states that nothing is authored there.
+  - repository: org-brain
+    public: false
+    manifest: present
+    reason: >-
+      Private. Its own manifest declares the documentation surface planned and internal and states
+      that nothing in it is collected by the Website.
+  - repository: swarm
+    public: true
+    manifest: present
+    reason: >-
+      Public and carries a b10x.docs.yaml, but the organization catalog holds no repository row and
+      no website documentation surface for it, so there is nothing for the roster to follow.
+      Admission is the catalog's to make; add it here in the same change that adds its row.
+  - repository: website
+    public: true
+    manifest: present
+    reason: >-
+      This repository. It composes and renders the site and never collects itself as one of its own
+      sources; its manifest describes the surface the site publishes, not an input to the lock.
+  - repository: widgets
+    public: true
+    manifest: present
+    reason: >-
+      Public, but its b10x.docs.yaml is hand-written and names its own condition: the catalog
+      generator rewrites it once widgets carries a catalog row. Absent until that row exists.

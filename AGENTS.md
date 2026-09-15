@@ -34,6 +34,10 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
 - `beyond10x.github.io` is a generated deployment mirror. Do not author content there.
 - `getting-started` is predecessor history, not an authority or a source dependency. It remains an
   explicit compatibility-only façade; do not add it to the active source roster.
+- Roster admission follows the organization catalog's website documentation surfaces, not the mere
+  presence of a `b10x.docs.yaml`. `sources.yaml` carries the exclusion record for every repository a
+  reader could expect on the roster; amend that record in the same change that admits, retires, or
+  first publishes a manifest for one.
 
 ## Presentation
 
