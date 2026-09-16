@@ -750,14 +750,13 @@
       "accent": "#52d6c7",
       "adoption": {
         "estimatedMinutes": 20,
-        "label": "Connect Slack locally",
+        "label": "Build and run a connector locally",
         "mode": "source-build",
-        "outcome": "Configure a local Connector deployment and establish a governed Slack connection.",
+        "outcome": "Build the workspace and run a connector against a local composition.",
         "prerequisites": [
-          "Rust toolchain",
-          "Slack application credentials"
+          "Rust toolchain"
         ],
-        "url": "https://beyond10x.github.io/docs/connectors/guides/connect-slack/"
+        "url": "https://beyond10x.github.io/docs/connectors/development/"
       },
       "audiences": [
         "evaluator",
@@ -804,33 +803,13 @@
       "sections": [
         {
           "kind": "docs",
-          "label": "System overview",
-          "url": "https://beyond10x.github.io/docs/connectors/architecture/"
+          "label": "Design",
+          "url": "https://beyond10x.github.io/docs/connectors/design/"
         },
         {
           "kind": "docs",
-          "label": "Commands and interfaces",
-          "url": "https://beyond10x.github.io/docs/connectors/architecture/interfaces/"
-        },
-        {
-          "kind": "docs",
-          "label": "Deployment and runtime",
-          "url": "https://beyond10x.github.io/docs/connectors/architecture/deployment/"
-        },
-        {
-          "kind": "docs",
-          "label": "Specification status",
-          "url": "https://beyond10x.github.io/docs/connectors/architecture/specification/"
-        },
-        {
-          "kind": "quickstart",
-          "label": "Connect Slack",
-          "url": "https://beyond10x.github.io/docs/connectors/guides/connect-slack/"
-        },
-        {
-          "kind": "guide",
-          "label": "Connect GitLab",
-          "url": "https://beyond10x.github.io/docs/connectors/guides/connect-gitlab/"
+          "label": "Development",
+          "url": "https://beyond10x.github.io/docs/connectors/development/"
         },
         {
           "kind": "source",
@@ -842,11 +821,9 @@
         "documents": {
           "include": [
             "README.md",
-            "docs/architecture/*.md",
-            "docs/guides/*.md",
-            "docs/design/01-domain-model.md",
-            "docs/design/02-architecture.md",
-            "docs/design/18-governed-outbound-mcp-services.md"
+            "docs/design.md",
+            "docs/development.md",
+            "docs/compositions/monitoring.md"
           ]
         },
         "navigation": {
