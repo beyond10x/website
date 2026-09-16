@@ -533,7 +533,7 @@ async function verifyDocumentationViewports(cdp, siteUrl) {
     for (const {width, height, mobile, scale} of sizes) {
       const context = `${theme}, ${width}px, scale ${scale}`;
       await cdp.command('Emulation.setDeviceMetricsOverride', {width, height, deviceScaleFactor: scale, mobile});
-      await navigate(cdp, `${siteUrl}/docs/connectors/architecture/specification/`);
+      await navigate(cdp, `${siteUrl}/docs/connectors/design/`);
       let diagram;
       for (let attempt = 0; attempt < 100; attempt += 1) {
         diagram = await evaluate(cdp, `(() => {
