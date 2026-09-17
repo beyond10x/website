@@ -93,8 +93,9 @@ test('source roster is complete, sorted, and lock is either the explicit bootstr
   const rosterDocument = parse(roster);
   const repositories = rosterDocument.repositories;
   assert.ok(repositories.length > 0);
-  assert.equal(repositories.length, 25);
+  assert.equal(repositories.length, 26);
   assert.ok(repositories.includes('gates'));
+  assert.ok(repositories.includes('mandate'), 'Mandate is an admitted public documentation source');
   assert.deepEqual(repositories, [...repositories].sort());
   assert.deepEqual(rosterDocument.compatibilityRepositories, ['getting-started']);
   assert.ok(!repositories.includes('getting-started'));

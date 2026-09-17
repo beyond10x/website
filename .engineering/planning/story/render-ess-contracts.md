@@ -19,7 +19,7 @@ scope:
   path: src/components
 - confidence: cited
   path: tests
-revision: 6
+revision: 7
 ---
 # Publish browsable ESS contracts with Mandate outlook documentation
 
@@ -52,3 +52,7 @@ Operator requested a Brave review before this website goes out. Finish a concret
 The shared viewer integration passed 102 Website unit tests, TypeScript checking, production site build, source/build code rendering checks and the complete Website gate against the existing source roster. That gate verified 345 routes, 346 HTML documents, search, responsive/keyboard navigation, rendered diagrams/tables, and publication provenance. A separate Mandate preview exercised the actual format-selection helper, passive fetch wrapper and shared viewer with the unedited ESS projection. Browser checks cover navigation, declaration search, deep links and reload/history, focus, mobile width, diagrams and dark theme.
 
 Website now pins Docs System's immutable review-branch commit. New Mandate source admission and final publication require the coordinated catalog/source changes and the operator's requested website review. The preview is local evidence, not an assertion that the public site has been deployed.
+
+## Mandate roster integration
+
+The roster now includes Mandate. The source lock was generated through the documented coordinated workspace path from clean exact commits, including published Mandate 2e6ea48e45b72740d8d8c5ca4045b322007a0654 and Docs System 669cc593d5adde421f16c93aa3547dcf73c77c10 candidate sources. Both are available remotely. The bound bootstrap snapshot and complete 26-source gate must be regenerated before this branch is pushed. Atlas's global admission currently refuses because paused Zwirn still depends on retired Platform; decision-blocker:paused-source-admission in Atlas records the prerequisite. This does not establish public delivery or replace the requested local review.
