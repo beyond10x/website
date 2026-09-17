@@ -1,0 +1,337 @@
+/*
+ * Long-form essay typography.
+ *
+ * This page is an essay, not documentation, so it departs deliberately from
+ * the `.theme-doc-markdown` measure (75ch / 1.72) in favour of a single
+ * centred reading column with a slightly larger body size. Every colour is a
+ * site token so both themes follow automatically. Nothing here changes the
+ * text: rhythm is shaped purely with wrappers and spacing.
+ */
+
+.page {
+  --essay-size: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+  --essay-label: 700 0.72rem/1.2 var(--ifm-font-family-monospace);
+  --essay-label-tracking: 0.16em;
+
+  max-width: 41rem;
+  margin-inline: auto;
+  padding-block: clamp(0.5rem, 3vw, 2.5rem) 3rem;
+}
+
+/* ------------------------------------------------------------------ hero */
+
+/*
+ * PageHeader stays (shared component, shared markup) but loses its card
+ * chrome. A feature opens with type on the page, not a boxed banner.
+ */
+.hero :global(.b10x-page-header) {
+  display: block;
+  margin: 0 0 3rem;
+  padding: 0 0 2rem;
+  overflow: visible;
+  border: 0;
+  border-bottom: 1px solid var(--b10x-color-line);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.hero :global(.b10x-page-header)::before,
+.hero :global(.b10x-page-header)::after {
+  content: none;
+}
+
+.hero :global(.b10x-page-header__copy) {
+  max-inline-size: none;
+}
+
+.hero :global(.b10x-eyebrow) {
+  margin-bottom: 1.75rem;
+  color: var(--b10x-color-link);
+  font: var(--essay-label);
+  letter-spacing: var(--essay-label-tracking);
+}
+
+.hero :global(.b10x-page-header) h1 {
+  font-size: clamp(2.5rem, 1.4rem + 5vw, 4.1rem);
+  line-height: 1.02;
+  letter-spacing: -0.042em;
+}
+
+/*
+ * Each hero sentence sits on its own line without a hard break, so a narrow
+ * viewport can still wrap the sentence internally instead of overflowing.
+ * The first line sets up; the second lands, so only the second carries the
+ * full heading colour.
+ */
+.heroLine {
+  display: block;
+  text-wrap: balance;
+}
+
+.hero :global(.b10x-page-header) h1 .heroLine:not(.heroTurn) {
+  color: var(--b10x-color-muted);
+}
+
+.heroTurn {
+  margin-top: 0.12em;
+}
+
+.hero :global(.b10x-page-header__meta) {
+  margin-top: 2.25rem;
+}
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.85rem;
+  margin: 0;
+  color: var(--b10x-color-muted);
+  font: var(--essay-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.heroMeta > span + span::before {
+  content: '·';
+  margin-right: 0.85rem;
+  color: var(--b10x-color-line);
+}
+
+/* ------------------------------------------------------------------ body */
+
+.essay {
+  counter-reset: essay-section;
+  color: var(--b10x-color-text);
+  font-size: var(--essay-size);
+  line-height: 1.58;
+  text-wrap: pretty;
+}
+
+.essay > p {
+  max-width: none;
+  margin: 0 0 0.95em;
+}
+
+.essay strong {
+  color: var(--b10x-color-heading);
+  font-weight: 650;
+}
+
+/* Opening drop cap. */
+.essay > p:first-of-type::first-letter {
+  float: left;
+  margin: 0.06em 0.14em 0 -0.02em;
+  color: var(--b10x-color-heading);
+  font-size: 3.7em;
+  font-weight: 700;
+  line-height: 0.76;
+  letter-spacing: -0.02em;
+}
+
+/* Section breaks: the numbered heading is the divider, so the rules go. */
+.essay > hr {
+  display: none;
+}
+
+.essay > h2 {
+  max-width: 24ch;
+  margin: 4.25rem 0 1.4rem;
+  color: var(--b10x-color-heading);
+  font-size: clamp(1.55rem, 1.15rem + 1.4vw, 2.05rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1.5rem);
+}
+
+.essay > h2::before {
+  content: counter(essay-section, decimal-leading-zero);
+  counter-increment: essay-section;
+  display: block;
+  margin-bottom: 0.9rem;
+  color: var(--b10x-color-link);
+  font: var(--essay-label);
+  letter-spacing: var(--essay-label-tracking);
+}
+
+/*
+ * Runs.
+ *
+ * A run is a litany of parallel one-line paragraphs. Setting them tight turns
+ * a column of identical beats into one shaped stanza, and the wider gaps on
+ * either side become the breath between thought-groups.
+ */
+.run {
+  margin: 1.3em 0 1.5em;
+}
+
+.run > p {
+  margin: 0 0 0.26em;
+}
+
+.run > p:last-child {
+  margin-bottom: 0;
+}
+
+/*
+ * Pull lines.
+ *
+ * The bold single sentences carry the argument. They get display scale and a
+ * short accent rule so they read as the essay's own pull-quotes.
+ */
+.pull {
+  margin: 1.6em 0 2em;
+}
+
+.pull::before {
+  content: '';
+  display: block;
+  width: 2.25rem;
+  height: 2px;
+  margin-bottom: 1.1rem;
+  background: var(--b10x-color-link);
+}
+
+.pull > p {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--b10x-color-heading);
+  font-size: clamp(1.3rem, 1rem + 1.15vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+.pull strong {
+  font-weight: 600;
+}
+
+/*
+ * Shift pairs: "Instead of: / It becomes:".
+ *
+ * Each pair is a two-column grid. Source order (label, quote, label, quote)
+ * fills the grid as labels on the first row and quotes on the second, so the
+ * ticket sits beside the problem without reordering anything. The ticket is
+ * set in monospace, like a tracker title; the problem is set as a sentence.
+ */
+.shifts {
+  margin: 2.2em 0 2.4em;
+  border-bottom: 1px solid var(--b10x-color-line);
+}
+
+.shift {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-rows: auto auto;
+  grid-auto-flow: column;
+  gap: 0.55rem 2.25rem;
+  padding: 1.4rem 0 1.5rem;
+  border-top: 1px solid var(--b10x-color-line);
+}
+
+.shift > p {
+  margin: 0;
+  color: var(--b10x-color-muted);
+  font: var(--essay-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.shift > blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+.shift > blockquote > p {
+  margin: 0;
+}
+
+.shift > blockquote:first-of-type {
+  color: var(--b10x-color-muted);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.86em;
+  line-height: 1.5;
+}
+
+.shift > blockquote:last-of-type {
+  color: var(--b10x-color-heading);
+  font-size: 1.06em;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+}
+
+@media (max-width: 640px) {
+  .shift {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-auto-flow: row;
+    gap: 0.35rem 0;
+  }
+
+  .shift > blockquote:first-of-type {
+    margin-bottom: 1rem;
+  }
+}
+
+/* ------------------------------------------------------------------ coda */
+
+/*
+ * The final questions are the point of the essay, so they carry the weight
+ * rather than reading as ordinary bold body text. The small monospace labels
+ * echo the hero eyebrow and section numbers, which bookends the page.
+ */
+.coda {
+  margin-top: 5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--b10x-color-line);
+}
+
+.coda > h3 {
+  margin: 0 0 0.9rem;
+  color: var(--b10x-color-link);
+  font: var(--essay-label);
+  letter-spacing: var(--essay-label-tracking);
+  text-transform: uppercase;
+}
+
+.coda > h3:not(:first-child) {
+  margin-top: 3rem;
+}
+
+.coda > p {
+  max-width: none;
+  margin: 0 0 1.1rem;
+}
+
+.coda > p > strong {
+  display: block;
+  color: var(--b10x-color-heading);
+  font-size: clamp(1.45rem, 1.05rem + 1.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.028em;
+  text-wrap: balance;
+}
+
+.codaClose {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--b10x-color-line);
+}
+
+.codaClose > p {
+  margin: 0 0 0.3em;
+  font-size: 1.06em;
+}
+
+.codaClose > p:last-child {
+  color: var(--b10x-color-heading);
+  font-weight: 600;
+}
