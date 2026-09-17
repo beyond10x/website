@@ -2,6 +2,74 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "ess/0.26.0",
+      "id": "ess/0.26.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-17T00:07:24Z",
+      "title": "ESS 0.26.0",
+      "summary": "ESS released version 0.26.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.26.0",
+        "version": "0.26.0"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "gates/0.1.5",
+      "id": "gates/0.1.5",
+      "repository": "gates",
+      "publishedAt": "2026-09-16T12:00:29Z",
+      "title": "Gates 0.1.5",
+      "summary": "Gates released version 0.1.5.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/gates/releases/tag/0.1.5",
+        "version": "0.1.5"
+      },
+      "journeys": [
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "gates/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/0.25.0",
+      "id": "ess/0.25.0",
+      "repository": "ess",
+      "publishedAt": "2026-09-16T07:42:42Z",
+      "title": "ESS 0.25.0",
+      "summary": "ESS released version 0.25.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.25.0",
+        "version": "0.25.0"
+      },
+      "journeys": [
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "gates/0.1.4",
       "id": "gates/0.1.4",
       "repository": "gates",

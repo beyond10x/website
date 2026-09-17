@@ -1770,6 +1770,115 @@
       }
     },
     {
+      "adoption": {
+        "estimatedMinutes": 10,
+        "label": "Review Mandate foundations",
+        "mode": "source-build",
+        "outcome": "Validate the scaffold and review the implementation roadmap.",
+        "prerequisites": [
+          "Rust 1.98.1",
+          "ESS 0.25.0",
+          "AEP 0.55.0"
+        ],
+        "url": "https://beyond10x.github.io/docs/mandate/"
+      },
+      "audiences": [
+        "adopter",
+        "developer",
+        "operator"
+      ],
+      "availability": "published",
+      "canonicalUrl": "https://beyond10x.github.io/docs/mandate/",
+      "capabilities": [
+        "identity-foundations",
+        "constrained-delegation",
+        "tenant-authorization"
+      ],
+      "discoverability": "public",
+      "feeds": [],
+      "id": "docs",
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "kind": "service-docs",
+      "maturity": "experimental",
+      "name": "Mandate",
+      "primaryJourney": "operate-services",
+      "relationships": [],
+      "routeBase": "/docs/mandate/",
+      "sections": [
+        {
+          "kind": "docs",
+          "label": "Foundations",
+          "url": "https://beyond10x.github.io/docs/mandate/"
+        },
+        {
+          "kind": "source",
+          "label": "Source",
+          "url": "https://github.com/beyond10x/mandate"
+        }
+      ],
+      "source": {
+        "components": [
+          "OpenApiReference",
+          "Diagram"
+        ],
+        "data": {
+          "include": [
+            "generated/docs-ir/document.json"
+          ]
+        },
+        "documents": {
+          "include": [
+            "README.md",
+            "docs/public/**/*.md",
+            "generated/docs/**/*.md"
+          ]
+        },
+        "navigation": {
+          "group": "Services",
+          "label": "Mandate",
+          "order": 65,
+          "sidebar": "flat"
+        },
+        "root": ".",
+        "specifications": [
+          {
+            "format": "openapi",
+            "id": "control-plane",
+            "path": "generated/openapi/mandate-control-plane.yaml",
+            "route": "/api/mandate/control-plane/"
+          },
+          {
+            "format": "openapi",
+            "id": "authorization",
+            "path": "generated/openapi/mandate-authorization.yaml",
+            "route": "/api/mandate/authorization/"
+          },
+          {
+            "format": "openapi",
+            "id": "sts",
+            "path": "generated/openapi/mandate-sts.yaml",
+            "route": "/api/mandate/sts/"
+          },
+          {
+            "format": "openapi",
+            "id": "worker",
+            "path": "generated/openapi/mandate-worker.yaml",
+            "route": "/api/mandate/worker/"
+          }
+        ]
+      },
+      "summary": "Standalone identity, authorization and constrained delegation foundations, contracts and roadmap.",
+      "key": "mandate/docs",
+      "repository": {
+        "displayName": "Mandate",
+        "id": "mandate",
+        "url": "https://github.com/beyond10x/mandate"
+      }
+    },
+    {
       "accent": "#8bd5ca",
       "adoption": {
         "estimatedMinutes": 10,
