@@ -132,6 +132,9 @@ const config: Config = {
     mermaid: {
       theme: {light: 'neutral', dark: 'dark'},
       options: {
+        securityLevel: 'strict',
+        htmlLabels: false,
+        flowchart: {htmlLabels: false},
         fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
       },
     },

@@ -5,6 +5,7 @@ import {resolveDocumentPageMetadata} from '@beyond10x/docs-system/documents';
 import {evaluateExperienceCatalog} from '@beyond10x/docs-system/experiences';
 import {writeJsonFeed, writeRss} from '@beyond10x/docs-system/feeds';
 import {readExperienceCatalog} from '@beyond10x/docs-system/manifest';
+import {essContractReference} from './ess-contract-reference.mjs';
 import {compareUtf8} from './order-contract.mjs';
 import {sourceKey, sourceMap} from './source-routing.mjs';
 import {bootstrapEnabled} from './source-lock-contract.mjs';
@@ -548,10 +549,21 @@ async function materializeData({file, sourceFile, manifest, commit}) {
   const parsed = file.sourcePath.endsWith('.json') ? JSON.parse(raw) : parse(raw);
   const slug = path.basename(file.sourcePath, path.extname(file.sourcePath)).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const sourceDirectory = path.join(generatedStatic, 'data', file.repository);
+  const contract = essContractReference({
+    document: parsed,
+    sourceUrl: `/data/${file.repository}/${slug}.json`,
+    sourceRepository: `${manifest.repository.url}/blob/${commit}/${file.sourcePath}`,
+    slug: `/${file.repository}/${slug}/`,
+    title: `${manifest.repository.displayName} contracts`,
+  });
   await mkdir(sourceDirectory, {recursive: true});
-  await writeFile(path.join(sourceDirectory, `${slug}.json`), `${JSON.stringify(parsed, null, 2)}\n`);
+  await writeFile(path.join(sourceDirectory, `${slug}.json`), contract && file.sourcePath.endsWith('.json') ? raw : `${JSON.stringify(parsed, null, 2)}\n`);
   const page = path.join(components, file.repository, `${slug}.mdx`);
   await mkdir(path.dirname(page), {recursive: true});
+  if (contract !== undefined) {
+    await writeFile(page, contract);
+    return;
+  }
   const summary = dataSummary(parsed);
   await writeFile(
     page,
