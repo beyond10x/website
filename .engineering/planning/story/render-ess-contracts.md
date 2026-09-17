@@ -18,8 +18,10 @@ scope:
 - confidence: cited
   path: src/components
 - confidence: cited
+  path: src/theme
+- confidence: cited
   path: tests
-revision: 7
+revision: 9
 ---
 # Publish browsable ESS contracts with Mandate outlook documentation
 
@@ -56,3 +58,11 @@ Website now pins Docs System's immutable review-branch commit. New Mandate sourc
 ## Mandate roster integration
 
 The roster now includes Mandate. The source lock was generated through the documented coordinated workspace path from clean exact commits, including published Mandate 2e6ea48e45b72740d8d8c5ca4045b322007a0654 and Docs System 669cc593d5adde421f16c93aa3547dcf73c77c10 candidate sources. Both are available remotely. The bound bootstrap snapshot and complete 26-source gate must be regenerated before this branch is pushed. Atlas's global admission currently refuses because paused Zwirn still depends on retired Platform; decision-blocker:paused-source-admission in Atlas records the prerequisite. This does not establish public delivery or replace the requested local review.
+
+## Full integrated preview verification
+
+The 26-source Website gate passed with the remotely available locked inputs and without preview/source-workspace environment overrides: 102 unit tests, TypeScript, Docusaurus production build, 376 routes, 377 HTML documents, 26 SVG documents, 25,704 crawled references and 1,402 publication files. Search indexed 377 pages. Responsive navigation, diagram/table rendering, code rendering and provenance checks passed.
+
+The integrated browser check exercised the actual /components/mandate/document/ route: 16 contract pages, declaration search and no-results handling, deep-link reload/history, keyboard focus, passive lifecycle SVG, mobile width and dark theme. It also verified that the generated delegation title retains #delegation while its same-named entity retains #delegation-1. Docusaurus already assigns these identifiers; src/theme/Heading/index.tsx preserves the title identifier that its default renderer drops. ESS output remains unmodified. src/theme is part of this story's typed scope.
+
+The full local Website was opened in Brave at http://127.0.0.1:4175/docs/mandate/ and http://127.0.0.1:4175/components/mandate/document/. This is operator-review evidence, not live public delivery. Production still requires reviewed Atlas admission, the coordinated Docs System toolchain repin documented in ADR 0061, and the operator's requested review.
