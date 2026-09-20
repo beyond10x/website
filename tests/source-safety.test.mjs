@@ -343,6 +343,33 @@ test('reusable façade workflow dual-reads legacy root state and stable route co
   assert.doesNotMatch(workflow, /working-directory: \.website-data/);
 });
 
+test('reusable project-site workflow deploys one bot-authored build run and never repository code', async () => {
+  const workflow = await readFile(path.join(path.resolve(import.meta.dirname, '..'), '.github', 'workflows', 'project-site.yml'), 'utf8');
+  assert.match(workflow, /path: \.control-data/);
+  assert.match(workflow, /github\.triggering_actor == 'b10x-bot\[bot\]'/);
+  assert.match(workflow, /github\.sha == inputs\.control_sha/);
+  assert.match(workflow, /refs\/heads\/main/);
+  assert.match(workflow, /\.committer\.login == "web-flow"/);
+  assert.match(workflow, /\.commit\.verification\.verified == true/);
+  assert.match(workflow, /\.commit\.verification\.reason == "valid"/);
+  // The run is selected by the commit being published, never supplied at dispatch.
+  assert.doesNotMatch(workflow, /build_run_id:/);
+  assert.match(workflow, /head_sha=\$CONTROL_SHA/);
+  assert.match(workflow, /\.head_branch == "main"/);
+  assert.match(workflow, /\.event == "push"/);
+  assert.match(workflow, /\.conclusion == "success"/);
+  assert.match(workflow, /run-id: \$\{\{ steps\.build\.outputs\.run_id \}\}/);
+  // A site built for another base path answers 404 for every asset, so it is refused first.
+  assert.match(workflow, /\.baseUrl == \$base/);
+  assert.match(workflow, /b10x-project-site\/v1/);
+  assert.match(workflow, /b10x-site-provenance\/v1/);
+  assert.match(workflow, /test ! -e _site\/\.git/);
+  // Nothing from the source repository is executed here.
+  assert.doesNotMatch(workflow, /npm (ci|run|install)/);
+  assert.doesNotMatch(workflow, /actions\/checkout@[0-9a-f]+\n *with:\n *repository: beyond10x\/website/);
+  assert.doesNotMatch(workflow, /secrets: inherit/);
+});
+
 test('reusable root workflow executes immutable controls and blocks human reruns', async () => {
   const workflow = await readFile(path.join(path.resolve(import.meta.dirname, '..'), '.github', 'workflows', 'deploy-root.yml'), 'utf8');
   assert.match(workflow, /repository: \$\{\{ job\.workflow_repository \}\}/);
