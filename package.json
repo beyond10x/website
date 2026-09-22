@@ -8,6 +8,7 @@
     "dev": "node scripts/preview.mjs dev",
     "dev:fast": "node scripts/preview.mjs dev-fast",
     "preview:build": "node scripts/preview.mjs build",
+    "preview:source": "node scripts/preview.mjs source",
     "prepare:site": "node scripts/prepare-site.mjs",
     "sources:collect": "node scripts/collect-sources.mjs",
     "sources:lock": "node scripts/update-source-lock.mjs",

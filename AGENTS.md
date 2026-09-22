@@ -27,6 +27,15 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
   lock and Git-object fetch origins: `npm run sources:lock` requires clean checked-out `main` heads,
   while extraction still uses the exact locked commits and never reads dirty worktree bytes. Leave
   it unset for production and ordinary remote-backed builds.
+- `npm run preview:source` (from a source repository: `npm --prefix <website> run preview:source`)
+  is the one path that reads dirty working-tree bytes. It copies only the paths that repository's
+  manifest declares and validates them with the shared collector. Every other source is extracted
+  at the commit the live `PROVENANCE.json` records, through the bounded bare-Git-object store, and
+  must reproduce its published collection digest; the roster and the advisory route map are that
+  provenance's (`--snapshot <dir>` overrides the live fetch). It exits 1 only on that repository's
+  validation failure, 2 when the preview cannot be built or served, and 130 when interrupted before
+  the server is up. It executes nothing from any source repository and is never publication
+  evidence.
 - Before pushing a Website change against the retained lock path, publish every commit named by
   `sources.lock.json`, unset `B10X_SOURCE_WORKSPACE`, and run the gate against remote sources. A
   local object database is preview evidence, not publication availability. A production
