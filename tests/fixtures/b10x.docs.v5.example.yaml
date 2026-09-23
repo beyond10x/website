@@ -1,0 +1,54 @@
+delivery:
+  origin: https://beyond10x.github.io
+  publisher: website
+  repository: beyond10x.github.io
+repository:
+  displayName: Example Project
+  id: example-project
+  url: https://github.com/beyond10x/example-project
+schema: b10x-docs/v5
+surfaces:
+- canonicalUrl: https://beyond10x.github.io/docs/example-project/
+  capabilities:
+  - example-capability
+  documentDefaults:
+    access: public
+    audiences:
+    - developer
+    experienceIds:
+    - evaluate-beyond10x-products
+    support: preview
+  experienceIds:
+  - evaluate-beyond10x-products
+  id: docs
+  kind: documentation
+  maturity: development
+  name: Example Project
+  publication:
+    availability: published
+    discoverability: public
+  routeBase: /docs/example-project/
+  sections:
+  - kind: source
+    label: Source
+    url: https://github.com/beyond10x/example-project
+  source:
+    documents:
+      include:
+      - '**/*.md'
+    navigation:
+      group: Build
+      label: Example Project
+      menuWithheld:
+      - internal-notes.md
+      order: 999
+      sidebar:
+      - label: Getting started
+        items:
+        - getting-started/index.md
+        - getting-started/install.md
+      - label: Reference
+        items:
+        - guide.md
+    root: docs
+  summary: A fixture project proving b10x-docs/v5 nested sidebar and menuWithheld rendering.

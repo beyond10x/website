@@ -23,7 +23,7 @@ export function essContractReference({document, sourceUrl, sourceRepository, slu
     '',
     ...document.pages.map(page => `- **${markdownText(essText(page.title))}** — ${index.sections.get(page.id).length} sections`),
     '',
-    `[Download the ESS documentation projection](${sourceUrl})`,
+    `[Download the ESS documentation projection](pathname://${sourceUrl})`,
     '',
   ].join('\n');
 }

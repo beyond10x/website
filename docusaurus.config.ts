@@ -3,6 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import docsSystemPlugin from '@beyond10x/docs-system/docusaurus';
 import {PRISM_ADDITIONAL_LANGUAGES} from '@beyond10x/docs-system/code';
+import {journeyById} from './data/journeys.mjs';
 
 const localPreview = process.env.B10X_LOCAL_PREVIEW === '1';
 
@@ -62,7 +63,6 @@ const config: Config = {
         id: 'ecosystem-profiles',
         path: '.generated/ecosystem',
         routeBasePath: 'ecosystem',
-        sidebarPath: false,
         showLastUpdateAuthor: false,
         showLastUpdateTime: false,
       },
@@ -73,7 +73,6 @@ const config: Config = {
         id: 'component-data',
         path: '.generated/components',
         routeBasePath: 'components',
-        sidebarPath: false,
         showLastUpdateAuthor: false,
         showLastUpdateTime: false,
       },
@@ -84,7 +83,6 @@ const config: Config = {
         id: 'api-reference',
         path: '.generated/api',
         routeBasePath: 'api',
-        sidebarPath: false,
         showLastUpdateAuthor: false,
         showLastUpdateTime: false,
       },
@@ -181,16 +179,16 @@ const config: Config = {
         {
           title: 'Start',
           items: [
-            {label: 'Try a governed change', href: '/start/spec-driven-development/'},
-            {label: 'Learn safe agentic coding', href: '/learn/safe-agentic-coding/'},
-            {label: 'Build agent systems', href: '/build/agent-systems/'},
+            {label: journeyById('start').footerLabel, href: journeyById('start').hubRoute},
+            {label: journeyById('learn').footerLabel, href: journeyById('learn').hubRoute},
+            {label: journeyById('build').footerLabel, href: journeyById('build').hubRoute},
           ],
         },
         {
           title: 'Adopt',
           items: [
-            {label: 'Evaluate products', href: '/products/evaluate/'},
-            {label: 'Operate services', href: '/operate/'},
+            {label: journeyById('products').footerLabel, href: journeyById('products').hubRoute},
+            {label: journeyById('operate').footerLabel, href: journeyById('operate').hubRoute},
             {label: 'Explore the project map', href: '/ecosystem/'},
           ],
         },
@@ -198,6 +196,7 @@ const config: Config = {
           title: 'Documentation',
           items: [
             {label: 'Technical documentation', to: '/docs/'},
+            {label: 'API reference', to: '/api/'},
             {label: 'Search all documentation', to: '/search/'},
             {label: 'Updates and field notes', to: '/updates/'},
             {label: 'Releases', to: '/releases/'},
@@ -207,6 +206,7 @@ const config: Config = {
           title: 'About',
           items: [
             {label: 'Vision', to: '/vision/'},
+            {label: 'Engineering transformation', to: '/engineering-transformation/'},
             {label: 'Architecture', to: '/architecture/'},
             {label: 'GitHub organization', href: 'https://github.com/beyond10x'},
           ],

@@ -2,6 +2,7 @@ import type {ReactNode} from 'react';
 import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import {journeyById} from '../../data/journeys.mjs';
 import styles from './start.module.css';
 
 const loop = [
@@ -18,28 +19,28 @@ const gateways = [
     eyebrow: 'Build',
     title: 'Build observable agent systems',
     description: 'Move from host guidance to Harness, Substrate, and outside-in evaluation only when the work needs them.',
-    url: '/build/agent-systems/',
+    url: journeyById('build').experienceRoute,
   },
   {
     accent: 'violet',
     eyebrow: 'Evaluate',
     title: 'Evaluate a beyond10x product',
     description: 'See what is public, what is preview, and what remains access-gated before planning adoption.',
-    url: '/products/evaluate/',
+    url: journeyById('products').experienceRoute,
   },
   {
     accent: 'amber',
     eyebrow: 'Operate',
     title: 'Deploy an available service',
     description: 'Go directly to service and platform operations without putting cluster detail in the beginner path.',
-    url: '/operate/',
+    url: journeyById('operate').experienceRoute,
   },
   {
     accent: 'coral',
     eyebrow: 'Contribute',
     title: 'Maintain the documentation system',
     description: 'Change technical truth in its owning repository and preview it through the canonical Website shell.',
-    url: '/contribute/',
+    url: journeyById('contribute').experienceRoute,
   },
 ];
 
@@ -71,10 +72,10 @@ export default function Home(): ReactNode {
                 and finish with a scoped, critic-reviewed plan and visible blockers.
               </p>
               <div className={styles.actions}>
-                <Link className={styles.primaryAction} to="/start/spec-driven-development/">
+                <Link className={styles.primaryAction} to={journeyById('start').hubRoute}>
                   Plan a governed change with Claude <span aria-hidden="true">→</span>
                 </Link>
-                <Link className={styles.secondaryAction} to="/learn/safe-agentic-coding/">
+                <Link className={styles.secondaryAction} to={journeyById('learn').experienceRoute}>
                   Learn safe agentic coding
                 </Link>
               </div>
@@ -117,9 +118,6 @@ export default function Home(): ReactNode {
                 </li>
               ))}
             </ol>
-            <Link className={styles.inlineAction} to="/start/spec-driven-development/">
-              Follow the complete learn → do → verify path <span aria-hidden="true">→</span>
-            </Link>
           </div>
         </section>
 
@@ -153,11 +151,10 @@ export default function Home(): ReactNode {
             <div>
               <p className={styles.eyebrow}>REFERENCE</p>
               <Heading as="h2" id="reference-title">Already know what you need?</Heading>
-              <p>Browse source-locked technical documentation or inspect the complete project map.</p>
-            </div>
-            <div className={styles.referenceActions}>
-              <Link className={styles.primaryAction} to="/docs/">Open technical documentation</Link>
-              <Link className={styles.secondaryLightAction} to="/ecosystem/">Explore every project</Link>
+              <p>
+                Browse <Link className={styles.inlineAction} to="/docs/">source-locked technical documentation <span aria-hidden="true">→</span></Link> or
+                inspect the <Link className={styles.inlineAction} to="/ecosystem/">complete project map <span aria-hidden="true">→</span></Link>.
+              </p>
             </div>
           </div>
         </section>

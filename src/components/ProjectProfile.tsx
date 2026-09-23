@@ -36,7 +36,7 @@ export default function ProjectProfile({repository, revision}: {repository: stri
       <FactGrid items={[
         {label: 'Locked revision', value: /^[0-9a-f]{40}$/.test(revision) ? <Link to={`${primary.repository.url}/tree/${revision}`} aria-label={`View locked revision ${revision} on GitHub`} title={revision}><code>{revision.slice(0, 12)}</code></Link> : 'Local preview'},
         {label: 'Latest release', value: latestRelease ? <Link to={latestRelease.url}>{latestRelease.version}</Link> : 'Not recorded', detail: latestRelease ? <time dateTime={latestRelease.publishedAt}>{formatDate(latestRelease.publishedAt)}</time> : 'No release exists in the current snapshot'},
-        {label: 'Primary outcome', value: primaryJourneyOf(primary) ? <Link to={experienceRouteForJourney(primaryJourneyOf(primary) ?? '')}>{label(primaryJourneyOf(primary) ?? '')}</Link> : 'Not declared'},
+        {label: 'Primary outcome', value: primaryJourneyOf(primary) ? <Link to={experienceRouteForJourney(primaryJourneyOf(primary) ?? '')}>{sentence(primaryJourneyOf(primary) ?? '')}</Link> : 'Not declared'},
         {label: 'Audience', value: (primary.audiences ?? []).map(label).join(', ') || 'Not declared'},
       ]} />
     </section>
@@ -146,6 +146,11 @@ function localTarget(value: string): string {
 
 function label(value: string): string {
   return value.replaceAll('-', ' ').replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function sentence(value: string): string {
+  const words = value.replaceAll('-', ' ');
+  return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
 function formatDate(value: string): string {
