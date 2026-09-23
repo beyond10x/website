@@ -41,8 +41,8 @@ export async function collectSources({root, outputRoot, inputs, sourceWorkspace 
       throw new Error(`${source.repository} manifest digest drift: locked ${source.manifestSha256}, fetched ${actualManifestSha}`);
     }
     const manifest = await readManifest(extracted.manifestFile);
-    if (!isCollectableManifestSchema(manifest.schema)) throw new Error(`${source.repository} source manifest is not v3 or v4`);
-    if (manifest.schema === 'b10x-docs/v4') validateManifestExperienceReferences(manifest, experienceCatalog);
+    if (!isCollectableManifestSchema(manifest.schema)) throw new Error(`${source.repository} source manifest is not v3, v4 or v5`);
+    if (manifest.schema === 'b10x-docs/v4' || manifest.schema === 'b10x-docs/v5') validateManifestExperienceReferences(manifest, experienceCatalog);
     const index = await collectManifestSources(manifest, extracted.treeRoot, {outputRoot: collectionRoot});
     verifyCollectionLock(lock, index, {commit: source.commit, manifestSha256: actualManifestSha});
     if (bundle && canonicalJson(index) !== canonicalJson(bundle.collection)) {

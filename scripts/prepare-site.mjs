@@ -12,7 +12,7 @@ import {canonicalSectionUrl, redirectQuarantinedUrls, rewriteLinks} from './link
 import {bootstrapEnabled} from './source-lock-contract.mjs';
 import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
 import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from './api-catalog.mjs';
-import {assertDocumentationFamilyDistribution, documentationFamilies, documentationFamilyOrder, renderSidebars, sourceSidebarMetadata} from './sidebar-contract.mjs';
+import {assertDocumentationFamilyDistribution, declaredDocumentRoute, declaredNavigationRefusals, documentPagePath, documentSourceRelative, isMenuWithheld, documentationFamilies, documentationFamilyOrder, renderSidebars, sourceSidebarMetadata} from './sidebar-contract.mjs';
 import {normalizePassiveMarkdown} from './passive-markdown.mjs';
 import {assertSearchAudienceVocabulary, experienceIdsForSourceDocument, qualifiedDocumentTitle} from './search-metadata-contract.mjs';
 import {withGenerationLease} from './generation-lease.mjs';
@@ -90,6 +90,7 @@ let indexes = [];
 let collectionRoot;
 let apiCatalog = buildApiCatalog([]);
 let documentIndex = {schema: 'b10x-document-index/v1', documents: []};
+let documentPages = {schema: 'b10x-website-document-pages/v1', pages: []};
 
 if (lock.sources.length > 0) {
   const {collectSources} = await import('./collect-sources.mjs');
@@ -98,7 +99,7 @@ if (lock.sources.length > 0) {
   registry = redirectQuarantined(registry);
   manifests = redirectQuarantined(manifests);
   assertDocumentationFamilyDistribution(manifests, {quarantined: [...quarantined]});
-  ({apiCatalog, documentIndex} = await materializeCollection({manifests, indexes, collectionRoot}));
+  ({apiCatalog, documentIndex, documentPages} = await materializeCollection({manifests, indexes, collectionRoot}));
 } else {
   registry = fixtureRegistry(roster.repositories, legacyRegistry);
 }
@@ -137,6 +138,8 @@ await Promise.all([
   writeFile(path.join(data, 'api-catalog.json'), `${JSON.stringify(apiCatalog, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'api-catalog.json'), `${JSON.stringify(apiCatalog, null, 2)}\n`),
   writeFile(path.join(data, 'document-index.json'), `${JSON.stringify(documentIndex, null, 2)}\n`),
+  // Read by code-contract.mjs: the page each collected document was written to, not recomputed.
+  writeFile(path.join(data, 'document-pages.json'), `${JSON.stringify(documentPages, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'document-index.json'), `${JSON.stringify(documentIndex, null, 2)}\n`),
   writeFile(path.join(data, 'experiences.json'), `${JSON.stringify(evaluatedExperienceCatalog, null, 2)}\n`),
   // Read by src/lib/published.ts: the Website's own pages apply the same rule to the same list.
@@ -244,6 +247,9 @@ await writeFile(
 );
 
 const profiledRepositories = new Set();
+// A collected document served at /docs/<repo>/ owns that route wherever its page was written, so the
+// generated project page is never a second page for it.
+const collectedRoutes = new Set(documentIndex.documents.filter((record) => record.sourcePath !== null).map((record) => record.route));
 for (const surface of surfaces) {
   const repository = surface.repository.id;
   const source = lockByRepository.get(repository);
@@ -271,7 +277,7 @@ for (const surface of surfaces) {
       break;
     } catch {}
   }
-  if (!hasCollectedIndex) {
+  if (!hasCollectedIndex && !collectedRoutes.has(`/docs/${repository}/`)) {
     await writeFile(
       indexFile,
       `${projectDocument({surface, repository, revision, sourceUrl, relationships, sections})}\n`,
@@ -311,6 +317,11 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
     sourceManifests.flatMap((manifest) => manifest.surfaces.map((surface) => [`${manifest.repository.id}/${surface.id}`, surface])),
   );
   const documents = sourceIndexes.flatMap((index) => index.files.filter((file) => file.kind === 'document'));
+  const refusals = sourceIndexes.flatMap((index) => declaredNavigationRefusals(
+    manifestByRepository.get(index.repository.id),
+    index.files.filter((file) => file.kind === 'document'),
+  ));
+  if (refusals.length > 0) throw new Error(`declared navigation is refused:\n${refusals.join('\n')}`);
   const routeBySource = sourceMap(documents, (file) => documentRoute(file, surfaceByKey));
   const blogFiles = sourceIndexes.flatMap((index) => index.files.filter((file) => file.kind === 'blog'));
   const blogRouteBySource = new Map();
@@ -326,6 +337,7 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
   const destinations = new Set();
   const apiSpecifications = [];
   const documentRecords = [];
+  const pages = [];
 
   for (const index of sourceIndexes) {
     const manifest = manifestByRepository.get(index.repository.id);
@@ -334,8 +346,12 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
       const sourceFile = path.join(collectedRoot, ...file.outputPath.split('/'));
       if (file.kind === 'document') {
         const route = routeBySource.get(sourceKey(file.repository, file.sourcePath));
-        const destination = docDestination(route, file.sourcePath);
+        const page = documentPagePath(route, file.sourcePath, {
+          withheld: isMenuWithheld(surfaceByKey.get(`${file.repository}/${file.surface}`), documentSourceRelative(file)),
+        });
+        const destination = path.join(docs, ...page.split('/'));
         assertUniqueDestination(destinations, destination);
+        pages.push({project: file.repository, sourcePath: file.sourcePath, page: `.generated/docs/${page}`});
         await mkdir(path.dirname(destination), {recursive: true});
         const raw = await readFile(sourceFile, 'utf8');
         const metadata = await documentMetadata({
@@ -392,6 +408,10 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
   return {
     apiCatalog: buildApiCatalog(apiSpecifications),
     documentIndex: {schema: 'b10x-document-index/v1', documents: documentRecords},
+    documentPages: {
+      schema: 'b10x-website-document-pages/v1',
+      pages: pages.sort((left, right) => compareUtf8(sourceKey(left.project, left.sourcePath), sourceKey(right.project, right.sourcePath))),
+    },
   };
 }
 
@@ -399,23 +419,11 @@ function documentRoute(file, surfaceByKey) {
   const surface = surfaceByKey.get(`${file.repository}/${file.surface}`);
   if (!surface) throw new Error(`missing surface for ${file.outputPath}`);
   if (!surface.routeBase.startsWith('/docs/')) throw new Error(`${file.repository}/${file.surface} routeBase must begin /docs/`);
-  const relative = file.outputPath.split('/').slice(3).join('/');
-  const normalized = normalizeDocumentRelative(relative);
-  const base = surface.routeBase.replace(/^\/docs\//, '').replace(/^\/+|\/+$/g, '');
-  const leaf = normalized.replace(/\.(?:md|mdx)$/i, '').replace(/(?:^|\/)index$/i, '');
-  return `/docs/${[base, leaf].filter(Boolean).join('/')}/`.replace(/\/+/g, '/');
-}
-
-function normalizeDocumentRelative(relative) {
-  let value = relative.replace(/^website\/docs\//, '').replace(/^docs\//, '');
-  value = value.replace(/(^|\/)(?:README|index|intro)\.(?:md|mdx)$/i, '$1index.md');
-  return value;
+  return declaredDocumentRoute(surface, documentSourceRelative(file));
 }
 
 function docDestination(route, sourcePath) {
-  const relative = route.replace(/^\/docs\//, '').replace(/\/$/, '');
-  const extension = path.extname(sourcePath).toLowerCase() === '.mdx' ? '.mdx' : '.md';
-  return path.join(docs, ...relative.split('/'), `index${extension}`);
+  return path.join(docs, ...documentPagePath(route, sourcePath).split('/'));
 }
 
 function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, metadata}) {
@@ -497,7 +505,7 @@ async function renderBlog({raw, file, route, commit, repositoryUrl, routeBySourc
   const title = frontmatter.title ?? firstHeading(body) ?? path.basename(file.sourcePath, path.extname(file.sourcePath));
   const date = normalizeBlogDate(frontmatter.date ?? /^([0-9]{4}-[0-9]{2}-[0-9]{2})/.exec(path.basename(file.sourcePath))?.[1] ?? '1970-01-01');
   const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, quarantined});
-  const resolved = manifest.schema === 'b10x-docs/v4'
+  const resolved = manifest.schema === 'b10x-docs/v4' || manifest.schema === 'b10x-docs/v5'
     ? await resolveDocumentPageMetadata(manifest, file.surface, raw, `${file.repository}/${file.sourcePath}`)
     : undefined;
   return [
@@ -656,7 +664,7 @@ async function documentMetadata({raw, file, route, manifest, surface}) {
   const description = summaryText(frontmatter.description ?? `${title} in the source-owned ${projectName} documentation.`);
   const declared = frontmatter.b10x && typeof frontmatter.b10x === 'object' ? frontmatter.b10x : {};
   const documentType = declared.documentType ?? inferDocumentType(file.sourcePath, title);
-  const resolved = manifest.schema === 'b10x-docs/v4'
+  const resolved = manifest.schema === 'b10x-docs/v4' || manifest.schema === 'b10x-docs/v5'
     ? await resolveDocumentPageMetadata(manifest, file.surface, raw, `${file.repository}/${file.sourcePath}`)
     : undefined;
   const audiences = resolved

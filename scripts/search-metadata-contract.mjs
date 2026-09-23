@@ -15,7 +15,7 @@ export function qualifiedDocumentTitle(title, projectName) {
 }
 
 export function experienceIdsForSourceDocument({schema, effective}) {
-  if (schema !== 'b10x-docs/v4') return [];
+  if (schema !== 'b10x-docs/v4' && schema !== 'b10x-docs/v5') return [];
   if (!effective || !Array.isArray(effective.experienceIds)) {
     throw new Error('v4 source document metadata must be resolved before assigning experience membership');
   }

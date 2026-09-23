@@ -144,6 +144,7 @@ export async function quarantineFixture(context, {quarantined, sources = FIXTURE
 }
 
 async function writeBundle(inputsRoot, source, index) {
+  if (source.manifest !== undefined) return writeDeclaredBundle(inputsRoot, source, index);
   const {repository, displayName, group} = source;
   const repositoryUrl = `https://github.com/beyond10x/${repository}`;
   const bundleRoot = path.join(inputsRoot, 'sources', repository);
@@ -221,6 +222,59 @@ async function writeBundle(inputsRoot, source, index) {
     commit,
     producer: {runId: 41},
     manifestSha256: sha256(Buffer.from(manifest)),
+    collectionSha256: sha256(collectionBytes),
+    contentSha256: sha256(Buffer.from(JSON.stringify(files))),
+    files,
+  };
+  const bundleBytes = Buffer.from(`${JSON.stringify(bundle)}\n`);
+  await writeFile(path.join(bundleRoot, 'bundle.json'), bundleBytes);
+  return {
+    repository,
+    url: repositoryUrl,
+    commit,
+    producerRunId: 41,
+    producerRunAttempt: 1,
+    artifactId: 42,
+    artifactDigest: `sha256:${'4'.repeat(64)}`,
+    bundleSha256: sha256(bundleBytes),
+  };
+}
+
+/**
+ * A source that brings its own `b10x.docs.yaml` bytes and tree files. Its collection is what the
+ * Docs System collector produces over that tree, which is the index the Website re-collects and
+ * compares against the bundle.
+ */
+async function writeDeclaredBundle(inputsRoot, source, index) {
+  const {repository} = source;
+  const repositoryUrl = `https://github.com/beyond10x/${repository}`;
+  const bundleRoot = path.join(inputsRoot, 'sources', repository);
+  const treeRoot = path.join(bundleRoot, 'tree');
+  const manifestFile = path.join(bundleRoot, 'b10x.docs.yaml');
+  const manifestBytes = Buffer.from(source.manifest);
+  await mkdir(treeRoot, {recursive: true});
+  await writeFile(manifestFile, manifestBytes);
+  const files = [];
+  for (const [relative, content] of Object.entries(source.files ?? {})) {
+    const destination = path.join(treeRoot, ...relative.split('/'));
+    const bytes = Buffer.from(content);
+    await mkdir(path.dirname(destination), {recursive: true});
+    await writeFile(destination, bytes);
+    files.push({path: relative, sha256: sha256(bytes), size: bytes.byteLength});
+  }
+  files.sort((left, right) => (Buffer.compare(Buffer.from(left.path), Buffer.from(right.path))));
+  const {collectManifestSources} = await import('@beyond10x/docs-system/collector');
+  const {readManifest} = await import('@beyond10x/docs-system/manifest');
+  const collection = await collectManifestSources(await readManifest(manifestFile), treeRoot);
+  const collectionBytes = Buffer.from(canonicalJson(collection));
+  await writeFile(path.join(bundleRoot, 'collection.json'), collectionBytes);
+  const commit = (index + 1).toString(16).padStart(40, 'a');
+  const bundle = {
+    schema: 'b10x-docs-bundle/v1',
+    repository: {id: repository, url: repositoryUrl},
+    commit,
+    producer: {runId: 41},
+    manifestSha256: sha256(manifestBytes),
     collectionSha256: sha256(collectionBytes),
     contentSha256: sha256(Buffer.from(JSON.stringify(files))),
     files,
