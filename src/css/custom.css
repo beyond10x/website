@@ -534,6 +534,22 @@ html.docs-doc-page .main-wrapper {
   letter-spacing: 0.03em;
 }
 
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer__bottom .footer__copyright {
+  order: -1;
+  margin-bottom: 0.75rem;
+}
+
+.footer__imprint {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .b10x-revision {
   display: inline-block;
   max-width: 13ch;
