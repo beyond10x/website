@@ -10,6 +10,7 @@ import {
 import type {EcosystemRegistry} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import {
+  isRelevantSearchResult,
   preferredExperienceFilters,
   prioritizeSearchResults,
   resultCountDescription,
@@ -33,6 +34,7 @@ interface PagefindResult {id: string; data(): Promise<PagefindResultData>}
 interface PagefindSearchResponse {
   results: PagefindResult[];
   unfilteredResultCount?: number;
+  filters: AvailableFilters;
 }
 
 interface PagefindModule {
@@ -52,6 +54,7 @@ const filterLabels: Record<FilterKey, string> = {
 export default function Search(): ReactNode {
   const [query, setQuery] = useState('');
   const [pagefind, setPagefind] = useState<PagefindModule>();
+  const [corpusFilters, setCorpusFilters] = useState<AvailableFilters>({});
   const [availableFilters, setAvailableFilters] = useState<AvailableFilters>({});
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
   const [fullTextResults, setFullTextResults] = useState<PagefindResultData[]>([]);
@@ -86,9 +89,11 @@ export default function Search(): ReactNode {
     if (typeof window === 'undefined') return;
     const load = new Function('url', 'return import(url)') as (url: string) => Promise<PagefindModule>;
     load('/pagefind/pagefind.js').then(async (module) => {
-      await module.options({ranking: {metaWeights: {title: 5, qualified_title: 5, search_priority: 10}}});
+      await module.options({ranking: {metaWeights: {title: 5, qualified_title: 5, search_priority: 10, image: 0}}});
       setPagefind(module);
-      setAvailableFilters(await module.filters());
+      const filters = await module.filters();
+      setCorpusFilters(filters);
+      setAvailableFilters(filters);
     }).catch(() => undefined);
   }, []);
 
@@ -110,19 +115,23 @@ export default function Search(): ReactNode {
       setFullTextResults([]);
       setFullTextTotal(0);
       setSearching(false);
+      setAvailableFilters(corpusFilters);
       return;
     }
     setSearching(true);
-    pagefind.search(needle.length >= 2 ? needle : null, {filters: activeFilters}).then(async ({results}) => {
+    pagefind.search(needle.length >= 2 ? needle : null, {filters: activeFilters}).then(async ({results, filters}) => {
+      const resolvedAll = await Promise.all(results.map((result) => result.data()));
+      const relevant = results.filter((_, index) => isRelevantSearchResult(needle, resolvedAll[index]));
       const preferredFilters = preferredExperienceFilters(needle, activeFilters);
       const preferred = preferredFilters
         ? (await pagefind.search(null, {filters: preferredFilters})).results
         : [];
-      const selected = prioritizeSearchResults(results, preferred, 40);
+      const selected = prioritizeSearchResults(relevant, preferred, 40);
       const resolved = await Promise.all(selected.map((result) => result.data()));
       if (current) {
         setFullTextResults(resolved);
-        setFullTextTotal(results.length);
+        setFullTextTotal(relevant.length);
+        setAvailableFilters(filters);
         setSearching(false);
       }
     }).catch(() => {
@@ -133,9 +142,11 @@ export default function Search(): ReactNode {
       }
     });
     return () => { current = false; };
-  }, [activeFilters, hasContext, pagefind, query]);
+  }, [activeFilters, corpusFilters, hasContext, pagefind, query]);
 
-  const clearFiltersUrl = query.trim() ? `/search/?q=${encodeURIComponent(query.trim())}` : '/search/';
+  const trimmedQuery = query.trim();
+  const queryActive = trimmedQuery.length >= 2;
+  const clearFiltersUrl = trimmedQuery ? `/search/?q=${encodeURIComponent(trimmedQuery)}` : '/search/';
 
   return (
     <Layout title="Search" description="Search the public beyond10x documentation by path, audience, project, and document type.">
@@ -190,20 +201,29 @@ export default function Search(): ReactNode {
           </div>
         </div>
 
-        {(searching || fullTextResults.length > 0 || (hasContext && pagefind)) && (
+        {pagefind && (searching || fullTextResults.length > 0 || hasContext || queryActive) && (
           <section className={styles.updates} aria-live="polite" aria-label="Documentation search results">
             <SectionHeader
               title="Documentation"
               description={searching ? 'Searching the locked public corpus…' : resultCountDescription(fullTextResults.length, fullTextTotal)}
             />
-            {!searching && fullTextResults.length === 0 ? <p className={styles.empty}>No page matches this query and context. Remove a filter or search all documentation.</p> : null}
+            {!searching && fullTextResults.length === 0 ? (
+              <div className={styles.empty}>
+                <p>{queryActive ? `No results for “${trimmedQuery}”.` : 'No documentation matches this filter combination.'}</p>
+                <p>
+                  {hasContext ? <a href={clearFiltersUrl}>Clear filters</a> : null}
+                  {hasContext && queryActive ? ' · ' : null}
+                  <a href="/docs/">Browse all documentation</a>
+                </p>
+              </div>
+            ) : null}
             <CardGrid>{fullTextResults.map((result) => (
               <ContentCard
                 key={result.url}
                 eyebrow={result.meta.project ?? result.meta.document_type}
                 title={qualifiedTitle(result)}
                 titleUrl={result.url}
-                description={resultSummary(result, {preferDescription: !query.trim()})}
+                description={resultSummary(result, {preferDescription: !queryActive})}
                 meta={[result.meta.document_type, result.meta.experience]
                   .filter((value): value is string => Boolean(value))
                   .map(humanize)

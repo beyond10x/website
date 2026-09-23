@@ -50,10 +50,13 @@ export function renderSidebars(ecosystemRegistry, sourceManifests) {
     .map((repository) => {
       const surface = ecosystemRegistry.surfaces.find((candidate) => candidate.repository.id === repository);
       const declared = navigation.get(repository) ?? {};
+      if (!declared.group && surface.kind !== 'front-door') {
+        throw new Error(`${repository} declares no documentation family`);
+      }
       return {
         repository,
         label: declared.label ?? surface.name,
-        group: declared.group ?? (surface.kind === 'front-door' ? undefined : 'Projects'),
+        group: declared.group,
         frontDoor: surface.kind === 'front-door',
         order: Number.isFinite(declared.order) ? declared.order : 100,
       };

@@ -12,13 +12,18 @@ import styles from './ecosystem.module.css';
 const registry = registryDocument as EcosystemRegistry;
 const familyOrder = familyTaxonomy.families.map((family) => family.id);
 const families = deriveEcosystemNavigation(registry, {familyOrder}).families.map((family) => family.name);
+// `satisfies Record<Journey, string>` makes this exhaustive: adding or renaming a member of
+// docs-system's `Journey` union without updating this map fails `npm run typecheck`.
+const journeyLabels = {
+  understand: 'Understand',
+  'plan-work': 'Plan work',
+  specify: 'Specify',
+  'build-agents': 'Build agents',
+  'operate-services': 'Operate services',
+} satisfies Record<Journey, string>;
 const journeys: Array<{id: Journey | 'all'; label: string}> = [
   {id: 'all', label: 'Everything public'},
-  {id: 'understand', label: 'Understand'},
-  {id: 'plan-work', label: 'Plan work'},
-  {id: 'specify', label: 'Specify'},
-  {id: 'build-agents', label: 'Build agents'},
-  {id: 'operate-services', label: 'Operate services'},
+  ...(Object.keys(journeyLabels) as Journey[]).map((id) => ({id, label: journeyLabels[id]})),
 ];
 
 export default function Ecosystem(): ReactNode {
@@ -26,13 +31,25 @@ export default function Ecosystem(): ReactNode {
   const [query, setQuery] = useState('');
   const [journey, setJourney] = useState<Journey | 'all'>('all');
   const [family, setFamily] = useState<string | 'all'>('all');
+  const [urlReady, setUrlReady] = useState(false);
   useEffect(() => {
     const search = new URLSearchParams(location.search);
     const requestedJourney = search.get('journey');
     setJourney(journeys.some((item) => item.id === requestedJourney) ? requestedJourney as Journey | 'all' : 'all');
     const requestedFamily = search.get('family');
     setFamily(requestedFamily && families.includes(requestedFamily) ? requestedFamily : 'all');
+    setQuery(search.get('q') ?? '');
+    setUrlReady(true);
   }, [location.search]);
+  useEffect(() => {
+    if (!urlReady || typeof window === 'undefined') return;
+    const search = new URLSearchParams();
+    if (query.trim()) search.set('q', query.trim());
+    if (journey !== 'all') search.set('journey', journey);
+    if (family !== 'all') search.set('family', family);
+    const serialized = search.toString();
+    window.history.replaceState(null, '', `${window.location.pathname}${serialized ? `?${serialized}` : ''}`);
+  }, [family, journey, query, urlReady]);
   const visible = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase();
     return registry.surfaces.filter((surface) => {

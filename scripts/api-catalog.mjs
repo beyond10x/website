@@ -79,7 +79,7 @@ export function renderApiCatalogLanding() {
     '',
     '<ApiCatalog catalog={catalog} />',
     '',
-    '[Download the deterministic API catalog](/api-catalog.json).',
+    '[Download the deterministic API catalog](pathname:///api-catalog.json).',
     '',
   ].join('\n');
 }

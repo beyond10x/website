@@ -3,6 +3,7 @@ import type {ReactNode} from 'react';
 import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import {CardGrid, ContentCard, PageHeader, SectionHeader} from '@beyond10x/docs-system/components';
+import {journeyById} from '../../../data/journeys.mjs';
 import styles from '../ecosystem.module.css';
 
 const destinations = [
@@ -10,7 +11,7 @@ const destinations = [
     eyebrow: 'Recommended start',
     title: 'Understand safe autonomous coding',
     description: 'Learn the intent, authority, execution, review, and evidence boundaries before adopting a tool.',
-    url: '/learn/safe-agentic-coding/',
+    url: journeyById('learn').experienceRoute,
   },
   {
     eyebrow: 'System model',
@@ -49,7 +50,7 @@ export default function Learn(): ReactNode {
             eyebrow="Learn"
             title="Understand the model before choosing the machinery."
             description="Start with the safety boundaries and mental model. Repository references remain available when you need to trace a claim to its owner."
-            actions={<Link className="button button--primary" to="/learn/safe-agentic-coding/">Learn the safe loop</Link>}
+            actions={<Link className="button button--primary" to={journeyById('learn').experienceRoute}>Learn the safe loop</Link>}
           />
         </div>
         <section className={styles.updates} aria-labelledby="learn-destinations">

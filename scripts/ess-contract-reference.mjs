@@ -23,11 +23,11 @@ export function essContractReference({document, sourceUrl, sourceRepository, slu
     '',
     ...document.pages.map(page => `- **${markdownText(essText(page.title))}** — ${index.sections.get(page.id).length} sections`),
     '',
-    `[Download the ESS documentation projection](${sourceUrl})`,
+    `[Download the ESS documentation projection](pathname://${sourceUrl})`,
     '',
   ].join('\n');
 }
 
-function markdownText(value) {
+export function markdownText(value) {
   return String(value).replace(/[\r\n]+/g, ' ').replace(/[&<>{}\\`[\]*_!|]/g, character => `&#${character.codePointAt(0)};`);
 }

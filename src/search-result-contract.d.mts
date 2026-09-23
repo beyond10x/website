@@ -4,7 +4,7 @@ export interface SearchResultLike {
 
 export interface SearchResultDataLike {
   excerpt?: string;
-  meta?: {description?: string};
+  meta?: {description?: string; title?: string; qualified_title?: string};
 }
 
 export interface SearchFiltersLike {
@@ -16,3 +16,5 @@ export function prioritizeSearchResults<T extends SearchResultLike>(results: T[]
 export function preferredExperienceFilters<T extends SearchFiltersLike>(query: string, filters: T): (T & {document_type: 'experience'}) | undefined;
 export function resultCountDescription(displayed: number, total: number): string;
 export function resultSummary(result: SearchResultDataLike, options?: {preferDescription?: boolean}): string;
+export function significantQueryTokens(query: string): string[];
+export function isRelevantSearchResult(query: string, result: SearchResultDataLike): boolean;

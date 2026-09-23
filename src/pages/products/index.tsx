@@ -3,6 +3,7 @@ import type {ReactNode} from 'react';
 import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import {CardGrid, ContentCard, PageHeader, SectionHeader} from '@beyond10x/docs-system/components';
+import {journeyById} from '../../../data/journeys.mjs';
 import styles from '../ecosystem.module.css';
 
 const destinations = [
@@ -10,13 +11,13 @@ const destinations = [
     eyebrow: 'Evaluate',
     title: 'Evaluate beyond10x products honestly',
     description: 'Review public evidence, maturity, and access boundaries before investing in deployment work.',
-    url: '/products/evaluate/',
+    url: journeyById('products').experienceRoute,
   },
   {
     eyebrow: 'Operate',
     title: 'Deploy an available service',
     description: 'Enter through the operations path when you already own service or cluster responsibilities.',
-    url: '/operate/',
+    url: journeyById('operate').experienceRoute,
   },
   {
     eyebrow: 'Current product',
@@ -34,10 +35,10 @@ const destinations = [
 
 export default function Products(): ReactNode {
   return (
-    <Layout title="Products" description="Evaluate beyond10x products and find operations guidance without confusing the two audiences.">
+    <Layout title="Evaluate products" description="Evaluate beyond10x products and find operations guidance without confusing the two audiences.">
       <main className={`container ${styles.page}`}>
         <div className="b10x-search-attributes" data-pagefind-ignore>
-          <span data-pagefind-meta="qualified_title">Products | beyond10x</span>
+          <span data-pagefind-meta="qualified_title">Evaluate products | beyond10x</span>
           <span data-pagefind-meta="description">Evaluate beyond10x products and find operations guidance without confusing the two audiences.</span>
           <span data-pagefind-filter="audience">evaluator</span>
           <span data-pagefind-filter="document_type">landing</span>
@@ -47,7 +48,7 @@ export default function Products(): ReactNode {
             eyebrow="Products"
             title="Evaluate first. Plan deployment only when access is real."
             description="Product evaluation and platform operations are different jobs. Begin with public evidence, then move to deployment guidance only for artifacts you can actually obtain."
-            actions={<Link className="button button--primary" to="/products/evaluate/">Open the evaluator path</Link>}
+            actions={<Link className="button button--primary" to={journeyById('products').experienceRoute}>Open the evaluator path</Link>}
           />
         </div>
         <section className={styles.updates} aria-labelledby="product-destinations">

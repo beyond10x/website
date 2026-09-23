@@ -16,7 +16,7 @@ test('Docs System validates the audience-first catalog and its evaluated adoptio
   assert.equal(result.routeCount, 6);
   assert.ok(result.stepCount >= 20);
   assert.deepEqual(presentation.pages.map((page) => [page.experienceId, page.route, page.navigationLabel, page.primaryStepId]), [
-    ['try-spec-driven-development', '/start/spec-driven-development/', 'Try spec-driven development', 'understand-the-loop'],
+    ['try-spec-driven-development', '/start/spec-driven-development/', 'Try spec-driven development', 'install-agent-plugins'],
     ['understand-safe-agentic-coding', '/learn/safe-agentic-coding/', 'Learn safe agentic coding', 'safe-loop'],
     ['build-agent-systems', '/build/agent-systems/', 'Build agent systems', 'run-harness'],
     ['evaluate-beyond10x-products', '/products/evaluate/', 'Evaluate products', 'agentide-install'],

@@ -6,7 +6,7 @@
       "route": "/start/spec-driven-development/",
       "navigationLabel": "Try spec-driven development",
       "adoptionPathId": "claude-code",
-      "primaryStepId": "understand-the-loop",
+      "primaryStepId": "install-agent-plugins",
       "sections": [
         {
           "kind": "learn",

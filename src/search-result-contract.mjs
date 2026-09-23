@@ -18,6 +18,38 @@ export function preferredExperienceFilters(query, filters) {
   return {...filters, document_type: 'experience'};
 }
 
+export function significantQueryTokens(query) {
+  return String(query ?? '')
+    .split(/[^a-zA-Z0-9]+/)
+    .flatMap((chunk) => chunk.split(/(?<=[a-zA-Z])(?=[0-9])|(?<=[0-9])(?=[a-zA-Z])/))
+    .map((token) => token.toLowerCase())
+    .filter((token) => token.length >= 3);
+}
+
+export function isRelevantSearchResult(query, result) {
+  const tokens = significantQueryTokens(query);
+  if (tokens.length === 0) return true;
+  const highlighted = [...String(result?.excerpt ?? '').matchAll(/<mark>([^<]*)<\/mark>/gi)]
+    .map((match) => decodeHtmlEntities(match[1]).toLocaleLowerCase())
+    .filter(Boolean);
+  const haystack = [result?.meta?.qualified_title, result?.meta?.title, result?.meta?.description]
+    .filter(Boolean)
+    .map((value) => decodeHtmlEntities(String(value)).toLocaleLowerCase());
+  return tokens.some((token) =>
+    highlighted.some((term) => sharesSignificantOverlap(token, term))
+    || haystack.some((text) => text.includes(token)));
+}
+
+function sharesSignificantOverlap(token, term) {
+  if (!term) return false;
+  const shorter = Math.min(token.length, term.length);
+  const longer = Math.max(token.length, term.length);
+  if (shorter < 3 || shorter / longer < 0.6) return false;
+  let sharedPrefix = 0;
+  while (sharedPrefix < shorter && token[sharedPrefix] === term[sharedPrefix]) sharedPrefix += 1;
+  return sharedPrefix >= Math.max(3, Math.ceil(shorter * 0.6));
+}
+
 export function resultCountDescription(displayed, total) {
   return `Showing ${displayed} of ${total} matching ${total === 1 ? 'page' : 'pages'}.`;
 }

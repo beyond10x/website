@@ -3,6 +3,7 @@ import type {ReactNode} from 'react';
 import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import {CardGrid, ContentCard, PageHeader, SectionHeader} from '@beyond10x/docs-system/components';
+import {journeyById} from '../../../data/journeys.mjs';
 import styles from '../ecosystem.module.css';
 
 const destinations = [
@@ -10,13 +11,13 @@ const destinations = [
     eyebrow: 'Recommended path',
     title: 'Build an observable agent system',
     description: 'Move from host guidance to bounded execution, effects, and evaluation with an explicit finish line.',
-    url: '/build/agent-systems/',
+    url: journeyById('build').experienceRoute,
   },
   {
     eyebrow: 'First governed change',
     title: 'Start smaller with Claude',
     description: 'Use focused Agent Plugins and an inspectable specification before introducing agent infrastructure.',
-    url: '/start/spec-driven-development/',
+    url: journeyById('start').experienceRoute,
   },
   {
     eyebrow: 'Host instructions',
@@ -53,7 +54,7 @@ export default function Build(): ReactNode {
             eyebrow="Build"
             title="Choose the smallest boundary that can prove the result."
             description="Start with a governed change when that is enough. Introduce Harness, specifications, and runtime components only when the system needs those boundaries."
-            actions={<Link className="button button--primary" to="/build/agent-systems/">Open the builder path</Link>}
+            actions={<Link className="button button--primary" to={journeyById('build').experienceRoute}>Open the builder path</Link>}
           />
         </div>
         <section className={styles.updates} aria-labelledby="build-destinations">

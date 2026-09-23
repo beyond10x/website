@@ -5,7 +5,7 @@ import {resolveDocumentPageMetadata} from '@beyond10x/docs-system/documents';
 import {evaluateExperienceCatalog} from '@beyond10x/docs-system/experiences';
 import {writeJsonFeed, writeRss} from '@beyond10x/docs-system/feeds';
 import {readExperienceCatalog} from '@beyond10x/docs-system/manifest';
-import {essContractReference} from './ess-contract-reference.mjs';
+import {essContractReference, markdownText} from './ess-contract-reference.mjs';
 import {compareUtf8} from './order-contract.mjs';
 import {sourceKey, sourceMap} from './source-routing.mjs';
 import {canonicalSectionUrl, redirectQuarantinedUrls, rewriteLinks} from './link-rewriting.mjs';
@@ -91,6 +91,7 @@ let collectionRoot;
 let apiCatalog = buildApiCatalog([]);
 let documentIndex = {schema: 'b10x-document-index/v1', documents: []};
 let documentPages = {schema: 'b10x-website-document-pages/v1', pages: []};
+let componentCatalog = [];
 
 if (lock.sources.length > 0) {
   const {collectSources} = await import('./collect-sources.mjs');
@@ -99,7 +100,7 @@ if (lock.sources.length > 0) {
   registry = redirectQuarantined(registry);
   manifests = redirectQuarantined(manifests);
   assertDocumentationFamilyDistribution(manifests, {quarantined: [...quarantined]});
-  ({apiCatalog, documentIndex, documentPages} = await materializeCollection({manifests, indexes, collectionRoot}));
+  ({apiCatalog, documentIndex, documentPages, componentCatalog} = await materializeCollection({manifests, indexes, collectionRoot}));
 } else {
   registry = fixtureRegistry(roster.repositories, legacyRegistry);
 }
@@ -243,7 +244,7 @@ function documentationFamiliesForLanding() {
 }
 await writeFile(
   path.join(components, 'index.md'),
-  `---\ntitle: Public components and data\nslug: /\n---\n\n# Public components and data\n\nRepository-owned catalogs and component projections appear here at locked source revisions.\n`,
+  renderComponentsIndexLanding(componentCatalog),
 );
 
 const profiledRepositories = new Set();
@@ -338,6 +339,7 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
   const apiSpecifications = [];
   const documentRecords = [];
   const pages = [];
+  const componentRecords = [];
 
   for (const index of sourceIndexes) {
     const manifest = manifestByRepository.get(index.repository.id);
@@ -396,7 +398,7 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
           await copyFile(sourceFile, legacyArtifact);
         }
       } else if (file.kind === 'data') {
-        await materializeData({file, sourceFile, manifest, commit: lockSource.commit});
+        componentRecords.push(await materializeData({file, sourceFile, manifest, commit: lockSource.commit}));
       } else if (file.kind === 'openapi' || file.kind === 'json-schema') {
         apiSpecifications.push(await materializeSpecification({file, sourceFile, manifest, commit: lockSource.commit}));
       }
@@ -405,6 +407,7 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
   await synthesizeDirectoryLandings({documents, routeBySource, destinations, manifestByRepository, documentRecords});
   await synthesizeApiLandings(sourceIndexes, manifestByRepository);
   documentRecords.sort((left, right) => compareUtf8(left.route, right.route));
+  componentRecords.sort((left, right) => compareUtf8(left.route, right.route));
   return {
     apiCatalog: buildApiCatalog(apiSpecifications),
     documentIndex: {schema: 'b10x-document-index/v1', documents: documentRecords},
@@ -412,6 +415,7 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
       schema: 'b10x-website-document-pages/v1',
       pages: pages.sort((left, right) => compareUtf8(sourceKey(left.project, left.sourcePath), sourceKey(right.project, right.sourcePath))),
     },
+    componentCatalog: componentRecords,
   };
 }
 
@@ -553,7 +557,7 @@ async function materializeSpecification({file, sourceFile, manifest, commit}) {
     page,
     [
       '---',
-      `title: ${JSON.stringify(file.specificationId)}`,
+      `title: ${JSON.stringify(`${file.specificationId} | ${manifest.repository.displayName ?? file.repository}`)}`,
       `slug: ${JSON.stringify(`/${relative}/`)}`,
       '---',
       '',
@@ -563,7 +567,7 @@ async function materializeSpecification({file, sourceFile, manifest, commit}) {
       '',
       ...summary,
       '',
-      `[Download the canonical ${file.kind === 'openapi' ? 'OpenAPI document' : 'JSON Schema'}](/api/${relative}/${rawName})`,
+      `[Download the canonical ${file.kind === 'openapi' ? 'OpenAPI document' : 'JSON Schema'}](pathname:///api/${relative}/${rawName})`,
       '',
       '## Interactive reference',
       '',
@@ -579,12 +583,14 @@ async function materializeData({file, sourceFile, manifest, commit}) {
   const parsed = file.sourcePath.endsWith('.json') ? JSON.parse(raw) : parse(raw);
   const slug = path.basename(file.sourcePath, path.extname(file.sourcePath)).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const sourceDirectory = path.join(generatedStatic, 'data', file.repository);
+  const route = `/components/${file.repository}/${slug}/`;
+  const repositoryDisplayName = manifest.repository.displayName ?? file.repository;
   const contract = essContractReference({
     document: parsed,
     sourceUrl: `/data/${file.repository}/${slug}.json`,
     sourceRepository: `${manifest.repository.url}/blob/${commit}/${file.sourcePath}`,
     slug: `/${file.repository}/${slug}/`,
-    title: `${manifest.repository.displayName} contracts`,
+    title: `${repositoryDisplayName} contracts`,
   });
   await mkdir(sourceDirectory, {recursive: true});
   await writeFile(path.join(sourceDirectory, `${slug}.json`), contract && file.sourcePath.endsWith('.json') ? raw : `${JSON.stringify(parsed, null, 2)}\n`);
@@ -592,14 +598,15 @@ async function materializeData({file, sourceFile, manifest, commit}) {
   await mkdir(path.dirname(page), {recursive: true});
   if (contract !== undefined) {
     await writeFile(page, contract);
-    return;
+    return {repository: file.repository, repositoryDisplayName, route, title: `${repositoryDisplayName} contracts`, kind: 'contract'};
   }
   const summary = dataSummary(parsed);
+  const title = `${repositoryDisplayName}: ${slug.replaceAll('-', ' ')}`;
   await writeFile(
     page,
     [
       '---',
-      `title: ${JSON.stringify(`${manifest.repository.displayName}: ${slug.replaceAll('-', ' ')}`)}`,
+      `title: ${JSON.stringify(title)}`,
       `slug: ${JSON.stringify(`/${file.repository}/${slug}/`)}`,
       '---',
       '',
@@ -609,14 +616,47 @@ async function materializeData({file, sourceFile, manifest, commit}) {
       '',
       ...summary,
       '',
-      `[Download the canonical JSON data](/data/${file.repository}/${slug}.json)`,
+      `[Download the canonical JSON data](pathname:///data/${file.repository}/${slug}.json)`,
       '',
       '## Interactive catalog',
       '',
-      `<DataCatalogReference sourceUrl=${JSON.stringify(`/data/${file.repository}/${slug}.json`)} sourceRepository=${JSON.stringify(`${manifest.repository.url}/blob/${commit}/${file.sourcePath}`)} title=${JSON.stringify(`${manifest.repository.displayName} data`)} />`,
+      `<DataCatalogReference sourceUrl=${JSON.stringify(`/data/${file.repository}/${slug}.json`)} sourceRepository=${JSON.stringify(`${manifest.repository.url}/blob/${commit}/${file.sourcePath}`)} title=${JSON.stringify(`${repositoryDisplayName} data`)} />`,
       '',
     ].join('\n'),
   );
+  return {repository: file.repository, repositoryDisplayName, route, title, kind: 'data'};
+}
+
+function renderComponentsIndexLanding(records) {
+  const byRepository = new Map();
+  for (const record of records) {
+    if (!byRepository.has(record.repository)) byRepository.set(record.repository, []);
+    byRepository.get(record.repository).push(record);
+  }
+  const repositories = [...byRepository.keys()].sort(compareUtf8);
+  const sections = repositories.flatMap((repository) => {
+    const items = byRepository.get(repository).sort((left, right) => compareUtf8(left.route, right.route));
+    return [
+      `### ${markdownText(items[0].repositoryDisplayName)}`,
+      '',
+      ...items.map((item) => `- [${markdownText(item.title)}](${item.route}) — ${item.kind === 'contract' ? 'ESS contract reference' : 'JSON data catalog'}`),
+      '',
+    ];
+  });
+  return [
+    '---',
+    'title: Public components and data',
+    'slug: /',
+    '---',
+    '',
+    '# Public components and data',
+    '',
+    'Repository-owned catalogs and component projections appear here at locked source revisions.',
+    '',
+    ...(repositories.length
+      ? sections
+      : ['No repository currently publishes a component or data catalog.', '']),
+  ].join('\n');
 }
 
 function specificationSummary(document, kind) {
