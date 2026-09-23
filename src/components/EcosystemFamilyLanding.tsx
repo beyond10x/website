@@ -86,9 +86,9 @@ export default function EcosystemFamilyLanding({family: familyId}: {family: stri
       />)}</CardGrid>
     </section>
 
-    <nav className={styles.next} aria-label="Next ecosystem family">
-      <p><span className="b10x-eyebrow">Next boundary</span><strong>{next.label}</strong><small>{family.next.label}</small></p>
-      <Link to={`/docs${next.slug}`}>Continue <span aria-hidden="true">→</span></Link>
+    <nav className={styles.next} aria-label="Next family in the technical reference">
+      <p><span className="b10x-eyebrow">Next in the reference tour</span><strong>{next.label}</strong><small>{family.next.label} New to agentic coding? <Link to="/start/">Start with an outcome</Link>.</small></p>
+      <Link to={`/docs${next.slug}`}>Continue the reference <span aria-hidden="true">→</span></Link>
     </nav>
   </div>;
 }

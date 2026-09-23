@@ -972,9 +972,10 @@ function fixtureRegistry(repositories, legacyRegistry) {
 }
 
 function projectDocument({surface, repository, revision, sourceUrl, relationships, sections}) {
+  const name = projectPageName(surface, repository);
   const metadata = {
-    qualifiedTitle: `${surface.name} | beyond10x`,
-    projectName: surface.name,
+    qualifiedTitle: `${name} | beyond10x`,
+    projectName: name,
     project: repository,
     description: surface.summary,
     documentType: 'reference',
@@ -983,9 +984,9 @@ function projectDocument({surface, repository, revision, sourceUrl, relationship
     tasks: ['reference'],
   };
   return [
-    '---', `title: ${JSON.stringify(metadata.qualifiedTitle)}`, `sidebar_label: ${JSON.stringify(surface.name)}`, `description: ${JSON.stringify(surface.summary)}`,
+    '---', `title: ${JSON.stringify(name)}`, `sidebar_label: ${JSON.stringify(name)}`, `description: ${JSON.stringify(surface.summary)}`,
     `slug: /${repository}/`, '---', '', renderSearchAttributes(metadata), '',
-    `# ${surface.name}`, '', surface.summary, '',
+    `# ${markdownText(name)}`, '', surface.summary, '',
     renderSourceBanner(`> Source-owned documentation · [${repository}](${sourceUrl}) · revision ${renderRevision(revision)}`), '',
     `**Status:** ${surface.maturity} · **Journeys:** ${surface.journeys.join(', ')}`, '', '## Start', '',
     `[${surface.adoption?.label ?? 'Open the source'}](${surface.adoption?.url ?? surface.repository.url})`, '',
@@ -995,12 +996,19 @@ function projectDocument({surface, repository, revision, sourceUrl, relationship
   ].join('\n');
 }
 
+// Docusaurus appends the site title to every page title, so a page names only its project. The
+// website repository's catalog name is the site title itself, so its own pages are named Website.
+function projectPageName(surface, repository) {
+  return repository === 'website' ? 'Website' : surface.name;
+}
+
 function profileDocument({surface, repository, revision}) {
+  const name = projectPageName(surface, repository);
   return [
-    '---', `title: ${JSON.stringify(`${surface.name} | beyond10x`)}`, `description: ${JSON.stringify(surface.summary)}`,
+    '---', `title: ${JSON.stringify(name)}`, `description: ${JSON.stringify(surface.summary)}`,
     `slug: /${repository}/`, 'pagination_next: null', 'pagination_prev: null', '---', '',
     "import ProjectProfile from '@site/src/components/ProjectProfile';", '',
-    `# ${surface.name}`, '',
+    `# ${markdownText(name)}`, '',
     `<ProjectProfile repository=${JSON.stringify(repository)} revision=${JSON.stringify(revision)} />`,
   ].join('\n');
 }
