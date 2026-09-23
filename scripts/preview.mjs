@@ -8,6 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {parseArgs} from 'node:util';
 import {
   claimGenerationLease,
+  defaultGenerationLeasePath,
   releaseGenerationLease,
   setGenerationLeaseChild,
 } from './generation-lease.mjs';
@@ -15,6 +16,7 @@ import {
   PreviewEnvironmentError,
   PreviewInterruptedError,
   SOURCE_PREVIEW_GUARANTEE,
+  assertRealDirectory,
   SourceValidationError,
   adviseCrossSourceLinks,
   collectSnapshotSources,
@@ -23,8 +25,9 @@ import {
   preparationError,
   previewDocuments,
   serveExitCode,
+  ownedCacheDirectory,
   snapshotRouteMap,
-  sourcePreviewCacheRoot,
+  sourcePreviewCacheDirectory,
   stageSourceWorkingTree,
   stagingDirectory,
   websiteRevisionWarning,
@@ -226,14 +229,31 @@ export function sourcePreviewArguments(args, environment = process.env, cwd = pr
   };
 }
 
-async function sourceMain(plan, lifecycle) {
-  const say = (line) => process.stdout.write(`[source preview] ${line}\n`);
+/** Where `npm run preview:source` reads and writes; tests substitute every part of it. */
+export function sourcePreviewContext(environment = process.env) {
+  return {
+    websiteRoot: root,
+    cacheRoot: sourcePreviewCacheDirectory(root, environment),
+    sourcesCacheRoot: path.join(root, '.cache', 'sources'),
+    sourceWorkspace: undefined,
+    leasePath: defaultGenerationLeasePath,
+    prepareModule: prepareSite,
+    serveModule: docusaurus,
+    fetchImpl: globalThis.fetch,
+    say: (line) => process.stdout.write(`[source preview] ${line}\n`),
+  };
+}
+
+export async function runSourcePreview(plan, lifecycle, context = sourcePreviewContext()) {
+  const {websiteRoot, say} = context;
+  const owned = ownedCacheDirectory(context.cacheRoot);
   say(SOURCE_PREVIEW_GUARANTEE);
   const options = sourcePreviewArguments(plan.args);
-  const staging = stagingDirectory(root);
+  const staging = stagingDirectory(owned);
+  await assertRealDirectory(owned);
   let source;
   try {
-    source = await stageSourceWorkingTree({sourceDirectory: options.sourceDirectory, websiteRoot: root, stagingRoot: staging});
+    source = await stageSourceWorkingTree({sourceDirectory: options.sourceDirectory, websiteRoot, stagingRoot: staging});
   } catch (error) {
     await rm(staging, {recursive: true, force: true});
     throw error;
@@ -245,8 +265,9 @@ async function sourceMain(plan, lifecycle) {
     const websiteHead = gitOutput(['rev-parse', '--verify', 'HEAD^{commit}']);
     const {snapshot, origin, warning} = await obtainSnapshot({
       override: options.snapshot,
-      cacheDirectory: path.join(sourcePreviewCacheRoot(root), 'publication'),
+      cacheDirectory: path.join(owned, 'publication'),
       roster: source.roster,
+      fetchImpl: context.fetchImpl,
       signal: lifecycle.abort.signal,
     });
     if (warning) say(warning);
@@ -255,25 +276,26 @@ async function sourceMain(plan, lifecycle) {
     say(`snapshot (${origin}) ${snapshot.directory} · Website ${provenance.websiteCommit.slice(0, 12)} · Atlas ${provenance.atlasControlCommit.slice(0, 12)} · ${Object.keys(provenance.sourceCommits).length} sources · ${routes.size} routes`);
     const revisionWarning = websiteRevisionWarning(provenance.websiteCommit, websiteHead);
     say(revisionWarning ?? `Website worktree ${websiteHead.slice(0, 12)} is the revision that published the snapshot`);
-    if (!existsSync(docusaurus)) {
+    if (!existsSync(context.serveModule)) {
       throw new PreviewEnvironmentError('Docusaurus is not installed; run npm ci --ignore-scripts in the Website checkout first');
     }
     if (lifecycle.signal) throw new PreviewInterruptedError();
-    const lease = claimGenerationLease(`source preview ${source.repository}`);
+    const lease = claimGenerationLease(`source preview ${source.repository}`, context.leasePath);
     try {
       const others = await collectSnapshotSources({
         snapshot,
         exclude: source.repository,
-        cacheRoot: path.join(root, '.cache', 'sources'),
+        cacheRoot: context.sourcesCacheRoot,
+        sourceWorkspace: context.sourceWorkspace,
         signal: lifecycle.abort.signal,
       });
       say(`collected ${others.length} other sources at their published commits; each reproduces its published collection digest`);
       const {sourceSetPath} = await writePreviewInputs({
-        websiteRoot: root,
+        websiteRoot,
         snapshot,
         source,
         others,
-        outputRoot: path.join(sourcePreviewCacheRoot(root), 'inputs'),
+        outputRoot: path.join(owned, 'inputs'),
       });
       await rm(staging, {recursive: true, force: true});
 
@@ -286,7 +308,7 @@ async function sourceMain(plan, lifecycle) {
       delete environment.B10X_BOOTSTRAP_FIXTURE;
       environment.B10X_DOCS_SOURCE_SET = sourceSetPath;
 
-      const prepareStatus = await runNode(prepareSite, [], {
+      const prepareStatus = await runNode(context.prepareModule, [], {
         ...environment,
         B10X_GENERATION_LEASE_TOKEN: lease.token,
       }, lease, lifecycle);
@@ -311,7 +333,7 @@ async function sourceMain(plan, lifecycle) {
         say(`advisory: ${entry.status === 'resolves' ? 'resolves' : 'ABSENT  '} ${entry.document} → ${entry.target} ${entry.path}`);
       }
       say(`serving ${source.repository} at /docs/${source.repository}/ (stop with Ctrl-C)`);
-      const status = await runNode(docusaurus, [plan.command, ...options.docusaurusArgs], environment, lease, lifecycle);
+      const status = await runNode(context.serveModule, [plan.command, ...options.docusaurusArgs], environment, lease, lifecycle);
       return serveExitCode({status, signal: lifecycle.signal});
     } finally {
       releaseGenerationLease(lease);
@@ -321,7 +343,8 @@ async function sourceMain(plan, lifecycle) {
   }
 }
 
-async function withInterrupts(run) {
+/** The state a SIGINT or SIGTERM sets, and the function that sets it. */
+export function sourcePreviewLifecycle() {
   const lifecycle = {child: undefined, signal: undefined, abort: new AbortController()};
   const interrupt = (signal) => {
     lifecycle.signal = lifecycle.signal ?? signal;
@@ -330,6 +353,11 @@ async function withInterrupts(run) {
       lifecycle.child.kill(signal);
     }
   };
+  return {lifecycle, interrupt};
+}
+
+async function withInterrupts(run) {
+  const {lifecycle, interrupt} = sourcePreviewLifecycle();
   const onInterrupt = () => interrupt('SIGINT');
   const onTerminate = () => interrupt('SIGTERM');
   process.on('SIGINT', onInterrupt);
@@ -345,7 +373,7 @@ async function withInterrupts(run) {
 async function main() {
   const [mode, ...args] = process.argv.slice(2);
   const plan = previewPlan(mode, args);
-  if (plan.source) return withInterrupts((lifecycle) => sourceMain(plan, lifecycle));
+  if (plan.source) return withInterrupts((lifecycle) => runSourcePreview(plan, lifecycle));
   if (!existsSync(docusaurus)) {
     throw new Error('Docusaurus is not installed; run npm ci --ignore-scripts first');
   }

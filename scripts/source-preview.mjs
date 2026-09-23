@@ -142,8 +142,47 @@ export function sourcePreviewCacheRoot(websiteRoot) {
   return path.join(websiteRoot, '.cache', 'source-preview');
 }
 
-export function stagingDirectory(websiteRoot) {
-  return path.join(sourcePreviewCacheRoot(websiteRoot), `staging-${randomUUID()}`);
+/**
+ * Names the cache root in place of the checkout's `.cache/source-preview`; an absolute directory.
+ * The named directory is never the preview's own: everything the preview writes or deletes lies in
+ * its one subdirectory, `ownedCacheDirectory(cacheRoot)`.
+ */
+export const SOURCE_PREVIEW_CACHE_ENVIRONMENT = 'B10X_PREVIEW_SOURCE_CACHE';
+export const OWNED_CACHE_NAME = 'b10x-source-preview';
+
+export function ownedCacheDirectory(cacheRoot) {
+  return path.join(cacheRoot, OWNED_CACHE_NAME);
+}
+
+/**
+ * Refuses `directory` when it exists and is not a real directory — a symbolic link or anything
+ * else — so that nothing is created or deleted through it. Missing is fine: it is created as a real
+ * directory.
+ */
+export async function assertRealDirectory(directory) {
+  let details;
+  try {
+    details = await lstat(directory);
+  } catch (error) {
+    if (error?.code === 'ENOENT') return;
+    throw new PreviewEnvironmentError(`cannot inspect ${directory}: ${messageOf(error)}`, {cause: error});
+  }
+  if (details.isDirectory()) return;
+  const kind = details.isSymbolicLink() ? 'a symbolic link' : 'not a directory';
+  throw new PreviewEnvironmentError(`${directory} is ${kind}; the source preview creates and deletes only inside a real directory it owns, so it deleted nothing`);
+}
+
+export function sourcePreviewCacheDirectory(websiteRoot, environment = process.env) {
+  const value = environment[SOURCE_PREVIEW_CACHE_ENVIRONMENT];
+  if (value === undefined || value === '') return sourcePreviewCacheRoot(websiteRoot);
+  if (!path.isAbsolute(value)) {
+    throw new PreviewEnvironmentError(`${SOURCE_PREVIEW_CACHE_ENVIRONMENT} must be an absolute directory, not ${value}`);
+  }
+  return value;
+}
+
+export function stagingDirectory(cacheRoot) {
+  return path.join(cacheRoot, `staging-${randomUUID()}`);
 }
 
 /**
@@ -164,6 +203,7 @@ export async function obtainSnapshot({
     return {snapshot: await loadSnapshot(path.resolve(override), roster), origin: 'override'};
   }
   let liveFailure;
+  await assertRealDirectory(path.dirname(cacheDirectory));
   const temporary = `${cacheDirectory}.fetch-${randomUUID()}`;
   const deadline = AbortSignal.timeout(totalMs);
   try {
@@ -301,6 +341,7 @@ export async function stageSourceWorkingTree({sourceDirectory, websiteRoot, stag
   }
   const manifestBytes = await readFile(manifestSource);
   const treeRoot = path.join(stagingRoot, 'tree');
+  await assertRealDirectory(path.dirname(stagingRoot));
   await rm(stagingRoot, {recursive: true, force: true});
   await mkdir(treeRoot, {recursive: true});
   const manifestFile = path.join(treeRoot, ...roster.manifestPath.split('/'));
@@ -478,6 +519,7 @@ async function collectSnapshotSource({repository, record, cacheRoot, sourceWorks
 
 export async function writePreviewInputs({websiteRoot, snapshot, source, others, outputRoot}) {
   const {provenance} = snapshot;
+  await assertRealDirectory(path.dirname(outputRoot));
   await rm(outputRoot, {recursive: true, force: true});
   await mkdir(path.join(outputRoot, 'sources'), {recursive: true});
   await mkdir(path.join(outputRoot, 'bootstrap'), {recursive: true});

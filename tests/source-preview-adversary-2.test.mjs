@@ -15,6 +15,7 @@ import {stripManagedRanges} from '../scripts/passive-markdown.mjs';
 import {
   SourceValidationError,
   obtainSnapshot,
+  ownedCacheDirectory,
   stageSourceWorkingTree,
 } from '../scripts/source-preview.mjs';
 import {publicationFixture} from './helpers/publication-fixture.mjs';
@@ -114,18 +115,20 @@ test('adversary 2: Ctrl-C while the snapshot is being fetched stops the command'
   const fixture = await publicationFixture(context);
   const source = await editedSource(context, fixture, '# Harness\n\nUncommitted working-tree text.\n');
   const origin = await drippingOrigin(context);
-  const cacheRoot = path.join(root, '.cache', 'source-preview');
-  const before = new Set(await readdir(cacheRoot).catch(() => []));
+  // Its own cache root, so its live staging and fetch directories never appear in another test's.
+  const cacheRoot = path.join(source.directory, 'source-preview-cache');
+  const ownedRoot = ownedCacheDirectory(cacheRoot);
+  const before = new Set(await readdir(ownedRoot).catch(() => []));
   context.after(async () => {
-    for (const entry of await readdir(cacheRoot).catch(() => [])) {
+    for (const entry of await readdir(ownedRoot).catch(() => [])) {
       if (!before.has(entry) && (entry.startsWith('staging-') || entry.startsWith('publication.fetch-'))) {
-        await rm(path.join(cacheRoot, entry), {recursive: true, force: true});
+        await rm(path.join(ownedRoot, entry), {recursive: true, force: true});
       }
     }
   });
   const child = spawn(process.execPath, ['--import', redirectFetch, previewScript, 'source', '--source', source.repositoryRoot], {
     cwd: source.repositoryRoot,
-    env: {...process.env, B10X_ADVERSARY_ORIGIN: origin},
+    env: {...process.env, B10X_ADVERSARY_ORIGIN: origin, B10X_PREVIEW_SOURCE_CACHE: cacheRoot},
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   let stdout = '';
