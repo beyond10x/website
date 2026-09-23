@@ -3,7 +3,7 @@ import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {artifactFacts, canonicalJson, deploymentFromProvenance, sha256} from './artifact-contract.mjs';
 import {bootstrapEnabled} from './source-lock-contract.mjs';
-import {loadPublicationInputs} from './publication-inputs.mjs';
+import {loadPublicationInputs, QUARANTINE_SOURCE_SET_SCHEMA} from './publication-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const build = path.join(root, 'build');
@@ -31,7 +31,10 @@ const provenance = inputs.mode === 'legacy'
       ...(bootstrap ? {bootstrap: true} : {}),
     }
   : {
-      schema: 'b10x-website-provenance/v2',
+      // A v2 source set may quarantine sources, so its provenance is v3 and names each one; a v1
+      // source set keeps writing v2 byte for byte.
+      schema: inputs.inputSchema === QUARANTINE_SOURCE_SET_SCHEMA ? 'b10x-website-provenance/v3' : 'b10x-website-provenance/v2',
+      ...(inputs.inputSchema === QUARANTINE_SOURCE_SET_SCHEMA ? {quarantinedSources: inputs.quarantined} : {}),
       websiteCommit,
       atlasControlCommit: inputs.sourceSet.atlasControlCommit,
       sourceSetSha256: inputs.sourceSetSha256,

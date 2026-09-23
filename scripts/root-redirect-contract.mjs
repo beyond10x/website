@@ -1,6 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {outputPathForRoute, renderRedirectHtml, writeRedirectMap} from '@beyond10x/docs-system/redirects';
+import {quarantinedRouteTarget} from '../src/quarantine-routes.mjs';
 
 export const ROOT_OWNED_REDIRECTS = Object.freeze([
   Object.freeze({from: '/engineering-protocols/', to: '/ecosystem/aep/', type: 'html'}),
@@ -13,7 +14,9 @@ export const ROOT_OWNED_REDIRECTS = Object.freeze([
   Object.freeze({from: '/website/', to: '/', type: 'html'}),
 ]);
 
-export function rootOwnedRedirectMap(declared) {
+// A root-owned redirect whose target a quarantined source owns points at the source's GitHub
+// repository — the rule every link follows, and what the effective map resolves it to as well.
+export function rootOwnedRedirectMap(declared, {quarantined = new Set()} = {}) {
   if (declared?.schema !== 'b10x-redirects/v1' || declared.origin !== 'https://beyond10x.github.io' || !Array.isArray(declared.redirects)) {
     throw new Error('legacy redirect contract is invalid');
   }
@@ -22,13 +25,14 @@ export function rootOwnedRedirectMap(declared) {
     if (matches.length !== 1 || !sameRedirect(matches[0], expected)) {
       throw new Error(`root-owned redirect ${expected.from} must exactly target ${expected.to}`);
     }
-    return expected;
+    const target = quarantinedRouteTarget(expected.to, quarantined);
+    return target === undefined ? expected : {...expected, to: target};
   });
   return {schema: declared.schema, origin: declared.origin, redirects};
 }
 
-export async function writeRootOwnedRedirects(outputRoot, declared) {
-  const map = rootOwnedRedirectMap(declared);
+export async function writeRootOwnedRedirects(outputRoot, declared, options = {}) {
+  const map = rootOwnedRedirectMap(declared, options);
   for (const redirect of map.redirects) {
     const destination = path.join(outputRoot, ...outputPathForRoute(redirect.from, true).split('/'));
     let current;

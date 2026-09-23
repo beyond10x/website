@@ -10,17 +10,17 @@ import type {
 } from '@beyond10x/docs-system/types';
 import ledgerDocument from '../../.generated/data/changes.json';
 import registryDocument from '../../.generated/data/ecosystem.json';
-import {localizeWebsiteHref} from '../lib/links';
+import {localizeWebsiteHref, withQuarantinedSurfaces} from '@site/src/lib/published';
 import styles from './ecosystem.module.css';
 
 const ledger = ledgerDocument as ChangeLedger;
 const registry = registryDocument as EcosystemRegistry;
-const surfaces = new Map<string, AnyDocumentationSurface>(
+const surfaces = withQuarantinedSurfaces(new Map<string, AnyDocumentationSurface>(
   registry.surfaces.map((surface) => [surface.key, {
     ...surface,
     canonicalUrl: localizeWebsiteHref(surface.canonicalUrl),
   }]),
-);
+), ledger.changes.flatMap((change) => change.affectedSurfaces ?? []));
 const journeys: Array<{id: Journey | 'all'; label: string}> = [
   {id: 'all', label: 'All journeys'},
   {id: 'understand', label: 'Understand'},

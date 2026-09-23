@@ -1,11 +1,12 @@
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import {AdoptionCard, CardGrid, ContentCard, FactGrid, PageHeader, SectionHeader, StatusBadge} from '@beyond10x/docs-system/components';
 import {surfaceNavigation} from '@beyond10x/docs-system/navigation';
 import type {RegistrySurface} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import familyTaxonomyDocument from '../../data/ecosystem-families.json';
-import {localizedAdoptionHref} from '../lib/links';
+import {localizedAdoptionHref} from '@site/src/lib/published';
+import {isQuarantinedRepository} from '../lib/published';
 import styles from './EcosystemFamilyLanding.module.css';
 
 interface FamilyDefinition {
@@ -26,7 +27,10 @@ export default function EcosystemFamilyLanding({family: familyId}: {family: stri
   if (!family) throw new Error(`unknown ecosystem family ${familyId}`);
   const members = uniqueRepositories(surfaces.filter((surface) => surfaceNavigation(surface)?.group === family.id));
   const start = members.find((surface) => surface.repository.id === family.startRepository);
-  if (!start) throw new Error(`${family.label} start ${family.startRepository} is absent from its declared members`);
+  // A start is absent only when this build quarantines it; any other absence is a taxonomy error.
+  if (!start && !isQuarantinedRepository(family.startRepository)) {
+    throw new Error(`${family.label} start ${family.startRepository} is absent from its declared members`);
+  }
   const next = familyById.get(family.next.family);
   if (!next) throw new Error(`${family.label} points to unknown next family ${family.next.family}`);
 
@@ -37,7 +41,7 @@ export default function EcosystemFamilyLanding({family: familyId}: {family: stri
       description={family.purpose}
     ><span>{members.length} {members.length === 1 ? 'public project' : 'public projects'}</span></PageHeader>
 
-    <section className={styles.start} aria-labelledby={`${family.id}-start`}>
+    {start ? <section className={styles.start} aria-labelledby={`${family.id}-start`}>
       <SectionHeader
         eyebrow={`Recommended start · ${start.name}`}
         title="Begin with one inspectable outcome."
@@ -57,10 +61,19 @@ export default function EcosystemFamilyLanding({family: familyId}: {family: stri
           {label: 'Audience', value: (start.audiences ?? []).map(label).join(', ') || 'Not declared'},
         ]} /></ContentCard>
       </div>
-    </section>
+    </section> : <section className={styles.start} aria-labelledby={`${family.id}-start`}>
+      <SectionHeader
+        eyebrow={`Recommended start · ${family.startRepository}`}
+        title="This family's recommended start is not published in this build."
+        id={`${family.id}-start`}
+        description="Its documentation failed validation at the last publication, so the portal leaves it out rather than showing a stale copy."
+      />
+      <p><Link to={`https://github.com/beyond10x/${family.startRepository}`}>Read {family.startRepository} on GitHub</Link></p>
+    </section>}
 
     <section className={styles.members} aria-labelledby={`${family.id}-members`}>
       <SectionHeader eyebrow="Family members" title="Choose the boundary that owns your next question." id={`${family.id}-members`} />
+      {members.length === 0 ? <p>No project in this family is published in this build.</p> : null}
       <CardGrid columns={2}>{members.map((surface) => <ContentCard
         key={surface.repository.id}
         title={surface.name}

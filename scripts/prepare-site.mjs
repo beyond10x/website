@@ -8,7 +8,7 @@ import {readExperienceCatalog} from '@beyond10x/docs-system/manifest';
 import {essContractReference} from './ess-contract-reference.mjs';
 import {compareUtf8} from './order-contract.mjs';
 import {sourceKey, sourceMap} from './source-routing.mjs';
-import {canonicalSectionUrl, rewriteLinks} from './link-rewriting.mjs';
+import {canonicalSectionUrl, redirectQuarantinedUrls, rewriteLinks} from './link-rewriting.mjs';
 import {bootstrapEnabled} from './source-lock-contract.mjs';
 import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
 import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from './api-catalog.mjs';
@@ -37,7 +37,10 @@ await Promise.all(
 const inputs = await loadPublicationInputs({root, allowBootstrap: bootstrapEnabled()});
 const {roster, lock, bootstrap} = inputs;
 const preparedInputSha256 = inputs.inputSha256;
-await validateBootstrapSnapshots(root, roster.repositories, {
+// Absent from every projection below; `roster` is already the published roster without them.
+const quarantined = new Set(inputs.quarantined.map((entry) => entry.repository));
+const redirectQuarantined = (value) => (quarantined.size ? redirectQuarantinedUrls(value, quarantined) : value);
+await validateBootstrapSnapshots(root, inputs.sourceRoster, {
   directory: inputs.bootstrapRoot,
   sourceLockBytes: inputs.sourceLockBytes,
   sourceSetSha256: inputs.sourceSetSha256,
@@ -50,10 +53,10 @@ const searchGolden = JSON.parse(await readFile(path.join(root, 'data/search-gold
 const experienceCatalog = await readExperienceCatalog(path.join(root, 'data/experiences.json'));
 const experiencePresentation = JSON.parse(await readFile(path.join(root, 'data/experience-pages.json'), 'utf8'));
 const presentedExperienceIdsByRoute = experienceStepRoutes(experiencePresentation);
-const evaluatedExperienceCatalog = {
+const evaluatedExperienceCatalog = redirectQuarantined({
   schema: 'b10x-evaluated-experiences/v1',
   experiences: evaluateExperienceCatalog(experienceCatalog),
-};
+});
 if (searchGolden.schema !== 'b10x-search-golden/v1' || !Array.isArray(searchGolden.queries)) {
   throw new Error('search golden contract must use b10x-search-golden/v1');
 }
@@ -63,13 +66,23 @@ for (const entry of searchGolden.queries) {
   entries.push(entry.query);
   rankedSearchQueries.set(entry.expectedFirst, entries);
 }
-const legacyLedger = {
+const legacyLedger = redirectQuarantined({
   ...legacyLedgerInput,
-  changes: legacyLedgerInput.changes.map((change) => ({
-    ...change,
-    channel: change.channel ?? (change.automatic ? 'releases' : 'impact'),
-  })),
-};
+  changes: legacyLedgerInput.changes
+    .filter((change) => !quarantined.has(change.repository))
+    .map((change) => ({
+      ...change,
+      channel: change.channel ?? (change.automatic ? 'releases' : 'impact'),
+    })),
+});
+const releaseFactsText = await readFile(path.join(inputs.bootstrapRoot, 'release-facts.json'), 'utf8');
+const publishedReleaseFacts = quarantined.size ? (() => {
+  const releaseFacts = JSON.parse(releaseFactsText);
+  return `${JSON.stringify(redirectQuarantined({
+    ...releaseFacts,
+    releases: releaseFacts.releases.filter((release) => !quarantined.has(release.repository)),
+  }), null, 2)}\n`;
+})() : releaseFactsText;
 const lockByRepository = new Map(lock.sources.map((source) => [source.repository, source]));
 let registry;
 let manifests = [];
@@ -82,7 +95,9 @@ if (lock.sources.length > 0) {
   const {collectSources} = await import('./collect-sources.mjs');
   const collected = await collectSources({root, outputRoot: generated, inputs});
   ({registry, manifests, indexes, collectionRoot} = collected);
-  assertDocumentationFamilyDistribution(manifests);
+  registry = redirectQuarantined(registry);
+  manifests = redirectQuarantined(manifests);
+  assertDocumentationFamilyDistribution(manifests, {quarantined: [...quarantined]});
   ({apiCatalog, documentIndex} = await materializeCollection({manifests, indexes, collectionRoot}));
 } else {
   registry = fixtureRegistry(roster.repositories, legacyRegistry);
@@ -112,10 +127,10 @@ const dependencyGraph = buildDependencyGraph(surfaces);
 await Promise.all([
   writeFile(path.join(data, 'ecosystem.json'), `${JSON.stringify(registry, null, 2)}\n`),
   writeFile(path.join(data, 'changes.json'), `${JSON.stringify(legacyLedger, null, 2)}\n`),
-  writeFile(path.join(data, 'release-facts.json'), await readFile(path.join(inputs.bootstrapRoot, 'release-facts.json'), 'utf8')),
+  writeFile(path.join(data, 'release-facts.json'), publishedReleaseFacts),
   writeFile(path.join(generatedStatic, 'ecosystem.json'), `${JSON.stringify(registry, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'changes.json'), `${JSON.stringify(legacyLedger, null, 2)}\n`),
-  writeFile(path.join(generatedStatic, 'release-facts.json'), await readFile(path.join(inputs.bootstrapRoot, 'release-facts.json'), 'utf8')),
+  writeFile(path.join(generatedStatic, 'release-facts.json'), publishedReleaseFacts),
   writeFile(path.join(data, 'dependencies.json'), `${JSON.stringify(dependencyGraph, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'dependencies.json'), `${JSON.stringify(dependencyGraph, null, 2)}\n`),
   writeFile(path.join(data, 'manifests.json'), `${JSON.stringify(manifests, null, 2)}\n`),
@@ -124,6 +139,8 @@ await Promise.all([
   writeFile(path.join(data, 'document-index.json'), `${JSON.stringify(documentIndex, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'document-index.json'), `${JSON.stringify(documentIndex, null, 2)}\n`),
   writeFile(path.join(data, 'experiences.json'), `${JSON.stringify(evaluatedExperienceCatalog, null, 2)}\n`),
+  // Read by src/lib/published.ts: the Website's own pages apply the same rule to the same list.
+  writeFile(path.join(data, 'quarantine.json'), `${JSON.stringify({schema: 'b10x-website-quarantine/v1', repositories: [...quarantined].sort(compareUtf8)}, null, 2)}\n`),
   writeFile(path.join(generatedStatic, 'experiences.json'), `${JSON.stringify(evaluatedExperienceCatalog, null, 2)}\n`),
   writeFile(
     path.join(generated, 'sidebars.cjs'),
@@ -134,6 +151,10 @@ if (bootstrap) {
   const fixtureOpenApi = path.join(generatedStatic, 'api', 'aep-service', 'http-api', 'openapi.json');
   await mkdir(path.dirname(fixtureOpenApi), {recursive: true});
   await writeFile(fixtureOpenApi, `${JSON.stringify({openapi: '3.1.0', info: {title: 'AEP Service local preview contract', version: '0.0.0-local'}, paths: {}}, null, 2)}\n`);
+}
+// The blog plugin emits no feed when no source publishes a field note — the bootstrap fixture, or a
+// build that quarantines every source owning one — and /updates/ links to all three feeds.
+if (bootstrap || !indexes.some((index) => index.files.some((file) => file.kind === 'blog'))) {
   const fixtureFieldNotes = path.join(generatedStatic, 'updates', 'field-notes');
   await mkdir(fixtureFieldNotes, {recursive: true});
   await Promise.all([
@@ -266,7 +287,7 @@ for (const surface of surfaces) {
 }
 
 const currentInputs = await loadPublicationInputs({root, allowBootstrap: bootstrapEnabled()});
-await validateBootstrapSnapshots(root, roster.repositories, {
+await validateBootstrapSnapshots(root, currentInputs.sourceRoster, {
   directory: currentInputs.bootstrapRoot,
   sourceLockBytes: currentInputs.sourceLockBytes,
   sourceSetSha256: currentInputs.sourceSetSha256,
@@ -401,7 +422,7 @@ function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeB
   const {frontmatter, body} = splitFrontmatter(raw);
   const title = metadata.title;
   const sidebar = sourceSidebarMetadata(frontmatter, title);
-  const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource});
+  const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, quarantined});
   const contextualized = insertDocContextAfterTitle(rewritten.trim(), renderDocContext({
     file,
     commit,
@@ -475,7 +496,7 @@ async function renderBlog({raw, file, route, commit, repositoryUrl, routeBySourc
   const {frontmatter, body} = splitFrontmatter(raw);
   const title = frontmatter.title ?? firstHeading(body) ?? path.basename(file.sourcePath, path.extname(file.sourcePath));
   const date = normalizeBlogDate(frontmatter.date ?? /^([0-9]{4}-[0-9]{2}-[0-9]{2})/.exec(path.basename(file.sourcePath))?.[1] ?? '1970-01-01');
-  const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource});
+  const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, quarantined});
   const resolved = manifest.schema === 'b10x-docs/v4'
     ? await resolveDocumentPageMetadata(manifest, file.surface, raw, `${file.repository}/${file.sourcePath}`)
     : undefined;

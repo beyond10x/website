@@ -1,7 +1,7 @@
 import React, {type ReactNode, useEffect, useState} from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import type {Props} from '@theme/Root';
-import {localizeWebsiteHref, WEBSITE_ORIGIN} from '../lib/links';
+import {localizeWebsiteHref, WEBSITE_ORIGIN} from '@site/src/lib/published';
 import styles from './Root.module.css';
 
 type LocalPreviewMetadata = {

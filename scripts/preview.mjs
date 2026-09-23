@@ -116,7 +116,7 @@ export function generatedInputIssue(siteRoot = root, environment = process.env) 
     return undefined;
   }
   if (completion?.schema !== 'b10x-website-generated-completion/v2'
-    || completion.inputSchema !== 'b10x-docs-source-set/v1'
+    || !['b10x-docs-source-set/v1', 'b10x-docs-source-set/v2'].includes(completion.inputSchema)
     || typeof completion.inputSha256 !== 'string'
     || !/^[0-9a-f]{64}$/.test(completion.inputSha256)) {
     return 'invalid .generated/.complete.json contract';

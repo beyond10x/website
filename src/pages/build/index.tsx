@@ -1,5 +1,6 @@
+import {publishedHref} from '@site/src/lib/published';
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import {CardGrid, ContentCard, PageHeader, SectionHeader} from '@beyond10x/docs-system/components';
 import styles from '../ecosystem.module.css';
@@ -21,19 +22,19 @@ const destinations = [
     eyebrow: 'Host instructions',
     title: 'Install Agent Plugins',
     description: 'Add focused beyond10x guidance to Claude and choose only the plugin needed for the current decision.',
-    url: '/docs/agentplugins/install/',
+    url: publishedHref('/docs/agentplugins/install/'),
   },
   {
     eyebrow: 'Agent loop',
     title: 'Build with Harness',
     description: 'Use the source-owned Harness guide for observable sessions, explicit tools, approvals, and evidence.',
-    url: '/docs/harness/',
+    url: publishedHref('/docs/harness/'),
   },
   {
     eyebrow: 'Docs as spec',
     title: 'Generate documentation with ESS',
     description: 'Model important system behavior as validated input, then generate deterministic human documentation and contracts.',
-    url: '/docs/ess/',
+    url: publishedHref('/docs/ess/'),
   },
 ];
 

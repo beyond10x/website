@@ -4,9 +4,20 @@ import {createServer} from 'node:http';
 import {access, mkdtemp, readFile, rm, stat} from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import {quarantinedRouteTarget} from '../src/quarantine-routes.mjs';
+import {loadPublicationInputs} from './publication-inputs.mjs';
+import {bootstrapEnabled} from './source-lock-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const build = path.join(root, 'build');
+// Several audits sample one source's pages because those pages carry the feature under test (the AEP
+// deep sidebar, the Connectors diagram, the Agent Plugins entity search). A quarantined source has no
+// pages, so its samples are skipped and named in the summary line.
+const quarantined = new Set((await loadPublicationInputs({root, allowBootstrap: bootstrapEnabled()})).quarantined.map((entry) => entry.repository));
+const published = (...repositories) => repositories.every((repository) => !quarantined.has(repository));
+const publishedRoute = (route) => !quarantinedRouteTarget(route, quarantined);
+const skippedSamples = [];
+const skipSample = (label) => { skippedSamples.push(label); };
 const chromeStartupTimeoutMs = 30_000;
 const chromeStartupPollMs = 50;
 const navigationPathTimeoutMs = 15_000;
@@ -68,15 +79,18 @@ try {
   await clickNavigationLink(client, 'nav[aria-label="Docs sidebar"]', 'Start by outcome');
   await waitForPath(client, '/start/', 1440);
 
-  await navigate(client, `${site}/docs/aep/getting-started/`);
-  const projectContext = await evaluate(client, projectContextSnapshot());
-  assert.ok(projectContext.sidebar.some((item) => item.label === 'Start by outcome' && item.path === '/start/'), 'deep project sidebar must return to an audience path');
-  assert.ok(projectContext.sidebar.some((item) => item.label === 'All technical docs' && item.path === '/docs/'), 'deep project sidebar must return to all technical docs');
-  assert.equal(projectContext.sidebar.filter((item) => item.path === '/docs/aep/').length, 1, 'deep project sidebar must expose the AEP root exactly once');
-  assert.deepEqual(projectContext.sidebar.filter((item) => item.path?.startsWith('/docs/aep/')).slice(0, 2).map((item) => item.label), ['AEP', 'Getting started'], 'deep project sidebar must preserve AEP source ordering');
-  assert.ok(projectContext.breadcrumbs.some((item) => item.label === 'AEP' && item.path === '/docs/aep/'), 'deep project breadcrumb must retain the linked AEP parent');
-  assert.match(projectContext.context, /AEP/, 'deep project context must name AEP');
-  assert.match(projectContext.provenance, /aep\/website\/docs\/getting-started\.md/, 'deep project provenance must qualify the source path with its repository');
+  if (!published('aep')) skipSample('AEP deep project context');
+  else {
+    await navigate(client, `${site}/docs/aep/getting-started/`);
+    const projectContext = await evaluate(client, projectContextSnapshot());
+    assert.ok(projectContext.sidebar.some((item) => item.label === 'Start by outcome' && item.path === '/start/'), 'deep project sidebar must return to an audience path');
+    assert.ok(projectContext.sidebar.some((item) => item.label === 'All technical docs' && item.path === '/docs/'), 'deep project sidebar must return to all technical docs');
+    assert.equal(projectContext.sidebar.filter((item) => item.path === '/docs/aep/').length, 1, 'deep project sidebar must expose the AEP root exactly once');
+    assert.deepEqual(projectContext.sidebar.filter((item) => item.path?.startsWith('/docs/aep/')).slice(0, 2).map((item) => item.label), ['AEP', 'Getting started'], 'deep project sidebar must preserve AEP source ordering');
+    assert.ok(projectContext.breadcrumbs.some((item) => item.label === 'AEP' && item.path === '/docs/aep/'), 'deep project breadcrumb must retain the linked AEP parent');
+    assert.match(projectContext.context, /AEP/, 'deep project context must name AEP');
+    assert.match(projectContext.provenance, /aep\/website\/docs\/getting-started\.md/, 'deep project provenance must qualify the source path with its repository');
+  }
 
   await setViewport(client, {width: 390, height: 844, mobile: true});
   await navigate(client, `${site}/docs/`);
@@ -117,6 +131,7 @@ try {
     {width: 390, height: 844, mobile: true},
     {width: 996, height: 844, mobile: false},
   ]) {
+    if (!published('aep')) { skipSample(`AEP keyboard drawer at ${viewport.width}px`); continue; }
     await verifyKeyboardDrawer(client, site, viewport);
   }
 
@@ -162,7 +177,7 @@ try {
   await verifySearchCards(client, site);
   await verifyDocumentationViewports(client, site);
 
-  process.stdout.write(`verified global navigation, project context, readable search cards, pointer activation, and trapped keyboard drawer flow at 1440×1000, 320/390×844, and ${boundaryWidths.join('/')}×844\n`);
+  process.stdout.write(`verified global navigation, project context, readable search cards, pointer activation, and trapped keyboard drawer flow at 1440×1000, 320/390×844, and ${boundaryWidths.join('/')}×844${skippedSamples.length ? `; skipped quarantined samples: ${skippedSamples.join(', ')}` : ''}\n`);
 } catch (error) {
   if (chromeErrors.trim()) error.message = `${error.message}\nChrome diagnostics:\n${chromeErrors.trim()}`;
   throw error;
@@ -438,7 +453,7 @@ async function verifyGlobalSectionState(cdp, siteUrl) {
     ['Search', ['/search/']],
   ];
   for (const [expected, routes] of cases) {
-    for (const route of routes) {
+    for (const route of routes.filter(publishedRoute)) {
       await navigate(cdp, `${siteUrl}${route}`);
       const active = await evaluate(cdp, `([...document.querySelectorAll('.navbar__items:not(.navbar__items--right) a.navbar__link--active')].map((item) => item.textContent.trim()))`);
       assert.deepEqual(active, [expected], `${route} must retain the ${expected} global section context`);
@@ -458,7 +473,7 @@ async function verifyLocalAnchorPresentation(cdp, siteUrl) {
     '/docs/aep/',
     '/docs/website/',
   ];
-  for (const route of routes) {
+  for (const route of routes.filter(publishedRoute)) {
     await navigate(cdp, `${siteUrl}${route}`);
     const snapshot = await evaluate(cdp, localAnchorSnapshot());
     assert.deepEqual(snapshot.absoluteSameOriginAnchors, [], `${route} must not escape a local preview through canonical Website anchors`);
@@ -466,6 +481,10 @@ async function verifyLocalAnchorPresentation(cdp, siteUrl) {
     assert.match(snapshot.canonical ?? '', /^https:\/\/beyond10x\.github\.io\//, `${route} must retain absolute canonical metadata`);
   }
 
+  if (!published('aep', 'agentplugins')) {
+    skipSample('AEP link to the Agent Plugins profile');
+    return;
+  }
   await navigate(cdp, `${siteUrl}/docs/aep/`);
   await evaluate(
     cdp,
@@ -503,6 +522,10 @@ async function verifySearchCards(cdp, siteUrl) {
     }
   }
 
+  if (!published('agentplugins')) {
+    skipSample('Agent Plugins entity search card');
+    return;
+  }
   const entityCards = await loadSearchCards(cdp, `${siteUrl}/search/?q=shared%20capability%20layer&project=agentplugins`);
   const decoded = entityCards.find((card) => card.description.includes('skills/<name>/SKILL.md'));
   assert.ok(decoded, 'typed search cards must display decoded <name> code placeholders as safe text');
@@ -521,6 +544,10 @@ async function loadSearchCards(cdp, url) {
 }
 
 async function verifyDocumentationViewports(cdp, siteUrl) {
+  if (!published('connectors')) {
+    process.stdout.write('skipped the diagram and table audit: its sample, Connectors, is quarantined\n');
+    return;
+  }
   // 720 CSS pixels at scale 2 exercises the reflow of a 1440px display at 200% zoom.
   const sizes = [
     {width: 1440, height: 1000, mobile: false, scale: 1},

@@ -31,6 +31,13 @@ export async function artifactFacts(build) {
 }
 
 export function deploymentFromProvenance(provenance) {
+  if (provenance.schema === 'b10x-website-provenance/v3') {
+    return {
+      ...deploymentFromProvenance({...provenance, schema: 'b10x-website-provenance/v2'}),
+      schema: 'b10x-docs-deployment/v3',
+      quarantinedSources: provenance.quarantinedSources.map((entry) => entry.repository),
+    };
+  }
   if (provenance.schema === 'b10x-website-provenance/v2') {
     return {
       schema: 'b10x-docs-deployment/v2',

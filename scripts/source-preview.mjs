@@ -215,7 +215,15 @@ export async function loadSnapshot(directory, roster) {
     throw new PreviewEnvironmentError(`${directory}/PROVENANCE.json is not JSON: ${messageOf(error)}`);
   }
   const invalid = (reason) => new PreviewEnvironmentError(`${directory}/PROVENANCE.json ${reason}`);
-  if (provenance?.schema !== 'b10x-website-provenance/v2') throw invalid('is not b10x-website-provenance/v2');
+  // v3 is the provenance of a quarantining source set: `quarantinedSources` plus the recorded
+  // sources are the roster, and the preview carries the quarantine forward.
+  if (!['b10x-website-provenance/v2', 'b10x-website-provenance/v3'].includes(provenance?.schema)) {
+    throw invalid('is not b10x-website-provenance/v2 or v3');
+  }
+  const quarantined = provenance.schema === 'b10x-website-provenance/v3' ? provenance.quarantinedSources : [];
+  if (!Array.isArray(quarantined) || quarantined.some((entry) => typeof entry?.repository !== 'string')) {
+    throw invalid('carries no valid quarantinedSources');
+  }
   if (!hex40.test(provenance.websiteCommit ?? '') || !hex40.test(provenance.atlasControlCommit ?? '')) {
     throw invalid('has an invalid websiteCommit or atlasControlCommit');
   }
@@ -225,8 +233,9 @@ export async function loadSnapshot(directory, roster) {
     throw invalid('carries no sourceCommits or sourceBundles');
   }
   const recorded = Object.keys(commits).sort(compareUtf8);
-  if (recorded.join('\n') !== [...roster].join('\n') || Object.keys(bundles).sort(compareUtf8).join('\n') !== recorded.join('\n')) {
-    throw invalid(`records roster ${recorded.join(', ')}, but sources.yaml is ${roster.join(', ')}`);
+  const recordedRoster = [...recorded, ...quarantined.map((entry) => entry.repository)].sort(compareUtf8);
+  if (recordedRoster.join('\n') !== [...roster].join('\n') || Object.keys(bundles).sort(compareUtf8).join('\n') !== recorded.join('\n')) {
+    throw invalid(`records roster ${recordedRoster.join(', ')}, but sources.yaml is ${roster.join(', ')}`);
   }
   for (const repository of recorded) {
     const bundle = bundles[repository];
@@ -505,14 +514,20 @@ export async function writePreviewInputs({websiteRoot, snapshot, source, others,
     bundleSha256: authored.bundleSha256,
   });
 
-  const roster = Object.keys(provenance.sourceCommits).sort(compareUtf8);
+  // The source under preview is published from its working tree even when the snapshot had
+  // quarantined it; every other quarantined source stays quarantined.
+  const quarantined = (provenance.quarantinedSources ?? [])
+    .filter((entry) => entry.repository !== source.repository)
+    .map((entry) => ({repository: entry.repository, check: entry.check, message: entry.message}));
+  const roster = [...new Set([...Object.keys(provenance.sourceCommits), source.repository])].sort(compareUtf8);
   const missing = roster.filter((repository) => !entries.has(repository));
   if (missing.length > 0) throw new PreviewEnvironmentError(`preview inputs lack snapshot sources ${missing.join(', ')}`);
   const sourceSet = {
-    schema: 'b10x-docs-source-set/v1',
+    schema: quarantined.length > 0 ? 'b10x-docs-source-set/v2' : 'b10x-docs-source-set/v1',
     atlasControlCommit: provenance.atlasControlCommit,
     websiteRuntimeCommit: provenance.websiteCommit,
     sources: roster.map((repository) => entries.get(repository)),
+    ...(quarantined.length > 0 ? {quarantined} : {}),
   };
   const sourceSetBytes = Buffer.from(`${JSON.stringify(sourceSet)}\n`);
   const sourceSetPath = path.join(outputRoot, 'source-set.json');

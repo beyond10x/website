@@ -1,5 +1,5 @@
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import {
   Callout,
@@ -19,7 +19,7 @@ import type {
 import evaluatedExperienceDocument from '../../.generated/data/experiences.json';
 import experiencePagesDocument from '../../data/experience-pages.json';
 import searchGoldenDocument from '../../data/search-golden.json';
-import {localizeWebsiteHref} from '../lib/links';
+import {isQuarantineRedirect, localizeWebsiteHref} from '@site/src/lib/published';
 import styles from './ExperienceView.module.css';
 
 export type ExperienceSectionKind = 'learn' | 'do' | 'verify';
@@ -196,7 +196,11 @@ function composeExperience(page: ExperiencePageCatalog['pages'][number]): Experi
   const primaryStep = page.sections.flatMap((section) => section.steps).find((step) => step.id === page.primaryStepId);
   if (!primaryStep) throw new Error(`${experience.id} has no primary step ${page.primaryStepId}`);
   const url = new URL(path.url);
-  if (url.origin !== 'https://beyond10x.github.io') throw new Error(`${experience.id}/${path.id} must route through the canonical Website`);
+  // An adoption path into a quarantined source was redirected to its GitHub repository by the
+  // quarantine rule; every other path must stay on the canonical Website.
+  if (url.origin !== 'https://beyond10x.github.io' && !isQuarantineRedirect(path.url)) {
+    throw new Error(`${experience.id}/${path.id} must route through the canonical Website`);
+  }
   return {
     id: experience.id,
     label: experience.label,

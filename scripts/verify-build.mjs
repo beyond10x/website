@@ -6,7 +6,8 @@ import {effectiveRedirectMap} from './redirect-contract.mjs';
 import {bootstrapEnabled} from './source-lock-contract.mjs';
 import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
 import {resolvePublicationLayout} from './publication-layout.mjs';
-import {loadPublicationInputs, SOURCE_SET_ENVIRONMENT} from './publication-inputs.mjs';
+import {loadPublicationInputs, QUARANTINE_SOURCE_SET_SCHEMA, SOURCE_SET_ENVIRONMENT} from './publication-inputs.mjs';
+import {quarantinedRouteTarget} from './link-rewriting.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const options = parseArgs(process.argv.slice(2));
@@ -33,7 +34,7 @@ if (layout?.schema === 'b10x-publication-layout/v2' && inputs.mode !== 'source-s
 if (layout?.schema === 'b10x-publication-layout/v1' && inputs.mode !== 'legacy') {
   throw new Error('legacy flat publication cannot select source-set inputs');
 }
-await validateBootstrapSnapshots(websiteRoot, roster.repositories, {
+await validateBootstrapSnapshots(websiteRoot, inputs.sourceRoster, {
   directory: inputs.bootstrapRoot,
   sourceLockBytes: inputs.sourceLockBytes,
   sourceSetSha256: inputs.sourceSetSha256,
@@ -76,7 +77,10 @@ const wellKnownBytes = await readFile(path.join(build, '.well-known', 'b10x-docs
 if (!provenanceBytes.equals(wellKnownBytes)) throw new Error('root provenance copies differ byte-for-byte');
 const provenance = JSON.parse(provenanceBytes);
 if (provenanceBytes.toString('utf8') !== canonicalJson(provenance)) throw new Error('website provenance is not canonical JSON');
-const provenanceSchema = inputs.mode === 'source-set' ? 'b10x-website-provenance/v2' : 'b10x-website-provenance/v1';
+const quarantining = inputs.inputSchema === QUARANTINE_SOURCE_SET_SCHEMA;
+const provenanceSchema = inputs.mode === 'source-set'
+  ? (quarantining ? 'b10x-website-provenance/v3' : 'b10x-website-provenance/v2')
+  : 'b10x-website-provenance/v1';
 if (provenance.schema !== provenanceSchema) throw new Error(`invalid website provenance schema for ${inputs.mode} inputs`);
 if (!/^[0-9a-f]{40}$/.test(provenance.websiteCommit) || /^0+$/.test(provenance.websiteCommit)) {
   throw new Error('website provenance has an invalid or zero commit');
@@ -92,7 +96,7 @@ const expectedProvenanceKeys = (inputs.mode === 'source-set'
   ? [
       'schema', 'websiteCommit', 'atlasControlCommit', 'sourceSetSha256', 'sourcesLockSha256',
       'legacyRoutesSha256', 'routesSha256', 'artifactSha256', 'sourceCommits', 'sourceBundles',
-      'routes', 'files',
+      'routes', 'files', ...(quarantining ? ['quarantinedSources'] : []),
     ]
   : [
       'schema', 'websiteCommit', 'sourcesLockSha256', 'legacyRoutesSha256', 'routesSha256',
@@ -126,6 +130,9 @@ if (inputs.sourceSet) {
   if (canonicalJson(provenance.sourceBundles) !== canonicalJson(expectedBundles)) {
     throw new Error('provenance source bundles do not exactly match source-set inputs');
   }
+  if (quarantining && canonicalJson(provenance.quarantinedSources) !== canonicalJson(inputs.quarantined)) {
+    throw new Error('provenance does not name exactly the quarantined sources of the source set');
+  }
 }
 const legacyRoutesBytes = await readFile(path.join(websiteRoot, 'legacy-routes.json'));
 if (provenance.legacyRoutesSha256 !== sha256(legacyRoutesBytes)) throw new Error('provenance legacy-route digest does not match legacy-routes.json bytes');
@@ -152,9 +159,14 @@ for (const property of ['artifactSha256', 'routesSha256']) {
 if (canonicalJson(provenance.files) !== canonicalJson(facts.files)) throw new Error('provenance file inventory does not match the built artifact');
 if (canonicalJson(provenance.routes) !== canonicalJson(facts.routes)) throw new Error('provenance route inventory does not match the built artifact');
 if (facts.routes[0] !== '/' || new Set(facts.routes).size !== facts.routes.length) throw new Error('built route inventory is not unique and rooted');
+const quarantinedRepositories = new Set(inputs.quarantined.map((entry) => entry.repository));
+const quarantinedRoutes = facts.routes.filter((route) => quarantinedRouteTarget(route, quarantinedRepositories));
+if (quarantinedRoutes.length > 0) {
+  throw new Error(`quarantined sources still publish routes: ${quarantinedRoutes.slice(0, 20).join(', ')}`);
+}
 
 const declaredRedirects = JSON.parse(legacyRoutesBytes);
-const expectedRedirects = canonicalJson(effectiveRedirectMap(declaredRedirects, facts));
+const expectedRedirects = canonicalJson(effectiveRedirectMap(declaredRedirects, facts, {quarantined: quarantinedRepositories}));
 const effectiveRedirects = await readFile(path.join(build, '.well-known', 'b10x-redirects.json'), 'utf8');
 if (effectiveRedirects !== expectedRedirects) {
   throw new Error('effective redirects are not the deterministic projection of legacy-routes.json and the artifact inventory');

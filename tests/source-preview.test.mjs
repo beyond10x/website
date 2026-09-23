@@ -489,3 +489,42 @@ test('Ctrl-C before the preview server exists aborts, cleans up, and exits 130',
     && (entry.startsWith('staging-') || entry.startsWith('publication.fetch-')));
   assert.deepEqual(left, [], 'an interrupted preview leaves no staging or fetch directories behind');
 });
+
+test('a snapshot that quarantined a source previews without it and carries the quarantine into the preview inputs', async (context) => {
+  const fixture = await publicationFixture(context);
+  const source = await dirtySourceRepository(context, fixture);
+  const published = await publishedSnapshot(context, fixture, source);
+  const quarantined = [{repository: 'aep', check: 'bundle-schema', message: 'bundle.json violates the exported Docs System bundle schema'}];
+  const provenance = {
+    ...published.provenance,
+    schema: 'b10x-website-provenance/v3',
+    sourceCommits: {harness: published.provenance.sourceCommits.harness},
+    sourceBundles: {harness: published.provenance.sourceBundles.harness},
+    quarantinedSources: quarantined,
+  };
+  await writeFile(path.join(published.snapshotRoot, 'PROVENANCE.json'), canonicalJson(provenance));
+  const roster = ['aep', 'harness'];
+  const {snapshot} = await obtainSnapshot({override: published.snapshotRoot, cacheDirectory: path.join(source.directory, 'unused'), roster});
+  await assert.rejects(
+    obtainSnapshot({override: published.snapshotRoot, cacheDirectory: path.join(source.directory, 'unused'), roster: ['aep', 'harness', 'mcp']}),
+    /roster/,
+  );
+  const staged = await stageSourceWorkingTree({
+    sourceDirectory: source.repositoryRoot,
+    websiteRoot: fixture.websiteRoot,
+    stagingRoot: path.join(source.directory, 'staging'),
+  });
+  const others = await collectSnapshotSources({snapshot, exclude: 'harness', cacheRoot: path.join(source.directory, 'sources-cache'), sourceWorkspace: published.workspace});
+  assert.deepEqual(others, []);
+  const {sourceSetPath} = await writePreviewInputs({
+    websiteRoot: fixture.websiteRoot,
+    snapshot,
+    source: staged,
+    others,
+    outputRoot: path.join(source.directory, 'preview-inputs'),
+  });
+  const inputs = await loadPublicationInputs({root: fixture.websiteRoot, environment: {B10X_DOCS_SOURCE_SET: sourceSetPath}});
+  assert.equal(inputs.inputSchema, 'b10x-docs-source-set/v2');
+  assert.deepEqual(inputs.quarantined, quarantined);
+  assert.deepEqual(inputs.roster.repositories, ['harness']);
+});

@@ -103,6 +103,8 @@ export function resolveNavigationTarget(raw, sourceRoute, {origin, files, routes
       return {external: false, exists: files.has(redirect.source), pathname, file: redirect.source, fragment: decodeFragment(url.hash.slice(1))};
     }
     const redirected = new URL(redirect.to, `${origin}/`);
+    // A redirect that leaves the origin (a quarantined source's GitHub repository) is external.
+    if (redirected.origin !== origin) return {external: true, exists: true, pathname: redirected.href};
     pathname = decodePath(redirected.pathname);
   }
   const relative = pathname.replace(/^\/+/, '');

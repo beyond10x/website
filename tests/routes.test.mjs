@@ -16,7 +16,7 @@ import {
   validateFacadeProvenance,
 } from '../scripts/facade-contract.mjs';
 import {effectiveRedirectMap} from '../scripts/redirect-contract.mjs';
-import {ROOT_OWNED_REDIRECTS, writeRootOwnedRedirects} from '../scripts/root-redirect-contract.mjs';
+import {ROOT_OWNED_REDIRECTS, rootOwnedRedirectMap, writeRootOwnedRedirects} from '../scripts/root-redirect-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 
@@ -60,6 +60,38 @@ test('root-owned compatibility routes are materialized in the root artifact', as
     assert.match(html, new RegExp(`<link rel="canonical" href="${new URL(redirect.to, declared.origin).href}"`));
     assert.match(html, /window\.location\.replace/);
   }
+});
+
+test('a root-owned redirect into a quarantined source points at its GitHub repository', async () => {
+  const declared = JSON.parse(await readFile(path.join(root, 'legacy-routes.json'), 'utf8'));
+  const quarantined = rootOwnedRedirectMap(declared, {quarantined: new Set(['aep'])});
+  assert.deepEqual(quarantined.redirects.find((redirect) => redirect.from === '/engineering-protocols/'), {from: '/engineering-protocols/', to: 'https://github.com/beyond10x/aep', type: 'html'});
+  assert.deepEqual(rootOwnedRedirectMap(declared).redirects, ROOT_OWNED_REDIRECTS.map((redirect) => ({...redirect})));
+  assert.deepEqual(
+    effectiveRedirectMap({...declared, redirects: declared.redirects.filter((redirect) => redirect.from === '/engineering-protocols/')}, {routes: ['/', '/ecosystem/', '/start/', '/build/agent-systems/', '/operate/', '/start/spec-driven-development/', '/learn/safe-agentic-coding/'], files: []}, {quarantined: new Set(['aep', 'aep-service'])})
+      .redirects.find((redirect) => redirect.from === '/engineering-protocols/').to,
+    'https://github.com/beyond10x/aep',
+    'the materialized page and the effective map agree',
+  );
+});
+
+test('a declared redirect into a quarantined source points at its GitHub repository, and nothing else changes', () => {
+  const declared = {
+    schema: 'b10x-redirects/v1',
+    origin: 'https://beyond10x.github.io',
+    redirects: [
+      {from: '/ess/docs/guide/', to: '/docs/ess/guide/', type: 'html'},
+      {from: '/ess/', to: '/ecosystem/ess/', type: 'html'},
+      {from: '/aep/', to: '/ecosystem/aep/', type: 'html'},
+    ],
+  };
+  const facts = {routes: ['/', '/ecosystem/', '/ecosystem/aep/'], files: []};
+  assert.deepEqual(effectiveRedirectMap(declared, facts, {quarantined: new Set(['ess'])}).redirects, [
+    {from: '/ess/docs/guide/', to: 'https://github.com/beyond10x/ess', type: 'html'},
+    {from: '/ess/', to: 'https://github.com/beyond10x/ess', type: 'html'},
+    {from: '/aep/', to: '/ecosystem/aep/', type: 'html'},
+  ]);
+  assert.equal(effectiveRedirectMap(declared, facts).redirects[0].to, '/', 'without a quarantine the nearest built route still wins');
 });
 
 test('HTML compatibility pages preserve search and fragment and expose a canonical fallback', () => {
@@ -247,6 +279,27 @@ test('stable façade manifests identify alias sources as canonical root routes',
   }]);
 });
 
+test('an alias of a file a quarantined source owns is dropped, and only that', () => {
+  const declared = {
+    schema: 'b10x-redirects/v1',
+    origin: 'https://beyond10x.github.io',
+    redirects: [
+      {from: '/aep-service/openapi.json', source: 'api/aep-service/http-api/openapi.json', type: 'alias', mediaType: 'application/json'},
+      {from: '/feed.xml', source: 'releases/rss.xml', type: 'alias', mediaType: 'application/rss+xml'},
+    ],
+  };
+  const facts = {routes: ['/'], files: [{path: 'releases/rss.xml'}]};
+  assert.deepEqual(
+    effectiveRedirectMap(declared, facts, {quarantined: new Set(['aep-service'])}).redirects.map((redirect) => redirect.from),
+    ['/feed.xml'],
+  );
+  assert.throws(() => effectiveRedirectMap(declared, facts), /legacy alias source \/api\/aep-service\/http-api\/openapi\.json is absent/);
+  assert.throws(
+    () => effectiveRedirectMap(declared, {routes: ['/'], files: []}, {quarantined: new Set(['aep-service'])}),
+    /legacy alias source \/releases\/rss\.xml is absent/,
+  );
+});
+
 test('effective redirects are an exact safe projection of declared compatibility routes', () => {
   const projected = effectiveRedirectMap({
     schema: 'b10x-redirects/v1',
@@ -271,4 +324,25 @@ test('effective redirects are an exact safe projection of declared compatibility
     schema: 'b10x-redirects/v1', origin: 'https://beyond10x.github.io',
     redirects: [{from: '/.Git/config', to: '/', type: 'html'}],
   }, {routes: ['/'], files: []}), /forbidden Git metadata/);
+});
+
+test('a façade accepts an off-origin target only as the GitHub repository of a quarantined source', () => {
+  const rootRoutes = new Set(['/', '/ecosystem/', '/docs/']);
+  const quarantined = new Set(['harness']);
+  const toGitHub = (repository) => [{from: '/', to: `https://github.com/beyond10x/${repository}`, type: 'html'}];
+  const accepted = synthesizeFacadeRoutes('harness', toGitHub('harness'), rootRoutes, undefined, {quarantined});
+  assert.equal(accepted.find((redirect) => redirect.from === '/').to, 'https://github.com/beyond10x/harness');
+  assert.deepEqual(
+    facadeRouteManifest(accepted, {quarantined}).find((entry) => entry.from === '/'),
+    {from: '/', to: 'https://github.com/beyond10x/harness', type: 'html'},
+  );
+  for (const [label, redirects, set] of [
+    ['a published repository', toGitHub('aep'), quarantined],
+    ['no quarantine at all', toGitHub('harness'), new Set()],
+    ['a path under the repository', [{from: '/', to: 'https://github.com/beyond10x/harness/tree/main', type: 'html'}], quarantined],
+    ['another host', [{from: '/', to: 'https://example.com/beyond10x/harness', type: 'html'}], quarantined],
+  ]) {
+    assert.throws(() => synthesizeFacadeRoutes('harness', redirects, rootRoutes, undefined, {quarantined: set}), /absent from root provenance/, label);
+    assert.throws(() => facadeRouteManifest(redirects, {quarantined: set}), /canonical absolute route/, label);
+  }
 });

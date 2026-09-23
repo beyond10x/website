@@ -1,10 +1,10 @@
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import {AdoptionCard, CardGrid, ContentCard, FactGrid, SectionHeader, StatusBadge} from '@beyond10x/docs-system/components';
 import type {Journey, RegistrySurface, ReleaseFact, ReleaseFactsDocument, SurfaceLink, SurfaceRelationship} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import releaseFactsDocument from '../../.generated/data/release-facts.json';
-import {isExternalWebsiteHref, localizedAdoptionHref, localizeWebsiteHref} from '../lib/links';
+import {isExternalWebsiteHref, localizedAdoptionHref, localizeWebsiteHref, withQuarantinedSurfaces} from '@site/src/lib/published';
 import styles from './ProjectProfile.module.css';
 
 const surfaces = (registryDocument as {surfaces: RegistrySurface[]}).surfaces;
@@ -21,7 +21,7 @@ export default function ProjectProfile({repository, revision}: {repository: stri
   if (!owned.length) throw new Error(`project profile ${repository} is absent from the public registry`);
   const primary = owned.find((surface) => surface.id === 'docs') ?? owned[0];
   const ownedKeys = new Set(owned.map((surface) => surface.key));
-  const byKey = new Map(surfaces.map((surface) => [surface.key, surface]));
+  const byKey = withQuarantinedSurfaces(new Map(surfaces.map((surface) => [surface.key, surface])), owned.flatMap((source) => (source.relationships ?? []).map((relationship) => relationship.target)));
   const outgoing = owned.flatMap((source) => (source.relationships ?? []).filter(isPresentedRelationship).map((relationship) => ({kind: relationship.kind, label: relationship.label, source, targetKey: relationship.target, targetSurface: byKey.get(relationship.target)})));
   const incoming = surfaces.flatMap((source) => (source.relationships ?? [])
     .filter((relationship) => ownedKeys.has(relationship.target) && isPresentedRelationship(relationship))

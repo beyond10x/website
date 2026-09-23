@@ -6,7 +6,7 @@ import {deriveEcosystemNavigation, surfaceNavigation} from '@beyond10x/docs-syst
 import type {EcosystemRegistry, Journey} from '@beyond10x/docs-system/types';
 import registryDocument from '../../.generated/data/ecosystem.json';
 import familyTaxonomy from '../../data/ecosystem-families.json';
-import {localizedAdoptionHref} from '../lib/links';
+import {localizedAdoptionHref} from '@site/src/lib/published';
 import styles from './ecosystem.module.css';
 
 const registry = registryDocument as EcosystemRegistry;

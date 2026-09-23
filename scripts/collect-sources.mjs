@@ -13,7 +13,10 @@ export async function collectSources({root, outputRoot, inputs, sourceWorkspace 
   const publicationInputs = inputs ?? await loadPublicationInputs({root});
   const lock = publicationInputs.lock;
   const lockNames = lock.sources.map((source) => source.repository);
-  if (lockNames.join('\n') !== roster.repositories.join('\n')) {
+  // The published roster: sources.yaml less any repository the source set quarantines.
+  const published = roster.repositories.filter((repository) => publicationInputs.roster.repositories.includes(repository));
+  if (lockNames.join('\n') !== published.join('\n')
+    || published.join('\n') !== publicationInputs.roster.repositories.join('\n')) {
     throw new Error('sources.lock.json must contain the sorted public source roster exactly once');
   }
   const cacheRoot = path.join(root, '.cache', 'sources');
@@ -57,8 +60,30 @@ export async function collectSources({root, outputRoot, inputs, sourceWorkspace 
   if (websiteManifest.schema !== 'b10x-docs/v4' || websiteManifest.repository.id !== 'website') {
     throw new Error('the Website root manifest must be b10x-docs/v4 with repository id website');
   }
-  const registryManifests = [websiteManifest, ...manifests];
+  // A quarantined source has no surface in the registry, and buildRegistry refuses any reference to
+  // a surface it does not publish, so every reference to one is dropped here, before it is built.
+  const quarantined = new Set((publicationInputs.quarantined ?? []).map((entry) => entry.repository));
+  const registryManifests = [websiteManifest, ...manifests].map((manifest) => withoutQuarantinedReferences(manifest, quarantined));
   return {lock, manifests: registryManifests, indexes, registry: buildRegistry(registryManifests), collectionRoot};
+}
+
+/**
+ * The manifest without the fields that name a surface of a quarantined repository: each surface's
+ * `relationships[].target` and a v3 front door's `journeyPaths`. These are every cross-surface
+ * reference buildRegistry checks. Nothing quarantined returns the manifest itself.
+ */
+export function withoutQuarantinedReferences(manifest, quarantined) {
+  if (!quarantined?.size) return manifest;
+  const kept = (key) => !quarantined.has(String(key).split('/')[0]);
+  return {
+    ...manifest,
+    ...(manifest.journeyPaths ? {
+      journeyPaths: Object.fromEntries(Object.entries(manifest.journeyPaths).map(([journey, keys]) => [journey, (keys ?? []).filter(kept)])),
+    } : {}),
+    surfaces: manifest.surfaces.map((surface) => (surface.relationships
+      ? {...surface, relationships: surface.relationships.filter((relation) => kept(relation.target))}
+      : surface)),
+  };
 }
 
 if (process.argv[1] === new URL(import.meta.url).pathname) {

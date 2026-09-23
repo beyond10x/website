@@ -1,9 +1,10 @@
 import {useId, type ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import Heading from '@theme/Heading';
 import {surfaceNavigation} from '@beyond10x/docs-system/navigation';
 import type {RegistrySurface} from '@beyond10x/docs-system/types';
 import familyTaxonomyDocument from '../../data/ecosystem-families.json';
+import {isQuarantinedRepository} from '../lib/published';
 import styles from './EcosystemFamilyOrientation.module.css';
 
 interface FamilyDefinition {
@@ -36,10 +37,13 @@ export default function EcosystemFamilyOrientation({
   const cards = taxonomy.families.map((family, index) => {
     const candidates = surfaces.filter((surface) => surface.repository.id === family.startRepository);
     const start = candidates.find((surface) => declaredAdoption(surface)) ?? candidates[0];
-    if (!start) throw new Error(`recommended family start ${family.startRepository} is absent from the public registry`);
+    // A start is absent only when this build quarantines it; any other absence is a taxonomy error.
+    if (!start && !isQuarantinedRepository(family.startRepository)) {
+      throw new Error(`recommended family start ${family.startRepository} is absent from the public registry`);
+    }
     const next = familyById.get(family.next.family);
     if (!next) throw new Error(`${family.id} points to unknown next family ${family.next.family}`);
-    const action = declaredAdoption(start) ?? {label: `Read ${start.name}`, url: start.canonicalUrl};
+    const action = start ? declaredAdoption(start) ?? {label: `Read ${start.name}`, url: start.canonicalUrl} : undefined;
     const memberCount = new Set(surfaces
       .filter((surface) => surfaceNavigation(surface)?.group === family.id)
       .map((surface) => surface.repository.id)).size;
@@ -64,13 +68,23 @@ export default function EcosystemFamilyOrientation({
             <p className={styles.purpose}>{family.purpose}</p>
             <ul>
               <li>
-                <Link to={localTarget(action.url)}>
-                  <span>
-                    <strong>Recommended start · {start.name}</strong>
-                    <small>{action.label}<code>{displayPath(action.url)}</code></small>
-                  </span>
-                  <span aria-hidden="true">→</span>
-                </Link>
+                {start && action ? (
+                  <Link to={localTarget(action.url)}>
+                    <span>
+                      <strong>Recommended start · {start.name}</strong>
+                      <small>{action.label}<code>{displayPath(action.url)}</code></small>
+                    </span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                ) : (
+                  <Link to={`https://github.com/beyond10x/${family.startRepository}`}>
+                    <span>
+                      <strong>Recommended start · {family.startRepository}</strong>
+                      <small>Not published in this build; read it on GitHub</small>
+                    </span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                )}
               </li>
               <li>
                 <Link to={familyDocsPath(next.slug)}>

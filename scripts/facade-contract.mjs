@@ -1,12 +1,16 @@
 import path from 'node:path';
 import {canonicalJson, sha256} from './artifact-contract.mjs';
+import {isQuarantinedRepositoryUrl} from '../src/quarantine-routes.mjs';
 import {assertPortableRelativePath, compareUtf8} from './order-contract.mjs';
 
 export function facadeRepositories(roster) {
   return [...new Set([...roster.repositories, ...(roster.compatibilityRepositories ?? [])])].sort(compareUtf8);
 }
 
-export function synthesizeFacadeRoutes(repository, input, rootRoutes, stableRoutes = {}) {
+// `quarantined` is the root provenance's quarantinedSources: a redirect into one of them points at its
+// GitHub repository (the rule every Website link follows), and that exact URL is the only off-origin
+// target a façade accepts.
+export function synthesizeFacadeRoutes(repository, input, rootRoutes, stableRoutes = {}, {quarantined = new Set()} = {}) {
   const routes = [...input];
   const profile = stableRoutes.profileRoute
     ?? (rootRoutes.has(`/ecosystem/${repository}/`) ? `/ecosystem/${repository}/` : '/ecosystem/');
@@ -30,16 +34,17 @@ export function synthesizeFacadeRoutes(repository, input, rootRoutes, stableRout
     assertEntryPoint(routes, '/ecosystem/', profile, repository);
   }
   for (const redirect of routes.filter((candidate) => candidate.type === 'html')) {
+    if (isQuarantinedRepositoryUrl(redirect.to, quarantined)) continue;
     if (rootRoutes && !rootRoutes.has(redirect.to)) throw new Error(`${repository} façade target ${redirect.to} is absent from root provenance`);
   }
   return routes.sort((left, right) => compareUtf8(left.from, right.from));
 }
 
-export function facadeRouteManifest(redirects) {
+export function facadeRouteManifest(redirects, {quarantined = new Set()} = {}) {
   const manifest = redirects.map((redirect) => {
     assertFacadeFrom(redirect?.from);
     if (redirect.type === 'html') {
-      assertCanonicalRoute(redirect.to, `façade target for ${redirect.from}`);
+      if (!isQuarantinedRepositoryUrl(redirect.to, quarantined)) assertCanonicalRoute(redirect.to, `façade target for ${redirect.from}`);
       return {from: redirect.from, to: redirect.to, type: 'html'};
     }
     if (redirect.type !== 'alias'

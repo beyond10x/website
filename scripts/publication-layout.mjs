@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {artifactFacts, canonicalJson} from './artifact-contract.mjs';
 import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
 import {compareUtf8} from './order-contract.mjs';
-import {loadPublicationInputs, SOURCE_SET_ENVIRONMENT} from './publication-inputs.mjs';
+import {loadPublicationInputs, QUARANTINE_SOURCE_SET_SCHEMA, SOURCE_SET_ENVIRONMENT} from './publication-inputs.mjs';
 
 export const PUBLICATION_LAYOUT_SCHEMA = 'b10x-publication-layout/v2';
 export const PUBLICATION_LAYOUT_FILE = 'publication.json';
@@ -88,7 +88,7 @@ export async function writePublicationLayout({websiteRoot, siteRoot, inputsRoot,
     root: website,
     environment,
   });
-  await validateBootstrapSnapshots(website, publicationInputs.roster.repositories, {
+  await validateBootstrapSnapshots(website, publicationInputs.sourceRoster, {
     directory: publicationInputs.bootstrapRoot,
     sourceSetSha256: publicationInputs.sourceSetSha256,
     websiteRevision: publicationInputs.sourceSet.websiteRuntimeCommit,
@@ -100,7 +100,9 @@ export async function writePublicationLayout({websiteRoot, siteRoot, inputsRoot,
   if (provenanceBytes.toString('utf8') !== canonicalJson(provenance)) {
     throw new Error('built site provenance is not canonical JSON');
   }
-  if (provenance.schema !== 'b10x-website-provenance/v2'
+  const quarantining = publicationInputs.inputSchema === QUARANTINE_SOURCE_SET_SCHEMA;
+  if (provenance.schema !== (quarantining ? 'b10x-website-provenance/v3' : 'b10x-website-provenance/v2')
+    || (quarantining && canonicalJson(provenance.quarantinedSources) !== canonicalJson(publicationInputs.quarantined))
     || provenance.websiteCommit !== publicationInputs.sourceSet.websiteRuntimeCommit
     || provenance.atlasControlCommit !== publicationInputs.sourceSet.atlasControlCommit
     || provenance.sourceSetSha256 !== publicationInputs.sourceSetSha256

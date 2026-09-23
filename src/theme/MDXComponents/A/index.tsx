@@ -1,7 +1,7 @@
 import type {ReactNode} from 'react';
 import OriginalMDXA from '@theme-original/MDXComponents/A';
 import type {Props} from '@theme/MDXComponents/A';
-import {localizeWebsiteHref} from '../../../lib/links';
+import {localizeWebsiteHref} from '@site/src/lib/published';
 
 export default function MDXA({href, ...props}: Props): ReactNode {
   const localized = href ? localizeWebsiteHref(href) : href;

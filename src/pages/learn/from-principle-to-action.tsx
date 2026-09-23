@@ -1,23 +1,26 @@
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import {CodeExample, ProjectCard} from '@beyond10x/docs-system/components';
 import EcosystemFamilyOrientation from '../../components/EcosystemFamilyOrientation';
 import type {EcosystemRegistry} from '@beyond10x/docs-system/types';
 import registryDocument from '../../../.generated/data/ecosystem.json';
-import {localizedAdoptionHref} from '../../lib/links';
+import {isQuarantinedRepository, localizedAdoptionHref} from '@site/src/lib/published';
 
 import styles from '../index.module.css';
 
 const registry = registryDocument as EcosystemRegistry;
-const executionSurfaces = ['harness/docs', 'metaharness/docs'].map((key) => {
-  const surface = registry.surfaces.find((candidate) => candidate.key === key);
-  if (!surface) {
-    throw new Error(`public execution surface ${key} is absent from ecosystem.json`);
-  }
-  return surface;
-});
+// A quarantined execution surface is left out of this build; any other absence is an error.
+const executionSurfaces = ['harness/docs', 'metaharness/docs']
+  .filter((key) => !isQuarantinedRepository(key.split('/')[0]))
+  .map((key) => {
+    const surface = registry.surfaces.find((candidate) => candidate.key === key);
+    if (!surface) {
+      throw new Error(`public execution surface ${key} is absent from ecosystem.json`);
+    }
+    return surface;
+  });
 
 const readingPath = [
   {

@@ -33,3 +33,19 @@ test('navigation target resolution accepts routes and files while rejecting a mi
   assert.equal(resolveNavigationTarget('/learn/', '/', context).exists, false);
   assert.equal(resolveNavigationTarget('https://github.com/beyond10x', '/', context).external, true);
 });
+
+test('a redirect that leaves the origin is external navigation, not a missing internal target', () => {
+  const origin = 'https://beyond10x.github.io';
+  const redirects = {redirects: [{from: '/harness/', to: 'https://github.com/beyond10x/harness', type: 'html'}]};
+  const resolved = resolveNavigationTarget('/harness/', '/', {origin, files: new Set(), routes: new Set(['/']), redirects});
+  assert.deepEqual(resolved, {external: true, exists: true, pathname: 'https://github.com/beyond10x/harness'});
+  const missing = resolveNavigationTarget('/gone/', '/', {origin, files: new Set(), routes: new Set(['/']), redirects});
+  assert.equal(missing.exists, false, 'an unredirected missing route is still missing');
+});
+
+test('rendered navigation is checked against the effective map when a source is quarantined', async () => {
+  const {readFile} = await import('node:fs/promises');
+  const source = await readFile(new URL('../scripts/verify-navigation.mjs', import.meta.url), 'utf8');
+  assert.match(source, /effectiveRedirectMap\(/, 'verify-navigation projects the declared map through the quarantine');
+  assert.match(source, /quarantined/);
+});

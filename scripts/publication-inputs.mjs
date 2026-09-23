@@ -9,6 +9,11 @@ import {assertPortableRelativePath, compareUtf8} from './order-contract.mjs';
 import {validateSourceLockDocument} from './source-lock-contract.mjs';
 
 export const SOURCE_SET_SCHEMA = 'b10x-docs-source-set/v1';
+// v2 adds a top-level `quarantined` list: each roster repository whose bundle failed validation,
+// with the failing check and its message. `sources` plus `quarantined` are the exact roster, and a
+// quarantined repository has no bundle directory. v1 stays accepted unchanged.
+export const QUARANTINE_SOURCE_SET_SCHEMA = 'b10x-docs-source-set/v2';
+export const SOURCE_SET_SCHEMAS = Object.freeze([SOURCE_SET_SCHEMA, QUARANTINE_SOURCE_SET_SCHEMA]);
 export const SOURCE_SET_ENVIRONMENT = 'B10X_DOCS_SOURCE_SET';
 
 const hex40 = /^(?!0{40}$)[0-9a-f]{40}$/;
@@ -41,6 +46,8 @@ export async function loadPublicationInputs({
       inputSchema: 'b10x-sources/v1',
       inputSha256: sha256(sourceLockBytes),
       bootstrapRoot: path.join(root, 'data', 'bootstrap'),
+      sourceRoster: validated.roster.repositories,
+      quarantined: [],
       sourceSet: undefined,
       sourceSetBytes: undefined,
       sourceSetSha256: undefined,
@@ -65,13 +72,14 @@ export async function loadPublicationInputs({
     throw new Error(`${SOURCE_SET_ENVIRONMENT} must name source-set.json`);
   }
   const inputsRoot = await realpath(path.dirname(sourceSetPath));
-  await validateInputDirectories(inputsRoot, roster.repositories);
   const sourceSetBytes = await readFile(sourceSetPath);
   const sourceSet = JSON.parse(sourceSetBytes);
   if (sourceSetBytes.toString('utf8') !== canonicalSourceSetJson(sourceSet)) {
     throw new Error('source-set.json must be canonical JSON');
   }
   validateSourceSetDocument(sourceSet, roster);
+  const published = sourceSet.sources.map((entry) => entry.repository);
+  await validateInputDirectories(inputsRoot, published);
 
   const bundles = new Map();
   const lockSources = [];
@@ -101,15 +109,19 @@ export async function loadPublicationInputs({
     });
   }
   const lock = {schema: 'b10x-sources/v1', sources: lockSources};
-  const validated = validateSourceLockDocument(roster, lock);
+  // Everything downstream builds from `roster`, so it is the published projection of sources.yaml;
+  // `sourceRoster` keeps the whole roster for data Atlas captured about every source (bootstrap).
+  const validated = validateSourceLockDocument({...roster, repositories: published}, lock);
   const sourceLockBytes = Buffer.from(canonicalJson(lock));
   return {
     mode: 'source-set',
     roster: validated.roster,
+    sourceRoster: roster.repositories,
+    quarantined: sourceSet.quarantined ?? [],
     lock: validated.lock,
     bootstrap: false,
     sourceLockBytes,
-    inputSchema: SOURCE_SET_SCHEMA,
+    inputSchema: sourceSet.schema,
     inputSha256: sha256(sourceSetBytes),
     bootstrapRoot: path.join(inputsRoot, 'bootstrap'),
     sourceSet,
@@ -136,7 +148,7 @@ async function validateInputDirectories(inputsRoot, repositories) {
   const sourceEntries = await readdir(path.join(inputsRoot, 'sources'), {withFileTypes: true});
   const sourceNames = sourceEntries.map((entry) => entry.name).sort(compareUtf8);
   if (sourceNames.join('\n') !== repositories.join('\n')) {
-    throw new Error('publication source bundles must contain the exact source roster');
+    throw new Error('publication source bundles must contain the exact published source roster');
   }
   for (const entry of sourceEntries) {
     if (!entry.isDirectory() || entry.isSymbolicLink()) {
@@ -157,19 +169,38 @@ async function validateInputDirectories(inputsRoot, repositories) {
 }
 
 export function validateSourceSetDocument(document, roster) {
-  assertExactKeys(document, ['schema', 'atlasControlCommit', 'websiteRuntimeCommit', 'sources'], 'source set');
-  if (document.schema !== SOURCE_SET_SCHEMA
+  const quarantining = document?.schema === QUARANTINE_SOURCE_SET_SCHEMA;
+  const schema = quarantining ? QUARANTINE_SOURCE_SET_SCHEMA : SOURCE_SET_SCHEMA;
+  assertExactKeys(document, [
+    'schema', 'atlasControlCommit', 'websiteRuntimeCommit', 'sources', ...(quarantining ? ['quarantined'] : []),
+  ], 'source set');
+  if (document.schema !== schema
     || !hex40.test(document.websiteRuntimeCommit ?? '')
     || !hex40.test(document.atlasControlCommit ?? '')
-    || !Array.isArray(document.sources)) {
-    throw new Error(`source-set.json is not ${SOURCE_SET_SCHEMA}`);
+    || !Array.isArray(document.sources)
+    || (quarantining && !Array.isArray(document.quarantined))) {
+    throw new Error(`source-set.json is not ${schema}`);
   }
   const expected = roster?.repositories;
   const actual = document.sources.map((entry) => entry?.repository);
+  const quarantined = (document.quarantined ?? []).map((entry) => entry?.repository);
+  const quarantinedSet = new Set(quarantined);
+  // Each list is the roster's own sorted order restricted to its members, so together they are the
+  // roster exactly once: a repository in both, in neither, off the roster, or out of order fails.
   if (!Array.isArray(expected)
-    || actual.length !== expected.length
-    || actual.join('\n') !== expected.join('\n')) {
+    || quarantinedSet.size !== quarantined.length
+    || actual.join('\n') !== expected.filter((repository) => !quarantinedSet.has(repository)).join('\n')
+    || quarantined.join('\n') !== expected.filter((repository) => quarantinedSet.has(repository)).join('\n')) {
     throw new Error(`source set must contain the exact sorted ${expected?.length ?? 0}-repository roster`);
+  }
+  if (actual.length === 0) throw new Error('source set must publish at least one source');
+  for (const entry of document.quarantined ?? []) {
+    assertExactKeys(entry, ['repository', 'check', 'message'], `source-set quarantine entry ${entry?.repository ?? '<unknown>'}`);
+    if (!repositoryPattern.test(entry.repository ?? '')
+      || !quarantineText(entry.check, {singleLine: true, limit: 200})
+      || !quarantineText(entry.message, {singleLine: false, limit: 4096})) {
+      throw new Error(`source set contains an invalid quarantine entry for ${entry.repository ?? '<unknown>'}`);
+    }
   }
   for (const entry of document.sources) {
     assertExactKeys(entry, [
@@ -419,6 +450,11 @@ async function walkRegularFiles(root, directory, label) {
   return files;
 }
 
+function quarantineText(value, {singleLine, limit}) {
+  if (typeof value !== 'string' || value.trim() === '' || value.length > limit) return false;
+  return !(singleLine ? /[\u0000-\u001f\u007f]/ : /[\u0000-\u0008\u000b-\u001f\u007f]/).test(value);
+}
+
 function assertExactKeys(value, expected, label) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error(`${label} must be an object`);
   const actual = Object.keys(value).sort(compareUtf8);
@@ -443,6 +479,13 @@ function canonicalSourceSetJson(document) {
       artifactDigest: entry.artifactDigest,
       bundleSha256: entry.bundleSha256,
     })) : document.sources,
+    ...(Object.hasOwn(document, 'quarantined') ? {
+      quarantined: Array.isArray(document.quarantined) ? document.quarantined.map((entry) => ({
+        repository: entry.repository,
+        check: entry.check,
+        message: entry.message,
+      })) : document.quarantined,
+    } : {}),
   })}\n`;
 }
 

@@ -47,7 +47,7 @@ export async function buildRedirectFacade(options) {
     const expectedEffectiveMap = effectiveRedirectMap(globalMap, {
       routes: initialRoot.document.routes,
       files: initialRoot.document.files,
-    });
+    }, {quarantined: new Set((initialRoot.document.quarantinedSources ?? []).map((entry) => entry.repository))});
     if (!effectiveBytes.equals(Buffer.from(canonicalJson(expectedEffectiveMap)))) {
       throw new Error('root effective redirect map is not the deterministic projection of the Website redirect contract');
     }
@@ -63,6 +63,7 @@ export async function buildRedirectFacade(options) {
   }
 
   const rootRoutes = initialRoot ? new Set(initialRoot.document.routes) : undefined;
+  const quarantined = new Set((initialRoot?.document.quarantinedSources ?? []).map((entry) => entry.repository));
   const redirects = synthesizeFacadeRoutes(
     repository,
     declared,
@@ -70,8 +71,9 @@ export async function buildRedirectFacade(options) {
     mode === 'v2'
       ? {canonicalRoute: options.canonicalRoute, profileRoute: options.profileRoute}
       : undefined,
+    {quarantined},
   );
-  const routeManifest = facadeRouteManifest(redirects);
+  const routeManifest = facadeRouteManifest(redirects, {quarantined});
   const aliasRoot = path.join(runtimeRoot, '.cache', 'redirect-aliases', repository);
   await Promise.all([rm(output, {recursive: true, force: true}), rm(aliasRoot, {recursive: true, force: true})]);
   await Promise.all([mkdir(output, {recursive: true}), mkdir(aliasRoot, {recursive: true})]);
@@ -188,7 +190,7 @@ async function fetchRootProvenance(origin, websiteSha) {
   if (!response.ok) throw new Error(`root provenance returned ${response.status}`);
   const bytes = Buffer.from(await response.arrayBuffer());
   const document = JSON.parse(bytes);
-  if (!['b10x-website-provenance/v1', 'b10x-website-provenance/v2'].includes(document.schema)) {
+  if (!['b10x-website-provenance/v1', 'b10x-website-provenance/v2', 'b10x-website-provenance/v3'].includes(document.schema)) {
     throw new Error('root provenance has an unexpected schema');
   }
   if (document.websiteCommit !== websiteSha) {

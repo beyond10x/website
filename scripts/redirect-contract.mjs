@@ -1,13 +1,21 @@
+import {quarantinedRouteTarget} from '../src/quarantine-routes.mjs';
 import {assertPortableRelativePath} from './order-contract.mjs';
 
-export function effectiveRedirectMap(declared, {routes, files}) {
+// An alias serves a copy of one artifact file. When that file belongs to a quarantined source it is
+// not in the build, and a machine-readable URL has no truthful HTML fallback, so the alias is dropped;
+// every other absent alias source still fails.
+export function effectiveRedirectMap(declared, {routes, files}, {quarantined = new Set()} = {}) {
   if (declared?.schema !== 'b10x-redirects/v1' || declared.origin !== 'https://beyond10x.github.io' || !Array.isArray(declared.redirects)) {
     throw new Error('legacy redirect contract is invalid');
   }
   const routeSet = new Set(routes);
   const fileSet = new Set(files.map((file) => typeof file === 'string' ? file : file.path));
   const seen = new Set();
-  const redirects = declared.redirects.map((redirect) => {
+  const redirects = declared.redirects.filter((redirect) => !(
+    redirect.type === 'alias'
+    && typeof redirect.source === 'string'
+    && quarantinedRouteTarget(`/${redirect.source}`, quarantined)
+  )).map((redirect) => {
     assertWebPath(redirect.from, 'legacy redirect source');
     if (seen.has(redirect.from)) throw new Error(`duplicate legacy redirect ${redirect.from}`);
     seen.add(redirect.from);
@@ -18,7 +26,8 @@ export function effectiveRedirectMap(declared, {routes, files}) {
     }
     if (redirect.type !== 'html') throw new Error(`legacy redirect ${redirect.from} has unsupported type ${String(redirect.type)}`);
     assertWebPath(redirect.to, `legacy redirect target ${redirect.from}`);
-    return {...redirect, to: nearestRoute(redirect.to, redirect.from, routeSet)};
+    // A target a quarantined source owns points at its GitHub repository, the rule every link follows.
+    return {...redirect, to: quarantinedRouteTarget(redirect.to, quarantined) ?? nearestRoute(redirect.to, redirect.from, routeSet)};
   });
   return {...declared, redirects};
 }

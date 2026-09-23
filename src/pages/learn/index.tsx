@@ -1,5 +1,6 @@
+import {publishedHref} from '@site/src/lib/published';
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import {CardGrid, ContentCard, PageHeader, SectionHeader} from '@beyond10x/docs-system/components';
 import styles from '../ecosystem.module.css';
@@ -21,7 +22,7 @@ const destinations = [
     eyebrow: 'Source-owned research',
     title: 'Read the Agentic Principles corpus',
     description: 'Inspect the observations, research notes, and principles that ground the operating model.',
-    url: '/docs/agentic-principles/',
+    url: publishedHref('/docs/agentic-principles/'),
   },
   {
     eyebrow: 'Keep learning',

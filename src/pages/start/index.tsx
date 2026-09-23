@@ -1,5 +1,5 @@
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import {ContentCard, CardGrid, PageHeader, SectionHeader} from '@beyond10x/docs-system/components';
 import {allExperiences} from '../../components/ExperienceView';

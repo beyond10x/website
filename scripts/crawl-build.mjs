@@ -2,6 +2,8 @@ import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {canonicalJson} from './artifact-contract.mjs';
 import {crawlArtifact} from './artifact-crawler.mjs';
+import {loadPublicationInputs} from './publication-inputs.mjs';
+import {bootstrapEnabled} from './source-lock-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const build = path.join(root, 'build');
@@ -18,7 +20,13 @@ for (const manifest of manifests) {
   }
 }
 
-const publicRepositories = [...new Set(registry.surfaces.map((surface) => surface.repository.id))];
+// A quarantined source is public and on the roster; links to it are rewritten to its GitHub
+// repository, which is therefore a catalogued destination.
+const {quarantined} = await loadPublicationInputs({root, allowBootstrap: bootstrapEnabled()});
+const publicRepositories = [...new Set([
+  ...registry.surfaces.map((surface) => surface.repository.id),
+  ...quarantined.map((entry) => entry.repository),
+])];
 const {report} = await crawlArtifact({build, origin, redirects, declaredReferences, publicRepositories});
 await mkdir(path.join(build, '._b10x'), {recursive: true});
 await writeFile(path.join(build, '._b10x', 'quality.json'), canonicalJson(report));

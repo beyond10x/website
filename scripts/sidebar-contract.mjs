@@ -10,7 +10,13 @@ export const documentationFamilies = familyTaxonomy.families.map((family) => ({
   docId: `families/${family.slug.replace(/^\/+|\/+$/g, '')}`,
 }));
 
-export function assertDocumentationFamilyDistribution(sourceManifests) {
+// Counted over the published manifests only. A quarantined source's manifest is not an input, so its
+// family cannot be read; each quarantined source can have emptied at most one family, and that bound
+// is what is enforced. An emptied family has no sidebar category (`renderSidebars` groups only the
+// published registry); its authored landing page is still generated. Each family's authored start
+// repository must be a published member of that family unless it is quarantined, which is the
+// condition the family components otherwise fail on at render time.
+export function assertDocumentationFamilyDistribution(sourceManifests, {quarantined = []} = {}) {
   const navigation = navigationByRepository(sourceManifests);
   const counts = Object.fromEntries(documentationFamilyOrder.map((family) => [family, 0]));
   for (const [repository, declared] of navigation) {
@@ -20,8 +26,18 @@ export function assertDocumentationFamilyDistribution(sourceManifests) {
     }
     counts[declared.group] += 1;
   }
-  for (const family of documentationFamilies) {
-    if (counts[family.id] === 0) throw new Error(`${family.id} documentation family has no public repositories`);
+  const empty = documentationFamilies.filter((family) => counts[family.id] === 0);
+  if (quarantined.length === 0 && empty.length > 0) {
+    throw new Error(`${empty[0].id} documentation family has no public repositories`);
+  }
+  if (empty.length > quarantined.length) {
+    throw new Error(`${empty.length} documentation families have no public repositories, more than the ${quarantined.length} quarantined source${quarantined.length === 1 ? '' : 's'} could have emptied`);
+  }
+  for (const family of familyTaxonomy.families) {
+    if (quarantined.includes(family.startRepository)) continue;
+    if (navigation.get(family.startRepository)?.group !== family.id) {
+      throw new Error(`${family.id} start ${family.startRepository} is not a published member of ${family.id}`);
+    }
   }
   return counts;
 }

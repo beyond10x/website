@@ -1,5 +1,5 @@
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import experiencePagesDocument from '../../data/experience-pages.json';
 import styles from './DocContext.module.css';
 

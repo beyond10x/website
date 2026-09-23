@@ -32,6 +32,14 @@ export async function crawlArtifact({build, origin, redirects, declaredReference
     }
   }
 
+  const checkExternal = (resolved, context) => {
+    externalReferences += 1;
+    const github = /^\/beyond10x\/([^/]+)(?:\/|$)/.exec(resolved.pathname);
+    if (resolved.hostname === 'github.com' && github && !knownRepositories.has(github[1])) {
+      diagnostics.push(diagnostic('private-or-uncatalogued-repository', context, resolved.href));
+    }
+  };
+
   const checkReference = (raw, baseUrl, context) => {
     const value = decodeEntities(String(raw).trim());
     if (!value || ignoredSchemes.test(value)) return;
@@ -44,15 +52,16 @@ export async function crawlArtifact({build, origin, redirects, declaredReference
       return;
     }
     if (resolved.origin !== origin) {
-      externalReferences += 1;
-      const github = /^\/beyond10x\/([^/]+)(?:\/|$)/.exec(resolved.pathname);
-      if (resolved.hostname === 'github.com' && github && !knownRepositories.has(github[1])) {
-        diagnostics.push(diagnostic('private-or-uncatalogued-repository', context, resolved.href));
-      }
+      checkExternal(resolved, context);
       return;
     }
-    const target = resolveInternalTarget(resolved.pathname, {fileSet, routeSet, redirectByPath, diagnostics, context});
+    const target = resolveInternalTarget(resolved.pathname, {origin, fileSet, routeSet, redirectByPath, diagnostics, context});
     if (!target) return;
+    // A redirect that leaves the origin (a quarantined source's GitHub repository) is external.
+    if (target.external) {
+      checkExternal(target.external, context);
+      return;
+    }
     if (resolved.hash) {
       const fragment = decodeFragment(resolved.hash.slice(1));
       if (!fragment) return;
@@ -163,7 +172,7 @@ export function srcsetReferences(source) {
   return source.split(',').map((candidate) => candidate.trim().split(/\s+/, 1)[0]).filter(Boolean);
 }
 
-function resolveInternalTarget(pathname, {fileSet, routeSet, redirectByPath, diagnostics, context}) {
+function resolveInternalTarget(pathname, {origin = 'https://beyond10x.github.io', fileSet, routeSet, redirectByPath, diagnostics, context}) {
   let current = normalizePublicPath(pathname);
   const visited = new Set();
   while (redirectByPath.has(current)) {
@@ -176,11 +185,12 @@ function resolveInternalTarget(pathname, {fileSet, routeSet, redirectByPath, dia
     if (redirect.type === 'alias') return {file: redirect.source};
     let next;
     try {
-      next = new URL(redirect.to, 'https://beyond10x.github.io/');
+      next = new URL(redirect.to, `${origin}/`);
     } catch {
       diagnostics.push(diagnostic('invalid-redirect-target', context, redirect.to));
       return undefined;
     }
+    if (next.origin !== origin) return {external: next};
     current = normalizePublicPath(next.pathname);
   }
 

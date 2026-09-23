@@ -5,6 +5,7 @@ import test from 'node:test';
 import {artifactFacts, canonicalJson, sha256} from '../scripts/artifact-contract.mjs';
 import {resolvePublicationLayout, writePublicationLayout} from '../scripts/publication-layout.mjs';
 import {publicationFixture} from './helpers/publication-fixture.mjs';
+import {quarantineFixture} from './helpers/quarantine-fixture.mjs';
 
 test('publication resolver preserves the legacy flat rollback layout', async (context) => {
   const fixture = await publicationFixture(context);
@@ -61,4 +62,37 @@ test('publication resolver rejects symbolic layout markers', async (context) => 
   }));
   await symlink('marker-target.json', path.join(publication, 'publication.json'));
   await assert.rejects(resolvePublicationLayout(publication), /layout marker must not be a symbolic link/);
+});
+
+test('publication writer accepts a quarantining source set only with provenance that names the quarantine', async (context) => {
+  const quarantined = [{repository: 'eventlog', check: 'bundle-schema', message: 'bundle.json violates the exported Docs System bundle schema'}];
+  const fixture = await quarantineFixture(context, {quarantined});
+  const siteRoot = path.join(fixture.temporary, 'built-site');
+  await mkdir(siteRoot);
+  await writeFile(path.join(siteRoot, 'index.html'), '<!doctype html>\n');
+  const facts = await artifactFacts(siteRoot);
+  const provenance = {
+    schema: 'b10x-website-provenance/v3',
+    websiteCommit: fixture.sourceSet.websiteRuntimeCommit,
+    atlasControlCommit: fixture.sourceSet.atlasControlCommit,
+    sourceSetSha256: sha256(fixture.sourceSetBytes),
+    artifactSha256: facts.artifactSha256,
+    routesSha256: facts.routesSha256,
+    routes: facts.routes,
+    files: facts.files,
+    quarantinedSources: quarantined,
+  };
+  const write = async (document, name) => {
+    await writeFile(path.join(siteRoot, 'PROVENANCE.json'), canonicalJson(document));
+    return writePublicationLayout({
+      websiteRoot: fixture.websiteRoot,
+      siteRoot,
+      inputsRoot: fixture.inputsRoot,
+      outputRoot: path.join(fixture.temporary, name),
+    });
+  };
+  await assert.rejects(write({...provenance, schema: 'b10x-website-provenance/v2'}, 'v2'), /does not match the exact source-set publication inputs/);
+  await assert.rejects(write({...provenance, quarantinedSources: []}, 'unnamed'), /does not match the exact source-set publication inputs/);
+  const layout = await write(provenance, 'v3');
+  assert.equal(layout.schema, 'b10x-publication-layout/v2');
 });

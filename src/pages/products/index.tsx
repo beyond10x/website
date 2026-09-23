@@ -1,5 +1,6 @@
+import {publishedHref} from '@site/src/lib/published';
 import type {ReactNode} from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
 import {CardGrid, ContentCard, PageHeader, SectionHeader} from '@beyond10x/docs-system/components';
 import styles from '../ecosystem.module.css';
@@ -21,7 +22,7 @@ const destinations = [
     eyebrow: 'Current product',
     title: 'Inspect the Devcenter profile',
     description: 'Separate Devcenter’s proposition and public evaluation material from artifacts that remain access-gated.',
-    url: '/ecosystem/devcenter/',
+    url: publishedHref('/ecosystem/devcenter/'),
   },
   {
     eyebrow: 'Reference',

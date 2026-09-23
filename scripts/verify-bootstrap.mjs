@@ -5,7 +5,7 @@ import {loadPublicationInputs} from './publication-inputs.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const inputs = await loadPublicationInputs({root, allowBootstrap: bootstrapEnabled()});
-await validateBootstrapSnapshots(root, inputs.roster.repositories, {
+await validateBootstrapSnapshots(root, inputs.sourceRoster, {
   directory: inputs.bootstrapRoot,
   sourceLockBytes: inputs.sourceLockBytes,
   sourceSetSha256: inputs.sourceSetSha256,

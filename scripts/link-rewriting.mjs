@@ -7,7 +7,10 @@
 //! Extracted from `prepare-site.mjs` so the translation can be tested without running a build.
 //! `prepare-site.mjs` executes on import and takes a generation lease, so nothing could import it.
 import path from 'node:path';
+import {quarantinedRouteTarget} from '../src/quarantine-routes.mjs';
 import {sourceKey} from './source-routing.mjs';
+
+export {quarantinedRouteTarget};
 
 export function rewriteLinks(body, context) {
   const markdown = body.replace(/(!?\[[^\]]*\])\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (match, label, destination) => {
@@ -37,6 +40,22 @@ export function rewriteLinks(body, context) {
 }
 
 export function resolveLink(destination, context, {image}) {
+  const resolved = resolvePublishedLink(destination, context, {image});
+  if (!context.quarantined?.size) return resolved;
+  return quarantinedRouteTarget(resolved, context.quarantined) ?? resolved;
+}
+
+/** A copy of a Website projection (registry, manifests, ledger) with every quarantined route redirected. */
+export function redirectQuarantinedUrls(value, quarantined) {
+  if (typeof value === 'string') return quarantinedRouteTarget(value, quarantined) ?? value;
+  if (Array.isArray(value)) return value.map((item) => redirectQuarantinedUrls(item, quarantined));
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, redirectQuarantinedUrls(item, quarantined)]));
+  }
+  return value;
+}
+
+function resolvePublishedLink(destination, context, {image}) {
   if (/^(?:https?:|mailto:|tel:|data:|#)/i.test(destination)) return destination;
   const suffixIndex = destination.search(/[?#]/);
   const target = suffixIndex === -1 ? destination : destination.slice(0, suffixIndex);

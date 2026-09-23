@@ -2,6 +2,9 @@ import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {preferredExperienceFilters, prioritizeSearchResults, resultSummary} from '../src/search-result-contract.mjs';
+import {quarantinedRouteTarget} from './link-rewriting.mjs';
+import {loadPublicationInputs} from './publication-inputs.mjs';
+import {bootstrapEnabled} from './source-lock-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const pagefindRoot = path.join(root, 'build', 'pagefind');
@@ -10,6 +13,11 @@ const golden = JSON.parse(await readFile(path.join(root, 'data', 'search-golden.
 const entry = JSON.parse(await readFile(path.join(pagefindRoot, 'pagefind-entry.json'), 'utf8'));
 const documentIndex = JSON.parse(await readFile(path.join(root, 'build', 'document-index.json'), 'utf8'));
 const audienceVocabulary = new Set(['adopter', 'developer', 'evaluator', 'operator', 'researcher']);
+// A quarantined source is absent from the corpus: a golden query that expects one of its pages is
+// not run, and nothing of it may be indexed.
+const {quarantined} = await loadPublicationInputs({root, allowBootstrap: bootstrapEnabled()});
+const quarantinedRepositories = new Set(quarantined.map((entry) => entry.repository));
+const goldenQueries = golden.queries.filter((entry) => !quarantinedRouteTarget(entry.expectedFirst, quarantinedRepositories));
 
 if (golden.schema !== 'b10x-search-golden/v1' || !Array.isArray(golden.queries) || golden.queries.length === 0) {
   throw new Error('search golden contract must use b10x-search-golden/v1 and contain queries');
@@ -53,8 +61,13 @@ try {
   if (filters.project.bench || documentIndex.documents.some((document) => document.project === 'bench' || document.route.startsWith('/docs/bench/'))) {
     throw new Error('private Bench material must not enter the public document index or Pagefind project filters');
   }
+  for (const repository of quarantinedRepositories) {
+    if (filters.project[repository] || documentIndex.documents.some((document) => document.project === repository || quarantinedRouteTarget(document.route, quarantinedRepositories))) {
+      throw new Error(`quarantined source ${repository} must not enter the document index or Pagefind project filters`);
+    }
+  }
 
-  for (const goldenQuery of golden.queries) {
+  for (const goldenQuery of goldenQueries) {
     const response = await pagefind.search(goldenQuery.query);
     const candidates = await Promise.all(response.results.slice(0, 5).map((result) => result.data()));
     if (candidates[0]?.url !== goldenQuery.expectedFirst) {
@@ -88,11 +101,13 @@ try {
     }
   }
 
-  const entityResponse = await pagefind.search('shared capability layer', {filters: {project: 'agentplugins'}});
-  const entityCandidate = entityResponse.results[0] ? await entityResponse.results[0].data() : undefined;
-  const entitySummary = resultSummary(entityCandidate);
-  if (!entitySummary.includes('skills/<name>/SKILL.md') || entitySummary.includes('&lt;name')) {
-    throw new Error(`typed search summaries must decode code placeholders as plain text: ${entitySummary || 'no result'}`);
+  if (!quarantinedRepositories.has('agentplugins')) {
+    const entityResponse = await pagefind.search('shared capability layer', {filters: {project: 'agentplugins'}});
+    const entityCandidate = entityResponse.results[0] ? await entityResponse.results[0].data() : undefined;
+    const entitySummary = resultSummary(entityCandidate);
+    if (!entitySummary.includes('skills/<name>/SKILL.md') || entitySummary.includes('&lt;name')) {
+      throw new Error(`typed search summaries must decode code placeholders as plain text: ${entitySummary || 'no result'}`);
+    }
   }
 
   const operatorFilters = {audience: 'operator'};
@@ -121,4 +136,4 @@ try {
   globalThis.fetch = nativeFetch;
 }
 
-process.stdout.write(`verified ${golden.queries.length} golden searches and typed-query summaries across ${indexedPages} indexed pages\n`);
+process.stdout.write(`verified ${goldenQueries.length} golden searches${goldenQueries.length === golden.queries.length ? '' : ` (${golden.queries.length - goldenQueries.length} into quarantined sources not run)`} and typed-query summaries across ${indexedPages} indexed pages\n`);

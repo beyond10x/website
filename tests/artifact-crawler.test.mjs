@@ -52,3 +52,22 @@ test('crawler tokenizers preserve the supported URL-bearing forms', () => {
   assert.deepEqual(cssReferences('@import "theme.css"; a{background:url(\'image.png\')}'), ['image.png', 'theme.css']);
   assert.deepEqual(srcsetReferences('small.png 1x, large.png 2x'), ['small.png', 'large.png']);
 });
+
+test('a redirect off the origin is an external reference, still refused for an uncatalogued repository', async (context) => {
+  const build = await mkdtemp(path.join(os.tmpdir(), 'b10x-crawl-external-redirect-'));
+  context.after(() => rm(build, {recursive: true, force: true}));
+  await writeFile(path.join(build, 'index.html'), '<!doctype html><html><body><a href="/harness/">Harness</a><a href="/bench/">Bench</a></body></html>');
+  const redirects = {
+    schema: 'b10x-redirects/v1',
+    origin: 'https://beyond10x.github.io',
+    redirects: [
+      {from: '/harness/', to: 'https://github.com/beyond10x/harness', type: 'html'},
+      {from: '/bench/', to: 'https://github.com/beyond10x/bench', type: 'html'},
+    ],
+  };
+  const {report} = await crawlArtifact({build, origin: 'https://beyond10x.github.io', redirects, publicRepositories: ['harness']});
+  assert.deepEqual(report.diagnostics.map((entry) => [entry.code, entry.target]), [
+    ['private-or-uncatalogued-repository', 'https://github.com/beyond10x/bench'],
+    ['private-or-uncatalogued-repository', 'https://github.com/beyond10x/bench'],
+  ]);
+});

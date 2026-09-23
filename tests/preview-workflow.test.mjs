@@ -210,3 +210,23 @@ test('package scripts expose the bounded preview workflow and production origin 
   assert.match(generation, /\['scripts\/code-contract\.mjs', 'source'\]/);
   assert.match(generation, /\['scripts\/code-contract\.mjs', 'build'\]/);
 });
+
+test('fast preview accepts prepared inputs from a quarantining v2 source set', async (context) => {
+  const siteRoot = await mkdtemp(path.join(os.tmpdir(), 'b10x-website-generated-source-set-v2-'));
+  context.after(() => rm(siteRoot, {recursive: true, force: true}));
+  const sourceSetPath = path.join(siteRoot, 'inputs', 'source-set.json');
+  const sourceSet = '{"schema":"b10x-docs-source-set/v2"}\n';
+  await mkdir(path.dirname(sourceSetPath), {recursive: true});
+  await writeFile(sourceSetPath, sourceSet);
+  for (const relative of ['.generated/data/ecosystem.json', '.generated/data/experiences.json', '.generated/docs/index.mdx', '.generated/sidebars.cjs']) {
+    const target = path.join(siteRoot, relative);
+    await mkdir(path.dirname(target), {recursive: true});
+    await writeFile(target, 'prepared\n');
+  }
+  await writeFile(path.join(siteRoot, '.generated', '.complete.json'), `${JSON.stringify({
+    schema: 'b10x-website-generated-completion/v2',
+    inputSchema: 'b10x-docs-source-set/v2',
+    inputSha256: createHash('sha256').update(sourceSet).digest('hex'),
+  })}\n`);
+  assert.equal(generatedInputIssue(siteRoot, {B10X_DOCS_SOURCE_SET: sourceSetPath}), undefined);
+});
