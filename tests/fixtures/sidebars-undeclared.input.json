@@ -1,0 +1,791 @@
+{
+  "registry": {
+    "schema": "b10x-docs-registry/v2",
+    "surfaces": [
+      {
+        "id": "site",
+        "name": "beyond10x",
+        "kind": "front-door",
+        "repository": {
+          "id": "website"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Agentic Principles",
+        "kind": "documentation",
+        "repository": {
+          "id": "agentic-principles"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Aep",
+        "kind": "documentation",
+        "repository": {
+          "id": "aep"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Ess",
+        "kind": "documentation",
+        "repository": {
+          "id": "ess"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Research",
+        "kind": "documentation",
+        "repository": {
+          "id": "research"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Agentide",
+        "kind": "documentation",
+        "repository": {
+          "id": "agentide"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Agentplugins",
+        "kind": "documentation",
+        "repository": {
+          "id": "agentplugins"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Docs System",
+        "kind": "documentation",
+        "repository": {
+          "id": "docs-system"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Entity Runtime",
+        "kind": "documentation",
+        "repository": {
+          "id": "entity-runtime"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Extensions",
+        "kind": "documentation",
+        "repository": {
+          "id": "extensions"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Gates",
+        "kind": "documentation",
+        "repository": {
+          "id": "gates"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Harness",
+        "kind": "documentation",
+        "repository": {
+          "id": "harness"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Mcp",
+        "kind": "documentation",
+        "repository": {
+          "id": "mcp"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Metaharness",
+        "kind": "documentation",
+        "repository": {
+          "id": "metaharness"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Substrate",
+        "kind": "documentation",
+        "repository": {
+          "id": "substrate"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Worktree",
+        "kind": "documentation",
+        "repository": {
+          "id": "worktree"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Aep Service",
+        "kind": "documentation",
+        "repository": {
+          "id": "aep-service"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Agent Platform",
+        "kind": "documentation",
+        "repository": {
+          "id": "agent-platform"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Connectors",
+        "kind": "documentation",
+        "repository": {
+          "id": "connectors"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Eventlog",
+        "kind": "documentation",
+        "repository": {
+          "id": "eventlog"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Identity",
+        "kind": "documentation",
+        "repository": {
+          "id": "identity"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Mandate",
+        "kind": "documentation",
+        "repository": {
+          "id": "mandate"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Secrets",
+        "kind": "documentation",
+        "repository": {
+          "id": "secrets"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Service Sdk",
+        "kind": "documentation",
+        "repository": {
+          "id": "service-sdk"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Workflow",
+        "kind": "documentation",
+        "repository": {
+          "id": "workflow"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Workspace",
+        "kind": "documentation",
+        "repository": {
+          "id": "workspace"
+        }
+      },
+      {
+        "id": "docs",
+        "name": "Devcenter",
+        "kind": "documentation",
+        "repository": {
+          "id": "devcenter"
+        }
+      }
+    ]
+  },
+  "manifests": [
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "website"
+      },
+      "surfaces": [
+        {
+          "id": "site",
+          "routeBase": "/docs/website/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Start",
+              "order": 0,
+              "sidebar": "flat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "agentic-principles"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/agentic-principles/",
+          "source": {
+            "root": "website",
+            "navigation": {
+              "label": "Agentic Principles",
+              "group": "Foundation",
+              "order": 0,
+              "sidebar": "flat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "aep"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/aep/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Aep",
+              "group": "Foundation",
+              "order": 10,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "ess"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/ess/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Ess",
+              "group": "Foundation",
+              "order": 20,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "research"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/research/",
+          "source": {
+            "root": "website",
+            "navigation": {
+              "label": "Research",
+              "group": "Foundation",
+              "order": 30,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "agentide"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/agentide/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Agentide",
+              "group": "Build",
+              "order": 0,
+              "sidebar": "flat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "agentplugins"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/agentplugins/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Agentplugins",
+              "group": "Build",
+              "order": 10,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "docs-system"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/docs-system/",
+          "source": {
+            "root": "website",
+            "navigation": {
+              "label": "Docs System",
+              "group": "Build",
+              "order": 20,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "entity-runtime"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/entity-runtime/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Entity Runtime",
+              "group": "Build",
+              "order": 30,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "extensions"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/extensions/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Extensions",
+              "group": "Build",
+              "order": 40,
+              "sidebar": "flat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "gates"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/gates/",
+          "source": {
+            "root": "website",
+            "navigation": {
+              "label": "Gates",
+              "group": "Build",
+              "order": 50,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "harness"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/harness/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Harness",
+              "group": "Build",
+              "order": 60,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "mcp"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/mcp/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Mcp",
+              "group": "Build",
+              "order": 70,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "metaharness"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/metaharness/",
+          "source": {
+            "root": "website",
+            "navigation": {
+              "label": "Metaharness",
+              "group": "Build",
+              "order": 80,
+              "sidebar": "flat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "substrate"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/substrate/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Substrate",
+              "group": "Build",
+              "order": 90,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "worktree"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/worktree/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Worktree",
+              "group": "Build",
+              "order": 100,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "aep-service"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/aep-service/",
+          "source": {
+            "root": "website",
+            "navigation": {
+              "label": "Aep Service",
+              "group": "Services",
+              "order": 0,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "agent-platform"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/agent-platform/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Agent Platform",
+              "group": "Services",
+              "order": 10,
+              "sidebar": "flat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "connectors"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/connectors/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Connectors",
+              "group": "Services",
+              "order": 20,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "eventlog"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/eventlog/",
+          "source": {
+            "root": "website",
+            "navigation": {
+              "label": "Eventlog",
+              "group": "Services",
+              "order": 30,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "identity"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/identity/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Identity",
+              "group": "Services",
+              "order": 40,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "mandate"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/mandate/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Mandate",
+              "group": "Services",
+              "order": 50,
+              "sidebar": "flat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "secrets"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/secrets/",
+          "source": {
+            "root": "website",
+            "navigation": {
+              "label": "Secrets",
+              "group": "Services",
+              "order": 60,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "service-sdk"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/service-sdk/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Service Sdk",
+              "group": "Services",
+              "order": 70,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "workflow"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/workflow/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Workflow",
+              "group": "Services",
+              "order": 80,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v3",
+      "repository": {
+        "id": "workspace"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/workspace/",
+          "source": {
+            "root": "website",
+            "navigation": {
+              "label": "Workspace",
+              "group": "Services",
+              "order": 90,
+              "sidebar": "flat"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "schema": "b10x-docs/v4",
+      "repository": {
+        "id": "devcenter"
+      },
+      "surfaces": [
+        {
+          "id": "docs",
+          "routeBase": "/docs/devcenter/",
+          "source": {
+            "root": ".",
+            "navigation": {
+              "label": "Devcenter",
+              "group": "Products",
+              "order": 0,
+              "sidebar": "autogenerated"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

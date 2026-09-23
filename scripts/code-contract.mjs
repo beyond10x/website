@@ -293,6 +293,21 @@ async function collectedMarkdownSources(inputs) {
   if (documentIndex?.schema !== 'b10x-document-index/v1' || !Array.isArray(documentIndex.documents)) {
     throw new Error('run npm run prepare:site before the code source contract');
   }
+  // The page prepare-site wrote for each collected document, as it recorded it: a menu-withheld
+  // document is written outside its route's directory, so the page is never recomputed here.
+  const documentPages = JSON.parse(await readFile(path.join(root, '.generated', 'data', 'document-pages.json'), 'utf8'));
+  if (documentPages?.schema !== 'b10x-website-document-pages/v1' || !Array.isArray(documentPages.pages)) {
+    throw new Error('run npm run prepare:site before the code source contract');
+  }
+  const pageBySource = new Map();
+  for (const page of documentPages.pages) {
+    const key = sourceKey(page.project, page.sourcePath);
+    if (pageBySource.has(key)) throw new Error(`document pages repeat ${page.project}/${page.sourcePath}`);
+    if (typeof page.page !== 'string' || !page.page.startsWith('.generated/docs/') || page.page.split('/').includes('..')) {
+      throw new Error(`${page.project}/${page.sourcePath} has no generated page inside .generated/docs`);
+    }
+    pageBySource.set(key, path.join(root, ...page.page.split('/')));
+  }
   const routeBySource = new Map();
   for (const document of documentIndex.documents) {
     if (typeof document.sourcePath !== 'string') continue;
@@ -320,7 +335,9 @@ async function collectedMarkdownSources(inputs) {
       if (file.kind === 'document') {
         const publicRoute = routeBySource.get(sourceKey(file.repository, file.sourcePath));
         if (!publicRoute) throw new Error(`${file.repository}/${file.sourcePath} has no public document route`);
-        descriptors.push({...base, publicRoute, generatedFile: generatedDocumentFile(publicRoute, file.sourcePath)});
+        const generatedFile = pageBySource.get(sourceKey(file.repository, file.sourcePath));
+        if (!generatedFile) throw new Error(`${file.repository}/${file.sourcePath} has no recorded generated page`);
+        descriptors.push({...base, publicRoute, generatedFile});
       } else {
         const generatedFile = path.join(root, '.generated', 'blog', `${file.repository}-${file.sourcePath.replace(/[^a-zA-Z0-9.-]+/g, '-')}`);
         const generated = await readFile(generatedFile, 'utf8');
@@ -557,12 +574,6 @@ function sortFences(fences) {
     if (left.line !== right.line) return left.line - right.line;
     return compareUtf8(left.publicRoute ?? '', right.publicRoute ?? '');
   });
-}
-
-function generatedDocumentFile(route, sourcePath) {
-  const relativeRoute = route.replace(/^\/docs\//, '').replace(/\/$/, '');
-  const extension = path.extname(sourcePath).toLowerCase() === '.mdx' ? '.mdx' : '.md';
-  return path.join(root, '.generated', 'docs', ...relativeRoute.split('/'), `index${extension}`);
 }
 
 function authoredPageRoute(file, source) {

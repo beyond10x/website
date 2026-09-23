@@ -23,8 +23,8 @@ for (const repository of roster.repositories) {
   const extracted = await extractDeclaredSource({repository, url, commit, manifestPath: roster.manifestPath, cacheRoot, sourceWorkspace});
   const manifestBytes = await readFile(extracted.manifestFile);
   const manifest = await readManifest(extracted.manifestFile);
-  if (!isCollectableManifestSchema(manifest.schema)) throw new Error(`${repository} must use b10x-docs/v3 or b10x-docs/v4 before it enters the website lock`);
-  if (manifest.schema === 'b10x-docs/v4') validateManifestExperienceReferences(manifest, experienceCatalog);
+  if (!isCollectableManifestSchema(manifest.schema)) throw new Error(`${repository} must use b10x-docs/v3, b10x-docs/v4 or b10x-docs/v5 before it enters the website lock`);
+  if (manifest.schema === 'b10x-docs/v4' || manifest.schema === 'b10x-docs/v5') validateManifestExperienceReferences(manifest, experienceCatalog);
   const index = await collectManifestSources(manifest, extracted.treeRoot);
   sources.push({
     repository,

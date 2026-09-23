@@ -11,10 +11,11 @@
 //! | `splitFrontmatter` YAML parse (prepare-site.mjs:868) | `frontmatterOf`                    |
 //! | `normalizePassiveMarkdown` managed ranges (:404,:478)| `normalizePassiveMarkdown` itself  |
 //! | `sourceSidebarMetadata` (:403)                       | `sourceSidebarMetadata` itself     |
-//! | `resolveDocumentPageMetadata`, v4 (:638, :480)       | `resolveDocumentPageMetadata`      |
+//! | `resolveDocumentPageMetadata`, v4 and v5 (:638, :480)| `resolveDocumentPageMetadata`      |
 //! | `assertSearchAudienceVocabulary` (:681)              | `assertSearchAudienceVocabulary`   |
 //! | `normalizeBlogDate` (:768)                           | `blogDateRefusal`                  |
 //! | `assertUniqueDestination` (:959)                     | `destinationOf`                    |
+//! | `declaredNavigationRefusals` (materializeCollection) | `declaredNavigationRefusals` itself |
 //! | data/specification JSON or YAML parse (:511, :550)   | `structuredRefusal`                |
 //! | specification route under /api/ (:514)              | `structuredRefusal`                |
 //! | Docusaurus MDX compile of the generated page         | `compileRefusal`                   |
@@ -27,7 +28,7 @@ import {parse as parseYaml} from 'yaml';
 import {resolveDocumentPageMetadata} from '@beyond10x/docs-system/documents';
 import {normalizePassiveMarkdown} from './passive-markdown.mjs';
 import {assertSearchAudienceVocabulary} from './search-metadata-contract.mjs';
-import {sourceSidebarMetadata} from './sidebar-contract.mjs';
+import {declaredDocumentRoute, declaredNavigationRefusals, documentPagePath, documentSourceRelative, isMenuWithheld, sourceSidebarMetadata} from './sidebar-contract.mjs';
 
 const require = createRequire(import.meta.url);
 
@@ -69,6 +70,7 @@ export async function portalRefusals({manifest, index, treeRoot}) {
   const destinations = new Map();
   const surfaces = new Map(manifest.surfaces.map((surface) => [surface.id, surface]));
   const compile = await portalCompiler();
+  refusals.push(...declaredNavigationRefusals(manifest, index.files.filter((file) => file.kind === 'document')));
   for (const file of index.files) {
     const where = file.sourcePath;
     const absolute = path.join(treeRoot, ...file.sourcePath.split('/'));
@@ -97,7 +99,7 @@ export async function portalRefusals({manifest, index, treeRoot}) {
       }
     };
     const normalized = await attempt('managed documentation range', () => normalizePassiveMarkdown(body));
-    const resolved = manifest.schema === 'b10x-docs/v4'
+    const resolved = manifest.schema === 'b10x-docs/v4' || manifest.schema === 'b10x-docs/v5'
       ? await attempt('page metadata', () => resolveDocumentPageMetadata(manifest, file.surface, raw, `${file.repository}/${file.sourcePath}`))
       : undefined;
     if (file.kind === 'document') {
@@ -149,16 +151,11 @@ function blogDateRefusal(frontmatter, sourcePath) {
   return Number.isFinite(new Date(input).getTime()) ? undefined : `invalid source blog date ${input}`;
 }
 
-/** prepare-site.mjs:377-399 `documentRoute` and `docDestination`: the page a document becomes. */
+/** prepare-site.mjs `documentRoute` and `documentPagePath`: the page a document becomes, through the same functions. */
 function destinationOf(file, surface) {
   if (!surface?.routeBase?.startsWith('/docs/')) return undefined;
-  let relative = file.outputPath.split('/').slice(3).join('/').replace(/^website\/docs\//, '').replace(/^docs\//, '');
-  relative = relative.replace(/(^|\/)(?:README|index|intro)\.(?:md|mdx)$/i, '$1index.md');
-  const base = surface.routeBase.replace(/^\/docs\//, '').replace(/^\/+|\/+$/g, '');
-  const leaf = relative.replace(/\.(?:md|mdx)$/i, '').replace(/(?:^|\/)index$/i, '');
-  const route = `/docs/${[base, leaf].filter(Boolean).join('/')}/`.replace(/\/+/g, '/');
-  const extension = path.extname(file.sourcePath).toLowerCase() === '.mdx' ? '.mdx' : '.md';
-  return `${route}index${extension}`;
+  const relative = documentSourceRelative(file);
+  return documentPagePath(declaredDocumentRoute(surface, relative), file.sourcePath, {withheld: isMenuWithheld(surface, relative)});
 }
 
 function structuredRefusal(file, raw) {

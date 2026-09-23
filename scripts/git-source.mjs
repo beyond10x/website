@@ -100,7 +100,7 @@ export async function extractDeclaredSource({repository, url, commit, manifestPa
   }
   const manifestBytes = await readObject(bare, manifestEntry.object);
   const manifest = parse(manifestBytes.toString('utf8'));
-  if (!isCollectableManifestSchema(manifest?.schema)) throw new Error(`${repository}@${commit} ${manifestPath} is not b10x-docs/v3 or b10x-docs/v4`);
+  if (!isCollectableManifestSchema(manifest?.schema)) throw new Error(`${repository}@${commit} ${manifestPath} is not b10x-docs/v3, b10x-docs/v4 or b10x-docs/v5`);
   if (manifest.repository?.id !== repository || manifest.repository?.url !== url) {
     throw new Error(`${repository}@${commit} manifest repository identity does not match its source lock`);
   }
@@ -128,7 +128,7 @@ export async function extractDeclaredSource({repository, url, commit, manifestPa
 }
 
 export function isCollectableManifestSchema(schema) {
-  return schema === 'b10x-docs/v3' || schema === 'b10x-docs/v4';
+  return schema === 'b10x-docs/v3' || schema === 'b10x-docs/v4' || schema === 'b10x-docs/v5';
 }
 
 export function sourceWorkspaceFromEnvironment(environment = process.env) {

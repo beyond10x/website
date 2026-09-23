@@ -269,7 +269,7 @@ export async function validateBundleInput(bundleRoot, expected) {
   const manifest = parse(manifestBytes.toString('utf8'));
   const collection = JSON.parse(collectionBytes);
   if (!manifest
-    || !['b10x-docs/v3', 'b10x-docs/v4'].includes(manifest.schema)
+    || !['b10x-docs/v3', 'b10x-docs/v4', 'b10x-docs/v5'].includes(manifest.schema)
     || manifest.repository?.id !== expected.repository
     || manifest.repository?.url !== document.repository.url) {
     throw new Error(`${expected.repository} b10x.docs.yaml has an invalid or inconsistent repository identity`);

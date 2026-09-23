@@ -1,0 +1,97 @@
+# ESS's b10x.docs.yaml at ess origin/main 65671f22f, rewritten as b10x-docs/v5 with its curated
+# website/sidebars.ts. Everything except navigation and builtAssets is ESS's real selection, with one
+# deliberate difference: the docs/examples/specification-to-contracts.md exclude is removed, because
+# the curated sidebar lists that document. story:docs-v3-ess-portal-fidelity removes the exclude
+# from ESS itself, and must also make that document passive first: it imports LabLaunch from
+# @site/src/components, which the collector's passive-MDX check refuses.
+# builtAssets are packaged independently of source.assets (which still excludes the .wasm here);
+# story:docs-v3-built-widget-assets defines how they are packaged.
+schema: b10x-docs/v5
+repository:
+  id: ess
+  url: https://github.com/beyond10x/ess
+  displayName: ESS
+delivery:
+  publisher: website
+  repository: beyond10x.github.io
+  origin: https://beyond10x.github.io
+surfaces:
+  - id: docs
+    name: ESS
+    summary: Executable system specifications, deterministic intermediate representations, generated contracts, and conformance.
+    kind: documentation
+    canonicalUrl: https://beyond10x.github.io/docs/ess/
+    maturity: experimental
+    accent: '#ff9070'
+    mark: website/static/img/mark.svg
+    publication:
+      availability: published
+      discoverability: public
+    experienceIds: [try-spec-driven-development]
+    documentDefaults:
+      audiences: [adopter, developer]
+      experienceIds: [try-spec-driven-development]
+      support: preview
+      access: public
+    journeys: [specify, operate-services]
+    primaryJourney: specify
+    capabilities: [system-specification, contract-generation, conformance]
+    feeds:
+      - {format: rss, kind: feed, label: Release notes RSS, scope: releases, url: https://beyond10x.github.io/ess/releases/rss.xml}
+    relationships: []
+    sections:
+      - {kind: quickstart, label: Getting started, url: https://beyond10x.github.io/docs/ess/getting-started/}
+      - {kind: docs, label: Concepts, url: https://beyond10x.github.io/docs/ess/concepts/overview/}
+      - {kind: reference, label: CLI, url: https://beyond10x.github.io/docs/ess/reference/cli/}
+      - {kind: status, label: Status, url: https://beyond10x.github.io/docs/ess/status/where-this-stands/}
+      - {kind: source, label: Source, url: https://github.com/beyond10x/ess}
+    routeBase: /docs/ess/
+    builtAssets: [static/lab/lab.js, static/lab/billing_web_realized.wasm]
+    source:
+      root: website
+      assets:
+        include: [static/**/*]
+        exclude: [static/lab/billing_web_realized.wasm]
+      blog:
+        include: [blog/*.md]
+      documents:
+        include: [docs/**/*.md]
+        exclude:
+          - docs/adr/**
+          - docs/adrs/**
+          - docs/decisions/**
+          - docs/internal/**
+          - docs/plans/**
+          - docs/stories/**
+          - docs/worklogs/**
+      navigation:
+        group: Foundation
+        label: ESS
+        order: 30
+        landing: docs/index.md
+        menuWithheld: [docs/guides/record-realization.md]
+        sidebar:
+          - label: Start here
+            collapsed: false
+            items: [docs/index.md, docs/getting-started.md]
+          - label: Concepts
+            collapsed: false
+            items: [docs/concepts/overview.md, docs/concepts/ess.md, docs/concepts/component-delivery.md]
+          - label: Guides
+            collapsed: false
+            items:
+              - docs/guides/write-a-specification.md
+              - docs/guides/generate-artifacts.md
+              - docs/guides/verify-conformance.md
+              - docs/guides/track-change.md
+              - docs/guides/synthesize.md
+              - docs/guides/check-infrastructure.md
+          - label: Reference
+            collapsed: false
+            items: [docs/reference/cli.md, docs/reference/formats.md, docs/reference/spec-versions.md]
+          - label: Examples
+            collapsed: false
+            items: [docs/examples/specification-to-contracts.md]
+          - label: Project status
+            collapsed: false
+            items: [docs/status/where-this-stands.md, docs/status/limitations.md, docs/status/roadmap.md, docs/status/outlook.md]
