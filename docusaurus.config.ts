@@ -212,7 +212,14 @@ const config: Config = {
           ],
         },
       ],
-      copyright: '© 2026 beyond10x · Make the decision explicit.',
+      logo: {
+        alt: 'babelforce',
+        src: 'img/publisher-lockup-light.svg',
+        href: 'https://www.babelforce.com/',
+        height: 18,
+      },
+      copyright:
+        'A babelforce Labs project · Make the decision explicit. · <a class="footer__imprint" href="https://www.babelforce.com/imprint">Imprint</a>',
     },
     prism: {
       theme: prismThemes.github,
