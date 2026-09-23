@@ -5,7 +5,9 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import {promisify} from 'node:util';
+import {compile} from '@mdx-js/mdx';
 import {findExtensionTrailingSlashLinks} from '../scripts/crawl-build.mjs';
+import {markdownText} from '../scripts/ess-contract-reference.mjs';
 import {quarantineFixture} from './helpers/quarantine-fixture.mjs';
 
 const exec = promisify(execFile);
@@ -99,4 +101,15 @@ test('the components index lists and links every generated component/data page, 
   // This fixture roster declares no openapi/json-schema/data source, so the honest empty state must
   // say so rather than silently rendering nothing.
   assert.match(indexMarkdown, /No repository currently publishes a component or data catalog\./);
+});
+
+test('source-controlled names on the components index compile to text, never to MDX expressions or JSX', async () => {
+  const source = await readFile(path.join(root, 'scripts', 'prepare-site.mjs'), 'utf8');
+  assert.match(source, /### \$\{markdownText\(items\[0\]\.repositoryDisplayName\)\}/);
+  assert.match(source, /- \[\$\{markdownText\(item\.title\)\}\]/);
+  for (const hostile of ['{String(1+1)}', '<img src="x" onerror="alert(1)">', 'a { b']) {
+    const compiled = String(await compile(`### ${markdownText(hostile)}\n\n- [${markdownText(hostile)}](/components/x/)\n`));
+    assert.doesNotMatch(compiled, /String\(1 \+ 1\)/);
+    assert.doesNotMatch(compiled, /_jsx\("img"/);
+  }
 });

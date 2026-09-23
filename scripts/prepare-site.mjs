@@ -5,7 +5,7 @@ import {resolveDocumentPageMetadata} from '@beyond10x/docs-system/documents';
 import {evaluateExperienceCatalog} from '@beyond10x/docs-system/experiences';
 import {writeJsonFeed, writeRss} from '@beyond10x/docs-system/feeds';
 import {readExperienceCatalog} from '@beyond10x/docs-system/manifest';
-import {essContractReference} from './ess-contract-reference.mjs';
+import {essContractReference, markdownText} from './ess-contract-reference.mjs';
 import {compareUtf8} from './order-contract.mjs';
 import {sourceKey, sourceMap} from './source-routing.mjs';
 import {canonicalSectionUrl, redirectQuarantinedUrls, rewriteLinks} from './link-rewriting.mjs';
@@ -637,9 +637,9 @@ function renderComponentsIndexLanding(records) {
   const sections = repositories.flatMap((repository) => {
     const items = byRepository.get(repository).sort((left, right) => compareUtf8(left.route, right.route));
     return [
-      `### ${items[0].repositoryDisplayName}`,
+      `### ${markdownText(items[0].repositoryDisplayName)}`,
       '',
-      ...items.map((item) => `- [${item.title}](${item.route}) — ${item.kind === 'contract' ? 'ESS contract reference' : 'JSON data catalog'}`),
+      ...items.map((item) => `- [${markdownText(item.title)}](${item.route}) — ${item.kind === 'contract' ? 'ESS contract reference' : 'JSON data catalog'}`),
       '',
     ];
   });

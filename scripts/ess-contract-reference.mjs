@@ -28,6 +28,6 @@ export function essContractReference({document, sourceUrl, sourceRepository, slu
   ].join('\n');
 }
 
-function markdownText(value) {
+export function markdownText(value) {
   return String(value).replace(/[\r\n]+/g, ' ').replace(/[&<>{}\\`[\]*_!|]/g, character => `&#${character.codePointAt(0)};`);
 }
