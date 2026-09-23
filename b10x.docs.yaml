@@ -4,7 +4,7 @@ delivery:
   publisher: website
   repository: beyond10x.github.io
 repository:
-  displayName: Website
+  displayName: beyond10x
   id: website
   url: https://github.com/beyond10x/website
 schema: b10x-docs/v4

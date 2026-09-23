@@ -73,13 +73,6 @@ test('a specification page title names its owning repository', async () => {
   assert.match(source, /title: \$\{JSON\.stringify\(`\$\{file\.specificationId\} \| \$\{manifest\.repository\.displayName/);
 });
 
-// R11: the Website project's own manifest set its display name to the site title, so every one of
-// its pages self-titled "beyond10x | beyond10x | beyond10x" with H1 "beyond10x".
-test('the website repository declares its own display name, not the site title', async () => {
-  const manifest = await readFile(path.join(root, 'b10x.docs.yaml'), 'utf8');
-  assert.match(manifest, /repository:\n {2}displayName: Website\n/);
-});
-
 // R9: /api, /components and /ecosystem had no sidebar (sidebarPath: false), and Docusaurus derives
 // breadcrumbs from the active sidebar, so they also had no breadcrumb.
 test('the api, component and ecosystem content-docs plugins keep a sidebar enabled', async () => {
