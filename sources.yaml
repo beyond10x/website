@@ -64,12 +64,6 @@ excludedRepositories:
     reason: >-
       The generated deployment mirror this site is published into. It carries no manifest and
       authors no content; AGENTS.md states that nothing is authored there.
-  - repository: org-brain
-    public: false
-    manifest: present
-    reason: >-
-      Private. Its own manifest declares the documentation surface planned and internal and states
-      that nothing in it is collected by the Website.
   - repository: swarm
     public: true
     manifest: present
