@@ -20,6 +20,7 @@ repositories:
   - gates
   - harness
   - identity
+  - llm
   - mandate
   - mcp
   - metaharness
