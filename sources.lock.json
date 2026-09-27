@@ -132,10 +132,10 @@
     {
       "repository": "llm",
       "url": "https://github.com/beyond10x/llm",
-      "commit": "0e3d3085a7d37893ecf215e1b3f49ad0d183d17d",
+      "commit": "6944561338bf8c90dc3da985cf9fd5a56bbad891",
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "39300f0c4efbde3b33183b971827cb942cb533ca28eed1b0f6ff0ac838317dcc",
-      "contentSha256": "e291a2cdc5cfef218cec9e3484e746504be24b014eeb7a7653ea9c72aab0bb2b"
+      "contentSha256": "1145ae1b30596aab721fe78879e093e4ff34f396e79f2146420490d5c266e7d7"
     },
     {
       "repository": "mandate",
