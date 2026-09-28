@@ -44,10 +44,10 @@
     {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
-      "commit": "68f4e08a4c5237d99ebe43b6167ee67790f2ca34",
+      "commit": "0fc2b900a2b2da2c32ce087ad159a4b680f8bcbb",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "f20deefa7497abccae0475135ad09d065c5bc240b0cd18bf356e7b3c662cecc0",
-      "contentSha256": "0c96c71b562df94ad1213b00c523b0071d1e6b1e0016e255a054a808efc94c75"
+      "manifestSha256": "d2105b6420111d03e17e5eb4ecc4f7326e0ab9557ff6c1e3dbf9bdd5d52be1cb",
+      "contentSha256": "76abc77073cab622423dcfab12dc0efa7a7bae42c8df89bd4bb6bf8956f05c67"
     },
     {
       "repository": "connectors",

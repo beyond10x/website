@@ -694,9 +694,14 @@
           "url": "https://beyond10x.github.io/docs/agentplugins/install/"
         },
         {
+          "kind": "guide",
+          "label": "Tutorial: your first ESS specification",
+          "url": "https://beyond10x.github.io/docs/agentplugins/tutorials/first-ess-specification/"
+        },
+        {
           "kind": "reference",
           "label": "Plugin reference",
-          "url": "https://beyond10x.github.io/docs/agentplugins/plugins/beyond10x/"
+          "url": "https://beyond10x.github.io/docs/agentplugins/plugins/b10x/"
         },
         {
           "kind": "source",
@@ -732,7 +737,7 @@
         },
         "root": "website"
       },
-      "summary": "Navigate and create portable plugins, or install focused AEP planning, AEP delivery, and ESS specification guidance from the curated beyond10x marketplace.",
+      "summary": "Set up the b10x plugins for AEP planning and delivery, ESS specification, worktrees and connectors, then write and test a first ESS specification with the tutorial.",
       "availability": "published",
       "discoverability": "public",
       "audiences": [

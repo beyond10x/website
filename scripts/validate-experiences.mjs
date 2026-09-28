@@ -92,9 +92,9 @@ if (agentideStepUrls.join(',') !== '/docs/agentide/running-modes/,/docs/agentide
 }
 const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
 for (const [id, kind, version, url] of [
-  ['agentplugins-release-source', 'source', '0.9.0', 'https://github.com/beyond10x/agentplugins/releases/tag/0.9.0'],
-  ['aep-cli-binary', 'binary', '0.55.0', 'https://github.com/beyond10x/aep/releases/tag/0.55.0'],
-  ['ess-cli-source', 'source', '0.22.0', 'https://github.com/beyond10x/ess/releases/tag/0.22.0'],
+  ['agentplugins-release-source', 'source', '0.17.0', 'https://github.com/beyond10x/agentplugins/releases/tag/0.17.0'],
+  ['aep-cli-binary', 'binary', '0.64.0', 'https://github.com/beyond10x/aep/releases/tag/0.64.0'],
+  ['ess-cli-binary', 'binary', '0.39.0', 'https://github.com/beyond10x/ess/releases/tag/0.39.0'],
   ['agentide-linux-binary', 'binary', '0.1.1', 'https://github.com/beyond10x/agentide/releases/tag/0.1.1'],
 ]) {
   const artifact = artifacts.get(id);
@@ -106,8 +106,8 @@ const claudePath = evaluatedById.get('try-spec-driven-development')?.adoptionPat
 if (!claudePath || claudePath.prerequisites?.join('\n') !== [
   'A Git repository',
   'Claude Code',
-  'AEP 0.55.0 on PATH for a supported Linux or macOS target',
-  'Rust to build ESS 0.22.0 from its source tag, with ess on PATH',
+  'AEP 0.64.0 and ESS 0.39.0 on PATH for a supported Linux or macOS target; b10x installs both',
+  'Go 1.23 or newer for the ESS tutorial conformance run',
 ].join('\n')) {
   throw new Error('the Claude path must declare only its real repository, host, and native CLI prerequisites');
 }
@@ -124,8 +124,9 @@ for (const id of ['aep-cli-binary']) {
     throw new Error(`${id} must publish its four-target Unix archive family, checksum file, and explicit Windows boundary`);
   }
 }
-if (!/source only.*no prebuilt CLI archives/i.test(artifacts.get('ess-cli-source')?.note ?? '')) {
-  throw new Error('ESS 0.22.0 must declare its source-only installation contract');
+if (!/x86_64.*aarch64.*Linux GNU.*x86_64.*aarch64.*macOS/i.test(artifacts.get('ess-cli-binary')?.note ?? '')
+  || !(artifacts.get('ess-cli-binary')?.note ?? '').includes('SHA256SUMS')) {
+  throw new Error('ESS 0.39.0 must publish its four-target Unix archive family and checksum file');
 }
 process.stdout.write(
   `validated ${result.experienceCount} Docs System experiences, ${paths.length} adoption paths, ${catalog.artifacts.length} artifacts, `
