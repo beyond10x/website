@@ -35,9 +35,16 @@
             {
               "id": "install-agent-plugins",
               "title": "Install the focused plugins",
-              "description": "Follow the Agent Plugins installation contract for Claude Code.",
+              "description": "Tell Claude Code or Codex to follow the Agent Plugins SETUP.md; b10x installs the plugins and the aep and ess CLIs, and changes nothing before you confirm.",
               "url": "/docs/agentplugins/install/",
-              "completion": "Claude can discover the selected beyond10x plugin instructions."
+              "completion": "The agent can load the selected beyond10x plugins, and aep and ess are on PATH."
+            },
+            {
+              "id": "first-ess-specification",
+              "title": "Write and test your first ESS specification",
+              "description": "Follow the tutorial: an agent writes a small specification, ess validates it, and a Go implementation passes the conformance suite it generates.",
+              "url": "/docs/agentplugins/tutorials/first-ess-specification/",
+              "completion": "ess specify validate prints valid, and go test passes all 17 scenarios the specification obliges."
             },
             {
               "id": "run-golden-path",
