@@ -1,0 +1,222 @@
+{
+  "baseUrl": "/metaharness/",
+  "commit": "1869371c63e12eb25f7a8c57569c6e1cf72693e8",
+  "repository": "metaharness",
+  "routes": [
+    {
+      "anchors": [
+        "contract",
+        "harnesses",
+        "how-it-works",
+        "interface-title",
+        "main",
+        "start"
+      ],
+      "path": "/metaharness/"
+    },
+    {
+      "anchors": [
+        "a-principle-worth-stating-twice",
+        "main",
+        "metaharness",
+        "start-here",
+        "the-claim-this-exists-to-make",
+        "the-three-promises",
+        "two-faces-one-run",
+        "where-it-came-from"
+      ],
+      "path": "/metaharness/docs/"
+    },
+    {
+      "anchors": [
+        "four-tiers-of-control",
+        "main",
+        "observe--measuring-a-harness-nobody-is-steering",
+        "proof-not-configuration",
+        "the-census-is-metaharnesss-not-the-vendors",
+        "the-control-seam",
+        "three-properties-that-are-easy-to-break-by-accident",
+        "tier-status-is-a-first-class-fact",
+        "who-decides---decisions",
+        "whose-tools---tool-surface"
+      ],
+      "path": "/metaharness/docs/control-seam/"
+    },
+    {
+      "anchors": [
+        "canonical-ordering-is-a-wire-fact",
+        "main",
+        "presented-every-turn-not-once-per-session",
+        "sealing-and-why-the-digest-is-on-the-document",
+        "the-operation-vocabulary-is-small-and-closed",
+        "the-workflow-frame",
+        "this-is-the-integration-seam",
+        "two-independent-ways-a-frame-reaches-the-model",
+        "what-a-frame-holds",
+        "why-handoff-is-explicit-even-when-empty",
+        "why-lines-are-verbatim",
+        "why-reaching-exists"
+      ],
+      "path": "/metaharness/docs/frames/"
+    },
+    {
+      "anchors": [
+        "declared-capabilities",
+        "main",
+        "measured",
+        "sessionstarted-on-this-arm",
+        "the-b10x-adapter",
+        "the-four-enforcement-tiers-reach-the-loop",
+        "what-a-run-does",
+        "what-the-seam-maps--and-what-it-refuses-to-claim"
+      ],
+      "path": "/metaharness/docs/harnesses/b10x/"
+    },
+    {
+      "anchors": [
+        "declared-capabilities",
+        "evidence-discipline",
+        "main",
+        "operation-rendering",
+        "the-claude-adapter",
+        "the-live-proof",
+        "three-things-this-crate-deliberately-does-not-do",
+        "two-defects-that-only-a-paid-run-could-find",
+        "what-a-run-does"
+      ],
+      "path": "/metaharness/docs/harnesses/claude/"
+    },
+    {
+      "anchors": [
+        "1-a-hook-is-declared-in-configtoml-not-hooksjson",
+        "2-a-hook-in-a-fresh-codex_home-never-fires-without---dangerously-bypass-hook-trust",
+        "3-the-hook-speaks-claude-codes-tool-vocabulary",
+        "a-version-split-nobody-was-looking-for",
+        "declared-capabilities",
+        "evidence-labels",
+        "main",
+        "operation-rendering",
+        "plugin-injection--the-placement-is-driven-the-plugin-list-is-not",
+        "the-codex-adapter",
+        "the-live-proof-and-its-exact-limits",
+        "the-loopback-provider-on-codex--the-api-key-half",
+        "the-rollout-format-has-no-stability-guarantee",
+        "the-vendor-sandbox-is-what-the-cwd-declaration-decides",
+        "three-things-that-cost-more-to-learn-than-the-code-using-them",
+        "what-a-run-does"
+      ],
+      "path": "/metaharness/docs/harnesses/codex/"
+    },
+    {
+      "anchors": [
+        "1-a-row-is-asserted-and-not-every-assertion-is-equally-strong",
+        "2-gating-is-per-row-not-global",
+        "ambient-inputs-metaharness-does-not-claim-to-remove",
+        "main",
+        "the-hermetic-contract",
+        "the-three-modes",
+        "the-twelve-rows",
+        "three-verdicts-not-two",
+        "what-the-contract-does-not-claim"
+      ],
+      "path": "/metaharness/docs/hermetic/"
+    },
+    {
+      "anchors": [
+        "allow-grants--a-departure-worth-naming",
+        "commands",
+        "deny-requires-a-non-empty-reason",
+        "five-refusal-codes",
+        "four-decisions",
+        "frameset-is-not-partially-deliverable",
+        "main",
+        "replace-is-never-silently-downgraded",
+        "silence-is-not-a-legal-outcome",
+        "the-seven-commands",
+        "which-is-why-abstain-exists"
+      ],
+      "path": "/metaharness/docs/protocol/commands/"
+    },
+    {
+      "anchors": [
+        "authexpired--a-recorded-deviation-from-design-v01",
+        "events",
+        "injection-has-no-expectation-kind-deliberately",
+        "main",
+        "opaque-is-mandatory-and-unconditional",
+        "sessionended-keeps-two-denial-counts-apart",
+        "sessionstarted-carries-the-hermetic-evidence",
+        "the-20-events",
+        "two-rules-about-the-tag-and-one-asymmetry",
+        "why-three-tool-events-and-not-two"
+      ],
+      "path": "/metaharness/docs/protocol/events/"
+    },
+    {
+      "anchors": [
+        "1-is-the-installed-vendor-the-one-the-adapter-was-written-against",
+        "2-what-does-the-adapter-say-it-can-do",
+        "3-does-the-seam-actually-hold",
+        "4-a-real-run",
+        "aep-governed-workflows",
+        "build",
+        "deciding-each-call-yourself",
+        "exit-codes",
+        "governing-a-run-from-outside-the-process",
+        "main",
+        "quickstart",
+        "running-over-a-real-repository"
+      ],
+      "path": "/metaharness/docs/quickstart/"
+    },
+    {
+      "anchors": [
+        "--cwd-the-declaration-that-trades-two-rows-for-real-work",
+        "audit",
+        "cli-reference",
+        "control",
+        "exit-codes",
+        "hermeticity",
+        "main",
+        "metaharness-audit-and-metaharness-project",
+        "metaharness-capabilities",
+        "metaharness-run",
+        "model-effort-and-actor",
+        "the-b10x-arm",
+        "the-run-itself"
+      ],
+      "path": "/metaharness/docs/reference/cli/"
+    },
+    {
+      "anchors": [
+        "crate-layout",
+        "driving-a-run",
+        "input",
+        "library-api",
+        "main",
+        "refusals-are-ordered",
+        "starting",
+        "the-builder",
+        "the-whole-loop",
+        "why-the-two-vendors-need-different-runners"
+      ],
+      "path": "/metaharness/docs/reference/library/"
+    },
+    {
+      "anchors": [
+        "built",
+        "built-and-not-driven-live--the-labels-that-have-not-moved",
+        "main",
+        "not-built--and-refusing-by-name",
+        "open-questions-in-flight",
+        "proven-against-paid-runs--on-both-vendors",
+        "roadmap-directions",
+        "status",
+        "the-gate",
+        "why-contract-testing-concretely"
+      ],
+      "path": "/metaharness/docs/status/"
+    }
+  ],
+  "schema": "b10x-project-routes/v1"
+}

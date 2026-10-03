@@ -28,10 +28,10 @@
     {
       "repository": "agentic-principles",
       "url": "https://github.com/beyond10x/agentic-principles",
-      "commit": "b0edc860d2c8938af81b4b88f06d263d061a391d",
+      "commit": "6f5428d4cda8e2532ef5a4dbbe0ddb26399d6b71",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "8b6ba19a6156702112daf148458583e5527fb48f8dbd6cf51cc7059cc9f18e23",
-      "contentSha256": "3220dd21aa5d3ac974d49c35c17513226d50602137b4e83f06f81755f5796e2a"
+      "manifestSha256": "331525d556e001aebac3668731bb8597d7b68a7180dce70eac8cbcf36f73dcdf",
+      "contentSha256": "91931ed54bca80f24fa734d9e7cd8a521dccd041074d1016ae5fec792d07100f"
     },
     {
       "repository": "agentide",
@@ -152,14 +152,6 @@
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "2fa89f4dc7fece9aafbbf970a9bb794a8c69999d04c5574062b80387ea17691b",
       "contentSha256": "a49522684b8e9ee64ac47ca4f1001252d76b9b0e3c4b239f1c09b86d5227e401"
-    },
-    {
-      "repository": "metaharness",
-      "url": "https://github.com/beyond10x/metaharness",
-      "commit": "d713850c703b0cb20ff2c5507e309543ceec3795",
-      "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "4b5d466f6a1c90d951f3e25a04b35cc845b17c2ab69c64e45ff3dd49b30e573b",
-      "contentSha256": "cb050d324b8f5fe8b76fd8849a95fbc740cb5a441f5b89a0e484f42fdf1cc374"
     },
     {
       "repository": "research",

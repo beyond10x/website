@@ -41,8 +41,10 @@ const config: Config = {
   projectName: 'website',
   trailingSlash: true,
 
-  onBrokenLinks: 'throw',
-  onBrokenAnchors: 'throw',
+  // The mandatory Rust crawler checks rendered routes and anchors across root and independent
+  // project artifacts. Docusaurus only knows the root artifact's React route inventory.
+  onBrokenLinks: 'ignore',
+  onBrokenAnchors: 'ignore',
   markdown: {
     mermaid: true,
     hooks: {

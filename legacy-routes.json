@@ -494,6 +494,11 @@
       "type": "html"
     },
     {
+      "from": "/agentic-principles/research/VISION",
+      "to": "/docs/agentic-principles/VISION/",
+      "type": "html"
+    },
+    {
       "from": "/agentic-principles/research/research/2026-08-25T001613+0200_seed",
       "to": "/docs/agentic-principles/research/",
       "type": "html"
@@ -531,11 +536,6 @@
     {
       "from": "/agentic-principles/research/research/evidence/scoped-progress-partial-failure/sources",
       "to": "/docs/agentic-principles/research/evidence/scoped-progress-partial-failure/sources/",
-      "type": "html"
-    },
-    {
-      "from": "/agentic-principles/research/VISION",
-      "to": "/docs/agentic-principles/VISION/",
       "type": "html"
     },
     {
@@ -586,6 +586,81 @@
     {
       "from": "/agentplugins/docs/trust-and-scope",
       "to": "/docs/agentplugins/trust-and-scope/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/",
+      "to": "/metaharness/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/control-seam/",
+      "to": "/metaharness/docs/control-seam/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/frames/",
+      "to": "/metaharness/docs/frames/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/harnesses/b10x/",
+      "to": "/metaharness/docs/harnesses/b10x/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/harnesses/claude/",
+      "to": "/metaharness/docs/harnesses/claude/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/harnesses/codex/",
+      "to": "/metaharness/docs/harnesses/codex/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/hermetic/",
+      "to": "/metaharness/docs/hermetic/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/protocol/commands/",
+      "to": "/metaharness/docs/protocol/commands/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/protocol/events/",
+      "to": "/metaharness/docs/protocol/events/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/quickstart/",
+      "to": "/metaharness/docs/quickstart/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/reference/cli/",
+      "to": "/metaharness/docs/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/reference/library/",
+      "to": "/metaharness/docs/reference/library/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/metaharness/status/",
+      "to": "/metaharness/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/ecosystem/metaharness/",
+      "to": "/metaharness/",
+      "type": "html"
+    },
+    {
+      "from": "/engineering-protocols/",
+      "to": "/ecosystem/aep/",
       "type": "html"
     },
     {
@@ -671,11 +746,6 @@
     {
       "from": "/entity-runtime/docs/guide/storage",
       "to": "/docs/entity-runtime/guide/storage/",
-      "type": "html"
-    },
-    {
-      "from": "/engineering-protocols/",
-      "to": "/ecosystem/aep/",
       "type": "html"
     },
     {
@@ -1034,76 +1104,6 @@
     {
       "from": "/journeys/understand/",
       "to": "/learn/safe-agentic-coding/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/",
-      "to": "/ecosystem/metaharness/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs",
-      "to": "/docs/metaharness/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/control-seam",
-      "to": "/docs/metaharness/control-seam/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/frames",
-      "to": "/docs/metaharness/frames/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/harnesses/b10x",
-      "to": "/docs/metaharness/harnesses/b10x/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/harnesses/claude",
-      "to": "/docs/metaharness/harnesses/claude/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/harnesses/codex",
-      "to": "/docs/metaharness/harnesses/codex/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/hermetic",
-      "to": "/docs/metaharness/hermetic/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/protocol/commands",
-      "to": "/docs/metaharness/protocol/commands/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/protocol/events",
-      "to": "/docs/metaharness/protocol/events/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/quickstart",
-      "to": "/docs/metaharness/quickstart/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/reference/cli",
-      "to": "/docs/metaharness/reference/cli/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/reference/library",
-      "to": "/docs/metaharness/reference/library/",
-      "type": "html"
-    },
-    {
-      "from": "/metaharness/docs/status",
-      "to": "/docs/metaharness/status/",
       "type": "html"
     },
     {

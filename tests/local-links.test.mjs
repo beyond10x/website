@@ -14,7 +14,7 @@ test('canonical Website links stay on the rendering origin', () => {
   );
   assert.equal(localizeWebsiteHref('https://beyond10x.github.io/agentplugins/'), '/ecosystem/agentplugins/');
   assert.equal(localizeWebsiteHref('https://beyond10x.github.io/ess/'), '/ecosystem/ess/');
-  assert.equal(localizeWebsiteHref('/metaharness/'), '/ecosystem/metaharness/');
+  assert.equal(localizeWebsiteHref('/metaharness/'), '/metaharness/');
   assert.equal(localizeWebsiteHref('/getting-started/'), '/');
   assert.equal(
     localizeWebsiteHref('https://beyond10x.github.io/agentic-principles/principles'),
