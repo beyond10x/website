@@ -48,6 +48,16 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
   reader could expect on the roster; amend that record in the same change that admits, retires, or
   first publishes a manifest for one.
 
+## Independent project sites
+
+Metaharness owns its documentation at `/metaharness/`. Its explicit exclusion in `sources.yaml`
+is retained alongside passive discovery data in `data/independent-sites.json`. The retained
+project provenance and route/anchor inventory must identify the same exact source commit and
+match their declared digests. Independent projects never re-enter the collector to make a link
+pass. The Rust compatibility tools own old root redirects and independently deployed link checks;
+missing independent routes or fragments remain errors. Publish and verify the independent site
+before deploying its Website migration.
+
 ## Presentation
 
 - Compose discovery, profile, search, feed, API, and reference views from the shared Docs System

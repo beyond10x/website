@@ -134,12 +134,31 @@ generated `b10x-publication-layout/v2` stores `site/` beside the exact source bu
 inputs on `beyond10x.github.io`'s `published` branch; Pages uploads only `site/`. Publication is
 performed by Atlas-owned bot automation, never by developer credentials in this repository.
 
-Active and retired repository Pages sites are stable redirect façades. They call
+Collected repository Pages sites are stable redirect façades. They call
 `.github/workflows/redirect-facade.yml` at an immutable Website runtime and bind v2 provenance to
 the repository's stable canonical/profile routes plus the runtime and caller control commits. A
 fixed Website snapshot is accepted only during the one-time v1-to-v2 migration to preserve legacy
 alias bytes; later content promotions do not rebuild or deploy façades. The reusable workflow
 executes the generator and dependency lock from its own immutable `job.workflow_sha`.
 `getting-started` remains explicitly admitted only for this permanent compatibility role.
+
+## Independent project documentation
+
+Metaharness publishes its own site at https://beyond10x.github.io/metaharness/. It is excluded
+from the collected source roster. Website retains discovery metadata and redirects the previous
+`/docs/metaharness/` pages to their exact `/metaharness/docs/` destinations, preserving queries
+and fragments through the existing redirect template.
+
+`data/independent-sites.json` binds the independent site's source commit to the exact retained
+site provenance and route/anchor inventory in `data/independent/`. These are passive discovery
+inputs. They never become collected manifests, source documents, or placeholder project pages.
+The Rust tools in `tools/website` generate compatibility pages and validate independent links
+against that exact inventory; an undeclared route or missing fragment fails the gate.
+
+The gate also runs the Rust formatter, linter and tests. Updating an independent site requires
+replacing its snapshots with verified output from the published project commit and updating the
+matching digests. Publish the independent site before promoting these Website compatibility
+controls. Existing source pins remain unchanged unless a declared relationship requires its
+own coordinated migration.
 
 Apache-2.0.

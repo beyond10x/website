@@ -35,7 +35,7 @@ import {
 } from './source-preview.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
-const prepareSite = path.join(root, 'scripts', 'prepare-site.mjs');
+const prepareSite = '--run=prepare:site';
 const docusaurus = path.join(root, 'node_modules', '@docusaurus', 'core', 'bin', 'docusaurus.mjs');
 const requiredGeneratedInputs = [
   '.generated/.complete.json',

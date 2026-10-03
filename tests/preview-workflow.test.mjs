@@ -186,9 +186,9 @@ test('package scripts expose the bounded preview workflow and production origin 
   assert.equal(packageDocument.scripts.dev, 'node scripts/preview.mjs dev');
   assert.equal(packageDocument.scripts['dev:fast'], 'node scripts/preview.mjs dev-fast');
   assert.equal(packageDocument.scripts['preview:build'], 'node scripts/preview.mjs build');
-  assert.equal(packageDocument.scripts.build, 'node scripts/generation-command.mjs build');
-  assert.equal(packageDocument.scripts['build:site'], 'node scripts/generation-command.mjs build-site');
-  assert.equal(packageDocument.scripts.clear, 'node scripts/generation-command.mjs clear');
+  assert.equal(packageDocument.scripts.build, 'cargo run --locked --quiet --manifest-path tools/website/Cargo.toml -- build');
+  assert.equal(packageDocument.scripts['build:site'], 'cargo run --locked --quiet --manifest-path tools/website/Cargo.toml -- build-site');
+  assert.equal(packageDocument.scripts.clear, 'cargo run --locked --quiet --manifest-path tools/website/Cargo.toml -- clear');
   assert.equal(packageDocument.scripts['audit:code-rendering'], 'node scripts/code-contract.mjs source && node scripts/code-contract.mjs build');
 
   const config = await readFile(path.join(root, 'docusaurus.config.ts'), 'utf8');

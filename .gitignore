@@ -15,3 +15,6 @@
 .env.test.local
 .env.production.local
 npm-debug.log*
+
+# Rust documentation migration tools
+/tools/website/target

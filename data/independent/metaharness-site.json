@@ -1,0 +1,6 @@
+{
+  "baseUrl": "/metaharness/",
+  "commit": "50c97895f864b84d7a573d8db03d89185050d8cd",
+  "repository": "metaharness",
+  "schema": "b10x-project-site/v1"
+}

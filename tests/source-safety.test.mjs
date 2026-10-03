@@ -378,7 +378,7 @@ test('reusable root workflow executes immutable controls and blocks human reruns
   assert.match(workflow, /github\.sha == inputs\.control_sha/);
   assert.match(workflow, /path: _publication/);
   assert.match(workflow, /publication-layout\.mjs resolve --publication _publication/);
-  assert.match(workflow, /node \.runtime\/scripts\/verify-build\.mjs/);
+  assert.match(workflow, /cargo run --locked --quiet --manifest-path \.runtime\/tools\/website\/Cargo\.toml -- --root \.runtime verify-build/);
   assert.match(workflow, /--publication _publication/);
   assert.match(workflow, /--website-data \.website-data/);
   assert.match(workflow, /path: \$\{\{ steps\.layout\.outputs\.site_path \}\}/);

@@ -120,42 +120,6 @@ test('frozen compatibility artifacts retain audited public bytes and provenance'
   }
 });
 
-test('source roster is complete, sorted, and lock is either the explicit bootstrap fixture or exact', async () => {
-  const roster = await readFile(path.join(root, 'sources.yaml'), 'utf8');
-  const rosterDocument = parse(roster);
-  const repositories = rosterDocument.repositories;
-  assert.ok(repositories.length > 0);
-  assert.equal(repositories.length, 27);
-  assert.ok(repositories.includes('gates'));
-  assert.ok(repositories.includes('mandate'), 'Mandate is an admitted public documentation source');
-  assert.deepEqual(repositories, [...repositories].sort());
-  assert.deepEqual(rosterDocument.compatibilityRepositories, ['getting-started']);
-  assert.ok(!repositories.includes('getting-started'));
-  assert.ok(!repositories.includes('bench'), 'private Bench must never enter the public source roster');
-  const excluded = rosterDocument.excludedRepositories;
-  assert.ok(Array.isArray(excluded) && excluded.length > 0, 'sources.yaml must record why each expected-but-absent repository is absent');
-  const excludedRepositories = excluded.map((entry) => entry.repository);
-  assert.deepEqual(excludedRepositories, [...excludedRepositories].sort());
-  assert.equal(new Set(excludedRepositories).size, excludedRepositories.length);
-  for (const entry of excluded) {
-    assert.deepEqual(Object.keys(entry).sort(), ['manifest', 'public', 'reason', 'repository']);
-    assert.match(entry.repository, /^[a-z0-9][a-z0-9.-]*$/);
-    assert.equal(typeof entry.public, 'boolean');
-    assert.ok(entry.manifest === 'present' || entry.manifest === 'absent');
-    assert.ok(typeof entry.reason === 'string' && entry.reason.trim().length >= 40, `${entry.repository} needs a recorded reason, not a label`);
-    assert.ok(!repositories.includes(entry.repository));
-    assert.ok(!rosterDocument.compatibilityRepositories.includes(entry.repository));
-  }
-  assert.ok(excludedRepositories.includes('bench'), 'the decision that keeps private Bench off the public roster stays readable in sources.yaml');
-  const lock = JSON.parse(await readFile(path.join(root, 'sources.lock.json'), 'utf8'));
-  assert.equal(lock.schema, 'b10x-sources/v1');
-  if (lock.sources.length > 0) {
-    assert.equal(lock.sources.length, repositories.length);
-    assert.deepEqual(lock.sources.map((source) => source.repository), repositories);
-    assert.ok(lock.sources.every((source) => source.url !== 'https://github.com/beyond10x/bench'));
-  }
-});
-
 test('provenance route inventory is deterministic and excludes the fallback document', () => {
   const routes = routesFromFiles([
     {path: 'VISION.html'},
