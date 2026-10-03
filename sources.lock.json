@@ -28,10 +28,10 @@
     {
       "repository": "agentic-principles",
       "url": "https://github.com/beyond10x/agentic-principles",
-      "commit": "b0edc860d2c8938af81b4b88f06d263d061a391d",
+      "commit": "6f5428d4cda8e2532ef5a4dbbe0ddb26399d6b71",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "8b6ba19a6156702112daf148458583e5527fb48f8dbd6cf51cc7059cc9f18e23",
-      "contentSha256": "3220dd21aa5d3ac974d49c35c17513226d50602137b4e83f06f81755f5796e2a"
+      "manifestSha256": "331525d556e001aebac3668731bb8597d7b68a7180dce70eac8cbcf36f73dcdf",
+      "contentSha256": "91931ed54bca80f24fa734d9e7cd8a521dccd041074d1016ae5fec792d07100f"
     },
     {
       "repository": "agentide",
