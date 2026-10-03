@@ -154,14 +154,6 @@
       "contentSha256": "a49522684b8e9ee64ac47ca4f1001252d76b9b0e3c4b239f1c09b86d5227e401"
     },
     {
-      "repository": "metaharness",
-      "url": "https://github.com/beyond10x/metaharness",
-      "commit": "d713850c703b0cb20ff2c5507e309543ceec3795",
-      "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "4b5d466f6a1c90d951f3e25a04b35cc845b17c2ab69c64e45ff3dd49b30e573b",
-      "contentSha256": "cb050d324b8f5fe8b76fd8849a95fbc740cb5a441f5b89a0e484f42fdf1cc374"
-    },
-    {
       "repository": "research",
       "url": "https://github.com/beyond10x/research",
       "commit": "31b8fd002191bdbf6d4dca60ba68ef028280c4cc",

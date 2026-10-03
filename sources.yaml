@@ -23,7 +23,6 @@ repositories:
   - llm
   - mandate
   - mcp
-  - metaharness
   - research
   - secrets
   - service-sdk
@@ -65,6 +64,14 @@ excludedRepositories:
     reason: >-
       The generated deployment mirror this site is published into. It carries no manifest and
       authors no content; AGENTS.md states that nothing is authored there.
+  - repository: metaharness
+    public: true
+    manifest: absent
+    reason: >-
+      Metaharness publishes its documentation independently at
+      https://beyond10x.github.io/metaharness/ from its own repository and main commit.
+      Website retains discovery and redirects from the former /docs/metaharness/ routes,
+      but does not collect or publish its documentation content.
   - repository: swarm
     public: true
     manifest: present
