@@ -97,8 +97,6 @@ surfaces:
   - kind: introduces
     target: mcp/docs
   - kind: introduces
-    target: metaharness/docs
-  - kind: introduces
     target: research/docs
   - kind: introduces
     target: secrets/docs
