@@ -1,0 +1,6 @@
+{
+  "baseUrl": "/substrate/",
+  "commit": "dc55907ae7bace8bfa2347b86124e45f70ac5ee8",
+  "repository": "substrate",
+  "schema": "b10x-project-site/v1"
+}

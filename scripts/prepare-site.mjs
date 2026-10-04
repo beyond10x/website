@@ -8,7 +8,7 @@ import {readExperienceCatalog} from '@beyond10x/docs-system/manifest';
 import {essContractReference, markdownText} from './ess-contract-reference.mjs';
 import {compareUtf8} from './order-contract.mjs';
 import {sourceKey, sourceMap} from './source-routing.mjs';
-import {canonicalSectionUrl, redirectQuarantinedUrls, rewriteLinks} from './link-rewriting.mjs';
+import {canonicalSectionUrl, projectPostRoutes, redirectQuarantinedUrls, rewriteLinks} from './link-rewriting.mjs';
 import {bootstrapEnabled} from './source-lock-contract.mjs';
 import {validateBootstrapSnapshots} from './bootstrap-contract.mjs';
 import {buildApiCatalog, describeApiSpecification, renderApiCatalogLanding} from './api-catalog.mjs';
@@ -40,6 +40,8 @@ const preparedInputSha256 = inputs.inputSha256;
 // Absent from every projection below; `roster` is already the published roster without them.
 const quarantined = new Set(inputs.quarantined.map((entry) => entry.repository));
 const redirectQuarantined = (value) => (quarantined.size ? redirectQuarantinedUrls(value, quarantined) : value);
+// A collected post's project-site URL → its field-note route; filled once posts are known.
+let projectPostRouteMap = new Map();
 await validateBootstrapSnapshots(root, inputs.sourceRoster, {
   directory: inputs.bootstrapRoot,
   sourceLockBytes: inputs.sourceLockBytes,
@@ -326,11 +328,15 @@ async function materializeCollection({manifests: sourceManifests, indexes: sourc
   const routeBySource = sourceMap(documents, (file) => documentRoute(file, surfaceByKey));
   const blogFiles = sourceIndexes.flatMap((index) => index.files.filter((file) => file.kind === 'blog'));
   const blogRouteBySource = new Map();
+  const posts = [];
   for (const file of blogFiles) {
     const raw = await readFile(path.join(collectedRoot, ...file.outputPath.split('/')), 'utf8');
     const {frontmatter} = splitFrontmatter(raw);
-    blogRouteBySource.set(sourceKey(file.repository, file.sourcePath), blogRoute(file, frontmatter.slug));
+    const route = blogRoute(file, frontmatter.slug);
+    blogRouteBySource.set(sourceKey(file.repository, file.sourcePath), route);
+    posts.push({repository: file.repository, slug: route.slice(`/updates/field-notes/${file.repository}/`.length), route});
   }
+  projectPostRouteMap = projectPostRoutes(sourceManifests, posts);
   const assetBySource = sourceMap(
     sourceIndexes.flatMap((index) => index.files.filter((file) => file.kind === 'asset')),
     (file) => `/source-assets/${file.outputPath}`,
@@ -434,7 +440,7 @@ function renderImportedMarkdown({raw, file, route, commit, repositoryUrl, routeB
   const {frontmatter, body} = splitFrontmatter(raw);
   const title = metadata.title;
   const sidebar = sourceSidebarMetadata(frontmatter, title);
-  const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, quarantined});
+  const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, projectPostRoutes: projectPostRouteMap, quarantined});
   const contextualized = insertDocContextAfterTitle(rewritten.trim(), renderDocContext({
     file,
     commit,
@@ -508,7 +514,7 @@ async function renderBlog({raw, file, route, commit, repositoryUrl, routeBySourc
   const {frontmatter, body} = splitFrontmatter(raw);
   const title = frontmatter.title ?? firstHeading(body) ?? path.basename(file.sourcePath, path.extname(file.sourcePath));
   const date = normalizeBlogDate(frontmatter.date ?? /^([0-9]{4}-[0-9]{2}-[0-9]{2})/.exec(path.basename(file.sourcePath))?.[1] ?? '1970-01-01');
-  const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, quarantined});
+  const rewritten = rewriteLinks(normalizePassiveMarkdown(body), {file, commit, repositoryUrl, routeBySource, blogRouteBySource, assetBySource, projectPostRoutes: projectPostRouteMap, quarantined});
   const resolved = manifest.schema === 'b10x-docs/v4' || manifest.schema === 'b10x-docs/v5'
     ? await resolveDocumentPageMetadata(manifest, file.surface, raw, `${file.repository}/${file.sourcePath}`)
     : undefined;

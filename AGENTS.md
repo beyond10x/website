@@ -50,8 +50,9 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
 
 ## Independent project sites
 
-Metaharness owns its documentation at `/metaharness/`. Its explicit exclusion in `sources.yaml`
-is retained alongside passive discovery data in `data/independent-sites.json`. The retained
+Metaharness owns its documentation at `/metaharness/` and Substrate at `/substrate/`. Each one's
+explicit exclusion in `sources.yaml` is retained alongside passive discovery data in
+`data/independent-sites.json`. The retained
 project provenance and route/anchor inventory must identify the same exact source commit and
 match their declared digests. Independent projects never re-enter the collector to make a link
 pass. The Rust compatibility tools own old root redirects and independently deployed link checks;

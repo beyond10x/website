@@ -15,7 +15,7 @@ on:
 permissions: {}
 
 jobs:
-  deploy:
+  verify:
     if: >-
       github.actor == 'b10x-bot[bot]'
       && github.triggering_actor == 'b10x-bot[bot]'
@@ -24,13 +24,11 @@ jobs:
       && github.sha == inputs.control_sha
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       contents: read
-      pages: write
-      id-token: write
+    outputs:
+      schema: ${{ steps.layout.outputs.schema }}
+      site_path: ${{ steps.layout.outputs.site_path }}
     env:
       BOT_EMAIL: 316511680+b10x-bot[bot]@users.noreply.github.com
       BOT_LOGIN: b10x-bot[bot]
@@ -213,6 +211,74 @@ jobs:
             --publication _publication \
             --website-data .website-data \
             --website-sha "$WEBSITE_SHA"
+
+  deploy:
+    needs: verify
+    if: >-
+      github.actor == 'b10x-bot[bot]'
+      && github.triggering_actor == 'b10x-bot[bot]'
+      && github.repository == 'beyond10x/beyond10x.github.io'
+      && github.ref == 'refs/heads/main'
+      && github.sha == inputs.control_sha
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    env:
+      CONTROL_SHA: ${{ inputs.control_sha }}
+      PUBLISHED_SHA: ${{ inputs.published_sha }}
+    steps:
+      - name: Validate immutable authority inputs
+        run: |
+          set -euo pipefail
+          for revision in "$CONTROL_SHA" "$PUBLISHED_SHA"; do
+            case "$revision" in
+              *[!0-9a-f]*|'') exit 1 ;;
+            esac
+            test "${#revision}" -eq 40
+            test "$revision" != 0000000000000000000000000000000000000000
+          done
+          test "$CONTROL_SHA" = "$GITHUB_SHA"
+
+      - name: Check out the exact verified publication
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: beyond10x/beyond10x.github.io
+          ref: ${{ inputs.published_sha }}
+          path: _publication
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Re-check the verified commit and branch heads
+        run: |
+          set -euo pipefail
+          test "$(git -C _publication rev-parse HEAD)" = "$PUBLISHED_SHA"
+          remote_head() {
+            local repository=$1 branch=$2
+            git ls-remote --refs "https://github.com/beyond10x/${repository}.git" "refs/heads/${branch}" \
+              | awk 'NF == 2 && $2 == "refs/heads/'"$branch"'" { print $1 }'
+          }
+          test "$(remote_head beyond10x.github.io main)" = "$CONTROL_SHA"
+          test "$(remote_head beyond10x.github.io published)" = "$PUBLISHED_SHA"
+          rm -rf -- _publication/.git
+
+      - name: Accept the layout the read-only job verified
+        id: layout
+        env:
+          VERIFIED_SCHEMA: ${{ needs.verify.outputs.schema }}
+          VERIFIED_SITE_PATH: ${{ needs.verify.outputs.site_path }}
+        run: |
+          set -euo pipefail
+          case "$VERIFIED_SCHEMA:$VERIFIED_SITE_PATH" in
+            b10x-publication-layout/v1:_publication|b10x-publication-layout/v2:_publication/site) ;;
+            *) echo "unsafe verified publication layout" >&2; exit 1 ;;
+          esac
+          printf 'site_path=%s\n' "$VERIFIED_SITE_PATH" >> "$GITHUB_OUTPUT"
 
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b

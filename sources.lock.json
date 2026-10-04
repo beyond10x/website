@@ -84,10 +84,10 @@
     {
       "repository": "ess",
       "url": "https://github.com/beyond10x/ess",
-      "commit": "8687cbf7ecd1a76aaa2db572e33a7898a84fd18a",
+      "commit": "5785a64742ff11156db3370e96a0b16fe14e339a",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "af67e8dbbd482583c9c72afc2cf7800f134dcda7ac6cd129381e21aaace0df49",
-      "contentSha256": "82662cd9f2d1c54ca8098ce70d805aece4585ea347e8c4b09d80c1e20fea4d37"
+      "manifestSha256": "40dbced387350a94c0b84dc4ea54c155e0a16ff5b4cbf4a18cf49f1cd66354a8",
+      "contentSha256": "4f6436b108030206cb28957c5b6d1a86446e10e45e4a3f73f13d039e87456178"
     },
     {
       "repository": "eventlog",
@@ -116,10 +116,10 @@
     {
       "repository": "harness",
       "url": "https://github.com/beyond10x/harness",
-      "commit": "06cb7c850f05eb3046e12ee049f38704d38ddcf2",
+      "commit": "2fd7235bdef80be1f708af0b4e95a10ef091535d",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "03b2b6737cbedc03a73aacc82af114df1cff017f80322666ad412080b57ec246",
-      "contentSha256": "06e172e0859b2a7da8a9dce45a8e6926a915f38dedb91835a0ecae1063fde630"
+      "manifestSha256": "a99c053b1780d84420d4d4f82fa80f80db60a27887ee1eefad1c3aa0d865eabc",
+      "contentSha256": "313184a15d826d7ecaf9ad4c1e87406c6bbac41df287ac9a95ed9a0b8f602d5e"
     },
     {
       "repository": "identity",
@@ -176,14 +176,6 @@
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "033571f12377dba49363ff31575bf51338bd180a6bfaf6d8954986fb75c86dc7",
       "contentSha256": "f3062bc0acad6fb01c8780dbaff3481c610ce125fde949badeeb3811f03cdc5f"
-    },
-    {
-      "repository": "substrate",
-      "url": "https://github.com/beyond10x/substrate",
-      "commit": "3192d9e6bc58b4f7156ac62a6041b460c9139bc1",
-      "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "d5817ee13dd2ab37d94d6b197285fbe178c83e84b6ee495c92423abda0bae589",
-      "contentSha256": "803387618afb09555aed1e15c03d1b6985a9dcea829aafcf7d134ec9a1334c05"
     },
     {
       "repository": "workflow",

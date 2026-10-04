@@ -391,6 +391,31 @@ test('reusable root workflow executes immutable controls and blocks human reruns
   assert.doesNotMatch(workflow, /working-directory: \.website-data/);
 });
 
+test('root verifier code runs without Pages authority and the deploy job builds nothing', async () => {
+  const workflow = await readFile(path.join(path.resolve(import.meta.dirname, '..'), '.github', 'workflows', 'deploy-root.yml'), 'utf8');
+  const jobs = workflow.slice(workflow.indexOf('\njobs:\n'));
+  const verifyStart = jobs.indexOf('\n  verify:\n');
+  const deployStart = jobs.indexOf('\n  deploy:\n');
+  assert.ok(verifyStart > 0 && deployStart > verifyStart, 'verify precedes deploy');
+  assert.deepEqual([...jobs.matchAll(/^  [a-z][a-z-]*:$/gm)].map((match) => match[0].trim()), ['verify:', 'deploy:']);
+  const verify = jobs.slice(verifyStart, deployStart);
+  const deploy = jobs.slice(deployStart);
+  assert.match(verify, /    permissions:\n      contents: read\n    outputs:/);
+  assert.doesNotMatch(verify, /pages: write|id-token: write|environment:/);
+  assert.match(verify, /-- --root \.runtime verify-build/);
+  assert.match(verify, /npm ci --ignore-scripts/);
+  assert.match(deploy, /    needs: verify\n/);
+  assert.match(deploy, /pages: write/);
+  assert.match(deploy, /id-token: write/);
+  assert.match(deploy, /github\.triggering_actor == 'b10x-bot\[bot\]'/);
+  assert.match(deploy, /ref: \$\{\{ inputs\.published_sha \}\}/);
+  assert.match(deploy, /test "\$\(git -C _publication rev-parse HEAD\)" = "\$PUBLISHED_SHA"/);
+  assert.match(deploy, /remote_head beyond10x\.github\.io published\)" = "\$PUBLISHED_SHA"/);
+  assert.match(deploy, /remote_head beyond10x\.github\.io main\)" = "\$CONTROL_SHA"/);
+  assert.match(deploy, /path: \$\{\{ steps\.layout\.outputs\.site_path \}\}/);
+  assert.doesNotMatch(deploy, /cargo|npm|node |rust-toolchain|setup-node|\.runtime|\.website-data|github\.token/);
+});
+
 function testGit(repositoryRoot, args) {
   return execFile('git', ['-C', repositoryRoot, ...args], {encoding: 'utf8'});
 }

@@ -55,7 +55,58 @@ export function redirectQuarantinedUrls(value, quarantined) {
   return value;
 }
 
+const WEBSITE_ORIGIN = 'https://beyond10x.github.io';
+
+/**
+ * Where the unified site publishes each collected post, keyed by the URL its own project site
+ * publishes it at. A source declares that URL through a feed on its own project path: ESS declares
+ * `https://beyond10x.github.io/ess/releases/rss.xml`, so its post `slug: set-effects` lives at
+ * `/ess/releases/set-effects/` there and at `/updates/field-notes/ess/set-effects/` here.
+ */
+export function projectPostRoutes(manifests, posts) {
+  const bases = new Map();
+  for (const manifest of manifests) {
+    const repository = manifest.repository.id;
+    for (const surface of manifest.surfaces ?? []) {
+      for (const feed of surface.feeds ?? []) {
+        let url;
+        try { url = new URL(feed.url); } catch { continue; }
+        if (url.origin !== WEBSITE_ORIGIN || !url.pathname.startsWith(`/${repository}/`)) continue;
+        const base = url.pathname.slice(0, url.pathname.lastIndexOf('/') + 1);
+        if (base === `/${repository}/`) continue;
+        if (!bases.has(repository)) bases.set(repository, new Set());
+        bases.get(repository).add(base);
+      }
+    }
+  }
+  const routes = new Map();
+  for (const {repository, slug, route} of posts) {
+    const cleaned = String(slug ?? '').replace(/^\/+|\/+$/g, '');
+    if (!cleaned) continue;
+    for (const base of bases.get(repository) ?? []) routes.set(`${base}${cleaned}/`, route);
+  }
+  return routes;
+}
+
+function projectPostTarget(destination, context) {
+  if (!context.projectPostRoutes?.size) return undefined;
+  let url;
+  try {
+    url = destination.startsWith('/') && !destination.startsWith('//')
+      ? new URL(destination, WEBSITE_ORIGIN)
+      : new URL(destination);
+  } catch {
+    return undefined;
+  }
+  if (url.origin !== WEBSITE_ORIGIN) return undefined;
+  const pathname = url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`;
+  const route = context.projectPostRoutes.get(pathname);
+  return route ? `${route}${url.search}${url.hash}` : undefined;
+}
+
 function resolvePublishedLink(destination, context, {image}) {
+  const post = image ? undefined : projectPostTarget(destination, context);
+  if (post) return post;
   if (/^(?:https?:|mailto:|tel:|data:|#)/i.test(destination)) return destination;
   const suffixIndex = destination.search(/[?#]/);
   const target = suffixIndex === -1 ? destination : destination.slice(0, suffixIndex);

@@ -1,0 +1,200 @@
+{
+  "baseUrl": "/substrate/",
+  "commit": "dc55907ae7bace8bfa2347b86124e45f70ac5ee8",
+  "repository": "substrate",
+  "routes": [
+    {
+      "anchors": [
+        "architecture",
+        "boundary-caption",
+        "main",
+        "quickstart"
+      ],
+      "path": "/substrate/"
+    },
+    {
+      "anchors": [
+        "choose-a-path",
+        "main",
+        "run-things-report-what-happened",
+        "the-boundary-in-one-table",
+        "what-it-deliberately-leaves-out",
+        "what-it-gives-a-caller"
+      ],
+      "path": "/substrate/docs/"
+    },
+    {
+      "anchors": [
+        "main",
+        "one-contract-capability-gated-behavior",
+        "one-machine-one-execution-boundary",
+        "what-stays-above-the-boundary",
+        "what-substrate-owns"
+      ],
+      "path": "/substrate/docs/concepts/boundary/"
+    },
+    {
+      "anchors": [
+        "a-missing-guarantee-is-a-refusal",
+        "capability-snapshots",
+        "guarded-filesystem-access",
+        "main",
+        "process-isolation",
+        "refusal-is-part-of-the-contract",
+        "what-the-minimum-host-does-not-claim"
+      ],
+      "path": "/substrate/docs/concepts/confinement/"
+    },
+    {
+      "anchors": [
+        "main",
+        "model-coverage",
+        "subsystems-and-ownership",
+        "what-defines-the-system",
+        "what-is-derived-and-what-is-authored"
+      ],
+      "path": "/substrate/docs/concepts/model/"
+    },
+    {
+      "anchors": [
+        "events-metrics-and-recovery-have-different-jobs",
+        "follow-a-command-from-intent-to-observation",
+        "leases-and-cleanup",
+        "main",
+        "read-the-outcome-before-deciding-what-to-do",
+        "retry-identity",
+        "three-identities-two-lifetimes"
+      ],
+      "path": "/substrate/docs/concepts/operations/"
+    },
+    {
+      "anchors": [
+        "build-the-workspace",
+        "inspect-verified-facts",
+        "main",
+        "prerequisites",
+        "run-the-daemon",
+        "serving-process-execution",
+        "start-with-an-observable-machine",
+        "try-a-workspace-without-process-execution",
+        "what-to-look-for"
+      ],
+      "path": "/substrate/docs/getting-started/"
+    },
+    {
+      "anchors": [
+        "deployment-review",
+        "main",
+        "organization-and-hosted-shapes",
+        "personal",
+        "production-tls-transport",
+        "put-the-same-contract-behind-an-explicit-trust-boundary",
+        "rules-that-do-not-change-by-posture",
+        "static-bearer-tcp-is-development-only",
+        "unrecorded-interactive-sessions"
+      ],
+      "path": "/substrate/docs/guides/deployment/"
+    },
+    {
+      "anchors": [
+        "build-the-adapter",
+        "connect-codex",
+        "give-a-harness-a-disposable-substrate",
+        "lifecycle-and-limits",
+        "main",
+        "portable-refusal-versus-delegated-success",
+        "what-the-harness-can-do"
+      ],
+      "path": "/substrate/docs/guides/mcp-adapter/"
+    },
+    {
+      "anchors": [
+        "1-point-the-shell-at-the-daemon",
+        "2-create-a-disk-bounded-workspace",
+        "3-put-input-in-workspace",
+        "4-start-the-binary",
+        "5-watch-current-usage",
+        "6-read-the-result-and-bounded-output",
+        "7-clean-up",
+        "execute-an-ordinary-binary-inside-a-measured-resource-envelope",
+        "main"
+      ],
+      "path": "/substrate/docs/guides/run-a-command/"
+    },
+    {
+      "anchors": [
+        "connect-and-run-an-argv-only-command",
+        "connect-to-a-daemon-you-own",
+        "connect-to-a-remote-daemon",
+        "drive-a-terminal-and-observe-usage",
+        "guard-file-changes-and-recovery",
+        "main",
+        "preserve-capability-absence",
+        "recover-and-observe",
+        "ship-one-application-executable",
+        "stream-terminal-output-without-recording-it",
+        "use-substrate-from-rust"
+      ],
+      "path": "/substrate/docs/guides/rust-sdk/"
+    },
+    {
+      "anchors": [
+        "bound-writable-storage-and-measure-the-process-that-used-it",
+        "host-requirements",
+        "main",
+        "read-the-latest-observation",
+        "request-a-persistent-workspace-ceiling",
+        "request-per-exec-scratch-and-counters",
+        "stream-without-building-a-history-service"
+      ],
+      "path": "/substrate/docs/guides/storage-and-metrics/"
+    },
+    {
+      "anchors": [
+        "a-small-control-plane-with-explicit-recovery",
+        "development-v2-byte-plane",
+        "execs",
+        "identity-and-operation-ids",
+        "machine",
+        "main",
+        "metrics",
+        "recovery-and-events",
+        "sessions",
+        "workspaces"
+      ],
+      "path": "/substrate/docs/reference/contract/"
+    },
+    {
+      "anchors": [
+        "main",
+        "report-security-issues-privately"
+      ],
+      "path": "/substrate/docs/security/"
+    },
+    {
+      "anchors": [
+        "explicitly-absent",
+        "main",
+        "reading-status-safely",
+        "served-now",
+        "trust-limitations",
+        "what-is-available-today"
+      ],
+      "path": "/substrate/docs/status/"
+    },
+    {
+      "anchors": [
+        "agent-tool-execution",
+        "batch-and-data-processing-steps",
+        "build-and-test-workers",
+        "extension-and-plugin-execution",
+        "file-and-document-conversion",
+        "main",
+        "put-a-governed-process-boundary-under-many-kinds-of-automation",
+        "what-it-is-not"
+      ],
+      "path": "/substrate/docs/use-cases/"
+    }
+  ],
+  "schema": "b10x-project-routes/v1"
+}
