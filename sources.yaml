@@ -26,7 +26,6 @@ repositories:
   - research
   - secrets
   - service-sdk
-  - substrate
   - workflow
   - workspace
   - worktree
@@ -71,6 +70,14 @@ excludedRepositories:
       Metaharness publishes its documentation independently at
       https://beyond10x.github.io/metaharness/ from its own repository and main commit.
       Website retains discovery and redirects from the former /docs/metaharness/ routes,
+      but does not collect or publish its documentation content.
+  - repository: substrate
+    public: true
+    manifest: absent
+    reason: >-
+      Substrate publishes its documentation independently at
+      https://beyond10x.github.io/substrate/ from its own repository and main commit.
+      Website retains discovery and redirects from the former /docs/substrate/ routes,
       but does not collect or publish its documentation content.
   - repository: swarm
     public: true

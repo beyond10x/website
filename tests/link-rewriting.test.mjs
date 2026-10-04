@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {quarantinedRouteTarget, redirectQuarantinedUrls, rewriteLinks} from '../scripts/link-rewriting.mjs';
+import {projectPostRoutes, quarantinedRouteTarget, redirectQuarantinedUrls, rewriteLinks} from '../scripts/link-rewriting.mjs';
 import {sourceKey} from '../scripts/source-routing.mjs';
 
 const context = {
@@ -155,4 +155,36 @@ test('a surface key of a quarantined source resolves to a link to its GitHub rep
   });
   assert.equal(quarantinedSurfaceLink('harness/docs', quarantined), undefined);
   assert.equal(quarantinedSurfaceLink('eventlog/docs', new Set()), undefined);
+});
+
+test('a link to a collected post on its own project site lands on the collected field note', () => {
+  // 2026-09-29 to 2026-10-03: ESS's generated releases/what-changed.md linked every release post
+  // at https://beyond10x.github.io/ess/releases/<slug>, which the unified build rendered as a
+  // root route it does not have, and every Website build failed.
+  const manifests = [
+    {repository: {id: 'ess'}, surfaces: [{feeds: [{url: 'https://beyond10x.github.io/ess/releases/rss.xml'}]}]},
+    {repository: {id: 'aep'}, surfaces: [{feeds: [{url: 'https://beyond10x.github.io/ess/releases/atom.xml'}, {url: 'https://example.com/aep/releases/rss.xml'}]}]},
+  ];
+  const posts = [
+    {repository: 'ess', slug: 'set-effects', route: '/updates/field-notes/ess/set-effects/'},
+    {repository: 'aep', slug: 'set-effects', route: '/updates/field-notes/aep/set-effects/'},
+  ];
+  const routes = projectPostRoutes(manifests, posts);
+  assert.deepEqual([...routes], [['/ess/releases/set-effects/', '/updates/field-notes/ess/set-effects/']]);
+  const withPosts = {...context, projectPostRoutes: routes};
+  for (const [written, expected] of [
+    ['https://beyond10x.github.io/ess/releases/set-effects', '/updates/field-notes/ess/set-effects/'],
+    ['https://beyond10x.github.io/ess/releases/set-effects/#effects', '/updates/field-notes/ess/set-effects/#effects'],
+    ['/ess/releases/set-effects', '/updates/field-notes/ess/set-effects/'],
+  ]) {
+    assert.equal(rewriteLinks(`[post](${written})\n`, withPosts), `[post](${expected})\n`);
+  }
+  for (const untouched of [
+    'https://beyond10x.github.io/ess/releases/not-collected',
+    'https://beyond10x.github.io/ess/docs/visualise',
+    'https://example.com/ess/releases/set-effects',
+    'https://github.com/beyond10x/ess/releases/tag/0.38.0',
+  ]) {
+    assert.equal(rewriteLinks(`[x](${untouched})\n`, withPosts), `[x](${untouched})\n`);
+  }
 });

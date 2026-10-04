@@ -654,8 +654,88 @@
       "type": "html"
     },
     {
+      "from": "/docs/substrate/",
+      "to": "/substrate/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/concepts/boundary/",
+      "to": "/substrate/docs/concepts/boundary/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/concepts/confinement/",
+      "to": "/substrate/docs/concepts/confinement/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/concepts/model/",
+      "to": "/substrate/docs/concepts/model/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/concepts/operations/",
+      "to": "/substrate/docs/concepts/operations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/getting-started/",
+      "to": "/substrate/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/guides/deployment/",
+      "to": "/substrate/docs/guides/deployment/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/guides/mcp-adapter/",
+      "to": "/substrate/docs/guides/mcp-adapter/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/guides/run-a-command/",
+      "to": "/substrate/docs/guides/run-a-command/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/guides/rust-sdk/",
+      "to": "/substrate/docs/guides/rust-sdk/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/guides/storage-and-metrics/",
+      "to": "/substrate/docs/guides/storage-and-metrics/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/reference/contract/",
+      "to": "/substrate/docs/reference/contract/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/security/",
+      "to": "/substrate/docs/security/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/status/",
+      "to": "/substrate/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/substrate/use-cases/",
+      "to": "/substrate/docs/use-cases/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/metaharness/",
       "to": "/metaharness/",
+      "type": "html"
+    },
+    {
+      "from": "/ecosystem/substrate/",
+      "to": "/substrate/",
       "type": "html"
     },
     {
@@ -1104,81 +1184,6 @@
     {
       "from": "/journeys/understand/",
       "to": "/learn/safe-agentic-coding/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/",
-      "to": "/ecosystem/substrate/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs",
-      "to": "/docs/substrate/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/concepts/boundary",
-      "to": "/docs/substrate/concepts/boundary/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/concepts/confinement",
-      "to": "/docs/substrate/concepts/confinement/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/concepts/operations",
-      "to": "/docs/substrate/concepts/operations/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/getting-started",
-      "to": "/docs/substrate/getting-started/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/guides/deployment",
-      "to": "/docs/substrate/guides/deployment/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/guides/mcp-adapter",
-      "to": "/docs/substrate/guides/mcp-adapter/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/guides/run-a-command",
-      "to": "/docs/substrate/guides/run-a-command/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/guides/rust-sdk",
-      "to": "/docs/substrate/guides/rust-sdk/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/guides/storage-and-metrics",
-      "to": "/docs/substrate/guides/storage-and-metrics/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/reference/contract",
-      "to": "/docs/substrate/reference/contract/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/security",
-      "to": "/docs/substrate/security/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/status",
-      "to": "/docs/substrate/status/",
-      "type": "html"
-    },
-    {
-      "from": "/substrate/docs/use-cases",
-      "to": "/docs/substrate/use-cases/",
       "type": "html"
     },
     {

@@ -101,8 +101,6 @@ surfaces:
   - kind: introduces
     target: secrets/docs
   - kind: introduces
-    target: substrate/docs
-  - kind: introduces
     target: workflow/docs
   - kind: introduces
     target: workspace/docs

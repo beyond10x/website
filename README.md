@@ -144,10 +144,16 @@ executes the generator and dependency lock from its own immutable `job.workflow_
 
 ## Independent project documentation
 
-Metaharness publishes its own site at https://beyond10x.github.io/metaharness/. It is excluded
-from the collected source roster. Website retains discovery metadata and redirects the previous
-`/docs/metaharness/` pages to their exact `/metaharness/docs/` destinations, preserving queries
-and fragments through the existing redirect template.
+Metaharness publishes its own site at https://beyond10x.github.io/metaharness/ and Substrate at
+https://beyond10x.github.io/substrate/. Both are excluded from the collected source roster.
+Website retains discovery metadata and redirects each previous `/docs/<project>/` page to its exact
+`/<project>/docs/` destination, preserving queries and fragments through the existing redirect
+template.
+
+A collected source that links one of its own posts at its project-site URL (ESS's generated
+`releases/what-changed` page links `https://beyond10x.github.io/ess/releases/<slug>`) is rewritten
+to that post's field note, `/updates/field-notes/<repository>/<slug>/`. The project-site base is the
+one the source declares through a feed URL on its own path.
 
 `data/independent-sites.json` binds the independent site's source commit to the exact retained
 site provenance and route/anchor inventory in `data/independent/`. These are passive discovery

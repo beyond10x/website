@@ -24,7 +24,8 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   const map = JSON.parse(await readFile(path.join(root, 'legacy-routes.json'), 'utf8'));
   const html = map.redirects.filter((route) => route.type === 'html');
   const aliases = map.redirects.filter((route) => route.type === 'alias');
-  assert.equal(html.length, 220);
+  // Substrate's independent site added concepts/model, which the captured site never had.
+  assert.equal(html.length, 221);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));

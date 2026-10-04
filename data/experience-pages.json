@@ -202,7 +202,7 @@
               "id": "confine-effects",
               "title": "Add a confinement boundary",
               "description": "Use Substrate when commands or tools require an explicit execution boundary.",
-              "url": "/docs/substrate/concepts/confinement/",
+              "url": "/substrate/docs/concepts/confinement/",
               "completion": "The execution boundary and allowed operations are explicit."
             }
           ]
