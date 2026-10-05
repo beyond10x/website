@@ -1,0 +1,331 @@
+{
+  "baseUrl": "/llm/",
+  "commit": "f9ca4e8dad25dbf11362545b038787f7298b85f6",
+  "repository": "llm",
+  "routes": [
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus-base-url-issue-banner",
+        "__docusaurus-base-url-issue-banner-suggestion-container",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-hero-title",
+        "b10x-product-main",
+        "how",
+        "how-title",
+        "related",
+        "related-title",
+        "status",
+        "status-title",
+        "theme-svg-external-link",
+        "what",
+        "what-title"
+      ],
+      "path": "/llm/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link",
+        "what-it-is-not",
+        "what-you-can-do-with-it-today",
+        "where-it-sits",
+        "where-to-go-next",
+        "why-it-exists"
+      ],
+      "path": "/llm/docs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "money-is-exact",
+        "six-bases-and-deliberately-no-grand-total",
+        "the-optional-spending-ledger",
+        "theme-svg-external-link",
+        "unknown-is-never-zero"
+      ],
+      "path": "/llm/docs/concepts/accounting/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "a-codex-login",
+        "anonymous-is-a-first-class-mode",
+        "optional-adapters",
+        "renewal-opt-in",
+        "the-guarantees",
+        "theme-svg-external-link"
+      ],
+      "path": "/llm/docs/concepts/credentials/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bounds",
+        "lifecycle",
+        "refusals",
+        "the-http-surface",
+        "the-route-inventory",
+        "theme-svg-external-link",
+        "why-it-cannot-leak-a-secret"
+      ],
+      "path": "/llm/docs/concepts/gateway/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "known-open-issue",
+        "not-verified",
+        "ownership-limits-and-cost",
+        "runpod",
+        "the-lifecycle",
+        "theme-svg-external-link",
+        "three-rules",
+        "try-it"
+      ],
+      "path": "/llm/docs/concepts/hosting/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "evidence-not-inference",
+        "failures-say-what-they-know",
+        "items-carry-no-authority",
+        "one-attempt-one-port",
+        "opaque-state-is-bound-to-six-coordinates",
+        "state-that-arrives-without-an-origin",
+        "streamed-events",
+        "theme-svg-external-link",
+        "validation-happens-before-the-network",
+        "whether-a-failure-may-be-retried"
+      ],
+      "path": "/llm/docs/concepts/neutral-boundary/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "a-binding-joins-them-explicitly",
+        "the-path-of-one-request",
+        "theme-svg-external-link",
+        "what-stays-outside",
+        "which-crate-do-i-need"
+      ],
+      "path": "/llm/docs/concepts/overview/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "chat-completions",
+        "conversation-identity-opt-in",
+        "messages",
+        "responses",
+        "rules-all-three-follow",
+        "the-codex-backend",
+        "theme-svg-external-link",
+        "what-this-evidence-covers"
+      ],
+      "path": "/llm/docs/concepts/protocols/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "explanation-is-safe-by-construction",
+        "ordered-fallback",
+        "same-target-retry",
+        "selection-is-ordered-and-opt-in",
+        "theme-svg-external-link",
+        "what-a-catalog-declares"
+      ],
+      "path": "/llm/docs/concepts/routing/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "depend-on-a-crate-from-your-own-project",
+        "explain-a-route-without-resolving-a-secret",
+        "force-one-tool-call",
+        "get-the-source",
+        "next",
+        "prerequisites",
+        "price-recorded-usage",
+        "run-a-model-turn-with-no-network-and-no-credential",
+        "theme-svg-external-link"
+      ],
+      "path": "/llm/docs/getting-started/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "next",
+        "the-program",
+        "theme-svg-external-link",
+        "what-happens"
+      ],
+      "path": "/llm/docs/guides/call-a-local-endpoint/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "ask-a-real-model-through-a-codex-login",
+        "run-it",
+        "the-program",
+        "theme-svg-external-link",
+        "what-comes-back"
+      ],
+      "path": "/llm/docs/guides/call-a-model-with-one-forced-tool/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "how-to-read-it",
+        "the-output",
+        "theme-svg-external-link",
+        "what-the-explanation-is-not"
+      ],
+      "path": "/llm/docs/guides/explain-a-route/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "attribution-must-match",
+        "price-identity",
+        "reading-a-report",
+        "the-boundary",
+        "theme-svg-external-link"
+      ],
+      "path": "/llm/docs/guides/price-recorded-usage/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "a-codex-login",
+        "a-protected-file",
+        "a-token-inside-a-json-document",
+        "an-environment-variable",
+        "an-explicitly-chosen-keychain",
+        "the-trust-boundary",
+        "theme-svg-external-link"
+      ],
+      "path": "/llm/docs/guides/resolve-a-local-secret/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link",
+        "what-it-does-not-demonstrate",
+        "what-the-example-demonstrates",
+        "writing-your-own-caller"
+      ],
+      "path": "/llm/docs/guides/run-a-local-turn/"
+    },
+    {
+      "anchors": [
+        "1-rust",
+        "2-documentation",
+        "3-specification",
+        "4-conformance",
+        "5-plan",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "falsification-is-part-of-the-evidence",
+        "theme-svg-external-link",
+        "what-a-green-gate-does-not-establish"
+      ],
+      "path": "/llm/docs/guides/run-the-checks/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "query-it",
+        "the-program",
+        "theme-svg-external-link"
+      ],
+      "path": "/llm/docs/guides/start-the-gateway/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "how-it-behaves",
+        "run-it",
+        "the-program",
+        "theme-svg-external-link"
+      ],
+      "path": "/llm/docs/guides/use-llm-from-a-synchronous-loop/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "optional-features",
+        "theme-svg-external-link"
+      ],
+      "path": "/llm/docs/reference/crates/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bounds",
+        "identity-digests",
+        "theme-svg-external-link",
+        "what-a-version-is-and-is-not"
+      ],
+      "path": "/llm/docs/reference/formats/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/llm/docs/status/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "credential-adapter-boundaries",
+        "licence",
+        "no-provider-route-is-qualified",
+        "the-gateway-does-not-translate-and-hosting-reaches-no-cloud",
+        "theme-svg-external-link",
+        "there-is-no-operator-command-line",
+        "what-the-libraries-deliberately-do-not-claim"
+      ],
+      "path": "/llm/docs/status/limitations/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "blocked-items",
+        "modal-hosting",
+        "out-of-scope-for-this-milestone",
+        "smaller-open-items",
+        "subscription-access",
+        "the-order-of-the-remaining-work",
+        "theme-svg-external-link"
+      ],
+      "path": "/llm/docs/status/roadmap/"
+    }
+  ],
+  "schema": "b10x-project-routes/v1"
+}

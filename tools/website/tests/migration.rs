@@ -56,8 +56,8 @@ fn independent_and_undocumented_repositories_leave_the_collector_roster() {
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(
         lock["sources"].as_array().unwrap().len(),
-        23,
-        "Metaharness, Substrate and Secrets left for their own sites and Gates has no website documentation"
+        22,
+        "Metaharness, Substrate, Secrets and LLM left for their own sites and Gates has no website documentation"
     );
 }
 /// Every page of Secrets' site answers its former `/docs/secrets/` path. The site has no
@@ -225,6 +225,104 @@ fn substrate_is_independent_and_all_fifteen_document_routes_survive() {
         ],
     );
 }
+/// Every page of LLM's site answers its former `/docs/llm/` path. The unified site's category
+/// indexes have no page of their own on the new site: concepts and reference land on their first
+/// page, guides on the first guide, and the retired where-this-stands page on Status.
+#[test]
+fn llm_is_independent_and_every_former_route_redirects() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let lock: Value =
+        serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
+    assert!(
+        !lock["sources"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|s| s["repository"] == "llm")
+    );
+    let roster = fs::read_to_string(root.join("sources.yaml")).unwrap();
+    assert!(roster.contains("repository: llm"));
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows = redirects["redirects"].as_array().unwrap();
+    assert!(
+        !rows
+            .iter()
+            .any(|r| r["from"].as_str().unwrap().starts_with("/llm/")),
+        "inverse redirects would create loops"
+    );
+    let actual: BTreeSet<_> = rows
+        .iter()
+        .filter(|r| {
+            let from = r["from"].as_str().unwrap();
+            from.starts_with("/docs/llm/") || from == "/ecosystem/llm/"
+        })
+        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
+        .collect();
+    let same = [
+        "",
+        "concepts/accounting/",
+        "concepts/credentials/",
+        "concepts/gateway/",
+        "concepts/hosting/",
+        "concepts/neutral-boundary/",
+        "concepts/overview/",
+        "concepts/protocols/",
+        "concepts/routing/",
+        "getting-started/",
+        "guides/call-a-local-endpoint/",
+        "guides/call-a-model-with-one-forced-tool/",
+        "guides/explain-a-route/",
+        "guides/price-recorded-usage/",
+        "guides/resolve-a-local-secret/",
+        "guides/run-a-local-turn/",
+        "guides/run-the-checks/",
+        "guides/start-the-gateway/",
+        "guides/use-llm-from-a-synchronous-loop/",
+        "reference/crates/",
+        "reference/formats/",
+        "status/",
+        "status/limitations/",
+        "status/roadmap/",
+    ];
+    let pairs: Vec<(String, String)> = same
+        .iter()
+        .map(|page| (format!("/docs/llm/{page}"), format!("/llm/docs/{page}")))
+        .chain(
+            [
+                ("/docs/llm/concepts/", "/llm/docs/concepts/overview/"),
+                ("/docs/llm/guides/", "/llm/docs/guides/run-a-local-turn/"),
+                ("/docs/llm/reference/", "/llm/docs/reference/crates/"),
+                ("/docs/llm/status/where-this-stands/", "/llm/docs/status/"),
+                ("/ecosystem/llm/", "/llm/"),
+            ]
+            .map(|(from, to)| (from.to_owned(), to.to_owned())),
+        )
+        .collect();
+    let expected: BTreeSet<_> = pairs
+        .iter()
+        .map(|(from, to)| (from.as_str(), to.as_str()))
+        .collect();
+    assert_eq!(actual, expected);
+}
+/// GitHub serves no Pages site at `/els/` since the repository was renamed to
+/// `engineering-protocols`; the root answers the old address.
+#[test]
+fn the_former_els_address_redirects_to_engineering_protocols() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows: Vec<_> = redirects["redirects"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|r| r["from"].as_str().unwrap().starts_with("/els/"))
+        .collect();
+    assert_eq!(
+        rows,
+        [&serde_json::json!({"from": "/els/", "to": "/engineering-protocols/", "type": "html"})]
+    );
+}
 #[test]
 fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
@@ -236,7 +334,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
         .iter()
         .map(|v| v.as_str().unwrap())
         .collect();
-    assert_eq!(repositories.len(), 23);
+    assert_eq!(repositories.len(), 22);
     assert!(repositories.contains(&"harness"));
     assert!(!repositories.contains(&"gates"));
     assert!(repositories.contains(&"mandate"));
@@ -252,6 +350,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(!repositories.contains(&"metaharness"));
     assert!(!repositories.contains(&"substrate"));
     assert!(!repositories.contains(&"secrets"));
+    assert!(!repositories.contains(&"llm"));
     let excluded = roster["excludedRepositories"].as_array().unwrap();
     assert!(!excluded.is_empty());
     let names: Vec<&str> = excluded
@@ -292,6 +391,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(names.contains(&"metaharness"));
     assert!(names.contains(&"substrate"));
     assert!(names.contains(&"gates"));
+    assert!(names.contains(&"llm"));
     let lock: Value =
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(lock["schema"], "b10x-sources/v1");

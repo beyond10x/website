@@ -604,6 +604,146 @@
       "type": "html"
     },
     {
+      "from": "/docs/llm/",
+      "to": "/llm/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/concepts/",
+      "to": "/llm/docs/concepts/overview/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/concepts/accounting/",
+      "to": "/llm/docs/concepts/accounting/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/concepts/credentials/",
+      "to": "/llm/docs/concepts/credentials/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/concepts/gateway/",
+      "to": "/llm/docs/concepts/gateway/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/concepts/hosting/",
+      "to": "/llm/docs/concepts/hosting/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/concepts/neutral-boundary/",
+      "to": "/llm/docs/concepts/neutral-boundary/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/concepts/overview/",
+      "to": "/llm/docs/concepts/overview/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/concepts/protocols/",
+      "to": "/llm/docs/concepts/protocols/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/concepts/routing/",
+      "to": "/llm/docs/concepts/routing/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/getting-started/",
+      "to": "/llm/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/",
+      "to": "/llm/docs/guides/run-a-local-turn/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/call-a-local-endpoint/",
+      "to": "/llm/docs/guides/call-a-local-endpoint/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/call-a-model-with-one-forced-tool/",
+      "to": "/llm/docs/guides/call-a-model-with-one-forced-tool/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/explain-a-route/",
+      "to": "/llm/docs/guides/explain-a-route/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/price-recorded-usage/",
+      "to": "/llm/docs/guides/price-recorded-usage/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/resolve-a-local-secret/",
+      "to": "/llm/docs/guides/resolve-a-local-secret/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/run-a-local-turn/",
+      "to": "/llm/docs/guides/run-a-local-turn/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/run-the-checks/",
+      "to": "/llm/docs/guides/run-the-checks/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/start-the-gateway/",
+      "to": "/llm/docs/guides/start-the-gateway/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/guides/use-llm-from-a-synchronous-loop/",
+      "to": "/llm/docs/guides/use-llm-from-a-synchronous-loop/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/reference/",
+      "to": "/llm/docs/reference/crates/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/reference/crates/",
+      "to": "/llm/docs/reference/crates/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/reference/formats/",
+      "to": "/llm/docs/reference/formats/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/status/",
+      "to": "/llm/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/status/limitations/",
+      "to": "/llm/docs/status/limitations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/status/roadmap/",
+      "to": "/llm/docs/status/roadmap/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/llm/status/where-this-stands/",
+      "to": "/llm/docs/status/",
+      "type": "html"
+    },
+    {
       "from": "/docs/metaharness/",
       "to": "/metaharness/docs/",
       "type": "html"
@@ -824,6 +964,11 @@
       "type": "html"
     },
     {
+      "from": "/ecosystem/llm/",
+      "to": "/llm/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/metaharness/",
       "to": "/metaharness/",
       "type": "html"
@@ -836,6 +981,11 @@
     {
       "from": "/ecosystem/substrate/",
       "to": "/substrate/",
+      "type": "html"
+    },
+    {
+      "from": "/els/",
+      "to": "/engineering-protocols/",
       "type": "html"
     },
     {

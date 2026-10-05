@@ -1,0 +1,6 @@
+{
+  "baseUrl": "/llm/",
+  "commit": "f9ca4e8dad25dbf11362545b038787f7298b85f6",
+  "repository": "llm",
+  "schema": "b10x-project-site/v1"
+}

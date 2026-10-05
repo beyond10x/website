@@ -144,13 +144,18 @@ executes the generator and dependency lock from its own immutable `job.workflow_
 
 ## Independent project documentation
 
-Metaharness publishes its own site at https://beyond10x.github.io/metaharness/, Secrets at
-https://beyond10x.github.io/secrets/ and Substrate at https://beyond10x.github.io/substrate/. All
-three are excluded from the collected source roster. Website retains discovery metadata and
-redirects each previous `/docs/<project>/` page to its exact `/<project>/docs/` destination,
-preserving queries and fragments through the existing redirect template. Secrets' former
-architecture, limitations and roadmap pages, and its `/api/secrets/` pages, redirect to the
-overview, Status and HTTP API pages that replaced them.
+LLM publishes its own site at https://beyond10x.github.io/llm/, Metaharness at
+https://beyond10x.github.io/metaharness/, Secrets at https://beyond10x.github.io/secrets/ and
+Substrate at https://beyond10x.github.io/substrate/. All four are excluded from the collected
+source roster. Website retains discovery metadata and redirects each previous `/docs/<project>/`
+page to its exact `/<project>/docs/` destination, preserving queries and fragments through the
+existing redirect template. Secrets' former architecture, limitations and roadmap pages, and its
+`/api/secrets/` pages, redirect to the overview, Status and HTTP API pages that replaced them.
+LLM's former concepts, guides and reference indexes redirect to their first page, and its
+where-this-stands page to Status.
+
+The els repository was renamed `engineering-protocols` and serves its own site at
+https://beyond10x.github.io/engineering-protocols/; the root redirects the former `/els/` to it.
 
 Gates has no website documentation at all: it is excluded from the roster, has no independent
 site, and its former `/docs/gates/` and `/ecosystem/gates/` routes redirect to `/ecosystem/`.

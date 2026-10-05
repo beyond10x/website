@@ -19,7 +19,6 @@ repositories:
   - extensions
   - harness
   - identity
-  - llm
   - mandate
   - mcp
   - research
@@ -69,6 +68,15 @@ excludedRepositories:
       organization catalog lists it as undocumented, its README is its documentation, and its
       b10x.docs.yaml, bundle, check and Pages façade are removed after this exclusion lands.
       Website redirects the former /docs/gates/ and /ecosystem/gates/ routes to /ecosystem/.
+  - repository: llm
+    public: true
+    manifest: present
+    reason: >-
+      LLM publishes its documentation independently at https://beyond10x.github.io/llm/
+      from its own repository and main commit. Website retains discovery and redirects from
+      the former /docs/llm/ routes, but does not collect or publish its documentation
+      content; its b10x.docs.yaml, bundle, check and Pages façade are removed after this
+      exclusion lands.
   - repository: metaharness
     public: true
     manifest: absent
