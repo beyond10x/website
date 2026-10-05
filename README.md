@@ -144,11 +144,13 @@ executes the generator and dependency lock from its own immutable `job.workflow_
 
 ## Independent project documentation
 
-Metaharness publishes its own site at https://beyond10x.github.io/metaharness/ and Substrate at
-https://beyond10x.github.io/substrate/. Both are excluded from the collected source roster.
-Website retains discovery metadata and redirects each previous `/docs/<project>/` page to its exact
-`/<project>/docs/` destination, preserving queries and fragments through the existing redirect
-template.
+Metaharness publishes its own site at https://beyond10x.github.io/metaharness/, Secrets at
+https://beyond10x.github.io/secrets/ and Substrate at https://beyond10x.github.io/substrate/. All
+three are excluded from the collected source roster. Website retains discovery metadata and
+redirects each previous `/docs/<project>/` page to its exact `/<project>/docs/` destination,
+preserving queries and fragments through the existing redirect template. Secrets' former
+architecture, limitations and roadmap pages, and its `/api/secrets/` pages, redirect to the
+overview, Status and HTTP API pages that replaced them.
 
 A collected source that links one of its own posts at its project-site URL (ESS's generated
 `releases/what-changed` page links `https://beyond10x.github.io/ess/releases/<slug>`) is rewritten
