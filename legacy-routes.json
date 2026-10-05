@@ -984,11 +984,6 @@
       "type": "html"
     },
     {
-      "from": "/els/",
-      "to": "/engineering-protocols/",
-      "type": "html"
-    },
-    {
       "from": "/engineering-protocols/",
       "to": "/ecosystem/aep/",
       "type": "html"

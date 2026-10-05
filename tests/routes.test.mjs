@@ -29,8 +29,8 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   // one /docs/secrets/ route for each of its 5 pages the unified site never had. Gates, which has
   // no website documentation, redirects its two former routes to /ecosystem/. LLM's independent site
   // added its 27 former /docs/llm/ and /ecosystem/llm/ routes and one /docs/llm/ route for each of
-  // its 2 guides the unified site never had; the renamed els repository's /els/ adds one.
-  assert.equal(html.length, 271);
+  // its 2 guides the unified site never had.
+  assert.equal(html.length, 270);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));

@@ -155,7 +155,9 @@ LLM's former concepts, guides and reference indexes redirect to their first page
 where-this-stands page to Status.
 
 The els repository was renamed `engineering-protocols` and serves its own site at
-https://beyond10x.github.io/engineering-protocols/; the root redirects the former `/els/` to it.
+https://beyond10x.github.io/engineering-protocols/. The root does not redirect the former `/els/`
+yet: a redirect into an independent site needs its route inventory in `data/independent-sites.json`,
+and engineering-protocols publishes none.
 
 Gates has no website documentation at all: it is excluded from the roster, has no independent
 site, and its former `/docs/gates/` and `/ecosystem/gates/` routes redirect to `/ecosystem/`.

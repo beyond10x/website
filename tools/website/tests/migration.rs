@@ -306,9 +306,12 @@ fn llm_is_independent_and_every_former_route_redirects() {
     assert_eq!(actual, expected);
 }
 /// GitHub serves no Pages site at `/els/` since the repository was renamed to
-/// `engineering-protocols`; the root answers the old address.
+/// `engineering-protocols`, but the root does not redirect it yet: a redirect into an
+/// independently documented site needs that site's route inventory in
+/// `data/independent-sites.json` (Atlas `docs verify-portal`), and engineering-protocols
+/// publishes no `.well-known/b10x-routes.json`.
 #[test]
-fn the_former_els_address_redirects_to_engineering_protocols() {
+fn the_former_els_address_has_no_redirect_without_a_route_inventory() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
     let redirects: Value =
         serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
@@ -318,10 +321,7 @@ fn the_former_els_address_redirects_to_engineering_protocols() {
         .iter()
         .filter(|r| r["from"].as_str().unwrap().starts_with("/els/"))
         .collect();
-    assert_eq!(
-        rows,
-        [&serde_json::json!({"from": "/els/", "to": "/engineering-protocols/", "type": "html"})]
-    );
+    assert!(rows.is_empty(), "{rows:?}");
 }
 #[test]
 fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() {
