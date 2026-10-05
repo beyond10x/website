@@ -50,15 +50,79 @@ fn assert_independent_migration(repository: &str, expected: &[&str]) {
     assert!(!experiences.contains(&format!("https://beyond10x.github.io/docs/{repository}/")));
 }
 #[test]
-fn metaharness_and_substrate_leave_the_collector_roster() {
+fn metaharness_substrate_and_secrets_leave_the_collector_roster() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
     let lock: Value =
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(
         lock["sources"].as_array().unwrap().len(),
-        25,
-        "Metaharness and Substrate retire from the 27-source collector roster"
+        24,
+        "Metaharness, Substrate and Secrets retire from the 27-source collector roster"
     );
+}
+/// Secrets' site has no architecture, limitations or roadmap page: the overview holds the
+/// architecture, and Status holds the limitations and the planned milestone. Its API page replaces
+/// the unified API catalog entry.
+#[test]
+fn secrets_is_independent_and_every_former_route_redirects() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let lock: Value =
+        serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
+    assert!(
+        !lock["sources"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|s| s["repository"] == "secrets")
+    );
+    let roster = fs::read_to_string(root.join("sources.yaml")).unwrap();
+    assert!(roster.contains("repository: secrets"));
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows = redirects["redirects"].as_array().unwrap();
+    assert!(
+        !rows
+            .iter()
+            .any(|r| r["from"].as_str().unwrap().starts_with("/secrets/")),
+        "inverse redirects would create loops"
+    );
+    let actual: BTreeSet<_> = rows
+        .iter()
+        .filter(|r| {
+            let from = r["from"].as_str().unwrap();
+            from.starts_with("/docs/secrets/")
+                || from.starts_with("/api/secrets/")
+                || from == "/ecosystem/secrets/"
+        })
+        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
+        .collect();
+    let expected: BTreeSet<_> = [
+        ("/api/secrets/", "/secrets/docs/http-api/"),
+        ("/api/secrets/http-api/", "/secrets/docs/http-api/"),
+        ("/docs/secrets/", "/secrets/docs/"),
+        ("/docs/secrets/architecture/", "/secrets/docs/"),
+        (
+            "/docs/secrets/authentication/",
+            "/secrets/docs/authentication/",
+        ),
+        (
+            "/docs/secrets/getting-started/",
+            "/secrets/docs/getting-started/",
+        ),
+        ("/docs/secrets/http-api/", "/secrets/docs/http-api/"),
+        ("/docs/secrets/limitations/", "/secrets/docs/status/"),
+        ("/docs/secrets/operations/", "/secrets/docs/operations/"),
+        ("/docs/secrets/roadmap/", "/secrets/docs/status/"),
+        ("/docs/secrets/rust-client/", "/secrets/docs/rust-client/"),
+        (
+            "/docs/secrets/security-model/",
+            "/secrets/docs/security-model/",
+        ),
+        ("/ecosystem/secrets/", "/secrets/"),
+    ]
+    .into_iter()
+    .collect();
+    assert_eq!(actual, expected);
 }
 #[test]
 fn metaharness_is_independent_and_all_thirteen_document_routes_survive() {
@@ -115,7 +179,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
         .iter()
         .map(|v| v.as_str().unwrap())
         .collect();
-    assert_eq!(repositories.len(), 25);
+    assert_eq!(repositories.len(), 24);
     assert!(repositories.contains(&"gates"));
     assert!(repositories.contains(&"mandate"));
     let mut sorted = repositories.clone();
@@ -129,6 +193,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(!repositories.contains(&"bench"));
     assert!(!repositories.contains(&"metaharness"));
     assert!(!repositories.contains(&"substrate"));
+    assert!(!repositories.contains(&"secrets"));
     let excluded = roster["excludedRepositories"].as_array().unwrap();
     assert!(!excluded.is_empty());
     let names: Vec<&str> = excluded

@@ -162,14 +162,6 @@
       "contentSha256": "7c524c3ce82fb9c57367090f245f68acd9baedbc4967555424aa48e6c5e9283b"
     },
     {
-      "repository": "secrets",
-      "url": "https://github.com/beyond10x/secrets",
-      "commit": "74296cba951881f1b90afd089f04caca9fb490a0",
-      "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "6fac89438ebe9da7ba243e2c2eb998413aeb001d1eef8ecc761f6c051102b2af",
-      "contentSha256": "21cc230b770a0be911b1eea9053293b9f29161524ca57f6eb5a3da45b5290d86"
-    },
-    {
       "repository": "service-sdk",
       "url": "https://github.com/beyond10x/service-sdk",
       "commit": "b5a1c1562984b11b5b945c5f95710497b2a69d80",

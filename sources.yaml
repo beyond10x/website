@@ -24,7 +24,6 @@ repositories:
   - mandate
   - mcp
   - research
-  - secrets
   - service-sdk
   - workflow
   - workspace
@@ -71,6 +70,14 @@ excludedRepositories:
       https://beyond10x.github.io/metaharness/ from its own repository and main commit.
       Website retains discovery and redirects from the former /docs/metaharness/ routes,
       but does not collect or publish its documentation content.
+  - repository: secrets
+    public: true
+    manifest: absent
+    reason: >-
+      Secrets publishes its documentation independently at
+      https://beyond10x.github.io/secrets/ from its own repository and main commit.
+      Website retains discovery and redirects from the former /docs/secrets/ and
+      /api/secrets/ routes, but does not collect or publish its documentation content.
   - repository: substrate
     public: true
     manifest: absent
