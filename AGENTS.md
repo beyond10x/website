@@ -50,7 +50,8 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
 
 ## Independent project sites
 
-Metaharness owns its documentation at `/metaharness/` and Substrate at `/substrate/`. Each one's
+Metaharness owns its documentation at `/metaharness/`, Substrate at `/substrate/` and Secrets at
+`/secrets/`. Each one's
 explicit exclusion in `sources.yaml` is retained alongside passive discovery data in
 `data/independent-sites.json`. The retained
 project provenance and route/anchor inventory must identify the same exact source commit and

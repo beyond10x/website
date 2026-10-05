@@ -17,14 +17,12 @@ repositories:
   - ess
   - eventlog
   - extensions
-  - gates
   - harness
   - identity
   - llm
   - mandate
   - mcp
   - research
-  - secrets
   - service-sdk
   - workflow
   - workspace
@@ -63,6 +61,13 @@ excludedRepositories:
     reason: >-
       The generated deployment mirror this site is published into. It carries no manifest and
       authors no content; AGENTS.md states that nothing is authored there.
+  - repository: gates
+    public: true
+    manifest: absent
+    reason: >-
+      Gates has no public website documentation by operator decision of 2026-10-05: it removed its
+      b10x.docs.yaml, bundle, check and Pages façade, and its README is its documentation. Website
+      redirects the former /docs/gates/ and /ecosystem/gates/ routes to /ecosystem/.
   - repository: metaharness
     public: true
     manifest: absent
@@ -71,6 +76,14 @@ excludedRepositories:
       https://beyond10x.github.io/metaharness/ from its own repository and main commit.
       Website retains discovery and redirects from the former /docs/metaharness/ routes,
       but does not collect or publish its documentation content.
+  - repository: secrets
+    public: true
+    manifest: absent
+    reason: >-
+      Secrets publishes its documentation independently at
+      https://beyond10x.github.io/secrets/ from its own repository and main commit.
+      Website retains discovery and redirects from the former /docs/secrets/ and /api/secrets/
+      routes, but does not collect or publish its documentation content.
   - repository: substrate
     public: true
     manifest: absent

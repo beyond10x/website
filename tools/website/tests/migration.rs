@@ -50,14 +50,14 @@ fn assert_independent_migration(repository: &str, expected: &[&str]) {
     assert!(!experiences.contains(&format!("https://beyond10x.github.io/docs/{repository}/")));
 }
 #[test]
-fn metaharness_and_substrate_leave_the_collector_roster() {
+fn independent_and_undocumented_repositories_leave_the_collector_roster() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
     let lock: Value =
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(
         lock["sources"].as_array().unwrap().len(),
-        25,
-        "Metaharness and Substrate retire from the 27-source collector roster"
+        23,
+        "Metaharness, Substrate and Secrets left for their own sites and Gates has no website documentation"
     );
 }
 #[test]
@@ -105,6 +105,98 @@ fn substrate_is_independent_and_all_fifteen_document_routes_survive() {
     );
 }
 #[test]
+fn gates_has_no_website_documentation_and_its_former_routes_land_on_the_ecosystem() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let lock: Value =
+        serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
+    assert!(
+        !lock["sources"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|s| s["repository"] == "gates")
+    );
+    let sites: Value =
+        serde_json::from_slice(&fs::read(root.join("data/independent-sites.json")).unwrap())
+            .unwrap();
+    assert!(
+        !sites["sites"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|s| s["repository"] == "gates"),
+        "gates publishes no site of its own either"
+    );
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows: Vec<_> = redirects["redirects"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|r| r["from"].as_str().unwrap().contains("gates"))
+        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
+        .collect();
+    assert_eq!(
+        rows,
+        [
+            ("/docs/gates/", "/ecosystem/"),
+            ("/ecosystem/gates/", "/ecosystem/")
+        ]
+    );
+}
+#[test]
+fn secrets_is_independent_and_every_former_route_lands_on_its_site() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let lock: Value =
+        serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
+    assert!(
+        !lock["sources"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|s| s["repository"] == "secrets")
+    );
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows: std::collections::BTreeMap<_, _> = redirects["redirects"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap_or("")))
+        .collect();
+    assert!(
+        !rows.keys().any(|from| from.starts_with("/secrets/")),
+        "inverse redirects would create loops"
+    );
+    // Every page the unified site published for Secrets (its sitemap on 2026-10-05) still lands.
+    for (from, to) in [
+        ("/docs/secrets/", "/secrets/docs/"),
+        ("/docs/secrets/architecture/", "/secrets/docs/"),
+        (
+            "/docs/secrets/authentication/",
+            "/secrets/docs/authentication/",
+        ),
+        (
+            "/docs/secrets/getting-started/",
+            "/secrets/docs/getting-started/",
+        ),
+        ("/docs/secrets/http-api/", "/secrets/docs/http-api/"),
+        ("/docs/secrets/limitations/", "/secrets/docs/status/"),
+        ("/docs/secrets/operations/", "/secrets/docs/operations/"),
+        ("/docs/secrets/roadmap/", "/secrets/docs/status/"),
+        ("/docs/secrets/rust-client/", "/secrets/docs/rust-client/"),
+        (
+            "/docs/secrets/security-model/",
+            "/secrets/docs/security-model/",
+        ),
+        ("/api/secrets/", "/secrets/docs/http-api/"),
+        ("/api/secrets/http-api/", "/secrets/docs/http-api/"),
+        ("/ecosystem/secrets/", "/secrets/"),
+    ] {
+        assert_eq!(rows.get(from), Some(&to), "{from}");
+    }
+}
+#[test]
 fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
     let roster: Value =
@@ -115,8 +207,9 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
         .iter()
         .map(|v| v.as_str().unwrap())
         .collect();
-    assert_eq!(repositories.len(), 25);
-    assert!(repositories.contains(&"gates"));
+    assert_eq!(repositories.len(), 23);
+    assert!(repositories.contains(&"harness"));
+    assert!(!repositories.contains(&"gates"));
     assert!(repositories.contains(&"mandate"));
     let mut sorted = repositories.clone();
     sorted.sort();
@@ -129,6 +222,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(!repositories.contains(&"bench"));
     assert!(!repositories.contains(&"metaharness"));
     assert!(!repositories.contains(&"substrate"));
+    assert!(!repositories.contains(&"secrets"));
     let excluded = roster["excludedRepositories"].as_array().unwrap();
     assert!(!excluded.is_empty());
     let names: Vec<&str> = excluded
@@ -168,6 +262,8 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(names.contains(&"bench"));
     assert!(names.contains(&"metaharness"));
     assert!(names.contains(&"substrate"));
+    assert!(names.contains(&"secrets"));
+    assert!(names.contains(&"gates"));
     let lock: Value =
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(lock["schema"], "b10x-sources/v1");

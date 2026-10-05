@@ -92,6 +92,85 @@
       }
     },
     {
+      "repository": "secrets",
+      "origin": "https://beyond10x.github.io",
+      "basePath": "/secrets/",
+      "sourceCommit": "65b67754799f3c8b019b38fe4b677ed7fc6e78cf",
+      "provenancePath": "data/independent/secrets-site.json",
+      "provenanceSha256": "d57e5dff90a6818e3cab18b9a6e168089c330cfbd70d0f3239bf6c292bccf771",
+      "routesPath": "data/independent/secrets-routes.json",
+      "routesSha256": "3505a0e14cc9f4802cea4e282150e304f8ec037e30fbbdfe867150f4cd0ca0c4",
+      "surface": {
+        "accent": "#59d89d",
+        "adoption": {
+          "estimatedMinutes": 8,
+          "label": "Inspect the custody boundary",
+          "mode": "browser",
+          "outcome": "Understand the non-revealable custody API and its tenant boundary.",
+          "prerequisites": [],
+          "url": "https://beyond10x.github.io/secrets/docs/"
+        },
+        "audiences": [
+          "evaluator",
+          "adopter",
+          "developer",
+          "operator"
+        ],
+        "availability": "published",
+        "canonicalUrl": "https://beyond10x.github.io/secrets/",
+        "capabilities": [
+          "secret-custody",
+          "tenant-isolation",
+          "openapi"
+        ],
+        "discoverability": "public",
+        "feeds": [],
+        "id": "docs",
+        "journeys": [
+          "build-agents",
+          "operate-services"
+        ],
+        "kind": "service-docs",
+        "maturity": "development",
+        "name": "Secrets",
+        "primaryJourney": "operate-services",
+        "relationships": [
+          {
+            "kind": "supports",
+            "label": "Connectors delegates encrypted credential-byte custody to the Secrets service",
+            "target": "connectors/docs"
+          },
+          {
+            "kind": "supports",
+            "label": "The Devcenter chart composes the Secrets service and its development database",
+            "target": "devcenter/docs"
+          },
+          {
+            "kind": "uses",
+            "label": "Identity issues an exact user audience that Secrets verifies without teaching Identity secret semantics",
+            "target": "identity/docs"
+          }
+        ],
+        "routeBase": "/secrets/docs/",
+        "sections": [],
+        "source": {
+          "navigation": {
+            "group": "Services",
+            "label": "Secrets",
+            "order": 60,
+            "sidebar": "flat"
+          }
+        },
+        "summary": "Encrypted tenant-scoped secret custody for users and service workloads without exposing stored values.",
+        "key": "secrets/docs",
+        "repository": {
+          "displayName": "Secrets",
+          "id": "secrets",
+          "url": "https://github.com/beyond10x/secrets"
+        }
+      }
+    },
+    {
       "repository": "substrate",
       "origin": "https://beyond10x.github.io",
       "basePath": "/substrate/",

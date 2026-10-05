@@ -589,6 +589,21 @@
       "type": "html"
     },
     {
+      "from": "/api/secrets/",
+      "to": "/secrets/docs/http-api/",
+      "type": "html"
+    },
+    {
+      "from": "/api/secrets/http-api/",
+      "to": "/secrets/docs/http-api/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/gates/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
       "from": "/docs/metaharness/",
       "to": "/metaharness/docs/",
       "type": "html"
@@ -651,6 +666,81 @@
     {
       "from": "/docs/metaharness/status/",
       "to": "/metaharness/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/",
+      "to": "/secrets/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/architecture/",
+      "to": "/secrets/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/authentication/",
+      "to": "/secrets/docs/authentication/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/getting-started/",
+      "to": "/secrets/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/http-api/",
+      "to": "/secrets/docs/http-api/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/limitations/",
+      "to": "/secrets/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/operations/",
+      "to": "/secrets/docs/operations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/reference/ess/",
+      "to": "/secrets/docs/reference/ess/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/reference/ess/crossings/",
+      "to": "/secrets/docs/reference/ess/crossings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/reference/ess/secrets-custody/",
+      "to": "/secrets/docs/reference/ess/secrets-custody/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/reference/ess/secrets-storage/",
+      "to": "/secrets/docs/reference/ess/secrets-storage/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/roadmap/",
+      "to": "/secrets/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/rust-client/",
+      "to": "/secrets/docs/rust-client/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/security-model/",
+      "to": "/secrets/docs/security-model/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/status/",
+      "to": "/secrets/docs/status/",
       "type": "html"
     },
     {
@@ -729,8 +819,18 @@
       "type": "html"
     },
     {
+      "from": "/ecosystem/gates/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/metaharness/",
       "to": "/metaharness/",
+      "type": "html"
+    },
+    {
+      "from": "/ecosystem/secrets/",
+      "to": "/secrets/",
       "type": "html"
     },
     {

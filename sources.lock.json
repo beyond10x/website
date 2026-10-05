@@ -60,9 +60,9 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "a32544a031a9375dbd284c7a9ac46e8a6b0b2101",
+      "commit": "10883d266f6225607eea8fe24804f3c8592c7180",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "812e82df4592daa0e1e51641bf7fd6d67e4f6950d0403ad8d6fc4f91fb475b28",
+      "manifestSha256": "f8765e2d0df9ebc0223788516f2015a91572dd20aead212e84c47de47349bd88",
       "contentSha256": "f4d8332dc6c8622015a1ee4ce50a8ac3161fcc9a9284263afd2906a4eb1e6bfe"
     },
     {
@@ -104,14 +104,6 @@
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "5e993458554326c5d8a4ffa10ef8cdd369800bbb9e6a2f383a160bd208e1ca19",
       "contentSha256": "055ff27daaf47e0e68f3546aaef93870217d90d0f73badd935d5fc7a13e59fbe"
-    },
-    {
-      "repository": "gates",
-      "url": "https://github.com/beyond10x/gates",
-      "commit": "d532e72dddf53efbf07fac4b0f86653926ab0102",
-      "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "a612f4bee6f00ab8ee11eaadf4ce729166679f7a558499bf5274951edc882243",
-      "contentSha256": "21b171393836f867d5f04c67c24548a6e0b4da17d09f3fd808e8d31370ec863d"
     },
     {
       "repository": "harness",
@@ -160,14 +152,6 @@
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "498b589bd44618f6d8fc1ff00b1cd2bcc4b05a39d52a448bc27192f61c9f34e1",
       "contentSha256": "7c524c3ce82fb9c57367090f245f68acd9baedbc4967555424aa48e6c5e9283b"
-    },
-    {
-      "repository": "secrets",
-      "url": "https://github.com/beyond10x/secrets",
-      "commit": "74296cba951881f1b90afd089f04caca9fb490a0",
-      "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "6fac89438ebe9da7ba243e2c2eb998413aeb001d1eef8ecc761f6c051102b2af",
-      "contentSha256": "21cc230b770a0be911b1eea9053293b9f29161524ca57f6eb5a3da45b5290d86"
     },
     {
       "repository": "service-sdk",

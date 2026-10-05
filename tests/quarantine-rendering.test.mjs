@@ -150,8 +150,8 @@ test('a v1 source set still writes v2 provenance with no quarantine field', asyn
 // one of them exercises the Website's own data (experiences, families, search goldens) against it.
 const rosterFamilies = {
   Foundation: ['agentic-principles', 'aep', 'ess', 'research'],
-  Build: ['agentide', 'agentplugins', 'docs-system', 'entity-runtime', 'extensions', 'gates', 'harness', 'llm', 'mcp', 'worktree'],
-  Services: ['aep-service', 'agent-platform', 'connectors', 'eventlog', 'identity', 'mandate', 'secrets', 'service-sdk', 'workflow', 'workspace'],
+  Build: ['agentide', 'agentplugins', 'docs-system', 'entity-runtime', 'extensions', 'harness', 'llm', 'mcp', 'worktree'],
+  Services: ['aep-service', 'agent-platform', 'connectors', 'eventlog', 'identity', 'mandate', 'service-sdk', 'workflow', 'workspace'],
   Products: ['devcenter'],
 };
 const rosterSources = Object.entries(rosterFamilies)
@@ -169,7 +169,7 @@ test('the fixture roster is the production roster', async () => {
   assert.deepEqual(rosterSources.map((source) => source.repository), production);
 });
 
-test('quarantining any one of the 25 sources prepares a site with no route of it anywhere', async (context) => {
+test('quarantining any one of the 23 sources prepares a site with no route of it anywhere', async (context) => {
   const failures = [];
   const queue = [...rosterSources];
   const worker = async () => {

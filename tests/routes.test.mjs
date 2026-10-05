@@ -24,8 +24,10 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   const map = JSON.parse(await readFile(path.join(root, 'legacy-routes.json'), 'utf8'));
   const html = map.redirects.filter((route) => route.type === 'html');
   const aliases = map.redirects.filter((route) => route.type === 'alias');
-  // Substrate's independent site added concepts/model, which the captured site never had.
-  assert.equal(html.length, 221);
+  // Substrate added concepts/model; Secrets added its reference/ess pages and five redirects for
+  // pages and API routes its own site folded into others. Gates, which has no website
+  // documentation, redirects its two former routes to /ecosystem/.
+  assert.equal(html.length, 241);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));
