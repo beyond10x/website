@@ -599,6 +599,11 @@
       "type": "html"
     },
     {
+      "from": "/docs/gates/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
       "from": "/docs/metaharness/",
       "to": "/metaharness/docs/",
       "type": "html"
@@ -811,6 +816,11 @@
     {
       "from": "/docs/substrate/use-cases/",
       "to": "/substrate/docs/use-cases/",
+      "type": "html"
+    },
+    {
+      "from": "/ecosystem/gates/",
+      "to": "/ecosystem/",
       "type": "html"
     },
     {

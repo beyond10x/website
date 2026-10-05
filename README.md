@@ -152,6 +152,9 @@ preserving queries and fragments through the existing redirect template. Secrets
 architecture, limitations and roadmap pages, and its `/api/secrets/` pages, redirect to the
 overview, Status and HTTP API pages that replaced them.
 
+Gates has no website documentation at all: it is excluded from the roster, has no independent
+site, and its former `/docs/gates/` and `/ecosystem/gates/` routes redirect to `/ecosystem/`.
+
 A collected source that links one of its own posts at its project-site URL (ESS's generated
 `releases/what-changed` page links `https://beyond10x.github.io/ess/releases/<slug>`) is rewritten
 to that post's field note, `/updates/field-notes/<repository>/<slug>/`. The project-site base is the

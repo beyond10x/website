@@ -17,7 +17,6 @@ repositories:
   - ess
   - eventlog
   - extensions
-  - gates
   - harness
   - identity
   - llm
@@ -62,6 +61,14 @@ excludedRepositories:
     reason: >-
       The generated deployment mirror this site is published into. It carries no manifest and
       authors no content; AGENTS.md states that nothing is authored there.
+  - repository: gates
+    public: true
+    manifest: present
+    reason: >-
+      Gates has no public website documentation by operator decision of 2026-10-05: the
+      organization catalog lists it as undocumented, its README is its documentation, and its
+      b10x.docs.yaml, bundle, check and Pages façade are removed after this exclusion lands.
+      Website redirects the former /docs/gates/ and /ecosystem/gates/ routes to /ecosystem/.
   - repository: metaharness
     public: true
     manifest: absent
