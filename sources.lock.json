@@ -60,9 +60,9 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "a32544a031a9375dbd284c7a9ac46e8a6b0b2101",
+      "commit": "7021e6e0f54ec618cb7e40f84287e7a1999ce83d",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "812e82df4592daa0e1e51641bf7fd6d67e4f6950d0403ad8d6fc4f91fb475b28",
+      "manifestSha256": "f8765e2d0df9ebc0223788516f2015a91572dd20aead212e84c47de47349bd88",
       "contentSha256": "f4d8332dc6c8622015a1ee4ce50a8ac3161fcc9a9284263afd2906a4eb1e6bfe"
     },
     {
