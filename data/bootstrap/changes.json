@@ -2,6 +2,28 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "gates/0.1.14",
+      "id": "gates/0.1.14",
+      "repository": "gates",
+      "publishedAt": "2026-10-05T00:42:27Z",
+      "title": "Gates 0.1.14",
+      "summary": "Gates released version 0.1.14.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/gates/releases/tag/0.1.14",
+        "version": "0.1.14"
+      },
+      "journeys": [
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "gates/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "gates/0.1.13",
       "id": "gates/0.1.13",
       "repository": "gates",
@@ -1383,29 +1405,6 @@
       "channel": "releases"
     },
     {
-      "key": "secrets/v0.4.0",
-      "id": "secrets/v0.4.0",
-      "repository": "secrets",
-      "publishedAt": "2026-09-27T20:24:53Z",
-      "title": "Secrets v0.4.0",
-      "summary": "Secrets released version v0.4.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/secrets/releases/tag/v0.4.0",
-        "version": "v0.4.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "secrets/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "llm/0.1.4",
       "id": "llm/0.1.4",
       "repository": "llm",
@@ -1449,29 +1448,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "secrets/v0.3.2",
-      "id": "secrets/v0.3.2",
-      "repository": "secrets",
-      "publishedAt": "2026-09-27T18:33:13Z",
-      "title": "Secrets v0.3.2",
-      "summary": "Secrets released version v0.3.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/secrets/releases/tag/v0.3.2",
-        "version": "v0.3.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "secrets/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "connectors/v0.13.2",
@@ -1606,52 +1582,6 @@
       ],
       "affectedSurfaces": [
         "llm/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "secrets/v0.3.1",
-      "id": "secrets/v0.3.1",
-      "repository": "secrets",
-      "publishedAt": "2026-09-27T10:31:23Z",
-      "title": "Secrets v0.3.1",
-      "summary": "Secrets released version v0.3.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/secrets/releases/tag/v0.3.1",
-        "version": "v0.3.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "secrets/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "secrets/v0.3.0",
-      "id": "secrets/v0.3.0",
-      "repository": "secrets",
-      "publishedAt": "2026-09-27T08:53:58Z",
-      "title": "Secrets v0.3.0",
-      "summary": "Secrets released version v0.3.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/secrets/releases/tag/v0.3.0",
-        "version": "v0.3.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "secrets/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -1843,29 +1773,6 @@
       ],
       "affectedSurfaces": [
         "llm/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "secrets/v0.2.0",
-      "id": "secrets/v0.2.0",
-      "repository": "secrets",
-      "publishedAt": "2026-09-27T00:47:51Z",
-      "title": "Secrets v0.2.0",
-      "summary": "Secrets released version v0.2.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/secrets/releases/tag/v0.2.0",
-        "version": "v0.2.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "secrets/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -9801,29 +9708,6 @@
       "channel": "releases"
     },
     {
-      "key": "secrets/v0.1.2",
-      "id": "secrets/v0.1.2",
-      "repository": "secrets",
-      "publishedAt": "2026-09-01T11:28:34Z",
-      "title": "Secrets v0.1.2",
-      "summary": "Secrets released version v0.1.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/secrets/releases/tag/v0.1.2",
-        "version": "v0.1.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "secrets/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "docs-system/adoption-and-change-contracts-0.2.0",
       "id": "docs-system/adoption-and-change-contracts-0.2.0",
       "repository": "docs-system",
@@ -9856,52 +9740,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "secrets/v0.1.1",
-      "id": "secrets/v0.1.1",
-      "repository": "secrets",
-      "publishedAt": "2026-09-01T11:12:24Z",
-      "title": "Secrets v0.1.1",
-      "summary": "Secrets released version v0.1.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/secrets/releases/tag/v0.1.1",
-        "version": "v0.1.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "secrets/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "secrets/v0.1.0",
-      "id": "secrets/v0.1.0",
-      "repository": "secrets",
-      "publishedAt": "2026-09-01T11:09:51Z",
-      "title": "Secrets v0.1.0",
-      "summary": "Secrets released version v0.1.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/secrets/releases/tag/v0.1.0",
-        "version": "v0.1.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "secrets/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "aep-service/0.1.4",
