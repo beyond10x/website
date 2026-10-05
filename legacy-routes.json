@@ -699,6 +699,26 @@
       "type": "html"
     },
     {
+      "from": "/docs/secrets/reference/ess/",
+      "to": "/secrets/docs/reference/ess/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/reference/ess/crossings/",
+      "to": "/secrets/docs/reference/ess/crossings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/reference/ess/secrets-custody/",
+      "to": "/secrets/docs/reference/ess/secrets-custody/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/reference/ess/secrets-storage/",
+      "to": "/secrets/docs/reference/ess/secrets-storage/",
+      "type": "html"
+    },
+    {
       "from": "/docs/secrets/roadmap/",
       "to": "/secrets/docs/status/",
       "type": "html"
@@ -711,6 +731,11 @@
     {
       "from": "/docs/secrets/security-model/",
       "to": "/secrets/docs/security-model/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/secrets/status/",
+      "to": "/secrets/docs/status/",
       "type": "html"
     },
     {

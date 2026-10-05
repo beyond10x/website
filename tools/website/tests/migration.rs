@@ -60,9 +60,9 @@ fn metaharness_substrate_and_secrets_leave_the_collector_roster() {
         "Metaharness, Substrate and Secrets retire from the 27-source collector roster"
     );
 }
-/// Secrets' site has no architecture, limitations or roadmap page: the overview holds the
-/// architecture, and Status holds the limitations and the planned milestone. Its API page replaces
-/// the unified API catalog entry.
+/// Every page of Secrets' site answers its former `/docs/secrets/` path. The site has no
+/// architecture, limitations or roadmap page: the overview holds the architecture, and Status holds
+/// the limitations and the planned milestone. Its API page replaces the unified API catalog entry.
 #[test]
 fn secrets_is_independent_and_every_former_route_redirects() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
@@ -112,12 +112,29 @@ fn secrets_is_independent_and_every_former_route_redirects() {
         ("/docs/secrets/http-api/", "/secrets/docs/http-api/"),
         ("/docs/secrets/limitations/", "/secrets/docs/status/"),
         ("/docs/secrets/operations/", "/secrets/docs/operations/"),
+        (
+            "/docs/secrets/reference/ess/",
+            "/secrets/docs/reference/ess/",
+        ),
+        (
+            "/docs/secrets/reference/ess/crossings/",
+            "/secrets/docs/reference/ess/crossings/",
+        ),
+        (
+            "/docs/secrets/reference/ess/secrets-custody/",
+            "/secrets/docs/reference/ess/secrets-custody/",
+        ),
+        (
+            "/docs/secrets/reference/ess/secrets-storage/",
+            "/secrets/docs/reference/ess/secrets-storage/",
+        ),
         ("/docs/secrets/roadmap/", "/secrets/docs/status/"),
         ("/docs/secrets/rust-client/", "/secrets/docs/rust-client/"),
         (
             "/docs/secrets/security-model/",
             "/secrets/docs/security-model/",
         ),
+        ("/docs/secrets/status/", "/secrets/docs/status/"),
         ("/ecosystem/secrets/", "/secrets/"),
     ]
     .into_iter()
