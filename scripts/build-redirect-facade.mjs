@@ -13,7 +13,7 @@ import {
 } from './facade-contract.mjs';
 import {validateSourceLock} from './source-lock-contract.mjs';
 import {compareUtf8} from './order-contract.mjs';
-import {effectiveRedirectMap} from './redirect-contract.mjs';
+import {effectiveRedirectMap, loadIndependentPages} from './redirect-contract.mjs';
 
 const runtimeRoot = path.resolve(import.meta.dirname, '..');
 
@@ -47,7 +47,10 @@ export async function buildRedirectFacade(options) {
     const expectedEffectiveMap = effectiveRedirectMap(globalMap, {
       routes: initialRoot.document.routes,
       files: initialRoot.document.files,
-    }, {quarantined: new Set((initialRoot.document.quarantinedSources ?? []).map((entry) => entry.repository))});
+    }, {
+      quarantined: new Set((initialRoot.document.quarantinedSources ?? []).map((entry) => entry.repository)),
+      independent: await loadIndependentPages(dataRoot),
+    });
     if (!effectiveBytes.equals(Buffer.from(canonicalJson(expectedEffectiveMap)))) {
       throw new Error('root effective redirect map is not the deterministic projection of the Website redirect contract');
     }

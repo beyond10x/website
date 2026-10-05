@@ -6,7 +6,7 @@ import test from 'node:test';
 import {buildRedirectFacade} from '../scripts/build-redirect-facade.mjs';
 import {crawlArtifact} from '../scripts/artifact-crawler.mjs';
 import {canonicalJson, sha256} from '../scripts/artifact-contract.mjs';
-import {effectiveRedirectMap} from '../scripts/redirect-contract.mjs';
+import {effectiveRedirectMap, loadIndependentPages} from '../scripts/redirect-contract.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const origin = 'https://beyond10x.github.io';
@@ -29,7 +29,9 @@ test('a legacy façade for a quarantined source builds against the quarantined r
     .filter((redirect) => redirect.type === 'alias')
     .map((redirect) => ({path: redirect.source, sha256: 'd'.repeat(64), size: 1}));
   const routes = ['/', '/docs/', '/ecosystem/'];
-  const effectiveBytes = Buffer.from(canonicalJson(effectiveRedirectMap(legacy, {routes, files}, {quarantined})));
+  // The deployed map keeps redirects into independent project sites, as the root build does.
+  const independent = await loadIndependentPages(root);
+  const effectiveBytes = Buffer.from(canonicalJson(effectiveRedirectMap(legacy, {routes, files}, {quarantined, independent})));
   files.push({path: '.well-known/b10x-redirects.json', sha256: sha256(effectiveBytes), size: effectiveBytes.byteLength});
   const provenance = {
     schema: 'b10x-website-provenance/v3',
