@@ -4,7 +4,6 @@ import {outputPathForRoute, renderRedirectHtml, writeRedirectMap} from '@beyond1
 import {quarantinedRouteTarget} from '../src/quarantine-routes.mjs';
 
 export const ROOT_OWNED_REDIRECTS = Object.freeze([
-  Object.freeze({from: '/engineering-protocols/', to: '/ecosystem/aep/', type: 'html'}),
   Object.freeze({from: '/journeys/', to: '/start/', type: 'html'}),
   Object.freeze({from: '/journeys/build-agents/', to: '/build/agent-systems/', type: 'html'}),
   Object.freeze({from: '/journeys/operate-services/', to: '/operate/', type: 'html'}),

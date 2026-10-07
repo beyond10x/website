@@ -50,8 +50,8 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
 
 ## Independent project sites
 
-LLM owns its documentation at `/llm/`, Metaharness at `/metaharness/`, Secrets at `/secrets/` and
-Substrate at `/substrate/`. Each one's
+Engineering Protocols owns its documentation at `/engineering-protocols/`, LLM at `/llm/`,
+Metaharness at `/metaharness/`, Secrets at `/secrets/` and Substrate at `/substrate/`. Each one's
 explicit exclusion in `sources.yaml` is retained alongside passive discovery data in
 `data/independent-sites.json`. The retained
 project provenance and route/anchor inventory must identify the same exact source commit and

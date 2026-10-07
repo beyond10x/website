@@ -59,7 +59,6 @@ const required = [
   'journeys/index.html',
   'ecosystem/index.html',
   'changes/index.html',
-  'engineering-protocols/index.html',
   'website/index.html',
   'PROVENANCE.json',
   '.well-known/b10x-docs.json',

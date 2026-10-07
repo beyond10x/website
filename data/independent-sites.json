@@ -2,6 +2,82 @@
   "schema": "b10x-independent-sites/v1",
   "sites": [
     {
+      "repository": "engineering-protocols",
+      "origin": "https://beyond10x.github.io",
+      "basePath": "/engineering-protocols/",
+      "sourceCommit": "9967d43493aa255d5b2755fdf9d33885aaa830e0",
+      "provenancePath": "data/independent/engineering-protocols-site.json",
+      "provenanceSha256": "91583fda676ad5dc978f9587d0019ea8caa1ad7fad1a595b63d09bbc3ce1f381",
+      "routesPath": "data/independent/engineering-protocols-routes.json",
+      "routesSha256": "fb95b15817341f2a4aa2f92a66899faf6c2c9fe0adab8bfb34a3e674b259d945",
+      "surface": {
+        "audiences": [
+          "adopter",
+          "developer",
+          "operator"
+        ],
+        "availability": "published",
+        "canonicalUrl": "https://beyond10x.github.io/engineering-protocols/",
+        "capabilities": [
+          "aep",
+          "engineering-workflows",
+          "evidence-gates",
+          "contract-generation"
+        ],
+        "discoverability": "public",
+        "id": "docs",
+        "journeys": [
+          "specify",
+          "build-agents",
+          "operate-services"
+        ],
+        "kind": "documentation",
+        "maturity": "development",
+        "name": "Engineering Protocols",
+        "relationships": [
+          {
+            "kind": "specifies",
+            "target": "aep-service/docs"
+          }
+        ],
+        "routeBase": "/engineering-protocols/docs/",
+        "sections": [
+          {
+            "kind": "docs",
+            "label": "What engineering protocols are",
+            "url": "https://beyond10x.github.io/engineering-protocols/docs/"
+          },
+          {
+            "kind": "reference",
+            "label": "Protocols",
+            "url": "https://beyond10x.github.io/engineering-protocols/docs/protocols/"
+          },
+          {
+            "kind": "reference",
+            "label": "Assertion catalog and CLI",
+            "url": "https://beyond10x.github.io/engineering-protocols/docs/reference/assertions/"
+          },
+          {
+            "kind": "status",
+            "label": "Status",
+            "url": "https://beyond10x.github.io/engineering-protocols/docs/status/"
+          },
+          {
+            "kind": "source",
+            "label": "Source",
+            "url": "https://github.com/beyond10x/engineering-protocols"
+          }
+        ],
+        "summary": "Typed, portable, machine-executable specifications for performing and proving autonomous engineering work.",
+        "key": "engineering-protocols/docs",
+        "repository": {
+          "displayName": "Engineering Protocols",
+          "id": "engineering-protocols",
+          "url": "https://github.com/beyond10x/engineering-protocols"
+        }
+      }
+    },
+    {
       "repository": "llm",
       "origin": "https://beyond10x.github.io",
       "basePath": "/llm/",

@@ -1,0 +1,346 @@
+{
+  "baseUrl": "/engineering-protocols/",
+  "commit": "9967d43493aa255d5b2755fdf9d33885aaa830e0",
+  "repository": "engineering-protocols",
+  "routes": [
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-hero-title",
+        "b10x-pg-_R_16qh_-arrow",
+        "b10x-pg-_R_16qh_-arrow-lit",
+        "b10x-pg-_R_16qh_-hint",
+        "b10x-pg-_R_16qh_-title",
+        "b10x-product-main",
+        "how",
+        "how-title",
+        "related",
+        "related-title",
+        "status",
+        "status-title",
+        "theme-svg-external-link",
+        "what",
+        "what-title"
+      ],
+      "path": "/engineering-protocols/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "a-stale-revision",
+        "progress-without-a-cause",
+        "protocols-are-data",
+        "theme-svg-external-link",
+        "unknown-is-not-false"
+      ],
+      "path": "/engineering-protocols/docs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/engineering-protocols/docs/category/concepts/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bindings",
+        "capabilities",
+        "enforcement-top-to-bottom",
+        "four-layers",
+        "theme-svg-external-link",
+        "where-scope-comes-from"
+      ],
+      "path": "/engineering-protocols/docs/concepts/capabilities-and-bindings/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "cancellation-and-failure",
+        "deciding-on-the-children-fan-in",
+        "opening-children-fan-out",
+        "theme-svg-external-link",
+        "three-shapes"
+      ],
+      "path": "/engineering-protocols/docs/concepts/composing-cases/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "adoption-is-a-case",
+        "b10x-pg-_R_4q7dalbah_-arrow",
+        "b10x-pg-_R_4q7dalbah_-arrow-lit",
+        "b10x-pg-_R_4q7dalbah_-description",
+        "b10x-pg-_R_4q7dalbah_-hint",
+        "b10x-pg-_R_4q7dalbah_-title",
+        "generated-protocols",
+        "profiles",
+        "theme-svg-external-link"
+      ],
+      "path": "/engineering-protocols/docs/concepts/profiles-and-generated-protocols/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "a-composition",
+        "a-protocol",
+        "b10x-pg-_R_8q7dalbah_-arrow",
+        "b10x-pg-_R_8q7dalbah_-arrow-lit",
+        "b10x-pg-_R_8q7dalbah_-description",
+        "b10x-pg-_R_8q7dalbah_-hint",
+        "b10x-pg-_R_8q7dalbah_-title",
+        "theme-svg-external-link"
+      ],
+      "path": "/engineering-protocols/docs/concepts/protocols-and-compositions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-pg-_R_6q7dalbah_-arrow",
+        "b10x-pg-_R_6q7dalbah_-arrow-lit",
+        "b10x-pg-_R_6q7dalbah_-description",
+        "b10x-pg-_R_6q7dalbah_-hint",
+        "b10x-pg-_R_6q7dalbah_-title",
+        "now-preconditions",
+        "profiles",
+        "theme-svg-external-link",
+        "what-preconditions-cannot-say"
+      ],
+      "path": "/engineering-protocols/docs/concepts/step-order/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link",
+        "what-canon-cannot-say-yet",
+        "what-it-says"
+      ],
+      "path": "/engineering-protocols/docs/concepts/support-triage/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admit-commands-explicitly",
+        "expressions-and-observations",
+        "extend-the-catalog",
+        "networking-and-later-kubernetes-checks",
+        "theme-svg-external-link",
+        "write-and-validate-a-gate"
+      ],
+      "path": "/engineering-protocols/docs/guides/assertions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/engineering-protocols/docs/protocols/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actions",
+        "artifacts",
+        "b10x-pg-_R_4q7dalbah_-arrow",
+        "b10x-pg-_R_4q7dalbah_-arrow-lit",
+        "b10x-pg-_R_4q7dalbah_-description",
+        "b10x-pg-_R_4q7dalbah_-hint",
+        "b10x-pg-_R_4q7dalbah_-title",
+        "claims",
+        "dependency-graph",
+        "evidence-kinds",
+        "obligations",
+        "outcomes",
+        "theme-svg-external-link"
+      ],
+      "path": "/engineering-protocols/docs/protocols/incident-response/1/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actions",
+        "artifacts",
+        "b10x-pg-_R_4q7dalbah_-arrow",
+        "b10x-pg-_R_4q7dalbah_-arrow-lit",
+        "b10x-pg-_R_4q7dalbah_-description",
+        "b10x-pg-_R_4q7dalbah_-hint",
+        "b10x-pg-_R_4q7dalbah_-title",
+        "claims",
+        "dependency-graph",
+        "evidence-kinds",
+        "obligations",
+        "outcomes",
+        "theme-svg-external-link"
+      ],
+      "path": "/engineering-protocols/docs/protocols/software-change/1/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actions",
+        "artifacts",
+        "b10x-pg-_R_4q7dalbah_-arrow",
+        "b10x-pg-_R_4q7dalbah_-arrow-lit",
+        "b10x-pg-_R_4q7dalbah_-description",
+        "b10x-pg-_R_4q7dalbah_-hint",
+        "b10x-pg-_R_4q7dalbah_-title",
+        "claims",
+        "dependency-graph",
+        "evidence-kinds",
+        "obligations",
+        "outcomes",
+        "theme-svg-external-link"
+      ],
+      "path": "/engineering-protocols/docs/protocols/support-triage/1/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "codegatedependencies",
+        "codegatedependenciesclean",
+        "command-line",
+        "describe",
+        "docboolean",
+        "docinteger",
+        "docstring",
+        "essconformancepassed",
+        "essreport",
+        "essrun",
+        "evaluate",
+        "explain",
+        "file_exists",
+        "fsdirexists",
+        "fsfileexists",
+        "generatedmatches",
+        "help",
+        "help-1",
+        "list",
+        "netdnslookup",
+        "nethostresolves",
+        "nettcpreachable",
+        "nodejspackagenamed",
+        "processrun",
+        "processsucceeded",
+        "projtestsrun",
+        "run",
+        "schemavalid",
+        "testspassed",
+        "testsreport",
+        "textcontains",
+        "theme-svg-external-link",
+        "validate"
+      ],
+      "path": "/engineering-protocols/docs/reference/assertions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "the-full-replay",
+        "the-night-in-numbers",
+        "theme-svg-external-link",
+        "where-the-data-comes-from"
+      ],
+      "path": "/engineering-protocols/docs/showcase/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/engineering-protocols/docs/status/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actions",
+        "artifact-kinds",
+        "claims",
+        "evidence-kinds",
+        "obligations",
+        "outcomes",
+        "theme-svg-external-link"
+      ],
+      "path": "/engineering-protocols/docs/vocabulary/"
+    },
+    {
+      "anchors": [
+        "anat",
+        "anat-lede",
+        "anat-table",
+        "byline",
+        "cad",
+        "cad-sub",
+        "cad-table",
+        "clock",
+        "composition",
+        "conc",
+        "conc-h2",
+        "conc-sub",
+        "conc-table",
+        "concurrency",
+        "counters",
+        "data",
+        "decisions",
+        "eyebrow-format",
+        "foot",
+        "graph",
+        "graph-sub",
+        "graph-table",
+        "hero-play",
+        "hero-sentence",
+        "legend-anat",
+        "legend-conc",
+        "legend-graph",
+        "legend-split",
+        "legend-timeline",
+        "log",
+        "log-foot",
+        "main",
+        "method",
+        "method-grid",
+        "play",
+        "player",
+        "replay",
+        "scrub",
+        "speed",
+        "split",
+        "split-sum",
+        "split-sum-sub",
+        "split-table",
+        "stats",
+        "term-title",
+        "theme",
+        "time",
+        "time-h2",
+        "timeline",
+        "timeline-table",
+        "tip",
+        "title",
+        "top",
+        "whatif",
+        "wi"
+      ],
+      "path": "/engineering-protocols/showcase/2026-10-04/"
+    }
+  ],
+  "schema": "b10x-project-routes/v1"
+}

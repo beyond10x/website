@@ -322,7 +322,6 @@ pub fn run(runtime: &Path, args: &VerifyArgs) -> Result<()> {
         "journeys/index.html",
         "ecosystem/index.html",
         "changes/index.html",
-        "engineering-protocols/index.html",
         "website/index.html",
         "PROVENANCE.json",
         ".well-known/b10x-docs.json",

@@ -10,8 +10,7 @@ use std::{
 use url::Url;
 
 pub const ORIGIN: &str = "https://beyond10x.github.io";
-const ROOT_ROUTES: [(&str, &str); 8] = [
-    ("/engineering-protocols/", "/ecosystem/aep/"),
+const ROOT_ROUTES: [(&str, &str); 7] = [
     ("/journeys/", "/start/"),
     ("/journeys/build-agents/", "/build/agent-systems/"),
     ("/journeys/operate-services/", "/operate/"),

@@ -60,6 +60,15 @@ excludedRepositories:
     reason: >-
       The generated deployment mirror this site is published into. It carries no manifest and
       authors no content; AGENTS.md states that nothing is authored there.
+  - repository: engineering-protocols
+    public: true
+    manifest: absent
+    reason: >-
+      Engineering Protocols publishes its documentation independently at
+      https://beyond10x.github.io/engineering-protocols/ from its own repository and main commit,
+      and the organization catalog lists it as independently documented. It never declared a
+      b10x.docs.yaml. Website retains discovery and its route inventory and redirects the
+      /docs/engineering-protocols/ and /ecosystem/engineering-protocols/ routes to that site.
   - repository: gates
     public: true
     manifest: present

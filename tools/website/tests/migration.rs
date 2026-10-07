@@ -305,13 +305,93 @@ fn llm_is_independent_and_every_former_route_redirects() {
         .collect();
     assert_eq!(actual, expected);
 }
-/// GitHub serves no Pages site at `/els/` since the repository was renamed to
-/// `engineering-protocols`, but the root does not redirect it yet: a redirect into an
-/// independently documented site needs that site's route inventory in
-/// `data/independent-sites.json` (Atlas `docs verify-portal`), and engineering-protocols
-/// publishes no `.well-known/b10x-routes.json`.
+/// Engineering Protocols never had unified documentation. Its own site owns
+/// `/engineering-protocols/`, so the root's former redirect of that path to the AEP profile is
+/// gone, and each of its documentation pages answers the `/docs/engineering-protocols/` path the
+/// independent compatibility contract derives from the retained route inventory.
 #[test]
-fn the_former_els_address_has_no_redirect_without_a_route_inventory() {
+fn engineering_protocols_is_independent_and_owns_its_base_path() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let lock: Value =
+        serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
+    assert!(
+        !lock["sources"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|s| s["repository"] == "engineering-protocols")
+    );
+    let sites: Value =
+        serde_json::from_slice(&fs::read(root.join("data/independent-sites.json")).unwrap())
+            .unwrap();
+    let site = sites["sites"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|s| s["repository"] == "engineering-protocols")
+        .expect("engineering-protocols is an independent site");
+    assert_eq!(site["basePath"], "/engineering-protocols/");
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows = redirects["redirects"].as_array().unwrap();
+    assert!(
+        !rows.iter().any(|r| r["from"]
+            .as_str()
+            .unwrap()
+            .starts_with("/engineering-protocols/")),
+        "inverse redirects would create loops"
+    );
+    let actual: BTreeSet<_> = rows
+        .iter()
+        .filter(|r| {
+            let from = r["from"].as_str().unwrap();
+            from.starts_with("/docs/engineering-protocols/")
+                || from == "/ecosystem/engineering-protocols/"
+        })
+        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
+        .collect();
+    let pages = [
+        "",
+        "category/concepts/",
+        "concepts/capabilities-and-bindings/",
+        "concepts/composing-cases/",
+        "concepts/profiles-and-generated-protocols/",
+        "concepts/protocols-and-compositions/",
+        "concepts/step-order/",
+        "concepts/support-triage/",
+        "guides/assertions/",
+        "protocols/",
+        "protocols/incident-response/1/",
+        "protocols/software-change/1/",
+        "protocols/support-triage/1/",
+        "reference/assertions/",
+        "showcase/",
+        "status/",
+        "vocabulary/",
+    ];
+    let pairs: Vec<(String, String)> = pages
+        .iter()
+        .map(|page| {
+            (
+                format!("/docs/engineering-protocols/{page}"),
+                format!("/engineering-protocols/docs/{page}"),
+            )
+        })
+        .chain([(
+            "/ecosystem/engineering-protocols/".to_owned(),
+            "/engineering-protocols/".to_owned(),
+        )])
+        .collect();
+    let expected: BTreeSet<_> = pairs
+        .iter()
+        .map(|(from, to)| (from.as_str(), to.as_str()))
+        .collect();
+    assert_eq!(actual, expected);
+}
+/// GitHub serves no Pages site at `/els/` since the repository was renamed to
+/// `engineering-protocols`, and the root does not redirect the former address.
+#[test]
+fn the_former_els_address_has_no_redirect() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
     let redirects: Value =
         serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
@@ -392,6 +472,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(names.contains(&"substrate"));
     assert!(names.contains(&"gates"));
     assert!(names.contains(&"llm"));
+    assert!(names.contains(&"engineering-protocols"));
     let lock: Value =
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(lock["schema"], "b10x-sources/v1");

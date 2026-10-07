@@ -29,8 +29,10 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   // one /docs/secrets/ route for each of its 5 pages the unified site never had. Gates, which has
   // no website documentation, redirects its two former routes to /ecosystem/. LLM's independent site
   // added its 27 former /docs/llm/ and /ecosystem/llm/ routes and one /docs/llm/ route for each of
-  // its 2 guides the unified site never had.
-  assert.equal(html.length, 270);
+  // its 2 guides the unified site never had. Engineering Protocols' independent site replaced the
+  // root's /engineering-protocols/ redirect with one /docs/engineering-protocols/ route for each of
+  // its 17 documentation pages and /ecosystem/engineering-protocols/.
+  assert.equal(html.length, 287);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));
@@ -68,17 +70,14 @@ test('root-owned compatibility routes are materialized in the root artifact', as
   }
 });
 
-test('a root-owned redirect into a quarantined source points at its GitHub repository', async () => {
+test('root-owned redirects target Website routes only, so a quarantine leaves them unchanged', async () => {
   const declared = JSON.parse(await readFile(path.join(root, 'legacy-routes.json'), 'utf8'));
-  const quarantined = rootOwnedRedirectMap(declared, {quarantined: new Set(['aep'])});
-  assert.deepEqual(quarantined.redirects.find((redirect) => redirect.from === '/engineering-protocols/'), {from: '/engineering-protocols/', to: 'https://github.com/beyond10x/aep', type: 'html'});
-  assert.deepEqual(rootOwnedRedirectMap(declared).redirects, ROOT_OWNED_REDIRECTS.map((redirect) => ({...redirect})));
-  assert.deepEqual(
-    effectiveRedirectMap({...declared, redirects: declared.redirects.filter((redirect) => redirect.from === '/engineering-protocols/')}, {routes: ['/', '/ecosystem/', '/start/', '/build/agent-systems/', '/operate/', '/start/spec-driven-development/', '/learn/safe-agentic-coding/'], files: []}, {quarantined: new Set(['aep', 'aep-service'])})
-      .redirects.find((redirect) => redirect.from === '/engineering-protocols/').to,
-    'https://github.com/beyond10x/aep',
-    'the materialized page and the effective map agree',
-  );
+  const expected = ROOT_OWNED_REDIRECTS.map((redirect) => ({...redirect}));
+  assert.deepEqual(rootOwnedRedirectMap(declared).redirects, expected);
+  assert.deepEqual(rootOwnedRedirectMap(declared, {quarantined: new Set(['aep', 'aep-service'])}).redirects, expected);
+  // /engineering-protocols/ belongs to that project's own site; the root no longer redirects it.
+  assert.ok(!ROOT_OWNED_REDIRECTS.some((redirect) => redirect.from === '/engineering-protocols/'));
+  assert.ok(!declared.redirects.some((redirect) => redirect.from.startsWith('/engineering-protocols/')));
 });
 
 test('a declared redirect into a quarantined source points at its GitHub repository, and nothing else changes', () => {

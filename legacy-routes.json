@@ -599,6 +599,91 @@
       "type": "html"
     },
     {
+      "from": "/docs/engineering-protocols/",
+      "to": "/engineering-protocols/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/category/concepts/",
+      "to": "/engineering-protocols/docs/category/concepts/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/concepts/capabilities-and-bindings/",
+      "to": "/engineering-protocols/docs/concepts/capabilities-and-bindings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/concepts/composing-cases/",
+      "to": "/engineering-protocols/docs/concepts/composing-cases/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/concepts/profiles-and-generated-protocols/",
+      "to": "/engineering-protocols/docs/concepts/profiles-and-generated-protocols/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/concepts/protocols-and-compositions/",
+      "to": "/engineering-protocols/docs/concepts/protocols-and-compositions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/concepts/step-order/",
+      "to": "/engineering-protocols/docs/concepts/step-order/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/concepts/support-triage/",
+      "to": "/engineering-protocols/docs/concepts/support-triage/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/guides/assertions/",
+      "to": "/engineering-protocols/docs/guides/assertions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/protocols/",
+      "to": "/engineering-protocols/docs/protocols/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/protocols/incident-response/1/",
+      "to": "/engineering-protocols/docs/protocols/incident-response/1/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/protocols/software-change/1/",
+      "to": "/engineering-protocols/docs/protocols/software-change/1/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/protocols/support-triage/1/",
+      "to": "/engineering-protocols/docs/protocols/support-triage/1/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/reference/assertions/",
+      "to": "/engineering-protocols/docs/reference/assertions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/showcase/",
+      "to": "/engineering-protocols/docs/showcase/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/status/",
+      "to": "/engineering-protocols/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/engineering-protocols/vocabulary/",
+      "to": "/engineering-protocols/docs/vocabulary/",
+      "type": "html"
+    },
+    {
       "from": "/docs/gates/",
       "to": "/ecosystem/",
       "type": "html"
@@ -959,6 +1044,11 @@
       "type": "html"
     },
     {
+      "from": "/ecosystem/engineering-protocols/",
+      "to": "/engineering-protocols/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/gates/",
       "to": "/ecosystem/",
       "type": "html"
@@ -981,11 +1071,6 @@
     {
       "from": "/ecosystem/substrate/",
       "to": "/substrate/",
-      "type": "html"
-    },
-    {
-      "from": "/engineering-protocols/",
-      "to": "/ecosystem/aep/",
       "type": "html"
     },
     {
