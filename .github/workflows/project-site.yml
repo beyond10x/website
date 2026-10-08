@@ -234,46 +234,55 @@ jobs:
         with:
           name: ${{ env.PAGES_ARTIFACT }}
           path: _site
-      - name: Wait until the Pages artifact is listed
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          RUN_ID: ${{ github.run_id }}
-        run: |
-          set -euo pipefail
-          # `deploy-pages` looks the artifact up by name in this run's artifact list once, and that
-          # list can lag the upload: a lookup 0.3 s after the upload found nothing. The artifact is
-          # named per attempt, so a re-run uploads a name no earlier attempt holds and the lookup
-          # can only ever see one. The same query is repeated until that one artifact is listed.
-          attempts=30
-          count=0
-          for attempt in $(seq 1 "$attempts"); do
-            curl --fail-with-body --silent --show-error --location --retry 3 \
-              --header 'Accept: application/vnd.github+json' \
-              --header "Authorization: Bearer $GITHUB_TOKEN" \
-              --header 'X-GitHub-Api-Version: 2022-11-28' \
-              "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/artifacts?name=$PAGES_ARTIFACT&per_page=100" \
-              > "$RUNNER_TEMP/b10x-site-boundary/artifacts.json"
-            count="$(jq -r --arg name "$PAGES_ARTIFACT" \
-              '[.artifacts[] | select(.name == $name and .expired == false)] | length' \
-              "$RUNNER_TEMP/b10x-site-boundary/artifacts.json")"
-            if [ "$count" -gt 1 ]; then
-              printf '::error::%s artifacts named %s in run %s\n' "$count" "$PAGES_ARTIFACT" "$RUN_ID" >&2
-              exit 1
-            fi
-            if [ "$count" -eq 1 ]; then
-              break
-            fi
-            if [ "$attempt" -lt "$attempts" ]; then
-              sleep 10
-            fi
-          done
-          if [ "$count" -ne 1 ]; then
-            printf '::error::Pages artifact %s not listed in run %s after %s attempts\n' \
-              "$PAGES_ARTIFACT" "$RUN_ID" "$attempts" >&2
-            exit 1
-          fi
-      - name: Deploy Pages artifact
-        id: deployment
+      # `deploy-pages` looks the artifact up once, in a listing that can lag the upload: it has
+      # reported "No artifacts named github-pages-1" 0.25 s after a REST query of the same run had
+      # listed that artifact. Its own lookup is the only one that counts, so the deploy itself is
+      # repeated, three attempts 20 s apart. The artifact is named per run attempt, so a job re-run
+      # never meets an earlier attempt's upload.
+      - name: Deploy Pages artifact (attempt 1)
+        id: deploy_1
+        continue-on-error: true
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
         with:
           artifact_name: ${{ env.PAGES_ARTIFACT }}
+      - name: Wait before deploy attempt 2
+        if: ${{ steps.deploy_1.outcome == 'failure' }}
+        run: sleep 20
+      - name: Deploy Pages artifact (attempt 2)
+        id: deploy_2
+        if: ${{ steps.deploy_1.outcome == 'failure' }}
+        continue-on-error: true
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT }}
+      - name: Wait before deploy attempt 3
+        if: ${{ steps.deploy_2.outcome == 'failure' }}
+        run: sleep 20
+      - name: Deploy Pages artifact (attempt 3)
+        id: deploy_3
+        if: ${{ steps.deploy_2.outcome == 'failure' }}
+        continue-on-error: true
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT }}
+      - name: Require one successful deploy attempt
+        id: deployment
+        env:
+          OUTCOMES: ${{ steps.deploy_1.outcome }} ${{ steps.deploy_2.outcome }} ${{ steps.deploy_3.outcome }}
+          PAGE_URLS: ${{ steps.deploy_1.outputs.page_url }} ${{ steps.deploy_2.outputs.page_url }} ${{ steps.deploy_3.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          attempts=0
+          for outcome in $OUTCOMES; do
+            case "$outcome" in
+              success)
+                read -r page_url _ <<< "$PAGE_URLS"
+                printf 'page_url=%s\n' "$page_url" >> "$GITHUB_OUTPUT"
+                exit 0
+                ;;
+              failure) attempts=$((attempts + 1)) ;;
+            esac
+          done
+          printf '::error::Pages artifact %s not deployed after %s attempts\n' \
+            "$PAGES_ARTIFACT" "$attempts" >&2
+          exit 1
