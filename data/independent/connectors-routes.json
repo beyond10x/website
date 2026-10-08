@@ -1,0 +1,2383 @@
+{
+  "baseUrl": "/connectors/",
+  "commit": "ed5fc78837d4f12e4c3993cbb6225e9b122d5207",
+  "repository": "connectors",
+  "routes": [
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus-base-url-issue-banner",
+        "__docusaurus-base-url-issue-banner-suggestion-container",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-hero-title",
+        "b10x-product-main",
+        "b10x-terminal-_R_16qh_-status",
+        "how",
+        "how-title",
+        "related",
+        "related-title",
+        "status",
+        "status-title",
+        "theme-svg-external-link",
+        "what",
+        "what-title"
+      ],
+      "path": "/connectors/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "neighbours",
+        "theme-svg-external-link",
+        "what-it-is-not",
+        "what-runs-today",
+        "where-to-go-next"
+      ],
+      "path": "/connectors/docs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "boundaries-the-gate-holds",
+        "composition-is-explicit",
+        "theme-svg-external-link",
+        "three-ways-an-adapter-runs",
+        "what-is-shared-and-what-is-not"
+      ],
+      "path": "/connectors/docs/concepts/adapters/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link",
+        "what-it-does-not-do",
+        "what-it-serves",
+        "writes-and-their-guards"
+      ],
+      "path": "/connectors/docs/concepts/catalog-provider/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "families-at-a-glance",
+        "follow-an-interaction",
+        "theme-svg-external-link",
+        "typed-and-textual-halves",
+        "versions-are-independent",
+        "what-a-refusal-promises"
+      ],
+      "path": "/connectors/docs/concepts/contracts/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "from-rust",
+        "theme-svg-external-link",
+        "what-is-still-a-specification",
+        "what-the-binding-adds"
+      ],
+      "path": "/connectors/docs/concepts/governed-invocation/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "approved-writes",
+        "cost-of-the-metadata-store",
+        "saved-connections",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/concepts/local-runtime/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/examples/contract-exercises/"
+    },
+    {
+      "anchors": [
+        "_R_13q7dalbah_",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/examples/follow-a-request/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "ask-it-what-it-offers",
+        "build",
+        "invoke-and-read-the-refusals",
+        "next",
+        "start-an-adapter-service",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/getting-started/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "compile-the-pinned-source",
+        "confirm-it-is-the-committed-bundle",
+        "sources-that-are-not-openapi",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/guides/build-a-catalog-bundle/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "configure-the-host",
+        "describe-through-the-host",
+        "invoke-through-the-host",
+        "theme-svg-external-link",
+        "what-the-host-does-not-do"
+      ],
+      "path": "/connectors/docs/guides/federate-adapter-services/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "check-the-prerequisites",
+        "create-the-configuration-and-the-store",
+        "next",
+        "nothing-is-configured-yet",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/guides/set-up-the-local-cli/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "runtime-available",
+        "specification-or-design-only",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/alertmanager/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/atlassian/"
+    },
+    {
+      "anchors": [
+        "1-identity-and-preserved-behavior",
+        "2-authority-identity-and-observation-boundary",
+        "3-document-payload",
+        "4-selected-provider-traces",
+        "41-confluence-by-id",
+        "42-jira-by-id-or-key",
+        "43-lookup-and-transport-failures",
+        "5-cache-admission-and-moves",
+        "6-body-and-whole-response-bounds",
+        "7-body-bearing-confluence-cql-search",
+        "8-required-semantic-and-binding-checks",
+        "9-binding-and-ess-ownership",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/atlassian/contracts/documents/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bounded-contexts",
+        "components",
+        "the-other-pages",
+        "the-system-as-a-graph",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/atlassian/model/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/atlassian/model/crossings/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "cqlsearchselection",
+        "documentrepresentation",
+        "documentscopekind",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/adapters/atlassian/model/domains/connectors_atlassian-documents/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/atlassian/model/interactions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/atlassian/model/topology/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "contracts",
+        "provider-notes",
+        "providers",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/catalog/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "capabilities",
+        "ceilings-and-cost",
+        "conformance",
+        "containers-projects",
+        "deletions",
+        "errors",
+        "items-merge-requests",
+        "merge-requests-only-not-issues",
+        "theme-svg-external-link",
+        "visibility-every-project-is-private",
+        "watermark-and-first-read",
+        "what-the-declaration-cannot-express"
+      ],
+      "path": "/connectors/docs/reference/adapters/catalog/contracts/feed/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/docker/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admission-and-provider-trace",
+        "completeness-bounds-and-errors",
+        "evidence-and-obligations",
+        "lines-and-result",
+        "selection",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/docker/contracts/logs/"
+    },
+    {
+      "anchors": [
+        "41-target-intent-and-lifecycle-results",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/docker/contracts/mutations/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bounded-contexts",
+        "components",
+        "the-other-pages",
+        "the-system-as-a-graph",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/docker/model/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/docker/model/crossings/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "containerlifecycleaction",
+        "containerlifecycleintent",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/adapters/docker/model/domains/connectors_docker-mutations/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/docker/model/interactions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/docker/model/topology/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "against-a-live-gitlab",
+        "limits",
+        "the-merge-request-feed",
+        "theme-svg-external-link",
+        "use-saved-credentials",
+        "what-runs",
+        "writes-and-the-guard"
+      ],
+      "path": "/connectors/docs/reference/adapters/gitlab/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/grafana/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "evidence-and-fixtures",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/grafana/contracts/discovery/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-mapping-and-source-evidence",
+        "theme-svg-external-link",
+        "verification"
+      ],
+      "path": "/connectors/docs/reference/adapters/grafana/contracts/routes/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bounded-contexts",
+        "components",
+        "the-other-pages",
+        "the-system-as-a-graph",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/grafana/model/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/grafana/model/crossings/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "observationprofile",
+        "partitionkind",
+        "recognitionprovider",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/adapters/grafana/model/domains/connectors_grafana-discovery/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/grafana/model/interactions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/grafana/model/topology/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "access-and-limits",
+        "current-capabilities",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/"
+    },
+    {
+      "anchors": [
+        "44-exact-authorization-targets-and-fan-out-budget-f08",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/contracts/auth/"
+    },
+    {
+      "anchors": [
+        "45-fixed-declarations-recognition-and-configured-source-identity",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "extraction-and-verification",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/contracts/discovery/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "completeness-and-cursors",
+        "decoding-the-stored-payload",
+        "disclosure",
+        "evidence-and-obligations",
+        "not-a-resource-kind",
+        "refusals",
+        "revision-records",
+        "selection",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/contracts/helm/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admission-and-provider-trace",
+        "completeness-bounds-and-errors",
+        "evidence-and-obligations",
+        "lines-and-result",
+        "selection",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/contracts/logs/"
+    },
+    {
+      "anchors": [
+        "41-rollout-restart-intent-and-replay",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/contracts/mutations/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "descriptor-visibility",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/contracts/reads/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-mapping-and-source-evidence",
+        "theme-svg-external-link",
+        "verification"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/contracts/routes/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bounded-contexts",
+        "components",
+        "the-other-pages",
+        "the-system-as-a-graph",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/model/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/model/crossings/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "kubernetesrecognitioninput",
+        "observationprofile",
+        "partitioncoordinates",
+        "partitionkind",
+        "recognitionprovider",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/model/domains/connectors_kubernetes-discovery/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "manifestdocumentprojection",
+        "recordedvaluekind",
+        "recordedvalueprojection",
+        "releasecoordinates",
+        "releaserevision",
+        "releasestatus",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/model/domains/connectors_kubernetes-helm/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "deploymentrestarttarget",
+        "prepareddeploymentrestart",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/model/domains/connectors_kubernetes-mutations/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "permissiontarget",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/model/domains/connectors_kubernetes-permissions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/model/interactions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/kubernetes/model/topology/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "current-capabilities",
+        "limits",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/loki/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "11-metric-queries-label-discovery-and-the-unpaged-binding",
+        "111-logql-metric",
+        "112-loki-labels",
+        "113-the-implemented-binding-2026-10-08",
+        "114-the-bearer-connection-2026-10-08",
+        "3-types",
+        "4-rules",
+        "41-provider-tenant-binding",
+        "42-native-logql-scope",
+        "43-loki-collection-and-ordering",
+        "44-retained-paging-and-current-authority",
+        "5-limits-and-completeness",
+        "6-conformance-scenarios",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/loki/contracts/logs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bounded-contexts",
+        "components",
+        "the-other-pages",
+        "the-system-as-a-graph",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/loki/model/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/loki/model/crossings/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bearerentry",
+        "bearerprofile",
+        "bearertoken",
+        "identityprobe",
+        "identitysource",
+        "instanceid",
+        "localconfiguration",
+        "queryscope",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/adapters/loki/model/domains/connectors_loki-connection/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "labelselection",
+        "logdirection",
+        "lograngeselection",
+        "logscopeequality",
+        "metricresulttype",
+        "metricselection",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/adapters/loki/model/domains/connectors_loki-reads/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/loki/model/interactions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/loki/model/topology/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/prometheus/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "5-limits-first-profile-defaults-to-be-measured",
+        "6-conformance-scenarios-docsdesignmd988",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/prometheus/contracts/series/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/rtvbp/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/rtvbp/contracts/session/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/sip/"
+    },
+    {
+      "anchors": [
+        "41-dial-effect-and-ready-session-result",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-media-and-transport-obligations",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/sip/contracts/dial/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "access-and-limits",
+        "current-capabilities",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/sql/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "native-deadlines-and-bounds",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/sql/contracts/reads/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "access-and-limits",
+        "current-capabilities",
+        "native-contract-reference",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/tavily/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "completeness-and-truncation",
+        "credential",
+        "errors-and-costs",
+        "mapping",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/adapters/tavily/contracts/websearch/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "commands",
+        "connectors-adapters-describe",
+        "connectors-adapters-list",
+        "connectors-adapters-status",
+        "connectors-adapters-stop",
+        "connectors-approvals-clock-check",
+        "connectors-approvals-issue",
+        "connectors-approvals-key-init",
+        "connectors-approvals-key-recover",
+        "connectors-approvals-key-retire",
+        "connectors-approvals-key-revoke",
+        "connectors-approvals-key-rotate",
+        "connectors-approvals-key-status",
+        "connectors-approvals-policy-set",
+        "connectors-approvals-policy-status",
+        "connectors-approvals-prepare",
+        "connectors-completions",
+        "connectors-connections-connect",
+        "connectors-connections-describe",
+        "connectors-connections-launch",
+        "connectors-connections-list",
+        "connectors-connections-repair",
+        "connectors-connections-revalidate",
+        "connectors-connections-revoke",
+        "connectors-connections-status",
+        "connectors-describe",
+        "connectors-invoke",
+        "connectors-operations-describe",
+        "connectors-operations-invoke",
+        "connectors-operations-list",
+        "connectors-serve",
+        "connectors-setup-check",
+        "connectors-setup-checkpoints-enable",
+        "connectors-setup-init",
+        "explicit-service-commands",
+        "global-options",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/cli/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "adapter-owned-native-contracts",
+        "authentication-and-access",
+        "data-reads",
+        "discovery-and-composition",
+        "ess-models",
+        "service-and-execution",
+        "sessions-and-media",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "acknowledgements-and-lifecycle",
+        "identity-and-current-authority",
+        "local-binding-and-cli",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/approval-keys/"
+    },
+    {
+      "anchors": [
+        "1-identity-and-selected-aggregate",
+        "2-ordering-and-failure",
+        "3-idempotent-final-observation-recovery",
+        "4-bounds-retention-and-disclosure",
+        "5-conformance-scenarios",
+        "6-ess-and-implementation-boundary",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/audit/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "40-acquisition-paths-and-required-declarations",
+        "41-refresh-exclusion-authorization-and-recovery",
+        "42-failure-matrix",
+        "43-acquisition-owner-consumption-and-terminal-records",
+        "5-ordering-limits",
+        "6-conformance-scenarios-docsdesignmd985",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/auth/acquisition/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "5-limits",
+        "6-conformance-scenarios",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/auth/capability/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "41-connection-viability-and-operation-eligibility",
+        "42-persistent-binding-identity-and-retention",
+        "5-ordering-limits",
+        "6-conformance-scenarios",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/auth/connection/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "41-scoped-version-identity-and-guarded-reclamation",
+        "42-consumer-delivery",
+        "5-limits",
+        "6-conformance-scenarios-docsdesignmd986",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/auth/custody/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "41-credential-generation-and-identity",
+        "42-admission-validation-and-dispatch",
+        "43-which-evidence-can-cross-a-generation-change",
+        "44-exact-authorization-targets-and-fan-out-budget-f08",
+        "45-retained-scope-and-expiry-observations",
+        "5-limits",
+        "6-conformance-scenarios",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/auth/evidence/"
+    },
+    {
+      "anchors": [
+        "1-owner-and-admission",
+        "2-readiness-revocation-and-outcome-boundaries",
+        "3-protected-actions-and-federation",
+        "4-reference-trace-and-limits-of-this-selection",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/auth/management/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "41-baseline-and-operation-requirements",
+        "42-explicit-access-bindings-without-child-credentials",
+        "43-immutable-declaration-records",
+        "5-limits",
+        "6-conformance-scenarios",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/auth/profile/"
+    },
+    {
+      "anchors": [
+        "1-explicit-selection-and-compatibility",
+        "2-eligibility-and-immutable-invocation",
+        "3-one-bounded-sequence",
+        "4-shared-time-call-and-byte-budgets",
+        "5-terminal-outcomes-authority-and-audit",
+        "6-conformance-and-model-boundary",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/auth/read-refresh/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "31-catalog-operations",
+        "32-the-generic-http-profile",
+        "33-declared-feed-bindings",
+        "4-rules",
+        "5-ordering-and-limits",
+        "6-conformance-scenarios-docsdesignmd1006",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-declarations-and-optional-catalog-state",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/catalog/"
+    },
+    {
+      "anchors": [
+        "1-owners-and-identities",
+        "2-command-inventory-and-process-contract",
+        "3-explicit-local-toml-configuration",
+        "4-lifecycle-and-bounded-startup",
+        "5-protected-entry-and-durable-publication",
+        "6-dynamic-operation-input-and-safe-failure-mapping",
+        "7-verification-and-remaining-obligations",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "consumer-launch",
+        "durable-open-checkpoints-on-an-existing-store",
+        "operations-by-family",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/cli/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "authenticated-acquisition",
+        "cli-and-verification",
+        "configuration-and-trust",
+        "local-continuation-and-bounds",
+        "registry-clock-floor",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/clock/"
+    },
+    {
+      "anchors": [
+        "1-independent-version-axes",
+        "2-deterministic-binding-selection",
+        "21-first-binding-post-v1alpha2invoke",
+        "3-legacy-projection-and-federation-intersection",
+        "4-extended-descriptor-and-invocation-surface",
+        "5-extended-responses-audit-and-mutation-observation",
+        "6-complete-family-disposition-matrix",
+        "7-limits-and-compatibility-obligations",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/compatibility/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admission-limits-and-errors",
+        "containers",
+        "deletions",
+        "items",
+        "model-and-conformance",
+        "operations-and-how-a-binding-names-them",
+        "revisions",
+        "shared-contract-and-adapter-ownership",
+        "theme-svg-external-link",
+        "watermarks-and-delivery"
+      ],
+      "path": "/connectors/docs/reference/contracts/data/feed/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admission-and-continuation",
+        "completeness-and-loss-accounting",
+        "resource-limits-errors-and-verification",
+        "result-obligations",
+        "shared-contract-and-adapter-ownership",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/data/logs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admission-caching-and-continuation",
+        "bounds-errors-and-verification",
+        "ownership-and-binding",
+        "result-and-representation-obligations",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/data/records/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admission-completeness-and-limits",
+        "shared-obligations",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/data/series/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admission-limits-and-errors",
+        "completeness-and-truncation",
+        "operations",
+        "result-obligations",
+        "shared-contract-and-adapter-ownership",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/data/websearch/"
+    },
+    {
+      "anchors": [
+        "1-evidence-and-distinct-authorities",
+        "2-canonical-subject-and-revisions",
+        "3-safe-approval-preparation-read",
+        "4-cryptographic-framing-and-proof-separation",
+        "41-gateway-delivery-assertion",
+        "42-issuer-approval-assertion",
+        "5-time-deadlines-and-durable-uniqueness",
+        "6-end-to-end-admission-and-single-spend",
+        "7-failure-and-correlation-matrix",
+        "8-ess-and-verification-boundary",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/delegation/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/discovery/composition/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "41-exact-coverage-scope",
+        "42-complete-and-incomplete-collection",
+        "43-observation-identity-and-fixed-targets",
+        "44-publication-retention-and-public-paging",
+        "45-fixed-declarations-and-adapter-native-interpretation",
+        "46-selected-persistent-owner-and-retirement",
+        "5-limits",
+        "6-conformance-scenarios-docsdesignmd989",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/discovery/resources/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "41-observation-continuity-and-route-revalidation",
+        "42-embedded-configuration-and-historical-association",
+        "5-limits",
+        "6-conformance-scenarios-docsdesignmd989-991",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/discovery/routes/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-remaining-binding-decisions",
+        "3-types-and-binding",
+        "31-authentication-and-admitted-invocation-context",
+        "32-descriptor",
+        "321-visibility-lookup-and-refusal-precedence-e12",
+        "33-invocation",
+        "34-responses-and-audit",
+        "35-errors",
+        "36-delegated-federation--selected-proposal",
+        "4-admission-and-execution-rules",
+        "5-limits",
+        "6-conformance-requirements",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-values-and-unresolved-owner-models",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/governed-service/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "11-capability-support-disposition",
+        "3-types",
+        "4-rules",
+        "5-limits-first-profile-defaults-from-the-old-profile-where-stated",
+        "6-conformance-scenarios-docsdesignmd984-1002",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/media/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "bounded-contexts",
+        "components",
+        "the-other-pages",
+        "the-system-as-a-graph",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/crossings/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actors",
+        "advanceissuerrevision",
+        "approvalissuer",
+        "approvalissuers",
+        "approvalsigningkey",
+        "approvalsigningkeys",
+        "audiencename",
+        "bindissuer",
+        "commands",
+        "confirmkeydeletion",
+        "entities",
+        "errors",
+        "events",
+        "issuerbound",
+        "issuername",
+        "issuerrevisionadvanced",
+        "issuerrevisionconflict",
+        "issuerrevisionreused",
+        "keydeleted",
+        "keypublished",
+        "keyretiring",
+        "keyrevoked",
+        "keystaged",
+        "keystateconflict",
+        "localhost",
+        "publishkey",
+        "retirekey",
+        "revokekey",
+        "stagekey",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-approval_issuers/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "artifactfile",
+        "bundle",
+        "curation",
+        "entities",
+        "licenseevidence",
+        "realization",
+        "risk",
+        "sha256hex",
+        "source",
+        "sourcekind",
+        "sourceorigin",
+        "sourcetransform",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-artifact_provenance/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "accessmode",
+        "accessselection",
+        "acquisitiondeclaration",
+        "acquisitionflow",
+        "authorizationcoverage",
+        "authorizationresult",
+        "authorizationtarget",
+        "capabilityname",
+        "permissionbudget",
+        "permissionobservation",
+        "permissionresult",
+        "permissiontarget",
+        "purpose",
+        "scheme",
+        "subject",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-auth_access/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "acknowledgecustodydeletion",
+        "acknowledgecustodywrite",
+        "acquisition",
+        "acquisitionbegan",
+        "acquisitioncandidaterecorded",
+        "acquisitioncompleted",
+        "acquisitionconsumed",
+        "acquisitionexpired",
+        "acquisitionfailed",
+        "acquisitionfailure",
+        "acquisitionresultmismatch",
+        "acquisitions",
+        "acquisitionstateconflict",
+        "acquisitionstates",
+        "actors",
+        "allocateconnection",
+        "authprofile",
+        "authprofiles",
+        "authrequirement",
+        "beginacquisition",
+        "bindingpublication",
+        "bindingpublished",
+        "commands",
+        "completeacquisition",
+        "connection",
+        "connectionallocated",
+        "connectionrevoked",
+        "connections",
+        "connectionstateconflict",
+        "connectionstates",
+        "consumeacquisition",
+        "credentialset",
+        "custodycandidaterecorded",
+        "custodydeleted",
+        "custodyinvalidated",
+        "custodyretiring",
+        "custodystateconflict",
+        "custodyversion",
+        "custodyversions",
+        "custodyversionstates",
+        "custodywritten",
+        "decision",
+        "entities",
+        "errors",
+        "events",
+        "expireacquisition",
+        "failacquisition",
+        "invalidatecustodyversion",
+        "localhost",
+        "localstaticprofile",
+        "profiledeclaration",
+        "profilerecorded",
+        "publicationfenceconflict",
+        "publishbinding",
+        "recordacquisitioncandidate",
+        "recordcustodyversion",
+        "recordprofile",
+        "refused",
+        "retirecustodyversion",
+        "revokeconnection",
+        "scoperequirements",
+        "theme-svg-external-link",
+        "types",
+        "unavailable",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-auth_bindings/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "acquisitionobservation",
+        "acquisitionstate",
+        "actors",
+        "adapterconfiguration",
+        "adapterdescribeinput",
+        "adapterdescriberesult",
+        "adapterlistinput",
+        "adapterlistresult",
+        "adapterobservation",
+        "adapterstatusinput",
+        "adapterstatusresult",
+        "adapterstopinput",
+        "adapterstopresult",
+        "adaptersummary",
+        "approvalclockcheckinput",
+        "approvalclockcheckresult",
+        "approvalissuedisposition",
+        "approvalissueinput",
+        "approvalissueresult",
+        "approvalissuerview",
+        "approvalkeyinitinput",
+        "approvalkeyrecoverinput",
+        "approvalkeyretireinput",
+        "approvalkeyrevokeinput",
+        "approvalkeyrotateinput",
+        "approvalkeysresult",
+        "approvalkeystate",
+        "approvalkeystatusinput",
+        "approvalkeyview",
+        "approvalpolicyresult",
+        "approvalpolicysetinput",
+        "approvalpolicystatusinput",
+        "approvalpolicyview",
+        "approvalprepareinput",
+        "approvalprepareresult",
+        "attemptreference",
+        "builddigest",
+        "checkpointschange",
+        "checkpointsdisposition",
+        "commands",
+        "configurationformat",
+        "configuredexecutable",
+        "connectionconnectinput",
+        "connectionconnectresult",
+        "connectioncreaterequest",
+        "connectiondescribeinput",
+        "connectiondescriberesult",
+        "connectiondescription",
+        "connectionlaunchinput",
+        "connectionlaunchresult",
+        "connectionlistcursor",
+        "connectionlistcursorexpired",
+        "connectionlistcursorrecorded",
+        "connectionlistcursors",
+        "connectionlistinput",
+        "connectionlistresult",
+        "connectionrepairinput",
+        "connectionrepairrequest",
+        "connectionrepairresult",
+        "connectionrevalidateinput",
+        "connectionrevalidateresult",
+        "connectionrevokeinput",
+        "connectionrevokeresult",
+        "connectionstatusinput",
+        "connectionstatusresult",
+        "connectionsummary",
+        "cursorstateconflict",
+        "entities",
+        "errors",
+        "events",
+        "expireconnectionlistcursor",
+        "failure",
+        "failurecode",
+        "failurekind",
+        "failurestage",
+        "initdisposition",
+        "keyringstate",
+        "legacydescribeinput",
+        "legacydescriberesult",
+        "legacyinvokeinput",
+        "legacyinvokeresult",
+        "lifecyclestate",
+        "localcaptureadmission",
+        "localcustodybinding",
+        "localhost",
+        "localoperationpolicy",
+        "localownerbuild",
+        "localownerbuildkind",
+        "localownerbuildrequest",
+        "localownercached",
+        "localownercachedkind",
+        "localownercachedrequest",
+        "localownergreeting",
+        "localownerhello",
+        "localownerhellokind",
+        "localrevalidationadmission",
+        "localruntimebootstrapremembered",
+        "localruntimerecord",
+        "localruntimerecorded",
+        "localruntimerecords",
+        "localruntimesuppressionset",
+        "metadatasource",
+        "mutationobservation",
+        "nextaction",
+        "operatingsystem",
+        "operationdescribeinput",
+        "operationdescriberesult",
+        "operationdescription",
+        "operationinvokeinput",
+        "operationinvokeresult",
+        "operationlistinput",
+        "operationlistresult",
+        "operationsummary",
+        "prerequisite",
+        "prerequisitestate",
+        "privateadapterbootstrap",
+        "privatebaseline",
+        "privateentryfield",
+        "privateoperationeffect",
+        "privateoperationrequirement",
+        "privateprofileacquisition",
+        "privatestaticprofile",
+        "providerrevocationoutcome",
+        "recordconnectionlistcursor",
+        "recordlocalruntime",
+        "rememberlocalruntimebootstrap",
+        "restartpolicy",
+        "revocationstate",
+        "servicedescriptor",
+        "setlocalruntimesuppression",
+        "setupcheckpointsenableinput",
+        "setupcheckpointsenableresult",
+        "setupcheckresult",
+        "setupinitresult",
+        "startupmode",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-cli/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actors",
+        "advancelocalclockfloor",
+        "clockfloorregressed",
+        "commands",
+        "configuration",
+        "entities",
+        "errors",
+        "events",
+        "localclockfloor",
+        "localclockflooradvanced",
+        "localclockfloorrecorded",
+        "localclockfloors",
+        "localhost",
+        "observation",
+        "recordlocalclockfloor",
+        "registryclockfloorfile",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-clock/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "connectionstate",
+        "eligibilitydecision",
+        "eligibilityfacts",
+        "evidencerequirements",
+        "managementaction",
+        "managementtarget",
+        "managementtargetkind",
+        "nextaction",
+        "operationcheckrequirements",
+        "requirementresult",
+        "statusobservation",
+        "theme-svg-external-link",
+        "types",
+        "viabilitydecision",
+        "viabilityfacts"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-connection_admission/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actors",
+        "admissiongenerationchanged",
+        "admissionid",
+        "admissionrefused",
+        "admissionstateconflict",
+        "admissionstates",
+        "admitgeneration",
+        "capturereaduse",
+        "checkkind",
+        "checkresult",
+        "commands",
+        "dispatchadmission",
+        "dispatchgeneration",
+        "dispatchreaduse",
+        "entities",
+        "errors",
+        "events",
+        "evidencecheck",
+        "evidenceorigin",
+        "evidencesnapshot",
+        "expirereaduse",
+        "generationadmitted",
+        "generationdispatched",
+        "generationinspected",
+        "inspectgeneration",
+        "localhost",
+        "readuse",
+        "readusecaptured",
+        "readusedispatched",
+        "readuseexpired",
+        "readuseid",
+        "readusereleased",
+        "readusestateconflict",
+        "readusestates",
+        "refusalreason",
+        "rejectadmission",
+        "releasereaduse",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-credential_evidence/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actors",
+        "commands",
+        "connectionbinding",
+        "credentialgeneration",
+        "credentialgenerationid",
+        "credentialgenerationrecorded",
+        "credentialgenerations",
+        "entities",
+        "events",
+        "externalidentity",
+        "localhost",
+        "recordcredentialgeneration",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-credentials/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "documentbodydecision",
+        "documentbodyfacts",
+        "documentcontentform",
+        "documentmembershipfacts",
+        "documentreaddecision",
+        "documentreadselection",
+        "logcollectionfacts",
+        "logpagedecision",
+        "logpagefacts",
+        "logtruncationcause",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-datasource_reads/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actors",
+        "adapterspecification",
+        "advanceregistryepoch",
+        "availabilitydecision",
+        "bodyparameter",
+        "booleanbodyconstant",
+        "commands",
+        "constantparameter",
+        "entities",
+        "errors",
+        "events",
+        "integerbodyconstant",
+        "localhost",
+        "namedparameter",
+        "operationavailability",
+        "operationdeclaration",
+        "parameter",
+        "recordserviceconfiguration",
+        "registryepochadvanced",
+        "registryepochregressed",
+        "requestmapping",
+        "serviceconfiguration",
+        "serviceconfigurationrecorded",
+        "serviceconfigurations",
+        "serviceconfigurationupgraded",
+        "servicehost",
+        "servicehostconfiguration",
+        "theme-svg-external-link",
+        "types",
+        "upgradeserviceconfiguration",
+        "upstreamsource",
+        "views",
+        "writemapping"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-declarations/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actors",
+        "admittedauthority",
+        "approvalclaims",
+        "approvalpolicy",
+        "approvalpreparation",
+        "approvalredemption",
+        "approvalredemptionrecorded",
+        "approvalredemptions",
+        "authoritysnapshot",
+        "canonicalapprovalsubject",
+        "canonicalauthorityscope",
+        "commands",
+        "configuredapprovalkey",
+        "deliveryclaims",
+        "deliveryreceipt",
+        "entities",
+        "events",
+        "executiontarget",
+        "executorbinding",
+        "httpmethod",
+        "localhost",
+        "lowercasehex64",
+        "nullableauthoritysnapshot",
+        "nullableexecutorbinding",
+        "nullableidentifier",
+        "nullableinteger",
+        "nullableroutebinding",
+        "presentation",
+        "proofheader",
+        "purpose",
+        "receiptid",
+        "recordapprovalredemption",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-delegation/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "collectioncoverage",
+        "collectionscope",
+        "compositiondeclaration",
+        "compositionfacts",
+        "compositioninstance",
+        "compositionlimits",
+        "configuredsourceidentity",
+        "declaredobservationbinding",
+        "historicalobservationcoordinate",
+        "installedroutebinding",
+        "mediatedroutebinding",
+        "mediatedrouteevidence",
+        "observationevidence",
+        "observationstate",
+        "partitioncoverage",
+        "partitionstate",
+        "publicationdecision",
+        "publicationfacts",
+        "recognitionconfidence",
+        "resourcerecognition",
+        "routerevalidationdecision",
+        "routerevalidationfacts",
+        "snapshotsummary",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-discovery/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "allocatecollection",
+        "allocateobservation",
+        "candidateview",
+        "collectionallocated",
+        "collectiondefinition",
+        "collectionretired",
+        "collectionstateconflict",
+        "commands",
+        "decisionrefusal",
+        "decisionunavailable",
+        "discoverycollection",
+        "entities",
+        "errors",
+        "events",
+        "observationchanged",
+        "observationstateconflict",
+        "observeequalincarnation",
+        "observepublication",
+        "ownerdecision",
+        "privatebindingentry",
+        "publicationobserved",
+        "publicationreceipt",
+        "publishedrow",
+        "publishedsnapshot",
+        "publishview",
+        "resourceobservation",
+        "retainstaleobservation",
+        "retirecollection",
+        "retireobservation",
+        "retireview",
+        "theme-svg-external-link",
+        "types",
+        "viewpublished",
+        "viewretired",
+        "withdrawobservation"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-discovery_state/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "acknowledgeanchor",
+        "activity",
+        "actors",
+        "anchoraccess",
+        "anchordecision",
+        "anchorkind",
+        "anchorstage",
+        "anchorunavailable",
+        "appenddecision",
+        "appendfinalobservation",
+        "appendunavailable",
+        "attemptlinkconflict",
+        "attemptlinked",
+        "attemptlinkrefused",
+        "attemptlinkrepeated",
+        "attemptlinkunavailable",
+        "auditanchored",
+        "auditcapacity",
+        "auditrecord",
+        "auditrecordref",
+        "auditref",
+        "auditstateconflict",
+        "auditstates",
+        "commands",
+        "entities",
+        "errors",
+        "events",
+        "finalobservation",
+        "finalobservationrecorded",
+        "finaloutcome",
+        "hoprole",
+        "linkanchorattempt",
+        "linkdecision",
+        "localhost",
+        "observationid",
+        "servicehost",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-execution_audit/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actors",
+        "addcontainer",
+        "additem",
+        "author",
+        "body",
+        "commands",
+        "consumer",
+        "container",
+        "containeradded",
+        "containerid",
+        "containeritems",
+        "containernotfound",
+        "containersinput",
+        "containerspage",
+        "deletioncapability",
+        "entities",
+        "errorcode",
+        "errors",
+        "events",
+        "feedcontainer",
+        "feeditem",
+        "invalidlimit",
+        "item",
+        "itemadded",
+        "itemid",
+        "itemnotfound",
+        "itemremoved",
+        "itemrestored",
+        "itemrevised",
+        "itemsinput",
+        "itemspage",
+        "itemstateconflict",
+        "kindcapability",
+        "listcontainers",
+        "listedcontainers",
+        "operationbinding",
+        "operationid",
+        "profilecapabilities",
+        "provenance",
+        "provider",
+        "readitems",
+        "removeitem",
+        "restoreitem",
+        "reviseitem",
+        "revision",
+        "revisioncapability",
+        "revisionunchanged",
+        "sourcecontainers",
+        "sourceitems",
+        "theme-svg-external-link",
+        "types",
+        "views",
+        "visibility",
+        "visibilitycapability",
+        "watermark"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-feed/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actors",
+        "authorityscope",
+        "commands",
+        "entities",
+        "errors",
+        "events",
+        "expireresult",
+        "keynamespace",
+        "keyquarantined",
+        "keyreservation",
+        "keyreserved",
+        "localhost",
+        "origin",
+        "originkind",
+        "quarantinekey",
+        "requestfingerprint",
+        "reservationid",
+        "reservationsettlements",
+        "reservationstateconflict",
+        "reservationstates",
+        "reservekey",
+        "resultexpired",
+        "resultretained",
+        "retainresult",
+        "routebinding",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-idempotency/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "actors",
+        "commands",
+        "configurelocalapprovalpolicy",
+        "entities",
+        "errors",
+        "events",
+        "localapprovalpolicies",
+        "localapprovalpolicy",
+        "localapprovalpolicyconfigured",
+        "localapprovalpolicyrevised",
+        "localhost",
+        "nativepreparation",
+        "nilpolicyidentity",
+        "reviselocalapprovalpolicy",
+        "revisionconflict",
+        "revisionexhausted",
+        "revisionnotadvanced",
+        "selection",
+        "setinput",
+        "theme-svg-external-link",
+        "toomanyoperations",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-local_approval_policy/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "abortprepared",
+        "actors",
+        "approvalmode",
+        "approvalsubjectmissing",
+        "attemptaborted",
+        "attemptcompleted",
+        "attemptid",
+        "attemptindeterminate",
+        "attemptprepared",
+        "attemptrecord",
+        "attemptrefused",
+        "attemptsettlements",
+        "attemptstateconflict",
+        "attemptstates",
+        "commands",
+        "dispatchopened",
+        "effectdeclaration",
+        "effectknowledge",
+        "entities",
+        "errors",
+        "events",
+        "executableeffect",
+        "idempotencykind",
+        "localhost",
+        "observation",
+        "opendispatch",
+        "prepareattempt",
+        "recordcompletion",
+        "recordrefusal",
+        "recorduncertainty",
+        "semanticeffect",
+        "servicehost",
+        "sessionestablishmentobservation",
+        "settlementclockinterval",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-mutations/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "authorizationdecision",
+        "authorizeexchange",
+        "commands",
+        "discardcandidate",
+        "entities",
+        "errors",
+        "events",
+        "exchangeauthorized",
+        "fencereserved",
+        "ownershipconflict",
+        "ownershiprefusalreason",
+        "ownershiptoken",
+        "publicationdecision",
+        "publicationrefusalreason",
+        "publicationrefused",
+        "publishrefresh",
+        "quarantinerefresh",
+        "recoverstoredresponse",
+        "refreshattempt",
+        "refreshattemptid",
+        "refreshcandidatediscarded",
+        "refreshpublished",
+        "refreshreserved",
+        "refreshresponsestored",
+        "refreshstateconflict",
+        "refreshstates",
+        "refreshuncertain",
+        "reservationdecision",
+        "reservedownerfenced",
+        "reserverefresh",
+        "responsedecision",
+        "sourcerefusalreason",
+        "sourceunavailable",
+        "storedresponserecovered",
+        "storeresponse",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-refresh/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "attemptreference",
+        "auditstatus",
+        "authalternative",
+        "baseerrorcode",
+        "causestage",
+        "diagnosticcause",
+        "error",
+        "errorcode",
+        "invokerequest",
+        "invokeresponse",
+        "mutationobservation",
+        "operationlimits",
+        "responsestatus",
+        "sourceaudit",
+        "theme-svg-external-link",
+        "types",
+        "version"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-service_wire/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "acceptoffer",
+        "beginclose",
+        "binding",
+        "cleanupdecision",
+        "closingbegun",
+        "commands",
+        "continuitylost",
+        "dataauthorityterminated",
+        "datalease",
+        "dataleaserenewed",
+        "datapermitted",
+        "entities",
+        "errors",
+        "establishready",
+        "events",
+        "finishteardown",
+        "gatedecision",
+        "localcleanupunaccounted",
+        "localresourcesreleased",
+        "losecontinuity",
+        "offeraccepted",
+        "offersession",
+        "peershutdown",
+        "permitdata",
+        "placement",
+        "profile",
+        "renewdatalease",
+        "session",
+        "sessionid",
+        "sessionoffered",
+        "sessionready",
+        "sessionstates",
+        "stateconflict",
+        "terminalactor",
+        "terminalfact",
+        "terminalreason",
+        "theme-svg-external-link",
+        "types",
+        "views"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-sessions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "httpresponseprefix",
+        "theme-svg-external-link",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-transport/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "contentform",
+        "crawlinput",
+        "failure",
+        "failurereason",
+        "fetchinput",
+        "page",
+        "pagesanswer",
+        "provenance",
+        "searchanswer",
+        "searchinput",
+        "searchresult",
+        "theme-svg-external-link",
+        "timerange",
+        "topic",
+        "truncationcause",
+        "types"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/domains/connectors-websearch/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "events-nothing-reacts-to",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/interactions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "components-that-run-nowhere",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/model/topology/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules",
+        "41-session-establishing-mutation-outcomes",
+        "5-ordering-retry-limits",
+        "51-key-namespace-fingerprint-and-replay-admission",
+        "52-exact-lifecycle-intent-and-repeat-guarantees-f11e08",
+        "6-conformance-scenarios",
+        "7-compatibility-and-projection",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/mutations/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "auth-and-configuration",
+        "end-to-end-acceptance",
+        "federation",
+        "placement-and-contracts",
+        "selected-operations",
+        "specification-and-realization",
+        "theme-svg-external-link",
+        "wire-boundary"
+      ],
+      "path": "/connectors/docs/reference/contracts/service/"
+    },
+    {
+      "anchors": [
+        "1-identity",
+        "10-open-decisions",
+        "3-types",
+        "4-rules-docsdesignmd406-418-settled-for-this-profile",
+        "41-traffic-cutoff-and-teardown-f06",
+        "5-ordering-and-limits",
+        "6-conformance-scenarios-docsdesignmd983",
+        "7-compatibility",
+        "8-sdk-and-host-obligations",
+        "9-ess-entities",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/contracts/sessions/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "adapters",
+        "libraries-and-the-command-line",
+        "repository-tooling",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/reference/crates/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "catalog-provider",
+        "distribution",
+        "local-runtime",
+        "native-adapters",
+        "service-boundary",
+        "theme-svg-external-link"
+      ],
+      "path": "/connectors/docs/status/"
+    }
+  ],
+  "schema": "b10x-project-routes/v1"
+}

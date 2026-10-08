@@ -1,0 +1,6 @@
+{
+  "baseUrl": "/connectors/",
+  "commit": "ed5fc78837d4f12e4c3993cbb6225e9b122d5207",
+  "repository": "connectors",
+  "schema": "b10x-project-site/v1"
+}

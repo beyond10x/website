@@ -599,6 +599,31 @@
       "type": "html"
     },
     {
+      "from": "/docs/connectors/",
+      "to": "/connectors/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/compositions/",
+      "to": "/connectors/docs/concepts/adapters/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/compositions/monitoring/",
+      "to": "/connectors/docs/reference/adapters/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/design/",
+      "to": "/connectors/docs/concepts/adapters/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/development/",
+      "to": "/connectors/docs/getting-started/",
+      "type": "html"
+    },
+    {
       "from": "/docs/engineering-protocols/",
       "to": "/engineering-protocols/docs/",
       "type": "html"
@@ -1041,6 +1066,11 @@
     {
       "from": "/docs/substrate/use-cases/",
       "to": "/substrate/docs/use-cases/",
+      "type": "html"
+    },
+    {
+      "from": "/ecosystem/connectors/",
+      "to": "/connectors/",
       "type": "html"
     },
     {

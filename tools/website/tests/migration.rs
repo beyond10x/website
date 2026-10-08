@@ -56,8 +56,8 @@ fn independent_and_undocumented_repositories_leave_the_collector_roster() {
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(
         lock["sources"].as_array().unwrap().len(),
-        22,
-        "Metaharness, Substrate, Secrets and LLM left for their own sites and Gates has no website documentation"
+        21,
+        "Metaharness, Substrate, Secrets, LLM and Connectors left for their own sites and Gates has no website documentation"
     );
 }
 /// Every page of Secrets' site answers its former `/docs/secrets/` path. The site has no
@@ -305,6 +305,82 @@ fn llm_is_independent_and_every_former_route_redirects() {
         .collect();
     assert_eq!(actual, expected);
 }
+/// Connectors' own site has no page at any of its five former `/docs/connectors/` paths: the
+/// overview lands on the documentation root, design and compositions on the adapter concepts,
+/// development on Getting started and the monitoring composition on the adapter reference. Every
+/// target is a route of the retained inventory.
+#[test]
+fn connectors_is_independent_and_every_former_route_redirects() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let lock: Value =
+        serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
+    assert!(
+        !lock["sources"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|s| s["repository"] == "connectors")
+    );
+    let roster = fs::read_to_string(root.join("sources.yaml")).unwrap();
+    assert!(roster.contains("repository: connectors"));
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows = redirects["redirects"].as_array().unwrap();
+    assert!(
+        !rows
+            .iter()
+            .any(|r| r["from"].as_str().unwrap().starts_with("/connectors/")),
+        "inverse redirects would create loops"
+    );
+    let actual: BTreeSet<_> = rows
+        .iter()
+        .filter(|r| {
+            let from = r["from"].as_str().unwrap();
+            from.starts_with("/docs/connectors/") || from == "/ecosystem/connectors/"
+        })
+        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
+        .collect();
+    let expected = BTreeSet::from([
+        ("/docs/connectors/", "/connectors/docs/"),
+        (
+            "/docs/connectors/compositions/",
+            "/connectors/docs/concepts/adapters/",
+        ),
+        (
+            "/docs/connectors/compositions/monitoring/",
+            "/connectors/docs/reference/adapters/",
+        ),
+        (
+            "/docs/connectors/design/",
+            "/connectors/docs/concepts/adapters/",
+        ),
+        (
+            "/docs/connectors/development/",
+            "/connectors/docs/getting-started/",
+        ),
+        ("/ecosystem/connectors/", "/connectors/"),
+    ]);
+    assert_eq!(actual, expected);
+    let inventory: Value = serde_json::from_slice(
+        &fs::read(root.join("data/independent/connectors-routes.json")).unwrap(),
+    )
+    .unwrap();
+    let routes: BTreeSet<_> = inventory["routes"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|r| r["path"].as_str().unwrap())
+        .collect();
+    for (_, to) in &expected {
+        assert!(
+            routes.contains(to),
+            "{to} is not a route of the Connectors site"
+        );
+    }
+    let experiences = fs::read_to_string(root.join("data/experiences.json")).unwrap();
+    assert!(experiences.contains("https://beyond10x.github.io/connectors/"));
+    assert!(!experiences.contains("https://beyond10x.github.io/docs/connectors/"));
+}
 /// Engineering Protocols never had unified documentation. Its own site owns
 /// `/engineering-protocols/`, so the root's former redirect of that path to the AEP profile is
 /// gone, and each of its documentation pages answers the `/docs/engineering-protocols/` path the
@@ -414,7 +490,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
         .iter()
         .map(|v| v.as_str().unwrap())
         .collect();
-    assert_eq!(repositories.len(), 22);
+    assert_eq!(repositories.len(), 21);
     assert!(repositories.contains(&"harness"));
     assert!(!repositories.contains(&"gates"));
     assert!(repositories.contains(&"mandate"));
@@ -431,6 +507,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(!repositories.contains(&"substrate"));
     assert!(!repositories.contains(&"secrets"));
     assert!(!repositories.contains(&"llm"));
+    assert!(!repositories.contains(&"connectors"));
     let excluded = roster["excludedRepositories"].as_array().unwrap();
     assert!(!excluded.is_empty());
     let names: Vec<&str> = excluded
@@ -472,6 +549,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(names.contains(&"substrate"));
     assert!(names.contains(&"gates"));
     assert!(names.contains(&"llm"));
+    assert!(names.contains(&"connectors"));
     assert!(names.contains(&"engineering-protocols"));
     let lock: Value =
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();

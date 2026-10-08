@@ -31,8 +31,9 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   // added its 27 former /docs/llm/ and /ecosystem/llm/ routes and one /docs/llm/ route for each of
   // its 2 guides the unified site never had. Engineering Protocols' independent site replaced the
   // root's /engineering-protocols/ redirect with one /docs/engineering-protocols/ route for each of
-  // its 17 documentation pages and /ecosystem/engineering-protocols/.
-  assert.equal(html.length, 287);
+  // its 17 documentation pages and /ecosystem/engineering-protocols/. Connectors' independent site
+  // added its 6 former /docs/connectors/ and /ecosystem/connectors/ routes.
+  assert.equal(html.length, 293);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));

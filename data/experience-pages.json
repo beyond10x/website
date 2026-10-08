@@ -305,7 +305,7 @@
               "id": "operate-connectors",
               "title": "Operate governed connector boundaries",
               "description": "Use Connectors documentation when external actions require catalog, credentials, grants, invocation, and events.",
-              "url": "/docs/connectors/",
+              "url": "/connectors/",
               "completion": "External effects have an attributable, bounded operations path."
             }
           ]

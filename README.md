@@ -144,9 +144,10 @@ executes the generator and dependency lock from its own immutable `job.workflow_
 
 ## Independent project documentation
 
-LLM publishes its own site at https://beyond10x.github.io/llm/, Metaharness at
-https://beyond10x.github.io/metaharness/, Secrets at https://beyond10x.github.io/secrets/ and
-Substrate at https://beyond10x.github.io/substrate/. All four are excluded from the collected
+Connectors publishes its own site at https://beyond10x.github.io/connectors/, LLM at
+https://beyond10x.github.io/llm/, Metaharness at https://beyond10x.github.io/metaharness/,
+Secrets at https://beyond10x.github.io/secrets/ and Substrate at
+https://beyond10x.github.io/substrate/. All five are excluded from the collected
 source roster. Website retains discovery metadata and redirects each previous `/docs/<project>/`
 page to its exact `/<project>/docs/` destination, preserving queries and fragments through the
 existing redirect template. Secrets' former architecture, limitations and roadmap pages, and its
