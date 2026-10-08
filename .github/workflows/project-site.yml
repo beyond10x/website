@@ -132,23 +132,38 @@ jobs:
           # The artifact is only as trustworthy as the run that made it, so the run is selected by
           # the exact commit this caller is publishing rather than supplied at dispatch: that
           # commit, on `main`, from a push, completed and green. A run of another workflow, or of a
-          # pull request, can hold a tree nobody merged.
-          curl --fail-with-body --silent --show-error --location --retry 3 \
-            --header 'Accept: application/vnd.github+json' \
-            --header "Authorization: Bearer $GITHUB_TOKEN" \
-            --header 'X-GitHub-Api-Version: 2022-11-28' \
-            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/workflows/$BUILD_WORKFLOW/runs?head_sha=$CONTROL_SHA&branch=main&event=push&status=success&per_page=100" \
-            > "$RUNNER_TEMP/b10x-site-boundary/runs.json"
-          run_id="$(jq -r --arg revision "$CONTROL_SHA" '
-            [.workflow_runs[]
-              | select(.head_sha == $revision
-                and .head_branch == "main"
-                and .event == "push"
-                and .status == "completed"
-                and .conclusion == "success")]
-            | sort_by(.run_started_at) | last | .id // empty' \
-            "$RUNNER_TEMP/b10x-site-boundary/runs.json")"
-          test -n "$run_id"
+          # pull request, can hold a tree nobody merged. The runs API can lag the run's completion,
+          # so the same query is repeated until the run is listed.
+          attempts=30
+          run_id=""
+          for attempt in $(seq 1 "$attempts"); do
+            curl --fail-with-body --silent --show-error --location --retry 3 \
+              --header 'Accept: application/vnd.github+json' \
+              --header "Authorization: Bearer $GITHUB_TOKEN" \
+              --header 'X-GitHub-Api-Version: 2022-11-28' \
+              "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/workflows/$BUILD_WORKFLOW/runs?head_sha=$CONTROL_SHA&branch=main&event=push&status=success&per_page=100" \
+              > "$RUNNER_TEMP/b10x-site-boundary/runs.json"
+            run_id="$(jq -r --arg revision "$CONTROL_SHA" '
+              [.workflow_runs[]
+                | select(.head_sha == $revision
+                  and .head_branch == "main"
+                  and .event == "push"
+                  and .status == "completed"
+                  and .conclusion == "success")]
+              | sort_by(.run_started_at) | last | .id // empty' \
+              "$RUNNER_TEMP/b10x-site-boundary/runs.json")"
+            if [ -n "$run_id" ]; then
+              break
+            fi
+            if [ "$attempt" -lt "$attempts" ]; then
+              sleep 10
+            fi
+          done
+          if [ -z "$run_id" ]; then
+            printf '::error::no successful %s push run on main for %s after %s attempts\n' \
+              "$BUILD_WORKFLOW" "$CONTROL_SHA" "$attempts" >&2
+            exit 1
+          fi
           printf 'run_id=%s\n' "$run_id" >> "$GITHUB_OUTPUT"
       - name: Download the built site
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1

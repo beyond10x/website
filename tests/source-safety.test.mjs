@@ -359,6 +359,12 @@ test('reusable project-site workflow deploys one bot-authored build run and neve
   assert.match(workflow, /\.event == "push"/);
   assert.match(workflow, /\.conclusion == "success"/);
   assert.match(workflow, /run-id: \$\{\{ steps\.build\.outputs\.run_id \}\}/);
+  // The runs API can list a finished run late, so the lookup is polled and names what it missed.
+  assert.match(workflow, /attempts=30\n/);
+  assert.match(workflow, /for attempt in \$\(seq 1 "\$attempts"\); do\n/);
+  assert.match(workflow, /sleep 10\n/);
+  assert.match(workflow, /for %s after %s attempts.*\n *"\$BUILD_WORKFLOW" "\$CONTROL_SHA" "\$attempts"/);
+  assert.doesNotMatch(workflow, /test -n "\$run_id"/);
   // A site built for another base path answers 404 for every asset, so it is refused first.
   assert.match(workflow, /\.baseUrl == \$base/);
   assert.match(workflow, /b10x-project-site\/v1/);
