@@ -5,6 +5,7 @@ import {mkdir, mkdtemp, readFile, rm, symlink, writeFile} from 'node:fs/promises
 import os from 'node:os';
 import path from 'node:path';
 import {promisify} from 'node:util';
+import {parse as parseYaml} from 'yaml';
 import test from 'node:test';
 import {assertPassiveMdx} from '@beyond10x/docs-system/collector';
 import {artifactFacts, sha256} from '../scripts/artifact-contract.mjs';
@@ -365,6 +366,11 @@ test('reusable project-site workflow deploys one bot-authored build run and neve
   assert.match(workflow, /sleep 10\n/);
   assert.match(workflow, /for %s after %s attempts.*\n *"\$BUILD_WORKFLOW" "\$CONTROL_SHA" "\$attempts"/);
   assert.doesNotMatch(workflow, /test -n "\$run_id"/);
+  // A job re-run must not meet the artifact of an earlier attempt, so the Pages artifact is named
+  // per attempt and the upload and the deploy both use that one name.
+  assert.match(workflow, /\n {6}PAGES_ARTIFACT: github-pages-\$\{\{ github\.run_attempt \}\}\n/);
+  assert.match(workflow, /upload-pages-artifact@[0-9a-f]{40}\n *with:\n *name: \$\{\{ env\.PAGES_ARTIFACT \}\}\n/);
+  assert.match(workflow, /deploy-pages@[0-9a-f]{40}\n *with:\n *artifact_name: \$\{\{ env\.PAGES_ARTIFACT \}\}\n/);
   // A site built for another base path answers 404 for every asset, so it is refused first.
   assert.match(workflow, /\.baseUrl == \$base/);
   assert.match(workflow, /b10x-project-site\/v1/);
@@ -374,6 +380,80 @@ test('reusable project-site workflow deploys one bot-authored build run and neve
   assert.doesNotMatch(workflow, /npm (ci|run|install)/);
   assert.doesNotMatch(workflow, /actions\/checkout@[0-9a-f]+\n *with:\n *repository: beyond10x\/website/);
   assert.doesNotMatch(workflow, /secrets: inherit/);
+});
+
+async function runPagesArtifactWait(responses) {
+  const workflow = parseYaml(await readFile(path.join(path.resolve(import.meta.dirname, '..'), '.github', 'workflows', 'project-site.yml'), 'utf8'));
+  const step = workflow.jobs.publish.steps.find((candidate) => candidate.name === 'Wait until the Pages artifact is listed');
+  assert.ok(step, 'the wait step exists');
+  const root = await mkdtemp(path.join(os.tmpdir(), 'b10x-pages-wait-'));
+  try {
+    const bin = path.join(root, 'bin');
+    const temp = path.join(root, 'runner');
+    await mkdir(path.join(temp, 'b10x-site-boundary'), {recursive: true});
+    await mkdir(bin);
+    for (const [index, response] of responses.entries()) {
+      await writeFile(path.join(root, `response-${index + 1}.json`), JSON.stringify(response));
+    }
+    // The fake answers the n-th query with response n, and the last response from then on.
+    await writeFile(path.join(bin, 'curl'), `#!/usr/bin/env bash
+set -euo pipefail
+n=$(( $(cat "$FAKE_ROOT/calls" 2>/dev/null || echo 0) + 1 ))
+echo "$n" > "$FAKE_ROOT/calls"
+printf '%s\\n' "\${@: -1}" >> "$FAKE_ROOT/urls"
+file="$FAKE_ROOT/response-$n.json"
+[ -f "$file" ] || file="$FAKE_ROOT/response-${responses.length}.json"
+cat "$file"
+`, {mode: 0o755});
+    await writeFile(path.join(bin, 'sleep'), '#!/usr/bin/env bash\necho "$1" >> "$FAKE_ROOT/sleeps"\n', {mode: 0o755});
+    const env = {
+      PATH: `${bin}:${process.env.PATH}`,
+      FAKE_ROOT: root,
+      GITHUB_API_URL: 'https://api.example.test',
+      GITHUB_REPOSITORY: 'beyond10x/example',
+      GITHUB_TOKEN: 'fake',
+      RUNNER_TEMP: temp,
+      RUN_ID: '42',
+      PAGES_ARTIFACT: 'github-pages-2',
+    };
+    const result = await execFile('bash', ['-e', '-c', step.run], {env}).then(
+      ({stdout, stderr}) => ({code: 0, stdout, stderr}),
+      (error) => ({code: error.code, stdout: error.stdout, stderr: error.stderr}),
+    );
+    const read = async (name) => (await readFile(path.join(root, name), 'utf8').catch(() => '')).split('\n').filter(Boolean);
+    return {...result, calls: Number((await read('calls'))[0] ?? 0), urls: await read('urls'), sleeps: await read('sleeps')};
+  } finally {
+    await rm(root, {recursive: true, force: true});
+  }
+}
+
+const pagesArtifact = (name, expired = false) => ({name, expired});
+
+test('project-site deploy waits until the attempt artifact is listed', async () => {
+  const result = await runPagesArtifactWait([
+    {artifacts: []},
+    {artifacts: []},
+    {artifacts: [pagesArtifact('github-pages-1'), pagesArtifact('github-pages-2')]},
+  ]);
+  assert.equal(result.code, 0, result.stderr);
+  assert.equal(result.calls, 3);
+  assert.deepEqual(result.sleeps, ['10', '10']);
+  assert.equal(result.urls[0], 'https://api.example.test/repos/beyond10x/example/actions/runs/42/artifacts?name=github-pages-2&per_page=100');
+});
+
+test('project-site deploy wait is bounded and names the artifact and the attempt count', async () => {
+  const result = await runPagesArtifactWait([{artifacts: [pagesArtifact('github-pages-2', true)]}]);
+  assert.notEqual(result.code, 0);
+  assert.equal(result.calls, 30);
+  assert.equal(result.sleeps.length, 29);
+  assert.match(result.stderr, /::error::Pages artifact github-pages-2 not listed in run 42 after 30 attempts/);
+});
+
+test('project-site deploy wait refuses two artifacts of one attempt name', async () => {
+  const result = await runPagesArtifactWait([{artifacts: [pagesArtifact('github-pages-2'), pagesArtifact('github-pages-2')]}]);
+  assert.notEqual(result.code, 0);
+  assert.equal(result.calls, 1);
+  assert.match(result.stderr, /::error::2 artifacts named github-pages-2 in run 42/);
 });
 
 test('reusable root workflow executes immutable controls and blocks human reruns', async () => {
