@@ -2,50 +2,939 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
-      "key": "connectors/v0.27.0",
-      "id": "connectors/v0.27.0",
-      "repository": "connectors",
-      "publishedAt": "2026-10-05T06:49:51Z",
-      "title": "Connectors v0.27.0",
-      "summary": "Connectors released version v0.27.0.",
+      "key": "agentplugins/0.22.3",
+      "id": "agentplugins/0.22.3",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-08T23:06:08Z",
+      "title": "Agent Plugins 0.22.3",
+      "summary": "Agent Plugins released version 0.22.3.",
       "kind": "release",
       "impact": "notable",
       "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.27.0",
-        "version": "v0.27.0"
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.3",
+        "version": "0.22.3"
       },
       "journeys": [
         "build-agents",
-        "operate-services"
+        "plan-work",
+        "specify"
       ],
       "affectedSurfaces": [
-        "connectors/docs"
+        "agentplugins/docs"
       ],
       "automatic": true,
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.26.0",
-      "id": "connectors/v0.26.0",
-      "repository": "connectors",
-      "publishedAt": "2026-10-05T04:21:22Z",
-      "title": "Connectors v0.26.0",
-      "summary": "Connectors released version v0.26.0.",
+      "key": "worktree/0.14.0",
+      "id": "worktree/0.14.0",
+      "repository": "worktree",
+      "publishedAt": "2026-10-08T21:44:28Z",
+      "title": "Worktree 0.14.0",
+      "summary": "Worktree released version 0.14.0.",
       "kind": "release",
       "impact": "notable",
       "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.26.0",
-        "version": "v0.26.0"
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.14.0",
+        "version": "0.14.0"
       },
       "journeys": [
         "build-agents",
         "operate-services"
       ],
       "affectedSurfaces": [
-        "connectors/docs"
+        "worktree/docs"
       ],
       "automatic": true,
       "channel": "releases"
+    },
+    {
+      "key": "aep/0.70.0",
+      "id": "aep/0.70.0",
+      "repository": "aep",
+      "publishedAt": "2026-10-08T21:19:52Z",
+      "title": "AEP 0.70.0",
+      "summary": "AEP released version 0.70.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.70.0",
+        "version": "0.70.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.30.3",
+      "id": "entity-runtime/0.30.3",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-10-08T15:59:05Z",
+      "title": "Entity Runtime 0.30.3",
+      "summary": "Entity Runtime released version 0.30.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.30.3",
+        "version": "0.30.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "mcp/0.2.0",
+      "id": "mcp/0.2.0",
+      "repository": "mcp",
+      "publishedAt": "2026-10-08T15:38:06Z",
+      "title": "MCP 0.2.0",
+      "summary": "MCP released version 0.2.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/mcp/releases/tag/0.2.0",
+        "version": "0.2.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "mcp/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "docs-system/0.8.0",
+      "id": "docs-system/0.8.0",
+      "repository": "docs-system",
+      "publishedAt": "2026-10-08T15:31:05Z",
+      "title": "Docs System 0.8.0",
+      "summary": "Docs System released version 0.8.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/docs-system/releases/tag/0.8.0",
+        "version": "0.8.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "docs-system/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.8.3",
+      "id": "eventlog/0.8.3",
+      "repository": "eventlog",
+      "publishedAt": "2026-10-08T12:56:13Z",
+      "title": "Eventlog 0.8.3",
+      "summary": "Eventlog released version 0.8.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.8.3",
+        "version": "0.8.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.8.2",
+      "id": "eventlog/0.8.2",
+      "repository": "eventlog",
+      "publishedAt": "2026-10-08T10:38:33Z",
+      "title": "Eventlog 0.8.2",
+      "summary": "Eventlog released version 0.8.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.8.2",
+        "version": "0.8.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.22.2",
+      "id": "agentplugins/0.22.2",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-08T09:53:28Z",
+      "title": "Agent Plugins 0.22.2",
+      "summary": "Agent Plugins released version 0.22.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.2",
+        "version": "0.22.2"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.13.0",
+      "id": "worktree/0.13.0",
+      "repository": "worktree",
+      "publishedAt": "2026-10-08T09:36:22Z",
+      "title": "Worktree 0.13.0",
+      "summary": "Worktree released version 0.13.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.13.0",
+        "version": "0.13.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.69.1",
+      "id": "aep/0.69.1",
+      "repository": "aep",
+      "publishedAt": "2026-10-08T08:32:50Z",
+      "title": "AEP 0.69.1",
+      "summary": "AEP released version 0.69.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.69.1",
+        "version": "0.69.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.22.1",
+      "id": "agentplugins/0.22.1",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-08T08:14:17Z",
+      "title": "Agent Plugins 0.22.1",
+      "summary": "Agent Plugins released version 0.22.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.1",
+        "version": "0.22.1"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.30.2",
+      "id": "entity-runtime/0.30.2",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-10-08T06:37:39Z",
+      "title": "Entity Runtime 0.30.2",
+      "summary": "Entity Runtime released version 0.30.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.30.2",
+        "version": "0.30.2"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.30.1",
+      "id": "entity-runtime/0.30.1",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-10-08T04:05:42Z",
+      "title": "Entity Runtime 0.30.1",
+      "summary": "Entity Runtime released version 0.30.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.30.1",
+        "version": "0.30.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.22.0",
+      "id": "agentplugins/0.22.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-08T03:08:17Z",
+      "title": "Agent Plugins 0.22.0",
+      "summary": "Agent Plugins released version 0.22.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.22.0",
+        "version": "0.22.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.8.1",
+      "id": "eventlog/0.8.1",
+      "repository": "eventlog",
+      "publishedAt": "2026-10-08T00:54:18Z",
+      "title": "Eventlog 0.8.1",
+      "summary": "Eventlog released version 0.8.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.8.1",
+        "version": "0.8.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.12.1",
+      "id": "worktree/0.12.1",
+      "repository": "worktree",
+      "publishedAt": "2026-10-08T00:09:15Z",
+      "title": "Worktree 0.12.1",
+      "summary": "Worktree released version 0.12.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.12.1",
+        "version": "0.12.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.12.0",
+      "id": "worktree/0.12.0",
+      "repository": "worktree",
+      "publishedAt": "2026-10-07T23:50:44Z",
+      "title": "Worktree 0.12.0",
+      "summary": "Worktree released version 0.12.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.12.0",
+        "version": "0.12.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.69.0",
+      "id": "aep/0.69.0",
+      "repository": "aep",
+      "publishedAt": "2026-10-07T22:42:03Z",
+      "title": "AEP 0.69.0",
+      "summary": "AEP released version 0.69.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.69.0",
+        "version": "0.69.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.30.0",
+      "id": "entity-runtime/0.30.0",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-10-07T13:24:21Z",
+      "title": "Entity Runtime 0.30.0",
+      "summary": "Entity Runtime released version 0.30.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.30.0",
+        "version": "0.30.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.21.2",
+      "id": "agentplugins/0.21.2",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-07T11:03:52Z",
+      "title": "Agent Plugins 0.21.2",
+      "summary": "Agent Plugins released version 0.21.2.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.21.2",
+        "version": "0.21.2"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.29.0",
+      "id": "entity-runtime/0.29.0",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-10-07T07:59:54Z",
+      "title": "Entity Runtime 0.29.0",
+      "summary": "Entity Runtime released version 0.29.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.29.0",
+        "version": "0.29.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.21.1",
+      "id": "agentplugins/0.21.1",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-07T02:59:19Z",
+      "title": "Agent Plugins 0.21.1",
+      "summary": "Agent Plugins released version 0.21.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.21.1",
+        "version": "0.21.1"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.11.0",
+      "id": "worktree/0.11.0",
+      "repository": "worktree",
+      "publishedAt": "2026-10-07T02:36:52Z",
+      "title": "Worktree 0.11.0",
+      "summary": "Worktree released version 0.11.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.11.0",
+        "version": "0.11.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.8.0",
+      "id": "eventlog/0.8.0",
+      "repository": "eventlog",
+      "publishedAt": "2026-10-07T02:20:21Z",
+      "title": "Eventlog 0.8.0",
+      "summary": "Eventlog released version 0.8.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.8.0",
+        "version": "0.8.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.28.0",
+      "id": "entity-runtime/0.28.0",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-10-07T01:00:14Z",
+      "title": "Entity Runtime 0.28.0",
+      "summary": "Entity Runtime released version 0.28.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.28.0",
+        "version": "0.28.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.21.0",
+      "id": "agentplugins/0.21.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-07T00:50:50Z",
+      "title": "Agent Plugins 0.21.0",
+      "summary": "Agent Plugins released version 0.21.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.21.0",
+        "version": "0.21.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.7.0",
+      "id": "eventlog/0.7.0",
+      "repository": "eventlog",
+      "publishedAt": "2026-10-07T00:14:16Z",
+      "title": "Eventlog 0.7.0",
+      "summary": "Eventlog released version 0.7.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.7.0",
+        "version": "0.7.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/held-state-branch-order-0.56.0",
+      "id": "ess/held-state-branch-order-0.56.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-07T00:00:00Z",
+      "title": "A held-state branch must be declared before an overlapping accepting or external branch",
+      "summary": "Validation refuses an accepting `when:` or `external:` branch declared before a branch the held state selects when one request can satisfy both guards (`ESS-COMMAND-004`, naming both branches). Every consumer then answers alike. To fix a refused specification, declare the held-state branch first.",
+      "kind": "breaking",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.56.0",
+        "version": "0.56.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/output-records-and-type-library-features-0.56.0",
+      "id": "ess/output-records-and-type-library-features-0.56.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-07T00:00:00Z",
+      "title": "Committed output records carry no machine path, and generated Rust types stop forcing arbitrary precision",
+      "summary": "A settled `.ess-output/state.json` no longer records the output's absolute path, device or inode, and regeneration refuses an edited owned file. Generated Rust types turn on arbitrary precision only where they hold JSON numbers. Entity Runtime lowers alphabets and text counts, and concurrent generation under a shared directory no longer refuses as busy.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.56.0",
+        "version": "0.56.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "entity-runtime/0.27.0",
+      "id": "entity-runtime/0.27.0",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-10-06T16:42:54Z",
+      "title": "Entity Runtime 0.27.0",
+      "summary": "Entity Runtime released version 0.27.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.27.0",
+        "version": "0.27.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.10.0",
+      "id": "worktree/0.10.0",
+      "repository": "worktree",
+      "publishedAt": "2026-10-06T11:40:07Z",
+      "title": "Worktree 0.10.0",
+      "summary": "Worktree released version 0.10.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.10.0",
+        "version": "0.10.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentplugins/0.20.1",
+      "id": "agentplugins/0.20.1",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-06T10:48:44Z",
+      "title": "Agent Plugins 0.20.1",
+      "summary": "Agent Plugins released version 0.20.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.20.1",
+        "version": "0.20.1"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.9.0",
+      "id": "worktree/0.9.0",
+      "repository": "worktree",
+      "publishedAt": "2026-10-06T10:12:06Z",
+      "title": "Worktree 0.9.0",
+      "summary": "Worktree released version 0.9.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.9.0",
+        "version": "0.9.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/counted-claims-and-checks-0.54.0",
+      "id": "ess/counted-claims-and-checks-0.54.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-06T00:00:00Z",
+      "title": "Counted event claims, generate --check and validation completeness",
+      "summary": "Suites `ess-conformance/44` and `/45` match repeated event claims as a set in the Rust, Go and TypeScript runners. `ess generate --check` reports drift without writing, `ess specify validate` reports completeness, `ess specify formats` lists every format, and a CLI binding takes a trailing argument list. A membership operand naming a parameter is refused.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.54.0",
+        "version": "0.54.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/json-cli-results-and-optional-generator-ports-0.55.0",
+      "id": "ess/json-cli-results-and-optional-generator-ports-0.55.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-06T00:00:00Z",
+      "title": "CLI results carry Json, and an optional generated value reads a port",
+      "summary": "A CLI result field may be typed `Json` and is written as JSON rather than JSON text, so a caller parses an answer once. A `{generated: true}` value of type `Optional<T>` is now supplied by the implementation through a generator port in generated Rust and Go, instead of always being absent; a context that implements the port must add the method.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.55.0",
+        "version": "0.55.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/source-23-records-0.54.0",
+      "id": "ess/source-23-records-0.54.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-06T00:00:00Z",
+      "title": "Source format ess/23, re-keyed records, bulk deletes and enum attributes",
+      "summary": "`ess/23` lets an update re-key its record, a value read the state held before the outcome, `deletes:` remove every row a filter selects, an `affects:` entry write one record per list element and an enum declare typed variant attributes. Synthesis witnesses state predicates, struct-identity selectors and row sets beside an addressed record.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.54.0",
+        "version": "0.54.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "agentplugins/0.20.0",
+      "id": "agentplugins/0.20.0",
+      "repository": "agentplugins",
+      "publishedAt": "2026-10-05T22:06:58Z",
+      "title": "Agent Plugins 0.20.0",
+      "summary": "Agent Plugins released version 0.20.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.20.0",
+        "version": "0.20.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "agentplugins/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "ess/protocol-specifications-0.53.0",
+      "id": "ess/protocol-specifications-0.53.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-05T00:00:00Z",
+      "title": "Experimental protocol specifications and instant-ordered timestamps",
+      "summary": "Experimental `ess-protospec/1` models communicating peers, bounded channels, timers and safety properties; `ess verify protocol` simulates, replays and explores it. Conformance runners in Rust, Go and TypeScript now order RFC 3339 instants by instant, not by text.",
+      "kind": "capability",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.53.0",
+        "version": "0.53.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
+    },
+    {
+      "key": "ess/source-22-expressions-0.53.0",
+      "id": "ess/source-22-expressions-0.53.0",
+      "repository": "ess",
+      "publishedAt": "2026-10-05T00:00:00Z",
+      "title": "Source format ess/22, row sets and calendar windows",
+      "summary": "`ess/22` adds fact operands, constant offsets, instant comparison, UTF-8 byte length, distinct list members, typed text operands, row sets with filtered related reads, calendar windows at a fixed offset, binding payload conditions and conditional aggregate measures, each checked by synthesized conformance scenarios in the Rust, Go and TypeScript runners.",
+      "kind": "capability",
+      "impact": "significant",
+      "source": {
+        "url": "https://github.com/beyond10x/ess/releases/tag/0.53.0",
+        "version": "0.53.0"
+      },
+      "journeys": [
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "ess/docs"
+      ],
+      "automatic": false,
+      "channel": "impact"
     },
     {
       "key": "entity-runtime/0.26.0",
@@ -118,75 +1007,6 @@
       "channel": "impact"
     },
     {
-      "key": "connectors/v0.25.1",
-      "id": "connectors/v0.25.1",
-      "repository": "connectors",
-      "publishedAt": "2026-10-02T21:05:36Z",
-      "title": "Connectors v0.25.1",
-      "summary": "Connectors released version v0.25.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.25.1",
-        "version": "v0.25.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.25.0",
-      "id": "connectors/v0.25.0",
-      "repository": "connectors",
-      "publishedAt": "2026-10-02T13:50:25Z",
-      "title": "Connectors v0.25.0",
-      "summary": "Connectors released version v0.25.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.25.0",
-        "version": "v0.25.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.24.0",
-      "id": "connectors/v0.24.0",
-      "repository": "connectors",
-      "publishedAt": "2026-10-02T02:27:20Z",
-      "title": "Connectors v0.24.0",
-      "summary": "Connectors released version v0.24.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.24.0",
-        "version": "v0.24.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "ess/output-portable-state-0.51.0",
       "id": "ess/output-portable-state-0.51.0",
       "repository": "ess",
@@ -251,29 +1071,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "connectors/v0.23.0",
-      "id": "connectors/v0.23.0",
-      "repository": "connectors",
-      "publishedAt": "2026-10-01T21:33:47Z",
-      "title": "Connectors v0.23.0",
-      "summary": "Connectors released version v0.23.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.23.0",
-        "version": "v0.23.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "ess/actor-grants-enforced-0.49.0",
@@ -343,75 +1140,6 @@
       "channel": "impact"
     },
     {
-      "key": "connectors/v0.22.0",
-      "id": "connectors/v0.22.0",
-      "repository": "connectors",
-      "publishedAt": "2026-10-01T15:41:43Z",
-      "title": "Connectors v0.22.0",
-      "summary": "Connectors released version v0.22.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.22.0",
-        "version": "v0.22.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.21.1",
-      "id": "connectors/v0.21.1",
-      "repository": "connectors",
-      "publishedAt": "2026-10-01T14:11:58Z",
-      "title": "Connectors v0.21.1",
-      "summary": "Connectors released version v0.21.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.21.1",
-        "version": "v0.21.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.21.0",
-      "id": "connectors/v0.21.0",
-      "repository": "connectors",
-      "publishedAt": "2026-10-01T08:24:29Z",
-      "title": "Connectors v0.21.0",
-      "summary": "Connectors released version v0.21.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.21.0",
-        "version": "v0.21.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "ess/conform-report-0.48.0",
       "id": "ess/conform-report-0.48.0",
       "repository": "ess",
@@ -476,29 +1204,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "connectors/v0.20.0",
-      "id": "connectors/v0.20.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-30T18:43:10Z",
-      "title": "Connectors v0.20.0",
-      "summary": "Connectors released version v0.20.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.20.0",
-        "version": "v0.20.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "aep/0.68.0",
@@ -592,29 +1297,6 @@
       "channel": "impact"
     },
     {
-      "key": "connectors/v0.19.0",
-      "id": "connectors/v0.19.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-30T15:55:08Z",
-      "title": "Connectors v0.19.0",
-      "summary": "Connectors released version v0.19.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.19.0",
-        "version": "v0.19.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "aep/0.67.0",
       "id": "aep/0.67.0",
       "repository": "aep",
@@ -662,29 +1344,6 @@
       "channel": "impact"
     },
     {
-      "key": "connectors/v0.18.0",
-      "id": "connectors/v0.18.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-30T09:38:00Z",
-      "title": "Connectors v0.18.0",
-      "summary": "Connectors released version v0.18.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.18.0",
-        "version": "v0.18.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "aep/0.66.0",
       "id": "aep/0.66.0",
       "repository": "aep",
@@ -705,29 +1364,6 @@
       ],
       "affectedSurfaces": [
         "aep/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.17.0",
-      "id": "connectors/v0.17.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-30T01:26:22Z",
-      "title": "Connectors v0.17.0",
-      "summary": "Connectors released version v0.17.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.17.0",
-        "version": "v0.17.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -775,29 +1411,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "connectors/v0.16.0",
-      "id": "connectors/v0.16.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-29T21:26:41Z",
-      "title": "Connectors v0.16.0",
-      "summary": "Connectors released version v0.16.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.16.0",
-        "version": "v0.16.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "ess/defect-batch-0.43.0",
@@ -909,75 +1522,6 @@
       ],
       "affectedSurfaces": [
         "agentplugins/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.15.1",
-      "id": "connectors/v0.15.1",
-      "repository": "connectors",
-      "publishedAt": "2026-09-29T06:44:55Z",
-      "title": "Connectors v0.15.1",
-      "summary": "Connectors released version v0.15.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.15.1",
-        "version": "v0.15.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.15.0",
-      "id": "connectors/v0.15.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-29T05:22:11Z",
-      "title": "Connectors v0.15.0",
-      "summary": "Connectors released version v0.15.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.15.0",
-        "version": "v0.15.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.14.0",
-      "id": "connectors/v0.14.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-29T01:13:03Z",
-      "title": "Connectors v0.14.0",
-      "summary": "Connectors released version v0.14.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.14.0",
-        "version": "v0.14.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -1294,29 +1838,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.13.3",
-      "id": "connectors/v0.13.3",
-      "repository": "connectors",
-      "publishedAt": "2026-09-27T22:01:24Z",
-      "title": "Connectors v0.13.3",
-      "summary": "Connectors released version v0.13.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.13.3",
-        "version": "v0.13.3"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "ess/retrofit-findings-0.37.0",
       "id": "ess/retrofit-findings-0.37.0",
       "repository": "ess",
@@ -1339,29 +1860,6 @@
       "channel": "impact"
     },
     {
-      "key": "connectors/v0.13.2",
-      "id": "connectors/v0.13.2",
-      "repository": "connectors",
-      "publishedAt": "2026-09-27T14:52:43Z",
-      "title": "Connectors v0.13.2",
-      "summary": "Connectors released version v0.13.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.13.2",
-        "version": "v0.13.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "ess/value-expressions-0.36.0",
       "id": "ess/value-expressions-0.36.0",
       "repository": "ess",
@@ -1382,29 +1880,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "connectors/v0.13.1",
-      "id": "connectors/v0.13.1",
-      "repository": "connectors",
-      "publishedAt": "2026-09-27T11:02:26Z",
-      "title": "Connectors v0.13.1",
-      "summary": "Connectors released version v0.13.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.13.1",
-        "version": "v0.13.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "aep/0.61.1",
@@ -1547,29 +2022,6 @@
       ],
       "affectedSurfaces": [
         "aep/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.13.0",
-      "id": "connectors/v0.13.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-27T01:47:21Z",
-      "title": "Connectors v0.13.0",
-      "summary": "Connectors released version v0.13.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.13.0",
-        "version": "v0.13.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -2277,29 +2729,6 @@
       ],
       "affectedSurfaces": [
         "agentplugins/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.12.0",
-      "id": "connectors/v0.12.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-25T12:20:17Z",
-      "title": "Connectors v0.12.0",
-      "summary": "Connectors released version v0.12.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.12.0",
-        "version": "v0.12.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -3316,98 +3745,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.11.0",
-      "id": "connectors/v0.11.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-14T20:56:17Z",
-      "title": "Connectors v0.11.0",
-      "summary": "Connectors released version v0.11.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.11.0",
-        "version": "v0.11.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.10.0",
-      "id": "connectors/v0.10.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-13T16:26:51Z",
-      "title": "Connectors v0.10.0",
-      "summary": "Connectors released version v0.10.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.10.0",
-        "version": "v0.10.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.9.0",
-      "id": "connectors/v0.9.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-13T13:43:21Z",
-      "title": "Connectors v0.9.0",
-      "summary": "Connectors released version v0.9.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.9.0",
-        "version": "v0.9.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.8.0",
-      "id": "connectors/v0.8.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-13T07:23:47Z",
-      "title": "Connectors v0.8.0",
-      "summary": "Connectors released version v0.8.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.8.0",
-        "version": "v0.8.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "ess/component-settings-0.24.0",
       "id": "ess/component-settings-0.24.0",
       "repository": "ess",
@@ -3849,29 +4186,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.7.2",
-      "id": "connectors/v0.7.2",
-      "repository": "connectors",
-      "publishedAt": "2026-09-07T13:08:04Z",
-      "title": "Connectors v0.7.2",
-      "summary": "Connectors released version v0.7.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.7.2",
-        "version": "v0.7.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "agentplugins/0.8.1",
       "id": "agentplugins/0.8.1",
       "repository": "agentplugins",
@@ -3891,29 +4205,6 @@
       ],
       "affectedSurfaces": [
         "agentplugins/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.7.1",
-      "id": "connectors/v0.7.1",
-      "repository": "connectors",
-      "publishedAt": "2026-09-07T12:28:45Z",
-      "title": "Connectors v0.7.1",
-      "summary": "Connectors released version v0.7.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.7.1",
-        "version": "v0.7.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -3960,29 +4251,6 @@
       ],
       "affectedSurfaces": [
         "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.7.0",
-      "id": "connectors/v0.7.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-07T08:18:02Z",
-      "title": "Connectors v0.7.0",
-      "summary": "Connectors released version v0.7.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.7.0",
-        "version": "v0.7.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -4724,29 +4992,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.6.0",
-      "id": "connectors/v0.6.0",
-      "repository": "connectors",
-      "publishedAt": "2026-09-04T22:54:57Z",
-      "title": "Connectors v0.6.0",
-      "summary": "Connectors released version v0.6.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.6.0",
-        "version": "v0.6.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "agent-platform/0.6.8",
       "id": "agent-platform/0.6.8",
       "repository": "agent-platform",
@@ -5113,29 +5358,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.5.11",
-      "id": "connectors/v0.5.11",
-      "repository": "connectors",
-      "publishedAt": "2026-09-04T04:18:54Z",
-      "title": "Connectors v0.5.11",
-      "summary": "Connectors released version v0.5.11.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.11",
-        "version": "v0.5.11"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "service-sdk/0.5.6",
       "id": "service-sdk/0.5.6",
       "repository": "service-sdk",
@@ -5248,29 +5470,6 @@
       ],
       "affectedSurfaces": [
         "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.5.9",
-      "id": "connectors/v0.5.9",
-      "repository": "connectors",
-      "publishedAt": "2026-09-04T03:13:06Z",
-      "title": "Connectors v0.5.9",
-      "summary": "Connectors released version v0.5.9.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.9",
-        "version": "v0.5.9"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -5393,29 +5592,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.5.8",
-      "id": "connectors/v0.5.8",
-      "repository": "connectors",
-      "publishedAt": "2026-09-04T01:29:44Z",
-      "title": "Connectors v0.5.8",
-      "summary": "Connectors released version v0.5.8.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.8",
-        "version": "v0.5.8"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "aep-service/0.1.7",
       "id": "aep-service/0.1.7",
       "repository": "aep-service",
@@ -5459,29 +5635,6 @@
       ],
       "affectedSurfaces": [
         "aep/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.5.7",
-      "id": "connectors/v0.5.7",
-      "repository": "connectors",
-      "publishedAt": "2026-09-03T23:44:52Z",
-      "title": "Connectors v0.5.7",
-      "summary": "Connectors released version v0.5.7.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.7",
-        "version": "v0.5.7"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -7331,52 +7484,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.5.2",
-      "id": "connectors/v0.5.2",
-      "repository": "connectors",
-      "publishedAt": "2026-09-02T23:40:19Z",
-      "title": "Connectors v0.5.2",
-      "summary": "Connectors released version v0.5.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.2",
-        "version": "v0.5.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.5.1",
-      "id": "connectors/v0.5.1",
-      "repository": "connectors",
-      "publishedAt": "2026-09-02T23:38:07Z",
-      "title": "Connectors v0.5.1",
-      "summary": "Connectors released version v0.5.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.5.1",
-        "version": "v0.5.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "aep/0.44.0",
       "id": "aep/0.44.0",
       "repository": "aep",
@@ -7513,29 +7620,6 @@
       ],
       "affectedSurfaces": [
         "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.4.5",
-      "id": "connectors/v0.4.5",
-      "repository": "connectors",
-      "publishedAt": "2026-09-02T20:25:55Z",
-      "title": "Connectors v0.4.5",
-      "summary": "Connectors released version v0.4.5.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.5",
-        "version": "v0.4.5"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -7767,8 +7851,7 @@
       ],
       "affectedSurfaces": [
         "devcenter/docs",
-        "identity/docs",
-        "connectors/docs"
+        "identity/docs"
       ],
       "automatic": false,
       "channel": "impact"
@@ -7951,29 +8034,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.4.4",
-      "id": "connectors/v0.4.4",
-      "repository": "connectors",
-      "publishedAt": "2026-09-02T12:46:25Z",
-      "title": "Connectors v0.4.4",
-      "summary": "Connectors released version v0.4.4.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.4",
-        "version": "v0.4.4"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "service-sdk/0.2.0",
       "id": "service-sdk/0.2.0",
       "repository": "service-sdk",
@@ -8114,52 +8174,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.4.3",
-      "id": "connectors/v0.4.3",
-      "repository": "connectors",
-      "publishedAt": "2026-09-02T11:40:18Z",
-      "title": "Connectors v0.4.3",
-      "summary": "Connectors released version v0.4.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.3",
-        "version": "v0.4.3"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.4.2",
-      "id": "connectors/v0.4.2",
-      "repository": "connectors",
-      "publishedAt": "2026-09-02T11:08:57Z",
-      "title": "Connectors v0.4.2",
-      "summary": "Connectors released version v0.4.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.2",
-        "version": "v0.4.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "agentplugins/0.3.4",
       "id": "agentplugins/0.3.4",
       "repository": "agentplugins",
@@ -8294,29 +8308,6 @@
       ],
       "affectedSurfaces": [
         "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.4.1",
-      "id": "connectors/v0.4.1",
-      "repository": "connectors",
-      "publishedAt": "2026-09-02T03:14:46Z",
-      "title": "Connectors v0.4.1",
-      "summary": "Connectors released version v0.4.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.4.1",
-        "version": "v0.4.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -9035,11 +9026,6 @@
           "target": "surface:harness/docs",
           "kind": "integrates-with",
           "label": "Uses Harness for model and tool execution"
-        },
-        {
-          "target": "surface:connectors/docs",
-          "kind": "depends-on",
-          "label": "Uses governed Connector operations"
         }
       ],
       "automatic": false,
@@ -9094,11 +9080,6 @@
         "identity/docs"
       ],
       "relations": [
-        {
-          "target": "surface:connectors/docs",
-          "kind": "enables",
-          "label": "Issues bounded Connector authority"
-        },
         {
           "target": "surface:agent-platform/docs",
           "kind": "enables",
@@ -9771,29 +9752,6 @@
       "channel": "impact"
     },
     {
-      "key": "connectors/v0.3.3",
-      "id": "connectors/v0.3.3",
-      "repository": "connectors",
-      "publishedAt": "2026-09-01T04:57:11Z",
-      "title": "Connectors v0.3.3",
-      "summary": "Connectors released version v0.3.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.3.3",
-        "version": "v0.3.3"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "devcenter/0.2.5",
       "id": "devcenter/0.2.5",
       "repository": "devcenter",
@@ -9835,29 +9793,6 @@
       ],
       "affectedSurfaces": [
         "identity/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.3.2",
-      "id": "connectors/v0.3.2",
-      "repository": "connectors",
-      "publishedAt": "2026-09-01T03:47:23Z",
-      "title": "Connectors v0.3.2",
-      "summary": "Connectors released version v0.3.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.3.2",
-        "version": "v0.3.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -9973,29 +9908,6 @@
       ],
       "affectedSurfaces": [
         "docs-system/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.3.1",
-      "id": "connectors/v0.3.1",
-      "repository": "connectors",
-      "publishedAt": "2026-09-01T02:04:08Z",
-      "title": "Connectors v0.3.1",
-      "summary": "Connectors released version v0.3.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.3.1",
-        "version": "v0.3.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -11403,29 +11315,6 @@
       "channel": "releases"
     },
     {
-      "key": "connectors/v0.2.1",
-      "id": "connectors/v0.2.1",
-      "repository": "connectors",
-      "publishedAt": "2026-08-25T13:08:32Z",
-      "title": "Connectors v0.2.1",
-      "summary": "Connectors released version v0.2.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.2.1",
-        "version": "v0.2.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "entity-runtime/0.3.0",
       "id": "entity-runtime/0.3.0",
       "repository": "entity-runtime",
@@ -11445,29 +11334,6 @@
       ],
       "affectedSurfaces": [
         "entity-runtime/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "connectors/v0.2.0",
-      "id": "connectors/v0.2.0",
-      "repository": "connectors",
-      "publishedAt": "2026-08-25T09:39:10Z",
-      "title": "Connectors v0.2.0",
-      "summary": "Connectors released version v0.2.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/connectors/releases/tag/v0.2.0",
-        "version": "v0.2.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "connectors/docs"
       ],
       "automatic": true,
       "channel": "releases"
