@@ -305,10 +305,11 @@ fn llm_is_independent_and_every_former_route_redirects() {
         .collect();
     assert_eq!(actual, expected);
 }
-/// Connectors' own site has no page at any of its five former `/docs/connectors/` paths: the
-/// overview lands on the documentation root, design and compositions on the adapter concepts,
-/// development on Getting started and the monitoring composition on the adapter reference. Every
-/// target is a route of the retained inventory.
+/// Every page of Connectors' site answers its `/docs/connectors/` path, as the independent
+/// compatibility contract derives it from the retained route inventory, and so does the
+/// unified site's overview. The site has no page at the four other former paths: design and
+/// compositions land on the adapter concepts, development on Getting started and the
+/// monitoring composition on the adapter reference, each a route of the inventory.
 #[test]
 fn connectors_is_independent_and_every_former_route_redirects() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
@@ -332,16 +333,39 @@ fn connectors_is_independent_and_every_former_route_redirects() {
             .any(|r| r["from"].as_str().unwrap().starts_with("/connectors/")),
         "inverse redirects would create loops"
     );
-    let actual: BTreeSet<_> = rows
+    let actual: BTreeSet<(String, String)> = rows
         .iter()
         .filter(|r| {
             let from = r["from"].as_str().unwrap();
             from.starts_with("/docs/connectors/") || from == "/ecosystem/connectors/"
         })
-        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
+        .map(|r| {
+            assert_eq!(r["type"], "html");
+            (
+                r["from"].as_str().unwrap().to_owned(),
+                r["to"].as_str().unwrap().to_owned(),
+            )
+        })
         .collect();
-    let expected = BTreeSet::from([
-        ("/docs/connectors/", "/connectors/docs/"),
+    let inventory: Value = serde_json::from_slice(
+        &fs::read(root.join("data/independent/connectors-routes.json")).unwrap(),
+    )
+    .unwrap();
+    let routes: BTreeSet<_> = inventory["routes"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|r| r["path"].as_str().unwrap())
+        .collect();
+    let derived: Vec<(String, String)> = routes
+        .iter()
+        .filter_map(|path| {
+            path.strip_prefix("/connectors/docs/")
+                .map(|page| (format!("/docs/connectors/{page}"), (*path).to_owned()))
+        })
+        .collect();
+    assert_eq!(derived.len(), 134);
+    let former = [
         (
             "/docs/connectors/compositions/",
             "/connectors/docs/concepts/adapters/",
@@ -359,24 +383,22 @@ fn connectors_is_independent_and_every_former_route_redirects() {
             "/connectors/docs/getting-started/",
         ),
         ("/ecosystem/connectors/", "/connectors/"),
-    ]);
-    assert_eq!(actual, expected);
-    let inventory: Value = serde_json::from_slice(
-        &fs::read(root.join("data/independent/connectors-routes.json")).unwrap(),
-    )
-    .unwrap();
-    let routes: BTreeSet<_> = inventory["routes"]
-        .as_array()
-        .unwrap()
-        .iter()
-        .map(|r| r["path"].as_str().unwrap())
-        .collect();
-    for (_, to) in &expected {
+    ];
+    for (_, to) in former {
         assert!(
             routes.contains(to),
             "{to} is not a route of the Connectors site"
         );
     }
+    let expected: BTreeSet<(String, String)> = derived
+        .into_iter()
+        .chain(
+            former
+                .iter()
+                .map(|(from, to)| ((*from).to_owned(), (*to).to_owned())),
+        )
+        .collect();
+    assert_eq!(actual, expected);
     let experiences = fs::read_to_string(root.join("data/experiences.json")).unwrap();
     assert!(experiences.contains("https://beyond10x.github.io/connectors/"));
     assert!(!experiences.contains("https://beyond10x.github.io/docs/connectors/"));

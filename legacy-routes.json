@@ -614,6 +614,31 @@
       "type": "html"
     },
     {
+      "from": "/docs/connectors/concepts/adapters/",
+      "to": "/connectors/docs/concepts/adapters/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/concepts/catalog-provider/",
+      "to": "/connectors/docs/concepts/catalog-provider/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/concepts/contracts/",
+      "to": "/connectors/docs/concepts/contracts/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/concepts/governed-invocation/",
+      "to": "/connectors/docs/concepts/governed-invocation/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/concepts/local-runtime/",
+      "to": "/connectors/docs/concepts/local-runtime/",
+      "type": "html"
+    },
+    {
       "from": "/docs/connectors/design/",
       "to": "/connectors/docs/concepts/adapters/",
       "type": "html"
@@ -621,6 +646,646 @@
     {
       "from": "/docs/connectors/development/",
       "to": "/connectors/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/examples/contract-exercises/",
+      "to": "/connectors/docs/examples/contract-exercises/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/examples/follow-a-request/",
+      "to": "/connectors/docs/examples/follow-a-request/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/getting-started/",
+      "to": "/connectors/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/guides/build-a-catalog-bundle/",
+      "to": "/connectors/docs/guides/build-a-catalog-bundle/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/guides/federate-adapter-services/",
+      "to": "/connectors/docs/guides/federate-adapter-services/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/guides/set-up-the-local-cli/",
+      "to": "/connectors/docs/guides/set-up-the-local-cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/",
+      "to": "/connectors/docs/reference/adapters/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/alertmanager/",
+      "to": "/connectors/docs/reference/adapters/alertmanager/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/atlassian/",
+      "to": "/connectors/docs/reference/adapters/atlassian/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/atlassian/contracts/documents/",
+      "to": "/connectors/docs/reference/adapters/atlassian/contracts/documents/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/atlassian/model/",
+      "to": "/connectors/docs/reference/adapters/atlassian/model/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/atlassian/model/crossings/",
+      "to": "/connectors/docs/reference/adapters/atlassian/model/crossings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/atlassian/model/domains/connectors_atlassian-documents/",
+      "to": "/connectors/docs/reference/adapters/atlassian/model/domains/connectors_atlassian-documents/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/atlassian/model/interactions/",
+      "to": "/connectors/docs/reference/adapters/atlassian/model/interactions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/atlassian/model/topology/",
+      "to": "/connectors/docs/reference/adapters/atlassian/model/topology/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/catalog/",
+      "to": "/connectors/docs/reference/adapters/catalog/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/catalog/contracts/feed/",
+      "to": "/connectors/docs/reference/adapters/catalog/contracts/feed/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/docker/",
+      "to": "/connectors/docs/reference/adapters/docker/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/docker/contracts/logs/",
+      "to": "/connectors/docs/reference/adapters/docker/contracts/logs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/docker/contracts/mutations/",
+      "to": "/connectors/docs/reference/adapters/docker/contracts/mutations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/docker/model/",
+      "to": "/connectors/docs/reference/adapters/docker/model/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/docker/model/crossings/",
+      "to": "/connectors/docs/reference/adapters/docker/model/crossings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/docker/model/domains/connectors_docker-mutations/",
+      "to": "/connectors/docs/reference/adapters/docker/model/domains/connectors_docker-mutations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/docker/model/interactions/",
+      "to": "/connectors/docs/reference/adapters/docker/model/interactions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/docker/model/topology/",
+      "to": "/connectors/docs/reference/adapters/docker/model/topology/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/gitlab/",
+      "to": "/connectors/docs/reference/adapters/gitlab/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/grafana/",
+      "to": "/connectors/docs/reference/adapters/grafana/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/grafana/contracts/discovery/",
+      "to": "/connectors/docs/reference/adapters/grafana/contracts/discovery/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/grafana/contracts/routes/",
+      "to": "/connectors/docs/reference/adapters/grafana/contracts/routes/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/grafana/model/",
+      "to": "/connectors/docs/reference/adapters/grafana/model/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/grafana/model/crossings/",
+      "to": "/connectors/docs/reference/adapters/grafana/model/crossings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/grafana/model/domains/connectors_grafana-discovery/",
+      "to": "/connectors/docs/reference/adapters/grafana/model/domains/connectors_grafana-discovery/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/grafana/model/interactions/",
+      "to": "/connectors/docs/reference/adapters/grafana/model/interactions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/grafana/model/topology/",
+      "to": "/connectors/docs/reference/adapters/grafana/model/topology/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/contracts/auth/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/contracts/auth/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/contracts/discovery/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/contracts/discovery/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/contracts/helm/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/contracts/helm/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/contracts/logs/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/contracts/logs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/contracts/mutations/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/contracts/mutations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/contracts/reads/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/contracts/reads/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/contracts/routes/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/contracts/routes/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/model/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/model/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/model/crossings/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/model/crossings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/model/domains/connectors_kubernetes-discovery/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/model/domains/connectors_kubernetes-discovery/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/model/domains/connectors_kubernetes-helm/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/model/domains/connectors_kubernetes-helm/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/model/domains/connectors_kubernetes-mutations/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/model/domains/connectors_kubernetes-mutations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/model/domains/connectors_kubernetes-permissions/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/model/domains/connectors_kubernetes-permissions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/model/interactions/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/model/interactions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/kubernetes/model/topology/",
+      "to": "/connectors/docs/reference/adapters/kubernetes/model/topology/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/loki/",
+      "to": "/connectors/docs/reference/adapters/loki/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/loki/contracts/logs/",
+      "to": "/connectors/docs/reference/adapters/loki/contracts/logs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/loki/model/",
+      "to": "/connectors/docs/reference/adapters/loki/model/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/loki/model/crossings/",
+      "to": "/connectors/docs/reference/adapters/loki/model/crossings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/loki/model/domains/connectors_loki-connection/",
+      "to": "/connectors/docs/reference/adapters/loki/model/domains/connectors_loki-connection/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/loki/model/domains/connectors_loki-reads/",
+      "to": "/connectors/docs/reference/adapters/loki/model/domains/connectors_loki-reads/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/loki/model/interactions/",
+      "to": "/connectors/docs/reference/adapters/loki/model/interactions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/loki/model/topology/",
+      "to": "/connectors/docs/reference/adapters/loki/model/topology/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/prometheus/",
+      "to": "/connectors/docs/reference/adapters/prometheus/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/prometheus/contracts/series/",
+      "to": "/connectors/docs/reference/adapters/prometheus/contracts/series/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/rtvbp/",
+      "to": "/connectors/docs/reference/adapters/rtvbp/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/rtvbp/contracts/session/",
+      "to": "/connectors/docs/reference/adapters/rtvbp/contracts/session/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/sip/",
+      "to": "/connectors/docs/reference/adapters/sip/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/sip/contracts/dial/",
+      "to": "/connectors/docs/reference/adapters/sip/contracts/dial/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/sql/",
+      "to": "/connectors/docs/reference/adapters/sql/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/sql/contracts/reads/",
+      "to": "/connectors/docs/reference/adapters/sql/contracts/reads/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/tavily/",
+      "to": "/connectors/docs/reference/adapters/tavily/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/adapters/tavily/contracts/websearch/",
+      "to": "/connectors/docs/reference/adapters/tavily/contracts/websearch/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/cli/",
+      "to": "/connectors/docs/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/",
+      "to": "/connectors/docs/reference/contracts/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/approval-keys/",
+      "to": "/connectors/docs/reference/contracts/approval-keys/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/audit/",
+      "to": "/connectors/docs/reference/contracts/audit/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/auth/acquisition/",
+      "to": "/connectors/docs/reference/contracts/auth/acquisition/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/auth/capability/",
+      "to": "/connectors/docs/reference/contracts/auth/capability/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/auth/connection/",
+      "to": "/connectors/docs/reference/contracts/auth/connection/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/auth/custody/",
+      "to": "/connectors/docs/reference/contracts/auth/custody/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/auth/evidence/",
+      "to": "/connectors/docs/reference/contracts/auth/evidence/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/auth/management/",
+      "to": "/connectors/docs/reference/contracts/auth/management/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/auth/profile/",
+      "to": "/connectors/docs/reference/contracts/auth/profile/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/auth/read-refresh/",
+      "to": "/connectors/docs/reference/contracts/auth/read-refresh/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/catalog/",
+      "to": "/connectors/docs/reference/contracts/catalog/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/cli/",
+      "to": "/connectors/docs/reference/contracts/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/clock/",
+      "to": "/connectors/docs/reference/contracts/clock/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/compatibility/",
+      "to": "/connectors/docs/reference/contracts/compatibility/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/data/feed/",
+      "to": "/connectors/docs/reference/contracts/data/feed/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/data/logs/",
+      "to": "/connectors/docs/reference/contracts/data/logs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/data/records/",
+      "to": "/connectors/docs/reference/contracts/data/records/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/data/series/",
+      "to": "/connectors/docs/reference/contracts/data/series/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/data/websearch/",
+      "to": "/connectors/docs/reference/contracts/data/websearch/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/delegation/",
+      "to": "/connectors/docs/reference/contracts/delegation/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/discovery/composition/",
+      "to": "/connectors/docs/reference/contracts/discovery/composition/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/discovery/resources/",
+      "to": "/connectors/docs/reference/contracts/discovery/resources/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/discovery/routes/",
+      "to": "/connectors/docs/reference/contracts/discovery/routes/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/governed-service/",
+      "to": "/connectors/docs/reference/contracts/governed-service/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/media/",
+      "to": "/connectors/docs/reference/contracts/media/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/",
+      "to": "/connectors/docs/reference/contracts/model/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/crossings/",
+      "to": "/connectors/docs/reference/contracts/model/crossings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-approval_issuers/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-approval_issuers/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-artifact_provenance/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-artifact_provenance/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-auth_access/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-auth_access/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-auth_bindings/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-auth_bindings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-cli/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-clock/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-clock/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-connection_admission/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-connection_admission/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-credential_evidence/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-credential_evidence/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-credentials/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-credentials/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-datasource_reads/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-datasource_reads/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-declarations/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-declarations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-delegation/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-delegation/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-discovery/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-discovery/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-discovery_state/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-discovery_state/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-execution_audit/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-execution_audit/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-feed/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-feed/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-idempotency/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-idempotency/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-local_approval_policy/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-local_approval_policy/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-mutations/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-mutations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-refresh/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-refresh/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-service_wire/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-service_wire/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-sessions/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-sessions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-transport/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-transport/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/domains/connectors-websearch/",
+      "to": "/connectors/docs/reference/contracts/model/domains/connectors-websearch/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/interactions/",
+      "to": "/connectors/docs/reference/contracts/model/interactions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/model/topology/",
+      "to": "/connectors/docs/reference/contracts/model/topology/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/mutations/",
+      "to": "/connectors/docs/reference/contracts/mutations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/service/",
+      "to": "/connectors/docs/reference/contracts/service/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/contracts/sessions/",
+      "to": "/connectors/docs/reference/contracts/sessions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/reference/crates/",
+      "to": "/connectors/docs/reference/crates/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/connectors/status/",
+      "to": "/connectors/docs/status/",
       "type": "html"
     },
     {
