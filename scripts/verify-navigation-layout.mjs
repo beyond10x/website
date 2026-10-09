@@ -86,7 +86,7 @@ try {
     assert.ok(projectContext.sidebar.some((item) => item.label === 'Start by outcome' && item.path === '/start/'), 'deep project sidebar must return to an audience path');
     assert.ok(projectContext.sidebar.some((item) => item.label === 'All technical docs' && item.path === '/docs/'), 'deep project sidebar must return to all technical docs');
     assert.equal(projectContext.sidebar.filter((item) => item.path === '/docs/aep/').length, 1, 'deep project sidebar must expose the AEP root exactly once');
-    assert.deepEqual(projectContext.sidebar.filter((item) => item.path?.startsWith('/docs/aep/')).slice(0, 2).map((item) => item.label), ['AEP', 'Getting started'], 'deep project sidebar must preserve AEP source ordering');
+    assert.deepEqual(projectContext.sidebar.filter((item) => item.path?.startsWith('/docs/aep/')).slice(0, 2).map((item) => item.path), ['/docs/aep/', '/docs/aep/getting-started/'], 'deep project sidebar must preserve AEP source ordering');
     assert.ok(projectContext.breadcrumbs.some((item) => item.label === 'AEP' && item.path === '/docs/aep/'), 'deep project breadcrumb must retain the linked AEP parent');
     assert.match(projectContext.context, /AEP/, 'deep project context must name AEP');
     assert.match(projectContext.provenance, /aep\/website\/docs\/getting-started\.md/, 'deep project provenance must qualify the source path with its repository');
@@ -544,8 +544,8 @@ async function loadSearchCards(cdp, url) {
 }
 
 async function verifyDocumentationViewports(cdp, siteUrl) {
-  if (!published('connectors')) {
-    process.stdout.write('skipped the diagram and table audit: its sample, Connectors, is quarantined\n');
+  if (!published('ess')) {
+    process.stdout.write('skipped the diagram and table audit: its sample, ESS, is quarantined\n');
     return;
   }
   // 720 CSS pixels at scale 2 exercises the reflow of a 1440px display at 200% zoom.
@@ -560,7 +560,7 @@ async function verifyDocumentationViewports(cdp, siteUrl) {
     for (const {width, height, mobile, scale} of sizes) {
       const context = `${theme}, ${width}px, scale ${scale}`;
       await cdp.command('Emulation.setDeviceMetricsOverride', {width, height, deviceScaleFactor: scale, mobile});
-      await navigate(cdp, `${siteUrl}/docs/connectors/design/`);
+      await navigate(cdp, `${siteUrl}/docs/ess/concepts/overview/`);
       let diagram;
       for (let attempt = 0; attempt < 100; attempt += 1) {
         diagram = await evaluate(cdp, `(() => {
@@ -597,7 +597,7 @@ async function verifyDocumentationViewports(cdp, siteUrl) {
         hint: Boolean(wrapper.getAttribute('aria-describedby'))
           && document.getElementById(wrapper.getAttribute('aria-describedby'))?.hidden === false,
       })))`);
-      assert.ok(tables.some((table) => table.columns >= 3), 'coverage comparison must retain its semantic column headers');
+      assert.ok(tables.some((table) => table.columns >= 3), 'a documentation table must retain its semantic column headers');
       for (const [index, table] of tables.entries()) {
         if (!table.overflow) continue;
         assert.ok(table.focusable && table.named && table.hint, `overflowing table must be named and keyboard accessible at ${context}`);
