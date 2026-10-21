@@ -71,8 +71,6 @@ surfaces:
   - kind: introduces
     target: aep-service/docs
   - kind: introduces
-    target: agent-platform/docs
-  - kind: introduces
     target: agentic-principles/docs
   - kind: introduces
     target: agentide/docs

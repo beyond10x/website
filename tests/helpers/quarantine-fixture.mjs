@@ -12,15 +12,6 @@ const websiteRuntimeCommit = '3'.repeat(40);
 // source so that quarantining it leaves every family populated. `harness` links into `eventlog` in
 // every form a source writes.
 export const FIXTURE_SOURCES = Object.freeze([
-  {
-    repository: 'agent-platform',
-    displayName: 'Agent Platform',
-    group: 'Services',
-    relationships: [
-      {kind: 'uses', label: 'Reads the event log', target: 'eventlog/docs'},
-      {kind: 'uses', label: 'Runs the agent loop', target: 'harness/docs'},
-    ],
-  },
   {repository: 'agentic-principles', displayName: 'Agentic Principles', group: 'Foundation'},
   {repository: 'devcenter', displayName: 'Devcenter', group: 'Products'},
   {repository: 'eventlog', displayName: 'Eventlog', group: 'Services'},
@@ -37,13 +28,22 @@ export const FIXTURE_SOURCES = Object.freeze([
       '- [Eventlog profile](/ecosystem/eventlog/)',
       '- [Eventlog API][eventlog-api]',
       '- <a href="https://beyond10x.github.io/docs/eventlog/">Eventlog home</a>',
-      '- [Agent Platform guide](https://beyond10x.github.io/docs/agent-platform/guide/)',
+      '- [Identity guide](https://beyond10x.github.io/docs/identity/guide/)',
       '',
       '[eventlog-api]: https://beyond10x.github.io/api/eventlog/',
       '',
     ].join('\n'),
     sections: [
       {label: 'Eventlog companion', url: 'https://beyond10x.github.io/docs/eventlog/'},
+    ],
+  },
+  {
+    repository: 'identity',
+    displayName: 'Identity',
+    group: 'Services',
+    relationships: [
+      {kind: 'uses', label: 'Reads the event log', target: 'eventlog/docs'},
+      {kind: 'uses', label: 'Runs the agent loop', target: 'harness/docs'},
     ],
   },
 ]);

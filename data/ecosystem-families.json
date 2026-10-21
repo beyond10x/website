@@ -28,7 +28,7 @@
       "label": "Services",
       "slug": "/services/",
       "purpose": "Integrate authenticated, auditable capabilities for commands, identity, events, secrets, governed workspaces, workflows, and external systems.",
-      "startRepository": "agent-platform",
+      "startRepository": "identity",
       "next": {
         "family": "Products",
         "label": "See those capabilities assembled into a public experience."

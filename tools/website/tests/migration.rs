@@ -56,8 +56,8 @@ fn independent_and_undocumented_repositories_leave_the_collector_roster() {
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(
         lock["sources"].as_array().unwrap().len(),
-        21,
-        "Metaharness, Substrate, Secrets, LLM and Connectors left for their own sites and Gates has no website documentation"
+        20,
+        "Metaharness, Substrate, Secrets, LLM and Connectors left for their own sites, Gates has no website documentation and Agent Platform is archived and private"
     );
 }
 /// Every page of Secrets' site answers its former `/docs/secrets/` path. The site has no
@@ -178,6 +178,41 @@ fn gates_has_no_website_documentation_and_its_former_routes_land_on_the_ecosyste
         [
             ("/docs/gates/", "/ecosystem/"),
             ("/ecosystem/gates/", "/ecosystem/")
+        ]
+    );
+}
+/// Agent Platform was archived and made private on 2026-10-20, so a public site can publish
+/// nothing of it: it leaves the lock, no other surface introduces or relates to it, and its two
+/// former routes land on the ecosystem the way Gates' do.
+#[test]
+fn agent_platform_is_private_and_its_former_routes_land_on_the_ecosystem() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    for path in [
+        "sources.lock.json",
+        "b10x.docs.yaml",
+        "data/independent-sites.json",
+        "data/ecosystem-families.json",
+    ] {
+        let text = fs::read_to_string(root.join(path)).unwrap();
+        assert!(
+            !text.contains("agent-platform"),
+            "{path} still names agent-platform"
+        );
+    }
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows: Vec<_> = redirects["redirects"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|r| r["from"].as_str().unwrap().contains("agent-platform"))
+        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
+        .collect();
+    assert_eq!(
+        rows,
+        [
+            ("/docs/agent-platform/", "/ecosystem/"),
+            ("/ecosystem/agent-platform/", "/ecosystem/")
         ]
     );
 }
@@ -512,7 +547,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
         .iter()
         .map(|v| v.as_str().unwrap())
         .collect();
-    assert_eq!(repositories.len(), 21);
+    assert_eq!(repositories.len(), 20);
     assert!(repositories.contains(&"harness"));
     assert!(!repositories.contains(&"gates"));
     assert!(repositories.contains(&"mandate"));
@@ -530,6 +565,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(!repositories.contains(&"secrets"));
     assert!(!repositories.contains(&"llm"));
     assert!(!repositories.contains(&"connectors"));
+    assert!(!repositories.contains(&"agent-platform"));
     let excluded = roster["excludedRepositories"].as_array().unwrap();
     assert!(!excluded.is_empty());
     let names: Vec<&str> = excluded

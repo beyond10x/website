@@ -599,6 +599,11 @@
       "type": "html"
     },
     {
+      "from": "/docs/agent-platform/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
       "from": "/docs/connectors/",
       "to": "/connectors/docs/",
       "type": "html"
@@ -1731,6 +1736,11 @@
     {
       "from": "/docs/substrate/use-cases/",
       "to": "/substrate/docs/use-cases/",
+      "type": "html"
+    },
+    {
+      "from": "/ecosystem/agent-platform/",
+      "to": "/ecosystem/",
       "type": "html"
     },
     {

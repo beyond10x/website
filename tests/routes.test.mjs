@@ -33,8 +33,9 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   // root's /engineering-protocols/ redirect with one /docs/engineering-protocols/ route for each of
   // its 17 documentation pages and /ecosystem/engineering-protocols/. Connectors' independent site
   // added its 6 former /docs/connectors/ and /ecosystem/connectors/ routes and one /docs/connectors/
-  // route for each of its 133 other documentation pages.
-  assert.equal(html.length, 426);
+  // route for each of its 133 other documentation pages. Agent Platform, archived and private,
+  // redirects its two former routes to /ecosystem/.
+  assert.equal(html.length, 428);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));

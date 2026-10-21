@@ -6,7 +6,6 @@ compatibilityRepositories:
 repositories:
   - aep
   - aep-service
-  - agent-platform
   - agentic-principles
   - agentide
   - agentplugins
@@ -44,6 +43,14 @@ repositories:
 #
 # Keep this record current when a repository is admitted, retired, or publishes its first manifest.
 excludedRepositories:
+  - repository: agent-platform
+    public: false
+    manifest: present
+    reason: >-
+      Archived and private by operator decision of 2026-10-20, so nothing in it can be published
+      from this public site. The organization catalog retires the repository and its website
+      documentation surface. Website redirects the former /docs/agent-platform/ and
+      /ecosystem/agent-platform/ routes to /ecosystem/.
   - repository: bench
     public: false
     manifest: present

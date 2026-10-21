@@ -95,8 +95,8 @@ test('a v2 source set publishes its sources and names each quarantined repositor
   const inputs = await loadPublicationInputs({root: fixture.websiteRoot, environment: sourceSetEnvironment(fixture)});
   assert.equal(inputs.mode, 'source-set');
   assert.equal(inputs.inputSchema, 'b10x-docs-source-set/v2');
-  assert.deepEqual(inputs.roster.repositories, ['agent-platform', 'agentic-principles', 'devcenter', 'harness']);
-  assert.deepEqual(inputs.sourceRoster, ['agent-platform', 'agentic-principles', 'devcenter', 'eventlog', 'harness']);
+  assert.deepEqual(inputs.roster.repositories, ['agentic-principles', 'devcenter', 'harness', 'identity']);
+  assert.deepEqual(inputs.sourceRoster, ['agentic-principles', 'devcenter', 'eventlog', 'harness', 'identity']);
   assert.deepEqual(inputs.quarantined, quarantinedEventlog);
   assert.deepEqual(inputs.lock.sources.map((source) => source.repository), inputs.roster.repositories);
   assert.equal(inputs.bundles.has('eventlog'), false);

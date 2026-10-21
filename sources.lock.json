@@ -18,14 +18,6 @@
       "contentSha256": "801c35725e0a2ec84760f72ff0d96e87e738f164af042259226cc3a814c2c000"
     },
     {
-      "repository": "agent-platform",
-      "url": "https://github.com/beyond10x/agent-platform",
-      "commit": "2f38a467ec7f8c6b79d454f625f2997b48ea2739",
-      "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "40a65413e9f36eab96392529db1c09adf32ccbd4c460e1e1fc4dd0f22122071b",
-      "contentSha256": "2a73a0266b468a85aae815e598eb49e6304f1c9b1dc29dc5332978f139322949"
-    },
-    {
       "repository": "agentic-principles",
       "url": "https://github.com/beyond10x/agentic-principles",
       "commit": "391b2f7ff16de53e610108341811e3bd6b28f3f8",
@@ -52,9 +44,9 @@
     {
       "repository": "devcenter",
       "url": "https://github.com/beyond10x/devcenter",
-      "commit": "6365f2a01455ef450bb0c82ee61ba31d81658353",
+      "commit": "01de44a56db0b7cff2239611956ae1b9a6b6b792",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "91c0c6022fba08a80505adf416af2bc2c7e4dcc8052b357b10bed3677cd4da07",
+      "manifestSha256": "16348d7696258c67095743adf2b53e73f0456b873a286410c66de225eace6b25",
       "contentSha256": "f4d8332dc6c8622015a1ee4ce50a8ac3161fcc9a9284263afd2906a4eb1e6bfe"
     },
     {
@@ -108,9 +100,9 @@
     {
       "repository": "identity",
       "url": "https://github.com/beyond10x/identity",
-      "commit": "e3f8e1354f82ee8ca877b1bbbf52859781b3de82",
+      "commit": "f11a87119e026adce397dddf24c996653b9ec5b0",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "fbfde01db781d0ce1a20f38a93dfedb89c7cc876aab28241be59c89e9e886ce7",
+      "manifestSha256": "550cd6aa924793c806b5f4287b47ba14d2b473a0159b240859b1128786fe37b7",
       "contentSha256": "3a3d497f431049c61078282722ab9605ac1bb8cfcdc917dc2c67d24dfbfab78f"
     },
     {
@@ -148,9 +140,9 @@
     {
       "repository": "workflow",
       "url": "https://github.com/beyond10x/workflow",
-      "commit": "c9fe46f9e4480269580f568c0821443b9e4cbde8",
+      "commit": "fa8fe6bf904f04d4e4c7b04deb5f2163950a21e8",
       "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "9ca9f26811c3dc3a2fb43a39364709d7dd47061b5665ad27a8ded5779ce8514a",
+      "manifestSha256": "f082f0abc7b260a215e183a2e4d0a0d277c11f901303de94f0c722f820357cec",
       "contentSha256": "9ea1d99dbad7a71087f76bcd5e81afbe2ae4e85709aff20bec70c3fcbfea2c6c"
     },
     {

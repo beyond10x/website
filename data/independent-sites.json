@@ -53,11 +53,6 @@
             "target": "identity/docs"
           },
           {
-            "kind": "supports",
-            "label": "Supplies governed operations to agents",
-            "target": "agent-platform/docs"
-          },
-          {
             "kind": "uses",
             "label": "Stores durable Connector-owned state as events",
             "target": "eventlog/docs"

@@ -70,9 +70,9 @@ test('a quarantined source is absent from every Website projection and every inb
   assert.match(guide, new RegExp(`\\[Eventlog profile\\]\\(${github}\\)`));
   assert.match(guide, new RegExp(`\\[eventlog-api\\]: ${github}`));
   assert.match(guide, new RegExp(`<a href="${github}">Eventlog home</a>`));
-  assert.match(guide, /\[Agent Platform guide\]\(https:\/\/beyond10x\.github\.io\/docs\/agent-platform\/guide\/\)/);
-  const platform = registry.surfaces.find((surface) => surface.repository.id === 'agent-platform');
-  assert.deepEqual(platform.relationships.map((relation) => relation.target), ['harness/docs'], 'a relationship into the quarantined source is dropped');
+  assert.match(guide, /\[Identity guide\]\(https:\/\/beyond10x\.github\.io\/docs\/identity\/guide\/\)/);
+  const identity = registry.surfaces.find((surface) => surface.repository.id === 'identity');
+  assert.deepEqual(identity.relationships.map((relation) => relation.target), ['harness/docs'], 'a relationship into the quarantined source is dropped');
   const harness = registry.surfaces.find((surface) => surface.repository.id === 'harness');
   assert.ok(harness.sections.some((section) => section.label === 'Eventlog companion' && section.url === github));
 
@@ -123,7 +123,7 @@ test('provenance names each quarantined source and records only the published on
   const provenance = await json(path.join(build, 'PROVENANCE.json'));
   assert.equal(provenance.schema, 'b10x-website-provenance/v3');
   assert.deepEqual(provenance.quarantinedSources, quarantinedEventlog);
-  assert.deepEqual(Object.keys(provenance.sourceCommits), ['agent-platform', 'agentic-principles', 'devcenter', 'harness']);
+  assert.deepEqual(Object.keys(provenance.sourceCommits), ['agentic-principles', 'devcenter', 'harness', 'identity']);
   assert.deepEqual(Object.keys(provenance.sourceBundles), Object.keys(provenance.sourceCommits));
   const deployment = await json(path.join(build, '._b10x', 'deployment.json'));
   assert.equal(deployment.schema, 'b10x-docs-deployment/v3');
@@ -151,7 +151,7 @@ test('a v1 source set still writes v2 provenance with no quarantine field', asyn
 const rosterFamilies = {
   Foundation: ['agentic-principles', 'aep', 'ess', 'research'],
   Build: ['agentide', 'agentplugins', 'docs-system', 'entity-runtime', 'extensions', 'harness', 'mcp', 'worktree'],
-  Services: ['aep-service', 'agent-platform', 'eventlog', 'identity', 'mandate', 'service-sdk', 'workflow', 'workspace'],
+  Services: ['aep-service', 'eventlog', 'identity', 'mandate', 'service-sdk', 'workflow', 'workspace'],
   Products: ['devcenter'],
 };
 const rosterSources = Object.entries(rosterFamilies)
@@ -169,7 +169,7 @@ test('the fixture roster is the production roster', async () => {
   assert.deepEqual(rosterSources.map((source) => source.repository), production);
 });
 
-test('quarantining any one of the 21 sources prepares a site with no route of it anywhere', async (context) => {
+test('quarantining any one of the 20 sources prepares a site with no route of it anywhere', async (context) => {
   const failures = [];
   const queue = [...rosterSources];
   const worker = async () => {
