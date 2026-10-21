@@ -56,8 +56,8 @@ fn independent_and_undocumented_repositories_leave_the_collector_roster() {
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(
         lock["sources"].as_array().unwrap().len(),
-        20,
-        "Metaharness, Substrate, Secrets, LLM and Connectors left for their own sites, Gates has no website documentation and Agent Platform is archived and private"
+        19,
+        "Metaharness, Substrate, Secrets, LLM and Connectors left for their own sites, Gates has no website documentation, Agent Platform is archived and private and Devcenter leaves ahead of being made private"
     );
 }
 /// Every page of Secrets' site answers its former `/docs/secrets/` path. The site has no
