@@ -135,3 +135,51 @@ fn redirect_template_retains_query_and_fragment_contract_and_escapes_targets() {
     }
     assert!(website_tools::routes::render_redirect("/../outside", "/").is_err());
 }
+#[test]
+fn legacy_redirects_without_a_built_route_get_a_page_and_built_pages_are_kept() {
+    let build = tempfile::tempdir().unwrap();
+    for (page, body) in [
+        ("index.html", "home"),
+        ("ecosystem/index.html", "ecosystem"),
+        ("docs/aep/index.html", "aep"),
+    ] {
+        let file = build.path().join(page);
+        std::fs::create_dir_all(file.parent().unwrap()).unwrap();
+        std::fs::write(file, body).unwrap();
+    }
+    let declared = json!({"schema":"b10x-redirects/v1","origin":"https://beyond10x.github.io","redirects":[
+        {"from":"/docs/gates/","to":"/ecosystem/","type":"html"},
+        {"from":"/ecosystem/gates/","to":"/ecosystem/","type":"html"},
+        {"from":"/docs/aep/old","to":"/docs/aep/missing/","type":"html"},
+        {"from":"/docs/aep/","to":"/ecosystem/","type":"html"},
+        {"from":"/docs/ess/guide/","to":"/docs/ess/","type":"html"},
+        {"from":"/aep/docs/old","to":"/docs/aep/","type":"html"}
+    ]});
+    let q = BTreeSet::from(["ess".into()]);
+    let written = website_tools::routes::materialize_legacy(
+        &declared,
+        &q,
+        &IndependentSites::default(),
+        &BTreeSet::from(["aep".into()]),
+        build.path(),
+    )
+    .unwrap();
+    assert_eq!(written, 3);
+    let page =
+        |route: &str| std::fs::read_to_string(build.path().join(route).join("index.html")).unwrap();
+    assert_eq!(
+        page("docs/gates"),
+        website_tools::routes::render_redirect("/docs/gates/", "/ecosystem/").unwrap()
+    );
+    assert_eq!(
+        page("ecosystem/gates"),
+        website_tools::routes::render_redirect("/ecosystem/gates/", "/ecosystem/").unwrap()
+    );
+    assert_eq!(
+        page("docs/aep/old"),
+        website_tools::routes::render_redirect("/docs/aep/old", "/docs/aep/").unwrap()
+    );
+    assert_eq!(page("docs/aep"), "aep");
+    assert!(!build.path().join("docs/ess").exists());
+    assert!(!build.path().join("aep").exists());
+}

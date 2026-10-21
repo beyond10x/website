@@ -36,7 +36,10 @@ fn main() -> Result<()> {
     let build = root.join("build");
     match args.command {
         Command::CaptureRoutes => routes::capture(&root),
-        Command::RootRedirects => routes::write_root(&root, &build),
+        Command::RootRedirects => {
+            routes::write_root(&root, &build)?;
+            routes::write_legacy(&root, &build)
+        }
         Command::EffectiveRedirects => routes::write_effective(&root, &build),
         Command::Navigation => crawl::navigation(&root, &build),
         Command::Crawl => crawl::run(&root, &build),

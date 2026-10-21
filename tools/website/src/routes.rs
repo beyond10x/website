@@ -446,6 +446,79 @@ pub fn write_root(root: &Path, build: &Path) -> Result<()> {
     Ok(())
 }
 
+/// Repositories whose own redirect façade serves `/<repository>/`; the root artifact never does.
+pub fn facade_repositories(root: &Path) -> Result<BTreeSet<String>> {
+    let roster: Value = serde_yaml::from_slice(&fs::read(root.join("sources.yaml"))?)?;
+    ["repositories", "compatibilityRepositories"]
+        .iter()
+        .flat_map(|key| roster[*key].as_array().into_iter().flatten())
+        .map(|r| {
+            r.as_str()
+                .map(str::to_owned)
+                .context("roster entry is not a repository name")
+        })
+        .collect()
+}
+/// Write a redirect page for every declared HTML redirect whose route the built site lacks.
+/// Runs on the built artifact only: before the site build every route would look absent.
+pub fn write_legacy(root: &Path, build: &Path) -> Result<()> {
+    let written = materialize_legacy(
+        &read_json(&root.join("legacy-routes.json"))?,
+        &quarantined(root)?,
+        &IndependentSites::load(root)?,
+        &facade_repositories(root)?,
+        build,
+    )?;
+    println!("materialized {written} legacy redirect pages without a built route");
+    Ok(())
+}
+pub fn materialize_legacy(
+    declared: &Value,
+    q: &BTreeSet<String>,
+    sites: &IndependentSites,
+    facades: &BTreeSet<String>,
+    build: &Path,
+) -> Result<usize> {
+    let facts = artifact_facts(build)?;
+    let before = effective_redirect_map(declared, &facts, q, sites)?;
+    let routes: BTreeSet<String> = facts["routes"]
+        .as_array()
+        .context("missing routes")?
+        .iter()
+        .filter_map(Value::as_str)
+        .map(normalize_route)
+        .collect();
+    let mut written = 0;
+    for redirect in before["redirects"]
+        .as_array()
+        .context("missing redirects")?
+    {
+        if redirect["type"] != "html" {
+            continue;
+        }
+        let from = redirect["from"].as_str().context("missing redirect from")?;
+        let to = redirect["to"].as_str().context("missing redirect target")?;
+        let owner = from.trim_start_matches('/').split('/').next().unwrap_or("");
+        if routes.contains(&normalize_route(from))
+            || quarantined_target(from, q).is_some()
+            || facades.contains(owner)
+        {
+            continue;
+        }
+        let file = build.join(from.trim_matches('/')).join("index.html");
+        fs::create_dir_all(file.parent().context("redirect page has no parent")?)?;
+        fs::write(file, render_redirect(from, to)?)?;
+        written += 1;
+    }
+    // The pages become routes, so the map that later steps and verification derive from the
+    // artifact must not move because of them.
+    ensure!(
+        effective_redirect_map(declared, &artifact_facts(build)?, q, sites)? == before,
+        "legacy redirect pages change the effective redirect map"
+    );
+    Ok(written)
+}
+
 pub fn capture(root: &Path) -> Result<()> {
     let sites = IndependentSites::load(root)?;
     let _lease = crate::orchestration::Lease::acquire(root, "legacy route capture", false)?;
