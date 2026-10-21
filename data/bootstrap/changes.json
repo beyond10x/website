@@ -2,6 +2,31 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "aep/0.75.0",
+      "id": "aep/0.75.0",
+      "repository": "aep",
+      "publishedAt": "2026-10-21T07:13:11Z",
+      "title": "AEP 0.75.0",
+      "summary": "AEP released version 0.75.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.75.0",
+        "version": "0.75.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "harness/0.16.1",
       "id": "harness/0.16.1",
       "repository": "harness",
@@ -5573,52 +5598,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/publication-0.8.35",
-      "id": "devcenter/publication-0.8.35",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-07T10:01:00Z",
-      "title": "Devcenter publication-0.8.35",
-      "summary": "Devcenter released version publication-0.8.35.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.35",
-        "version": "publication-0.8.35"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.34",
-      "id": "devcenter/publication-0.8.34",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-07T01:18:14Z",
-      "title": "Devcenter publication-0.8.34",
-      "summary": "Devcenter released version publication-0.8.34.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.34",
-        "version": "publication-0.8.34"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "workspace/0.2.24",
       "id": "workspace/0.2.24",
       "repository": "workspace",
@@ -5637,29 +5616,6 @@
       ],
       "affectedSurfaces": [
         "workspace/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.33",
-      "id": "devcenter/publication-0.8.33",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-06T20:24:48Z",
-      "title": "Devcenter publication-0.8.33",
-      "summary": "Devcenter released version publication-0.8.33.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.33",
-        "version": "publication-0.8.33"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -5688,52 +5644,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/publication-0.8.32",
-      "id": "devcenter/publication-0.8.32",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-06T19:22:55Z",
-      "title": "Devcenter publication-0.8.32",
-      "summary": "Devcenter released version publication-0.8.32.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.32",
-        "version": "publication-0.8.32"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.31",
-      "id": "devcenter/publication-0.8.31",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-06T18:34:38Z",
-      "title": "Devcenter publication-0.8.31",
-      "summary": "Devcenter released version publication-0.8.31.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.31",
-        "version": "publication-0.8.31"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "ess/binary64-fields-0.20.0",
       "id": "ess/binary64-fields-0.20.0",
       "repository": "ess",
@@ -5756,52 +5666,6 @@
       "channel": "impact"
     },
     {
-      "key": "devcenter/publication-0.8.30",
-      "id": "devcenter/publication-0.8.30",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-06T12:03:31Z",
-      "title": "Devcenter publication-0.8.30",
-      "summary": "Devcenter released version publication-0.8.30.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.30",
-        "version": "publication-0.8.30"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.29",
-      "id": "devcenter/publication-0.8.29",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-06T10:59:18Z",
-      "title": "Devcenter publication-0.8.29",
-      "summary": "Devcenter released version publication-0.8.29.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.29",
-        "version": "publication-0.8.29"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "workspace/0.2.22",
       "id": "workspace/0.2.22",
       "repository": "workspace",
@@ -5820,29 +5684,6 @@
       ],
       "affectedSurfaces": [
         "workspace/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.28",
-      "id": "devcenter/publication-0.8.28",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-06T09:26:14Z",
-      "title": "Devcenter publication-0.8.28",
-      "summary": "Devcenter released version publication-0.8.28.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.28",
-        "version": "publication-0.8.28"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -5871,98 +5712,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/publication-0.8.27",
-      "id": "devcenter/publication-0.8.27",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-06T08:27:41Z",
-      "title": "Devcenter publication-0.8.27",
-      "summary": "Devcenter released version publication-0.8.27.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.27",
-        "version": "publication-0.8.27"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.26",
-      "id": "devcenter/publication-0.8.26",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-06T01:44:41Z",
-      "title": "Devcenter publication-0.8.26",
-      "summary": "Devcenter released version publication-0.8.26.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.26",
-        "version": "publication-0.8.26"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.25",
-      "id": "devcenter/publication-0.8.25",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T21:58:22Z",
-      "title": "Devcenter publication-0.8.25",
-      "summary": "Devcenter released version publication-0.8.25.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.25",
-        "version": "publication-0.8.25"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.24",
-      "id": "devcenter/publication-0.8.24",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T21:07:20Z",
-      "title": "Devcenter publication-0.8.24",
-      "summary": "Devcenter released version publication-0.8.24.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.24",
-        "version": "publication-0.8.24"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "ess/source-driven-realization-0.19.0",
       "id": "ess/source-driven-realization-0.19.0",
       "repository": "ess",
@@ -5983,75 +5732,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "devcenter/publication-0.8.23",
-      "id": "devcenter/publication-0.8.23",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T20:14:33Z",
-      "title": "Devcenter publication-0.8.23",
-      "summary": "Devcenter released version publication-0.8.23.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.23",
-        "version": "publication-0.8.23"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.22",
-      "id": "devcenter/publication-0.8.22",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T19:35:42Z",
-      "title": "Devcenter publication-0.8.22",
-      "summary": "Devcenter released version publication-0.8.22.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.22",
-        "version": "publication-0.8.22"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-0.8.21",
-      "id": "devcenter/publication-0.8.21",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T18:22:55Z",
-      "title": "Devcenter publication-0.8.21",
-      "summary": "Devcenter released version publication-0.8.21.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-0.8.21",
-        "version": "publication-0.8.21"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "workspace/0.2.20",
@@ -6125,75 +5805,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.8.20",
-      "id": "devcenter/0.8.20",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T11:57:49Z",
-      "title": "Devcenter 0.8.20",
-      "summary": "Devcenter released version 0.8.20.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.20",
-        "version": "0.8.20"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.19",
-      "id": "devcenter/0.8.19",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T11:25:18Z",
-      "title": "Devcenter 0.8.19",
-      "summary": "Devcenter released version 0.8.19.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.19",
-        "version": "0.8.19"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.18",
-      "id": "devcenter/0.8.18",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T09:45:01Z",
-      "title": "Devcenter 0.8.18",
-      "summary": "Devcenter released version 0.8.18.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.18",
-        "version": "0.8.18"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "workspace/0.2.19",
       "id": "workspace/0.2.19",
       "repository": "workspace",
@@ -6235,52 +5846,6 @@
       ],
       "affectedSurfaces": [
         "workspace/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/publication-ctl-independent-20260905",
-      "id": "devcenter/publication-ctl-independent-20260905",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T01:10:11Z",
-      "title": "Devcenter publication-ctl-independent-20260905",
-      "summary": "Devcenter released version publication-ctl-independent-20260905.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/publication-ctl-independent-20260905",
-        "version": "publication-ctl-independent-20260905"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.17",
-      "id": "devcenter/0.8.17",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-05T00:15:48Z",
-      "title": "Devcenter 0.8.17",
-      "summary": "Devcenter released version 0.8.17.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.17",
-        "version": "0.8.17"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -6397,29 +5962,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "devcenter/0.8.16",
-      "id": "devcenter/0.8.16",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-04T13:37:04Z",
-      "title": "Devcenter 0.8.16",
-      "summary": "Devcenter released version 0.8.16.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.16",
-        "version": "0.8.16"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "ess/authored-scenarios-0.15.0",
@@ -6558,29 +6100,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "devcenter/0.8.15",
-      "id": "devcenter/0.8.15",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-04T07:46:47Z",
-      "title": "Devcenter 0.8.15",
-      "summary": "Devcenter released version 0.8.15.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.15",
-        "version": "0.8.15"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "service-sdk/0.5.7",
@@ -7122,52 +6641,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.8.14",
-      "id": "devcenter/0.8.14",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T18:53:23Z",
-      "title": "Devcenter 0.8.14",
-      "summary": "Devcenter released version 0.8.14.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.14",
-        "version": "0.8.14"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.12",
-      "id": "devcenter/0.8.12",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T18:21:46Z",
-      "title": "Devcenter 0.8.12",
-      "summary": "Devcenter released version 0.8.12.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.12",
-        "version": "0.8.12"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "workspace/0.2.13",
       "id": "workspace/0.2.13",
       "repository": "workspace",
@@ -7211,29 +6684,6 @@
       ],
       "affectedSurfaces": [
         "aep/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.11",
-      "id": "devcenter/0.8.11",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T17:56:19Z",
-      "title": "Devcenter 0.8.11",
-      "summary": "Devcenter released version 0.8.11.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.11",
-        "version": "0.8.11"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -7450,29 +6900,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.8.10",
-      "id": "devcenter/0.8.10",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T14:41:40Z",
-      "title": "Devcenter 0.8.10",
-      "summary": "Devcenter released version 0.8.10.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.10",
-        "version": "0.8.10"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "workspace/0.2.12",
       "id": "workspace/0.2.12",
       "repository": "workspace",
@@ -7521,29 +6948,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.8.9",
-      "id": "devcenter/0.8.9",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T14:27:50Z",
-      "title": "Devcenter 0.8.9",
-      "summary": "Devcenter released version 0.8.9.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.9",
-        "version": "0.8.9"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "workspace/0.2.11",
       "id": "workspace/0.2.11",
       "repository": "workspace",
@@ -7585,29 +6989,6 @@
       ],
       "affectedSurfaces": [
         "aep-service/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.8",
-      "id": "devcenter/0.8.8",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T14:07:40Z",
-      "title": "Devcenter 0.8.8",
-      "summary": "Devcenter released version 0.8.8.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.8",
-        "version": "0.8.8"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -7845,29 +7226,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.8.7",
-      "id": "devcenter/0.8.7",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T11:57:43Z",
-      "title": "Devcenter 0.8.7",
-      "summary": "Devcenter released version 0.8.7.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.7",
-        "version": "0.8.7"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "website/0.3.2",
       "id": "website/0.3.2",
       "repository": "website",
@@ -7889,29 +7247,6 @@
       ],
       "affectedSurfaces": [
         "website/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.6",
-      "id": "devcenter/0.8.6",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T11:31:38Z",
-      "title": "Devcenter 0.8.6",
-      "summary": "Devcenter released version 0.8.6.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.6",
-        "version": "0.8.6"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -8175,29 +7510,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.8.5",
-      "id": "devcenter/0.8.5",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T08:53:21Z",
-      "title": "Devcenter 0.8.5",
-      "summary": "Devcenter released version 0.8.5.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.5",
-        "version": "0.8.5"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "identity/0.5.6",
       "id": "identity/0.5.6",
       "repository": "identity",
@@ -8265,75 +7577,6 @@
       ],
       "affectedSurfaces": [
         "identity/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.4",
-      "id": "devcenter/0.8.4",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T07:20:24Z",
-      "title": "Devcenter 0.8.4",
-      "summary": "Devcenter released version 0.8.4.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.4",
-        "version": "0.8.4"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.3",
-      "id": "devcenter/0.8.3",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T06:02:26Z",
-      "title": "Devcenter 0.8.3",
-      "summary": "Devcenter released version 0.8.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.3",
-        "version": "0.8.3"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.2",
-      "id": "devcenter/0.8.2",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T05:38:28Z",
-      "title": "Devcenter 0.8.2",
-      "summary": "Devcenter released version 0.8.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.2",
-        "version": "0.8.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -8427,29 +7670,6 @@
       ],
       "affectedSurfaces": [
         "workspace/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.8.1",
-      "id": "devcenter/0.8.1",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-03T03:10:22Z",
-      "title": "Devcenter 0.8.1",
-      "summary": "Devcenter released version 0.8.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.1",
-        "version": "0.8.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -8617,29 +7837,6 @@
       "channel": "impact"
     },
     {
-      "key": "devcenter/0.8.0",
-      "id": "devcenter/0.8.0",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T23:59:14Z",
-      "title": "Devcenter 0.8.0",
-      "summary": "Devcenter released version 0.8.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.8.0",
-        "version": "0.8.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "identity/0.5.2",
       "id": "identity/0.5.2",
       "repository": "identity",
@@ -8781,52 +7978,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.7.1",
-      "id": "devcenter/0.7.1",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T20:56:58Z",
-      "title": "Devcenter 0.7.1",
-      "summary": "Devcenter released version 0.7.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.7.1",
-        "version": "0.7.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.7.0",
-      "id": "devcenter/0.7.0",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T20:14:52Z",
-      "title": "Devcenter 0.7.0",
-      "summary": "Devcenter released version 0.7.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.7.0",
-        "version": "0.7.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "service-sdk/0.3.0",
       "id": "service-sdk/0.3.0",
       "repository": "service-sdk",
@@ -8943,29 +8094,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.6.3",
-      "id": "devcenter/0.6.3",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T16:26:16Z",
-      "title": "Devcenter 0.6.3",
-      "summary": "Devcenter released version 0.6.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.6.3",
-        "version": "0.6.3"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "workspace/0.1.4",
       "id": "workspace/0.1.4",
       "repository": "workspace",
@@ -8987,53 +8115,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.6.2",
-      "id": "devcenter/0.6.2",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T15:59:13Z",
-      "title": "Devcenter 0.6.2",
-      "summary": "Devcenter released version 0.6.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.6.2",
-        "version": "0.6.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/identity-routes-0.6.1",
-      "id": "devcenter/identity-routes-0.6.1",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T14:28:12Z",
-      "title": "Devcenter activates scoped Identity administration",
-      "summary": "Devcenter 0.6.1 exposes Identity's exact CLI discovery and scoped access-token routes, pins the SIP-disabled Connector embedding seam, and authenticates private frontend dependencies without leaking credentials into image layers.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.6.1",
-        "version": "0.6.1"
-      },
-      "journeys": [
-        "operate-services",
-        "build-agents"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs",
-        "identity/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "aep/external-work-refs-0.41.0",
@@ -9144,29 +8225,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.5.10",
-      "id": "devcenter/0.5.10",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T13:08:55Z",
-      "title": "Devcenter 0.5.10",
-      "summary": "Devcenter released version 0.5.10.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.10",
-        "version": "0.5.10"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "agentide/0.1.0",
       "id": "agentide/0.1.0",
       "repository": "agentide",
@@ -9255,29 +8313,6 @@
       ],
       "affectedSurfaces": [
         "agentplugins/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.5.9",
-      "id": "devcenter/0.5.9",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T12:12:00Z",
-      "title": "Devcenter 0.5.9",
-      "summary": "Devcenter released version 0.5.9.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.9",
-        "version": "0.5.9"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -9377,52 +8412,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.5.8",
-      "id": "devcenter/0.5.8",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T10:16:48Z",
-      "title": "Devcenter 0.5.8",
-      "summary": "Devcenter released version 0.5.8.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.8",
-        "version": "0.5.8"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.5.7",
-      "id": "devcenter/0.5.7",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T09:12:00Z",
-      "title": "Devcenter 0.5.7",
-      "summary": "Devcenter released version 0.5.7.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.7",
-        "version": "0.5.7"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "service-sdk/0.1.0",
       "id": "service-sdk/0.1.0",
       "repository": "service-sdk",
@@ -9464,52 +8453,6 @@
       ],
       "affectedSurfaces": [
         "harness/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.5.6",
-      "id": "devcenter/0.5.6",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T03:35:40Z",
-      "title": "Devcenter 0.5.6",
-      "summary": "Devcenter released version 0.5.6.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.6",
-        "version": "0.5.6"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.5.5",
-      "id": "devcenter/0.5.5",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T02:56:28Z",
-      "title": "Devcenter 0.5.5",
-      "summary": "Devcenter released version 0.5.5.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.5",
-        "version": "0.5.5"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -9599,29 +8542,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.5.3",
-      "id": "devcenter/0.5.3",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T01:41:07Z",
-      "title": "Devcenter 0.5.3",
-      "summary": "Devcenter released version 0.5.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.3",
-        "version": "0.5.3"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "worktree/0.3.0",
       "id": "worktree/0.3.0",
       "repository": "worktree",
@@ -9676,29 +8596,6 @@
       "channel": "impact"
     },
     {
-      "key": "devcenter/0.5.2",
-      "id": "devcenter/0.5.2",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-02T01:13:51Z",
-      "title": "Devcenter 0.5.2",
-      "summary": "Devcenter released version 0.5.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.5.2",
-        "version": "0.5.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "worktree/0.2.0",
       "id": "worktree/0.2.0",
       "repository": "worktree",
@@ -9717,144 +8614,6 @@
       ],
       "affectedSurfaces": [
         "worktree/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.4.7",
-      "id": "devcenter/0.4.7",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T22:17:17Z",
-      "title": "Devcenter 0.4.7",
-      "summary": "Devcenter released version 0.4.7.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.7",
-        "version": "0.4.7"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.4.6",
-      "id": "devcenter/0.4.6",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T21:58:42Z",
-      "title": "Devcenter 0.4.6",
-      "summary": "Devcenter released version 0.4.6.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.6",
-        "version": "0.4.6"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.4.5",
-      "id": "devcenter/0.4.5",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T21:46:43Z",
-      "title": "Devcenter 0.4.5",
-      "summary": "Devcenter released version 0.4.5.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.5",
-        "version": "0.4.5"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.4.4",
-      "id": "devcenter/0.4.4",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T21:36:21Z",
-      "title": "Devcenter 0.4.4",
-      "summary": "Devcenter released version 0.4.4.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.4",
-        "version": "0.4.4"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.4.3",
-      "id": "devcenter/0.4.3",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T21:23:41Z",
-      "title": "Devcenter 0.4.3",
-      "summary": "Devcenter released version 0.4.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.3",
-        "version": "0.4.3"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.4.2",
-      "id": "devcenter/0.4.2",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T21:02:30Z",
-      "title": "Devcenter 0.4.2",
-      "summary": "Devcenter released version 0.4.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.2",
-        "version": "0.4.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -9978,52 +8737,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.4.1",
-      "id": "devcenter/0.4.1",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T17:44:49Z",
-      "title": "Devcenter 0.4.1",
-      "summary": "Devcenter released version 0.4.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.1",
-        "version": "0.4.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.4.0",
-      "id": "devcenter/0.4.0",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T17:20:20Z",
-      "title": "Devcenter 0.4.0",
-      "summary": "Devcenter released version 0.4.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.4.0",
-        "version": "0.4.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "docs-system/passive-docusaurus-markers-0.3.3",
       "id": "docs-system/passive-docusaurus-markers-0.3.3",
       "repository": "docs-system",
@@ -10111,52 +8824,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "devcenter/0.3.4",
-      "id": "devcenter/0.3.4",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T13:41:43Z",
-      "title": "Devcenter 0.3.4",
-      "summary": "Devcenter released version 0.3.4.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.3.4",
-        "version": "0.3.4"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.3.3",
-      "id": "devcenter/0.3.3",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T13:01:41Z",
-      "title": "Devcenter 0.3.3",
-      "summary": "Devcenter released version 0.3.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.3.3",
-        "version": "0.3.3"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "eventlog/public-surface-2026-09-01",
@@ -10266,75 +8933,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "devcenter/0.3.2",
-      "id": "devcenter/0.3.2",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T11:57:45Z",
-      "title": "Devcenter 0.3.2",
-      "summary": "Devcenter released version 0.3.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.3.2",
-        "version": "0.3.2"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.3.1",
-      "id": "devcenter/0.3.1",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T11:49:37Z",
-      "title": "Devcenter 0.3.1",
-      "summary": "Devcenter released version 0.3.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.3.1",
-        "version": "0.3.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.3.0",
-      "id": "devcenter/0.3.0",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T11:42:50Z",
-      "title": "Devcenter 0.3.0",
-      "summary": "Devcenter released version 0.3.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.3.0",
-        "version": "0.3.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "docs-system/adoption-and-change-contracts-0.2.0",
@@ -10717,29 +9315,6 @@
       "channel": "releases"
     },
     {
-      "key": "devcenter/0.2.8",
-      "id": "devcenter/0.2.8",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T08:48:12Z",
-      "title": "Devcenter 0.2.8",
-      "summary": "Devcenter released version 0.2.8.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.2.8",
-        "version": "0.2.8"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "aep-service/0.1.2",
       "id": "aep-service/0.1.2",
       "repository": "aep-service",
@@ -10783,29 +9358,6 @@
       ],
       "affectedSurfaces": [
         "aep/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.2.6",
-      "id": "devcenter/0.2.6",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T06:56:26Z",
-      "title": "Devcenter 0.2.6",
-      "summary": "Devcenter released version 0.2.6.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.2.6",
-        "version": "0.2.6"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -10867,29 +9419,6 @@
       "channel": "impact"
     },
     {
-      "key": "devcenter/0.2.5",
-      "id": "devcenter/0.2.5",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T03:54:39Z",
-      "title": "Devcenter 0.2.5",
-      "summary": "Devcenter released version 0.2.5.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.2.5",
-        "version": "0.2.5"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "identity/0.4.0",
       "id": "identity/0.4.0",
       "repository": "identity",
@@ -10931,29 +9460,6 @@
       ],
       "affectedSurfaces": [
         "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.2.4",
-      "id": "devcenter/0.2.4",
-      "repository": "devcenter",
-      "publishedAt": "2026-09-01T02:37:12Z",
-      "title": "Devcenter 0.2.4",
-      "summary": "Devcenter released version 0.2.4.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.2.4",
-        "version": "0.2.4"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -11161,52 +9667,6 @@
       ],
       "affectedSurfaces": [
         "identity/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.1.1",
-      "id": "devcenter/0.1.1",
-      "repository": "devcenter",
-      "publishedAt": "2026-08-31T23:28:42Z",
-      "title": "Devcenter 0.1.1",
-      "summary": "Devcenter released version 0.1.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.1.1",
-        "version": "0.1.1"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "devcenter/0.1.0",
-      "id": "devcenter/0.1.0",
-      "repository": "devcenter",
-      "publishedAt": "2026-08-31T22:50:18Z",
-      "title": "Devcenter 0.1.0",
-      "summary": "Devcenter released version 0.1.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/devcenter/releases/tag/0.1.0",
-        "version": "0.1.0"
-      },
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "devcenter/docs"
       ],
       "automatic": true,
       "channel": "releases"

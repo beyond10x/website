@@ -663,117 +663,6 @@
     },
     {
       "accent": "#59d89d",
-      "canonicalUrl": "https://beyond10x.github.io/docs/devcenter/",
-      "capabilities": [
-        "developer-experience",
-        "service-composition",
-        "openapi"
-      ],
-      "documentDefaults": {
-        "access": "public",
-        "audiences": [
-          "evaluator"
-        ],
-        "experienceIds": [
-          "evaluate-beyond10x-products"
-        ],
-        "support": "preview"
-      },
-      "experienceIds": [
-        "evaluate-beyond10x-products",
-        "deploy-operate-products"
-      ],
-      "feeds": [],
-      "id": "docs",
-      "journeys": [
-        "build-agents",
-        "operate-services"
-      ],
-      "kind": "service-docs",
-      "maturity": "development",
-      "name": "Devcenter",
-      "primaryJourney": "operate-services",
-      "publication": {
-        "availability": "published",
-        "discoverability": "public"
-      },
-      "relationships": [
-        {
-          "kind": "uses",
-          "label": "devcenter/Cargo.toml:36 crate agentide-contracts from beyond10x/agentide at tag 0.2.1, and 2 more lines",
-          "target": "agentide/docs"
-        },
-        {
-          "kind": "uses",
-          "label": "The Devcenter Connectors composition persists service events through Eventlog Postgres at an exact revision.",
-          "target": "eventlog/docs"
-        },
-        {
-          "kind": "uses",
-          "label": "identity source packages consumed by devcenter",
-          "target": "identity/docs"
-        },
-        {
-          "kind": "uses",
-          "label": "The Devcenter Connectors composition consumes the standalone service SDK at an exact revision.",
-          "target": "service-sdk/docs"
-        },
-        {
-          "kind": "uses",
-          "label": "devcenter/Cargo.toml:40 crate workflow-generated-service from beyond10x/workflow at rev 77c204b4d7a913cdc26e7d3445229571bad84f9a",
-          "target": "workflow/docs"
-        },
-        {
-          "kind": "uses",
-          "label": "Devcenter consumes Workspace client and core crates at an exact revision.",
-          "target": "workspace/docs"
-        }
-      ],
-      "routeBase": "/docs/devcenter/",
-      "sections": [],
-      "source": {
-        "documents": {
-          "include": [
-            "README.md",
-            "docs/frontend-review.md",
-            "docs/local-acceptance.md",
-            "docs/source-build.md",
-            "docs/ess-deployment-model.md",
-            "docs/production-deployment.md"
-          ]
-        },
-        "navigation": {
-          "group": "Products",
-          "label": "Devcenter",
-          "order": 10,
-          "sidebar": "flat"
-        },
-        "root": ".",
-        "specifications": [
-          {
-            "format": "openapi",
-            "id": "http-api",
-            "path": "openapi.json",
-            "route": "/api/devcenter/http-api/",
-            "title": "Devcenter API"
-          }
-        ]
-      },
-      "summary": "The public application, BFF, API, and deployment composition for the beyond10x developer experience.",
-      "availability": "published",
-      "discoverability": "public",
-      "audiences": [
-        "evaluator"
-      ],
-      "key": "devcenter/docs",
-      "repository": {
-        "displayName": "Devcenter",
-        "id": "devcenter",
-        "url": "https://github.com/beyond10x/devcenter"
-      }
-    },
-    {
-      "accent": "#59d89d",
       "adoption": {
         "estimatedMinutes": 5,
         "label": "Validate a documentation source",
@@ -1975,10 +1864,6 @@
         {
           "kind": "introduces",
           "target": "agentplugins/docs"
-        },
-        {
-          "kind": "introduces",
-          "target": "devcenter/docs"
         },
         {
           "kind": "introduces",
