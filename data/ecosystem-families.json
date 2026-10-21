@@ -30,19 +30,8 @@
       "purpose": "Integrate authenticated, auditable capabilities for commands, identity, events, secrets, governed workspaces, workflows, and external systems.",
       "startRepository": "identity",
       "next": {
-        "family": "Products",
-        "label": "See those capabilities assembled into a public experience."
-      }
-    },
-    {
-      "id": "Products",
-      "label": "Products",
-      "slug": "/products/",
-      "purpose": "Preview Devcenter while it remains in active development. Start with its credential-free review mode to inspect the emerging product direction and readiness—not as a production adoption promise.",
-      "startRepository": "devcenter",
-      "next": {
         "family": "Foundation",
-        "label": "Trace product behavior back to its evidence and contracts."
+        "label": "Trace service behavior back to its evidence and contracts."
       }
     }
   ]

@@ -216,6 +216,61 @@ fn agent_platform_is_private_and_its_former_routes_land_on_the_ecosystem() {
         ]
     );
 }
+/// Devcenter leaves the unified documentation on 2026-10-21 ahead of being made private and
+/// archived: it leaves the lock, no surface introduces or relates to it, the Products family it was
+/// the only member of leaves the taxonomy, and its nine former routes land on the ecosystem while
+/// the family's /docs/products/ lands on the /products/ hub.
+#[test]
+fn devcenter_leaves_and_its_former_routes_land_on_the_ecosystem() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    for path in [
+        "sources.lock.json",
+        "b10x.docs.yaml",
+        "data/independent-sites.json",
+        "data/ecosystem-families.json",
+        "data/experiences.json",
+    ] {
+        let text = fs::read_to_string(root.join(path)).unwrap().to_lowercase();
+        assert!(!text.contains("devcenter"), "{path} still names devcenter");
+    }
+    let families: Value =
+        serde_json::from_slice(&fs::read(root.join("data/ecosystem-families.json")).unwrap())
+            .unwrap();
+    assert!(
+        families["families"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .all(|family| family["id"] != "Products")
+    );
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows: Vec<_> = redirects["redirects"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|r| {
+            let from = r["from"].as_str().unwrap();
+            from.contains("devcenter") || from == "/docs/products/"
+        })
+        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
+        .collect();
+    assert_eq!(
+        rows,
+        [
+            ("/api/devcenter/", "/ecosystem/"),
+            ("/api/devcenter/http-api/", "/ecosystem/"),
+            ("/docs/devcenter/", "/ecosystem/"),
+            ("/docs/devcenter/ess-deployment-model/", "/ecosystem/"),
+            ("/docs/devcenter/frontend-review/", "/ecosystem/"),
+            ("/docs/devcenter/local-acceptance/", "/ecosystem/"),
+            ("/docs/devcenter/production-deployment/", "/ecosystem/"),
+            ("/docs/devcenter/source-build/", "/ecosystem/"),
+            ("/docs/products/", "/products/"),
+            ("/ecosystem/devcenter/", "/ecosystem/")
+        ]
+    );
+}
 #[test]
 fn metaharness_is_independent_and_all_thirteen_document_routes_survive() {
     assert_independent_migration(
@@ -547,7 +602,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
         .iter()
         .map(|v| v.as_str().unwrap())
         .collect();
-    assert_eq!(repositories.len(), 20);
+    assert_eq!(repositories.len(), 19);
     assert!(repositories.contains(&"harness"));
     assert!(!repositories.contains(&"gates"));
     assert!(repositories.contains(&"mandate"));
@@ -566,6 +621,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(!repositories.contains(&"llm"));
     assert!(!repositories.contains(&"connectors"));
     assert!(!repositories.contains(&"agent-platform"));
+    assert!(!repositories.contains(&"devcenter"));
     let excluded = roster["excludedRepositories"].as_array().unwrap();
     assert!(!excluded.is_empty());
     let names: Vec<&str> = excluded

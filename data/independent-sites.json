@@ -398,11 +398,6 @@
             "target": "connectors/docs"
           },
           {
-            "kind": "supports",
-            "label": "The Devcenter chart composes the Secrets service and its development database",
-            "target": "devcenter/docs"
-          },
-          {
             "kind": "uses",
             "label": "Identity issues an exact user audience that Secrets verifies without teaching Identity secret semantics",
             "target": "identity/docs"

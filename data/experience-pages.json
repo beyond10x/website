@@ -238,7 +238,7 @@
               "title": "Compare the typed running modes",
               "description": "Start with the ESS-derived mode table so local interaction, attachment, support, artifacts, and hosted availability stay distinct.",
               "url": "/docs/agentide/running-modes/",
-              "completion": "You can explain which four modes are in the local binary and why hosted DevCenter is a separate, paused realization."
+              "completion": "You can explain which four modes are in the local binary and why the hosted realization is separate and paused."
             }
           ]
         },

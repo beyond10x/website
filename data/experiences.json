@@ -83,7 +83,7 @@
       "kind": "hosted-service",
       "availability": "unpublished",
       "access": "approval-required",
-      "note": "The DevCenter-hosted realization is a paused preview with no public self-service endpoint."
+      "note": "The hosted realization is a paused preview with no public self-service endpoint."
     },
     {
       "id": "ess-documentation",
@@ -121,43 +121,6 @@
       "availability": "available",
       "access": "public",
       "url": "https://beyond10x.github.io/metaharness/"
-    },
-    {
-      "id": "devcenter-docs",
-      "kind": "documentation",
-      "availability": "available",
-      "access": "public",
-      "url": "https://beyond10x.github.io/docs/devcenter/"
-    },
-    {
-      "id": "devcenter-source",
-      "kind": "source",
-      "availability": "available",
-      "access": "public",
-      "url": "https://github.com/beyond10x/devcenter",
-      "note": "Public source for evaluation under PolyForm Free Trial 1.0.0: less than 32 consecutive calendar days for one application."
-    },
-    {
-      "id": "devcenter-private-build-dependencies",
-      "kind": "package",
-      "availability": "available",
-      "access": "approval-required",
-      "note": "A full service source build requires approved access to private sibling Rust dependencies."
-    },
-    {
-      "id": "devcenter-chart",
-      "kind": "helm-chart",
-      "availability": "available",
-      "access": "public",
-      "url": "https://github.com/beyond10x/devcenter/pkgs/container/charts%2Fdevcenter",
-      "note": "The public OCI chart can be inspected and rendered, but it is insufficient for deployment without private images and deployment-specific values."
-    },
-    {
-      "id": "devcenter-production-container",
-      "kind": "container",
-      "availability": "unpublished",
-      "access": "private",
-      "note": "The production image is not publicly distributed and is not required for the public frontend-review path."
     },
     {
       "id": "aep-service-documentation",
@@ -275,38 +238,14 @@
         },
         {
           "id": "agentide-hosted-preview",
-          "label": "Use hosted AgentIDE in DevCenter",
+          "label": "Use hosted AgentIDE",
           "support": "paused",
           "access": "approval-required",
           "artifactIds": ["agentide-documentation", "agentide-hosted-service"],
           "url": "https://beyond10x.github.io/docs/agentide/running-modes/",
           "estimatedMinutes": 10,
-          "outcome": "Enter an authenticated DevCenter workspace whose hosted AgentIDE realization is supplied by an approved environment.",
+          "outcome": "Enter an authenticated hosted workspace whose AgentIDE realization is supplied by an approved environment.",
           "note": "This path is paused: the hosted realization is unpublished and has no public self-service endpoint."
-        },
-        {
-          "id": "frontend-review",
-          "label": "Review Devcenter without credentials",
-          "support": "preview",
-          "access": "public",
-          "artifactIds": ["devcenter-docs", "devcenter-source"],
-          "url": "https://beyond10x.github.io/products/evaluate/",
-          "estimatedMinutes": 10,
-          "prerequisites": ["Node.js and pnpm to run the credential-free frontend review locally"],
-          "outcome": "Run or inspect the credential-free frontend review and understand its license and production-access boundaries.",
-          "note": "The public source is licensed for a trial of less than 32 consecutive calendar days for one application. It does not grant production use or image access."
-        },
-        {
-          "id": "approved-source-build",
-          "label": "Build the full Devcenter service from source",
-          "support": "preview",
-          "access": "approval-required",
-          "artifactIds": ["devcenter-docs", "devcenter-source", "devcenter-private-build-dependencies"],
-          "url": "https://beyond10x.github.io/docs/devcenter/source-build/",
-          "estimatedMinutes": 30,
-          "prerequisites": ["Docker", "Approved GitHub access to the private sibling dependencies"],
-          "outcome": "Build and run the full service container locally after obtaining access to every private build dependency.",
-          "note": "This is an approved evaluation path, not a public binary distribution or a production-use grant."
         }
       ]
     },
@@ -325,18 +264,6 @@
           "url": "https://beyond10x.github.io/operate/",
           "estimatedMinutes": 15,
           "outcome": "Reach the owning service's deployment and operations contract with its access limitations intact."
-        },
-        {
-          "id": "company-cluster-devcenter",
-          "label": "Deploy Devcenter to a company cluster",
-          "support": "paused",
-          "access": "approval-required",
-          "artifactIds": ["devcenter-chart", "devcenter-production-container"],
-          "url": "https://beyond10x.github.io/docs/devcenter/production-deployment/",
-          "estimatedMinutes": 20,
-          "prerequisites": ["A company Kubernetes cluster", "Approved access to the production Devcenter image"],
-          "outcome": "Confirm the private production-image boundary before committing to a company-cluster deployment.",
-          "note": "The public chart is insufficient on its own, and the required production image is unpublished and private. This path is paused; review the operator documentation, then wait for an explicit distribution, license, and access contract."
         }
       ]
     },

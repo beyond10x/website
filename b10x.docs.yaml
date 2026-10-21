@@ -77,8 +77,6 @@ surfaces:
   - kind: introduces
     target: agentplugins/docs
   - kind: introduces
-    target: devcenter/docs
-  - kind: introduces
     target: docs-system/docs
   - kind: introduces
     target: entity-runtime/docs

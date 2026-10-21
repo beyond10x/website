@@ -33,25 +33,12 @@ const unexplainedBlockers = paths.filter((path) => !path.actionable && !path.exp
 if (unexplainedBlockers.length > 0) {
   throw new Error(`blocked adoption paths must explain their blockers: ${unexplainedBlockers.map((path) => path.id).join(', ')}`);
 }
-const devcenterCluster = evaluatedById.get('deploy-operate-products')?.adoptionPaths.find((path) => path.id === 'company-cluster-devcenter');
-if (!devcenterCluster
-  || devcenterCluster.actionable
-  || devcenterCluster.support !== 'paused'
-  || devcenterCluster.access !== 'approval-required'
-  || devcenterCluster.effectiveAccess !== 'private'
-  || !devcenterCluster.blockers.includes('non-actionable-support')
-  || !devcenterCluster.blockers.includes('unavailable-artifact')
-  || !devcenterCluster.blockers.includes('private-access')) {
-  throw new Error('the Devcenter company-cluster path must remain visibly approval-gated and blocked by its unpublished private container');
-}
 const productPaths = evaluatedById.get('evaluate-beyond10x-products')?.adoptionPaths ?? [];
-if (productPaths.map((path) => path.id).join(',') !== 'agentide-local-tui,agentide-hosted-preview,frontend-review,approved-source-build') {
-  throw new Error('product evaluation must keep AgentIDE and Devcenter public and gated paths separate');
+if (productPaths.map((path) => path.id).join(',') !== 'agentide-local-tui,agentide-hosted-preview') {
+  throw new Error('product evaluation must keep the public and gated AgentIDE paths separate');
 }
 const agentideLocal = productPaths.find((path) => path.id === 'agentide-local-tui');
 const agentideHosted = productPaths.find((path) => path.id === 'agentide-hosted-preview');
-const frontendReview = productPaths.find((path) => path.id === 'frontend-review');
-const approvedSourceBuild = productPaths.find((path) => path.id === 'approved-source-build');
 if (!agentideLocal?.actionable || agentideLocal.support !== 'preview' || agentideLocal.effectiveAccess !== 'public'
   || agentideLocal.artifactIds.join(',') !== 'agentide-documentation,agentide-source,agentide-linux-binary') {
   throw new Error('the AgentIDE local TUI must remain a public preview backed by public docs, source, and the released Linux binary');
@@ -68,19 +55,9 @@ if (!agentideSourceBuild?.actionable || agentideSourceBuild.support !== 'preview
   || agentideSourceBuild.artifactIds.join(',') !== 'agentide-documentation,agentide-source,agentide-private-build-dependencies') {
   throw new Error('the AgentIDE source-build path must remain a preview requiring approved private dependencies');
 }
-if (!frontendReview.actionable || frontendReview.support !== 'preview' || frontendReview.effectiveAccess !== 'public'
-  || frontendReview.artifactIds.join(',') !== 'devcenter-docs,devcenter-source') {
-  throw new Error('the Devcenter frontend review must remain a public preview backed only by public docs and PolyForm evaluation source');
-}
-if (!approvedSourceBuild.actionable || approvedSourceBuild.support !== 'preview' || approvedSourceBuild.effectiveAccess !== 'approval-required'
-  || approvedSourceBuild.artifactIds.join(',') !== 'devcenter-docs,devcenter-source,devcenter-private-build-dependencies'
-  || approvedSourceBuild.url !== 'https://beyond10x.github.io/docs/devcenter/source-build/') {
-  throw new Error('the Devcenter full source build must remain a preview path requiring approved private dependencies');
-}
 const operations = evaluatedById.get('deploy-operate-products');
 if (!operations || operations.audiences.join(',') !== 'operator'
-  || operations.adoptionPaths.map((path) => path.id).join(',') !== 'public-source-service,company-cluster-devcenter'
-  || devcenterCluster.url !== 'https://beyond10x.github.io/docs/devcenter/production-deployment/') {
+  || operations.adoptionPaths.map((path) => path.id).join(',') !== 'public-source-service') {
   throw new Error('production deployment belongs only to the operator experience and must not leak into product evaluation');
 }
 const productPresentation = presentation.pages.find((page) => page.experienceId === 'evaluate-beyond10x-products');

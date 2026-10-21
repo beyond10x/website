@@ -54,6 +54,7 @@ test('a declared ESS sidebar renders its six categories, in order, as documents 
 
 test('a repository with no declared sidebar renders the same sidebars.cjs bytes as before', async () => {
   // Captured from website ea48ffa's renderSidebars over the same input: 26 v3/v4 sources and the front door.
+  // Devcenter and its Products family were later removed from both the input and the captured bytes.
   const {registry, manifests} = JSON.parse(await readFile(path.join(fixtures, 'sidebars-undeclared.input.json'), 'utf8'));
   const before = await readFile(path.join(fixtures, 'sidebars-undeclared.cjs'), 'utf8');
   assert.equal(renderSidebars(registry, manifests), before);

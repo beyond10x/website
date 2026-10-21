@@ -589,6 +589,16 @@
       "type": "html"
     },
     {
+      "from": "/api/devcenter/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/api/devcenter/http-api/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
       "from": "/api/secrets/",
       "to": "/secrets/docs/http-api/",
       "type": "html"
@@ -1294,6 +1304,36 @@
       "type": "html"
     },
     {
+      "from": "/docs/devcenter/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/devcenter/ess-deployment-model/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/devcenter/frontend-review/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/devcenter/local-acceptance/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/devcenter/production-deployment/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/devcenter/source-build/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
       "from": "/docs/engineering-protocols/",
       "to": "/engineering-protocols/docs/",
       "type": "html"
@@ -1589,6 +1629,11 @@
       "type": "html"
     },
     {
+      "from": "/docs/products/",
+      "to": "/products/",
+      "type": "html"
+    },
+    {
       "from": "/docs/secrets/",
       "to": "/secrets/docs/",
       "type": "html"
@@ -1746,6 +1791,11 @@
     {
       "from": "/ecosystem/connectors/",
       "to": "/connectors/",
+      "type": "html"
+    },
+    {
+      "from": "/ecosystem/devcenter/",
+      "to": "/ecosystem/",
       "type": "html"
     },
     {

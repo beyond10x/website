@@ -13,7 +13,6 @@ const websiteRuntimeCommit = '3'.repeat(40);
 // every form a source writes.
 export const FIXTURE_SOURCES = Object.freeze([
   {repository: 'agentic-principles', displayName: 'Agentic Principles', group: 'Foundation'},
-  {repository: 'devcenter', displayName: 'Devcenter', group: 'Products'},
   {repository: 'eventlog', displayName: 'Eventlog', group: 'Services'},
   {
     repository: 'harness',
@@ -49,7 +48,7 @@ export const FIXTURE_SOURCES = Object.freeze([
 ]);
 
 /**
- * A copy of this Website — its scripts and data, never its generated output — with a five-source
+ * A copy of this Website — its scripts and data, never its generated output — with a four-source
  * roster and normalized publication inputs, so `prepare-site.mjs` can run against a source set
  * that quarantines some of those sources. `quarantined` omitted writes the v1 source set.
  */

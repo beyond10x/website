@@ -1,4 +1,3 @@
-import {publishedHref} from '@site/src/lib/published';
 import type {ReactNode} from 'react';
 import Link from '@site/src/lib/PublishedLink';
 import Layout from '@theme/Layout';
@@ -18,18 +17,6 @@ const destinations = [
     title: 'Deploy an available service',
     description: 'Enter through the operations path when you already own service or cluster responsibilities.',
     url: journeyById('operate').experienceRoute,
-  },
-  {
-    eyebrow: 'Current product',
-    title: 'Inspect the Devcenter profile',
-    description: 'Separate Devcenter’s proposition and public evaluation material from artifacts that remain access-gated.',
-    url: publishedHref('/ecosystem/devcenter/'),
-  },
-  {
-    eyebrow: 'Reference',
-    title: 'Browse the public Products family',
-    description: 'Use the generated project map when you need repository, relationship, or maturity facts.',
-    url: '/ecosystem/?family=Products',
   },
 ];
 

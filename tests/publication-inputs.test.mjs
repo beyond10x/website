@@ -95,8 +95,8 @@ test('a v2 source set publishes its sources and names each quarantined repositor
   const inputs = await loadPublicationInputs({root: fixture.websiteRoot, environment: sourceSetEnvironment(fixture)});
   assert.equal(inputs.mode, 'source-set');
   assert.equal(inputs.inputSchema, 'b10x-docs-source-set/v2');
-  assert.deepEqual(inputs.roster.repositories, ['agentic-principles', 'devcenter', 'harness', 'identity']);
-  assert.deepEqual(inputs.sourceRoster, ['agentic-principles', 'devcenter', 'eventlog', 'harness', 'identity']);
+  assert.deepEqual(inputs.roster.repositories, ['agentic-principles', 'harness', 'identity']);
+  assert.deepEqual(inputs.sourceRoster, ['agentic-principles', 'eventlog', 'harness', 'identity']);
   assert.deepEqual(inputs.quarantined, quarantinedEventlog);
   assert.deepEqual(inputs.lock.sources.map((source) => source.repository), inputs.roster.repositories);
   assert.equal(inputs.bundles.has('eventlog'), false);
@@ -119,15 +119,15 @@ test('sources plus quarantined must be the exact sorted roster, each repository 
   const cases = [
     ['a quarantined repository also published', (document) => {
       document.quarantined = [{...quarantinedEventlog[0], repository: 'harness'}];
-    }, /exact sorted 5-repository roster/],
-    ['a roster repository in neither list', (document) => { document.quarantined = []; }, /exact sorted 5-repository roster/],
+    }, /exact sorted 4-repository roster/],
+    ['a roster repository in neither list', (document) => { document.quarantined = []; }, /exact sorted 4-repository roster/],
     ['a quarantined repository off the roster', (document) => {
       document.quarantined = [...quarantinedEventlog, {...quarantinedEventlog[0], repository: 'zzz'}];
-    }, /exact sorted 5-repository roster/],
+    }, /exact sorted 4-repository roster/],
     ['an unsorted quarantine list', (document) => {
       document.quarantined = [{...quarantinedEventlog[0], repository: 'harness'}, ...quarantinedEventlog];
       document.sources = document.sources.filter((entry) => entry.repository !== 'harness');
-    }, /exact sorted 5-repository roster/],
+    }, /exact sorted 4-repository roster/],
     ['a quarantine entry without its message', (document) => {
       document.quarantined = [{repository: 'eventlog', check: 'bundle-schema'}];
     }, /quarantine entry eventlog has unexpected or missing fields/],
