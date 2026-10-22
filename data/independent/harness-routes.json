@@ -1,0 +1,295 @@
+{
+  "baseUrl": "/harness/",
+  "commit": "0b68740d97768e445132946dea48156e2b9652ab",
+  "repository": "harness",
+  "routes": [
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus-base-url-issue-banner",
+        "__docusaurus-base-url-issue-banner-suggestion-container",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-hero-title",
+        "b10x-product-main",
+        "how",
+        "how-title",
+        "related",
+        "related-title",
+        "status",
+        "status-title",
+        "theme-svg-external-link",
+        "what",
+        "what-title"
+      ],
+      "path": "/harness/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "choose-your-path",
+        "own-the-loop",
+        "the-capability-ladder",
+        "theme-svg-external-link",
+        "three-ways-to-use-the-same-loop",
+        "what-it-owns",
+        "where-to-go-next"
+      ],
+      "path": "/harness/docs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "budgets-bind-between-effects",
+        "events-are-the-observation-seam",
+        "one-core-three-shells",
+        "one-run-turn-by-turn",
+        "stateless-at-the-provider-boundary",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/concepts/agent-loop/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "credential-sources-are-inspectable",
+        "deployment-checklist",
+        "hooks-are-trusted-operator-programs",
+        "model-visibility",
+        "multi-tenant-use",
+        "read-containment-and-write-confinement",
+        "sessions-contain-workspace-material",
+        "skills-agents-and-memories-are-files-not-remote-authority",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/concepts/security-boundary/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "calls-that-never-happen",
+        "flat-and-verb-surfaces",
+        "narrowing-for-a-named-agent",
+        "restrict-writes-by-path",
+        "risk-ceiling-and-approver",
+        "the-workspace-catalogue",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/concepts/tools-and-approvals/"
+    },
+    {
+      "anchors": [
+        "1-inspect-the-safe-default",
+        "2-choose-how-connection-facts-are-supplied",
+        "3-make-the-run",
+        "4-verify-the-outcome",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "next-steps",
+        "prerequisites",
+        "select-a-built-in-provider",
+        "theme-svg-external-link",
+        "use-your-own-endpoint-and-named-credential"
+      ],
+      "path": "/harness/docs/getting-started/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "context-inspection",
+        "credentials",
+        "exit-status",
+        "mcp-servers",
+        "providers-and-profiles",
+        "skills-agents-and-memories",
+        "standard-streams",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/guides/command-line/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admit-process-execution",
+        "approval-still-applies",
+        "build-toolchains",
+        "choose-a-boundary",
+        "embedded-workspace-rules",
+        "inspect-before-running",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/guides/confinement/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "add-a-confined-change-profile",
+        "create-a-configuration",
+        "inspect-a-built-in-provider",
+        "override-one-run",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/guides/profiles/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "chat",
+        "evaluation-record",
+        "json-lines-event-stream",
+        "retried-streams-invalidate-earlier-deltas",
+        "sessions",
+        "structured-answers-under---json",
+        "theme-svg-external-link",
+        "warning-codes"
+      ],
+      "path": "/harness/docs/guides/sessions-and-events/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "delegate-one-task",
+        "name-an-agent",
+        "offer-memories-on-demand",
+        "offer-skills-on-demand",
+        "run-operator-hooks",
+        "structured-output",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/guides/structured-runs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "evidence-labels",
+        "stability",
+        "theme-svg-external-link",
+        "what-belongs-elsewhere",
+        "what-harness-does-not-do"
+      ],
+      "path": "/harness/docs/limitations/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-harness-app-server",
+        "b10x-harness-chat",
+        "b10x-harness-context",
+        "b10x-harness-context-show",
+        "b10x-harness-profiles",
+        "b10x-harness-profiles-explain",
+        "b10x-harness-profiles-init",
+        "b10x-harness-profiles-list",
+        "b10x-harness-profiles-show",
+        "b10x-harness-providers",
+        "b10x-harness-providers-list",
+        "b10x-harness-providers-show",
+        "b10x-harness-run",
+        "b10x-harness-sessions",
+        "b10x-harness-toolchains",
+        "b10x-harness-toolchains-list",
+        "b10x-harness-toolchains-show",
+        "b10x-harness-toolchains-validate",
+        "b10x-harness-tools",
+        "commands",
+        "options-of-b10x-harness-itself",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/reference/cli/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "codex-renews-a-stale-token-and-rewrites-the-file-it-came-from",
+        "model-aliases",
+        "not-yet",
+        "profiles",
+        "providers",
+        "read-it-before-you-run-it",
+        "the-credential-is-defaulted-and-the-record-says-so",
+        "the-shortest-useful-configuration",
+        "theme-svg-external-link",
+        "what-wins",
+        "why-a-file-is-safer-than-the-flags-it-replaces",
+        "write-is-one-key-and-it-is-off"
+      ],
+      "path": "/harness/docs/reference/configuration/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/reference/crates/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "custom-specifications",
+        "go",
+        "npm",
+        "rust",
+        "taskfile",
+        "theme-svg-external-link",
+        "yarn"
+      ],
+      "path": "/harness/docs/reference/toolchains/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "app-server-bridge",
+        "contracts-and-evidence",
+        "credentials",
+        "retry-behaviour",
+        "stateless-continuation",
+        "supported-projections",
+        "theme-svg-external-link"
+      ],
+      "path": "/harness/docs/reference/wires/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "agent-loop",
+        "bridge-mode",
+        "command-line",
+        "delegation-skills-memories-and-hooks",
+        "provider-wires",
+        "sessions-and-output",
+        "specification",
+        "theme-svg-external-link",
+        "tools-and-approvals"
+      ],
+      "path": "/harness/docs/status/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "before-you-start",
+        "inspect-the-effect-boundary",
+        "run-the-change",
+        "theme-svg-external-link",
+        "verify-outside-the-model"
+      ],
+      "path": "/harness/docs/tutorials/confined-change/"
+    }
+  ],
+  "schema": "b10x-project-routes/v1"
+}

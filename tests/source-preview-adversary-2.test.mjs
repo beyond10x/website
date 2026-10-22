@@ -29,16 +29,19 @@ async function git(repositoryRoot, args) {
   return execFile('git', ['-C', repositoryRoot, ...args], {encoding: 'utf8'});
 }
 
-// A committed harness checkout with an uncommitted edit to its one declared document.
-async function editedSource(context, fixture, body) {
+// A committed harness checkout with an uncommitted edit to its one declared document. A test that
+// runs the preview against this Website's own roster names a repository on it instead, because
+// harness publishes its documentation independently and is not on the roster.
+async function editedSource(context, fixture, body, {repository = 'harness'} = {}) {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'b10x-source-preview-adversary2-'));
   context.after(() => rm(directory, {recursive: true, force: true}));
-  const repositoryRoot = path.join(directory, 'harness');
+  const repositoryRoot = path.join(directory, repository);
   await mkdir(path.join(repositoryRoot, 'docs'), {recursive: true});
   await git(repositoryRoot, ['init', '--quiet']);
   await git(repositoryRoot, ['config', 'user.name', 'Website Test']);
   await git(repositoryRoot, ['config', 'user.email', 'website-test@example.invalid']);
-  await writeFile(path.join(repositoryRoot, 'b10x.docs.yaml'), await readFile(path.join(fixture.bundleRoot, 'b10x.docs.yaml')));
+  const manifest = await readFile(path.join(fixture.bundleRoot, 'b10x.docs.yaml'), 'utf8');
+  await writeFile(path.join(repositoryRoot, 'b10x.docs.yaml'), manifest.replaceAll('harness', repository));
   await writeFile(path.join(repositoryRoot, 'docs', 'guide.md'), '# Harness\n\nCommitted text.\n');
   await git(repositoryRoot, ['add', '.']);
   await git(repositoryRoot, ['commit', '--quiet', '-m', 'fixture']);
@@ -113,7 +116,7 @@ test('adversary 2: a live publication fetch that never finishes falls back to th
 // is swallowed and the author cannot stop the command.
 test('adversary 2: Ctrl-C while the snapshot is being fetched stops the command', async (context) => {
   const fixture = await publicationFixture(context);
-  const source = await editedSource(context, fixture, '# Harness\n\nUncommitted working-tree text.\n');
+  const source = await editedSource(context, fixture, '# AgentIDE\n\nUncommitted working-tree text.\n', {repository: 'agentide'});
   const origin = await drippingOrigin(context);
   // Its own cache root, so its live staging and fetch directories never appear in another test's.
   const cacheRoot = path.join(source.directory, 'source-preview-cache');

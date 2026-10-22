@@ -14,8 +14,8 @@
       "expectedFirst": "/docs/agentplugins/install/"
     },
     {
-      "query": "harness approvals",
-      "expectedFirst": "/docs/harness/concepts/tools-and-approvals/"
+      "query": "agentide running modes",
+      "expectedFirst": "/docs/agentide/running-modes/"
     },
     {
       "query": "operate service deployment",

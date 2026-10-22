@@ -144,16 +144,18 @@ executes the generator and dependency lock from its own immutable `job.workflow_
 
 ## Independent project documentation
 
-Connectors publishes its own site at https://beyond10x.github.io/connectors/, LLM at
-https://beyond10x.github.io/llm/, Metaharness at https://beyond10x.github.io/metaharness/,
-Secrets at https://beyond10x.github.io/secrets/ and Substrate at
-https://beyond10x.github.io/substrate/. All five are excluded from the collected
+Connectors publishes its own site at https://beyond10x.github.io/connectors/, Harness at
+https://beyond10x.github.io/harness/, LLM at https://beyond10x.github.io/llm/, Metaharness at
+https://beyond10x.github.io/metaharness/, Secrets at https://beyond10x.github.io/secrets/ and
+Substrate at https://beyond10x.github.io/substrate/. All six are excluded from the collected
 source roster. Website retains discovery metadata and redirects each previous `/docs/<project>/`
 page to its exact `/<project>/docs/` destination, preserving queries and fragments through the
 existing redirect template. Secrets' former architecture, limitations and roadmap pages, and its
 `/api/secrets/` pages, redirect to the overview, Status and HTTP API pages that replaced them.
 LLM's former concepts, guides and reference indexes redirect to their first page, and its
-where-this-stands page to Status.
+where-this-stands page to Status. Harness's former concepts, guides, reference and tutorials
+indexes redirect to their first page, and its removed workflow guide and reference to the
+command-line guide and the CLI reference.
 
 The els repository was renamed `engineering-protocols` and serves its own site at
 https://beyond10x.github.io/engineering-protocols/. It never had unified documentation, so

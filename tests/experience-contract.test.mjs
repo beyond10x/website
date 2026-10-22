@@ -146,7 +146,7 @@ test('golden search targets are first-class experiences or source-owned steps', 
     'spec driven development claude',
     'safe autonomous coding',
     'agent plugins install claude',
-    'harness approvals',
+    'agentide running modes',
     'operate service deployment',
   ]);
   assert.equal(golden.queries.at(-1).expectedFirst, '/operate/');

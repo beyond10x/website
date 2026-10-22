@@ -29,7 +29,7 @@ const destinations = [
     eyebrow: 'Agent loop',
     title: 'Build with Harness',
     description: 'Use the source-owned Harness guide for observable sessions, explicit tools, approvals, and evidence.',
-    url: publishedHref('/docs/harness/'),
+    url: '/harness/',
   },
   {
     eyebrow: 'Docs as spec',

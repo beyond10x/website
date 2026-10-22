@@ -1424,6 +1424,126 @@
       "type": "html"
     },
     {
+      "from": "/docs/harness/",
+      "to": "/harness/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/concepts/",
+      "to": "/harness/docs/concepts/agent-loop/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/concepts/agent-loop/",
+      "to": "/harness/docs/concepts/agent-loop/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/concepts/security-boundary/",
+      "to": "/harness/docs/concepts/security-boundary/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/concepts/tools-and-approvals/",
+      "to": "/harness/docs/concepts/tools-and-approvals/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/getting-started/",
+      "to": "/harness/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/guides/",
+      "to": "/harness/docs/guides/command-line/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/guides/command-line/",
+      "to": "/harness/docs/guides/command-line/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/guides/confinement/",
+      "to": "/harness/docs/guides/confinement/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/guides/profiles/",
+      "to": "/harness/docs/guides/profiles/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/guides/sessions-and-events/",
+      "to": "/harness/docs/guides/sessions-and-events/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/guides/structured-runs/",
+      "to": "/harness/docs/guides/structured-runs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/guides/workflows/",
+      "to": "/harness/docs/guides/command-line/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/limitations/",
+      "to": "/harness/docs/limitations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/reference/",
+      "to": "/harness/docs/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/reference/cli/",
+      "to": "/harness/docs/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/reference/configuration/",
+      "to": "/harness/docs/reference/configuration/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/reference/crates/",
+      "to": "/harness/docs/reference/crates/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/reference/toolchains/",
+      "to": "/harness/docs/reference/toolchains/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/reference/wires/",
+      "to": "/harness/docs/reference/wires/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/reference/workflows/",
+      "to": "/harness/docs/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/status/",
+      "to": "/harness/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/tutorials/",
+      "to": "/harness/docs/tutorials/confined-change/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/harness/tutorials/confined-change/",
+      "to": "/harness/docs/tutorials/confined-change/",
+      "type": "html"
+    },
+    {
       "from": "/docs/llm/",
       "to": "/llm/docs/",
       "type": "html"
@@ -1809,6 +1929,11 @@
       "type": "html"
     },
     {
+      "from": "/ecosystem/harness/",
+      "to": "/harness/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/llm/",
       "to": "/llm/",
       "type": "html"
@@ -2149,96 +2274,6 @@
     {
       "from": "/getting-started/updates",
       "to": "/changes/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/",
-      "to": "/ecosystem/harness/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs",
-      "to": "/docs/harness/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/concepts/agent-loop",
-      "to": "/docs/harness/concepts/agent-loop/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/concepts/security-boundary",
-      "to": "/docs/harness/concepts/security-boundary/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/concepts/tools-and-approvals",
-      "to": "/docs/harness/concepts/tools-and-approvals/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/getting-started",
-      "to": "/docs/harness/getting-started/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/guides/confinement",
-      "to": "/docs/harness/guides/confinement/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/guides/profiles",
-      "to": "/docs/harness/guides/profiles/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/guides/sessions-and-events",
-      "to": "/docs/harness/guides/sessions-and-events/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/guides/structured-runs",
-      "to": "/docs/harness/guides/structured-runs/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/guides/workflows",
-      "to": "/docs/harness/guides/workflows/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/reference/cli",
-      "to": "/docs/harness/reference/cli/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/reference/configuration",
-      "to": "/docs/harness/reference/configuration/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/reference/toolchains",
-      "to": "/docs/harness/reference/toolchains/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/reference/wires",
-      "to": "/docs/harness/reference/wires/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/reference/workflows",
-      "to": "/docs/harness/reference/workflows/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/status",
-      "to": "/docs/harness/status/",
-      "type": "html"
-    },
-    {
-      "from": "/harness/docs/tutorials/confined-change",
-      "to": "/docs/harness/tutorials/confined-change/",
       "type": "html"
     },
     {

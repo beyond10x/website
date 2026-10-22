@@ -95,8 +95,8 @@ test('a v2 source set publishes its sources and names each quarantined repositor
   const inputs = await loadPublicationInputs({root: fixture.websiteRoot, environment: sourceSetEnvironment(fixture)});
   assert.equal(inputs.mode, 'source-set');
   assert.equal(inputs.inputSchema, 'b10x-docs-source-set/v2');
-  assert.deepEqual(inputs.roster.repositories, ['agentic-principles', 'harness', 'identity']);
-  assert.deepEqual(inputs.sourceRoster, ['agentic-principles', 'eventlog', 'harness', 'identity']);
+  assert.deepEqual(inputs.roster.repositories, ['agentic-principles', 'agentplugins', 'identity']);
+  assert.deepEqual(inputs.sourceRoster, ['agentic-principles', 'agentplugins', 'eventlog', 'identity']);
   assert.deepEqual(inputs.quarantined, quarantinedEventlog);
   assert.deepEqual(inputs.lock.sources.map((source) => source.repository), inputs.roster.repositories);
   assert.equal(inputs.bundles.has('eventlog'), false);
@@ -118,15 +118,15 @@ test('a v1 source set still loads with the whole roster published and nothing qu
 test('sources plus quarantined must be the exact sorted roster, each repository exactly once', async (context) => {
   const cases = [
     ['a quarantined repository also published', (document) => {
-      document.quarantined = [{...quarantinedEventlog[0], repository: 'harness'}];
+      document.quarantined = [{...quarantinedEventlog[0], repository: 'agentplugins'}];
     }, /exact sorted 4-repository roster/],
     ['a roster repository in neither list', (document) => { document.quarantined = []; }, /exact sorted 4-repository roster/],
     ['a quarantined repository off the roster', (document) => {
       document.quarantined = [...quarantinedEventlog, {...quarantinedEventlog[0], repository: 'zzz'}];
     }, /exact sorted 4-repository roster/],
     ['an unsorted quarantine list', (document) => {
-      document.quarantined = [{...quarantinedEventlog[0], repository: 'harness'}, ...quarantinedEventlog];
-      document.sources = document.sources.filter((entry) => entry.repository !== 'harness');
+      document.quarantined = [...quarantinedEventlog, {...quarantinedEventlog[0], repository: 'agentplugins'}];
+      document.sources = document.sources.filter((entry) => entry.repository !== 'agentplugins');
     }, /exact sorted 4-repository roster/],
     ['a quarantine entry without its message', (document) => {
       document.quarantined = [{repository: 'eventlog', check: 'bundle-schema'}];
@@ -169,7 +169,7 @@ test('a v2 source set that publishes nothing is refused', async (context) => {
 
 test('a quarantined source contributes no bundle directory to the publication inputs', async (context) => {
   const fixture = await quarantineFixture(context, {quarantined: quarantinedEventlog});
-  await cp(path.join(fixture.inputsRoot, 'sources', 'harness'), path.join(fixture.inputsRoot, 'sources', 'eventlog'), {recursive: true});
+  await cp(path.join(fixture.inputsRoot, 'sources', 'agentplugins'), path.join(fixture.inputsRoot, 'sources', 'eventlog'), {recursive: true});
   await assert.rejects(
     loadPublicationInputs({root: fixture.websiteRoot, environment: sourceSetEnvironment(fixture)}),
     /publication source bundles must contain the exact published source roster/,

@@ -24,17 +24,17 @@ test('an impact change affecting a quarantined surface still links it, to its Gi
   const bootstrap = path.join(fixture.inputsRoot, 'bootstrap');
   const changes = JSON.parse(await readFile(path.join(bootstrap, 'changes.json'), 'utf8'));
   changes.changes.push({
-    key: 'harness/eventlog-bridge-0.1.1',
-    id: 'harness/eventlog-bridge-0.1.1',
-    repository: 'harness',
+    key: 'agentplugins/eventlog-bridge-0.1.1',
+    id: 'agentplugins/eventlog-bridge-0.1.1',
+    repository: 'agentplugins',
     publishedAt: '2026-09-18T00:00:00Z',
-    title: 'Harness writes to the event log',
-    summary: 'Harness now appends its turns to the event log.',
+    title: 'Agentplugins writes to the event log',
+    summary: 'Agentplugins now appends its turns to the event log.',
     kind: 'capability',
     impact: 'significant',
-    source: {url: 'https://github.com/beyond10x/harness/releases/tag/0.1.1', version: '0.1.1'},
+    source: {url: 'https://github.com/beyond10x/agentplugins/releases/tag/0.1.1', version: '0.1.1'},
     journeys: ['operate-services'],
-    affectedSurfaces: ['harness/docs', 'eventlog/docs'],
+    affectedSurfaces: ['agentplugins/docs', 'eventlog/docs'],
     automatic: false,
     channel: 'impact',
   });
@@ -53,7 +53,7 @@ test('an impact change affecting a quarantined surface still links it, to its Gi
   const ledger = JSON.parse(await readFile(path.join(data, 'changes.json'), 'utf8'));
   const registry = JSON.parse(await readFile(path.join(data, 'ecosystem.json'), 'utf8'));
 
-  const change = ledger.changes.find((entry) => entry.key === 'harness/eventlog-bridge-0.1.1');
+  const change = ledger.changes.find((entry) => entry.key === 'agentplugins/eventlog-bridge-0.1.1');
   assert.ok(change, 'the published source keeps its change');
   // Coordinator decision (wave 2 U2, correction round 2): quarantined surfaces stay out of the
   // registry, so this intent is asserted at the layer that renders it. src/pages/changes.tsx hands
@@ -68,7 +68,7 @@ test('an impact change affecting a quarantined surface still links it, to its Gi
   );
   const rendered = change.affectedSurfaces.map((key) => ({key, href: surfaces.get(key)?.canonicalUrl}));
   assert.deepEqual(rendered, [
-    {key: 'harness/docs', href: 'https://beyond10x.github.io/docs/harness/'},
+    {key: 'agentplugins/docs', href: 'https://beyond10x.github.io/docs/agentplugins/'},
     {key: 'eventlog/docs', href: 'https://github.com/beyond10x/eventlog'},
   ]);
   // The registry decision itself, pinned: the quarantined surface has no registry card.

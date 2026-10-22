@@ -133,7 +133,7 @@
               "id": "inspect-harness",
               "title": "See how an agent loop stays observable",
               "description": "Inspect the Harness model for tools, approvals, effects, budgets, and retained sessions.",
-              "url": "/docs/harness/concepts/agent-loop/",
+              "url": "/harness/docs/concepts/agent-loop/",
               "completion": "You can name the evidence a native agent run should retain."
             }
           ]
@@ -175,14 +175,14 @@
               "id": "understand-harness",
               "title": "Use Harness for a native agent loop",
               "description": "Adopt Harness when provider-neutral execution, approvals, budgets, and sessions are requirements.",
-              "url": "/docs/harness/concepts/agent-loop/",
+              "url": "/harness/docs/concepts/agent-loop/",
               "completion": "You know when a plugin is enough and when you need a native loop."
             },
             {
               "id": "inspect-approvals",
               "title": "Inspect tools and approvals",
               "description": "See how Harness separates available tools from the decisions that permit consequential effects.",
-              "url": "/docs/harness/concepts/tools-and-approvals/",
+              "url": "/harness/docs/concepts/tools-and-approvals/",
               "completion": "You can identify where an approval decision is recorded and enforced."
             }
           ]
@@ -195,7 +195,7 @@
               "id": "run-harness",
               "title": "Run the Harness getting started path",
               "description": "Complete the repository-owned first run and retain its session evidence.",
-              "url": "/docs/harness/getting-started/",
+              "url": "/harness/docs/getting-started/",
               "completion": "A run completes with its decisions and effects available for inspection."
             },
             {

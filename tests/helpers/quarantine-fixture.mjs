@@ -9,17 +9,16 @@ const atlasControlCommit = '2'.repeat(40);
 const websiteRuntimeCommit = '3'.repeat(40);
 
 // One source per documentation family, each its family's start repository, plus a second Services
-// source so that quarantining it leaves every family populated. `harness` links into `eventlog` in
+// source so that quarantining it leaves every family populated. `agentplugins` links into `eventlog` in
 // every form a source writes.
 export const FIXTURE_SOURCES = Object.freeze([
   {repository: 'agentic-principles', displayName: 'Agentic Principles', group: 'Foundation'},
-  {repository: 'eventlog', displayName: 'Eventlog', group: 'Services'},
   {
-    repository: 'harness',
-    displayName: 'Harness',
+    repository: 'agentplugins',
+    displayName: 'Agentplugins',
     group: 'Build',
     body: [
-      '# Harness',
+      '# Agentplugins',
       '',
       'Clone-free documentation input.',
       '',
@@ -36,13 +35,14 @@ export const FIXTURE_SOURCES = Object.freeze([
       {label: 'Eventlog companion', url: 'https://beyond10x.github.io/docs/eventlog/'},
     ],
   },
+  {repository: 'eventlog', displayName: 'Eventlog', group: 'Services'},
   {
     repository: 'identity',
     displayName: 'Identity',
     group: 'Services',
     relationships: [
       {kind: 'uses', label: 'Reads the event log', target: 'eventlog/docs'},
-      {kind: 'uses', label: 'Runs the agent loop', target: 'harness/docs'},
+      {kind: 'uses', label: 'Installs the plugins', target: 'agentplugins/docs'},
     ],
   },
 ]);
@@ -119,12 +119,12 @@ export async function quarantineFixture(context, {quarantined, sources = FIXTURE
   const bootstrapDocuments = {
     'changes.json': Buffer.from(canonicalJson({
       schema: 'b10x-change-ledger/v1',
-      changes: [change('eventlog', '0.2.0', '2026-09-20T00:00:00Z'), change('harness', '0.1.0', '2026-09-19T00:00:00Z')],
+      changes: [change('eventlog', '0.2.0', '2026-09-20T00:00:00Z'), change('agentplugins', '0.1.0', '2026-09-19T00:00:00Z')],
     })),
     'ecosystem.json': Buffer.from(canonicalJson({schema: 'b10x-docs-registry/v2', surfaces: []})),
     'release-facts.json': Buffer.from(canonicalJson({
       schema: 'b10x-release-facts/v1',
-      releases: [release('eventlog', '0.2.0', '2026-09-20T00:00:00Z'), release('harness', '0.1.0', '2026-09-19T00:00:00Z')],
+      releases: [release('eventlog', '0.2.0', '2026-09-20T00:00:00Z'), release('agentplugins', '0.1.0', '2026-09-19T00:00:00Z')],
     })),
   };
   await Promise.all(Object.entries(bootstrapDocuments).map(([name, bytes]) => (

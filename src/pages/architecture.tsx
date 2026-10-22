@@ -2,7 +2,6 @@ import type {ReactNode} from 'react';
 import Layout from '@theme/Layout';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import {Diagram, DependencyGraph, PageHeader, ScrollableTable, SectionHeader} from '@beyond10x/docs-system/components';
-import {publishedHref} from '@site/src/lib/published';
 import graphDocument from '../../.generated/data/dependencies.json';
 
 interface GraphDocument {
@@ -31,7 +30,7 @@ const terms: Term[] = [
     {name: 'llm-gateway', repository: 'llm-gateway'},
   ]},
   {term: 'Harness', layer: 'L1', meaning: 'The agent loop: turns, prompt assembly, tool round trips, compaction, session and transcript, budgets. Claude Code and Codex are vendor harnesses; tools holds the tool contracts.', components: [
-    {name: 'harness', repository: 'harness', docs: publishedHref('/docs/harness/')},
+    {name: 'harness', repository: 'harness', docs: '/harness/'},
     {name: 'tools', repository: 'tools'},
   ]},
   {term: 'Meta-harness', layer: 'L2', meaning: 'Starts any harness behind one event stream and one command set, allows, denies or rewrites each tool call, and records every session as trace-ir/1.', components: [

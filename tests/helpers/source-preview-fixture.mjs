@@ -16,16 +16,18 @@ export async function git(repositoryRoot, args) {
 }
 
 // A committed harness checkout, then an uncommitted edit to its one declared document: the state an
-// author is in when they want to see a change before committing it.
-export async function dirtySourceRepository(context, fixture, {document = 'docs/guide.md', body} = {}) {
+// author is in when they want to see a change before committing it. A test that runs the preview
+// against this Website's own roster names a repository on it, because harness publishes its
+// documentation independently and is not on the roster.
+export async function dirtySourceRepository(context, fixture, {document = 'docs/guide.md', body, repository = 'harness'} = {}) {
   const directory = await mkdtemp(path.join(os.tmpdir(), 'b10x-source-preview-'));
   context.after(() => rm(directory, {recursive: true, force: true}));
-  const repositoryRoot = path.join(directory, 'harness');
+  const repositoryRoot = path.join(directory, repository);
   await mkdir(path.join(repositoryRoot, 'docs'), {recursive: true});
   await git(repositoryRoot, ['init', '--quiet']);
   await git(repositoryRoot, ['config', 'user.name', 'Website Test']);
   await git(repositoryRoot, ['config', 'user.email', 'website-test@example.invalid']);
-  let manifest = await readFile(path.join(fixture.bundleRoot, 'b10x.docs.yaml'), 'utf8');
+  let manifest = (await readFile(path.join(fixture.bundleRoot, 'b10x.docs.yaml'), 'utf8')).replaceAll('harness', repository);
   if (document !== 'docs/guide.md') manifest = manifest.replace('include: [docs/guide.md]', `include: [${document}]`);
   await writeFile(path.join(repositoryRoot, 'b10x.docs.yaml'), manifest);
   await writeFile(path.join(repositoryRoot, document), '# Harness\n\nCommitted text.\n');

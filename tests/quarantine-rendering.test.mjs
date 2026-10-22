@@ -60,21 +60,21 @@ test('a quarantined source is absent from every Website projection and every inb
   for (const feed of ['changes/feed.json', 'changes/rss.xml', 'releases/feed.json', 'releases/rss.xml']) {
     const bytes = await readFile(path.join(generated, 'static', ...feed.split('/')), 'utf8');
     assert.doesNotMatch(bytes, /eventlog/, `${feed} has no entry for the quarantined source`);
-    assert.match(bytes, /harness/, `${feed} still carries the published sources`);
+    assert.match(bytes, /agentplugins/, `${feed} still carries the published sources`);
   }
   const dependencies = await json(path.join(generated, 'data', 'dependencies.json'));
   assert.ok(!dependencies.nodes.some((node) => node.id === 'eventlog'));
 
-  const guide = await readFile(path.join(generated, 'docs', 'harness', 'guide', 'index.md'), 'utf8');
+  const guide = await readFile(path.join(generated, 'docs', 'agentplugins', 'guide', 'index.md'), 'utf8');
   assert.match(guide, new RegExp(`\\[Eventlog guide\\]\\(${github}\\)`));
   assert.match(guide, new RegExp(`\\[Eventlog profile\\]\\(${github}\\)`));
   assert.match(guide, new RegExp(`\\[eventlog-api\\]: ${github}`));
   assert.match(guide, new RegExp(`<a href="${github}">Eventlog home</a>`));
   assert.match(guide, /\[Identity guide\]\(https:\/\/beyond10x\.github\.io\/docs\/identity\/guide\/\)/);
   const identity = registry.surfaces.find((surface) => surface.repository.id === 'identity');
-  assert.deepEqual(identity.relationships.map((relation) => relation.target), ['harness/docs'], 'a relationship into the quarantined source is dropped');
-  const harness = registry.surfaces.find((surface) => surface.repository.id === 'harness');
-  assert.ok(harness.sections.some((section) => section.label === 'Eventlog companion' && section.url === github));
+  assert.deepEqual(identity.relationships.map((relation) => relation.target), ['agentplugins/docs'], 'a relationship into the quarantined source is dropped');
+  const agentplugins = registry.surfaces.find((surface) => surface.repository.id === 'agentplugins');
+  assert.ok(agentplugins.sections.some((section) => section.label === 'Eventlog companion' && section.url === github));
 
   // The class, not the three instances above: no generated file outside the raw collected source
   // copy names a route the quarantined source would have owned.
@@ -123,7 +123,7 @@ test('provenance names each quarantined source and records only the published on
   const provenance = await json(path.join(build, 'PROVENANCE.json'));
   assert.equal(provenance.schema, 'b10x-website-provenance/v3');
   assert.deepEqual(provenance.quarantinedSources, quarantinedEventlog);
-  assert.deepEqual(Object.keys(provenance.sourceCommits), ['agentic-principles', 'harness', 'identity']);
+  assert.deepEqual(Object.keys(provenance.sourceCommits), ['agentic-principles', 'agentplugins', 'identity']);
   assert.deepEqual(Object.keys(provenance.sourceBundles), Object.keys(provenance.sourceCommits));
   const deployment = await json(path.join(build, '._b10x', 'deployment.json'));
   assert.equal(deployment.schema, 'b10x-docs-deployment/v3');
@@ -150,7 +150,7 @@ test('a v1 source set still writes v2 provenance with no quarantine field', asyn
 // one of them exercises the Website's own data (experiences, families, search goldens) against it.
 const rosterFamilies = {
   Foundation: ['agentic-principles', 'aep', 'ess', 'research'],
-  Build: ['agentide', 'agentplugins', 'docs-system', 'entity-runtime', 'extensions', 'harness', 'mcp', 'worktree'],
+  Build: ['agentide', 'agentplugins', 'docs-system', 'entity-runtime', 'extensions', 'mcp', 'worktree'],
   Services: ['aep-service', 'eventlog', 'identity', 'mandate', 'service-sdk', 'workflow', 'workspace'],
 };
 const rosterSources = Object.entries(rosterFamilies)
@@ -168,7 +168,7 @@ test('the fixture roster is the production roster', async () => {
   assert.deepEqual(rosterSources.map((source) => source.repository), production);
 });
 
-test('quarantining any one of the 19 sources prepares a site with no route of it anywhere', async (context) => {
+test('quarantining any one of the 18 sources prepares a site with no route of it anywhere', async (context) => {
   const failures = [];
   const queue = [...rosterSources];
   const worker = async () => {

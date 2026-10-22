@@ -56,8 +56,8 @@ fn independent_and_undocumented_repositories_leave_the_collector_roster() {
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(
         lock["sources"].as_array().unwrap().len(),
-        19,
-        "Metaharness, Substrate, Secrets, LLM and Connectors left for their own sites, Gates has no website documentation, Agent Platform is archived and private and Devcenter leaves ahead of being made private"
+        18,
+        "Metaharness, Substrate, Secrets, LLM, Connectors and Harness left for their own sites, Gates has no website documentation, Agent Platform is archived and private and Devcenter leaves ahead of being made private"
     );
 }
 /// Every page of Secrets' site answers its former `/docs/secrets/` path. The site has no
@@ -493,6 +493,108 @@ fn connectors_is_independent_and_every_former_route_redirects() {
     assert!(experiences.contains("https://beyond10x.github.io/connectors/"));
     assert!(!experiences.contains("https://beyond10x.github.io/docs/connectors/"));
 }
+/// Every page of Harness's site answers its `/docs/harness/` path, as the independent
+/// compatibility contract derives it from the retained route inventory. The site has no index page
+/// for concepts, guides, reference or tutorials, and no workflow guide or reference since the
+/// workflow command was removed: each lands on a route of the inventory.
+#[test]
+fn harness_is_independent_and_every_former_route_redirects() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let lock: Value =
+        serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
+    assert!(
+        !lock["sources"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|s| s["repository"] == "harness")
+    );
+    let roster = fs::read_to_string(root.join("sources.yaml")).unwrap();
+    assert!(roster.contains("repository: harness"));
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows = redirects["redirects"].as_array().unwrap();
+    assert!(
+        !rows
+            .iter()
+            .any(|r| r["from"].as_str().unwrap().starts_with("/harness/")),
+        "inverse redirects would create loops"
+    );
+    let actual: BTreeSet<(String, String)> = rows
+        .iter()
+        .filter(|r| {
+            let from = r["from"].as_str().unwrap();
+            from.starts_with("/docs/harness/") || from == "/ecosystem/harness/"
+        })
+        .map(|r| {
+            assert_eq!(r["type"], "html");
+            (
+                r["from"].as_str().unwrap().to_owned(),
+                r["to"].as_str().unwrap().to_owned(),
+            )
+        })
+        .collect();
+    let inventory: Value = serde_json::from_slice(
+        &fs::read(root.join("data/independent/harness-routes.json")).unwrap(),
+    )
+    .unwrap();
+    let routes: BTreeSet<_> = inventory["routes"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|r| r["path"].as_str().unwrap())
+        .collect();
+    let derived: Vec<(String, String)> = routes
+        .iter()
+        .filter_map(|path| {
+            path.strip_prefix("/harness/docs/")
+                .map(|page| (format!("/docs/harness/{page}"), (*path).to_owned()))
+        })
+        .collect();
+    assert_eq!(derived.len(), 18);
+    let former = [
+        (
+            "/docs/harness/concepts/",
+            "/harness/docs/concepts/agent-loop/",
+        ),
+        (
+            "/docs/harness/guides/",
+            "/harness/docs/guides/command-line/",
+        ),
+        (
+            "/docs/harness/guides/workflows/",
+            "/harness/docs/guides/command-line/",
+        ),
+        ("/docs/harness/reference/", "/harness/docs/reference/cli/"),
+        (
+            "/docs/harness/reference/workflows/",
+            "/harness/docs/reference/cli/",
+        ),
+        (
+            "/docs/harness/tutorials/",
+            "/harness/docs/tutorials/confined-change/",
+        ),
+        ("/ecosystem/harness/", "/harness/"),
+    ];
+    for (_, to) in former {
+        assert!(
+            routes.contains(to),
+            "{to} is not a route of the Harness site"
+        );
+    }
+    let expected: BTreeSet<(String, String)> = derived
+        .into_iter()
+        .chain(
+            former
+                .iter()
+                .map(|(from, to)| ((*from).to_owned(), (*to).to_owned())),
+        )
+        .collect();
+    assert_eq!(actual, expected);
+    let experiences = fs::read_to_string(root.join("data/experiences.json")).unwrap();
+    assert!(experiences.contains("https://beyond10x.github.io/harness/"));
+    assert!(!experiences.contains("https://beyond10x.github.io/docs/harness/"));
+}
 /// Engineering Protocols never had unified documentation. Its own site owns
 /// `/engineering-protocols/`, so the root's former redirect of that path to the AEP profile is
 /// gone, and each of its documentation pages answers the `/docs/engineering-protocols/` path the
@@ -602,8 +704,8 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
         .iter()
         .map(|v| v.as_str().unwrap())
         .collect();
-    assert_eq!(repositories.len(), 19);
-    assert!(repositories.contains(&"harness"));
+    assert_eq!(repositories.len(), 18);
+    assert!(!repositories.contains(&"harness"));
     assert!(!repositories.contains(&"gates"));
     assert!(repositories.contains(&"mandate"));
     let mut sorted = repositories.clone();
@@ -664,6 +766,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(names.contains(&"gates"));
     assert!(names.contains(&"llm"));
     assert!(names.contains(&"connectors"));
+    assert!(names.contains(&"harness"));
     assert!(names.contains(&"engineering-protocols"));
     let lock: Value =
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();

@@ -259,6 +259,7 @@ test('the command prints its guarantee first and exits non-zero only for a per-s
   const invalid = await dirtySourceRepository(context, fixture, {
     document: 'docs/guide.mdx',
     body: "import Danger from './danger';\n\n# Harness\n",
+    repository: 'agentide',
   });
   const failure = await execFile(process.execPath, [
     previewScript, 'source', '--source', invalid.repositoryRoot, '--snapshot', path.join(invalid.directory, 'unused'),
@@ -269,12 +270,12 @@ test('the command prints its guarantee first and exits non-zero only for a per-s
   assert.equal(failure.code, 1);
   assert.ok(failure.stdout.startsWith('[source preview] '), failure.stdout);
   assert.ok(failure.stdout.includes(SOURCE_PREVIEW_GUARANTEE));
-  assert.match(failure.stderr, /harness failed per-source validation/);
+  assert.match(failure.stderr, /agentide failed per-source validation/);
 });
 
 test('a snapshot that cannot be obtained exits 2 and says what to supply', async (context) => {
   const fixture = await publicationFixture(context);
-  const valid = await dirtySourceRepository(context, fixture);
+  const valid = await dirtySourceRepository(context, fixture, {repository: 'agentide'});
   const failure = await execFile(process.execPath, [
     previewScript, 'source', '--source', valid.repositoryRoot, '--snapshot', path.join(valid.directory, 'absent'),
   ], {cwd: valid.repositoryRoot, encoding: 'utf8'}).then(
@@ -351,7 +352,7 @@ test('the portal compile mirrors this Website config: MDX format for .md and no 
 
 test('Ctrl-C before the preview server exists aborts, cleans up, and exits 130', async (context) => {
   const fixture = await publicationFixture(context);
-  const source = await dirtySourceRepository(context, fixture);
+  const source = await dirtySourceRepository(context, fixture, {repository: 'agentide'});
   const server = (await import('node:http')).createServer((request, response) => {
     response.writeHead(200, {'content-type': 'application/json'});
     response.write('{');

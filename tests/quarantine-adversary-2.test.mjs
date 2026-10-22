@@ -21,10 +21,10 @@ test('a legacy façade for a quarantined source builds against the quarantined r
   const legacyBytes = await readFile(path.join(root, 'legacy-routes.json'));
   const legacy = JSON.parse(legacyBytes);
   const websiteCommit = 'c'.repeat(40);
-  const quarantinedSources = [{repository: 'harness', check: 'bundle-schema', message: 'harness bundle.json is invalid'}];
-  const quarantined = new Set(['harness']);
-  // Every alias source the other repositories declare is present; no /docs/harness/ or
-  // /ecosystem/harness/ route exists, as in a build with harness quarantined.
+  const quarantinedSources = [{repository: 'agentplugins', check: 'bundle-schema', message: 'agentplugins bundle.json is invalid'}];
+  const quarantined = new Set(['agentplugins']);
+  // Every alias source the other repositories declare is present; no /docs/agentplugins/ or
+  // /ecosystem/agentplugins/ route exists, as in a build with agentplugins quarantined.
   const files = legacy.redirects
     .filter((redirect) => redirect.type === 'alias')
     .map((redirect) => ({path: redirect.source, sha256: 'd'.repeat(64), size: 1}));
@@ -55,12 +55,12 @@ test('a legacy façade for a quarantined source builds against the quarantined r
   };
 
   const result = await buildRedirectFacade({
-    repository: 'harness',
+    repository: 'agentplugins',
     websiteSha: websiteCommit,
     out: path.join(temporary, 'site'),
   });
   const landing = result.redirects.find((redirect) => redirect.from === '/');
-  assert.equal(landing.to, 'https://github.com/beyond10x/harness');
+  assert.equal(landing.to, 'https://github.com/beyond10x/agentplugins');
 });
 
 // The crawler follows a same-origin link through the effective redirect map. When that redirect

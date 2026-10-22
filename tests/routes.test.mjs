@@ -36,11 +36,13 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   // route for each of its 133 other documentation pages. Agent Platform, archived and private,
   // redirects its two former routes to /ecosystem/. Devcenter, leaving to be made private and
   // archived, redirects its nine former routes to /ecosystem/ and the emptied Products family's
-  // /docs/products/ to /products/.
-  assert.equal(html.length, 438);
+  // /docs/products/ to /products/. Harness's independent site replaced the 18 inverse /harness/
+  // redirects with one /docs/harness/ route for each of its 18 documentation pages,
+  // /ecosystem/harness/ and six explicit targets for former index and workflow pages.
+  assert.equal(html.length, 445);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
-  assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));
+  assert.ok(!map.redirects.some((route) => route.from.startsWith('/harness/')));
   assert.ok(html.some((route) => route.from === '/journeys/understand/' && route.to === '/learn/safe-agentic-coding/'));
   assert.ok(html.some((route) => route.from === '/agentic-principles/principles' && route.to === '/components/agentic-principles/principles/'));
   assert.ok(html.some((route) => route.from === '/agentic-principles/research/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure'
