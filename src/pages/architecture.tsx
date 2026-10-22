@@ -13,7 +13,7 @@ const graph = graphDocument as GraphDocument;
 
 interface Component {
   name: string;
-  repository: string;
+  repository?: string;
   docs?: string;
 }
 interface Term {
@@ -39,22 +39,22 @@ const terms: Term[] = [
   {term: 'Agent runtime', layer: 'L3 · governed runtime', meaning: 'Loom; loom-sdk is its library. Opens a case on a protocol and lets a model act only through the actions the case admits at that moment. Calls llm for its own short decisions and metaharness for agent work.', components: [
     {name: 'Loom', repository: 'loom'},
   ]},
-  {term: 'Application', layer: 'above L3', meaning: 'An end-to-end use of the stack, built on loom-sdk. takt delivers stories and counts nothing done until a validator records the evidence; it manages agents and is not one.', components: [
+  {term: 'Application', layer: 'above L3', meaning: 'An end-to-end use of the stack, built on loom-sdk. takt delivers stories and counts nothing done until a validator records the evidence; it manages agents and is not one. conductor coordinates Claude Code sessions across the repositories of one organization and sits on top of Agency.', components: [
     {name: 'takt', repository: 'takt'},
-    {name: 'swarm', repository: 'swarm'},
-  ]},
-  {term: 'Conductor', layer: 'operator tooling', meaning: 'Coordinates Claude Code sessions across the repositories of one organization: one session tracks every repository and starts one controller session per repository.', components: [
     {name: 'conductor', repository: 'conductor'},
   ]},
-  {term: 'Control plane', layer: 'paused', meaning: 'A local workspace service: add repositories, set a goal, follow its plan, implementation assignments and verified merge receipts. Paused; it is not part of the stack above.', components: [
-    {name: 'control-plane', repository: 'control-plane'},
+  {term: 'Product', layer: 'above the applications', meaning: 'What a person uses on top of the stack. Agency is where the operator manages agents, work, teams, auth and tools; control-plane converges into it. loom-coder is a Loom-based coding agent with a command line and a web version; it has no repository yet.', components: [
+    {name: 'Agency', repository: 'agency'},
+    {name: 'loom-coder'},
+    {name: 'swarm', repository: 'swarm'},
+    {name: 'agentide', repository: 'agentide'},
   ]},
 ];
 
 function ComponentLinks({components}: {components: Component[]}): ReactNode {
-  return components.map((component, index) => <span key={component.repository}>
+  return components.map((component, index) => <span key={component.name}>
     {index > 0 ? ', ' : ''}
-    {component.docs ? <>
+    {component.docs && component.repository ? <>
       <a href={component.docs}>{component.name}</a>
       {' '}(<a href={`https://github.com/beyond10x/${component.repository}`}>GitHub</a>)
     </> : <code>{component.name}</code>}
@@ -80,10 +80,11 @@ export default function Architecture(): ReactNode {
             id="agent-stack-heading"
             eyebrow="Agent stack"
             title="One owner per layer"
-            description="Six layers from applications down to model providers. A layer depends only on the layers below it. Recorded in the organization's architecture decisions 0096 to 0101, 2026-10-20."
+            description="Seven layers from products down to model providers. A layer depends only on the layers below it. Recorded in the organization's architecture decisions 0096 to 0101 (2026-10-20), 0105 and 0106 (2026-10-22)."
           />
-          <Diagram kind="svg" src={layers} download={layers} minWidth="78rem" title="The agent stack: one owner per layer" description="Six layers from applications down to model providers, with each layer's responsibilities and the repositories and libraries that own it." alternative={{label: 'Layers as text', content: <p>Applications (takt, b10x-loom, swarm) build on loom-sdk. L3, the governed runtime, is Loom. L2, the harness interface, is metaharness. L1 is harness, Claude Code and Codex, with tools. L0, the model call, is llm and inference. Providers (Anthropic, OpenAI, self-hosted through llm-gateway) are outside beyond10x.</p>}} />
-          <Diagram kind="svg" src={dependencies} download={dependencies} minWidth="78rem" title="How a request travels through the agent stack" description="From the operator through takt and Loom, then either straight to llm for Loom's own decisions or through metaharness to harness, Claude Code or Codex, down to the model providers." alternative={{label: 'Request path as text', content: <p>The operator gives takt an intent or a story. takt opens a case in Loom through loom-sdk. Loom calls llm directly for short decisions (classify, select, fill arguments) and runs agent work as a session through metaharness, which drives harness, Claude Code or Codex. Those call llm, which calls the provider. Commission in Loom applies the proposed change.</p>}} />
+          <p><a href="/agent-stack/">Open the agent stack as an interactive page</a>: the layers assemble as you scroll, a call travels down them, and every term links to its definition and repository.</p>
+          <Diagram kind="svg" src={layers} download={layers} minWidth="78rem" title="The agent stack: one owner per layer" description="Seven layers from products down to model providers, with each layer's responsibilities and the repositories and libraries that own it." alternative={{label: 'Layers as text', content: <p>Products (Agency, loom-coder, swarm, agentide) are what a person uses; loom-coder has no repository yet. Applications (takt, b10x-loom, conductor) build on loom-sdk; conductor sits on top of Agency. L3, the governed runtime, is Loom. L2, the harness interface, is metaharness. L1 is harness, Claude Code and Codex, with tools. L0, the model call, is llm and inference. Providers (Anthropic, OpenAI, self-hosted through llm-gateway) are outside beyond10x.</p>}} />
+          <Diagram kind="svg" src={dependencies} download={dependencies} minWidth="78rem" title="How a request travels through the agent stack" description="The products on top, then from the operator through takt and Loom, then either straight to llm for Loom's own decisions or through metaharness to harness, Claude Code or Codex, down to the model providers." alternative={{label: 'Request path as text', content: <p>The operator gives takt an intent or a story. takt opens a case in Loom through loom-sdk. Loom calls llm directly for short decisions (classify, select, fill arguments) and runs agent work as a session through metaharness, which drives harness, Claude Code or Codex. Those call llm, which calls the provider. Commission in Loom applies the proposed change.</p>}} />
 
           <SectionHeader headingLevel={3} id="agent-stack-terms" title="Definitions" description="Each term, the layer it names, and the repositories that own it." />
           <ScrollableTable label="Agent stack definitions">

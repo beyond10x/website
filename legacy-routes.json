@@ -1909,6 +1909,11 @@
       "type": "html"
     },
     {
+      "from": "/ecosystem/agent-stack/",
+      "to": "/agent-stack/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/connectors/",
       "to": "/connectors/",
       "type": "html"

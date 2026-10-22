@@ -148,7 +148,9 @@ Connectors publishes its own site at https://beyond10x.github.io/connectors/, Ha
 https://beyond10x.github.io/harness/, LLM at https://beyond10x.github.io/llm/, Metaharness at
 https://beyond10x.github.io/metaharness/, Secrets at https://beyond10x.github.io/secrets/ and
 Substrate at https://beyond10x.github.io/substrate/. All six are excluded from the collected
-source roster. Website retains discovery metadata and redirects each previous `/docs/<project>/`
+source roster. agent-stack publishes https://beyond10x.github.io/agent-stack/, which Website
+retains as discovery data with its route inventory and links from /architecture/; it never had
+unified documentation, so there is nothing to redirect. Website retains discovery metadata and redirects each previous `/docs/<project>/`
 page to its exact `/<project>/docs/` destination, preserving queries and fragments through the
 existing redirect template. Secrets' former architecture, limitations and roadmap pages, and its
 `/api/secrets/` pages, redirect to the overview, Status and HTTP API pages that replaced them.

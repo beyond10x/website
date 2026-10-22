@@ -1,0 +1,12 @@
+{
+  "schema": "b10x-project-routes/v1",
+  "repository": "agent-stack",
+  "commit": "bf82931a7188a21a9617e35905b170b7584463ac",
+  "baseUrl": "/agent-stack/",
+  "routes": [
+    {
+      "path": "/agent-stack/",
+      "anchors": []
+    }
+  ]
+}
