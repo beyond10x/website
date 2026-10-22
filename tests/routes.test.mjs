@@ -36,8 +36,8 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   // route for each of its 133 other documentation pages. Agent Platform, archived and private,
   // redirects its two former routes to /ecosystem/. Devcenter, leaving to be made private and
   // archived, redirects its nine former routes to /ecosystem/ and the emptied Products family's
-  // /docs/products/ to /products/.
-  assert.equal(html.length, 438);
+  // /docs/products/ to /products/. Agent stack's independent site added /ecosystem/agent-stack/.
+  assert.equal(html.length, 439);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(html.some((route) => route.from === '/harness/' && route.to === '/ecosystem/harness/'));
