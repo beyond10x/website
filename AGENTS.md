@@ -51,8 +51,8 @@ Organization-wide naming and coordinated-migration rules live in `atlas/AGENTS.m
 ## Independent project sites
 
 Connectors owns its documentation at `/connectors/`, Engineering Protocols at
-`/engineering-protocols/`, LLM at `/llm/`, Metaharness at `/metaharness/`, Secrets at `/secrets/` and
-Substrate at `/substrate/`. Each one's
+`/engineering-protocols/`, LLM at `/llm/`, Metaharness at `/metaharness/`, Secrets at `/secrets/`,
+Substrate at `/substrate/` and agent-stack at `/agent-stack/`. Each one's
 explicit exclusion in `sources.yaml` is retained alongside passive discovery data in
 `data/independent-sites.json`. The retained
 project provenance and route/anchor inventory must identify the same exact source commit and

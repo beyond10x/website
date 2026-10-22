@@ -2,6 +2,56 @@
   "schema": "b10x-independent-sites/v1",
   "sites": [
     {
+      "repository": "agent-stack",
+      "origin": "https://beyond10x.github.io",
+      "basePath": "/agent-stack/",
+      "sourceCommit": "bf82931a7188a21a9617e35905b170b7584463ac",
+      "provenancePath": "data/independent/agent-stack-site.json",
+      "provenanceSha256": "c529e9aa0566617313dfdce62fa41f1bd04902e5227d46282bf903a2c7da746f",
+      "routesPath": "data/independent/agent-stack-routes.json",
+      "routesSha256": "9ef16ac87f6fd122a69687a4033569c9ec1665e0af93d7ede51e5d5455037cd3",
+      "surface": {
+        "audiences": [
+          "evaluator",
+          "developer"
+        ],
+        "availability": "published",
+        "canonicalUrl": "https://beyond10x.github.io/agent-stack/",
+        "capabilities": [
+          "agent-stack-map"
+        ],
+        "discoverability": "public",
+        "id": "docs",
+        "journeys": [
+          "understand",
+          "build-agents"
+        ],
+        "kind": "documentation",
+        "maturity": "experimental",
+        "name": "Agent stack",
+        "routeBase": "/agent-stack/",
+        "sections": [
+          {
+            "kind": "docs",
+            "label": "The agent stack",
+            "url": "https://beyond10x.github.io/agent-stack/"
+          },
+          {
+            "kind": "source",
+            "label": "Source",
+            "url": "https://github.com/beyond10x/agent-stack"
+          }
+        ],
+        "summary": "The layers of the agent stack, who owns each one and the products on top, drawn from one data file.",
+        "key": "agent-stack/docs",
+        "repository": {
+          "displayName": "Agent stack",
+          "id": "agent-stack",
+          "url": "https://github.com/beyond10x/agent-stack"
+        }
+      }
+    },
+    {
       "repository": "connectors",
       "origin": "https://beyond10x.github.io",
       "basePath": "/connectors/",

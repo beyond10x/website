@@ -50,6 +50,13 @@ excludedRepositories:
       from this public site. The organization catalog retires the repository and its website
       documentation surface. Website redirects the former /docs/agent-platform/ and
       /ecosystem/agent-platform/ routes to /ecosystem/.
+  - repository: agent-stack
+    public: true
+    manifest: absent
+    reason: >-
+      agent-stack publishes its own site at https://beyond10x.github.io/agent-stack/ from its own
+      repository and main commit. Website retains its discovery entry and route inventory and links
+      it from /architecture/, but does not collect or publish its content.
   - repository: bench
     public: false
     manifest: present
