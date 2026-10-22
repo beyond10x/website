@@ -2,22 +2,34 @@
   "schema": "b10x-release-facts/v1",
   "releases": [
     {
+      "repository": "docs-system",
+      "version": "0.11.0",
+      "publishedAt": "2026-10-21T21:44:18Z",
+      "url": "https://github.com/beyond10x/docs-system/releases/tag/0.11.0"
+    },
+    {
+      "repository": "agentplugins",
+      "version": "0.24.0",
+      "publishedAt": "2026-10-21T21:02:31Z",
+      "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.24.0"
+    },
+    {
+      "repository": "aep",
+      "version": "0.76.0",
+      "publishedAt": "2026-10-21T15:01:26Z",
+      "url": "https://github.com/beyond10x/aep/releases/tag/0.76.0"
+    },
+    {
+      "repository": "ess",
+      "version": "0.67.0",
+      "publishedAt": "2026-10-21T11:00:49Z",
+      "url": "https://github.com/beyond10x/ess/releases/tag/0.67.0"
+    },
+    {
       "repository": "aep",
       "version": "0.75.0",
       "publishedAt": "2026-10-21T07:13:11Z",
       "url": "https://github.com/beyond10x/aep/releases/tag/0.75.0"
-    },
-    {
-      "repository": "harness",
-      "version": "0.16.1",
-      "publishedAt": "2026-10-20T23:50:27Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.16.1"
-    },
-    {
-      "repository": "harness",
-      "version": "0.16.0",
-      "publishedAt": "2026-10-20T22:47:25Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.16.0"
     },
     {
       "repository": "ess",
@@ -44,40 +56,16 @@
       "url": "https://github.com/beyond10x/ess/releases/tag/0.64.0"
     },
     {
-      "repository": "harness",
-      "version": "0.15.1",
-      "publishedAt": "2026-10-20T14:26:18Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.15.1"
-    },
-    {
       "repository": "agentide",
       "version": "0.3.8",
       "publishedAt": "2026-10-20T13:16:16Z",
       "url": "https://github.com/beyond10x/agentide/releases/tag/0.3.8"
     },
     {
-      "repository": "harness",
-      "version": "0.15.0",
-      "publishedAt": "2026-10-20T11:09:21Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.15.0"
-    },
-    {
       "repository": "aep",
       "version": "0.68.1",
       "publishedAt": "2026-10-20T10:03:44Z",
       "url": "https://github.com/beyond10x/aep/releases/tag/0.68.1"
-    },
-    {
-      "repository": "harness",
-      "version": "0.14.1",
-      "publishedAt": "2026-10-20T07:29:25Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.14.1"
-    },
-    {
-      "repository": "harness",
-      "version": "0.14.0",
-      "publishedAt": "2026-10-20T06:45:24Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.14.0"
     },
     {
       "repository": "ess",
@@ -932,12 +920,6 @@
       "url": "https://github.com/beyond10x/agentplugins/releases/tag/0.14.10"
     },
     {
-      "repository": "harness",
-      "version": "0.13.3",
-      "publishedAt": "2026-09-25T21:43:15Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.13.3"
-    },
-    {
       "repository": "agentplugins",
       "version": "0.14.9",
       "publishedAt": "2026-09-25T21:34:00Z",
@@ -954,12 +936,6 @@
       "version": "0.32.1",
       "publishedAt": "2026-09-25T20:58:36Z",
       "url": "https://github.com/beyond10x/ess/releases/tag/0.32.1"
-    },
-    {
-      "repository": "harness",
-      "version": "0.13.2",
-      "publishedAt": "2026-09-25T20:14:40Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.13.2"
     },
     {
       "repository": "agentplugins",
@@ -1268,12 +1244,6 @@
       "url": "https://github.com/beyond10x/ess/releases/tag/0.23.0"
     },
     {
-      "repository": "harness",
-      "version": "0.12.1",
-      "publishedAt": "2026-09-10T22:19:10Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.12.1"
-    },
-    {
       "repository": "eventlog",
       "version": "0.2.1",
       "publishedAt": "2026-09-10T20:55:21Z",
@@ -1326,12 +1296,6 @@
       "version": "0.1.2",
       "publishedAt": "2026-09-10T16:48:49Z",
       "url": "https://github.com/beyond10x/mcp/releases/tag/0.1.2"
-    },
-    {
-      "repository": "harness",
-      "version": "0.12.0",
-      "publishedAt": "2026-09-10T16:48:39Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.12.0"
     },
     {
       "repository": "ess",
@@ -1760,12 +1724,6 @@
       "url": "https://github.com/beyond10x/agentide/releases/tag/0.2.0"
     },
     {
-      "repository": "harness",
-      "version": "0.11.1",
-      "publishedAt": "2026-09-03T12:33:05Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.11.1"
-    },
-    {
       "repository": "agentide",
       "version": "0.1.4",
       "publishedAt": "2026-09-03T12:19:15Z",
@@ -2090,12 +2048,6 @@
       "url": "https://github.com/beyond10x/service-sdk/releases/tag/0.1.0"
     },
     {
-      "repository": "harness",
-      "version": "0.11.0",
-      "publishedAt": "2026-09-02T07:54:53Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.11.0"
-    },
-    {
       "repository": "agentplugins",
       "version": "0.3.3",
       "publishedAt": "2026-09-02T02:57:02Z",
@@ -2190,12 +2142,6 @@
       "version": "0.40.3",
       "publishedAt": "2026-09-01T10:09:59Z",
       "url": "https://github.com/beyond10x/aep/releases/tag/0.40.3"
-    },
-    {
-      "repository": "harness",
-      "version": "0.10.1",
-      "publishedAt": "2026-09-01T10:00:53Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.10.1"
     },
     {
       "repository": "aep",
@@ -2448,12 +2394,6 @@
       "version": "0.34.0",
       "publishedAt": "2026-08-30T22:08:36Z",
       "url": "https://github.com/beyond10x/aep/releases/tag/0.34.0"
-    },
-    {
-      "repository": "harness",
-      "version": "0.4.0",
-      "publishedAt": "2026-08-30T12:23:23Z",
-      "url": "https://github.com/beyond10x/harness/releases/tag/0.4.0"
     },
     {
       "repository": "aep",
