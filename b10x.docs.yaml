@@ -85,8 +85,6 @@ surfaces:
   - kind: introduces
     target: eventlog/docs
   - kind: introduces
-    target: harness/docs
-  - kind: introduces
     target: identity/docs
   - kind: introduces
     target: mcp/docs
