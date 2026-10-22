@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="1024" viewBox="0 0 1560 1024" role="img" aria-labelledby="t1 d1">
+<title id="t1">The beyond10x agent stack: one owner per layer</title>
+<desc id="d1">Six layers from applications down to model providers, with each layer's responsibilities and the repositories and libraries that own it.</desc>
+<style>
+svg{font-family:Inter, 'DejaVu Sans', system-ui, -apple-system, 'Segoe UI', sans-serif}
+.bg{fill:#fcfcfb} .card{fill:#ffffff} .tp{fill:#0b0b0b} .ts{fill:#52514e} .tm{fill:#898781}
+.rule{stroke:#e1e0d9} .edge{stroke:#52514e;fill:none;stroke-width:1.5} .head{fill:#52514e}
+.halo{paint-order:stroke;stroke:#fcfcfb;stroke-width:4px;stroke-linejoin:round}
+.box{stroke-width:1.5} .cont{fill:none;stroke-width:1.25;stroke-dasharray:5 4}
+.c-app{fill:#2a78d6} .s-app{stroke:#2a78d6} .t-app{fill:#2a78d6;fill-opacity:.075} .c-l3{fill:#eb6834} .s-l3{stroke:#eb6834} .t-l3{fill:#eb6834;fill-opacity:.075} .c-l2{fill:#1baf7a} .s-l2{stroke:#1baf7a} .t-l2{fill:#1baf7a;fill-opacity:.075} .c-l1{fill:#eda100} .s-l1{stroke:#eda100} .t-l1{fill:#eda100;fill-opacity:.075} .c-l0{fill:#e87ba4} .s-l0{stroke:#e87ba4} .t-l0{fill:#e87ba4;fill-opacity:.075} .c-prov{fill:#898781} .s-prov{stroke:#898781} .t-prov{fill:#898781;fill-opacity:.075} .c-user{fill:#52514e} .s-user{stroke:#52514e} .t-user{fill:#52514e;fill-opacity:.075}
+@media (prefers-color-scheme: dark) {
+.bg{fill:#1a1a19} .card{fill:#232322} .tp{fill:#f0efec} .ts{fill:#c3c2b7} .tm{fill:#898781}
+.rule{stroke:#2c2c2a} .edge{stroke:#c3c2b7} .head{fill:#c3c2b7}
+.halo{stroke:#1a1a19}
+.c-app{fill:#3987e5} .s-app{stroke:#3987e5} .t-app{fill:#3987e5;fill-opacity:.14} .c-l3{fill:#d95926} .s-l3{stroke:#d95926} .t-l3{fill:#d95926;fill-opacity:.14} .c-l2{fill:#199e70} .s-l2{stroke:#199e70} .t-l2{fill:#199e70;fill-opacity:.14} .c-l1{fill:#c98500} .s-l1{stroke:#c98500} .t-l1{fill:#c98500;fill-opacity:.14} .c-l0{fill:#d55181} .s-l0{stroke:#d55181} .t-l0{fill:#d55181;fill-opacity:.14} .c-prov{fill:#898781} .s-prov{stroke:#898781} .t-prov{fill:#898781;fill-opacity:.14} .c-user{fill:#c3c2b7} .s-user{stroke:#c3c2b7} .t-user{fill:#c3c2b7;fill-opacity:.14}
+}
+</style>
+<rect width="1560" height="1024" class="bg"/>
+<text x="40" y="54" font-size="26" font-weight="650" text-anchor="start" class="tp" >The beyond10x agent stack: one owner per layer</text>
+<text x="40" y="84" font-size="15" font-weight="400" text-anchor="start" class="ts" >A layer depends only on the layers below it. Atlas ADR 0096, 2026-10-20.</text>
+<text x="72" y="130" font-size="12" font-weight="600" text-anchor="start" class="tm" letter-spacing="1.2">LAYER</text>
+<text x="440" y="130" font-size="12" font-weight="600" text-anchor="start" class="tm" letter-spacing="1.2">RESPONSIBILITY</text>
+<text x="1000" y="130" font-size="12" font-weight="600" text-anchor="start" class="tm" letter-spacing="1.2">REPOSITORIES AND LIBRARIES</text>
+<rect x="40" y="150" width="1480" height="122" rx="12" class="t-app"/>
+<rect x="40" y="150" width="6" height="122" rx="3" class="c-app"/>
+<text x="72" y="184" font-size="18" font-weight="600" text-anchor="start" class="tp" >Applications</text>
+<text x="72" y="206" font-size="13" font-weight="400" text-anchor="start" class="ts" >build on loom-sdk · owner: each application</text>
+<circle cx="426" cy="179" r="3.5" class="c-app"/>
+<text x="440" y="184" font-size="14" font-weight="400" text-anchor="start" class="tp" >Turn an intent or a story into evidenced, merged work</text>
+<circle cx="426" cy="205" r="3.5" class="c-app"/>
+<text x="440" y="210" font-size="14" font-weight="400" text-anchor="start" class="tp" >Evidence from validators, bound to a commit; merge only under a grant</text>
+<circle cx="426" cy="231" r="3.5" class="c-app"/>
+<text x="440" y="236" font-size="14" font-weight="400" text-anchor="start" class="tp" >Trials and a scorecard measure every layer below</text>
+<text x="1000" y="184" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">takt</tspan><tspan class="ts" font-weight="400" dx="8">work runtime: validators, git and forge, trials, view</tspan></text>
+<text x="1000" y="210" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">b10x-loom</tspan><tspan class="ts" font-weight="400" dx="8">command line and plugins (Slack)</tspan></text>
+<text x="1000" y="236" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">swarm</tspan><tspan class="ts" font-weight="400" dx="8">goal loop; calls metaharness directly; frozen (ADR 0092)</tspan></text>
+<rect x="40" y="284" width="1480" height="122" rx="12" class="t-l3"/>
+<rect x="40" y="284" width="6" height="122" rx="3" class="c-l3"/>
+<text x="72" y="318" font-size="18" font-weight="600" text-anchor="start" class="tp" >Governed runtime</text>
+<text x="72" y="340" font-size="13" font-weight="400" text-anchor="start" class="ts" >L3 · owner: Loom</text>
+<circle cx="426" cy="313" r="3.5" class="c-l3"/>
+<text x="440" y="318" font-size="14" font-weight="400" text-anchor="start" class="tp" >Commission: case, frontier, authority; rechecks and invokes effects</text>
+<circle cx="426" cy="339" r="3.5" class="c-l3"/>
+<text x="440" y="344" font-size="14" font-weight="400" text-anchor="start" class="tp" >Governor: evaluates the case's protocol with Canon</text>
+<circle cx="426" cy="365" r="3.5" class="c-l3"/>
+<text x="440" y="370" font-size="14" font-weight="400" text-anchor="start" class="tp" >Intake and chooser: classify, pick one action, fill its arguments</text>
+<text x="1000" y="318" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">loom</tspan><tspan class="ts" font-weight="400" dx="8">loom-commission · loom-governor · loom-intake</tspan></text>
+<text x="1000" y="344" font-size="14" text-anchor="start"><tspan class="tp" font-weight="400"></tspan><tspan class="ts" font-weight="400">loom-executor (chooser) · loom-sdk</tspan></text>
+<text x="1000" y="370" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">uses</tspan><tspan class="ts" font-weight="400" dx="8">Canon · engineering-protocols · Mandate · Connectors · Substrate</tspan></text>
+<rect x="40" y="418" width="1480" height="122" rx="12" class="t-l2"/>
+<rect x="40" y="418" width="6" height="122" rx="3" class="c-l2"/>
+<text x="72" y="452" font-size="18" font-weight="600" text-anchor="start" class="tp" >Harness interface</text>
+<text x="72" y="474" font-size="13" font-weight="400" text-anchor="start" class="ts" >L2 · owner: metaharness</text>
+<circle cx="426" cy="447" r="3.5" class="c-l2"/>
+<text x="440" y="452" font-size="14" font-weight="400" text-anchor="start" class="tp" >Start any harness; one event stream and one command set</text>
+<circle cx="426" cy="473" r="3.5" class="c-l2"/>
+<text x="440" y="478" font-size="14" font-weight="400" text-anchor="start" class="tp" >Allow, deny or rewrite each tool call; hermetic setup</text>
+<circle cx="426" cy="499" r="3.5" class="c-l2"/>
+<text x="440" y="504" font-size="14" font-weight="400" text-anchor="start" class="tp" >Session format trace-ir/1; session mining (ADR 0088)</text>
+<text x="1000" y="452" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">metaharness</tspan><tspan class="ts" font-weight="400" dx="8">protocol · claude, codex and b10x adapters</tspan></text>
+<text x="1000" y="478" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">drives</tspan><tspan class="ts" font-weight="400" dx="8">Claude Code · Codex · harness</tspan></text>
+<rect x="40" y="552" width="1480" height="122" rx="12" class="t-l1"/>
+<rect x="40" y="552" width="6" height="122" rx="3" class="c-l1"/>
+<text x="72" y="586" font-size="18" font-weight="600" text-anchor="start" class="tp" >Harness and tools</text>
+<text x="72" y="608" font-size="13" font-weight="400" text-anchor="start" class="ts" >L1 · owners: harness, tools</text>
+<circle cx="426" cy="581" r="3.5" class="c-l1"/>
+<text x="440" y="586" font-size="14" font-weight="400" text-anchor="start" class="tp" >The agent loop: turns, prompt assembly, tool round trips</text>
+<circle cx="426" cy="607" r="3.5" class="c-l1"/>
+<text x="440" y="612" font-size="14" font-weight="400" text-anchor="start" class="tp" >Compaction, session and transcript, budgets, approvals</text>
+<circle cx="426" cy="633" r="3.5" class="c-l1"/>
+<text x="440" y="638" font-size="14" font-weight="400" text-anchor="start" class="tp" >Tool contracts and their default implementations</text>
+<text x="1000" y="586" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">harness</tspan><tspan class="ts" font-weight="400" dx="8">in-house: harness-loop · harness-cli · app-server</tspan></text>
+<text x="1000" y="612" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">Claude Code, Codex</tspan><tspan class="ts" font-weight="400" dx="8">vendor harnesses</tspan></text>
+<text x="1000" y="638" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">tools</tspan><tspan class="ts" font-weight="400" dx="8">tool-contract/1 · tool-fs · tool-code-editor</tspan></text>
+<rect x="40" y="686" width="1480" height="122" rx="12" class="t-l0"/>
+<rect x="40" y="686" width="6" height="122" rx="3" class="c-l0"/>
+<text x="72" y="720" font-size="18" font-weight="600" text-anchor="start" class="tp" >Model call</text>
+<text x="72" y="742" font-size="13" font-weight="400" text-anchor="start" class="ts" >L0 · owners: llm, inference</text>
+<circle cx="426" cy="715" r="3.5" class="c-l0"/>
+<text x="440" y="720" font-size="14" font-weight="400" text-anchor="start" class="tp" >One turn: messages and tools in; text, tool calls and usage out</text>
+<circle cx="426" cy="741" r="3.5" class="c-l0"/>
+<text x="440" y="746" font-size="14" font-weight="400" text-anchor="start" class="tp" >Wires (Responses, Messages, Chat), credentials, routes, cost</text>
+<circle cx="426" cy="767" r="3.5" class="c-l0"/>
+<text x="440" y="772" font-size="14" font-weight="400" text-anchor="start" class="tp" >Speech and multimodal graphs: STT, LLM, TTS</text>
+<text x="1000" y="720" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">llm</tspan><tspan class="ts" font-weight="400" dx="8">llm-core (Model::turn) · wire crates · routing · cost</tspan></text>
+<text x="1000" y="746" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">inference</tspan><tspan class="ts" font-weight="400" dx="8">inference-llm wraps llm · STT · TTS · pipeline</tspan></text>
+<text x="1000" y="772" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">llm-gateway</tspan><tspan class="ts" font-weight="400" dx="8">the serving side of llm</tspan></text>
+<rect x="40" y="820" width="1480" height="122" rx="12" class="t-prov"/>
+<rect x="40" y="820" width="6" height="122" rx="3" class="c-prov"/>
+<text x="72" y="854" font-size="18" font-weight="600" text-anchor="start" class="tp" >Providers</text>
+<text x="72" y="876" font-size="13" font-weight="400" text-anchor="start" class="ts" >outside beyond10x</text>
+<circle cx="426" cy="849" r="3.5" class="c-prov"/>
+<text x="440" y="854" font-size="14" font-weight="400" text-anchor="start" class="tp" >Model endpoints, hosted or self-hosted</text>
+<text x="1000" y="854" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">Anthropic</tspan><tspan class="ts" font-weight="400" dx="8">Messages API</tspan></text>
+<text x="1000" y="880" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">OpenAI</tspan><tspan class="ts" font-weight="400" dx="8">Responses API</tspan></text>
+<text x="1000" y="906" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">self-hosted</tspan><tspan class="ts" font-weight="400" dx="8">vLLM, served through llm-gateway</tspan></text>
+<text x="40" y="972" font-size="14" font-weight="400" text-anchor="start" class="ts" >Trials run takt's scenarios through every layer; an improvement lands in the repository that owns the layer it changes (ADR 0101).</text>
+<text x="40" y="996" font-size="12" font-weight="400" text-anchor="start" class="tm" >Sources: Atlas ADRs 0066-0101; each repository's README.md and Cargo.toml, read 2026-10-20.</text>
+</svg>
