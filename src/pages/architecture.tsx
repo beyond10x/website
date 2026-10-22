@@ -37,7 +37,7 @@ const terms: Term[] = [
   {term: 'Meta-harness', layer: 'L2', meaning: 'Starts any harness behind one event stream and one command set, allows, denies or rewrites each tool call, and records every session as trace-ir/1.', components: [
     {name: 'metaharness', repository: 'metaharness', docs: '/metaharness/'},
   ]},
-  {term: 'Governed runtime', layer: 'L3', meaning: 'Opens a case on a protocol and lets a model act only through the actions the case admits at that moment. Calls llm for its own short decisions and metaharness for agent work.', components: [
+  {term: 'Agent runtime', layer: 'L3 · governed runtime', meaning: 'Loom; loom-sdk is its library. Opens a case on a protocol and lets a model act only through the actions the case admits at that moment. Calls llm for its own short decisions and metaharness for agent work.', components: [
     {name: 'Loom', repository: 'loom'},
   ]},
   {term: 'Application', layer: 'above L3', meaning: 'An end-to-end use of the stack, built on loom-sdk. takt delivers stories and counts nothing done until a validator records the evidence; it manages agents and is not one.', components: [
