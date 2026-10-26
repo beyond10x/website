@@ -24,7 +24,7 @@ interface Term {
 }
 
 const terms: Term[] = [
-  {term: 'Model call', layer: 'L0', meaning: 'One turn in, one turn out: messages and tools in; text, tool calls and usage out. Owns provider wires, credentials, routes and cost.', components: [
+  {term: 'Model call', layer: 'L0', meaning: 'One turn in, one turn out: messages and tools in; text, tool calls and usage out. Owns provider wires, credential presentation, routes and cost; custody and OAuth2 refresh of a credential belong to Connectors.', components: [
     {name: 'llm', repository: 'llm', docs: '/llm/'},
     {name: 'inference', repository: 'inference'},
     {name: 'llm-gateway', repository: 'llm-gateway'},

@@ -95,7 +95,7 @@ svg{font-family:Inter, 'DejaVu Sans', system-ui, -apple-system, 'Segoe UI', sans
 <circle cx="426" cy="875" r="3.5" class="c-l0"/>
 <text x="440" y="880" font-size="14" font-weight="400" text-anchor="start" class="tp" >One turn: messages and tools in; text, tool calls and usage out</text>
 <circle cx="426" cy="901" r="3.5" class="c-l0"/>
-<text x="440" y="906" font-size="14" font-weight="400" text-anchor="start" class="tp" >Wires (Responses, Messages, Chat), credentials, routes, cost</text>
+<text x="440" y="906" font-size="14" font-weight="400" text-anchor="start" class="tp" >Wires (Responses, Messages, Chat), credential presentation, routes, cost</text>
 <circle cx="426" cy="927" r="3.5" class="c-l0"/>
 <text x="440" y="932" font-size="14" font-weight="400" text-anchor="start" class="tp" >Speech and multimodal graphs: STT, LLM, TTS</text>
 <text x="1000" y="880" font-size="14" text-anchor="start"><tspan class="tp" font-weight="600">llm</tspan><tspan class="ts" font-weight="400" dx="8">llm-core (Model::turn) · wire crates · routing · cost</tspan></text>
