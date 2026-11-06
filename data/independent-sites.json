@@ -52,6 +52,73 @@
       }
     },
     {
+      "repository": "codespec",
+      "origin": "https://beyond10x.github.io",
+      "basePath": "/codespec/",
+      "sourceCommit": "7ee0d5c7efc20aee0774ed9a0735d31e523ba2e5",
+      "provenancePath": "data/independent/codespec-site.json",
+      "provenanceSha256": "65cc7058adb9f9e6f4521ae9b5e51c72a48fece505cfb31a5c4b17795a04d942",
+      "routesPath": "data/independent/codespec-routes.json",
+      "routesSha256": "34160223ffe28517d21f309282aeed492545e4943393cd2ca8ca3881b055d1c6",
+      "surface": {
+        "audiences": [
+          "developer",
+          "researcher"
+        ],
+        "availability": "published",
+        "canonicalUrl": "https://beyond10x.github.io/codespec/",
+        "capabilities": [
+          "code-ir",
+          "source-translation",
+          "byte-equal-checking"
+        ],
+        "discoverability": "public",
+        "id": "docs",
+        "journeys": [
+          "specify",
+          "understand"
+        ],
+        "kind": "documentation",
+        "maturity": "experimental",
+        "name": "codespec",
+        "routeBase": "/codespec/",
+        "sections": [
+          {
+            "kind": "quickstart",
+            "label": "Getting started",
+            "url": "https://beyond10x.github.io/codespec/docs/getting-started/"
+          },
+          {
+            "kind": "docs",
+            "label": "cir/1",
+            "url": "https://beyond10x.github.io/codespec/docs/concepts/cir-1/"
+          },
+          {
+            "kind": "reference",
+            "label": "CLI",
+            "url": "https://beyond10x.github.io/codespec/docs/reference/cli/"
+          },
+          {
+            "kind": "status",
+            "label": "Status",
+            "url": "https://beyond10x.github.io/codespec/docs/status/"
+          },
+          {
+            "kind": "source",
+            "label": "Source",
+            "url": "https://github.com/beyond10x/codespec"
+          }
+        ],
+        "summary": "A typed code IR (cir/1) with readers that lift source languages into it and writers that emit Go and Rust from it, every translation checked by byte-equal runs of the original and the output.",
+        "key": "codespec/docs",
+        "repository": {
+          "displayName": "codespec",
+          "id": "codespec",
+          "url": "https://github.com/beyond10x/codespec"
+        }
+      }
+    },
+    {
       "repository": "connectors",
       "origin": "https://beyond10x.github.io",
       "basePath": "/connectors/",
@@ -490,6 +557,73 @@
       }
     },
     {
+      "repository": "rfcspec",
+      "origin": "https://beyond10x.github.io",
+      "basePath": "/rfcspec/",
+      "sourceCommit": "f5e01245e24fd360f114278cc73c54e7221931b9",
+      "provenancePath": "data/independent/rfcspec-site.json",
+      "provenanceSha256": "b74697dc1b374ca1d8ba96d2d107815eeca44eafc7e3a997664c006b4c8a29d9",
+      "routesPath": "data/independent/rfcspec-routes.json",
+      "routesSha256": "3aad396cba278a2de707d4a851bcf39b843554e9ef35d0172e2bfa27ceb19771",
+      "surface": {
+        "audiences": [
+          "developer",
+          "researcher"
+        ],
+        "availability": "published",
+        "canonicalUrl": "https://beyond10x.github.io/rfcspec/",
+        "capabilities": [
+          "rfc-requirement-catalogue",
+          "protocol-specification",
+          "conformance-generation"
+        ],
+        "discoverability": "public",
+        "id": "docs",
+        "journeys": [
+          "specify",
+          "understand"
+        ],
+        "kind": "documentation",
+        "maturity": "experimental",
+        "name": "RFCspec",
+        "routeBase": "/rfcspec/",
+        "sections": [
+          {
+            "kind": "quickstart",
+            "label": "Getting started",
+            "url": "https://beyond10x.github.io/rfcspec/docs/getting-started/"
+          },
+          {
+            "kind": "docs",
+            "label": "Requirement catalogue",
+            "url": "https://beyond10x.github.io/rfcspec/docs/concepts/catalogue/"
+          },
+          {
+            "kind": "reference",
+            "label": "RFC explorer",
+            "url": "https://beyond10x.github.io/rfcspec/explorer/"
+          },
+          {
+            "kind": "status",
+            "label": "Status",
+            "url": "https://beyond10x.github.io/rfcspec/docs/status/"
+          },
+          {
+            "kind": "source",
+            "label": "Source",
+            "url": "https://github.com/beyond10x/rfcspec"
+          }
+        ],
+        "summary": "Turn RFCs into executable specifications: cited requirement catalogues, ESS protocol models, wire-format sidecars, generated protocol cores and conformance suites.",
+        "key": "rfcspec/docs",
+        "repository": {
+          "displayName": "RFCspec",
+          "id": "rfcspec",
+          "url": "https://github.com/beyond10x/rfcspec"
+        }
+      }
+    },
+    {
       "repository": "secrets",
       "origin": "https://beyond10x.github.io",
       "basePath": "/secrets/",
@@ -585,6 +719,72 @@
           "displayName": "Secrets",
           "id": "secrets",
           "url": "https://github.com/beyond10x/secrets"
+        }
+      }
+    },
+    {
+      "repository": "spindle",
+      "origin": "https://beyond10x.github.io",
+      "basePath": "/spindle/",
+      "sourceCommit": "88c1c5a260e1da5f070893c90d6bc10a13d5862d",
+      "provenancePath": "data/independent/spindle-site.json",
+      "provenanceSha256": "27f654f08bf75771d6adb3d6a7271567f260b677bbcb06abbb6660db2d9283aa",
+      "routesPath": "data/independent/spindle-routes.json",
+      "routesSha256": "cdbee31c283544cbd042217418f7ed30f1482ba84032a89575fa03e8171a905a",
+      "surface": {
+        "audiences": [
+          "developer",
+          "operator"
+        ],
+        "availability": "published",
+        "canonicalUrl": "https://beyond10x.github.io/spindle/",
+        "capabilities": [
+          "specification-runtime",
+          "capability-admission"
+        ],
+        "discoverability": "public",
+        "id": "docs",
+        "journeys": [
+          "specify",
+          "operate-services"
+        ],
+        "kind": "documentation",
+        "maturity": "experimental",
+        "name": "Spindle",
+        "routeBase": "/spindle/",
+        "sections": [
+          {
+            "kind": "quickstart",
+            "label": "Getting started",
+            "url": "https://beyond10x.github.io/spindle/docs/getting-started/"
+          },
+          {
+            "kind": "docs",
+            "label": "Capabilities",
+            "url": "https://beyond10x.github.io/spindle/docs/concepts/capabilities/"
+          },
+          {
+            "kind": "reference",
+            "label": "CLI",
+            "url": "https://beyond10x.github.io/spindle/docs/reference/cli/"
+          },
+          {
+            "kind": "status",
+            "label": "Status",
+            "url": "https://beyond10x.github.io/spindle/docs/status/"
+          },
+          {
+            "kind": "source",
+            "label": "Source",
+            "url": "https://github.com/beyond10x/spindle"
+          }
+        ],
+        "summary": "A generic runtime that loads an ESS specification bundle and runs it as a live service; environments declare capabilities and admission decides whether a specification runs and with which implementation.",
+        "key": "spindle/docs",
+        "repository": {
+          "displayName": "Spindle",
+          "id": "spindle",
+          "url": "https://github.com/beyond10x/spindle"
         }
       }
     },

@@ -614,6 +614,71 @@
       "type": "html"
     },
     {
+      "from": "/docs/codespec/",
+      "to": "/codespec/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/concepts/cir-1/",
+      "to": "/codespec/docs/concepts/cir-1/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/concepts/harness/",
+      "to": "/codespec/docs/concepts/harness/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/concepts/pipeline/",
+      "to": "/codespec/docs/concepts/pipeline/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/examples/greeter/",
+      "to": "/codespec/docs/examples/greeter/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/getting-started/",
+      "to": "/codespec/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/guides/add-an-adapter/",
+      "to": "/codespec/docs/guides/add-an-adapter/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/guides/translate-go-to-rust/",
+      "to": "/codespec/docs/guides/translate-go-to-rust/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/reference/cir-1/",
+      "to": "/codespec/docs/reference/cir-1/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/reference/cli/",
+      "to": "/codespec/docs/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/reference/crates/",
+      "to": "/codespec/docs/reference/crates/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/status/",
+      "to": "/codespec/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/codespec/vision/",
+      "to": "/codespec/docs/vision/",
+      "type": "html"
+    },
+    {
       "from": "/docs/connectors/",
       "to": "/connectors/docs/",
       "type": "html"
@@ -1754,6 +1819,141 @@
       "type": "html"
     },
     {
+      "from": "/docs/rfcspec/",
+      "to": "/rfcspec/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/",
+      "to": "/rfcspec/docs/catalog/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/dns/",
+      "to": "/rfcspec/docs/catalog/dns/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/ntp/",
+      "to": "/rfcspec/docs/catalog/ntp/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/",
+      "to": "/rfcspec/docs/catalog/rfcs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/00000/",
+      "to": "/rfcspec/docs/catalog/rfcs/00000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/01000/",
+      "to": "/rfcspec/docs/catalog/rfcs/01000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/02000/",
+      "to": "/rfcspec/docs/catalog/rfcs/02000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/03000/",
+      "to": "/rfcspec/docs/catalog/rfcs/03000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/04000/",
+      "to": "/rfcspec/docs/catalog/rfcs/04000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/05000/",
+      "to": "/rfcspec/docs/catalog/rfcs/05000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/06000/",
+      "to": "/rfcspec/docs/catalog/rfcs/06000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/07000/",
+      "to": "/rfcspec/docs/catalog/rfcs/07000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/08000/",
+      "to": "/rfcspec/docs/catalog/rfcs/08000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/09000/",
+      "to": "/rfcspec/docs/catalog/rfcs/09000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/rfcs/10000/",
+      "to": "/rfcspec/docs/catalog/rfcs/10000/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/time/",
+      "to": "/rfcspec/docs/catalog/time/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/catalog/websocket/",
+      "to": "/rfcspec/docs/catalog/websocket/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/concepts/ai-proposals/",
+      "to": "/rfcspec/docs/concepts/ai-proposals/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/concepts/catalogue/",
+      "to": "/rfcspec/docs/concepts/catalogue/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/concepts/communication-semantics/",
+      "to": "/rfcspec/docs/concepts/communication-semantics/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/concepts/lowering-to-ess/",
+      "to": "/rfcspec/docs/concepts/lowering-to-ess/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/concepts/rfc-kinds/",
+      "to": "/rfcspec/docs/concepts/rfc-kinds/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/design/",
+      "to": "/rfcspec/docs/design/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/examples/websocket/",
+      "to": "/rfcspec/docs/examples/websocket/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/getting-started/",
+      "to": "/rfcspec/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/rfcspec/status/",
+      "to": "/rfcspec/docs/status/",
+      "type": "html"
+    },
+    {
       "from": "/docs/secrets/",
       "to": "/secrets/docs/",
       "type": "html"
@@ -1826,6 +2026,61 @@
     {
       "from": "/docs/secrets/status/",
       "to": "/secrets/docs/status/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/",
+      "to": "/spindle/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/concepts/capabilities/",
+      "to": "/spindle/docs/concepts/capabilities/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/concepts/components-and-bindings/",
+      "to": "/spindle/docs/concepts/components-and-bindings/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/concepts/deployment-targets/",
+      "to": "/spindle/docs/concepts/deployment-targets/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/concepts/environment-and-admission/",
+      "to": "/spindle/docs/concepts/environment-and-admission/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/concepts/observe/",
+      "to": "/spindle/docs/concepts/observe/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/concepts/specification/",
+      "to": "/spindle/docs/concepts/specification/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/examples/rally/",
+      "to": "/spindle/docs/examples/rally/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/getting-started/",
+      "to": "/spindle/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/reference/cli/",
+      "to": "/spindle/docs/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/spindle/status/",
+      "to": "/spindle/docs/status/",
       "type": "html"
     },
     {
@@ -1914,6 +2169,11 @@
       "type": "html"
     },
     {
+      "from": "/ecosystem/codespec/",
+      "to": "/codespec/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/connectors/",
       "to": "/connectors/",
       "type": "html"
@@ -1949,8 +2209,18 @@
       "type": "html"
     },
     {
+      "from": "/ecosystem/rfcspec/",
+      "to": "/rfcspec/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/secrets/",
       "to": "/secrets/",
+      "type": "html"
+    },
+    {
+      "from": "/ecosystem/spindle/",
+      "to": "/spindle/",
       "type": "html"
     },
     {

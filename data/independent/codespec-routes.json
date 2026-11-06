@@ -1,0 +1,254 @@
+{
+  "baseUrl": "/codespec/",
+  "commit": "7ee0d5c7efc20aee0774ed9a0735d31e523ba2e5",
+  "repository": "codespec",
+  "routes": [
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus-base-url-issue-banner",
+        "__docusaurus-base-url-issue-banner-suggestion-container",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-hero-title",
+        "b10x-product-main",
+        "how",
+        "how-title",
+        "related",
+        "related-title",
+        "status",
+        "status-title",
+        "theme-svg-external-link",
+        "what",
+        "what-title"
+      ],
+      "path": "/codespec/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_9q7dalbah_-instructions",
+        "neighbours",
+        "start",
+        "theme-svg-external-link",
+        "what-it-is",
+        "what-it-is-not"
+      ],
+      "path": "/codespec/docs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_3q7dalbah_-instructions",
+        "b10x-table-_R_7q7dalbah_-instructions",
+        "design-choices",
+        "facts",
+        "reading-is-strict",
+        "theme-svg-external-link",
+        "what-a-document-holds",
+        "what-cir1-cannot-express"
+      ],
+      "path": "/codespec/docs/concepts/cir-1/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "a-difference",
+        "b10x-table-_R_9q7dalbah_-instructions",
+        "o-1",
+        "o-1</code",
+        "output",
+        "the-manifest",
+        "theme-svg-external-link",
+        "traces",
+        "what-the-harness-does-not-do"
+      ],
+      "path": "/codespec/docs/concepts/harness/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "adapters",
+        "b10x-table-_R_4q7dalbah_-instructions",
+        "b10x-table-_R_6q7dalbah_-instructions",
+        "b10x-table-_R_cq7dalbah_-instructions",
+        "b10x-table-_R_hq7dalbah_-instructions",
+        "passes-and-facts",
+        "refusals",
+        "theme-svg-external-link",
+        "writers"
+      ],
+      "path": "/codespec/docs/concepts/pipeline/"
+    },
+    {
+      "anchors": [
+        "1-the-source",
+        "2-read-go--cir1",
+        "3-pass-cir1--cir1",
+        "4-write-cir1--go",
+        "5-write-cir1--rust",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "the-cir1-document-as-a-tree",
+        "theme-svg-external-link",
+        "what-this-does-not-show"
+      ],
+      "path": "/codespec/docs/examples/greeter/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "install-or-build",
+        "next",
+        "pass-cir1--cir1",
+        "read-go--cir1",
+        "run-the-harness",
+        "theme-svg-external-link",
+        "when-an-adapter-is-missing",
+        "write-go",
+        "write-rust"
+      ],
+      "path": "/codespec/docs/getting-started/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2q7dalbah_-instructions",
+        "the-boundary-is-checked",
+        "the-contract",
+        "theme-svg-external-link",
+        "what-the-gate-needs",
+        "where-it-lives-and-what-it-is-written-in"
+      ],
+      "path": "/codespec/docs/guides/add-an-adapter/"
+    },
+    {
+      "anchors": [
+        "1-the-package",
+        "2-read-it-into-cir1",
+        "3-apply-the-passes",
+        "4-write-the-rust-crate",
+        "5-build-and-test-it",
+        "6-and-back-to-go",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "proving-equivalence",
+        "theme-svg-external-link"
+      ],
+      "path": "/codespec/docs/guides/translate-go-to-rust/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_12a7dalbah_-instructions",
+        "b10x-table-_R_14a7dalbah_-instructions",
+        "b10x-table-_R_16a7dalbah_-instructions",
+        "b10x-table-_R_1aa7dalbah_-instructions",
+        "b10x-table-_R_1ea7dalbah_-instructions",
+        "b10x-table-_R_1ia7dalbah_-instructions",
+        "b10x-table-_R_1ka7dalbah_-instructions",
+        "b10x-table-_R_1ma7dalbah_-instructions",
+        "b10x-table-_R_5a7dalbah_-instructions",
+        "b10x-table-_R_9a7dalbah_-instructions",
+        "b10x-table-_R_da7dalbah_-instructions",
+        "b10x-table-_R_fa7dalbah_-instructions",
+        "b10x-table-_R_ja7dalbah_-instructions",
+        "b10x-table-_R_ma7dalbah_-instructions",
+        "b10x-table-_R_oa7dalbah_-instructions",
+        "b10x-table-_R_qa7dalbah_-instructions",
+        "b10x-table-_R_ta7dalbah_-instructions",
+        "case",
+        "chandir",
+        "constdecl",
+        "definitions",
+        "errorvar",
+        "expr",
+        "facts",
+        "field",
+        "fieldinit",
+        "func",
+        "intwidth",
+        "module",
+        "param",
+        "reader",
+        "refusal",
+        "stmt",
+        "theme-svg-external-link",
+        "type",
+        "typedecl",
+        "unionvariant",
+        "variant"
+      ],
+      "path": "/codespec/docs/reference/cir-1/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_5a7dalbah_-instructions",
+        "b10x-table-_R_9a7dalbah_-instructions",
+        "b10x-table-_R_ga7dalbah_-instructions",
+        "b10x-table-_R_ka7dalbah_-instructions",
+        "b10x-table-_R_oa7dalbah_-instructions",
+        "b10x-table-_R_sa7dalbah_-instructions",
+        "codespec-harness",
+        "codespec-pass",
+        "codespec-read",
+        "codespec-schema",
+        "codespec-validate",
+        "codespec-write",
+        "commands",
+        "exit-status",
+        "theme-svg-external-link"
+      ],
+      "path": "/codespec/docs/reference/cli/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_5a7dalbah_-instructions",
+        "b10x-table-_R_8a7dalbah_-instructions",
+        "components",
+        "repository-tooling",
+        "theme-svg-external-link"
+      ],
+      "path": "/codespec/docs/reference/crates/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_hq7dalbah_-instructions",
+        "known-limitations",
+        "not-provided",
+        "theme-svg-external-link"
+      ],
+      "path": "/codespec/docs/status/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_8q7dalbah_-instructions",
+        "b10x-table-_R_hq7dalbah_-instructions",
+        "later",
+        "measured-adapters",
+        "milestones",
+        "not-used",
+        "rules",
+        "the-pipeline",
+        "theme-svg-external-link",
+        "why"
+      ],
+      "path": "/codespec/docs/vision/"
+    }
+  ],
+  "schema": "b10x-project-routes/v1"
+}

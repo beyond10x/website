@@ -71,6 +71,14 @@ excludedRepositories:
     reason: >-
       The generated deployment mirror this site is published into. It carries no manifest and
       authors no content; AGENTS.md states that nothing is authored there.
+  - repository: codespec
+    public: true
+    manifest: absent
+    reason: >-
+      codespec publishes its own site at https://beyond10x.github.io/codespec/ from its own
+      repository and main commit; it was never on the unified site. Website retains its discovery
+      entry and route inventory, and the compatibility redirects every independent site owns, but
+      does not collect or publish its content.
   - repository: connectors
     public: true
     manifest: present
@@ -131,6 +139,14 @@ excludedRepositories:
       https://beyond10x.github.io/metaharness/ from its own repository and main commit.
       Website retains discovery and redirects from the former /docs/metaharness/ routes,
       but does not collect or publish its documentation content.
+  - repository: rfcspec
+    public: true
+    manifest: absent
+    reason: >-
+      RFCspec publishes its own site at https://beyond10x.github.io/rfcspec/ from its own
+      repository and main commit; it was never on the unified site. Website retains its discovery
+      entry and route inventory, and the compatibility redirects every independent site owns, but
+      does not collect or publish its content.
   - repository: secrets
     public: true
     manifest: absent
@@ -139,6 +155,14 @@ excludedRepositories:
       https://beyond10x.github.io/secrets/ from its own repository and main commit.
       Website retains discovery and redirects from the former /docs/secrets/ and
       /api/secrets/ routes, but does not collect or publish its documentation content.
+  - repository: spindle
+    public: true
+    manifest: absent
+    reason: >-
+      Spindle publishes its own site at https://beyond10x.github.io/spindle/ from its own
+      repository and main commit; it was never on the unified site. Website retains its discovery
+      entry and route inventory, and the compatibility redirects every independent site owns, but
+      does not collect or publish its content.
   - repository: substrate
     public: true
     manifest: absent

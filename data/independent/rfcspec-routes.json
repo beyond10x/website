@@ -1,0 +1,439 @@
+{
+  "baseUrl": "/rfcspec/",
+  "commit": "f5e01245e24fd360f114278cc73c54e7221931b9",
+  "repository": "rfcspec",
+  "routes": [
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus-base-url-issue-banner",
+        "__docusaurus-base-url-issue-banner-suggestion-container",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-hero-title",
+        "b10x-product-main",
+        "how",
+        "how-title",
+        "related",
+        "related-title",
+        "status",
+        "status-title",
+        "theme-svg-external-link",
+        "what",
+        "what-title"
+      ],
+      "path": "/rfcspec/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_5q7dalbah_-instructions",
+        "b10x-table-_R_7q7dalbah_-instructions",
+        "theme-svg-external-link",
+        "what-rfcspec-is-not",
+        "where-it-sits",
+        "where-to-start"
+      ],
+      "path": "/rfcspec/docs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_4a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_4a7dalbah_-instructions",
+        "b10x-table-_R_7a7dalbah_-instructions",
+        "b10x-table-_R_ca7dalbah_-instructions",
+        "b10x-table-_R_ga7dalbah_-instructions",
+        "b10x-table-_R_la7dalbah_-instructions",
+        "communication-semantics",
+        "conformance",
+        "downloads",
+        "ess-gaps",
+        "requirement-matrix",
+        "rfcs",
+        "theme-svg-external-link",
+        "unsupported-no-ess-gap"
+      ],
+      "path": "/rfcspec/docs/catalog/dns/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_4a7dalbah_-instructions",
+        "b10x-table-_R_7a7dalbah_-instructions",
+        "b10x-table-_R_ca7dalbah_-instructions",
+        "b10x-table-_R_fa7dalbah_-instructions",
+        "b10x-table-_R_ha7dalbah_-instructions",
+        "b10x-table-_R_ka7dalbah_-instructions",
+        "b10x-table-_R_pa7dalbah_-instructions",
+        "communication-semantics",
+        "conformance",
+        "downloads",
+        "ess-gaps",
+        "property-notes",
+        "requirement-matrix",
+        "rfcs",
+        "theme-svg-external-link",
+        "unsupported-no-ess-gap"
+      ],
+      "path": "/rfcspec/docs/catalog/ntp/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_7a7dalbah_-instructions",
+        "b10x-table-_R_9a7dalbah_-instructions",
+        "ranges",
+        "reviewed-profiles",
+        "summary",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/00000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/01000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/02000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/03000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/04000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/05000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/06000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/07000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/08000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/09000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/rfcs/10000/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_4a7dalbah_-instructions",
+        "b10x-table-_R_7a7dalbah_-instructions",
+        "b10x-table-_R_ca7dalbah_-instructions",
+        "b10x-table-_R_ja7dalbah_-instructions",
+        "communication-semantics",
+        "conformance",
+        "downloads",
+        "ess-gaps",
+        "requirement-matrix",
+        "rfcs",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/catalog/time/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_4a7dalbah_-instructions",
+        "b10x-table-_R_7a7dalbah_-instructions",
+        "b10x-table-_R_ca7dalbah_-instructions",
+        "b10x-table-_R_fa7dalbah_-instructions",
+        "b10x-table-_R_ha7dalbah_-instructions",
+        "b10x-table-_R_ka7dalbah_-instructions",
+        "b10x-table-_R_pa7dalbah_-instructions",
+        "communication-semantics",
+        "conformance",
+        "downloads",
+        "ess-gaps",
+        "rejected-proposals",
+        "requirement-matrix",
+        "rfcs",
+        "theme-svg-external-link",
+        "unsupported-no-ess-gap"
+      ],
+      "path": "/rfcspec/docs/catalog/websocket/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_3q7dalbah_-instructions",
+        "prior-work",
+        "the-contract",
+        "theme-svg-external-link",
+        "where-a-model-helps"
+      ],
+      "path": "/rfcspec/docs/concepts/ai-proposals/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2q7dalbah_-instructions",
+        "b10x-table-_R_5q7dalbah_-instructions",
+        "from-rfc-to-catalogue",
+        "profiles-and-overlays",
+        "provenance",
+        "theme-svg-external-link",
+        "what-the-catalogue-holds"
+      ],
+      "path": "/rfcspec/docs/concepts/catalogue/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2q7dalbah_-instructions",
+        "b10x-table-_R_4q7dalbah_-instructions",
+        "examples",
+        "the-axes",
+        "theme-svg-external-link",
+        "what-ess-can-express-today"
+      ],
+      "path": "/rfcspec/docs/concepts/communication-semantics/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2q7dalbah_-instructions",
+        "b10x-table-_R_5q7dalbah_-instructions",
+        "b10x-table-_R_cq7dalbah_-instructions",
+        "gaps",
+        "synthesis",
+        "the-wire-sidecar",
+        "theme-svg-external-link",
+        "what-becomes-what"
+      ],
+      "path": "/rfcspec/docs/concepts/lowering-to-ess/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2q7dalbah_-instructions",
+        "b10x-table-_R_3q7dalbah_-instructions",
+        "b10x-table-_R_7q7dalbah_-instructions",
+        "kinds",
+        "the-corpus",
+        "theme-svg-external-link",
+        "what-is-modelled"
+      ],
+      "path": "/rfcspec/docs/concepts/rfc-kinds/"
+    },
+    {
+      "anchors": [
+        "0-decisions-at-a-glance",
+        "1-goal-and-non-goals",
+        "10-synthesis-native-and-spindle",
+        "101-native",
+        "102-spindle",
+        "11-conformance",
+        "12-worked-example-websocket",
+        "121-profile",
+        "122-what-s2-extracts-from-rfc-6455",
+        "123-communication-semantics",
+        "124-machine-illustrative-lowering",
+        "125-generated-crate",
+        "126-conformance",
+        "13-repository",
+        "14-milestones",
+        "15-risks-and-open-questions",
+        "16-relation-to-ignite",
+        "17-references",
+        "2-what-rfcs-are",
+        "21-the-corpus",
+        "22-source-formats",
+        "23-kinds-of-rfc-and-which-are-worth-modelling",
+        "3-sources-lock-and-provenance",
+        "4-pipeline",
+        "5-the-catalogue-rfcspec1",
+        "6-communication-semantics",
+        "61-axes",
+        "62-examples",
+        "63-what-ess-protospec1-can-carry-today",
+        "7-lowering-to-ess-and-the-gaps",
+        "8-the-wire-layer-rfcspec-wire1",
+        "81-notations",
+        "82-what-is-generated",
+        "83-imports-across-rfcs",
+        "9-ai-in-the-pipeline",
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_12a7dalbah_-instructions",
+        "b10x-table-_R_16a7dalbah_-instructions",
+        "b10x-table-_R_1ea7dalbah_-instructions",
+        "b10x-table-_R_1ha7dalbah_-instructions",
+        "b10x-table-_R_1la7dalbah_-instructions",
+        "b10x-table-_R_1oa7dalbah_-instructions",
+        "b10x-table-_R_1qa7dalbah_-instructions",
+        "b10x-table-_R_1ua7dalbah_-instructions",
+        "b10x-table-_R_26a7dalbah_-instructions",
+        "b10x-table-_R_2ca7dalbah_-instructions",
+        "b10x-table-_R_2ja7dalbah_-instructions",
+        "b10x-table-_R_2oa7dalbah_-instructions",
+        "b10x-table-_R_2sa7dalbah_-instructions",
+        "b10x-table-_R_30a7dalbah_-instructions",
+        "b10x-table-_R_3fa7dalbah_-instructions",
+        "b10x-table-_R_3ia7dalbah_-instructions",
+        "b10x-table-_R_3ka7dalbah_-instructions",
+        "b10x-table-_R_6a7dalbah_-instructions",
+        "b10x-table-_R_fa7dalbah_-instructions",
+        "b10x-table-_R_ga7dalbah_-instructions",
+        "b10x-table-_R_ha7dalbah_-instructions",
+        "b10x-table-_R_la7dalbah_-instructions",
+        "b10x-table-_R_pa7dalbah_-instructions",
+        "b10x-table-_R_qa7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/design/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2q7dalbah_-instructions",
+        "b10x-table-_R_5q7dalbah_-instructions",
+        "b10x-table-_R_7q7dalbah_-instructions",
+        "b10x-table-_R_gq7dalbah_-instructions",
+        "b10x-table-_R_jq7dalbah_-instructions",
+        "communication-semantics",
+        "conformance-planned",
+        "generated-crate-in-part",
+        "profile",
+        "the-closing-handshake-model",
+        "theme-svg-external-link",
+        "what-exploration-found-gap-g9",
+        "what-extraction-finds-in-rfc-6455",
+        "where-the-boundary-is-today"
+      ],
+      "path": "/rfcspec/docs/examples/websocket/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "browse",
+        "build-the-repository",
+        "explore-the-websocket-closing-handshake-model",
+        "run-rfcspec-on-a-profile",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/getting-started/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "theme-svg-external-link"
+      ],
+      "path": "/rfcspec/docs/status/"
+    },
+    {
+      "anchors": [
+        "app"
+      ],
+      "path": "/rfcspec/explorer/"
+    },
+    {
+      "anchors": [
+        "a",
+        "bar",
+        "deck",
+        "hud",
+        "stage"
+      ],
+      "path": "/rfcspec/pitch/"
+    }
+  ],
+  "schema": "b10x-project-routes/v1"
+}

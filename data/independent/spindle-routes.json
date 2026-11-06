@@ -1,0 +1,184 @@
+{
+  "baseUrl": "/spindle/",
+  "commit": "88c1c5a260e1da5f070893c90d6bc10a13d5862d",
+  "repository": "spindle",
+  "routes": [
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus-base-url-issue-banner",
+        "__docusaurus-base-url-issue-banner-suggestion-container",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-hero-title",
+        "b10x-product-main",
+        "how",
+        "how-title",
+        "related",
+        "related-title",
+        "status",
+        "status-title",
+        "theme-svg-external-link",
+        "what",
+        "what-title"
+      ],
+      "path": "/spindle/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2q7dalbah_-instructions",
+        "neighbours",
+        "theme-svg-external-link",
+        "what-spindle-is-not",
+        "where-to-go-next"
+      ],
+      "path": "/spindle/docs/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "adding-one",
+        "answering-external-outcomes",
+        "b10x-table-_R_2q7dalbah_-instructions",
+        "per-component",
+        "serving-ingressnetwork-over-http",
+        "the-derivation-rules",
+        "theme-svg-external-link"
+      ],
+      "path": "/spindle/docs/concepts/capabilities/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_6q7dalbah_-instructions",
+        "bindings",
+        "components",
+        "event-bindings",
+        "one-process",
+        "periodic-bindings",
+        "theme-svg-external-link"
+      ],
+      "path": "/spindle/docs/concepts/components-and-bindings/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_6q7dalbah_-instructions",
+        "placement",
+        "target-kinds",
+        "the-launcher-contract",
+        "theme-svg-external-link"
+      ],
+      "path": "/spindle/docs/concepts/deployment-targets/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admission",
+        "b10x-table-_R_cq7dalbah_-instructions",
+        "the-environment",
+        "theme-svg-external-link",
+        "what-the-runtime-does-with-a-binding"
+      ],
+      "path": "/spindle/docs/concepts/environment-and-admission/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_3q7dalbah_-instructions",
+        "b10x-table-_R_9q7dalbah_-instructions",
+        "counters",
+        "resources",
+        "telemetry",
+        "the-control-process",
+        "the-observe-api-and-ui",
+        "theme-svg-external-link"
+      ],
+      "path": "/spindle/docs/concepts/observe/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "executing",
+        "loading",
+        "scenarios",
+        "theme-svg-external-link",
+        "views"
+      ],
+      "path": "/spindle/docs/concepts/specification/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2q7dalbah_-instructions",
+        "b10x-table-_R_5q7dalbah_-instructions",
+        "drive-it-by-hand",
+        "five-bindings",
+        "play-a-match",
+        "theme-svg-external-link",
+        "three-components",
+        "three-processes"
+      ],
+      "path": "/spindle/docs/examples/rally/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admit-it-against-an-environment",
+        "build",
+        "compile-the-specification",
+        "derive-its-capabilities",
+        "next",
+        "play-it",
+        "see-what-it-counts",
+        "theme-svg-external-link"
+      ],
+      "path": "/spindle/docs/getting-started/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "admit",
+        "b10x-table-_R_15a7dalbah_-instructions",
+        "b10x-table-_R_1ba7dalbah_-instructions",
+        "b10x-table-_R_1ha7dalbah_-instructions",
+        "b10x-table-_R_3a7dalbah_-instructions",
+        "b10x-table-_R_7a7dalbah_-instructions",
+        "b10x-table-_R_ba7dalbah_-instructions",
+        "b10x-table-_R_ga7dalbah_-instructions",
+        "b10x-table-_R_la7dalbah_-instructions",
+        "b10x-table-_R_va7dalbah_-instructions",
+        "capabilities",
+        "check",
+        "conform",
+        "deploy",
+        "metrics",
+        "play",
+        "run",
+        "theme-svg-external-link"
+      ],
+      "path": "/spindle/docs/reference/cli/"
+    },
+    {
+      "anchors": [
+        "__docusaurus",
+        "__docusaurus_skipToContent_fallback",
+        "b10x-table-_R_2a7dalbah_-instructions",
+        "the-tests-that-hold-them",
+        "theme-svg-external-link"
+      ],
+      "path": "/spindle/docs/status/"
+    }
+  ],
+  "schema": "b10x-project-routes/v1"
+}

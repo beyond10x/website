@@ -165,6 +165,12 @@ Website retains its discovery entry and route inventory, redirects `/docs/engine
 pages and `/ecosystem/engineering-protocols/` to it, and no longer redirects
 `/engineering-protocols/` itself to the AEP profile. The root does not redirect the former `/els/`.
 
+codespec, RFCspec and Spindle serve their own sites at https://beyond10x.github.io/codespec/,
+https://beyond10x.github.io/rfcspec/ and https://beyond10x.github.io/spindle/ and never had unified
+documentation. Website retains each one's discovery entry and route inventory, so each is listed
+under /ecosystem/, and redirects its `/docs/<repository>/` pages and `/ecosystem/<repository>/` to
+its site, as every independent site's compatibility routes require.
+
 Gates has no website documentation at all: it is excluded from the roster, has no independent
 site, and its former `/docs/gates/` and `/ecosystem/gates/` routes redirect to `/ecosystem/`.
 
