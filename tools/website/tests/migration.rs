@@ -287,7 +287,10 @@ fn agentide_and_service_sdk_are_retired_and_their_former_routes_land_on_the_ecos
     ] {
         let text = fs::read_to_string(root.join(path)).unwrap().to_lowercase();
         assert!(!text.contains("agentide"), "{path} still names agentide");
-        assert!(!text.contains("service-sdk"), "{path} still names service-sdk");
+        assert!(
+            !text.contains("service-sdk"),
+            "{path} still names service-sdk"
+        );
     }
     assert!(!root.join("src/pages/products").exists());
     let roster: Value =
@@ -308,7 +311,9 @@ fn agentide_and_service_sdk_are_retired_and_their_former_routes_land_on_the_ecos
         .iter()
         .filter(|r| {
             let from = r["from"].as_str().unwrap();
-            from.contains("agentide") || from.contains("service-sdk") || from.starts_with("/products/")
+            from.contains("agentide")
+                || from.contains("service-sdk")
+                || from.starts_with("/products/")
         })
         .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
         .collect();
@@ -324,7 +329,10 @@ fn agentide_and_service_sdk_are_retired_and_their_former_routes_land_on_the_ecos
         "/products/",
         "/products/evaluate/",
     ] {
-        assert!(rows.iter().any(|(row, _)| *row == from), "{from} has no redirect");
+        assert!(
+            rows.iter().any(|(row, _)| *row == from),
+            "{from} has no redirect"
+        );
     }
 }
 #[test]
