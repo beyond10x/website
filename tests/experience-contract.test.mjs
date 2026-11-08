@@ -12,14 +12,13 @@ test('Docs System validates the audience-first catalog and its evaluated adoptio
   const catalog = await readExperienceCatalog(path.join(root, 'data', 'experiences.json'));
   const presentation = JSON.parse(await readFile(path.join(root, 'data', 'experience-pages.json'), 'utf8'));
   const result = validateExperiencePresentation(catalog, presentation);
-  assert.equal(result.experienceCount, 6);
-  assert.equal(result.routeCount, 6);
+  assert.equal(result.experienceCount, 5);
+  assert.equal(result.routeCount, 5);
   assert.ok(result.stepCount >= 20);
   assert.deepEqual(presentation.pages.map((page) => [page.experienceId, page.route, page.navigationLabel, page.primaryStepId]), [
     ['try-spec-driven-development', '/start/spec-driven-development/', 'Try spec-driven development', 'install-agent-plugins'],
     ['understand-safe-agentic-coding', '/learn/safe-agentic-coding/', 'Learn safe agentic coding', 'safe-loop'],
     ['build-agent-systems', '/build/agent-systems/', 'Build agent systems', 'run-harness'],
-    ['evaluate-beyond10x-products', '/products/evaluate/', 'Evaluate products', 'agentide-install'],
     ['deploy-operate-products', '/operate/', 'Operate services', 'inspect-service-map'],
     ['contribute-maintain', '/contribute/', 'Contribute documentation', 'docs-system-contract'],
   ]);
@@ -28,72 +27,23 @@ test('Docs System validates the audience-first catalog and its evaluated adoptio
     assert.ok(primaryStep, `${page.experienceId} primary step must exist`);
     assert.notEqual(primaryStep.url, page.route, `${page.experienceId} primary step must not loop to its own page`);
   }
-  assert.equal(catalog.artifacts.length, 20);
+  assert.equal(catalog.artifacts.length, 15);
   const evaluated = evaluateExperienceCatalog(catalog);
   const evaluatedById = new Map(evaluated.map((experience) => [experience.id, experience]));
   const primaryPaths = presentation.pages.map((page) => evaluatedById.get(page.experienceId).adoptionPaths.find((path) => path.id === page.adoptionPathId));
   assert.ok(primaryPaths.every((path) => path.actionable && path.effectiveAccess === 'public'));
   assert.ok(evaluated.every((experience) => experience.adoptionPaths.some((path) => path.actionable)));
   assert.deepEqual(primaryPaths.map((path) => path.support), [
-    'experimental', 'supported', 'experimental', 'preview', 'experimental', 'supported',
+    'experimental', 'supported', 'experimental', 'experimental', 'supported',
   ]);
 });
 
-test('AgentIDE keeps public, approved, and unavailable paths distinct', async () => {
+test('production deployment stays in the operator experience', async () => {
   const catalog = await readExperienceCatalog(path.join(root, 'data', 'experiences.json'));
-  const presentation = JSON.parse(await readFile(path.join(root, 'data', 'experience-pages.json'), 'utf8'));
-  const product = evaluateExperienceCatalog(catalog).find((experience) => experience.id === 'evaluate-beyond10x-products');
-  assert.deepEqual(product.adoptionPaths.map((path) => path.id), [
-    'agentide-local-tui',
-    'agentide-hosted-preview',
-  ]);
-  assert.deepEqual(product.adoptionPaths.map((path) => ({
-    support: path.support,
-    access: path.access,
-    effectiveAccess: path.effectiveAccess,
-    actionable: path.actionable,
-    artifactIds: path.artifactIds,
-  })), [
-    {support: 'preview', access: 'public', effectiveAccess: 'public', actionable: true, artifactIds: ['agentide-documentation', 'agentide-source', 'agentide-linux-binary']},
-    {support: 'paused', access: 'approval-required', effectiveAccess: 'approval-required', actionable: false, artifactIds: ['agentide-documentation', 'agentide-hosted-service']},
-  ]);
-  const hostedAgentide = product.adoptionPaths.find((path) => path.id === 'agentide-hosted-preview');
-  assert.deepEqual(hostedAgentide.blockers, ['non-actionable-support', 'unavailable-artifact']);
-  const agentideSourceBuild = evaluateExperienceCatalog(catalog)
-    .find((experience) => experience.id === 'build-agent-systems')
-    .adoptionPaths.find((path) => path.id === 'agentide-approved-source-build');
-  assert.deepEqual({
-    support: agentideSourceBuild.support,
-    effectiveAccess: agentideSourceBuild.effectiveAccess,
-    actionable: agentideSourceBuild.actionable,
-    artifactIds: agentideSourceBuild.artifactIds,
-  }, {
-    support: 'preview',
-    effectiveAccess: 'approval-required',
-    actionable: true,
-    artifactIds: ['agentide-documentation', 'agentide-source', 'agentide-private-build-dependencies'],
-  });
   const operations = evaluateExperienceCatalog(catalog).find((experience) => experience.id === 'deploy-operate-products');
   assert.deepEqual(operations.audiences, ['operator']);
   assert.deepEqual(operations.adoptionPaths.map((path) => path.id), ['public-source-service']);
-  const productPage = presentation.pages.find((page) => page.experienceId === 'evaluate-beyond10x-products');
-  assert.equal(productPage.adoptionPathId, 'agentide-local-tui');
-  assert.deepEqual(
-    productPage.sections.flatMap((section) => section.steps).map((step) => step.url),
-    ['/docs/agentide/running-modes/', '/docs/agentide/', '/docs/agentide/running-modes/'],
-  );
-  const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
-  assert.deepEqual(
-    ['agentide-documentation', 'agentide-source', 'agentide-linux-binary', 'agentide-private-build-dependencies', 'agentide-hosted-service']
-      .map((id) => [id, artifacts.get(id).kind, artifacts.get(id).availability, artifacts.get(id).access]),
-    [
-      ['agentide-documentation', 'documentation', 'available', 'public'],
-      ['agentide-source', 'source', 'available', 'public'],
-      ['agentide-linux-binary', 'binary', 'available', 'public'],
-      ['agentide-private-build-dependencies', 'package', 'available', 'approval-required'],
-      ['agentide-hosted-service', 'hosted-service', 'unpublished', 'approval-required'],
-    ],
-  );
+  assert.ok(catalog.artifacts.every((artifact) => !artifact.id.startsWith('agentide-')));
 });
 
 test('the Claude practitioner path pins its actual plugin and CLI releases', async () => {
@@ -146,7 +96,6 @@ test('golden search targets are first-class experiences or source-owned steps', 
     'spec driven development claude',
     'safe autonomous coding',
     'agent plugins install claude',
-    'agentide running modes',
     'operate service deployment',
   ]);
   assert.equal(golden.queries.at(-1).expectedFirst, '/operate/');

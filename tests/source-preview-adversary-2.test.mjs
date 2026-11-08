@@ -116,7 +116,7 @@ test('adversary 2: a live publication fetch that never finishes falls back to th
 // is swallowed and the author cannot stop the command.
 test('adversary 2: Ctrl-C while the snapshot is being fetched stops the command', async (context) => {
   const fixture = await publicationFixture(context);
-  const source = await editedSource(context, fixture, '# AgentIDE\n\nUncommitted working-tree text.\n', {repository: 'agentide'});
+  const source = await editedSource(context, fixture, '# Worktree\n\nUncommitted working-tree text.\n', {repository: 'worktree'});
   const origin = await drippingOrigin(context);
   // Its own cache root, so its live staging and fetch directories never appear in another test's.
   const cacheRoot = path.join(source.directory, 'source-preview-cache');

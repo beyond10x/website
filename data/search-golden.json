@@ -14,10 +14,6 @@
       "expectedFirst": "/docs/agentplugins/install/"
     },
     {
-      "query": "agentide running modes",
-      "expectedFirst": "/docs/agentide/running-modes/"
-    },
-    {
       "query": "operate service deployment",
       "expectedFirst": "/operate/"
     }

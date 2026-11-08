@@ -33,46 +33,16 @@ const unexplainedBlockers = paths.filter((path) => !path.actionable && !path.exp
 if (unexplainedBlockers.length > 0) {
   throw new Error(`blocked adoption paths must explain their blockers: ${unexplainedBlockers.map((path) => path.id).join(', ')}`);
 }
-const productPaths = evaluatedById.get('evaluate-beyond10x-products')?.adoptionPaths ?? [];
-if (productPaths.map((path) => path.id).join(',') !== 'agentide-local-tui,agentide-hosted-preview') {
-  throw new Error('product evaluation must keep the public and gated AgentIDE paths separate');
-}
-const agentideLocal = productPaths.find((path) => path.id === 'agentide-local-tui');
-const agentideHosted = productPaths.find((path) => path.id === 'agentide-hosted-preview');
-if (!agentideLocal?.actionable || agentideLocal.support !== 'preview' || agentideLocal.effectiveAccess !== 'public'
-  || agentideLocal.artifactIds.join(',') !== 'agentide-documentation,agentide-source,agentide-linux-binary') {
-  throw new Error('the AgentIDE local TUI must remain a public preview backed by public docs, source, and the released Linux binary');
-}
-if (!agentideHosted || agentideHosted.actionable || agentideHosted.support !== 'paused'
-  || agentideHosted.effectiveAccess !== 'approval-required'
-  || !agentideHosted.blockers.includes('non-actionable-support')
-  || !agentideHosted.blockers.includes('unavailable-artifact')) {
-  throw new Error('hosted AgentIDE must remain a paused approval-required path blocked by its unpublished service');
-}
-const agentideSourceBuild = evaluatedById.get('build-agent-systems')?.adoptionPaths.find((path) => path.id === 'agentide-approved-source-build');
-if (!agentideSourceBuild?.actionable || agentideSourceBuild.support !== 'preview'
-  || agentideSourceBuild.effectiveAccess !== 'approval-required'
-  || agentideSourceBuild.artifactIds.join(',') !== 'agentide-documentation,agentide-source,agentide-private-build-dependencies') {
-  throw new Error('the AgentIDE source-build path must remain a preview requiring approved private dependencies');
-}
 const operations = evaluatedById.get('deploy-operate-products');
 if (!operations || operations.audiences.join(',') !== 'operator'
   || operations.adoptionPaths.map((path) => path.id).join(',') !== 'public-source-service') {
-  throw new Error('production deployment belongs only to the operator experience and must not leak into product evaluation');
-}
-const productPresentation = presentation.pages.find((page) => page.experienceId === 'evaluate-beyond10x-products');
-const agentideStepUrls = productPresentation?.sections.flatMap((section) => section.steps)
-  .filter((step) => step.url.startsWith('/docs/agentide/'))
-  .map((step) => step.url) ?? [];
-if (agentideStepUrls.join(',') !== '/docs/agentide/running-modes/,/docs/agentide/,/docs/agentide/running-modes/') {
-  throw new Error('the primary product evaluation path must lead through AgentIDE modes, installation, and runtime boundaries');
+  throw new Error('production deployment belongs only to the operator experience');
 }
 const artifacts = new Map(catalog.artifacts.map((artifact) => [artifact.id, artifact]));
 for (const [id, kind, version, url] of [
   ['agentplugins-release-source', 'source', '0.9.0', 'https://github.com/beyond10x/agentplugins/releases/tag/0.9.0'],
   ['aep-cli-binary', 'binary', '0.55.0', 'https://github.com/beyond10x/aep/releases/tag/0.55.0'],
   ['ess-cli-source', 'source', '0.22.0', 'https://github.com/beyond10x/ess/releases/tag/0.22.0'],
-  ['agentide-linux-binary', 'binary', '0.1.1', 'https://github.com/beyond10x/agentide/releases/tag/0.1.1'],
 ]) {
   const artifact = artifacts.get(id);
   if (!artifact || artifact.kind !== kind || artifact.availability !== 'available' || artifact.access !== 'public' || artifact.version !== version || artifact.url !== url) {

@@ -589,6 +589,16 @@
       "type": "html"
     },
     {
+      "from": "/api/agentide/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/api/agentide/intent-engine/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
       "from": "/api/devcenter/",
       "to": "/ecosystem/",
       "type": "html"
@@ -610,6 +620,91 @@
     },
     {
       "from": "/docs/agent-platform/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/CHANGELOG/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/architecture/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/docs/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/docs/crossings/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/docs/domains/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/docs/domains/agentide-coding/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/docs/domains/agentide-coordination/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/docs/domains/agentide-session/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/docs/domains/agentide-surface/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/docs/interactions/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/generated/ess/docs/topology/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/harness-tui/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/keyboard-interface/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/agentide/running-modes/",
       "to": "/ecosystem/",
       "type": "html"
     },
@@ -1815,7 +1910,7 @@
     },
     {
       "from": "/docs/products/",
-      "to": "/products/",
+      "to": "/ecosystem/",
       "type": "html"
     },
     {
@@ -2029,6 +2124,26 @@
       "type": "html"
     },
     {
+      "from": "/docs/service-sdk/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/service-sdk/CHANGELOG/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/service-sdk/CONTRIBUTING/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/service-sdk/SECURITY/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
       "from": "/docs/spindle/",
       "to": "/spindle/docs/",
       "type": "html"
@@ -2169,6 +2284,11 @@
       "type": "html"
     },
     {
+      "from": "/ecosystem/agentide/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/codespec/",
       "to": "/codespec/",
       "type": "html"
@@ -2216,6 +2336,11 @@
     {
       "from": "/ecosystem/secrets/",
       "to": "/secrets/",
+      "type": "html"
+    },
+    {
+      "from": "/ecosystem/service-sdk/",
+      "to": "/ecosystem/",
       "type": "html"
     },
     {
@@ -2579,6 +2704,16 @@
     {
       "from": "/journeys/understand/",
       "to": "/learn/safe-agentic-coding/",
+      "type": "html"
+    },
+    {
+      "from": "/products/",
+      "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/products/evaluate/",
+      "to": "/ecosystem/",
       "type": "html"
     },
     {

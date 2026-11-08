@@ -475,12 +475,11 @@ pub fn run(root: &Path, build: &Path) -> Result<()> {
     Ok(())
 }
 pub fn navigation(root: &Path, build: &Path) -> Result<()> {
-    const PRIMARY: [&str; 13] = [
+    const PRIMARY: [&str; 12] = [
         "/",
         "/start/",
         "/learn/",
         "/build/",
-        "/products/",
         "/operate/",
         "/contribute/",
         "/docs/",

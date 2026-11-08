@@ -22,13 +22,6 @@ const gateways = [
     url: journeyById('build').experienceRoute,
   },
   {
-    accent: 'violet',
-    eyebrow: 'Evaluate',
-    title: 'Evaluate a beyond10x product',
-    description: 'See what is public, what is preview, and what remains access-gated before planning adoption.',
-    url: journeyById('products').experienceRoute,
-  },
-  {
     accent: 'amber',
     eyebrow: 'Operate',
     title: 'Deploy an available service',

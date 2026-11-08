@@ -163,7 +163,7 @@ const config: Config = {
         src: 'img/mark.svg',
       },
       items: [
-        {to: '/start/', label: 'Start', position: 'left', activeBaseRegex: '^/(start|learn|build|products|operate|contribute)(/|$)'},
+        {to: '/start/', label: 'Start', position: 'left', activeBaseRegex: '^/(start|learn|build|operate|contribute)(/|$)'},
         {to: '/ecosystem/', label: 'Explore', position: 'left', activeBasePath: '/ecosystem'},
         {to: '/docs/', label: 'Docs', position: 'left', activeBaseRegex: '^/(docs|api|components|architecture)(/|$)'},
         {to: '/updates/', label: 'Updates', position: 'left', activeBaseRegex: '^/(updates|changes|releases)(/|$)'},
@@ -189,7 +189,6 @@ const config: Config = {
         {
           title: 'Adopt',
           items: [
-            {label: journeyById('products').footerLabel, href: journeyById('products').hubRoute},
             {label: journeyById('operate').footerLabel, href: journeyById('operate').hubRoute},
             {label: 'Explore the project map', href: '/ecosystem/'},
           ],

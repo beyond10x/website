@@ -223,54 +223,6 @@
       ]
     },
     {
-      "experienceId": "evaluate-beyond10x-products",
-      "route": "/products/evaluate/",
-      "navigationLabel": "Evaluate products",
-      "adoptionPathId": "agentide-local-tui",
-      "primaryStepId": "agentide-install",
-      "sections": [
-        {
-          "kind": "learn",
-          "title": "Choose the AgentIDE realization you can actually access",
-          "steps": [
-            {
-              "id": "agentide-running-modes",
-              "title": "Compare the typed running modes",
-              "description": "Start with the ESS-derived mode table so local interaction, attachment, support, artifacts, and hosted availability stay distinct.",
-              "url": "/docs/agentide/running-modes/",
-              "completion": "You can explain which four modes are in the local binary and why the hosted realization is separate and paused."
-            }
-          ]
-        },
-        {
-          "kind": "do",
-          "title": "Run the public local path",
-          "steps": [
-            {
-              "id": "agentide-install",
-              "title": "Verify and start the released Linux binary",
-              "description": "Follow the source-owned checksum, session, model endpoint, and credential instructions for the recommended model-backed local TUI.",
-              "url": "/docs/agentide/",
-              "completion": "The 0.1.1 archive verifies, a local session starts, and the TUI opens against the model endpoint without journaling the credential."
-            }
-          ]
-        },
-        {
-          "kind": "verify",
-          "title": "Preserve the runtime and access boundaries",
-          "steps": [
-            {
-              "id": "agentide-boundaries",
-              "title": "Check confinement and hosted availability",
-              "description": "Confirm the Linux cgroup v2 requirement, private source-build dependency, and lack of a public hosted endpoint before planning adoption.",
-              "url": "/docs/agentide/running-modes/",
-              "completion": "Your evaluation notes distinguish the available local binary from approval-required source builds and the unpublished hosted service."
-            }
-          ]
-        }
-      ]
-    },
-    {
       "experienceId": "deploy-operate-products",
       "route": "/operate/",
       "navigationLabel": "Operate services",

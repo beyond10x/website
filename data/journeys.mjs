@@ -33,20 +33,6 @@ export const journeys = Object.freeze([
     }),
   }),
   Object.freeze({
-    id: 'products',
-    experienceId: 'evaluate-beyond10x-products',
-    label: 'Evaluate',
-    hubRoute: '/products/',
-    experienceRoute: '/products/evaluate/',
-    footerLabel: 'Evaluate products',
-    hubActionLabel: 'Open the evaluator path',
-    gateway: Object.freeze({
-      accent: 'violet',
-      title: 'Evaluate a beyond10x product',
-      description: 'See what is public, what is preview, and what remains access-gated before planning adoption.',
-    }),
-  }),
-  Object.freeze({
     id: 'operate',
     experienceId: 'deploy-operate-products',
     label: 'Operate',

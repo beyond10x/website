@@ -56,8 +56,8 @@ fn independent_and_undocumented_repositories_leave_the_collector_roster() {
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(
         lock["sources"].as_array().unwrap().len(),
-        18,
-        "Metaharness, Substrate, Secrets, LLM, Connectors and Harness left for their own sites, Gates has no website documentation, Agent Platform is archived and private and Devcenter leaves ahead of being made private"
+        16,
+        "Metaharness, Substrate, Secrets, LLM, Connectors and Harness left for their own sites, Gates has no website documentation, Agent Platform is archived and private, Devcenter leaves ahead of being made private, and AgentIDE and Service SDK are retired and archived"
     );
 }
 /// Every page of Secrets' site answers its former `/docs/secrets/` path. The site has no
@@ -219,7 +219,7 @@ fn agent_platform_is_private_and_its_former_routes_land_on_the_ecosystem() {
 /// Devcenter leaves the unified documentation on 2026-10-21 ahead of being made private and
 /// archived: it leaves the lock, no surface introduces or relates to it, the Products family it was
 /// the only member of leaves the taxonomy, and its nine former routes land on the ecosystem while
-/// the family's /docs/products/ lands on the /products/ hub.
+/// the family's /docs/products/ landed on the /products/ hub until AgentIDE's retirement removed it.
 #[test]
 fn devcenter_leaves_and_its_former_routes_land_on_the_ecosystem() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
@@ -266,10 +266,66 @@ fn devcenter_leaves_and_its_former_routes_land_on_the_ecosystem() {
             ("/docs/devcenter/local-acceptance/", "/ecosystem/"),
             ("/docs/devcenter/production-deployment/", "/ecosystem/"),
             ("/docs/devcenter/source-build/", "/ecosystem/"),
-            ("/docs/products/", "/products/"),
+            ("/docs/products/", "/ecosystem/"),
             ("/ecosystem/devcenter/", "/ecosystem/")
         ]
     );
+}
+/// AgentIDE and Service SDK are retired and archived by operator decision of 2026-11-08: they
+/// leave the lock and the roster with exclusion entries, no surface introduces them, AgentIDE takes
+/// the Evaluate journey it was the only product of, and every former route the deployed sitemap
+/// listed for them lands on the ecosystem.
+#[test]
+fn agentide_and_service_sdk_are_retired_and_their_former_routes_land_on_the_ecosystem() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    for path in [
+        "sources.lock.json",
+        "b10x.docs.yaml",
+        "data/experiences.json",
+        "data/experience-pages.json",
+        "data/journeys.mjs",
+    ] {
+        let text = fs::read_to_string(root.join(path)).unwrap().to_lowercase();
+        assert!(!text.contains("agentide"), "{path} still names agentide");
+        assert!(!text.contains("service-sdk"), "{path} still names service-sdk");
+    }
+    assert!(!root.join("src/pages/products").exists());
+    let roster: Value =
+        serde_yaml::from_slice(&fs::read(root.join("sources.yaml")).unwrap()).unwrap();
+    let excluded: Vec<&str> = roster["excludedRepositories"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|e| e["repository"].as_str().unwrap())
+        .collect();
+    assert!(excluded.contains(&"agentide"));
+    assert!(excluded.contains(&"service-sdk"));
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows: Vec<_> = redirects["redirects"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|r| {
+            let from = r["from"].as_str().unwrap();
+            from.contains("agentide") || from.contains("service-sdk") || from.starts_with("/products/")
+        })
+        .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
+        .collect();
+    assert_eq!(rows.len(), 27);
+    assert!(rows.iter().all(|(_, to)| *to == "/ecosystem/"));
+    for from in [
+        "/api/agentide/",
+        "/docs/agentide/",
+        "/docs/agentide/running-modes/",
+        "/docs/service-sdk/",
+        "/ecosystem/agentide/",
+        "/ecosystem/service-sdk/",
+        "/products/",
+        "/products/evaluate/",
+    ] {
+        assert!(rows.iter().any(|(row, _)| *row == from), "{from} has no redirect");
+    }
 }
 #[test]
 fn metaharness_is_independent_and_all_thirteen_document_routes_survive() {
@@ -704,7 +760,9 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
         .iter()
         .map(|v| v.as_str().unwrap())
         .collect();
-    assert_eq!(repositories.len(), 18);
+    assert_eq!(repositories.len(), 16);
+    assert!(!repositories.contains(&"agentide"));
+    assert!(!repositories.contains(&"service-sdk"));
     assert!(!repositories.contains(&"harness"));
     assert!(!repositories.contains(&"gates"));
     assert!(repositories.contains(&"mandate"));

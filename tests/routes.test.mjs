@@ -37,12 +37,15 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   // redirects its two former routes to /ecosystem/. Devcenter, leaving to be made private and
   // archived, redirects its nine former routes to /ecosystem/ and the emptied Products family's
   // /docs/products/ to /products/. Agent stack's independent site added /ecosystem/agent-stack/.
+  // AgentIDE and Service SDK, retired and archived, redirect their 25 former routes and the two
+  // /products/ routes of the Evaluate journey AgentIDE was the only product of to /ecosystem/, as
+  // /docs/products/ now does.
   // Harness's independent site replaced the 18 inverse /harness/ redirects with one /docs/harness/
   // route for each of its 18 documentation pages, /ecosystem/harness/ and six explicit targets for
   // former index and workflow pages. Spindle's, codespec's and RFCspec's independent sites, never
   // on the unified site, added one /docs/<repository>/ route for each of their 11, 13 and 27
   // documentation pages and their /ecosystem/<repository>/ routes.
-  assert.equal(html.length, 500);
+  assert.equal(html.length, 527);
   assert.equal(aliases.length, 14);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(!map.redirects.some((route) => route.from.startsWith('/harness/')));

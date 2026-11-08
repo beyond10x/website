@@ -446,7 +446,7 @@ async function verifyKeyboardDrawer(cdp, siteUrl, viewport) {
 async function verifyGlobalSectionState(cdp, siteUrl) {
   await setViewport(cdp, {width: 1440, height: 1000, mobile: false});
   const cases = [
-    ['Start', ['/start/', '/learn/', '/build/', '/products/evaluate/', '/operate/', '/contribute/']],
+    ['Start', ['/start/', '/learn/', '/build/', '/operate/', '/contribute/']],
     ['Explore', ['/ecosystem/', '/ecosystem/aep/']],
     ['Docs', ['/docs/', '/docs/aep/', '/architecture/']],
     ['Updates', ['/updates/', '/changes/', '/releases/']],

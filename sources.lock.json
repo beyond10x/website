@@ -26,14 +26,6 @@
       "contentSha256": "91931ed54bca80f24fa734d9e7cd8a521dccd041074d1016ae5fec792d07100f"
     },
     {
-      "repository": "agentide",
-      "url": "https://github.com/beyond10x/agentide",
-      "commit": "5da9929fc5f76622d2ab3491850d43493babc9d2",
-      "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "56b121a51f49ad4d45a5968777c50af0dd534ae2c507f7fd2c10f858569d1f7a",
-      "contentSha256": "bd595065e8685da5012dcd625311653d189798fc751e926b70280a5a27ee7deb"
-    },
-    {
       "repository": "agentplugins",
       "url": "https://github.com/beyond10x/agentplugins",
       "commit": "d4e95c09a590b187d4b4c3f05a5abec5cdb3a8d5",
@@ -112,14 +104,6 @@
       "manifestPath": "b10x.docs.yaml",
       "manifestSha256": "498b589bd44618f6d8fc1ff00b1cd2bcc4b05a39d52a448bc27192f61c9f34e1",
       "contentSha256": "7c524c3ce82fb9c57367090f245f68acd9baedbc4967555424aa48e6c5e9283b"
-    },
-    {
-      "repository": "service-sdk",
-      "url": "https://github.com/beyond10x/service-sdk",
-      "commit": "77ca69757ae888a9e868a3b1d00fbdd00f9b9bc6",
-      "manifestPath": "b10x.docs.yaml",
-      "manifestSha256": "36c43414330046fda05104c8886ff2e49377cdc3e669ca29c62a522486df9271",
-      "contentSha256": "dd33e7e31c4d93996351d49495ed75c1006de7f075d4819f43e15d9bdae6b3cd"
     },
     {
       "repository": "workflow",

@@ -7,7 +7,6 @@ repositories:
   - aep
   - aep-service
   - agentic-principles
-  - agentide
   - agentplugins
   - docs-system
   - entity-runtime
@@ -18,7 +17,6 @@ repositories:
   - mandate
   - mcp
   - research
-  - service-sdk
   - workflow
   - workspace
   - worktree
@@ -56,6 +54,15 @@ excludedRepositories:
       agent-stack publishes its own site at https://beyond10x.github.io/agent-stack/ from its own
       repository and main commit. Website retains its discovery entry and route inventory and links
       it from /architecture/, but does not collect or publish its content.
+  - repository: agentide
+    public: true
+    manifest: present
+    reason: >-
+      Retired and archived by operator decision of 2026-11-08. The organization catalog retires
+      the repository and its website documentation surface. It was the only product of the
+      Evaluate journey, so /products/ and /products/evaluate/ leave with it; Website redirects
+      those, the former /docs/agentide/, /api/agentide/ and /ecosystem/agentide/ routes and
+      /docs/products/ to /ecosystem/.
   - repository: bench
     public: false
     manifest: present
@@ -155,6 +162,13 @@ excludedRepositories:
       https://beyond10x.github.io/secrets/ from its own repository and main commit.
       Website retains discovery and redirects from the former /docs/secrets/ and
       /api/secrets/ routes, but does not collect or publish its documentation content.
+  - repository: service-sdk
+    public: true
+    manifest: present
+    reason: >-
+      Retired and archived by operator decision of 2026-11-08. The organization catalog retires
+      the repository and its website documentation surface. Website redirects the former
+      /docs/service-sdk/ and /ecosystem/service-sdk/ routes to /ecosystem/.
   - repository: spindle
     public: true
     manifest: absent

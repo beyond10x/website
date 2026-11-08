@@ -9,7 +9,6 @@ export const PRIMARY_ROUTE_MATRIX = Object.freeze([
   '/start/',
   '/learn/',
   '/build/',
-  '/products/',
   '/operate/',
   '/contribute/',
   '/docs/',

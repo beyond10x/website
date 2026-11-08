@@ -196,11 +196,11 @@ test('global navigation stays sticky, uses gateway routes, and retains mobile to
     [...navbarConfig.matchAll(/\{to: '([^']+)', label: '(Start|Explore|Docs|Updates|Search)'/g)].map((match) => match[1]),
     ['/start/', '/ecosystem/', '/docs/', '/updates/', '/search/'],
   );
-  assert.match(navbarConfig, /label: 'Start'[^\n]+activeBaseRegex: '\^\/\(start\|learn\|build\|products\|operate\|contribute\)\(\/\|\$\)'/);
+  assert.match(navbarConfig, /label: 'Start'[^\n]+activeBaseRegex: '\^\/\(start\|learn\|build\|operate\|contribute\)\(\/\|\$\)'/);
   assert.match(navbarConfig, /label: 'Explore'[^\n]+activeBasePath: '\/ecosystem'/);
   assert.match(navbarConfig, /label: 'Docs'[^\n]+activeBaseRegex: '\^\/\(docs\|api\|components\|architecture\)\(\/\|\$\)'/);
   assert.match(navbarConfig, /label: 'Updates'[^\n]+activeBaseRegex: '\^\/\(updates\|changes\|releases\)\(\/\|\$\)'/);
-  for (const gateway of ['start', 'learn', 'build', 'products']) {
+  for (const gateway of ['start', 'learn', 'build']) {
     await readFile(path.join(root, 'src/pages', gateway, 'index.tsx'), 'utf8');
   }
   const footerConfig = config.slice(config.indexOf('footer:'), config.indexOf('prism:'));
@@ -229,7 +229,7 @@ test('the site-wide visual system retains its color, interaction, and reading co
   assert.match(css, /\.theme-doc-markdown table th/);
   assert.match(css, /\.theme-doc-markdown :not\(pre\) > code/);
   assert.match(home, /className=\{styles\.heroSignal\}/);
-  assert.deepEqual([...home.matchAll(/accent: '([^']+)'/g)].map((match) => match[1]), ['mint', 'violet', 'amber', 'coral']);
+  assert.deepEqual([...home.matchAll(/accent: '([^']+)'/g)].map((match) => match[1]), ['mint', 'amber', 'coral']);
   assert.match(home, /data-accent=\{gateway\.accent\}/);
   assert.match(homeStyles, /\.loopGrid li:nth-child\(5\).*--stage-color: var\(--b10x-coral\)/);
   assert.match(homeStyles, /\.gatewayGrid article:focus-within/);
@@ -355,7 +355,7 @@ test('project profiles derive adoption, references, revisions, releases, and bot
   assert.match(preparation, /if \(!isPresentedRelationship\(relationship\)\) continue/);
 });
 
-test('six audience-first experiences have ordered learn, do, and verify steps with explicit outcomes', async () => {
+test('five audience-first experiences have ordered learn, do, and verify steps with explicit outcomes', async () => {
   const catalog = JSON.parse(await readFile(path.join(root, 'data/experiences.json'), 'utf8'));
   const presentation = JSON.parse(await readFile(path.join(root, 'data/experience-pages.json'), 'utf8'));
   assert.equal(catalog.schema, 'b10x-experiences/v1');
@@ -363,7 +363,6 @@ test('six audience-first experiences have ordered learn, do, and verify steps wi
     'try-spec-driven-development',
     'understand-safe-agentic-coding',
     'build-agent-systems',
-    'evaluate-beyond10x-products',
     'deploy-operate-products',
     'contribute-maintain',
   ]);
@@ -371,7 +370,7 @@ test('six audience-first experiences have ordered learn, do, and verify steps wi
   assert.ok(catalog.experiences.every((experience) => experience.adoptionPaths.length > 0 && experience.audiences.length > 0));
   assert.ok(catalog.experiences.flatMap((experience) => experience.adoptionPaths).every((path) => path.outcome.length > 60 && path.artifactIds.length > 0));
   assert.ok(presentation.pages.every((page) => catalog.experiences.find((experience) => experience.id === page.experienceId)?.adoptionPaths.some((path) => path.id === page.adoptionPathId)));
-  assert.deepEqual(presentation.pages.map((page) => page.sections.map((section) => section.kind)), Array(6).fill(['learn', 'do', 'verify']));
+  assert.deepEqual(presentation.pages.map((page) => page.sections.map((section) => section.kind)), Array(5).fill(['learn', 'do', 'verify']));
   assert.ok(presentation.pages.flatMap((page) => page.sections).flatMap((section) => section.steps).every((step) => step.completion.length > 40));
   const view = await readFile(path.join(root, 'src/components/ExperienceView.tsx'), 'utf8');
   assert.match(view, /data-pagefind-filter="experience"/);

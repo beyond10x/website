@@ -9,7 +9,6 @@ import styles from '../ecosystem.module.css';
 const hubSections = [
   {label: 'Learn', description: 'Concept-first mental model, without repository or tooling detail.', route: journeyById('learn').hubRoute},
   {label: 'Build', description: 'Agent-system construction: Harness, Substrate, and evaluation.', route: journeyById('build').hubRoute},
-  {label: 'Products', description: 'Evaluate a beyond10x product before planning adoption.', route: journeyById('products').hubRoute},
 ];
 
 export default function Start(): ReactNode {
