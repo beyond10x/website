@@ -358,7 +358,11 @@ test('reusable project-site workflow deploys one bot-authored build run and neve
   assert.match(workflow, /head_sha=\$CONTROL_SHA/);
   assert.match(workflow, /\.head_branch == "main"/);
   assert.match(workflow, /\.event == "push"/);
+  assert.match(workflow, /\.status == "completed"/);
   assert.match(workflow, /\.conclusion == "success"/);
+  // GitHub lists nothing for `head_sha` combined with a `status` filter, so the runs query never
+  // carries one; completion and success are required by the jq filter instead.
+  assert.doesNotMatch(workflow, /runs\?[^"\s]*status=/);
   assert.match(workflow, /run-id: \$\{\{ steps\.build\.outputs\.run_id \}\}/);
   // The runs API can list a finished run late, so the lookup is polled and names what it missed.
   assert.match(workflow, /attempts=30\n/);
