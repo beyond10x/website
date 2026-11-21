@@ -2,22 +2,31 @@
 
 ## Unreleased
 
-- Include Gates in the public documentation roster and refresh the foundation sources. Update
-  the practitioner path to Agentplugins 0.9.0, AEP 0.55.0 binaries and ESS 0.22.0 source, with
-  accurate installation prerequisites for the source-only ESS release.
+## 0.4.0 — 2026-11-22
 
 - Accept Atlas-selected immutable Docs System bundles through `b10x-docs-source-set/v1`, derive
-  the compatibility source lock without Git access, and write/verify a self-contained
+  the compatibility source lock without Git access, and write and verify a self-contained
   `b10x-publication-layout/v2` whose exact inputs remain available for audit and rollback.
 - Make project Pages a stable `b10x-facade-provenance/v2` route contract independent of content
   revisions, while retaining dual readers and an optional fixed Website snapshot for migration.
-
-- Inventory every fenced example from the exact locked documentation sources through its rendered
-  route and exact body, retain source-aware diagnostics and field-note projection attribution, and
-  publish the deterministic source/render report with the site artifact.
+- Move the documentation of Connectors, Engineering Protocols, LLM, Metaharness, Secrets,
+  Substrate and Harness to independent project sites, with redirects from every former page and
+  validated route and anchor inventories. Drop Gates, Devcenter, Agent Platform, AgentIDE and
+  Service SDK from the unified documentation.
+- Add the codespec, RFCspec and Spindle sites to the ecosystem list, and show the agent stack and
+  its terms on the architecture page.
+- Render a repository's declared sidebar and landing document in the portal, let a quarantined
+  source build as absent, preview one source repository's working tree locally with
+  `npm run preview:source`, and render ESS contract documents through the shared viewer.
+- Inventory every fenced example from the locked documentation sources through its rendered route
+  and exact body, and publish the deterministic source and render report with the site artifact.
 - Give code examples consistent language labels, semantic accents, theme contrast, focus and touch
-  controls, narrow-screen scrolling, and verified client-rendered Mermaid diagrams through the
-  pinned shared Docs System renderer.
+  controls, narrow-screen scrolling, and client-rendered Mermaid diagrams.
+- Fix navigation and interaction review findings, keep the footer naming its publisher with an
+  imprint link, add the Engineering After Coding essay, and keep documentation diagrams and tables
+  readable.
+- Harden delivery: make the project-site Pages deploy wait for its build run and retry, write a
+  page for every root redirect the built site lacks, and clear the critical npm advisories.
 
 ## 0.3.2 — 2026-09-03
 
