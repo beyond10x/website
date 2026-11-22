@@ -2,6 +2,337 @@
   "schema": "b10x-change-ledger/v1",
   "changes": [
     {
+      "key": "worktree/0.21.0",
+      "id": "worktree/0.21.0",
+      "repository": "worktree",
+      "publishedAt": "2026-11-22T05:16:23Z",
+      "title": "Worktree 0.21.0",
+      "summary": "Worktree released version 0.21.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.21.0",
+        "version": "0.21.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "entity-runtime/0.32.0",
+      "id": "entity-runtime/0.32.0",
+      "repository": "entity-runtime",
+      "publishedAt": "2026-11-22T04:01:07Z",
+      "title": "Entity Runtime 0.32.0",
+      "summary": "Entity Runtime released version 0.32.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/entity-runtime/releases/tag/0.32.0",
+        "version": "0.32.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "entity-runtime/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "identity/0.5.7",
+      "id": "identity/0.5.7",
+      "repository": "identity",
+      "publishedAt": "2026-11-22T03:12:07Z",
+      "title": "Identity 0.5.7",
+      "summary": "Identity released version 0.5.7.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/identity/releases/tag/0.5.7",
+        "version": "0.5.7"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "identity/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "docs-system/0.15.1",
+      "id": "docs-system/0.15.1",
+      "repository": "docs-system",
+      "publishedAt": "2026-11-22T01:50:12Z",
+      "title": "Docs System 0.15.1",
+      "summary": "Docs System released version 0.15.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/docs-system/releases/tag/0.15.1",
+        "version": "0.15.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "docs-system/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "mcp/0.2.1",
+      "id": "mcp/0.2.1",
+      "repository": "mcp",
+      "publishedAt": "2026-11-22T01:27:28Z",
+      "title": "MCP 0.2.1",
+      "summary": "MCP released version 0.2.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/mcp/releases/tag/0.2.1",
+        "version": "0.2.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "mcp/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "workspace/0.2.25",
+      "id": "workspace/0.2.25",
+      "repository": "workspace",
+      "publishedAt": "2026-11-22T00:16:04Z",
+      "title": "Workspace 0.2.25",
+      "summary": "Workspace released version 0.2.25.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/workspace/releases/tag/0.2.25",
+        "version": "0.2.25"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "workspace/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "website/0.4.0",
+      "id": "website/0.4.0",
+      "repository": "website",
+      "publishedAt": "2026-11-21T23:28:01Z",
+      "title": "beyond10x 0.4.0",
+      "summary": "beyond10x released version 0.4.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/website/releases/tag/0.4.0",
+        "version": "0.4.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify",
+        "understand"
+      ],
+      "affectedSurfaces": [
+        "website/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "agentic-principles/v0.2.0",
+      "id": "agentic-principles/v0.2.0",
+      "repository": "agentic-principles",
+      "publishedAt": "2026-11-21T23:19:52Z",
+      "title": "Agentic Principles v0.2.0",
+      "summary": "Agentic Principles released version v0.2.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/agentic-principles/releases/tag/v0.2.0",
+        "version": "v0.2.0"
+      },
+      "journeys": [
+        "build-agents",
+        "plan-work",
+        "understand"
+      ],
+      "affectedSurfaces": [
+        "agentic-principles/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.9.4",
+      "id": "eventlog/0.9.4",
+      "repository": "eventlog",
+      "publishedAt": "2026-11-11T13:46:47Z",
+      "title": "Eventlog 0.9.4",
+      "summary": "Eventlog released version 0.9.4.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.9.4",
+        "version": "0.9.4"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "eventlog/0.9.3",
+      "id": "eventlog/0.9.3",
+      "repository": "eventlog",
+      "publishedAt": "2026-11-11T02:47:23Z",
+      "title": "Eventlog 0.9.3",
+      "summary": "Eventlog released version 0.9.3.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/eventlog/releases/tag/0.9.3",
+        "version": "0.9.3"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "eventlog/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.80.0",
+      "id": "aep/0.80.0",
+      "repository": "aep",
+      "publishedAt": "2026-11-11T00:06:00Z",
+      "title": "AEP 0.80.0",
+      "summary": "AEP released version 0.80.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.80.0",
+        "version": "0.80.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "aep/0.79.1",
+      "id": "aep/0.79.1",
+      "repository": "aep",
+      "publishedAt": "2026-11-10T13:04:46Z",
+      "title": "AEP 0.79.1",
+      "summary": "AEP released version 0.79.1.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/aep/releases/tag/0.79.1",
+        "version": "0.79.1"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services",
+        "plan-work",
+        "specify"
+      ],
+      "affectedSurfaces": [
+        "aep/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "worktree/0.20.0",
+      "id": "worktree/0.20.0",
+      "repository": "worktree",
+      "publishedAt": "2026-11-10T02:09:11Z",
+      "title": "Worktree 0.20.0",
+      "summary": "Worktree released version 0.20.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/worktree/releases/tag/0.20.0",
+        "version": "0.20.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "worktree/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
+      "key": "docs-system/0.15.0",
+      "id": "docs-system/0.15.0",
+      "repository": "docs-system",
+      "publishedAt": "2026-11-08T23:53:31Z",
+      "title": "Docs System 0.15.0",
+      "summary": "Docs System released version 0.15.0.",
+      "kind": "release",
+      "impact": "notable",
+      "source": {
+        "url": "https://github.com/beyond10x/docs-system/releases/tag/0.15.0",
+        "version": "0.15.0"
+      },
+      "journeys": [
+        "build-agents",
+        "operate-services"
+      ],
+      "affectedSurfaces": [
+        "docs-system/docs"
+      ],
+      "automatic": true,
+      "channel": "releases"
+    },
+    {
       "key": "worktree/0.19.4",
       "id": "worktree/0.19.4",
       "repository": "worktree",
@@ -94,167 +425,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.90.0",
-      "id": "ess/0.90.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-07T05:22:22Z",
-      "title": "ESS 0.90.0",
-      "summary": "ESS released version 0.90.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.90.0",
-        "version": "0.90.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.89.0",
-      "id": "ess/0.89.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-06T22:06:40Z",
-      "title": "ESS 0.89.0",
-      "summary": "ESS released version 0.89.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.89.0",
-        "version": "0.89.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.88.0",
-      "id": "ess/0.88.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-06T10:57:30Z",
-      "title": "ESS 0.88.0",
-      "summary": "ESS released version 0.88.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.88.0",
-        "version": "0.88.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.87.0",
-      "id": "ess/0.87.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-05T17:57:13Z",
-      "title": "ESS 0.87.0",
-      "summary": "ESS released version 0.87.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.87.0",
-        "version": "0.87.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.86.0",
-      "id": "ess/0.86.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-04T08:48:02Z",
-      "title": "ESS 0.86.0",
-      "summary": "ESS released version 0.86.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.86.0",
-        "version": "0.86.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.85.0",
-      "id": "ess/0.85.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-04T03:47:56Z",
-      "title": "ESS 0.85.0",
-      "summary": "ESS released version 0.85.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.85.0",
-        "version": "0.85.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.84.0",
-      "id": "ess/0.84.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-03T05:24:14Z",
-      "title": "ESS 0.84.0",
-      "summary": "ESS released version 0.84.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.84.0",
-        "version": "0.84.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "agentplugins/0.26.0",
       "id": "agentplugins/0.26.0",
       "repository": "agentplugins",
@@ -274,144 +444,6 @@
       ],
       "affectedSurfaces": [
         "agentplugins/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.83.0",
-      "id": "ess/0.83.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-02T19:27:30Z",
-      "title": "ESS 0.83.0",
-      "summary": "ESS released version 0.83.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.83.0",
-        "version": "0.83.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.82.0",
-      "id": "ess/0.82.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-02T02:07:16Z",
-      "title": "ESS 0.82.0",
-      "summary": "ESS released version 0.82.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.82.0",
-        "version": "0.82.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.81.0",
-      "id": "ess/0.81.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-01T18:07:49Z",
-      "title": "ESS 0.81.0",
-      "summary": "ESS released version 0.81.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.81.0",
-        "version": "0.81.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.80.0",
-      "id": "ess/0.80.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-01T12:27:42Z",
-      "title": "ESS 0.80.0",
-      "summary": "ESS released version 0.80.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.80.0",
-        "version": "0.80.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.79.0",
-      "id": "ess/0.79.0",
-      "repository": "ess",
-      "publishedAt": "2026-11-01T05:57:42Z",
-      "title": "ESS 0.79.0",
-      "summary": "ESS released version 0.79.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.79.0",
-        "version": "0.79.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.78.0",
-      "id": "ess/0.78.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-31T17:58:30Z",
-      "title": "ESS 0.78.0",
-      "summary": "ESS released version 0.78.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.78.0",
-        "version": "0.78.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -512,29 +544,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.77.0",
-      "id": "ess/0.77.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-29T16:09:50Z",
-      "title": "ESS 0.77.0",
-      "summary": "ESS released version 0.77.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.77.0",
-        "version": "0.77.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "docs-system/0.14.0",
       "id": "docs-system/0.14.0",
       "repository": "docs-system",
@@ -553,29 +562,6 @@
       ],
       "affectedSurfaces": [
         "docs-system/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.76.0",
-      "id": "ess/0.76.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-29T05:02:58Z",
-      "title": "ESS 0.76.0",
-      "summary": "ESS released version 0.76.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.76.0",
-        "version": "0.76.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -628,52 +614,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.75.0",
-      "id": "ess/0.75.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-28T14:48:46Z",
-      "title": "ESS 0.75.0",
-      "summary": "ESS released version 0.75.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.75.0",
-        "version": "0.75.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.74.0",
-      "id": "ess/0.74.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-28T08:37:51Z",
-      "title": "ESS 0.74.0",
-      "summary": "ESS released version 0.74.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.74.0",
-        "version": "0.74.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "agentplugins/0.25.0",
       "id": "agentplugins/0.25.0",
       "repository": "agentplugins",
@@ -698,75 +638,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.73.0",
-      "id": "ess/0.73.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-28T02:57:26Z",
-      "title": "ESS 0.73.0",
-      "summary": "ESS released version 0.73.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.73.0",
-        "version": "0.73.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.72.0",
-      "id": "ess/0.72.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-27T22:44:51Z",
-      "title": "ESS 0.72.0",
-      "summary": "ESS released version 0.72.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.72.0",
-        "version": "0.72.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.71.0",
-      "id": "ess/0.71.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-27T14:42:38Z",
-      "title": "ESS 0.71.0",
-      "summary": "ESS released version 0.71.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.71.0",
-        "version": "0.71.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "worktree/0.19.0",
       "id": "worktree/0.19.0",
       "repository": "worktree",
@@ -785,29 +656,6 @@
       ],
       "affectedSurfaces": [
         "worktree/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.70.0",
-      "id": "ess/0.70.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-26T21:44:17Z",
-      "title": "ESS 0.70.0",
-      "summary": "ESS released version 0.70.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.70.0",
-        "version": "0.70.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -857,75 +705,6 @@
       ],
       "affectedSurfaces": [
         "aep/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.69.2",
-      "id": "ess/0.69.2",
-      "repository": "ess",
-      "publishedAt": "2026-10-25T09:14:21Z",
-      "title": "ESS 0.69.2",
-      "summary": "ESS released version 0.69.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.69.2",
-        "version": "0.69.2"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.69.1",
-      "id": "ess/0.69.1",
-      "repository": "ess",
-      "publishedAt": "2026-10-25T01:33:41Z",
-      "title": "ESS 0.69.1",
-      "summary": "ESS released version 0.69.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.69.1",
-        "version": "0.69.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.69.0",
-      "id": "ess/0.69.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-24T04:16:44Z",
-      "title": "ESS 0.69.0",
-      "summary": "ESS released version 0.69.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.69.0",
-        "version": "0.69.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -1023,29 +802,6 @@
       ],
       "affectedSurfaces": [
         "docs-system/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.68.0",
-      "id": "ess/0.68.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-22T20:38:06Z",
-      "title": "ESS 0.68.0",
-      "summary": "ESS released version 0.68.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.68.0",
-        "version": "0.68.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -1217,28 +973,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/absent-values-and-narrowed-externals-0.67.0",
-      "id": "ess/absent-values-and-narrowed-externals-0.67.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-21T00:00:00Z",
-      "title": "A guard says what an absent value compares as, and an external branch can be narrowed to some rows",
-      "summary": "Format `ess/29` lets a guard write `coalesce(x, d)` on the left of a comparison, so a guard over an `Optional` decides every record, and lets `external:` carry `when_subject:`. A one-time read cell names its reader (suite `ess-conformance/56`). Synthesis witnesses more ranked heads and connective children, and many row-set selectors take seconds.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.67.0",
-        "version": "0.67.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "aep/0.68.1",
       "id": "aep/0.68.1",
       "repository": "aep",
@@ -1262,94 +996,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/queries-over-rows-first-slice-0.64.0",
-      "id": "ess/queries-over-rows-first-slice-0.64.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-20T00:00:00Z",
-      "title": "A view and a guard read the row a reference names",
-      "summary": "Format `ess/28` lets a view field and a view filter read the row a reference of the source names, one hop, as it is when the view is read; a value read a referenced row's lifecycle state; a branch require several related rows at once; and a guard refuse a list of references that names a missing row. Suite `ess-conformance/54` witnesses each navigated view.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.64.0",
-        "version": "0.64.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/synthesis-fixes-0.65.0",
-      "id": "ess/synthesis-fixes-0.65.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-20T00:00:00Z",
-      "title": "Synthesis arranges the rows binding, row-set and one-time disclosure scenarios read",
-      "summary": "Binding scenarios arrange the rows a per-row event, a refusal policy or a stored target names; row-set guards are witnessed beside bindings; `affects:` rows are arranged behind a missing-row guard; and one-time disclosure cells reach caller, unknown-instance and wrong-state branches the way the ordinary suite does.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.65.0",
-        "version": "0.65.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/unsupported-reads-as-skipped-0.66.0",
-      "id": "ess/unsupported-reads-as-skipped-0.66.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-20T00:00:00Z",
-      "title": "A generated Go or TypeScript runner shows an unsupported scenario as skipped, and the run still fails",
-      "summary": "Under report format 2 the generated Go and TypeScript runners end an unsupported required scenario as a skipped subtest or case carrying the target's reason, not a failed assertion. The run still fails once, with one message naming how many required scenarios were unsupported; the report is unchanged.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.66.0",
-        "version": "0.66.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/typed-expressions-and-one-precedence-order-0.63.0",
-      "id": "ess/typed-expressions-and-one-precedence-order-0.63.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-19T00:00:00Z",
-      "title": "A value can be computed by a typed expression, and every guard answers in one precedence order",
-      "summary": "Format `ess/27` computes a value from an expression in `sets:`, payloads and view fields, reads digest functions in guards, and answers a command's guards in one precedence order, admitting the guard pairs that order settles. `ess verify conform diff` compares two suites, and a suite states the event catalog once.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.63.0",
-        "version": "0.63.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "agentplugins/0.23.2",
@@ -1517,28 +1163,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/guard-boundaries-are-held-at-a-fixed-now-0.62.0",
-      "id": "ess/guard-boundaries-are-held-at-a-fixed-now-0.62.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-16T00:00:00Z",
-      "title": "A suite holds a command at a fixed now, so a guard on a time boundary is tested exactly there",
-      "summary": "A conformance suite can hold the instant a target reads as `now` for one command, and synthesis adds a scenario on each `now` boundary a command decides by. Format `ess/26` holds an external refusal beside an existing row to leave it unchanged. Generated Rust decoders enforce a newtype's alphabet and length; the Go and TypeScript explorers draw timestamps.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.62.0",
-        "version": "0.62.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "agentplugins/0.23.0",
       "id": "agentplugins/0.23.0",
       "repository": "agentplugins",
@@ -1586,28 +1210,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/history-records-input-and-events-0.61.0",
-      "id": "ess/history-records-input-and-events-0.61.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-15T00:00:00Z",
-      "title": "Concurrent histories record each call's input and events, and check-history holds them",
-      "summary": "`ess-history/3` records each operation's input and published events, and `check-history` holds a target to both. Concurrent exploration arranges `external:` causes and replays a failing seed alone. Synthesis arranges period-bounded views, Rust types take raw JSON values, and the one-time response guide counts disclosure cells.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.61.0",
-        "version": "0.61.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "aep/0.72.1",
@@ -1728,118 +1330,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/composition-roles-0.60.0",
-      "id": "ess/composition-roles-0.60.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-14T00:00:00Z",
-      "title": "A composition states which component plays another's role, and which command implements or gates it",
-      "summary": "`ess-composition/4` adds `roles:`: one imported component plays another's, and each local command `implements` or `gates` a contract command, checked for input drift by `ess specify compose` ([#525](https://github.com/beyond10x/ess/issues/525)).",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.60.0",
-        "version": "0.60.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/ess-25-and-http-binding-0.60.0",
-      "id": "ess/ess-25-and-http-binding-0.60.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-14T00:00:00Z",
-      "title": "Source format ess/25, and an HTTP binding that generates Rust and Go servers",
-      "summary": "`ess/25` adds create-or-update selection by stored fields, trimmed text guards, one event per changed row and refusals ahead of held state. `ess-http/1` binds commands and views to HTTP; `ess generate` projects it to OpenAPI and emits Rust and Go servers. `ess-composition/4` adds roles.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.60.0",
-        "version": "0.60.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/http-routes-0.60.0",
-      "id": "ess/http-routes-0.60.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-14T00:00:00Z",
-      "title": "Commands and views bind to HTTP routes, and mutation testing covers more of a model",
-      "summary": "`ess-http/1` binds commands and views to HTTP routes, projected into OpenAPI by `--http` ([#493](https://github.com/beyond10x/ess/issues/493)). `mutate` covers `when_subject:`/`when_related:` guards and authored scenarios ([#515](https://github.com/beyond10x/ess/issues/515)). Go synthesis builds when bounded contexts reference each other in a loop.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.60.0",
-        "version": "0.60.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/http-servers-0.60.0",
-      "id": "ess/http-servers-0.60.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-14T00:00:00Z",
-      "title": "HTTP bindings declare encodings, statuses, headers and redirects, and synthesis writes Rust and Go servers",
-      "summary": "An `ess-http/1` route declares its request encoding, each outcome's status, body, headers and redirect, and the standard refusals. `--http` projects them into OpenAPI, and `ess generate synthesize --target rust` or `go` writes a server that serves the binding ([#493](https://github.com/beyond10x/ess/issues/493)).",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.60.0",
-        "version": "0.60.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/source-25-0.60.0",
-      "id": "ess/source-25-0.60.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-14T00:00:00Z",
-      "title": "Source format ess/25 selects an upsert's update by the stored row and adds per-row events and default view rows",
-      "summary": "`ess/25` lets a create-or-update command pick its update with `when_subject:` ([#530](https://github.com/beyond10x/ess/issues/530)), publish an event per changed row, answer an `external:` refusal before the row is read, compare `trimmed:` text, and give a view an `absent:` row. `ess-diff/19` classifies the view change.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.60.0",
-        "version": "0.60.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "aep/0.71.3",
@@ -2215,50 +1705,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/authored-caller-0.59.0",
-      "id": "ess/authored-caller-0.59.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-11T00:00:00Z",
-      "title": "An authored act states the caller its command is sent as, and synthesis fixes two guard cases",
-      "summary": "`ess-scenario/5` lets an act state its caller under `caller:`, so a command that records `{caller: …}` runs from an authored scenario. Synthesis decides a related guard on a captured struct key ([#521](https://github.com/beyond10x/ess/issues/521)) and writes stored-field guard scenarios no view observes ([#496](https://github.com/beyond10x/ess/issues/496)).",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.59.0",
-        "version": "0.59.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/caller-attributes-0.59.0",
-      "id": "ess/caller-attributes-0.59.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-11T00:00:00Z",
-      "title": "An authored scenario states the caller its command is sent as",
-      "summary": "`ess-scenario/5` adds `caller:` to an authored act, so a command that records caller attributes runs from an authored scenario on every target. Synthesis covers `when_subject:` commands whose guarded field no view observes, and picks a related row against the subject's real key.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.59.0",
-        "version": "0.59.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "agentplugins/0.22.7",
       "id": "agentplugins/0.22.7",
       "repository": "agentplugins",
@@ -2380,28 +1826,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/undeclared-fields-ignored-0.58.0",
-      "id": "ess/undeclared-fields-ignored-0.58.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-10T00:00:00Z",
-      "title": "A struct or a command response may ignore undeclared fields, and generation, verify diff and runners follow",
-      "summary": "`ess/24` lets a `kind: struct` type or a command's response declare `undeclared_fields: ignored`, admitting fields it does not declare. `ess generate` writes open objects there, `ess verify diff` classifies opening and closing, and runners admit an undeclared key at exactly those objects. Authored scenarios are judged by the command's precedence plan.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.58.0",
-        "version": "0.58.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "agentplugins/0.22.5",
       "id": "agentplugins/0.22.5",
       "repository": "agentplugins",
@@ -2473,28 +1897,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/cli-globals-diff-caller-breaks-and-response-constraints-0.57.0",
-      "id": "ess/cli-globals-diff-caller-breaks-and-response-constraints-0.57.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-09T00:00:00Z",
-      "title": "CLI bindings may omit globals, verify diff flags caller-breaking changes, runners check constrained responses",
-      "summary": "`ess-cli/2` lets a CLI binding omit its config and output globals. `ess verify diff` classifies added and removed domains and rates changes that refuse an existing caller as breaking. Runners check responses of constrained `String` newtypes. Route-escaping wire names and always-true refusals are refused, and synthesis covers more guards.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.57.0",
-        "version": "0.57.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "agentplugins/0.22.3",
@@ -3160,50 +2562,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/held-state-branch-order-0.56.0",
-      "id": "ess/held-state-branch-order-0.56.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-07T00:00:00Z",
-      "title": "A held-state branch must be declared before an overlapping accepting or external branch",
-      "summary": "Validation refuses an accepting `when:` or `external:` branch declared before a branch the held state selects when one request can satisfy both guards (`ESS-COMMAND-004`, naming both branches). Every consumer then answers alike. To fix a refused specification, declare the held-state branch first.",
-      "kind": "breaking",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.56.0",
-        "version": "0.56.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/output-records-and-type-library-features-0.56.0",
-      "id": "ess/output-records-and-type-library-features-0.56.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-07T00:00:00Z",
-      "title": "Committed output records carry no machine path, and generated Rust types stop forcing arbitrary precision",
-      "summary": "A settled `.ess-output/state.json` no longer records the output's absolute path, device or inode, and regeneration refuses an edited owned file. Generated Rust types turn on arbitrary precision only where they hold JSON numbers. Entity Runtime lowers alphabets and text counts, and concurrent generation under a shared directory no longer refuses as busy.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.56.0",
-        "version": "0.56.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "entity-runtime/0.27.0",
       "id": "entity-runtime/0.27.0",
       "repository": "entity-runtime",
@@ -3298,72 +2656,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/counted-claims-and-checks-0.54.0",
-      "id": "ess/counted-claims-and-checks-0.54.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-06T00:00:00Z",
-      "title": "Counted event claims, generate --check and validation completeness",
-      "summary": "Suites `ess-conformance/44` and `/45` match repeated event claims as a set in the Rust, Go and TypeScript runners. `ess generate --check` reports drift without writing, `ess specify validate` reports completeness, `ess specify formats` lists every format, and a CLI binding takes a trailing argument list. A membership operand naming a parameter is refused.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.54.0",
-        "version": "0.54.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/json-cli-results-and-optional-generator-ports-0.55.0",
-      "id": "ess/json-cli-results-and-optional-generator-ports-0.55.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-06T00:00:00Z",
-      "title": "CLI results carry Json, and an optional generated value reads a port",
-      "summary": "A CLI result field may be typed `Json` and is written as JSON rather than JSON text, so a caller parses an answer once. A `{generated: true}` value of type `Optional<T>` is now supplied by the implementation through a generator port in generated Rust and Go, instead of always being absent; a context that implements the port must add the method.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.55.0",
-        "version": "0.55.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/source-23-records-0.54.0",
-      "id": "ess/source-23-records-0.54.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-06T00:00:00Z",
-      "title": "Source format ess/23, re-keyed records, bulk deletes and enum attributes",
-      "summary": "`ess/23` lets an update re-key its record, a value read the state held before the outcome, `deletes:` remove every row a filter selects, an `affects:` entry write one record per list element and an enum declare typed variant attributes. Synthesis witnesses state predicates, struct-identity selectors and row sets beside an addressed record.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.54.0",
-        "version": "0.54.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "agentplugins/0.20.0",
       "id": "agentplugins/0.20.0",
       "repository": "agentplugins",
@@ -3386,50 +2678,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/protocol-specifications-0.53.0",
-      "id": "ess/protocol-specifications-0.53.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-05T00:00:00Z",
-      "title": "Experimental protocol specifications and instant-ordered timestamps",
-      "summary": "Experimental `ess-protospec/1` models communicating peers, bounded channels, timers and safety properties; `ess verify protocol` simulates, replays and explores it. Conformance runners in Rust, Go and TypeScript now order RFC 3339 instants by instant, not by text.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.53.0",
-        "version": "0.53.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/source-22-expressions-0.53.0",
-      "id": "ess/source-22-expressions-0.53.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-05T00:00:00Z",
-      "title": "Source format ess/22, row sets and calendar windows",
-      "summary": "`ess/22` adds fact operands, constant offsets, instant comparison, UTF-8 byte length, distinct list members, typed text operands, row sets with filtered related reads, calendar windows at a fixed offset, binding payload conditions and conditional aggregate measures, each checked by synthesized conformance scenarios in the Rust, Go and TypeScript runners.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.53.0",
-        "version": "0.53.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "entity-runtime/0.26.0",
@@ -3480,227 +2728,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/consumer-fixes-0.52.0",
-      "id": "ess/consumer-fixes-0.52.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-03T00:00:00Z",
-      "title": "Event publishers, recursive Rust contracts and consumer fixes",
-      "summary": "ESS adds declared event transports and typed Rust/Go publishers with native timestamps, positional names and constant constructors. Optional recursive Rust types, generated Go behavior, typed view parameters, UI filters and integer bounds complete the update. Breaking interfaces are documented in the release notes.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.52.0",
-        "version": "0.52.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/output-portable-state-0.51.0",
-      "id": "ess/output-portable-state-0.51.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-01T23:30:00Z",
-      "title": "Committed generated output regenerates in another checkout",
-      "summary": "Generated output committed with its `.ess-output` regenerates in a clone, a second worktree or CI when its owned files still have their recorded bytes, and an unchanged regeneration leaves `state.json` byte-identical; a state carried without matching files refuses, lists them and prints the steps to re-enroll with `ess generate output adopt`.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.51.0",
-        "version": "0.51.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/upsert-by-existence-0.51.0",
-      "id": "ess/upsert-by-existence-0.51.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-01T23:30:00Z",
-      "title": "Generated Rust servers select a branch by whether the record exists",
-      "summary": "A generated Rust server looks the input identity up in the storage port before dispatch, so an `existing_instance:` refusal beside a creation and a creating `unknown_instance:` branch beside an update are generated instead of owed; a command whose lookup would not match its creations stays an obligation, and Go, Web and Clap still refuse both forms by name.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.51.0",
-        "version": "0.51.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/aggregate-related-guard-0.50.0",
-      "id": "ess/aggregate-related-guard-0.50.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-01T22:00:00Z",
-      "title": "Synthesis witnesses an aggregate over rows a when_related-guarded command creates",
-      "summary": "An aggregate view whose creating command has a `when_related` guard gets its `<view>/aggregate` scenario instead of ESS-SYNTH-017: each row's related row is arranged, owner-linked guard inputs name an arranged owner, and a group key read from a related row's owner link holds one owner per value.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.50.0",
-        "version": "0.50.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/actor-grants-enforced-0.49.0",
-      "id": "ess/actor-grants-enforced-0.49.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-01T18:00:00Z",
-      "title": "Generated servers enforce actor grants",
-      "summary": "In a specification that declares actors, generated Rust and Go servers take the authenticated caller and answer `403 not granted` before a command runs for a caller the specification does not grant it; served suites witness the refusal. Existing callers of `dispatch`, `handle` and `serve` must pass the caller.",
-      "kind": "breaking",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.49.0",
-        "version": "0.49.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/related-state-0.49.0",
-      "id": "ess/related-state-0.49.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-01T18:00:00Z",
-      "title": "A when_related guard reads the related row's lifecycle state",
-      "summary": "`ess/20` lets a `when_related` predicate read the related row's held lifecycle state as `state`, and synthesis arranges a related row of an entity already being arranged one level deep; earlier formats refuse the path and keep their suites.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.49.0",
-        "version": "0.49.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/synthesis-fixes-0.49.0",
-      "id": "ess/synthesis-fixes-0.49.0",
-      "repository": "ess",
-      "publishedAt": "2026-10-01T18:00:00Z",
-      "title": "Synthesis witnesses related copies, owner-linked guards and overlapping branches",
-      "summary": "Synthesis now witnesses aggregate keys and values copied from a related row, `when_related` over an `owns` via field, a fresh caller-supplied identity under swapped callers, and a `when:` beside a `when_subject:`; `ess verify diff` leaves no residual for a one-sided declaration.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.49.0",
-        "version": "0.49.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/conform-report-0.48.0",
-      "id": "ess/conform-report-0.48.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-30T23:00:00Z",
-      "title": "An outside runner's results become a conformance report",
-      "summary": "`ess verify conform report` turns a runner's per-scenario results into an `ess-conformance-report/2` whose producer profile says the results were supplied and ESS executed nothing; aep 0.66.0 records it as evidence.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.48.0",
-        "version": "0.48.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/served-501-committed-0.48.0",
-      "id": "ess/served-501-committed-0.48.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-30T23:00:00Z",
-      "title": "A served 501 says whether the effect was committed",
-      "summary": "Every served `501` carries `committed`: false for an unmet obligation, true when the command took effect and delivering what it published failed. Rust shells gain `Refused::Undelivered`.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.48.0",
-        "version": "0.48.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/ui-test-0.48.0",
-      "id": "ess/ui-test-0.48.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-30T23:00:00Z",
-      "title": "ess ui test runs UI tests by node path",
-      "summary": "`ess ui test` runs `ess-ui-test/1` tests, which select nodes by their document path, headless against the terminal renderer, and writes a Playwright spec for the generated React project from the same file.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.48.0",
-        "version": "0.48.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "aep/0.68.0",
       "id": "aep/0.68.0",
       "repository": "aep",
@@ -3724,72 +2751,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/diff-error-payload-0.46.1",
-      "id": "ess/diff-error-payload-0.46.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-30T18:00:00Z",
-      "title": "ess verify diff classifies error payload sources and three outcome flags",
-      "summary": "`ess verify diff` reports an outcome's error `payload:` sources declared, dropped or replaced, and a moved `accepts: nothing`, `returns:` or caller-decided refusal, as their own changes instead of one `unclassified-changed`. The new kinds need `ess-diff/12`; a delta without them keeps its format and bytes.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.46.1",
-        "version": "0.46.1"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/ess-ui-0.47.0",
-      "id": "ess/ess-ui-0.47.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-30T18:00:00Z",
-      "title": "ess-ui/1 UI documents load, check and render",
-      "summary": "`ess-ui/1` describes an application's pages, state and live channels without naming a renderer. `ess ui check` reports findings by node path, `ess ui run --tui` runs a document in the terminal, `ess generate ui --target react` writes a React project, and `ess ui docs` renders the format reference from its schema.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.47.0",
-        "version": "0.47.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/http-published-events-0.47.0",
-      "id": "ess/http-published-events-0.47.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-30T18:00:00Z",
-      "title": "Generated servers answer with what a command published",
-      "summary": "The generated Rust and Go servers list the events a command published in its answer, keep request headers, and name and encode every system event. Delivery is tracked per binding, so an undeliverable event no longer blocks later requests, and 501 is declared for a committed command whose delivery failed.",
-      "kind": "capability",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.47.0",
-        "version": "0.47.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "aep/0.67.0",
@@ -3817,28 +2778,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/generated-behaviour-0.46.0",
-      "id": "ess/generated-behaviour-0.46.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-30T12:00:00Z",
-      "title": "The Rust target generates what the specification fully determines",
-      "summary": "`ess generate synthesize --target rust` generates the command behaviours, view queries and invariant checks the specification fully determines, over storage and context ports you provide. Actor grants arrive as data, the server gains a transport-free `handle`, `--layout crate` writes one crate, and `ess/19` gives an error's fields their sources.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.46.0",
-        "version": "0.46.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "aep/0.66.0",
       "id": "aep/0.66.0",
       "repository": "aep",
@@ -3862,94 +2801,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/json-go-web-clap-0.45.0",
-      "id": "ess/json-go-web-clap-0.45.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-29T23:00:00Z",
-      "title": "The Go, web and clap synthesis targets represent Json",
-      "summary": "`ess generate synthesize --target go`, `web` and `clap` carry `Json` as `rust` already does: object members keep their order and numbers their spelling, and a clap flag takes one JSON document. No code target refuses a model for using `Json` any more, and a model without it synthesizes the same bytes as before.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.45.0",
-        "version": "0.45.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/json-rust-docs-0.44.0",
-      "id": "ess/json-rust-docs-0.44.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-29T22:00:00Z",
-      "title": "The Rust synthesis target represents Json, and the public docs are rebuilt",
-      "summary": "`ess generate synthesize --target rust` carries `Json` as the types crate's `json::Value`, unchanged on the wire. The public docs gain generated CLI and diagnostics references, Start here tutorials a test runs against the built binary, task-sized guides and a what-changed page.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.44.0",
-        "version": "0.44.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/defect-batch-0.43.0",
-      "id": "ess/defect-batch-0.43.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-29T20:00:00Z",
-      "title": "Instance references inside structured values, one refusal precedence and unstated external answers refused",
-      "summary": "`{$instance}` works inside lists, maps, structs and unions (suites `ess-conformance/32` and `/33`); acts claiming an unstated external answer are refused `ESS-AUTHOR-037`. An input refusal may sit beside held-state branches under one precedence order the explorer follows; synthesis meets nested input invariants and witnesses absent fields and stored maps.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.43.0",
-        "version": "0.43.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/defect-batch-0.42.0",
-      "id": "ess/defect-batch-0.42.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-29T18:00:00Z",
-      "title": "Link-field guards, overlap precedence, counter limits and unkillable mutants scored apart",
-      "summary": "Synthesis witnesses a guard comparing a link field with an input and a stored counter at its limit; the first declared of overlapping accepting branches answers; a relation may ride on the identity. `ess-diff/11` names newtype prefix changes, and mutation report and manifest `/3` score unkillable mutants apart from survivors.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.42.0",
-        "version": "0.42.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "agentplugins/0.19.1",
@@ -3976,28 +2827,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/defect-batch-0.41.0",
-      "id": "ess/defect-batch-0.41.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-29T12:00:00Z",
-      "title": "State-scoped refusals, guards over a related row, delivery context, and a synthesis and mutation defect batch",
-      "summary": "`ess/18` adds state-scoped refusals, `state` in a `when_subject` predicate, guards over a related row (`when_related:`) and a binding's delivery context. Synthesis now witnesses map inputs, identity and link view filters, every creating command and the record a refusal needs; mutation scores gained refusals apart from survivors.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.41.0",
-        "version": "0.41.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "agentplugins/0.19.0",
       "id": "agentplugins/0.19.0",
       "repository": "agentplugins",
@@ -4020,28 +2849,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/runtime-parity-0.40.0",
-      "id": "ess/runtime-parity-0.40.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-28T21:00:00Z",
-      "title": "Generated Go and TypeScript runtimes run every suite, and reader-side composition checks",
-      "summary": "The generated Go and TypeScript runtimes run suites `ess-conformance/22` to `/27` with the Rust runner's verdicts, where 0.38.0 refused them. `ess-composition/3` adds `reader: true`, admitting the widenings a consumer may read. Duplicate names are refused once, and the schema publishes name charsets.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.40.0",
-        "version": "0.40.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "aep/0.65.0",
@@ -4069,28 +2876,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/concurrent-history-0.39.0",
-      "id": "ess/concurrent-history-0.39.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-28T18:00:00Z",
-      "title": "Concurrent histories checked against the model, and direct library returns",
-      "summary": "`ess verify conform check-history` checks an `ess-history/1` run of several clients for linearizability against the interpreted model and holds each view to its declared consistency; the Go and TypeScript explorers record concurrent histories and inject declared faults. Source format `ess/17` adds `returns: true`, checked as a typed direct response.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.39.0",
-        "version": "0.39.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "agentplugins/0.18.0",
       "id": "agentplugins/0.18.0",
       "repository": "agentplugins",
@@ -4113,28 +2898,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/retrofit-findings-0.38.0",
-      "id": "ess/retrofit-findings-0.38.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-28T12:00:00Z",
-      "title": "Set effects, caller values, existence-selected outcomes, bounded retries and paged views",
-      "summary": "Source format `ess/16` adds literal fallbacks, `defined()` over optional aggregates, bodiless requests, related-record values, `now` in guards, create-or-update outcomes, caller attributes, bounded retries, view paging and outcomes over every record a filter selects. `ess-composition/2` checks consumer types.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.38.0",
-        "version": "0.38.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "aep/0.64.0",
@@ -4333,50 +3096,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/retrofit-findings-0.37.0",
-      "id": "ess/retrofit-findings-0.37.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-27T20:00:00Z",
-      "title": "Outcome shapes, subject guards over the input, new value types and a pinned toolchain",
-      "summary": "Source format `ess/15` adds outcome shapes (`deletes:`, `into:`, `unknown_instance:`, `accepts: nothing`, `preconditions:`), `input.` in subject guards, case-insensitive text, optional aggregates, `prefix:`, `Json` and field `presence:`. Synthesis kills more mutants; `ess` can run a pinned release.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.37.0",
-        "version": "0.37.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/value-expressions-0.36.0",
-      "id": "ess/value-expressions-0.36.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-27T12:00:00Z",
-      "title": "Payload and sets values read the subject, increment, fall back and nest",
-      "summary": "Source format `ess/14` adds `{subject: <field>}`, `{increment: <n>}`, `{input: <field>, else: {generated: true}}`, nested struct mappings and `{generated: true}` in `sets:`. Decimal literals are admitted in every format; `subject.<field>` as text is refused. Older readers refuse `ess/14`.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.36.0",
-        "version": "0.36.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "aep/0.61.1",
       "id": "aep/0.61.1",
       "repository": "aep",
@@ -4469,29 +3188,6 @@
       ],
       "affectedSurfaces": [
         "eventlog/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.35.1",
-      "id": "ess/0.35.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-27T03:25:28Z",
-      "title": "ESS 0.35.1",
-      "summary": "ESS released version 0.35.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.35.1",
-        "version": "0.35.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -4661,73 +3357,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/fixture-inputs-0.35.0",
-      "id": "ess/fixture-inputs-0.35.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-26T15:00:00Z",
-      "title": "Typed fixture values resolved before a scenario starts",
-      "summary": "Source format `ess/13` adds `fixture_inputs:` and `ess-scenario/3` adds `fixtures:` with `{$fixture: name}` references, compiled to `ess-conformance/18`/`19`. Rust, Go and TypeScript resolve and type-check the values from an independent provider before the scenario starts. Older readers refuse the new formats; fixture-free models and suites keep their bytes.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.35.0",
-        "version": "0.35.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/aggregate-views-0.34.0",
-      "id": "ess/aggregate-views-0.34.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-26T12:00:00Z",
-      "title": "String operators, subject guards, aggregate views and outcome groups, and a mutation audit",
-      "summary": "Source formats `ess/8`–`ess/12` add `starts_with`/`ends_with`/`contains`, `when_subject: {predicate: …}`, aggregate views with `group_by:`, `alphabet:` and input `example:`, and `outcome_groups:`. `ess verify conform mutate` audits a suite with specification mutants. Older readers refuse each new format; models that use none keep their bytes.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.34.0",
-        "version": "0.34.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/secret-presence-0.33.0",
-      "id": "ess/secret-presence-0.33.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-26T12:00:00Z",
-      "title": "A scan records only that a Secret value exists, and a bound workload can acknowledge foreign containers",
-      "summary": "A Kubernetes scan writes `infra-observation/3` and `infra-ir/3`, recording each Secret key as `{\"present\": true}` instead of a digest that confirms a guessed value; `infra-drift/3` no longer reports a rotated Secret. `ess-observed-bindings/2` acknowledges a mesh proxy or vendor agent by name and reason. Breaking: older readers refuse each new version.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.33.0",
-        "version": "0.33.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "aep/0.60.0",
@@ -4994,29 +3623,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.32.1",
-      "id": "ess/0.32.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-25T20:58:36Z",
-      "title": "ESS 0.32.1",
-      "summary": "ESS released version 0.32.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.32.1",
-        "version": "0.32.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "agentplugins/0.14.7",
       "id": "agentplugins/0.14.7",
       "repository": "agentplugins",
@@ -5090,29 +3696,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/openapi-3-0-import-0.32.0",
-      "id": "ess/openapi-3-0-import-0.32.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-25T18:00:00Z",
-      "title": "OpenAPI 3.0 imports, and a bound workload's unbound sidecars are violations",
-      "summary": "`ess infra import openapi` reads OpenAPI 3.0 by rewriting each schema to its 3.1 form, refusing a construct with no faithful one. `ess verify bindings` reports OBS-BIND-008 for a container or native sidecar in a bound workload that no binding names. Synthesize orders `Timestamp` values by the instant they name.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.32.0",
-        "version": "0.32.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "worktree/0.7.2",
       "id": "worktree/0.7.2",
       "repository": "worktree",
@@ -5158,29 +3741,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/entity-runtime-lowering-0.31.0",
-      "id": "ess/entity-runtime-lowering-0.31.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-25T12:00:00Z",
-      "title": "A service contract lowers to Entity Runtime definitions",
-      "summary": "ess-service-contract extracts an admitted component's service contract, and ess-entity-runtime lowers it into validated Entity Runtime 0.23.0 definitions and typed host binding obligations, refusing what it cannot express by name. Breaking: `ess skill` and the in-repository plugin are removed; the plugin ships from beyond10x/agentplugins.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.31.0",
-        "version": "0.31.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "agentplugins/0.14.4",
@@ -5733,28 +4293,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/agent-plugin-0.30.0",
-      "id": "ess/agent-plugin-0.30.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-23T16:00:00Z",
-      "title": "ESS ships its own agent plugin, and the binary prints its skills",
-      "summary": "The ESS agent plugin (ess@ess) now ships from this repository at the binary's version, with skills for writing, retrofitting and conformance-testing a specification. `ess skill` prints the same skills from the binary, and the release gate refuses a plugin version that differs from the workspace.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.30.0",
-        "version": "0.30.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "mandate/v0.5.1",
       "id": "mandate/v0.5.1",
       "repository": "mandate",
@@ -5919,72 +4457,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/retained-command-results-0.29.0",
-      "id": "ess/retained-command-results-0.29.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-22T06:46:21Z",
-      "title": "Verify retries against their original command results",
-      "summary": "Source ess/7 declares silent retries of original command results and finite state refusals. Conformance suites 12/13 compare actual retained responses and complete subjects in Rust and Go; unsupported runners refuse. Native APIs preserve typed results, and diff/6 records the new semantics.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.29.0",
-        "version": "0.29.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/observed-subject-history-0.28.0",
-      "id": "ess/observed-subject-history-0.28.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-21T16:57:25Z",
-      "title": "Conformance observes history and independently arranged failures",
-      "summary": "Source format ess/6 models input eligibility for external failures and enum subject history. Suite formats 10/11 compare actual before-and-after subject values and assert silent success. Rust, Go and TypeScript runners reject changed, missing or duplicate subjects; older formats refuse the new vocabulary.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.28.0",
-        "version": "0.28.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/enum-variant-wire-names-0.27.0",
-      "id": "ess/enum-variant-wire-names-0.27.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-20T10:12:14Z",
-      "title": "An enum variant carries its own wire spelling",
-      "summary": "A variant is authored as a bare name or as a mapping that also carries `wire`, `display`, `summary` and `code`, so a variant whose wire form is not derivable from its name can be declared at all. Specification format `ess/5`; delta format `ess-diff/5` adds three `TypeChange` cases, so a moved spelling no longer returns an empty delta.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.27.0",
-        "version": "0.27.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "mandate/v0.2.0",
       "id": "mandate/v0.2.0",
       "repository": "mandate",
@@ -6080,50 +4552,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/a-branch-can-clear-a-field-0.26.0",
-      "id": "ess/a-branch-can-clear-a-field-0.26.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-17T00:07:24Z",
-      "title": "A branch may say the field it owns holds nothing",
-      "summary": "`sets: {field: {cleared: true}}` states absence. Before it, a branch either left the field alone, wrote a literal that synthesis dropped, or wrote an empty string, which is a different reading. The field's type must be `Optional<...>` and the source must be an entity; an event payload is refused because an undetermined field is not the outcome's to set.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.26.0",
-        "version": "0.26.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/code-emitter-names-0.25.0",
-      "id": "ess/code-emitter-names-0.25.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-16T07:42:42Z",
-      "title": "An author names the identifier a code emitter spells a declaration as",
-      "summary": "`naming: { code: ... }` settles a collision the emitter cannot: a target without dotted type names flattens `X.State` and an authored view `XState` to one identifier. Only code emitters read it, so wire names, document schemas and qualified names are untouched and setting one cannot break a deployed consumer. The source format stays `ess/4`.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.25.0",
-        "version": "0.25.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "agentplugins/0.9.2",
       "id": "agentplugins/0.9.2",
       "repository": "agentplugins",
@@ -6146,51 +4574,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/component-settings-0.24.0",
-      "id": "ess/component-settings-0.24.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-12T00:00:00Z",
-      "title": "A component declares its settings, and the runtime slots are derived from them",
-      "summary": "`settings:` states each of a component's configuration inputs once, typed from the specification's own `types:`. `ess specify runtime compile` derives the `ess-runtime/1` config and secret slots from it, and refuses a hand-authored slot or two settings binding one environment variable twice. Absence is stated with `Optional<...>` and nothing else.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.24.0",
-        "version": "0.24.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/held-state-guards-0.23.0",
-      "id": "ess/held-state-guards-0.23.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-11T14:14:26Z",
-      "title": "A branch can turn on the state a subject is already in",
-      "summary": "`when_subject_state` in `ess/3` combines a declared held lifecycle state with input guards, so equal input applied to two different existing states is distinguished. `ess/4` declares error wire names without merging semantic identities and fills emitted event payloads from typed command response fields. New deltas use `ess-diff/3` and `ess-diff/4`.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.23.0",
-        "version": "0.23.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "eventlog/0.2.1",
@@ -6286,29 +4669,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.22.2",
-      "id": "ess/0.22.2",
-      "repository": "ess",
-      "publishedAt": "2026-09-10T20:11:55Z",
-      "title": "ESS 0.22.2",
-      "summary": "ESS released version 0.22.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.22.2",
-        "version": "0.22.2"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "agentplugins/0.9.1",
       "id": "agentplugins/0.9.1",
       "repository": "agentplugins",
@@ -6328,29 +4688,6 @@
       ],
       "affectedSurfaces": [
         "agentplugins/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.22.1",
-      "id": "ess/0.22.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-10T18:55:54Z",
-      "title": "ESS 0.22.1",
-      "summary": "ESS released version 0.22.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.22.1",
-        "version": "0.22.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -6403,29 +4740,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/at-most-once-delivery-0.22.0",
-      "id": "ess/at-most-once-delivery-0.22.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-10T12:27:04Z",
-      "title": "A binding can declare one delivery attempt and no redelivery",
-      "summary": "`delivery: at_most_once` states that a binding is tried once. Loss stays possible and no idempotency obligation is imposed on the handler. OpenAPI requires `Idempotency-Key` only for `at_least_once` commands, conformance records `BindingGap::DeliverySingleAttempt` instead of synthesizing a redelivery, and the format stays `ess/1`.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.22.0",
-        "version": "0.22.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "aep/0.55.0",
       "id": "aep/0.55.0",
       "repository": "aep",
@@ -6472,28 +4786,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/declared-coverage-0.21.0",
-      "id": "ess/declared-coverage-0.21.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-09T22:16:05Z",
-      "title": "A conformance suite records what it covers, and what it left out",
-      "summary": "Opt-in `ess-conformance/5` records selected generated and authored coverage, omitted scenarios, source identities and every refusal occurrence. Report 2 then distinguishes complete passing conformance from empty, unknown or incomplete coverage — a pass over nothing and a pass over everything stop reading the same.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.21.0",
-        "version": "0.21.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "eventlog/0.1.0",
@@ -6636,28 +4928,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/binary64-fields-0.20.0",
-      "id": "ess/binary64-fields-0.20.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-06T16:07:45Z",
-      "title": "A specification can declare a finite floating-point field",
-      "summary": "Authored `ess/2` adds `Binary64` fields, distinct from integer and decimal values. Reference, Rust and Go preserve signed zero, subnormals and nearest-even rounding; two typed operands use IEEE equality. Synthesis and conformance refuse unsupported `Binary64` before publication rather than emitting a target that would disagree.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.20.0",
-        "version": "0.20.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "workspace/0.2.22",
       "id": "workspace/0.2.22",
       "repository": "workspace",
@@ -6702,28 +4972,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/source-driven-realization-0.19.0",
-      "id": "ess/source-driven-realization-0.19.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-05T21:00:00Z",
-      "title": "Checked schema imports and structural data realizations",
-      "summary": "Import complete JSON Schema roots with source identity; generate structural Go, Rust and TypeScript libraries; and run source-pinned normalization recipes. Rust normalization has a library API; Go/TypeScript support is pending. Rust/Web synthesis returns checked failures, and sliced provenance names its digest profile.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.19.0",
-        "version": "0.19.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "workspace/0.2.20",
@@ -6843,117 +5091,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.17.0",
-      "id": "ess/0.17.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T14:13:15Z",
-      "title": "ESS 0.17.0",
-      "summary": "ESS released version 0.17.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.17.0",
-        "version": "0.17.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/early-stop-assertion-0.18.0",
-      "id": "ess/early-stop-assertion-0.18.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T14:08:16Z",
-      "title": "An authored scenario can claim that a consumer halted an ordered scan",
-      "summary": "`halts_after: <n>` lets an authored scenario require a consumer to stop an ordered scan after n rows. The target reports rows produced and whether the consumer ended the read. Targets without incremental reads report `unsupported`. This adds a claim to `ess-conformance/4`.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.18.0",
-        "version": "0.18.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/scenario-player-0.18.0",
-      "id": "ess/scenario-player-0.18.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T14:08:16Z",
-      "title": "A specification's scenarios can be played in a browser",
-      "summary": "`ess verify conform web` emits a browser page that walks authored scenarios, showing actors, state, selected views, and declared consequences. It replays model-determined behavior without executing an implementation, so authors can inspect a specification before filling its obligations.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.18.0",
-        "version": "0.18.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/authored-scenarios-0.15.0",
-      "id": "ess/authored-scenarios-0.15.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T13:13:51Z",
-      "title": "A specification carries the scenarios an author wrote, not only the ones it obliges",
-      "summary": "Authors can declare modelled instances, command timelines, and expectations in `ess-scenario/1`. These scenarios compile into `ess-conformance/2` with identities distinct from synthesized suites. Twenty-seven refusals check their names against the model. Included in the published 0.16.0 release.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.16.0",
-        "version": "0.16.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
-      "key": "ess/elapsed-time-claims-0.16.0",
-      "id": "ess/elapsed-time-claims-0.16.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T13:13:51Z",
-      "title": "An authored scenario can claim a length of time, and a target has to answer for it",
-      "summary": "Authored scenarios gain `mark:` and `elapsed:` with `not_before`, `within`, and `quiet` bounds. The suite states a duration and its anchor; the target reports an observed or advanced clock. Targets without clock support report `unsupported`. The claims use `ess-conformance/3`.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.16.0",
-        "version": "0.16.0"
-      },
-      "journeys": [
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "workspace/0.2.15",
       "id": "workspace/0.2.15",
       "repository": "workspace",
@@ -7002,29 +5139,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/command-line-surface-0.14.0",
-      "id": "ess/command-line-surface-0.14.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T10:01:53Z",
-      "title": "A component can declare a command-line surface, and ESS synthesizes its parser",
-      "summary": "`reached_by: command_line` and a `cli:` block state that a component's callers are people at a terminal and where each command sits in the tree. `ess generate synthesize --target clap` emits the parser, the handler obligations and the completion scripts from that declaration.",
-      "kind": "capability",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.14.0",
-        "version": "0.14.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
-    },
-    {
       "key": "aep-service/0.1.8",
       "id": "aep-service/0.1.8",
       "repository": "aep-service",
@@ -7043,29 +5157,6 @@
       ],
       "affectedSurfaces": [
         "aep-service/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.13.5",
-      "id": "ess/0.13.5",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T05:00:06Z",
-      "title": "ESS 0.13.5",
-      "summary": "ESS released version 0.13.5.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.13.5",
-        "version": "0.13.5"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -7096,75 +5187,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.13.4",
-      "id": "ess/0.13.4",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T03:30:03Z",
-      "title": "ESS 0.13.4",
-      "summary": "ESS released version 0.13.4.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.13.4",
-        "version": "0.13.4"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.13.3",
-      "id": "ess/0.13.3",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T03:14:50Z",
-      "title": "ESS 0.13.3",
-      "summary": "ESS released version 0.13.3.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.13.3",
-        "version": "0.13.3"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.13.2",
-      "id": "ess/0.13.2",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T02:33:48Z",
-      "title": "ESS 0.13.2",
-      "summary": "ESS released version 0.13.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.13.2",
-        "version": "0.13.2"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "aep/0.52.0",
       "id": "aep/0.52.0",
       "repository": "aep",
@@ -7185,75 +5207,6 @@
       ],
       "affectedSurfaces": [
         "aep/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.13.1",
-      "id": "ess/0.13.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T01:56:41Z",
-      "title": "ESS 0.13.1",
-      "summary": "ESS released version 0.13.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.13.1",
-        "version": "0.13.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.13.0",
-      "id": "ess/0.13.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T01:38:38Z",
-      "title": "ESS 0.13.0",
-      "summary": "ESS released version 0.13.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.13.0",
-        "version": "0.13.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.12.0",
-      "id": "ess/0.12.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-04T01:32:32Z",
-      "title": "ESS 0.12.0",
-      "summary": "ESS released version 0.12.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.12.0",
-        "version": "0.12.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -7302,29 +5255,6 @@
       ],
       "affectedSurfaces": [
         "aep/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.11.1",
-      "id": "ess/0.11.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-03T23:38:32Z",
-      "title": "ESS 0.11.1",
-      "summary": "ESS released version 0.11.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.11.1",
-        "version": "0.11.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -7424,29 +5354,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.11.0",
-      "id": "ess/0.11.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-03T20:11:17Z",
-      "title": "ESS 0.11.0",
-      "summary": "ESS released version 0.11.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.11.0",
-        "version": "0.11.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "aep/0.50.0",
       "id": "aep/0.50.0",
       "repository": "aep",
@@ -7538,29 +5445,6 @@
       ],
       "affectedSurfaces": [
         "workflow/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.10.0",
-      "id": "ess/0.10.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-03T17:31:20Z",
-      "title": "ESS 0.10.0",
-      "summary": "ESS released version 0.10.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.10.0",
-        "version": "0.10.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -7900,29 +5784,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.9.2",
-      "id": "ess/0.9.2",
-      "repository": "ess",
-      "publishedAt": "2026-09-03T10:35:03Z",
-      "title": "ESS 0.9.2",
-      "summary": "ESS released version 0.9.2.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.9.2",
-        "version": "0.9.2"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "website/0.3.1",
       "id": "website/0.3.1",
       "repository": "website",
@@ -7944,75 +5805,6 @@
       ],
       "affectedSurfaces": [
         "website/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.9.1",
-      "id": "ess/0.9.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-03T10:04:10Z",
-      "title": "ESS 0.9.1",
-      "summary": "ESS released version 0.9.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.9.1",
-        "version": "0.9.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.9.0",
-      "id": "ess/0.9.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-03T10:02:38Z",
-      "title": "ESS 0.9.0",
-      "summary": "ESS released version 0.9.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.9.0",
-        "version": "0.9.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.8.0",
-      "id": "ess/0.8.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-03T09:39:37Z",
-      "title": "ESS 0.8.0",
-      "summary": "ESS released version 0.8.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.8.0",
-        "version": "0.8.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -8207,52 +5999,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.7.0",
-      "id": "ess/0.7.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-03T02:11:09Z",
-      "title": "ESS 0.7.0",
-      "summary": "ESS released version 0.7.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.7.0",
-        "version": "0.7.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.6.0",
-      "id": "ess/0.6.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-03T01:27:53Z",
-      "title": "ESS 0.6.0",
-      "summary": "ESS released version 0.6.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.6.0",
-        "version": "0.6.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "workspace/0.2.2",
       "id": "workspace/0.2.2",
       "repository": "workspace",
@@ -8417,29 +6163,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.5.1",
-      "id": "ess/0.5.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-02T23:22:48Z",
-      "title": "ESS 0.5.1",
-      "summary": "ESS released version 0.5.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.5.1",
-        "version": "0.5.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "agentplugins/0.5.0",
       "id": "agentplugins/0.5.0",
       "repository": "agentplugins",
@@ -8482,29 +6205,6 @@
       ],
       "affectedSurfaces": [
         "identity/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
-      "key": "ess/0.4.0",
-      "id": "ess/0.4.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-02T21:00:22Z",
-      "title": "ESS 0.4.0",
-      "summary": "ESS released version 0.4.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.4.0",
-        "version": "0.4.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
       ],
       "automatic": true,
       "channel": "releases"
@@ -8942,13 +6642,11 @@
       "affectedSurfaces": [
         "agentic-principles/docs",
         "docs-system/docs",
-        "ess/docs",
         "website/docs"
       ],
       "affectedRepositories": [
         "agentic-principles",
         "docs-system",
-        "ess",
         "website"
       ],
       "affectedComponents": [
@@ -9061,14 +6759,12 @@
         "aep/docs",
         "agentic-principles/docs",
         "docs-system/docs",
-        "ess/docs",
         "website/docs"
       ],
       "affectedRepositories": [
         "aep",
         "agentic-principles",
         "docs-system",
-        "ess",
         "website"
       ],
       "affectedComponents": [
@@ -9315,29 +7011,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.2.1",
-      "id": "ess/0.2.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-01T10:15:58Z",
-      "title": "ESS 0.2.1",
-      "summary": "ESS released version 0.2.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.2.1",
-        "version": "0.2.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "aep/0.40.3",
       "id": "aep/0.40.3",
       "repository": "aep",
@@ -9495,29 +7168,6 @@
       ],
       "automatic": false,
       "channel": "impact"
-    },
-    {
-      "key": "ess/0.2.0",
-      "id": "ess/0.2.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-01T09:08:49Z",
-      "title": "ESS 0.2.0",
-      "summary": "ESS released version 0.2.0.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.2.0",
-        "version": "0.2.0"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
     },
     {
       "key": "agentplugins/0.2.0",
@@ -9685,13 +7335,7 @@
       "affectedSurfaces": [
         "aep/docs"
       ],
-      "relations": [
-        {
-          "target": "change:ess/standalone-0.1.0",
-          "kind": "integrates-with",
-          "label": "Consumes only the closed ESS conformance report"
-        }
-      ],
+      "relations": [],
       "automatic": false,
       "channel": "impact"
     },
@@ -9719,29 +7363,6 @@
       "channel": "releases"
     },
     {
-      "key": "ess/0.1.1",
-      "id": "ess/0.1.1",
-      "repository": "ess",
-      "publishedAt": "2026-09-01T02:57:49Z",
-      "title": "ESS 0.1.1",
-      "summary": "ESS released version 0.1.1.",
-      "kind": "release",
-      "impact": "notable",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.1.1",
-        "version": "0.1.1"
-      },
-      "journeys": [
-        "operate-services",
-        "specify"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": true,
-      "channel": "releases"
-    },
-    {
       "key": "identity/0.3.2",
       "id": "identity/0.3.2",
       "repository": "identity",
@@ -9763,29 +7384,6 @@
       ],
       "automatic": true,
       "channel": "releases"
-    },
-    {
-      "key": "ess/standalone-0.1.0",
-      "id": "ess/standalone-0.1.0",
-      "repository": "ess",
-      "publishedAt": "2026-09-01T02:32:47Z",
-      "title": "ESS becomes a standalone executable specification toolchain",
-      "summary": "ESS 0.1.0 extracts system modeling, schema contracts, generators, and conformance into an independent repository with no AEP dependency.",
-      "kind": "migration",
-      "impact": "significant",
-      "source": {
-        "url": "https://github.com/beyond10x/ess/releases/tag/0.1.0",
-        "version": "0.1.0"
-      },
-      "journeys": [
-        "specify",
-        "operate-services"
-      ],
-      "affectedSurfaces": [
-        "ess/docs"
-      ],
-      "automatic": false,
-      "channel": "impact"
     },
     {
       "key": "docs-system/0.1.3",
