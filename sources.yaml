@@ -10,7 +10,6 @@ repositories:
   - agentplugins
   - docs-system
   - entity-runtime
-  - ess
   - eventlog
   - extensions
   - identity
@@ -112,6 +111,15 @@ excludedRepositories:
       and the organization catalog lists it as independently documented. It never declared a
       b10x.docs.yaml. Website retains discovery and its route inventory and redirects the
       /docs/engineering-protocols/ and /ecosystem/engineering-protocols/ routes to that site.
+  - repository: ess
+    public: true
+    manifest: present
+    reason: >-
+      ESS publishes its documentation independently at https://beyond10x.github.io/ess/ from its
+      own repository and main commit; by operator decision of 2026-11-22 its unified copy at
+      /docs/ess/ is deprecated. Website retains discovery and redirects from the former
+      /docs/ess/ routes, but does not collect or publish its documentation content; its
+      b10x.docs.yaml, bundle and check are removed after this exclusion lands.
   - repository: gates
     public: true
     manifest: present

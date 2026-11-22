@@ -149,7 +149,7 @@ test('a v1 source set still writes v2 provenance with no quarantine field', asyn
 // Every repository on the real roster, in its real documentation family, so that quarantining any
 // one of them exercises the Website's own data (experiences, families, search goldens) against it.
 const rosterFamilies = {
-  Foundation: ['agentic-principles', 'aep', 'ess', 'research'],
+  Foundation: ['agentic-principles', 'aep', 'research'],
   Build: ['agentplugins', 'docs-system', 'entity-runtime', 'extensions', 'mcp', 'worktree'],
   Services: ['aep-service', 'eventlog', 'identity', 'mandate', 'workflow', 'workspace'],
 };
@@ -168,7 +168,7 @@ test('the fixture roster is the production roster', async () => {
   assert.deepEqual(rosterSources.map((source) => source.repository), production);
 });
 
-test('quarantining any one of the 16 sources prepares a site with no route of it anywhere', async (context) => {
+test('quarantining any one of the 15 sources prepares a site with no route of it anywhere', async (context) => {
   const failures = [];
   const queue = [...rosterSources];
   const worker = async () => {

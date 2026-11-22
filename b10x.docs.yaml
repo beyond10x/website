@@ -78,8 +78,6 @@ surfaces:
   - kind: introduces
     target: entity-runtime/docs
   - kind: introduces
-    target: ess/docs
-  - kind: introduces
     target: eventlog/docs
   - kind: introduces
     target: identity/docs

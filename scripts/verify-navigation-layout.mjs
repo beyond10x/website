@@ -544,8 +544,10 @@ async function loadSearchCards(cdp, url) {
 }
 
 async function verifyDocumentationViewports(cdp, siteUrl) {
-  if (!published('ess')) {
-    process.stdout.write('skipped the diagram and table audit: its sample, ESS, is quarantined\n');
+  // The sample is Entity Runtime's system model: Mermaid diagrams and three-column tables. It was
+  // ESS's concepts overview until ESS left the unified site for its own at /ess/ (2026-11-22).
+  if (!published('entity-runtime')) {
+    process.stdout.write('skipped the diagram and table audit: its sample, Entity Runtime, is quarantined\n');
     return;
   }
   // 720 CSS pixels at scale 2 exercises the reflow of a 1440px display at 200% zoom.
@@ -560,7 +562,7 @@ async function verifyDocumentationViewports(cdp, siteUrl) {
     for (const {width, height, mobile, scale} of sizes) {
       const context = `${theme}, ${width}px, scale ${scale}`;
       await cdp.command('Emulation.setDeviceMetricsOverride', {width, height, deviceScaleFactor: scale, mobile});
-      await navigate(cdp, `${siteUrl}/docs/ess/concepts/overview/`);
+      await navigate(cdp, `${siteUrl}/docs/entity-runtime/concepts/system-model/`);
       let diagram;
       for (let attempt = 0; attempt < 100; attempt += 1) {
         diagram = await evaluate(cdp, `(() => {

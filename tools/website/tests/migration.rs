@@ -56,8 +56,8 @@ fn independent_and_undocumented_repositories_leave_the_collector_roster() {
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
     assert_eq!(
         lock["sources"].as_array().unwrap().len(),
-        16,
-        "Metaharness, Substrate, Secrets, LLM, Connectors and Harness left for their own sites, Gates has no website documentation, Agent Platform is archived and private, Devcenter leaves ahead of being made private, and AgentIDE and Service SDK are retired and archived"
+        15,
+        "Metaharness, Substrate, Secrets, LLM, Connectors, Harness and ESS left for their own sites, Gates has no website documentation, Agent Platform is archived and private, Devcenter leaves ahead of being made private, and AgentIDE and Service SDK are retired and archived"
     );
 }
 /// Every page of Secrets' site answers its former `/docs/secrets/` path. The site has no
@@ -170,7 +170,9 @@ fn gates_has_no_website_documentation_and_its_former_routes_land_on_the_ecosyste
         .as_array()
         .unwrap()
         .iter()
-        .filter(|r| r["from"].as_str().unwrap().contains("gates"))
+        // The `/gates/` segment, not the substring: ESS's former post
+        // `aggregates-over-related-guards` contains it too.
+        .filter(|r| r["from"].as_str().unwrap().contains("/gates/"))
         .map(|r| (r["from"].as_str().unwrap(), r["to"].as_str().unwrap()))
         .collect();
     assert_eq!(
@@ -659,6 +661,127 @@ fn harness_is_independent_and_every_former_route_redirects() {
     assert!(experiences.contains("https://beyond10x.github.io/harness/"));
     assert!(!experiences.contains("https://beyond10x.github.io/docs/harness/"));
 }
+/// Every page of ESS's site answers its `/docs/ess/` path, as the independent compatibility
+/// contract derives it from the retained route inventory. The site has no index page for the
+/// concepts, examples, reference, releases, start, runners or status categories, or for the
+/// deliver, specify and verify guides: each lands on the first page of that category in ESS's own
+/// sidebar, or on the document the category links. ESS's release posts, which the unified site
+/// rendered as field notes, land on the same posts of its own site.
+#[test]
+fn ess_is_independent_and_every_former_route_redirects() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let lock: Value =
+        serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();
+    assert!(
+        !lock["sources"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|s| s["repository"] == "ess")
+    );
+    let roster = fs::read_to_string(root.join("sources.yaml")).unwrap();
+    assert!(roster.contains("repository: ess"));
+    let redirects: Value =
+        serde_json::from_slice(&fs::read(root.join("legacy-routes.json")).unwrap()).unwrap();
+    let rows = redirects["redirects"].as_array().unwrap();
+    assert!(
+        !rows
+            .iter()
+            .any(|r| r["from"].as_str().unwrap().starts_with("/ess/")),
+        "inverse redirects would create loops"
+    );
+    let actual: BTreeSet<(String, String)> = rows
+        .iter()
+        .filter(|r| {
+            let from = r["from"].as_str().unwrap();
+            from.starts_with("/docs/ess/")
+                || from.starts_with("/updates/field-notes/ess/")
+                || from == "/ecosystem/ess/"
+        })
+        .map(|r| {
+            assert_eq!(r["type"], "html");
+            (
+                r["from"].as_str().unwrap().to_owned(),
+                r["to"].as_str().unwrap().to_owned(),
+            )
+        })
+        .collect();
+    let inventory: Value =
+        serde_json::from_slice(&fs::read(root.join("data/independent/ess-routes.json")).unwrap())
+            .unwrap();
+    let routes: BTreeSet<_> = inventory["routes"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|r| r["path"].as_str().unwrap())
+        .collect();
+    let derived: Vec<(String, String)> = routes
+        .iter()
+        .filter_map(|path| {
+            path.strip_prefix("/ess/docs/")
+                .map(|page| (format!("/docs/ess/{page}"), (*path).to_owned()))
+        })
+        .collect();
+    assert_eq!(derived.len(), 69);
+    let posts: Vec<(String, String)> = actual
+        .iter()
+        .filter(|(from, _)| from.starts_with("/updates/field-notes/ess/"))
+        .cloned()
+        .collect();
+    assert_eq!(posts.len(), 49);
+    for (from, to) in &posts {
+        let post = from.strip_prefix("/updates/field-notes/ess/").unwrap();
+        assert_eq!(to, &format!("/ess/releases/{post}"));
+        assert!(
+            routes.contains(to.as_str()),
+            "{to} is not a release post of the ESS site"
+        );
+    }
+    let former = [
+        ("/docs/ess/concepts/", "/ess/docs/concepts/overview/"),
+        (
+            "/docs/ess/examples/",
+            "/ess/docs/examples/specification-to-contracts/",
+        ),
+        (
+            "/docs/ess/guides/deliver/",
+            "/ess/docs/guides/deliver/build-and-chart/",
+        ),
+        (
+            "/docs/ess/guides/specify/",
+            "/ess/docs/guides/write-a-specification/",
+        ),
+        (
+            "/docs/ess/guides/verify/",
+            "/ess/docs/guides/verify-conformance/",
+        ),
+        ("/docs/ess/reference/", "/ess/docs/reference/cli/"),
+        ("/docs/ess/releases/", "/ess/docs/releases/what-changed/"),
+        ("/docs/ess/start/", "/ess/docs/start/install/"),
+        (
+            "/docs/ess/start/runners/",
+            "/ess/docs/start/runners/typescript/",
+        ),
+        ("/docs/ess/status/", "/ess/docs/status/where-this-stands/"),
+        ("/ecosystem/ess/", "/ess/"),
+    ];
+    for (_, to) in former {
+        assert!(routes.contains(to), "{to} is not a route of the ESS site");
+    }
+    let expected: BTreeSet<(String, String)> = derived
+        .into_iter()
+        .chain(posts)
+        .chain(
+            former
+                .iter()
+                .map(|(from, to)| ((*from).to_owned(), (*to).to_owned())),
+        )
+        .collect();
+    assert_eq!(actual, expected);
+    let experiences = fs::read_to_string(root.join("data/experiences.json")).unwrap();
+    assert!(experiences.contains("https://beyond10x.github.io/ess/"));
+    assert!(!experiences.contains("https://beyond10x.github.io/docs/ess/"));
+}
 /// Engineering Protocols never had unified documentation. Its own site owns
 /// `/engineering-protocols/`, so the root's former redirect of that path to the AEP profile is
 /// gone, and each of its documentation pages answers the `/docs/engineering-protocols/` path the
@@ -768,10 +891,11 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
         .iter()
         .map(|v| v.as_str().unwrap())
         .collect();
-    assert_eq!(repositories.len(), 16);
+    assert_eq!(repositories.len(), 15);
     assert!(!repositories.contains(&"agentide"));
     assert!(!repositories.contains(&"service-sdk"));
     assert!(!repositories.contains(&"harness"));
+    assert!(!repositories.contains(&"ess"));
     assert!(!repositories.contains(&"gates"));
     assert!(repositories.contains(&"mandate"));
     let mut sorted = repositories.clone();
@@ -833,6 +957,7 @@ fn source_roster_is_complete_sorted_and_lock_is_exact_with_private_exclusions() 
     assert!(names.contains(&"llm"));
     assert!(names.contains(&"connectors"));
     assert!(names.contains(&"harness"));
+    assert!(names.contains(&"ess"));
     assert!(names.contains(&"engineering-protocols"));
     let lock: Value =
         serde_json::from_slice(&fs::read(root.join("sources.lock.json")).unwrap()).unwrap();

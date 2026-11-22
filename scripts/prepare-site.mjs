@@ -177,7 +177,8 @@ await Promise.all([
   writeRss(path.join(generatedStatic, 'releases', 'rss.xml'), legacyLedger, {scope: 'releases'}),
   writeJsonFeed(path.join(generatedStatic, 'releases', 'feed.json'), legacyLedger, {scope: 'releases'}),
 ]);
-for (const repository of ['aep', 'ess']) {
+// ESS publishes its own release feeds at /ess/releases/ since it left the unified site (2026-11-22).
+for (const repository of ['aep']) {
   const entries = legacyLedger.changes.filter((change) => change.repository === repository && change.source.version);
   const repositoryLedger = {...legacyLedger, changes: entries};
   await writeRss(path.join(generatedStatic, 'releases', repository, 'rss.xml'), repositoryLedger, {

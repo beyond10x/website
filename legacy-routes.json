@@ -1579,6 +1579,401 @@
       "type": "html"
     },
     {
+      "from": "/docs/ess/",
+      "to": "/ess/docs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/concepts/",
+      "to": "/ess/docs/concepts/overview/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/concepts/adoption-modes/",
+      "to": "/ess/docs/concepts/adoption-modes/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/concepts/component-delivery/",
+      "to": "/ess/docs/concepts/component-delivery/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/concepts/ess/",
+      "to": "/ess/docs/concepts/ess/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/concepts/overview/",
+      "to": "/ess/docs/concepts/overview/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/concepts/test-pyramid/",
+      "to": "/ess/docs/concepts/test-pyramid/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/examples/",
+      "to": "/ess/docs/examples/specification-to-contracts/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/examples/specification-to-contracts/",
+      "to": "/ess/docs/examples/specification-to-contracts/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/getting-started/",
+      "to": "/ess/docs/getting-started/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/",
+      "to": "/ess/docs/guides/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/check-infrastructure/",
+      "to": "/ess/docs/guides/check-infrastructure/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/commit-generated-files/",
+      "to": "/ess/docs/guides/commit-generated-files/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/deliver/",
+      "to": "/ess/docs/guides/deliver/build-and-chart/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/deliver/build-and-chart/",
+      "to": "/ess/docs/guides/deliver/build-and-chart/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/deliver/deploy-an-environment/",
+      "to": "/ess/docs/guides/deliver/deploy-an-environment/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/deliver/resolve-a-stack/",
+      "to": "/ess/docs/guides/deliver/resolve-a-stack/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/generate-artifacts/",
+      "to": "/ess/docs/guides/generate-artifacts/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/http-routes/",
+      "to": "/ess/docs/guides/http-routes/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/record-realization/",
+      "to": "/ess/docs/guides/record-realization/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/",
+      "to": "/ess/docs/guides/write-a-specification/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/aggregate-views/",
+      "to": "/ess/docs/guides/specify/aggregate-views/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/binding-conditions/",
+      "to": "/ess/docs/guides/specify/binding-conditions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/binding-context/",
+      "to": "/ess/docs/guides/specify/binding-context/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/binding-stored-state/",
+      "to": "/ess/docs/guides/specify/binding-stored-state/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/bindings-and-components/",
+      "to": "/ess/docs/guides/specify/bindings-and-components/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/commands-and-outcomes/",
+      "to": "/ess/docs/guides/specify/commands-and-outcomes/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/fields-and-invariants/",
+      "to": "/ess/docs/guides/specify/fields-and-invariants/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/guards-and-predicates/",
+      "to": "/ess/docs/guides/specify/guards-and-predicates/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/layout-and-validation/",
+      "to": "/ess/docs/guides/specify/layout-and-validation/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/narrowed-inputs/",
+      "to": "/ess/docs/guides/specify/narrowed-inputs/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/selection-effects/",
+      "to": "/ess/docs/guides/specify/selection-effects/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/stored-rules/",
+      "to": "/ess/docs/guides/specify/stored-rules/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/unions/",
+      "to": "/ess/docs/guides/specify/unions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/values-and-views/",
+      "to": "/ess/docs/guides/specify/values-and-views/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/views/",
+      "to": "/ess/docs/guides/specify/views/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/specify/wire-names/",
+      "to": "/ess/docs/guides/specify/wire-names/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/synthesize/",
+      "to": "/ess/docs/guides/synthesize/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/track-change/",
+      "to": "/ess/docs/guides/track-change/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify-conformance/",
+      "to": "/ess/docs/guides/verify-conformance/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/",
+      "to": "/ess/docs/guides/verify-conformance/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/author-scenarios/",
+      "to": "/ess/docs/guides/verify/author-scenarios/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/cover-a-refusal/",
+      "to": "/ess/docs/guides/verify/cover-a-refusal/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/explore/",
+      "to": "/ess/docs/guides/verify/explore/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/mutation-audit/",
+      "to": "/ess/docs/guides/verify/mutation-audit/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/observations/",
+      "to": "/ess/docs/guides/verify/observations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/one-time-responses/",
+      "to": "/ess/docs/guides/verify/one-time-responses/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/runners/",
+      "to": "/ess/docs/guides/verify/runners/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/synthesize-a-suite/",
+      "to": "/ess/docs/guides/verify/synthesize-a-suite/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/verify/target-process/",
+      "to": "/ess/docs/guides/verify/target-process/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/guides/write-a-specification/",
+      "to": "/ess/docs/guides/write-a-specification/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/",
+      "to": "/ess/docs/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/cli/",
+      "to": "/ess/docs/reference/cli/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/diagnostics/",
+      "to": "/ess/docs/reference/diagnostics/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/entity-runtime-lowering/",
+      "to": "/ess/docs/reference/entity-runtime-lowering/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/ess-ui-test/",
+      "to": "/ess/docs/reference/ess-ui-test/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/ess-ui/",
+      "to": "/ess/docs/reference/ess-ui/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/formats/",
+      "to": "/ess/docs/reference/formats/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/glossary/",
+      "to": "/ess/docs/reference/glossary/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/predicates/",
+      "to": "/ess/docs/reference/predicates/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/reference/spec-versions/",
+      "to": "/ess/docs/reference/spec-versions/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/releases/",
+      "to": "/ess/docs/releases/what-changed/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/releases/what-changed/",
+      "to": "/ess/docs/releases/what-changed/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/",
+      "to": "/ess/docs/start/install/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/explore-the-example/",
+      "to": "/ess/docs/start/explore-the-example/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/first-conformance-run/",
+      "to": "/ess/docs/start/first-conformance-run/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/first-specification/",
+      "to": "/ess/docs/start/first-specification/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/install/",
+      "to": "/ess/docs/start/install/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/runners/",
+      "to": "/ess/docs/start/runners/typescript/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/runners/go/",
+      "to": "/ess/docs/start/runners/go/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/runners/rust/",
+      "to": "/ess/docs/start/runners/rust/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/runners/typescript/",
+      "to": "/ess/docs/start/runners/typescript/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/start/use-with-an-agent/",
+      "to": "/ess/docs/start/use-with-an-agent/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/status/",
+      "to": "/ess/docs/status/where-this-stands/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/status/limitations/",
+      "to": "/ess/docs/status/limitations/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/status/outlook/",
+      "to": "/ess/docs/status/outlook/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/status/roadmap/",
+      "to": "/ess/docs/status/roadmap/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/status/where-this-stands/",
+      "to": "/ess/docs/status/where-this-stands/",
+      "type": "html"
+    },
+    {
+      "from": "/docs/ess/visualise/",
+      "to": "/ess/docs/visualise/",
+      "type": "html"
+    },
+    {
       "from": "/docs/gates/",
       "to": "/ecosystem/",
       "type": "html"
@@ -2309,6 +2704,11 @@
       "type": "html"
     },
     {
+      "from": "/ecosystem/ess/",
+      "to": "/ess/",
+      "type": "html"
+    },
+    {
       "from": "/ecosystem/gates/",
       "to": "/ecosystem/",
       "type": "html"
@@ -2439,194 +2839,6 @@
       "type": "html"
     },
     {
-      "from": "/ess/",
-      "to": "/ecosystem/ess/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs",
-      "to": "/docs/ess/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/concepts/ess",
-      "to": "/docs/ess/concepts/ess/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/concepts/overview",
-      "to": "/docs/ess/concepts/overview/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/examples/specification-to-contracts",
-      "to": "/docs/ess/examples/specification-to-contracts/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/getting-started",
-      "to": "/docs/ess/getting-started/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/guides/check-infrastructure",
-      "to": "/docs/ess/guides/check-infrastructure/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/guides/generate-artifacts",
-      "to": "/docs/ess/guides/generate-artifacts/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/guides/synthesize",
-      "to": "/docs/ess/guides/synthesize/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/guides/track-change",
-      "to": "/docs/ess/guides/track-change/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/guides/verify-conformance",
-      "to": "/docs/ess/guides/verify-conformance/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/guides/write-a-specification",
-      "to": "/docs/ess/guides/write-a-specification/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/reference/cli",
-      "to": "/docs/ess/reference/cli/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/status/limitations",
-      "to": "/docs/ess/status/limitations/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/status/roadmap",
-      "to": "/docs/ess/status/roadmap/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/docs/status/where-this-stands",
-      "to": "/docs/ess/status/where-this-stands/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/lab",
-      "to": "/docs/ess/lab/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/lab/billing_web_realized.wasm",
-      "source": "artifacts/ess/lab/billing_web_realized.wasm",
-      "type": "alias",
-      "mediaType": "application/wasm"
-    },
-    {
-      "from": "/ess/releases",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/a-cluster-described-and-answered",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/archive",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/atom.xml",
-      "source": "releases/ess/atom.xml",
-      "type": "alias",
-      "mediaType": "application/xml"
-    },
-    {
-      "from": "/ess/releases/ess-the-compiler",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/ess-the-join-and-the-model",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/ess-the-projections",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/hardening-the-register-emptied",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/one-spec-two-apps",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/reconciliation",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/rss.xml",
-      "source": "releases/ess/rss.xml",
-      "type": "alias",
-      "mediaType": "application/xml"
-    },
-    {
-      "from": "/ess/releases/semantic-diff",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/structural-synthesis",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/tags",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/tags/conformance",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/tags/ess",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/tags/infrastructure",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/tags/release",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
-      "from": "/ess/releases/the-specification-as-oracle",
-      "to": "/releases/",
-      "type": "html"
-    },
-    {
       "from": "/getting-started/",
       "to": "/",
       "type": "html"
@@ -2714,6 +2926,251 @@
     {
       "from": "/products/evaluate/",
       "to": "/ecosystem/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/a-cluster-described-and-answered/",
+      "to": "/ess/releases/a-cluster-described-and-answered/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/a-deployment-described/",
+      "to": "/ess/releases/a-deployment-described/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/a-pass-over-nothing/",
+      "to": "/ess/releases/a-pass-over-nothing/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/a-secret-is-only-present/",
+      "to": "/ess/releases/a-secret-is-only-present/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/actor-grants-and-related-state/",
+      "to": "/ess/releases/actor-grants-and-related-state/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/aggregates-over-related-guards/",
+      "to": "/ess/releases/aggregates-over-related-guards/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/alike-outcomes-and-unreachable-branches/",
+      "to": "/ess/releases/alike-outcomes-and-unreachable-branches/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/authored-caller-attributes/",
+      "to": "/ess/releases/authored-caller-attributes/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/bare-bodies-literal-routes-and-repeated-identities/",
+      "to": "/ess/releases/bare-bodies-literal-routes-and-repeated-identities/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/concurrent-histories/",
+      "to": "/ess/releases/concurrent-histories/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/ess-the-compiler/",
+      "to": "/ess/releases/ess-the-compiler/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/ess-the-join-and-the-model/",
+      "to": "/ess/releases/ess-the-join-and-the-model/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/ess-the-projections/",
+      "to": "/ess/releases/ess-the-projections/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/event-identities-and-file-cited-refusals/",
+      "to": "/ess/releases/event-identities-and-file-cited-refusals/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/every-witness-reads-back-and-the-audit-covers-grants/",
+      "to": "/ess/releases/every-witness-reads-back-and-the-audit-covers-grants/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/existence-lookup-and-portable-output/",
+      "to": "/ess/releases/existence-lookup-and-portable-output/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/four-areas-and-a-command-line/",
+      "to": "/ess/releases/four-areas-and-a-command-line/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/generated-servers-refuse-what-their-openapi-refuses/",
+      "to": "/ess/releases/generated-servers-refuse-what-their-openapi-refuses/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/hardening-the-register-emptied/",
+      "to": "/ess/releases/hardening-the-register-emptied/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/host-slots-and-list-guard-witnesses/",
+      "to": "/ess/releases/host-slots-and-list-guard-witnesses/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/http-bound-inputs-and-short-names/",
+      "to": "/ess/releases/http-bound-inputs-and-short-names/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/instance-references-in-structured-values/",
+      "to": "/ess/releases/instance-references-in-structured-values/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/journey-controls-and-collection-controls/",
+      "to": "/ess/releases/journey-controls-and-collection-controls/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/json-cli-results-and-optional-generator-ports/",
+      "to": "/ess/releases/json-cli-results-and-optional-generator-ports/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/named-rows-beside-a-row-set/",
+      "to": "/ess/releases/named-rows-beside-a-row-set/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/names-nobody-may-invent/",
+      "to": "/ess/releases/names-nobody-may-invent/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/nested-claims-and-binary64/",
+      "to": "/ess/releases/nested-claims-and-binary64/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/nullable-binary64-and-binding-aware-synthesis/",
+      "to": "/ess/releases/nullable-binary64-and-binding-aware-synthesis/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/one-spec-two-apps/",
+      "to": "/ess/releases/one-spec-two-apps/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/optional-appends-and-refusals-that-tell-states-apart/",
+      "to": "/ess/releases/optional-appends-and-refusals-that-tell-states-apart/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/outcome-shapes/",
+      "to": "/ess/releases/outcome-shapes/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/reconciliation/",
+      "to": "/ess/releases/reconciliation/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/runtime-parity/",
+      "to": "/ess/releases/runtime-parity/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/semantic-diff/",
+      "to": "/ess/releases/semantic-diff/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/set-effects/",
+      "to": "/ess/releases/set-effects/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/state-scoped-refusals/",
+      "to": "/ess/releases/state-scoped-refusals/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/structural-synthesis/",
+      "to": "/ess/releases/structural-synthesis/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/structured-examples-and-provided-rows/",
+      "to": "/ess/releases/structured-examples-and-provided-rows/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/the-claims-a-scenario-could-not-make/",
+      "to": "/ess/releases/the-claims-a-scenario-could-not-make/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/the-scenarios-an-author-writes/",
+      "to": "/ess/releases/the-scenarios-an-author-writes/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/the-specification-as-oracle/",
+      "to": "/ess/releases/the-specification-as-oracle/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/typed-expressions-and-one-precedence-order/",
+      "to": "/ess/releases/typed-expressions-and-one-precedence-order/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/ui-documents-and-published-answers/",
+      "to": "/ess/releases/ui-documents-and-published-answers/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/ui-durations-help-and-synthesis-refusals/",
+      "to": "/ess/releases/ui-durations-help-and-synthesis-refusals/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/ui-labels-toggles-pager-and-refusal-paths/",
+      "to": "/ess/releases/ui-labels-toggles-pager-and-refusal-paths/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/ui-tests-and-supplied-results/",
+      "to": "/ess/releases/ui-tests-and-supplied-results/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/unkillable-mutants/",
+      "to": "/ess/releases/unkillable-mutants/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/values-read-from-the-row/",
+      "to": "/ess/releases/values-read-from-the-row/",
+      "type": "html"
+    },
+    {
+      "from": "/updates/field-notes/ess/what-a-retry-returns/",
+      "to": "/ess/releases/what-a-retry-returns/",
       "type": "html"
     },
     {

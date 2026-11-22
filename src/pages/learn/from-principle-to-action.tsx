@@ -414,7 +414,7 @@ export default function FromPrincipleToAction(): ReactNode {
                 <Link className={styles.textAction} to="/docs/aep/">
                   Explore AEP <span aria-hidden="true">↗</span>
                 </Link>
-                <Link className={styles.textAction} to="/docs/ess/">
+                <Link className={styles.textAction} to="pathname:///ess/">
                   Explore ESS <span aria-hidden="true">↗</span>
                 </Link>
                 <Link className={styles.textAction} to="/docs/aep-service/">
@@ -534,7 +534,7 @@ production.write denied
                   ESS emits a standalone closed conformance report. An optional AEP adapter can
                   translate it into evidence without either core model depending on the other.
                 </p>
-                <Link to="/docs/ess/">
+                <Link to="pathname:///ess/">
                   Explore ESS ↗
                 </Link>
               </article>
@@ -580,7 +580,7 @@ production.write denied
               <Link to="/docs/aep/">
                 <span>My engineering rules live in prompts</span><strong>Start with AEP ↗</strong>
               </Link>
-              <Link to="/docs/ess/">
+              <Link to="pathname:///ess/">
                 <span>My system intent is prose</span><strong>Start with ESS ↗</strong>
               </Link>
               <Link to="/docs/aep-service/">

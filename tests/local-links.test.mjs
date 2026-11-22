@@ -13,7 +13,8 @@ test('canonical Website links stay on the rendering origin', () => {
     '/docs/aep/?view=full#evidence',
   );
   assert.equal(localizeWebsiteHref('https://beyond10x.github.io/agentplugins/'), '/ecosystem/agentplugins/');
-  assert.equal(localizeWebsiteHref('https://beyond10x.github.io/ess/'), '/ecosystem/ess/');
+  // ESS serves its own site at /ess/ since 2026-11-22, so its root is no façade into the profile.
+  assert.equal(localizeWebsiteHref('https://beyond10x.github.io/ess/'), '/ess/');
   assert.equal(localizeWebsiteHref('/metaharness/'), '/metaharness/');
   assert.equal(localizeWebsiteHref('/getting-started/'), '/');
   assert.equal(

@@ -45,10 +45,15 @@ test('legacy inventory captures all audited HTML and machine routes exactly once
   // former index and workflow pages. Spindle's, codespec's and RFCspec's independent sites, never
   // on the unified site, added one /docs/<repository>/ route for each of their 11, 13 and 27
   // documentation pages and their /ecosystem/<repository>/ routes.
-  assert.equal(html.length, 527);
-  assert.equal(aliases.length, 14);
+  // ESS's independent site replaced the 34 inverse /ess/ redirects and its three /ess/ aliases with
+  // one /docs/ess/ route for each of its 69 documentation pages, /ecosystem/ess/, ten explicit
+  // targets for former category indexes, and one /updates/field-notes/ess/ route for each of its 49
+  // release posts the unified site rendered as field notes.
+  assert.equal(html.length, 622);
+  assert.equal(aliases.length, 11);
   assert.equal(new Set(map.redirects.map((route) => route.from)).size, map.redirects.length);
   assert.ok(!map.redirects.some((route) => route.from.startsWith('/harness/')));
+  assert.ok(!map.redirects.some((route) => route.from.startsWith('/ess/')));
   assert.ok(html.some((route) => route.from === '/journeys/understand/' && route.to === '/learn/safe-agentic-coding/'));
   assert.ok(html.some((route) => route.from === '/agentic-principles/principles' && route.to === '/components/agentic-principles/principles/'));
   assert.ok(html.some((route) => route.from === '/agentic-principles/research/research/2026-08-25T023000+0200_scoped-progress-under-partial-failure'

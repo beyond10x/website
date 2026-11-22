@@ -57,7 +57,7 @@
               "id": "generate-docs-from-spec",
               "title": "Project the specification into documentation",
               "description": "Use ESS to generate deterministic human-readable documentation from the validated system specification.",
-              "url": "/docs/ess/guides/generate-artifacts/",
+              "url": "/ess/docs/guides/generate-artifacts/",
               "completion": "Re-running generation from unchanged inputs produces unchanged documentation bytes."
             }
           ]
@@ -126,7 +126,7 @@
               "id": "inspect-ess",
               "title": "See how system intent becomes executable",
               "description": "Use ESS's overview to distinguish specifications from generated documentation and contracts.",
-              "url": "/docs/ess/concepts/overview/",
+              "url": "/ess/docs/concepts/overview/",
               "completion": "You can describe specification-to-document generation without claiming that prose is ESS input."
             },
             {

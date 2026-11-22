@@ -35,7 +35,7 @@ const destinations = [
     eyebrow: 'Docs as spec',
     title: 'Generate documentation with ESS',
     description: 'Model important system behavior as validated input, then generate deterministic human documentation and contracts.',
-    url: publishedHref('/docs/ess/'),
+    url: '/ess/',
   },
 ];
 

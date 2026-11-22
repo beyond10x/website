@@ -144,10 +144,11 @@ executes the generator and dependency lock from its own immutable `job.workflow_
 
 ## Independent project documentation
 
-Connectors publishes its own site at https://beyond10x.github.io/connectors/, Harness at
-https://beyond10x.github.io/harness/, LLM at https://beyond10x.github.io/llm/, Metaharness at
-https://beyond10x.github.io/metaharness/, Secrets at https://beyond10x.github.io/secrets/ and
-Substrate at https://beyond10x.github.io/substrate/. All six are excluded from the collected
+Connectors publishes its own site at https://beyond10x.github.io/connectors/, ESS at
+https://beyond10x.github.io/ess/, Harness at https://beyond10x.github.io/harness/, LLM at
+https://beyond10x.github.io/llm/, Metaharness at https://beyond10x.github.io/metaharness/, Secrets
+at https://beyond10x.github.io/secrets/ and Substrate at https://beyond10x.github.io/substrate/.
+All seven are excluded from the collected
 source roster. agent-stack publishes https://beyond10x.github.io/agent-stack/, which Website
 retains as discovery data with its route inventory and links from /architecture/; it never had
 unified documentation, so there is nothing to redirect. Website retains discovery metadata and redirects each previous `/docs/<project>/`
@@ -157,7 +158,12 @@ existing redirect template. Secrets' former architecture, limitations and roadma
 LLM's former concepts, guides and reference indexes redirect to their first page, and its
 where-this-stands page to Status. Harness's former concepts, guides, reference and tutorials
 indexes redirect to their first page, and its removed workflow guide and reference to the
-command-line guide and the CLI reference.
+command-line guide and the CLI reference. ESS's unified copy at `/docs/ess/` was deprecated on
+2026-11-22: its former category indexes redirect to the first page of that category in ESS's own
+sidebar, and its release posts, rendered here as `/updates/field-notes/ess/<slug>/`, to the same
+posts at `/ess/releases/<slug>/`. ESS's release feeds are its own site's
+`/ess/releases/rss.xml` and `/ess/releases/atom.xml`; Website no longer writes
+`/releases/ess/rss.xml` or `/releases/ess/atom.xml`.
 
 The els repository was renamed `engineering-protocols` and serves its own site at
 https://beyond10x.github.io/engineering-protocols/. It never had unified documentation, so
@@ -175,7 +181,8 @@ Gates has no website documentation at all: it is excluded from the roster, has n
 site, and its former `/docs/gates/` and `/ecosystem/gates/` routes redirect to `/ecosystem/`.
 
 A collected source that links one of its own posts at its project-site URL (ESS's generated
-`releases/what-changed` page links `https://beyond10x.github.io/ess/releases/<slug>`) is rewritten
+`releases/what-changed` page linked `https://beyond10x.github.io/ess/releases/<slug>` while ESS was
+collected) is rewritten
 to that post's field note, `/updates/field-notes/<repository>/<slug>/`. The project-site base is the
 one the source declares through a feed URL on its own path.
 
